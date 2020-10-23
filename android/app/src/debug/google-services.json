@@ -1,0 +1,47 @@
+{
+	"project_info": {
+		"project_number": "1093636438068",
+		"firebase_url": "https://kiira-health-app.firebaseio.com",
+		"project_id": "kiira-health-app",
+		"storage_bucket": "kiira-health-app.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:1093636438068:android:3becf35b8fba41dde5b261",
+				"android_client_info": {
+					"package_name": "com.kiira"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "1093636438068-hvgjdu59aentnblv0ck701efsh5v749f.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyA8Ad3mavmkY4HiamJcVoJc96ttMtm2YC8"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "1093636438068-hvgjdu59aentnblv0ck701efsh5v749f.apps.googleusercontent.com",
+							"client_type": 3
+						},
+						{
+							"client_id": "1093636438068-hs8rpq4b0c9vegifob16sv0rqvm988d4.apps.googleusercontent.com",
+							"client_type": 2,
+							"ios_info": {
+								"bundle_id": "com.kiira"
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
+}

@@ -1,0 +1,11 @@
+export { mergeStyles } from "./mergeStyles";
+export { switchCase } from "./switchCase";
+export { toCamelCase } from "./toCamelCase";
+export { insertAtIndex } from "./insertAtIndex";
+export { generateIdentifier } from "./generateIdentifier";
+export { cloneChild } from "./cloneChild";
+export { cloneChildren } from "./cloneChildren";
+export { addHashtag } from "./addHashtag";
+export { calculateRating } from "./calculateRating";
+export { searchObject } from "./searchObject";
+export { formatLanguages } from "./formatLanguages";
