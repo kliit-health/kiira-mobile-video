@@ -21,6 +21,8 @@ import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.config.RNFirebaseRemoteConfigPackage;
 import io.invertase.firebase.functions.RNFirebaseFunctionsPackage;
 
+import com.reactnativecomponent.splashscreen.RCTSplashScreenPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -43,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
           packages.add(new RNFirebaseMessagingPackage());
           packages.add(new RNFirebaseRemoteConfigPackage());
           packages.add(new RNFirebaseFunctionsPackage());
+
           return packages;
         }
 
