@@ -33,6 +33,8 @@
 		93447C68603A4088A48A3343 /* Poppins-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1743E50AA45543D7A6670504 /* Poppins-Italic.otf */; };
 		93514F612540A71E004D0A33 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93514F602540A71E004D0A33 /* GoogleService-Info.plist */; };
 		9351517D2540D0C3004D0A33 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 9351517C2540D0C3004D0A33 /* splash.png */; };
+		9367D1AF254B6ABD00B9D807 /* RCTSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 9367D1AE254B6ABD00B9D807 /* RCTSplashScreen.m */; };
+		93CB6D14254B64F4007FF641 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93CB6D13254B64F4007FF641 /* libRCTSplashScreen.a */; };
 		988A1DA323E94F8EA37E7D10 /* Avenir-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5EEEA055F494B779642F10C /* Avenir-Light.ttf */; };
 		9A106CE9B88A2234838F9BB1 /* libPods-kiiramobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3EA52FAED744B767EB9078 /* libPods-kiiramobile-tvOS.a */; };
 		9A4475EA3B3E449B822D59B3 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2BFFAF5FF0504ECE8976E48B /* Poppins-ExtraLight.otf */; };
@@ -63,6 +65,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "kiiramobile-tvOS";
+		};
+		9367D1AB254B6A0A00B9D807 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9367D1A7254B6A0A00B9D807 /* RCTSplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9F90C2241D619E9400F3E238;
+			remoteInfo = RCTSplashScreen;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -115,6 +124,10 @@
 		9351517C2540D0C3004D0A33 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		935151892540D0EC004D0A33 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "../../Coding/kliit/kiira-mobile/ios/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		9351518E2540D161004D0A33 /* kiiramobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = kiiramobile.entitlements; path = kiiramobile/kiiramobile.entitlements; sourceTree = "<group>"; };
+		9367D1A7254B6A0A00B9D807 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../../../Downloads/react-native-smart-splash-screen-master/ios/RCTSplashScreen/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
+		9367D1AE254B6ABD00B9D807 /* RCTSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTSplashScreen.m; path = "../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen/RCTSplashScreen.m"; sourceTree = "<group>"; };
+		93CB6D13254B64F4007FF641 /* libRCTSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTSplashScreen.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		93F6EEC0254B475E00A7BC63 /* libRCTSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTSplashScreen.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D66869B755434D8344EC6D /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		968A24A7F3F24409980EC339 /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.otf"; path = "../assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
 		9FA4B18A2C2141B486981A2D /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -154,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93CB6D14254B64F4007FF641 /* libRCTSplashScreen.a in Frameworks */,
 				14030B13FD12E558D91E9876 /* libPods-kiiramobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +211,7 @@
 		13B07FAE1A68108700A75B9A /* kiiramobile */ = {
 			isa = PBXGroup;
 			children = (
+				9367D1A7254B6A0A00B9D807 /* RCTSplashScreen.xcodeproj */,
 				9351518E2540D161004D0A33 /* kiiramobile.entitlements */,
 				935151892540D0EC004D0A33 /* AppCenter-Config.plist */,
 				93514F602540A71E004D0A33 /* GoogleService-Info.plist */,
@@ -230,7 +245,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93CB6D13254B64F4007FF641 /* libRCTSplashScreen.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				93F6EEC0254B475E00A7BC63 /* libRCTSplashScreen.a */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				6BD9F81D7200F13738E9C6B3 /* libPods-kiiramobile.a */,
 				EC8ED89A53818DBD0DA7F8AA /* libPods-kiiramobile-kiiramobileTests.a */,
@@ -298,6 +315,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				9367D1AE254B6ABD00B9D807 /* RCTSplashScreen.m */,
 				13B07FAE1A68108700A75B9A /* kiiramobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* kiiramobileTests */,
@@ -318,6 +336,14 @@
 				00E356EE1AD99517003FC87E /* kiiramobileTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* kiiramobile-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* kiiramobile-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9367D1A8254B6A0A00B9D807 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9367D1AC254B6A0A00B9D807 /* libRCTSplashScreen.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -445,6 +471,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9367D1A8254B6A0A00B9D807 /* Products */;
+					ProjectRef = 9367D1A7254B6A0A00B9D807 /* RCTSplashScreen.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* kiiramobile */,
@@ -454,6 +486,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9367D1AC254B6A0A00B9D807 /* libRCTSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSplashScreen.a;
+			remoteRef = 9367D1AB254B6A0A00B9D807 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -836,6 +878,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9367D1AF254B6ABD00B9D807 /* RCTSplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,7 +1058,8 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-					"$(SRCROOT)/../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen",
+					"$(SRCROOT)/../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen/**",
+					"$(SRCROOT)/../../../react-native/React/**",
 				);
 				INFOPLIST_FILE = kiiramobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1224,7 +1268,8 @@
 					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
 					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
 					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
-					"$(SRCROOT)/../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen",
+					"$(SRCROOT)/../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen/**",
+					"$(SRCROOT)/../../../react-native/React/**",
 				);
 				INFOPLIST_FILE = kiiramobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

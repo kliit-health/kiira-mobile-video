@@ -15,7 +15,7 @@ import {
 } from './src/screens/authLoading/action';
 import {signoutApihit} from './src/screens/account/action';
 import Constant from './src/utils/constants';
-import BackgroundTimer from 'react-native-background-timer';
+// import BackgroundTimer from 'react-native-background-timer';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigator';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
@@ -74,29 +74,29 @@ class App extends PureComponent {
       if (this.timer) {
         clearTimeout(this.timer);
       }
-      if (this.timeoutId) {
-        BackgroundTimer.clearTimeout(this.timeoutId);
-      }
+      // if (this.timeoutId) {
+      //   BackgroundTimer.clearTimeout(this.timeoutId);
+      // }
     } else {
       setState(false);
 
-      if (this.timeoutId) {
-        BackgroundTimer.clearTimeout(this.timeoutId);
-      }
+      // if (this.timeoutId) {
+      //   BackgroundTimer.clearTimeout(this.timeoutId);
+      // }
 
-      this.timeoutId = BackgroundTimer.setTimeout(() => {
-        const payload = {
-          navigation: this.navigator._navigation,
-          isLoaderShow: false,
-        };
-        signOut(payload);
-        Alert.alert(
-          'Log Out',
-          'For your security, you have been logged out due to 20 minutes of inactivity.',
-          [{text: 'OK', onPress: () => {}}],
-          {cancelable: false},
-        );
-      }, Constant.App.logoutInterval);
+      // this.timeoutId = BackgroundTimer.setTimeout(() => {
+      //   const payload = {
+      //     navigation: this.navigator._navigation,
+      //     isLoaderShow: false,
+      //   };
+      //   signOut(payload);
+      //   Alert.alert(
+      //     'Log Out',
+      //     'For your security, you have been logged out due to 20 minutes of inactivity.',
+      //     [{text: 'OK', onPress: () => {}}],
+      //     {cancelable: false},
+      //   );
+      // }, Constant.App.logoutInterval);
     }
   };
 
