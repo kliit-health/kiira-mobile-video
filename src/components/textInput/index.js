@@ -31,9 +31,12 @@ const TextInput = ({
   };
 
   const styles = {
-    root: [defaultStyles.root],
-    textInput: [defaultStyles.textInput],
-    chevronContainer: [defaultStyles.chevronContainer],
+    root: [defaultStyles.root, customStyles.root],
+    textInput: [defaultStyles.textInput, customStyles.textInput],
+    chevronContainer: [
+      defaultStyles.chevronContainer,
+      customStyles.chevronContainer,
+    ],
   };
 
   return (
@@ -41,16 +44,16 @@ const TextInput = ({
       activeOpacity={1}
       onPress={handlePress}
       style={styles.root}>
-      {/* <Input
-        // pointerEvents={onPress ? 'none' : 'auto'}
-        // value={value}
+      <Input
+        pointerEvents={onPress ? 'none' : 'auto'}
+        value={value}
         onChangeText={handleChange}
-        // placeholder={placeholder}
+        placeholder={placeholder}
         style={styles.textInput}
         placeholderTextColor={colors.blueGrey}
-        // multiline={multiline}
-        // {...rest}
-      /> */}
+        multiline={multiline}
+        {...rest}
+      />
       {chevron && (
         <View style={styles.chevronContainer}>
           <Chevron color={colors.gray} />

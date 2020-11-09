@@ -1,7 +1,15 @@
 import React, {PureComponent} from 'react';
-import {View, TouchableOpacity, ScrollView, Text, Image} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  Image,
+  Modal,
+} from 'react-native';
 import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
+import {showOrHideModal} from '../../components/customModal/action';
 import styles from './style';
 import language from '../../utils/localization';
 import Constant from '../../utils/constants';
@@ -28,6 +36,8 @@ class Dashboard extends PureComponent {
       questions: this.props.userData.questions,
       credits: this.props.userData.credits,
       videoChat: 0,
+      videoEnabled: false,
+      modalOpen: true,
     };
   }
 
@@ -35,11 +45,14 @@ class Dashboard extends PureComponent {
     const {
       question,
       getPolicy,
+      getTerms,
       getHealthHistory,
       getExpertsDetails,
       getFavoriteExperts,
     } = this.props;
 
+    this.checkLicenseStatus();
+    console.log('DID MOUNT');
     if (question) {
       this.setState({
         questionText: question,
@@ -49,13 +62,13 @@ class Dashboard extends PureComponent {
         questionText: '',
       });
     }
-
+    getTerms();
     this.fetchData();
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
+      getHealthHistory();
+      getExpertsDetails();
       var user = firebase.auth().currentUser;
       if (user && user.uid) {
-        getHealthHistory();
-        getExpertsDetails();
         getFavoriteExperts();
         try {
           const obj = {
@@ -131,7 +144,7 @@ class Dashboard extends PureComponent {
 
   componentWillUnmount() {
     // Remove the event listener
-    this.focusListener.remove();
+    // this.focusListener.remove();
   }
 
   onChangeText = (value) => {
@@ -140,6 +153,15 @@ class Dashboard extends PureComponent {
       questionText: value,
     });
     setQuestionText(value);
+  };
+
+  checkLicenseStatus = () => {
+    const isValid = this.props.licenses.includes(
+      this.props.userData.profileInfo.state.code,
+    );
+    console.log(this.props.userData.profileInfo.state.code);
+    console.log(isValid);
+    if (isValid) this.setState({videoEnabled: true});
   };
 
   Header = () => {
@@ -157,7 +179,12 @@ class Dashboard extends PureComponent {
   };
 
   fetchData() {
-    const {getQuestion, userData} = this.props;
+    const {
+      getQuestion,
+      userData,
+      getHealthHistory,
+      getExpertsDetails,
+    } = this.props;
     const params = {
       questionParams: {
         tableName: Constant.App.firebaseTableNames.questions,
@@ -185,6 +212,8 @@ class Dashboard extends PureComponent {
     };
     getQuestion(params);
     getRecentExpertsData(params);
+    getHealthHistory();
+    getExpertsDetails();
   }
 
   renderHeadingProfileView() {
@@ -227,14 +256,19 @@ class Dashboard extends PureComponent {
     const clipboard = require('../../../assets/clipboard.png');
     const reminders = require('../../../assets/reminders.png');
     const sos = require('../../../assets/sos.png');
-    const {navigation} = this.props;
+    const {navigation, showHideErrorModal} = this.props;
+    const {videoEnabled} = this.state;
 
     return (
       <View style={styles.dashboardContainer}>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(Constant.App.screenNames.RequestVisit)
-          }>
+          onPress={() => {
+            if (videoEnabled) {
+              navigation.navigate(Constant.App.screenNames.RequestVisit);
+            } else {
+              showHideErrorModal('Currently unavailable in your state');
+            }
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -306,9 +340,13 @@ class Dashboard extends PureComponent {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(Constant.App.screenNames.Appointments)
-          }>
+          onPress={() => {
+            if (videoEnabled) {
+              navigation.navigate(Constant.App.screenNames.Appointments);
+            } else {
+              showHideErrorModal('Currently unavailable in your state');
+            }
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -346,13 +384,7 @@ class Dashboard extends PureComponent {
   }
 
   render() {
-    const {
-      recentExpertData,
-      previousQuestionData,
-      questionData,
-      userData,
-    } = this.props;
-
+    console.log(this.state.videoEnabled);
     return (
       <View style={styles.container}>
         <ScrollView
@@ -368,6 +400,7 @@ class Dashboard extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  licenses: state.authLoadingReducer.licenses,
   userData: state.authLoadingReducer.userData,
   recentExpertData: state.askReducer.recentExpertData,
   previousQuestionData: state.askReducer.previousQuestionData,
@@ -384,6 +417,7 @@ const mapDispatchToProps = (dispatch) => ({
   getHealthHistory: () => dispatch(getHealthHistoryAsync()),
   getExpertsDetails: () => dispatch(getExpertsDetailsAsync()),
   getFavoriteExperts: () => dispatch(getFavoriteExpertsAsync()),
+  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
 });
 
 export default connect(

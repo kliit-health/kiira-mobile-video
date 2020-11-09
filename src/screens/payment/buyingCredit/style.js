@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../../utils/constants";
-import metrics from "../../../utils/metrices";
+import {StyleSheet} from 'react-native';
+import Constant from '../../../utils/constants';
+import metrics from '../../../utils/metrices';
 
 export const PaymentDropdownDimensions = {
   cellHeight: 42,
@@ -9,13 +9,13 @@ export const PaymentDropdownDimensions = {
   marginBottom: 121,
 };
 
-const ContainerHeight = 414 - metrics.BOTTOM_SAVE_AREA;
+const ContainerHeight = 414;
 
 const PaymentDropDownCellStyle = {
   height: PaymentDropdownDimensions.cellHeight,
   flex: 1,
-  flexDirection: "row",
-  alignItems: "center",
+  flexDirection: 'row',
+  alignItems: 'center',
   backgroundColor: Constant.App.colors.whiteColor,
 };
 
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderColor: Constant.App.colors.brownGreyTwo,
     shadowColor: Constant.App.colors.black4,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.625,
     shadowRadius: 24,
     elevation: 1,
@@ -64,13 +64,13 @@ const styles = StyleSheet.create({
   amountDropdownCell: {
     height: 42,
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 
   amountDropdownContainer: {
-    position: "absolute",
-    flexDirection: "row-reverse",
-    bottom: ContainerHeight - 59, // Subtract the top margin of the dropdown,
+    position: 'absolute',
+    flexDirection: 'row-reverse',
+    bottom: ContainerHeight, // Subtract the top margin of the dropdown,
     right: 24,
   },
 
@@ -99,11 +99,11 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 22,
     backgroundColor: Constant.App.colors.blueColor,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 
   buyCreditsButtonText: {
-    paddingLeft: 27,
+    textAlign: 'center',
     fontFamily: Constant.App.fontFamily.avenirMedium,
     fontSize: Constant.App.textSize.Normal,
     color: Constant.App.colors.whiteColor,
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    height: ContainerHeight,
+    height: metrics.DEVICE_HEIGHT * 0.9,
     borderTopLeftRadius: 19,
     borderTopRightRadius: 19,
     backgroundColor: Constant.App.colors.whiteColor,
     paddingTop: 25,
     paddingBottom: 55,
     shadowColor: Constant.App.colors.darkishBlue21,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     shadowRadius: 10,
     elevation: 1,
@@ -135,14 +135,14 @@ const styles = StyleSheet.create({
   },
 
   footerContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 
   header: {
     marginLeft: 23,
-    flexDirection: "row",
+    flexDirection: 'row',
     height: 22,
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   optionsContainer: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderColor: Constant.App.colors.brownGreyTwo,
     shadowColor: Constant.App.colors.black4,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.625,
     shadowRadius: 24,
     elevation: 1,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
 
   paymentMethodsDropdownContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: PaymentDropdownDimensions.marginBottom - metrics.BOTTOM_SAVE_AREA,
     right: PaymentDropdownDimensions.marginRight,
   },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 
   topContainer: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     backgroundColor: Constant.App.colors.dark40,
   },
 

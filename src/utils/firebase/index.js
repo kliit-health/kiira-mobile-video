@@ -12,6 +12,23 @@ const mySecretSalt = 'klit280391';
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 
+export function getPlans(plan) {
+  try {
+    let planRef = firebase.firestore().doc(`plans/${plan}`).get();
+    return planRef
+      .then((doc) => {
+        return doc.data();
+      })
+      .catch((e) => {
+        displayConsole('e', e);
+        return false;
+      });
+  } catch (error) {
+    displayConsole('Crash error', error);
+    return false;
+  }
+}
+
 export function createUser(obj) {
   try {
     return firebase
@@ -39,6 +56,7 @@ export function loginInWithFirebase(obj) {
       .auth()
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
+        console.log('Values', firebase.config().getValues());
         const {user} = success;
         return user;
       })
@@ -76,6 +94,24 @@ export function getTermsFromFirebase() {
     const user = firebase.auth().currentUser;
     let termsRef = firebase.firestore().doc('legal/terms').get();
     return termsRef
+      .then((doc) => {
+        return doc.data();
+      })
+      .catch((e) => {
+        displayConsole('e', e);
+        return false;
+      });
+  } catch (error) {
+    displayConsole('Crash error', error);
+    return false;
+  }
+}
+
+export function getPlanDetails(planDetails) {
+  try {
+    const user = firebase.auth().currentUser;
+    let planRef = firebase.firestore().doc(`plans/${planDetails}`).get();
+    return planRef
       .then((doc) => {
         return doc.data();
       })
@@ -326,23 +362,26 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
         const document = firestore.collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
+
         appointments.history = appointments.history.filter(
           (item) => item.id !== id,
         );
-        await document.set({history: [...appointments.history]}, {merge: true});
+        await document.set(
+          {history: [...(appointments.history || [])]},
+          {merge: true},
+        );
 
         const expertDocument = firestore
           .collection('appointments')
           .doc(expert.uid);
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
-
         expertAppointments.history[uid] = expertAppointments.history[
           uid
         ].filter((item) => item.id !== id);
 
         await expertDocument.set(
-          {history: {[uid]: [...expertAppointments.history[uid]]}},
+          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
           {merge: true},
         );
       })
@@ -469,6 +508,16 @@ export function getUserData(obj, success, error) {
   try {
     let userRef = firestore.doc(`${obj.tableName}/${obj.uid}`);
     return userRef.onSnapshot(success, error);
+  } catch (error) {
+    displayConsole('Crash error', error);
+    return false;
+  }
+}
+
+export async function getLicensesAsync() {
+  try {
+    let licensesRef = await firestore.doc('licenses/states').get();
+    return licensesRef.data();
   } catch (error) {
     displayConsole('Crash error', error);
     return false;
@@ -910,6 +959,57 @@ export const checkQuestionStatus = (obj, success, error) => {
     .doc(`${obj.id}`);
   return ref.onSnapshot(success, error);
 };
+
+export function resolvedQuestion(obj) {
+  try {
+    displayConsole(
+      '\n\n--------------**** resolvedQuestion Start ********-----------',
+    );
+    displayConsole('obj', obj);
+    return firebase
+      .firestore()
+      .collection(Constant.App.firebaseTableNames.questions)
+      .doc(`${obj.questionId}`)
+      .set(obj)
+      .then(
+        function (success) {
+          displayConsole('success', true);
+          displayConsole('docref', success);
+          const data = {
+            success: true,
+          };
+          displayConsole('data', data);
+          console.log(
+            '--------------**** resolvedQuestion End ********-----------\n\n',
+          );
+          return data;
+        },
+        (error) => {
+          const {message, code} = error;
+          displayConsole('error message', message);
+          displayConsole('error code', code);
+          const data = {
+            success: false,
+            message: message,
+          };
+          displayConsole('data', data);
+          displayConsole(
+            '--------------***** resolvedQuestion End *********-----------\n\n',
+          );
+          return data;
+        },
+      );
+  } catch (error) {
+    const data = {
+      success: false,
+    };
+    displayConsole('Crash error', error);
+    displayConsole(
+      '--------------**** resolvedQuestion End ********-----------\n\n',
+    );
+    return data;
+  }
+}
 
 export const updateRefrealcodeForAllUsers = (uid, data) => {
   firebase

@@ -1,5 +1,5 @@
-import { put, takeEvery, select } from "redux-saga/effects";
-import Language from "../../../utils/localization";
+import {put, takeEvery, select} from 'redux-saga/effects';
+import Language from '../../../utils/localization';
 import {
   sendMessage,
   loadMessages,
@@ -10,7 +10,7 @@ import {
   updateUnreadCount,
   checkQuestionStatus,
   resolvedQuestion,
-} from "../../../utils/firebase";
+} from '../../../utils/firebase';
 import {
   loadExpertMessagesSuccess,
   loadExpertMessagesError,
@@ -18,14 +18,14 @@ import {
   chatMessageExpertError,
   checkUserStatusSuccess,
   checkQuestionExpertStatusSuccess,
-} from "./action";
-import { showOrHideModal } from "../../../components/customModal/action";
-import { displayConsole } from "../../../utils/helper";
+} from './action';
+import {showOrHideModal} from '../../../components/customModal/action';
+import {displayConsole} from '../../../utils/helper';
 import {
   showApiLoader,
   hideApiLoader,
-} from "../../../components/customLoader/action";
-import Constant from "../../../utils/constants";
+} from '../../../components/customLoader/action';
+import Constant from '../../../utils/constants';
 import {
   CHAT_MESSAGE_EXPERT_LOADING,
   CHAT_MESSAGE_EXPERT_SENDING,
@@ -33,29 +33,29 @@ import {
   TOGGLE_EXPERT_STATUS,
   RESOLVE_QUESTION,
   STOP_OBSERVER_CHAT,
-} from "../../../redux/types";
-let Lang = Language["en"];
+} from '../../../redux/types';
+let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100,
   loadMessagesObserver,
   checkStatusObserver,
   checkQuestionStatusObserver;
 
-function* sendMessageToUser({ data }) {
+function* sendMessageToUser({data}) {
   try {
-    const { messageParams, imageParams, id, lastMessage, questionId } = data;
+    const {messageParams, imageParams, id, lastMessage, questionId} = data;
     if (imageParams) {
       yield put(showApiLoader(Lang.apiLoader.loadingText));
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
-        const { downloadURL } = responseImage.data;
+        const {downloadURL} = responseImage.data;
         messageParams.image = downloadURL;
         const state = yield select();
         const userStatusData = state.chatExpertReducer.userStatusData;
         const userData = state.authLoadingReducer.userData;
         const questionData = Object.assign(
           {},
-          state.chatExpertReducer.questionData
+          state.chatExpertReducer.questionData,
         );
         var unreadCount = questionData.userUnreadCount
           ? questionData.userUnreadCount
@@ -90,8 +90,8 @@ function* sendMessageToUser({ data }) {
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError
-          )
+              : Lang.errorMessage.serverError,
+          ),
         );
       }
     } else {
@@ -100,7 +100,7 @@ function* sendMessageToUser({ data }) {
       const userData = state.authLoadingReducer.userData;
       const questionData = Object.assign(
         {},
-        state.chatExpertReducer.questionData
+        state.chatExpertReducer.questionData,
       );
       var unreadCount = questionData.userUnreadCount
         ? questionData.userUnreadCount
@@ -123,7 +123,7 @@ function* sendMessageToUser({ data }) {
           userUnreadCount: unreadCount,
         },
       };
-      displayConsole("inside sendMessageToUser", state);
+      displayConsole('inside sendMessageToUser', state);
       yield sendMessage(params);
       questionData.userUnreadCount = unreadCount;
       const dataResponse = {
@@ -135,137 +135,137 @@ function* sendMessageToUser({ data }) {
     yield put(chatMessageExpertError());
   }
 }
-function* loadMessagesOfExpert({ data, dispatch }) {
+function* loadMessagesOfExpert({data, dispatch}) {
   try {
     yield put(showApiLoader(Lang.apiLoader.loadingText));
     let isFirstTime = true;
     loadMessagesObserver = yield loadMessages(
       data,
       (querySnapshot) => {
-        displayConsole("inside loadMessagesOfExpert", querySnapshot);
+        displayConsole('inside loadMessagesOfExpert', querySnapshot);
         const response = {
           success: true,
           messages: querySnapshot.docs,
         };
-        displayConsole("inside loadMessagesOfExpert response", response);
+        displayConsole('inside loadMessagesOfExpert response', response);
         dispatch(hideApiLoader());
         dispatch(loadExpertMessagesSuccess(response.messages));
         if (isFirstTime) {
           const obj = {
             id: data.id,
-            key: "type",
-            value: "User",
+            key: 'type',
+            value: 'User',
           };
           updateReadMessageStatus(obj);
           isFirstTime = false;
         }
-        displayConsole("data loadMessagesOfExpert", data);
+        displayConsole('data loadMessagesOfExpert', data);
         displayConsole(
-          "--------------**** loadMessagesOfExpert end ********-----------\n\n"
+          '--------------**** loadMessagesOfExpert end ********-----------\n\n',
         );
       },
       (error) => {
-        const { message, code } = error;
-        displayConsole("message loadMessagesOfExpert", message);
-        displayConsole("code loadMessagesOfExpert", code);
+        const {message, code} = error;
+        displayConsole('message loadMessagesOfExpert', message);
+        displayConsole('code loadMessagesOfExpert', code);
         const data = {
           success: false,
           message: message,
         };
         dispatch(loadExpertMessagesError(data.message));
-        displayConsole("data loadMessagesOfExpert", data);
+        displayConsole('data loadMessagesOfExpert', data);
         displayConsole(
-          "--------------**** loadMessagesOfExpert end ********-----------\n\n"
+          '--------------**** loadMessagesOfExpert end ********-----------\n\n',
         );
-      }
+      },
     );
   } catch (error) {
-    displayConsole("loadMessagesOfExpert  error ", error);
+    displayConsole('loadMessagesOfExpert  error ', error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(Lang.errorMessage.serverError));
   }
 }
 
-function* checkUserStatus({ data, dispatch }) {
+function* checkUserStatus({data, dispatch}) {
   try {
-    displayConsole("data", data);
-    const { userInfo, questionData } = data;
+    displayConsole('data', data);
+    const {userInfo, questionData} = data;
     checkStatusObserver = yield checkStatus(
       {
         id: userInfo.uid,
       },
       (querySnapshot) => {
-        displayConsole("inside checkUserStatus", querySnapshot.data());
+        displayConsole('inside checkUserStatus', querySnapshot.data());
         dispatch(checkUserStatusSuccess(querySnapshot.data()));
         displayConsole(
-          "--------------**** checkExpertStatus end ********-----------\n\n"
+          '--------------**** checkExpertStatus end ********-----------\n\n',
         );
       },
       (error) => {
-        const { message, code } = error;
-        displayConsole("message", message);
-        displayConsole("code", code);
+        const {message, code} = error;
+        displayConsole('message', message);
+        displayConsole('code', code);
         const data = {
           success: false,
           message: message,
         };
         dispatch(loadMessagesError(data.message));
-        displayConsole("data", data);
+        displayConsole('data', data);
         displayConsole(
-          "--------------**** checkExpertStatus end ********-----------\n\n"
+          '--------------**** checkExpertStatus end ********-----------\n\n',
         );
-      }
+      },
     );
     if (questionData) {
       yield delay(delayTime);
-      yield checkQuestStatus({ data: { questionData }, dispatch });
+      yield checkQuestStatus({data: {questionData}, dispatch});
     }
   } catch (error) {
-    displayConsole("checkUserStatus  error ", error);
+    displayConsole('checkUserStatus  error ', error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(Lang.errorMessage.serverError));
   }
 }
 
-function* checkQuestStatus({ data, dispatch }) {
+function* checkQuestStatus({data, dispatch}) {
   try {
-    displayConsole("data", data);
-    const { questionData } = data;
+    displayConsole('data', data);
+    const {questionData} = data;
     checkQuestionStatusObserver = yield checkQuestionStatus(
       {
         id: questionData.questionId,
       },
       (querySnapshot) => {
-        displayConsole("inside checkQuestStatus", querySnapshot.data());
+        displayConsole('inside checkQuestStatus', querySnapshot.data());
         dispatch(checkQuestionExpertStatusSuccess(querySnapshot.data()));
         displayConsole(
-          "--------------**** checkQuestStatus end ********-----------\n\n"
+          '--------------**** checkQuestStatus end ********-----------\n\n',
         );
       },
       (error) => {
-        const { message, code } = error;
-        displayConsole("message", message);
-        displayConsole("code", code);
+        const {message, code} = error;
+        displayConsole('message', message);
+        displayConsole('code', code);
         const data = {
           success: false,
           message: message,
         };
-        displayConsole("data", data);
+        displayConsole('data', data);
         displayConsole(
-          "--------------**** checkQuestStatus end ********-----------\n\n"
+          '--------------**** checkQuestStatus end ********-----------\n\n',
         );
-      }
+      },
     );
   } catch (error) {
-    displayConsole("checkQuestStatus  error ", error);
+    displayConsole('checkQuestStatus  error ', error);
     yield put(showOrHideModal(Lang.errorMessage.serverError));
   }
 }
 
-function* toggleExpertStatus({ data }) {
+function* toggleExpertStatus({data}) {
   try {
-    displayConsole("data", data);
-    const { toggleStatusParams, questionData } = data;
+    displayConsole('data', data);
+    const {toggleStatusParams, questionData} = data;
     yield updateStatus(toggleStatusParams);
     if (questionData) {
       const params = {
@@ -278,16 +278,17 @@ function* toggleExpertStatus({ data }) {
       yield updateUnreadCount(params);
     }
   } catch (error) {
-    displayConsole("toggleUserStatus  error ", error);
+    displayConsole('toggleUserStatus  error ', error);
   }
 }
 
-function* resolveQuestion({ data }) {
+function* resolveQuestion({data}) {
   try {
-    displayConsole("data", data);
-    const { resolveQuestionParams, navigation } = data;
+    displayConsole('data', data);
+    const {resolveQuestionParams, navigation} = data;
+    console.log(data);
     const responseResolvedQuestion = yield resolvedQuestion(
-      resolveQuestionParams
+      resolveQuestionParams,
     );
 
     if (responseResolvedQuestion.success) {
@@ -297,12 +298,12 @@ function* resolveQuestion({ data }) {
         showOrHideModal(
           responseResolvedQuestion.message
             ? responseResolvedQuestion.message
-            : Lang.errorMessage.serverError
-        )
+            : Lang.errorMessage.serverError,
+        ),
       );
     }
   } catch (error) {
-    displayConsole("setExpertRating  error ", error);
+    displayConsole('setExpertRating  error ', error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(Lang.errorMessage.serverError));
   }
@@ -320,7 +321,7 @@ function* stopObserver() {
       loadMessagesObserver();
     }
   } catch (error) {
-    displayConsole("stopOberver  error ", error);
+    displayConsole('stopOberver  error ', error);
   }
 }
 

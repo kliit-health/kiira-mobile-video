@@ -215,29 +215,17 @@ class Ask extends PureComponent {
   }
 
   renderCreditView() {
-    const {questions, videoChat} = this.state;
-
     return (
       <Fragment>
         <CustomText style={styles.creditTextStyle}>
-          {`${Constant.App.questionCreditValue} ${lang.askUser.homeCreditsText}`}
+          {`Unlimited Questions per month`}
         </CustomText>
-        {questions > 0 && (
-          <CustomText style={styles.creditTextStyle}>
-            {`${questions} ${lang.askUser.questionsText}`}
-          </CustomText>
-        )}
-        {videoChat > 0 && (
-          <CustomText style={styles.creditTextStyle}>
-            {`${videoChat} ${lang.askUser.videoChatText}`}
-          </CustomText>
-        )}
       </Fragment>
     );
   }
 
   renderInputTextView() {
-    const {setQuestionText, question} = this.props;
+    const {question} = this.props;
     const {questionText} = this.state;
     return (
       <View style={styles.inputTextContainerStyle}>
@@ -546,12 +534,8 @@ class Ask extends PureComponent {
           {this.renderCreditView()}
           {questionData
             ? this.renderAskedQuestionView()
-            : this.state.credits > 0 || this.state.questions > 0
-            ? this.renderInputTextView()
-            : null}
-          {!questionData &&
-            (this.state.credits > 0 || this.state.questions > 0) &&
-            this.renderButtonView()}
+            : this.renderInputTextView()}
+          {!questionData && this.renderButtonView()}
           {!questionData &&
             this.state.credits === 0 &&
             this.state.questions === 0 &&

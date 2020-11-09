@@ -8,13 +8,16 @@ import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
 import {generateDateInfo} from '../../../utils/helper';
 import moment from 'moment';
+import _ from 'lodash';
 
 const ExpertAppointments = (props) => {
   const {navigation} = props;
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const visitData = useSelector((state) => state.appointmentsReducer);
+  const visitData = useSelector(
+    (state) => state.expertAppointmentsReducer.history,
+  );
   const [visits, setVisits] = useState([]);
 
   useEffect(() => {
@@ -22,8 +25,9 @@ const ExpertAppointments = (props) => {
   }, []);
 
   useEffect(() => {
-    if (visitData.history.length > 1) {
-      let filtered = visitData.history.filter((visit) =>
+    let record = _.flatten(visitData);
+    if (record.length > 1) {
+      let filtered = record.filter((visit) =>
         moment(visit.time).isSameOrAfter(new Date()),
       );
 
@@ -34,12 +38,13 @@ const ExpertAppointments = (props) => {
         );
       });
 
-      setVisits(filtered);
+      setVisits([...filtered]);
     } else {
-      setVisits(visitData.history);
+      console.log('VISITS ARRAY', record);
+      setVisits([...record]);
     }
   }, [visitData]);
-  console.log(visits);
+  console.log('VISIT DATA', visits);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainerStyle}>

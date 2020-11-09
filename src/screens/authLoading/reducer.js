@@ -3,15 +3,17 @@ import {
   SET_FCM_TOKEN,
   SET_APP_STATE,
   SET_APP_SCREEN,
-} from "../../redux/types";
+  SET_LICENSES,
+} from '../../redux/types';
 
 const initialState = {
   userData: null,
   fcmToken: null,
+  licenses: null,
   isActive: true,
   appScreen: {
-    currentScreen: "",
-    prevScreen: "",
+    currentScreen: '',
+    prevScreen: '',
   },
 };
 const authLoadingReducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ const authLoadingReducer = (state = initialState, action) => {
       return {
         ...state,
         appScreen: action.data,
+      };
+    case SET_LICENSES:
+      return {
+        ...state,
+        licenses: action.data,
       };
     default:
       return {

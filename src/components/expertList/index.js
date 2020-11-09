@@ -76,11 +76,7 @@ const ExpertList = ({navigation, getFirst, experts}) => {
                     {Lang.expertProfile.prescriber}
                   </CustomText>
                 </View>
-                <View style={styles.firstAvaliableContainer}>
-                  {/* <CustomText style={styles.firstAvaliable}>
-										{"Test"}
-									</CustomText> */}
-                </View>
+                <View style={styles.firstAvaliableContainer}></View>
               </View>
             </View>
           </TouchableOpacity>

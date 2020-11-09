@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import {Header} from '../../../components';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import {connect} from 'react-redux';
 import {ActivityIndicator} from 'react-native-paper';
 import {decode, encode} from 'base-64';
 import styles from './styles';
+import {generateCometChatUser} from '../../../utils/helper';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -24,9 +18,10 @@ if (!global.atob) {
 
 this.DOMParser = require('xmldom').DOMParser;
 
-let appID = '24040819d9bfac8',
-  apiKey = 'fb7f672e5bcb70ee02b1338a49265cd4b7e65fe4',
-  appRegion = 'US';
+let appID = '250962e6be718e6';
+let apiKey = 'f9fdf2c3b58835823c6f3d05e1217a1343a43fee';
+let restKey = 'c8e128ec8a07b1a15d77c9820095dc3c6bc53e38';
+let appRegion = 'US';
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -38,7 +33,7 @@ class LoginScreen extends Component {
     this.state = {
       loaderVisible: false,
     };
-    this.state.entredUID = 'aaron_elkins';
+    this.state.entredUID = '';
     this.buttonPressed = this.buttonPressed.bind(this);
     var appSettings = new CometChat.AppSettingsBuilder()
       .subscribePresenceForAllUsers()
@@ -73,7 +68,7 @@ class LoginScreen extends Component {
   }
 
   buttonPressed() {
-    UID = this.state.entredUID;
+    UID = generateCometChatUser(this.props.userData);
     this.cometchatLogin();
   }
 
@@ -85,9 +80,41 @@ class LoginScreen extends Component {
         this.props.navigation.navigate('Home');
       },
       (error) => {
+        this.setState({loaderVisible: false});
+        this.createUser();
         console.log('Login failed with exception:', {error});
       },
     );
+  }
+
+  createUser() {
+    const {userData} = this.props;
+    const uid = generateCometChatUser(userData);
+    var options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        apiKey: restKey,
+        appId: appID,
+      },
+      body: {
+        uid: generateCometChatUser(userData),
+        name: `${userData.firstName} ${userData.lastName}`,
+      },
+    };
+
+    fetch(
+      `https://api-us.cometchat.io/v2.0/users?name=${userData.firstName} ${userData.lastName}&uid=${uid}`,
+      options,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.data.name) {
+          this.cometchatLogin();
+        } else {
+          console.log('Error', res);
+        }
+      });
   }
 
   render() {
