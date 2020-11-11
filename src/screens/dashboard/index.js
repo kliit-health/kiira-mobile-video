@@ -26,6 +26,7 @@ import {
   getExpertsDetailsAsync,
   getFavoriteExpertsAsync,
 } from '../careSquad/actions';
+import CustomButton from '../../components/customButton';
 
 const lang = language.en;
 class Dashboard extends PureComponent {
@@ -159,8 +160,7 @@ class Dashboard extends PureComponent {
     const isValid = this.props.licenses.includes(
       this.props.userData.profileInfo.state.code,
     );
-    console.log(this.props.userData.profileInfo.state.code);
-    console.log(isValid);
+
     if (isValid) this.setState({videoEnabled: true});
   };
 
@@ -384,7 +384,7 @@ class Dashboard extends PureComponent {
   }
 
   render() {
-    console.log(this.state.videoEnabled);
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.container}>
         <ScrollView
@@ -393,6 +393,32 @@ class Dashboard extends PureComponent {
           {this.Header()}
           {this.renderHeadingProfileView()}
           {this.renderDashBoard()}
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              resizeMode="contain"
+              source={staticImages.loginLogoImage}
+              style={styles.logoStyle}
+            />
+            <View>
+              <Text>Kiira</Text>
+              <Text>
+                One of the biggest challenges of adulthood is finding the right
+                doctor for you. I've got you covered
+              </Text>
+              <CustomButton
+                buttonStyle={styles.noContainerStyle}
+                textStyle={styles.noTextStyle}
+                onPress={() => dispatch(cancelAppointment(data))}
+                text="Cancel Appointment"
+              />
+              <CustomButton
+                buttonStyle={styles.noContainerStyle}
+                textStyle={styles.noTextStyle}
+                onPress={() => dispatch(cancelAppointment(data))}
+                text="Cancel Appointment"
+              />
+            </View>
+          </View>
         </ScrollView>
       </View>
     );
