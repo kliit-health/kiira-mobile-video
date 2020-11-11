@@ -385,6 +385,7 @@ class Dashboard extends PureComponent {
 
   render() {
     const {staticImages} = Constant.App;
+    console.log('Unessasary');
     return (
       <View style={styles.container}>
         <ScrollView
