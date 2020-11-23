@@ -11,6 +11,7 @@ import {
 import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import CustomText from '../../../components/customText';
+import SearchBar from '../../../components/searchBar';
 import styles from '../style';
 import moment from 'moment';
 import Constant from '../../../utils/constants';
@@ -88,6 +89,7 @@ const SheduleModal = ({
                 decelerationRate={'fast'}
                 extraData={selectedDate}
                 renderItem={({item, index}) => {
+                  console.log(item);
                   item = generateDateInfo(item.date);
                   return (
                     <View

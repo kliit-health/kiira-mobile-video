@@ -54,14 +54,14 @@ const PaymentModal = ({
                 }}
                 text="Apply"
               />
-              {/* <CustomButton
-								buttonStyle={styles.yesContainerStyle}
-								textStyle={styles.yesTextStyle}
-								onPress={() => {
-									setShowPlans(!showPlans);
-								}}
-								text="Change Plan"
-							/> */}
+              <CustomButton
+                buttonStyle={styles.yesContainerStyle}
+                textStyle={styles.yesTextStyle}
+                onPress={() => {
+                  setShowPlans(!showPlans);
+                }}
+                text="Change Plan"
+              />
             </View>
           </View>
         ) : (
@@ -88,7 +88,7 @@ const PaymentModal = ({
                 }}>
                 <View style={{flexDirection: 'column'}}>
                   <Text style={{flexDirection: 'column'}}>Kiira Starter:</Text>
-                  <Text style={{flexDirection: 'column'}}>10 Chats</Text>
+                  <Text style={{flexDirection: 'column'}}>Unlimited Chats</Text>
                   <Text style={{flexDirection: 'column'}}>0 Visits</Text>
                 </View>
 

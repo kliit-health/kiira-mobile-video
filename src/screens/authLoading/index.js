@@ -69,7 +69,6 @@ class AuthLoadingScreen extends Component {
         duration: 3000,
         delay: 500,
       });
-      setData(userData);
     }
   }
 

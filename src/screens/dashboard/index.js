@@ -1,12 +1,5 @@
 import React, {PureComponent} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  Image,
-  Modal,
-} from 'react-native';
+import {View, TouchableOpacity, ScrollView, Text, Image} from 'react-native';
 import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
 import {showOrHideModal} from '../../components/customModal/action';
@@ -18,6 +11,7 @@ import {withNavigation} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {getTerms} from '../termsAndConditions/action';
 import {getPolicy} from '../privacyPolicy/action';
+import {getLicenses} from '../authLoading/action';
 import {setUserData} from './action';
 import firebase from 'react-native-firebase';
 import {getUserData, getRecentExpertsData} from '../../utils/firebase';
@@ -50,10 +44,11 @@ class Dashboard extends PureComponent {
       getHealthHistory,
       getExpertsDetails,
       getFavoriteExperts,
+      getLicenses,
     } = this.props;
 
+    getLicenses();
     this.checkLicenseStatus();
-    console.log('DID MOUNT');
     if (question) {
       this.setState({
         questionText: question,
@@ -68,6 +63,7 @@ class Dashboard extends PureComponent {
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
       getHealthHistory();
       getExpertsDetails();
+
       var user = firebase.auth().currentUser;
       if (user && user.uid) {
         getFavoriteExperts();
@@ -98,40 +94,42 @@ class Dashboard extends PureComponent {
     const countStartApp = await AsyncStorage.getItem('countStartApp');
     const count = countStartApp ? parseInt(countStartApp) : 1;
 
-    if (!isAlreadyRate && count % 15 === 0) {
-      // Alert.alert("App Rating", "Please give us your opinion", [
-      //   {
-      //     text: "Later",
-      //     onPress: () => console.log("Cancel Pressed"),
-      //     style: "cancel",
-      //   },
-      //   {
-      //     text: "OK",
-      //     onPress: () => {
-      //       setTimeout(() => {
-      //         let options = {
-      //           AppleAppID: "1487436865",
-      //           GooglePackageName: "com.klit",
-      //           preferredAndroidMarket: AndroidMarket.Google,
-      //           preferInApp: true,
-      //           openAppStoreIfInAppFails: true,
-      //           fallbackPlatformURL: "https://kliit.com",
-      //         };
-      //         Rate.rate(options, (success) => {
-      //           if (success) {
-      //             AsyncStorage.setItem("isAlreadyRate", "true");
-      //           }
-      //         });
-      //       }, 500);
-      //     },
-      //   },
-      // ]);
+    if (!isAlreadyRate && count % 30 === 0) {
+      Alert.alert('App Rating', 'Please give us your opinion', [
+        {
+          text: 'Later',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            setTimeout(() => {
+              let options = {
+                AppleAppID: '1526336962',
+                GooglePackageName: 'com.kiira',
+                preferredAndroidMarket: AndroidMarket.Google,
+                preferInApp: true,
+                openAppStoreIfInAppFails: true,
+                fallbackPlatformURL: 'https://kirra.io',
+              };
+              Rate.rate(options, (success) => {
+                if (success) {
+                  AsyncStorage.setItem('isAlreadyRate', 'true');
+                }
+              });
+            }, 500);
+          },
+        },
+      ]);
     }
     await AsyncStorage.setItem('countStartApp', `${count + 1}`);
   }
 
   componentDidUpdate() {
-    const {question} = this.props;
+    const {question, getLicenses} = this.props;
+    this.checkLicenseStatus();
+    getLicenses();
     if (question) {
       this.setState({
         questionText: question,
@@ -145,7 +143,7 @@ class Dashboard extends PureComponent {
 
   componentWillUnmount() {
     // Remove the event listener
-    // this.focusListener.remove();
+    this.focusListener.remove();
   }
 
   onChangeText = (value) => {
@@ -157,11 +155,13 @@ class Dashboard extends PureComponent {
   };
 
   checkLicenseStatus = () => {
-    const isValid = this.props.licenses.includes(
-      this.props.userData.profileInfo.state.code,
-    );
-
-    if (isValid) this.setState({videoEnabled: true});
+    const {licenses} = this.props;
+    if (licenses) {
+      const isValid = licenses.includes(
+        this.props.userData.profileInfo.state.code,
+      );
+      if (isValid) this.setState({videoEnabled: true});
+    }
   };
 
   Header = () => {
@@ -250,12 +250,7 @@ class Dashboard extends PureComponent {
   }
 
   renderDashBoard() {
-    const bandaid = require('../../../assets/bandaid.png');
-    const squad = require('../../../assets/squad.png');
-    const chat = require('../../../assets/chat.png');
-    const clipboard = require('../../../assets/clipboard.png');
-    const reminders = require('../../../assets/reminders.png');
-    const sos = require('../../../assets/sos.png');
+    const {staticImages} = Constant.App;
     const {navigation, showHideErrorModal} = this.props;
     const {videoEnabled} = this.state;
 
@@ -272,7 +267,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={bandaid}
+                source={staticImages.bandaid}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -291,7 +286,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={squad}
+                source={staticImages.squad}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -308,7 +303,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={chat}
+                source={staticImages.chat}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -327,7 +322,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={clipboard}
+                source={staticImages.clipboard}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -350,7 +345,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={reminders}
+                source={staticImages.reminders}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -367,7 +362,7 @@ class Dashboard extends PureComponent {
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
-                source={sos}
+                source={staticImages.sos}
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -384,8 +379,9 @@ class Dashboard extends PureComponent {
   }
 
   render() {
-    const {staticImages} = Constant.App;
-    console.log('Unessasary');
+    const {staticImages, screenNames} = Constant.App;
+    const {navigation, showHideErrorModal} = this.props;
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -394,29 +390,33 @@ class Dashboard extends PureComponent {
           {this.Header()}
           {this.renderHeadingProfileView()}
           {this.renderDashBoard()}
-          <View style={{flexDirection: 'row'}}>
+          <View style={styles.botContainer}>
             <Image
               resizeMode="contain"
               source={staticImages.loginLogoImage}
-              style={styles.logoStyle}
+              style={styles.botLogo}
             />
             <View>
-              <Text>Kiira</Text>
-              <Text>
-                One of the biggest challenges of adulthood is finding the right
-                doctor for you. I've got you covered
+              <Text style={styles.botTitle}>Kiira</Text>
+              <Text style={styles.botDescription}>
+                Doctors and therapists (your Squad) are important folks, in
+                sickness and in health! Are you feeling sick right now?
               </Text>
               <CustomButton
-                buttonStyle={styles.noContainerStyle}
-                textStyle={styles.noTextStyle}
-                onPress={() => dispatch(cancelAppointment(data))}
-                text="Cancel Appointment"
+                buttonStyle={styles.buttonContainerStyle}
+                textStyle={styles.buttonTextStyle}
+                onPress={() =>
+                  showHideErrorModal(
+                    "That's great, if that changes let us know.",
+                  )
+                }
+                text="I'm not feeling sick"
               />
               <CustomButton
-                buttonStyle={styles.noContainerStyle}
-                textStyle={styles.noTextStyle}
-                onPress={() => dispatch(cancelAppointment(data))}
-                text="Cancel Appointment"
+                buttonStyle={styles.buttonContainerStyle}
+                textStyle={styles.buttonTextStyle}
+                onPress={() => navigation.navigate('TreatmentBot')}
+                text="Now that you mention it..."
               />
             </View>
           </View>
@@ -441,6 +441,7 @@ const mapDispatchToProps = (dispatch) => ({
   setQuestionText: (value) => dispatch(updateQuestion(value)),
   getTerms: () => dispatch(getTerms()),
   getPolicy: () => dispatch(getPolicy()),
+  getLicenses: () => dispatch(getLicenses()),
   getHealthHistory: () => dispatch(getHealthHistoryAsync()),
   getExpertsDetails: () => dispatch(getExpertsDetailsAsync()),
   getFavoriteExperts: () => dispatch(getFavoriteExpertsAsync()),

@@ -19,7 +19,7 @@ const BookVisit = (props) => {
 
   const visitData = useSelector((state) => state.expertScheduleReducer);
   const userData = useSelector((state) => state.authLoadingReducer.userData);
-  console.log(userData);
+
   const appointmentDetails = {
     firstName: userData.profileInfo.firstName,
     lastName: userData.profileInfo.lastName,

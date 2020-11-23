@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import Constant from '../../../utils/constants';
-import metrics from '../../../utils/metrices';
-import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
+import Constant from '../../utils/constants';
+import metrics from '../../utils/metrices';
+import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    width: metrics.DEVICE_WIDTH,
     marginTop: getStatusBarHeight(),
   },
 
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   myRecentExpertContainerStyle: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.95,
+    width: metrics.DEVICE_WIDTH * 0.85,
     height: 425,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // IOS
     shadowRadius: 10, //IOS
     elevation: 2, // Android
-    // margin: 15,
+    margin: 15,
   },
 
   parentContainerStyle: {
@@ -315,169 +314,21 @@ const styles = StyleSheet.create({
   },
 
   titleContainerStyle: {
-    // flex: 1,
-    backgroundColor: Constant.App.colors.blueColor,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: Constant.App.colors.whiteColor,
+    borderBottomColor: Constant.App.colors.offWhiteColor,
+    borderBottomWidth: 5,
     justifyContent: 'center',
     alignItems: 'center',
     width: metrics.DEVICE_WIDTH,
-    // height: 200,
-    borderRadius: 50,
-    overflow: 'hidden',
   },
 
   titleTextStyle: {
-    color: Constant.App.colors.whiteColor,
+    color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
     fontWeight: '500',
-  },
-
-  safeArea: {
-    flex: 1,
-    backgroundColor: Constant.App.colors.blueColor,
-  },
-
-  dateContainerStyle: {
-    alignSelf: 'center',
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 1,
-    borderRadius: 50,
-    padding: 8,
-    backgroundColor: Constant.App.colors.whiteColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
-  },
-
-  dateSelectedContainerStyle: {
-    alignSelf: 'center',
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 1,
-    borderRadius: 50,
-    padding: 8,
-    backgroundColor: Constant.App.colors.blueColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
-  },
-
-  dateTextStyle: {
-    textAlign: 'center',
-    width: 18,
-  },
-
-  dateSelectedTextStyle: {
-    textAlign: 'center',
-    color: Constant.App.colors.whiteColor,
-    width: 18,
-  },
-
-  dateTimeSlotContainerStyle: {
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 1,
-    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-    padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.28,
-    height: 44,
-    backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
-    marginRight: 5,
-  },
-
-  dateTimeSelectedSlotContainerStyle: {
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 1,
-    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-    padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.28,
-    height: 44,
-    backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
-    marginRight: 5,
-  },
-
-  dateTimeSlotTextStyle: {
-    fontSize: Constant.App.textSize.Normal,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    color: Constant.App.colors.blueColor,
-  },
-
-  dateTimeSelectedSlotTextStyle: {
-    fontSize: Constant.App.textSize.Normal,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    color: Constant.App.colors.whiteColor,
-  },
-
-  recentChatContainerStyle: {
-    padding: parentPaddingValue,
-    flexDirection: 'row',
-    backgroundColor: Constant.App.colors.whiteColor,
-    alignSelf: 'center',
-    borderRadius: 20,
-    shadowColor: 'rgba(0,0,0, .4)', // IOS
-    shadowOffset: {height: 13, width: 1}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 10, //IOS
-    elevation: 2, // Android
-    padding: 15,
-    width: metrics.DEVICE_WIDTH * 0.95,
-  },
-
-  resolveContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    // width: metrics.DEVICE_WIDTH,
-    // padding: 40,
-  },
-
-  recentChatParentContainerStyle: {
-    flexDirection: 'column',
-    backgroundColor: Constant.App.colors.whiteColor,
-    // alignSelf: 'center',
-    backgroundColor: 'white',
-    // width: metrics.DEVICE_WIDTH,
-    marginVertical: 35,
-  },
-
-  userInfoContainerResolvedChatStyle: {
-    flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPadding - 90,
-    marginLeft: 10,
-    justifyContent: 'center',
-  },
-
-  userInfoContainerStyle: {
-    flexDirection: 'column',
-    width: 220,
-    marginLeft: 10,
-    marginRight: 10,
-    justifyContent: 'center',
-  },
-
-  userInfoTextBoldStyle: {
-    fontSize: Constant.App.textSize.Large,
-    color: Constant.App.colors.blackColor,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: '400',
-  },
-
-  userInfoTextStyle: {
-    fontSize: Constant.App.textSize.Normal,
-    color: Constant.App.colors.whiteColor,
-    fontWeight: '200',
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  timeContainer: {
-    backgroundColor: Constant.App.colors.pinkColor,
-    marginLeft: 80,
-    // flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    borderRadius: 5,
-    overflow: 'hidden',
-    padding: 5,
   },
 });
 

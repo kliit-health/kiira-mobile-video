@@ -6,6 +6,7 @@ import styles from '../style';
 import Constant from '../../../utils/constants';
 import {makeAppointment} from '../action';
 import {getAppointmentsList} from '../../appointments/action';
+import {showOrHideModal} from '../../../components/customModal/action';
 
 const Buttons = ({
   applyCredit,
@@ -20,71 +21,85 @@ const Buttons = ({
 }) => {
   const dispatch = useDispatch();
 
+  const bookedButtons = () => (
+    <Fragment>
+      <CustomButton
+        buttonStyle={styles.yesContainerStyle}
+        textStyle={styles.yesTextStyle}
+        onPress={() => {
+          dispatch(getAppointmentsList({uid: appointmentDetails.uid}));
+          navigation.navigate(Constant.App.screenNames.Appointments);
+        }}
+        text="Check Upcoming Visits"
+      />
+      <CustomButton
+        buttonStyle={styles.noContainerStyle}
+        textStyle={styles.noTextStyle}
+        onPress={() => {
+          navigation.navigate(Constant.App.screenNames.ExpertSchedule, {
+            uid: expertData.uid,
+            calendarID: expertData.calendarID,
+          });
+        }}
+        text="Reschedule Visit  "
+      />
+    </Fragment>
+  );
+
+  const pay = () => (
+    <Fragment>
+      <CustomButton
+        buttonStyle={styles.yesContainerStyle}
+        textStyle={styles.yesTextStyle}
+        onPress={() => {
+          if (userData.demo) {
+            dispatch(showOrHideModal('Currently Unavailible'));
+          } else {
+            navigation.navigate('BuyingCredit');
+          }
+        }}
+        text="Pay"
+      />
+      <CustomButton
+        disabled={userData.visits === 0}
+        buttonStyle={
+          userData.visits === 0
+            ? styles.noContainerDisabledStyle
+            : styles.noContainerStyle
+        }
+        textStyle={
+          userData.visits === 0
+            ? styles.noTextDisabledStyle
+            : styles.noTextStyle
+        }
+        onPress={() => {
+          if (userData.demo) {
+            dispatch(showOrHideModal('Currently Unavailible'));
+          } else {
+            setModalVisible(!modalVisible);
+          }
+        }}
+        text="Apply Plan Credit"
+      />
+    </Fragment>
+  );
+
+  const confirm = () => (
+    <CustomButton
+      buttonStyle={styles.yesContainerStyle}
+      textStyle={styles.yesTextStyle}
+      onPress={() => {
+        dispatch(makeAppointment(appointmentDetails));
+        setBooked(true);
+        navigation.navigate('Dashboard');
+      }}
+      text="Confirm"
+    />
+  );
+
   return (
     <View style={styles.renderButtonsContainer}>
-      {booked ? (
-        <Fragment>
-          <CustomButton
-            buttonStyle={styles.yesContainerStyle}
-            textStyle={styles.yesTextStyle}
-            onPress={() => {
-              dispatch(getAppointmentsList({uid: appointmentDetails.uid}));
-              navigation.navigate(Constant.App.screenNames.Appointments);
-            }}
-            text="Check Upcoming Visits"
-          />
-          <CustomButton
-            buttonStyle={styles.noContainerStyle}
-            textStyle={styles.noTextStyle}
-            onPress={() => {
-              navigation.navigate(Constant.App.screenNames.ExpertSchedule, {
-                uid: expertData.uid,
-                calendarID: expertData.calendarID,
-              });
-            }}
-            text="Reschedule Visit  "
-          />
-        </Fragment>
-      ) : !applyCredit ? (
-        <Fragment>
-          <CustomButton
-            buttonStyle={styles.yesContainerStyle}
-            textStyle={styles.yesTextStyle}
-            onPress={() => {
-              navigation.navigate('BuyingCredit');
-            }}
-            text="Pay"
-          />
-          <CustomButton
-            disabled={userData.visits === 0}
-            buttonStyle={
-              userData.visits === 0
-                ? styles.noContainerDisabledStyle
-                : styles.noContainerStyle
-            }
-            textStyle={
-              userData.visits === 0
-                ? styles.noTextDisabledStyle
-                : styles.noTextStyle
-            }
-            onPress={() => {
-              setModalVisible(!modalVisible);
-            }}
-            text="Apply Plan Credit"
-          />
-        </Fragment>
-      ) : (
-        <CustomButton
-          buttonStyle={styles.yesContainerStyle}
-          textStyle={styles.yesTextStyle}
-          onPress={() => {
-            dispatch(makeAppointment(appointmentDetails));
-            setBooked(true);
-            navigation.navigate('Dashboard');
-          }}
-          text="Confirm"
-        />
-      )}
+      {booked ? bookedButtons() : !applyCredit ? pay() : confirm()}
     </View>
   );
 };

@@ -58,7 +58,7 @@ const Account = (props) => {
           </View>
         </View>
         <View style={styles.accountPlanContainer}>
-          <Text style={styles.userName}>{`Kiira ${planType.title}`}</Text>
+          <Text style={styles.userName}>{`Kiira ${planType.title || ''}`}</Text>
           <View style={styles.accountButtons}>
             <CustomButton
               onPress={() => {

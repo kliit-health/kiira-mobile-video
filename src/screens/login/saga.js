@@ -37,6 +37,7 @@ function* loginFirebase({data}) {
         uid,
       };
       const userData = yield getDataFromTable(obj);
+      console.log('LOGIN USERDATA', userData);
       if (userData && userData.role === 'User') {
         const updateStatusParams = {
           uid: userData.uid,

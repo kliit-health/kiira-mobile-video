@@ -203,7 +203,6 @@ export async function getAppointmentsForTodayAsync(data) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log('The data', data);
         response.today = data;
       });
 
@@ -298,10 +297,8 @@ export async function makeAppointment({data}) {
         });
 
       const document = firebase.firestore().collection('appointments').doc(uid);
-
       const prev = await document.get();
 
-      console.log(prev.data());
       if (prev.data().history) {
         await document.set(
           {history: [...prev.data().history, response]},
@@ -315,15 +312,14 @@ export async function makeAppointment({data}) {
           .set({history: [response]});
       }
 
-      console.log('EXPERT: ', expert);
       const expertDocument = firebase
         .firestore()
         .collection('appointments')
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
-      console.log(expertPrev.data());
-      if (expertPrev.data().history) {
+
+      if (expertPrev.data().history[uid]) {
         await expertDocument.set(
           {history: {[uid]: [...expertPrev.data().history[uid], response]}},
           {merge: true},
@@ -333,7 +329,7 @@ export async function makeAppointment({data}) {
           .firestore()
           .collection('appointments')
           .doc(expert.uid)
-          .set({history: {[uid]: [response]}});
+          .set({history: {...expertPrev.data().history, [uid]: [response]}});
       }
 
       return;
@@ -1509,7 +1505,7 @@ export async function payAmountWithToken(tokenID, amount) {
   }
 }
 
-export async function addUserCredits(credits) {
+export async function addUserCredits(visits) {
   try {
     const userID = firebase.auth().currentUser.uid;
     const docData = await firebase
@@ -1523,9 +1519,9 @@ export async function addUserCredits(credits) {
       .collection('users')
       .doc(userID)
       .update({
-        credits: userData.credits + credits,
+        visits: userData.visits + visits,
       });
-    return {ok: true, newCredits: userData.credits + credits};
+    return {ok: true};
   } catch (err) {
     return {ok: false, status: 'internal'};
   }

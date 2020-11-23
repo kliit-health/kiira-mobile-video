@@ -5,7 +5,6 @@ import {
   ScrollView,
   FlatList,
   Platform,
-  Alert,
   Image,
 } from 'react-native';
 import {connect} from 'react-redux';
@@ -20,14 +19,13 @@ import {getQuestionData, updateQuestion} from './action';
 import moment from 'moment';
 import {withNavigation} from 'react-navigation';
 import {Header} from '../../components';
-import Rate, {AndroidMarket} from 'react-native-rate';
-import AsyncStorage from '@react-native-community/async-storage';
 import {getTerms} from '../termsAndConditions/action';
 import {getPolicy} from '../privacyPolicy/action';
 import CachedImage from 'react-native-image-cache-wrapper';
 import {setUserData} from './action';
 import firebase from 'react-native-firebase';
 import {getUserData} from '../../utils/firebase';
+import {showOrHideModal} from '../../components/customModal/action';
 
 const lang = language.en;
 class Ask extends PureComponent {
@@ -80,40 +78,6 @@ class Ask extends PureComponent {
         }
       }
     });
-    const isAlreadyRate = await AsyncStorage.getItem('isAlreadyRate');
-    const countStartApp = await AsyncStorage.getItem('countStartApp');
-    const count = countStartApp ? parseInt(countStartApp) : 1;
-
-    if (!isAlreadyRate && count % 30 === 0) {
-      Alert.alert('App Rating', 'Please give us your opinion', [
-        {
-          text: 'Later',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            setTimeout(() => {
-              let options = {
-                AppleAppID: '1526336962',
-                GooglePackageName: 'com.kiira',
-                preferredAndroidMarket: AndroidMarket.Google,
-                preferInApp: true,
-                openAppStoreIfInAppFails: true,
-                fallbackPlatformURL: 'https://kirra.io',
-              };
-              Rate.rate(options, (success) => {
-                if (success) {
-                  AsyncStorage.setItem('isAlreadyRate', 'true');
-                }
-              });
-            }, 500);
-          },
-        },
-      ]);
-    }
-    await AsyncStorage.setItem('countStartApp', `${count + 1}`);
   }
 
   componentDidUpdate() {
@@ -248,14 +212,18 @@ class Ask extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation, question} = this.props;
+    const {navigation, question, userData, showHideErrorModal} = this.props;
     return (
       <CustomButton
         disabled={question ? false : true}
         buttonStyle={styles.buttonContainerStyle}
         textStyle={styles.buttonTextStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ChooseExpert);
+          if (userData.demo) {
+            showHideErrorModal('Currently unavailable');
+          } else {
+            navigation.navigate(Constant.App.screenNames.ChooseExpert);
+          }
         }}
         text={lang.askUser.btnText}
       />
@@ -522,8 +490,9 @@ class Ask extends PureComponent {
       previousQuestionData,
       questionData,
       navigation,
+      userData,
     } = this.props;
-
+    console.log('USER DATA', userData);
     return (
       <View style={styles.container}>
         <Header title="" onBack={() => navigation.goBack()} />
@@ -568,6 +537,7 @@ const mapDispatchToProps = (dispatch) => ({
   setQuestionText: (value) => dispatch(updateQuestion(value)),
   getTerms: () => dispatch(getTerms()),
   getPolicy: () => dispatch(getPolicy()),
+  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
 });
 
 export default connect(

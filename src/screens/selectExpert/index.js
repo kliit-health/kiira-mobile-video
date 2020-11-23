@@ -41,10 +41,9 @@ const SelectExpert = (props) => {
     )
       .then((res) => res.json())
       .then((data) => data);
-    console.log('MMM', response);
     return response;
   };
-  console.log(props);
+
   return (
     <View style={styles.container}>
       <Header title="Request a visit" onBack={() => navigation.goBack()} />

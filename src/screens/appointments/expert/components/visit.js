@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import CustomButton from '../../../../components/customButton';
+import CustomText from '../../../../components/customText';
 import styles from '../style';
 import {useDispatch} from 'react-redux';
 import {cancelAppointment} from '../action';
 import {getUserData} from '../../../../utils/firebase';
 import Constant from '../../../../utils/constants';
+import moment from 'moment';
 
 const Visit = ({visit, date, navigation}) => {
   const dispatch = useDispatch();
   const [patientInfo, setPatientInfo] = useState(null);
+  const [profilePic, setProfilePic] = useState('');
   const patient = {
     uid: visit.uid,
     id: visit.id,
@@ -37,68 +40,73 @@ const Visit = ({visit, date, navigation}) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (patientInfo) {
+      setProfilePic(patientInfo.profileInfo.profileImageUrl);
+    }
+  }, [patientInfo]);
+
   return (
-    <View style={{alignSelf: 'center', paddingBottom: 50}}>
-      <View style={styles.myRecentExpertContainerStyle}>
-        <Text style={{alignSelf: 'center', margin: 15, fontSize: 20}}>
-          {`${visit.firstName} ${visit.lastName}`}
-        </Text>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.expertImageContainer}>
-            <Image
-              style={styles.expertImage}
-              source={
-                patientInfo
-                  ? {
-                      uri: patientInfo.profileInfo.profileImageUrl,
-                    }
-                  : require('../../../../../assets/profile_img_placeholder.png')
-              }
-              activeOpacity={0.7}
-            />
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-          }}>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.dow}
-            </Text>
-            <Text>{`${date.month} ${date.day}`}</Text>
-          </View>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.hour.time}
-            </Text>
-            <Text>{date.hour.am_pm}</Text>
-          </View>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>30</Text>
-            <Text>MIN</Text>
-          </View>
-        </View>
-        <CustomButton
-          buttonStyle={styles.yesContainerStyle}
-          textStyle={styles.yesTextStyle}
+    <View style={styles.resolveContainer}>
+      <View style={styles.recentChatParentContainerStyle}>
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate('ExpertLoginScreen', {
               uid: visit.expert.uid,
               visit,
               patientInfo,
             });
-          }}
-          text="Join"
-        />
-
-        <CustomButton
-          buttonStyle={styles.noContainerStyle}
-          textStyle={styles.noTextStyle}
-          onPress={() => dispatch(cancelAppointment(patient))}
-          text="Cancel"
-        />
+          }}>
+          <View style={styles.recentChatContainerStyle}>
+            <Image
+              containerStyle={{alignSelf: 'center'}}
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 50,
+              }}
+              source={
+                profilePic
+                  ? {
+                      uri: profilePic,
+                    }
+                  : require('../../../../../assets/profile_img_placeholder.png')
+              }
+              activeOpacity={0.7}
+            />
+            {/* <CustomButton
+            buttonStyle={styles.noContainerStyle}
+            textStyle={styles.noTextStyle}
+            onPress={() => dispatch(cancelAppointment(patient))}
+            text="Cancel"
+          /> */}
+            <View style={styles.userInfoContainerStyle}>
+              <View style={{flexDirection: 'row'}}>
+                <CustomText style={styles.userInfoTextBoldStyle}>
+                  {`${visit.firstName} ${visit.lastName}`}
+                </CustomText>
+                <View style={styles.timeContainer}>
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      marginRight: 5,
+                      flexDirection: 'row',
+                      justifyContent: 'flex-start',
+                    }}
+                    resizeMode="contain"
+                    defaultSource={require('../../../../../assets/clock.png')}
+                    source={require('../../../../../assets/clock.png')}
+                  />
+                  <CustomText style={styles.userInfoTextStyle}>
+                    {moment(visit.time).format('hh:mm A')}
+                  </CustomText>
+                </View>
+              </View>
+              <CustomText>{visit.reason}</CustomText>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

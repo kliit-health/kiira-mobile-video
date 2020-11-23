@@ -67,6 +67,7 @@ import Medications from '../screens/medications';
 import MedicalHistory from '../screens/medicalHistory';
 import NeedsPresciption from '../screens/needsPrescription';
 import NewUser from '../screens/newUser';
+import Patients from '../screens/patients';
 import PaymentMethods from '../screens/payment/paymentMethods';
 import PayPalApproval from '../screens/payment/buyingCredit/paypal';
 import Pregnancy from '../screens/pregnancy';
@@ -83,6 +84,7 @@ import SettingExpert from '../screens/setting/expert';
 import SOS from '../screens/sos';
 import Tutorial from '../screens/tutorial';
 import TermsConditions from '../screens/termsAndConditions';
+import TreatmentBot from '../screens/treatmentBot';
 import UpdateAvailablity from '../screens/updateAvailablity';
 import Verify from '../screens/verify';
 import VideoPlayer from '../screens/videoVisit/VideoPlayer';
@@ -368,6 +370,35 @@ const BottomTabExpert = createBottomTabNavigator(
         ),
       },
     },
+    Community: {
+      screen: Patients,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => {
+          return (
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: focused ? '#e4fdfd' : '',
+                padding: focused ? 10 : 0,
+                marginTop: 5,
+                borderRadius: 20,
+              }}>
+              <Image
+                resizeMode={'contain'}
+                style={{width: tabIconSize, height: tabIconSize}}
+                source={
+                  focused
+                    ? require('../../assets/history-active.png')
+                    : require('../../assets/history.png')
+                }
+              />
+            </View>
+          );
+        },
+      },
+    },
   },
   {
     initialRouteName: 'AskExpert',
@@ -465,6 +496,7 @@ const MainAppStack = createStackNavigator(
     Setting: {screen: Setting},
     SOS: {screen: SOS},
     TermsConditions: {screen: TermsConditions},
+    TreatmentBot: {screen: TreatmentBot},
     Visit: {screen: Visit},
   },
   {

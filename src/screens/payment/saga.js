@@ -1,5 +1,8 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
-import { showApiLoader, hideApiLoader } from '../../components/customLoader/action';
+import {put, takeLatest, call} from 'redux-saga/effects';
+import {
+  showApiLoader,
+  hideApiLoader,
+} from '../../components/customLoader/action';
 import Language from '../../utils/localization';
 import {
   CREATE_PAYMENT_CARD,
@@ -21,7 +24,10 @@ import {
   getDataFromTable,
 } from '../../utils/firebase';
 
-import { createPayPalOrder, capturePayPalPaymentAPI } from '../../utils/webServices';
+import {
+  createPayPalOrder,
+  capturePayPalPaymentAPI,
+} from '../../utils/webServices';
 import {
   setCreditAmountsOptions,
   setPaymentMethods,
@@ -30,10 +36,10 @@ import {
   setData,
 } from './action';
 
-import { showOrHideModal } from '../../components/customModal/action';
-import { parseCardInfo } from '../../utils/helper/payment';
-import { NavigationService } from '../../navigator';
-import { deviceSupportsNativePay } from '../../utils/payment';
+import {showOrHideModal} from '../../components/customModal/action';
+import {parseCardInfo} from '../../utils/helper/payment';
+import {NavigationService} from '../../navigator';
+import {deviceSupportsNativePay} from '../../utils/payment';
 import Constant from '../../utils/constants';
 import firebase from 'react-native-firebase';
 
@@ -45,12 +51,14 @@ function* checkNativePaySupport() {
 }
 function* getCreditAmounts() {
   const creditAmountsString = yield call(getCreditAmountsData);
-  const creditAmounts = creditAmountsString ? JSON.parse(creditAmountsString) : null;
+  const creditAmounts = creditAmountsString
+    ? JSON.parse(creditAmountsString)
+    : null;
   yield put(setCreditAmountsOptions(creditAmounts));
 }
 
-function* createPayment({ data }) {
-  const { navigation, params } = data;
+function* createPayment({data}) {
+  const {navigation, params} = data;
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   try {
     const response = yield call(addNewPaymentCard, params);
@@ -95,8 +103,8 @@ function* getPaymentMethods() {
   yield put(hideApiLoader());
 
   if (response.ok) {
-    let cards = response.data.map(cardInfo => parseCardInfo(cardInfo));
-    cards = cards.filter(card => card !== null);
+    let cards = response.data.map((cardInfo) => parseCardInfo(cardInfo));
+    cards = cards.filter((card) => card !== null);
     yield put(setPaymentMethods(cards));
   } else {
     yield put(showOrHideModal(Lang.errorMessage.serverError));
@@ -104,9 +112,11 @@ function* getPaymentMethods() {
 }
 
 function* handlePayResponse(response, credits, navigation) {
+  console.log('Response from card', response);
   if (response.ok) {
     response = yield call(addUserCredits, credits);
     if (response.ok) {
+      console.log('RESPONSE WAS OK');
       const user = firebase.auth().currentUser;
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
@@ -116,8 +126,10 @@ function* handlePayResponse(response, credits, navigation) {
       yield put(setData(userData));
       yield put(showOrHideModal(Lang.successMessages.creditAddedSuccessfully));
       if (navigation === undefined) {
+        console.log("NAVIGATION DOESN'T EXIST");
         NavigationService.goBack();
       } else {
+        console.log('NAVIGATION EXISTS');
         navigation.goBack();
       }
     }
@@ -128,7 +140,7 @@ function* handlePayResponse(response, credits, navigation) {
   }
 }
 
-function* buyCredits({ payload: { cardID, credits, amount } }) {
+function* buyCredits({payload: {cardID, credits, amount}}) {
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   let response = yield call(payAmount, cardID, amount);
   yield put(hideApiLoader());
@@ -136,7 +148,7 @@ function* buyCredits({ payload: { cardID, credits, amount } }) {
   yield handlePayResponse(response, credits);
 }
 
-function* buyCreditsWithToken({ payload: { tokenID, credits, amount } }) {
+function* buyCreditsWithToken({payload: {tokenID, credits, amount}}) {
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   let response = yield call(payAmountWithToken, tokenID, amount);
   yield put(hideApiLoader());
@@ -144,14 +156,19 @@ function* buyCreditsWithToken({ payload: { tokenID, credits, amount } }) {
   yield handlePayResponse(response, credits);
 }
 
-function* buyCreditsWithPayPal({ payload: { credits, amount, navigation } }) {
+function* buyCreditsWithPayPal({payload: {credits, amount, navigation}}) {
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   let response = yield call(getPayPalAccessToken);
   yield put(hideApiLoader());
   if (response.ok) {
     let accessToken = response.data.data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
-    let paypalResponse = yield call(createPayPalOrder, accessToken, amount, credits);
+    let paypalResponse = yield call(
+      createPayPalOrder,
+      accessToken,
+      amount,
+      credits,
+    );
     yield put(hideApiLoader());
     yield put(setOrderData(paypalResponse));
     navigation.navigate(Constant.App.screenNames.PayPalApproval);
@@ -160,17 +177,23 @@ function* buyCreditsWithPayPal({ payload: { credits, amount, navigation } }) {
   }
 }
 
-function* capturePayPalPayment({ payload: { capturePaymentURL, credits, navigation } }) {
+function* capturePayPalPayment({
+  payload: {capturePaymentURL, credits, navigation},
+}) {
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   let tokenResponse = yield call(getPayPalAccessToken);
   yield put(hideApiLoader());
   if (tokenResponse.ok) {
     let accessToken = tokenResponse.data.data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
-    let response = yield call(capturePayPalPaymentAPI, accessToken, capturePaymentURL);
+    let response = yield call(
+      capturePayPalPaymentAPI,
+      accessToken,
+      capturePaymentURL,
+    );
     yield put(hideApiLoader());
     // TODO: Remove after testing
-    yield handlePayResponse({ ok: true }, credits, navigation);
+    yield handlePayResponse({ok: true}, credits, navigation);
     if (response.ok) {
       // yield handlePayResponse({ ok: true }, credits);
     } else {
