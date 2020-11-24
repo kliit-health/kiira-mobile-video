@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
 import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
+import metrices from '../../../utils/metrices';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
     width: metrics.DEVICE_WIDTH,
-    marginTop: getStatusBarHeight(),
+    // marginTop: getStatusBarHeight(),
   },
 
   creditButtonStyle: {
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   },
 
   parentContainerStyle: {
-    flex: 1,
+    // flex: 1,
   },
 
   profileImageParentContainerStyle: {
@@ -334,7 +335,6 @@ const styles = StyleSheet.create({
 
   safeArea: {
     flex: 1,
-    backgroundColor: Constant.App.colors.blueColor,
   },
 
   dateContainerStyle: {
@@ -478,6 +478,36 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     padding: 5,
+  },
+
+  header: {
+    width: metrics.DEVICE_WIDTH,
+    alignItems: 'center',
+    paddingVertical: 60,
+    backgroundColor: Constant.App.colors.blueColor,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    overflow: 'hidden',
+  },
+
+  headerText: {
+    color: Constant.App.colors.whiteColor,
+    fontSize: Constant.App.textSize.xxLarge,
+    fontFamily: Constant.App.fontFamily.headerBold,
+    fontWeight: '500',
+  },
+
+  searchBar: {
+    alignSelf: 'center',
+    width: metrics.DEVICE_WIDTH * 0.75,
+    backgroundColor: Constant.App.colors.greyBgAsk,
+    margin: 5,
+    // borderRadius: 20,
+    backgroundColor: 'transparent',
+    borderWidth: 0, //no effect
+    shadowColor: 'transparent', //no effect
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent',
   },
 });
 

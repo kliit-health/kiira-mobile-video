@@ -49,8 +49,10 @@ const PaymentModal = ({
                 buttonStyle={styles.noContainerStyle}
                 textStyle={styles.noTextStyle}
                 onPress={() => {
-                  setModalVisible(!modalVisible);
-                  setApplyCredit(true);
+                  if (userData.visits > 0) {
+                    setModalVisible(!modalVisible);
+                    setApplyCredit(true);
+                  }
                 }}
                 text="Apply"
               />

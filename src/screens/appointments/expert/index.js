@@ -11,7 +11,8 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../components/customText';
-import SearchBar from '../../../components/searchBar';
+// import SearchBar from '../../../components/searchBar';
+import {SearchBar} from 'react-native-elements';
 import CustomButton from '../../../components/customButton';
 import Constant from '../../../utils/constants';
 import {getAppointmentsList} from './action';
@@ -48,7 +49,7 @@ const ExpertAppointments = (props) => {
 
   useEffect(() => {
     let record = _.flatten(visitData);
-    if (record.length > 1) {
+    if (record.length > 1 && selectedDate) {
       let filtered = record.filter((visit) =>
         moment(visit.time).isSameOrAfter(new Date()),
       );
@@ -60,26 +61,40 @@ const ExpertAppointments = (props) => {
         );
       });
 
-      setVisits([...filtered]);
+      let current = filtered.filter((visit) => {
+        return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
+      });
+
+      setVisits([...current]);
     } else {
       setVisits([...record]);
     }
-  }, [visitData]);
+  }, [visitData, selectedDate]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#008AFC" />
-      <View style={styles.titleContainerStyle}>
-        <CustomText style={styles.titleTextStyle}>
-          {'Upcoming Visits'}
-        </CustomText>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Patient Profile</Text>
       </View>
       <View style={styles.container}>
-        <SearchBar
-          onChange={(input) => console.log(input)}
-          placeholder={'Search'}
-        />
         <View>
+          <View
+            style={{
+              marginTop: 10,
+
+              alignSelf: 'center',
+            }}>
+            <SearchBar
+              containerStyle={styles.searchBar}
+              inputContainerStyle={{
+                borderRadius: 10,
+                backgroundColor: Constant.App.colors.greyBgAsk,
+              }}
+              onChange={(input) => console.log(input)}
+              placeholder={'Search'}
+            />
+          </View>
           <FlatList
             showsHorizontalScrollIndicator={false}
             keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
@@ -98,7 +113,7 @@ const ExpertAppointments = (props) => {
                     height: 100,
                     flexDirection: 'column',
                     alignItems: 'center',
-                    margin: 10,
+                    margin: 15,
                   }}>
                   <CustomText
                     style={
@@ -149,6 +164,7 @@ const ExpertAppointments = (props) => {
                 }
                 data={visits}
                 decelerationRate={'fast'}
+                extraData={selectedDate}
                 renderItem={({item, index}) => {
                   const date = generateDateInfo(item.time);
                   return (
@@ -168,18 +184,17 @@ const ExpertAppointments = (props) => {
                   marginTop: 20,
                 }}
                 resizeMode="contain"
-                source={require('../../../../assets/bell.png')}
+                source={require('../../../../assets/logo.png')}
               />
-              <Text style={styles.title}>You have no upcoming visits</Text>
-              <Text style={styles.subtitle}>
-                We'll notifiy you about upcoming appointments, new messages, and
-                more
+              <Text style={styles.title}>
+                You do not have any scheduled visits. Upcoming visits will be
+                listed here.
               </Text>
             </View>
           )}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

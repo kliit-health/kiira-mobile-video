@@ -67,7 +67,9 @@ import Medications from '../screens/medications';
 import MedicalHistory from '../screens/medicalHistory';
 import NeedsPresciption from '../screens/needsPrescription';
 import NewUser from '../screens/newUser';
+import OtherDetails from '../screens/patientProfile/other';
 import Patients from '../screens/patients';
+import PatientProfile from '../screens/patientProfile';
 import PaymentMethods from '../screens/payment/paymentMethods';
 import PayPalApproval from '../screens/payment/buyingCredit/paypal';
 import Pregnancy from '../screens/pregnancy';
@@ -440,6 +442,8 @@ const AppStackExpert = createStackNavigator(
     ExpertVisit: {screen: ExpertVisit},
     Help: {screen: Help},
     Learn: {screen: Learn},
+    OtherDetails: {screen: OtherDetails},
+    PatientProfile: {screen: PatientProfile},
     PrivacyPolicy: {screen: PrivacyPolicy},
     SettingExpert: {screen: SettingExpert},
     TermsConditions: {screen: TermsConditions},

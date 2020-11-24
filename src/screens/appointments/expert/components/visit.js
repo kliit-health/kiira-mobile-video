@@ -51,7 +51,7 @@ const Visit = ({visit, date, navigation}) => {
       <View style={styles.recentChatParentContainerStyle}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('ExpertLoginScreen', {
+            navigation.navigate('PatientProfile', {
               uid: visit.expert.uid,
               visit,
               patientInfo,
