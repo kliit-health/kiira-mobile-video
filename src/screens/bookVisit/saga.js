@@ -1,7 +1,7 @@
 import {UPDATE_APPOINTMENT, MAKE_APPOINTMENT} from '../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
 import {navigation} from 'react-navigation';
-import {makeAppointment} from '../../utils/firebase';
+import {addUserData, makeAppointment} from '../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,

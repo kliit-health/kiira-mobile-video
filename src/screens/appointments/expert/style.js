@@ -502,7 +502,7 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH * 0.75,
     backgroundColor: Constant.App.colors.greyBgAsk,
     margin: 5,
-    // borderRadius: 20,
+    
     backgroundColor: 'transparent',
     borderWidth: 0, //no effect
     shadowColor: 'transparent', //no effect

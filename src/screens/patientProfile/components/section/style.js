@@ -1,6 +1,12 @@
 import {StyleSheet} from 'react-native';
-import Constant from '../../utils/constants';
-import metrices from '../../utils/metrices';
+import Constant from '../../../../utils/constants';
+import metrices from '../../../../utils/metrices';
+
+let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
+let parentPadding = parentPaddingValue * 2;
+
+let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
+var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
   container: {
@@ -53,8 +59,11 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
+    // flex: 1,
     width: metrices.DEVICE_WIDTH * 0.8,
     alignSelf: 'center',
+    // borderWidth: 1,
+    // borderColor: 'black',
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
     padding: 10,

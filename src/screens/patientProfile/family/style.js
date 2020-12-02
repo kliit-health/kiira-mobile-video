@@ -1,15 +1,13 @@
 import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrices from '../../../utils/metrices';
-// import {getStatusBarHeight} from '../../components/iPhoneXHelper';
-
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+
   container: {
     flex: 1,
   },
@@ -37,25 +35,55 @@ const styles = StyleSheet.create({
     width: metrices.DEVICE_WIDTH * 0.8,
     alignSelf: 'center',
     marginTop: 50,
-    height: 400,
+    height: 200,
     color: 'black',
     padding: 10,
   },
 
-  buttonContainerStyle: {
-    alignSelf: 'center',
+  prevButtonContainerStyle: {
+    justifyContent: 'space-around',
+    borderColor: Constant.App.colors.blueColor,
+    borderWidth: 2,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH - childPadding,
+    width: metrices.DEVICE_WIDTH * 0.3,
+    backgroundColor: Constant.App.colors.whiteColor,
+    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+  },
+
+  prevButtonTextStyle: {
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    color: Constant.App.colors.blueColor,
+  },
+
+  nextButtonContainerStyle: {
+    justifyContent: 'space-around',
+    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+    padding: Constant.App.dimensions.btnPaddingGlobal,
+    width: metrices.DEVICE_WIDTH * 0.3,
     backgroundColor: Constant.App.colors.blueColor,
     marginTop: metrices.DEVICE_HEIGHT * 0.03,
   },
 
-  buttonTextStyle: {
+  nextButtonTextStyle: {
     textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.whiteColor,
+  },
+
+  progressContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+
+  question: {
+    alignSelf: 'center',
+    paddingVertical: 40,
+    paddingHorizontal: 15,
+    fontSize: Constant.App.textSize.xLarge,
   },
 });
 

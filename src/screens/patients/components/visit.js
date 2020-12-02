@@ -36,7 +36,7 @@ const Visit = ({visit, date, navigation}) => {
       console.log(error);
     }
   }, []);
-  console.log('VISIT', visit);
+
   return (
     <View style={{alignSelf: 'center', paddingBottom: 50}}>
       <View style={styles.myRecentExpertContainerStyle}>

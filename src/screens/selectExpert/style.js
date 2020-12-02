@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.whiteColor,
   },
+
+  
 });
 
 export default styles;

@@ -13,6 +13,7 @@ import AccountExpert from '../screens/account/expert';
 import AddChild from '../screens/addChild';
 import AddCreditOrDebitCard from '../screens/payment/AddCreditOrDebitCard';
 import Allergies from '../screens/allergies';
+import AllergiesHistory from '../screens/patientProfile/allergies';
 import Appointments from '../screens/appointments/';
 import Ask from '../screens/ask';
 import AskExpert from '../screens/ask/expert';
@@ -47,9 +48,11 @@ import ExpertSchedule from '../screens/expertSchedule';
 import ExpertLoginScreen from '../screens/videoVisit/expert/LoginScreen/LoginScreen';
 import ExpertVideoPlayer from '../screens/videoVisit/expert/VideoPlayer';
 import ExpertVisit from '../screens/visit/expert';
+import FamilyHistory from '../screens/patientProfile/family';
 import ForgotPassword from '../screens/forgotPassword';
 import GetStarted from '../screens/getStarted';
 import GroupChatScreen from '../screens/videoVisit/GroupChatScreen';
+import GynHistory from '../screens/patientProfile/gyn';
 import HealthHistory from '../screens/healthHistory/';
 import HomeScreen from '../screens/videoVisit/HomeScreen/HomeScreen';
 import GetTreatment from '../screens/getTreatment';
@@ -64,6 +67,7 @@ import Login from '../screens/login';
 import LoginScreen from '../screens/videoVisit/LoginScreen/LoginScreen';
 import MainCallScreen from '../screens/videoVisit/MainCallScreen';
 import Medications from '../screens/medications';
+import MedicationsHistory from '../screens/patientProfile/medications';
 import MedicalHistory from '../screens/medicalHistory';
 import NeedsPresciption from '../screens/needsPrescription';
 import NewUser from '../screens/newUser';
@@ -72,6 +76,7 @@ import Patients from '../screens/patients';
 import PatientProfile from '../screens/patientProfile';
 import PaymentMethods from '../screens/payment/paymentMethods';
 import PayPalApproval from '../screens/payment/buyingCredit/paypal';
+import PersonalMedicalHistory from '../screens/patientProfile/pmh';
 import Pregnancy from '../screens/pregnancy';
 import PregnancyHistory from '../screens/pregnancyHistory';
 import PreviousAppointmentsNotes from '../screens/previousAppointmentsNotes';
@@ -83,6 +88,8 @@ import SignUp from '../screens/signUp';
 import SelectExpert from '../screens/selectExpert';
 import Setting from '../screens/setting';
 import SettingExpert from '../screens/setting/expert';
+import SocialHistory from '../screens/patientProfile/social';
+import SurgicalHistory from '../screens/patientProfile/surgical';
 import SOS from '../screens/sos';
 import Tutorial from '../screens/tutorial';
 import TermsConditions from '../screens/termsAndConditions';
@@ -428,6 +435,7 @@ const BottomTabExpert = createBottomTabNavigator(
 
 const AppStackExpert = createStackNavigator(
   {
+    AllergiesHistory: {screen: AllergiesHistory},
     BottomTabExpert: {screen: BottomTabExpert},
     ChangePasswordExpert: {screen: ChangePasswordExpert},
     ChatExpert: {screen: ChatExpert},
@@ -440,12 +448,18 @@ const AppStackExpert = createStackNavigator(
     ExpertLoginScreen: {screen: ExpertLoginScreen},
     ExpertVideoPlayer: {screen: ExpertVideoPlayer},
     ExpertVisit: {screen: ExpertVisit},
+    FamilyHistory: {screen: FamilyHistory},
+    GynHistory: {screen: GynHistory},
     Help: {screen: Help},
     Learn: {screen: Learn},
+    MedicationsHistory: {screen: MedicationsHistory},
     OtherDetails: {screen: OtherDetails},
     PatientProfile: {screen: PatientProfile},
+    PersonalMedicalHistory: {screen: PersonalMedicalHistory},
     PrivacyPolicy: {screen: PrivacyPolicy},
+    SocialHistory: {screen: SocialHistory},
     SettingExpert: {screen: SettingExpert},
+    SurgicalHistory: {screen: SurgicalHistory},
     TermsConditions: {screen: TermsConditions},
     UpdateAvailablity: {screen: UpdateAvailablity},
   },

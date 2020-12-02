@@ -24,13 +24,16 @@ class MessageRowContainer extends React.PureComponent {
           <View style={styles.rowLeftParentContainerStyle}>
             <View style={styles.rowLeftContainerStyle}>
               <View style={styles.staticTextContainerStyle}>
-                {/* <HTML
-                                        onLinkPress={(evt, href) => { Linking.openURL(href); }}
-                                        containerStyle={{
-                                            overflow: 'hidden',
-                                        }}
-                                        html={Constant.App.disclaimerTextForChat}
-                                        baseFontStyle={styles.staticTextStyle} /> */}
+                <HTML
+                  onLinkPress={(evt, href) => {
+                    Linking.openURL(href);
+                  }}
+                  containerStyle={{
+                    overflow: 'hidden',
+                  }}
+                  html={Constant.App.disclaimerTextForChat}
+                  baseFontStyle={styles.staticTextStyle}
+                />
                 <Text>{Constant.App.disclaimerTextForChat}</Text>
               </View>
             </View>
@@ -131,7 +134,7 @@ class MessageRowContainer extends React.PureComponent {
           <View style={styles.rowLeftParentContainerStyle}>
             <View style={styles.rowLeftContainerStyle}>
               <View style={styles.staticTextContainerStyle}>
-                {/* <HTML
+                <HTML
                   onLinkPress={(evt, href) => {
                     Linking.openURL(href);
                   }}
@@ -140,7 +143,7 @@ class MessageRowContainer extends React.PureComponent {
                   }}
                   html={Constant.App.disclaimerTextForChat}
                   baseFontStyle={styles.staticTextStyle}
-                /> */}
+                />
                 <Text>{Constant.App.disclaimerTextForChat}</Text>
               </View>
             </View>
@@ -157,7 +160,7 @@ class MessageRowContainer extends React.PureComponent {
                 </CustomText>
               ) : !item.image && item.text ? (
                 <View style={styles.staticTextContainerStyle}>
-                  {/* <HTML
+                  <HTML
                     onLinkPress={(evt, href) => {
                       Linking.openURL(href);
                     }}
@@ -166,7 +169,7 @@ class MessageRowContainer extends React.PureComponent {
                     }}
                     html={Constant.App.disclaimerTextForChat}
                     baseFontStyle={styles.staticTextStyle}
-                  /> */}
+                  />
                   <Text>{Constant.App.disclaimerTextForChat}</Text>
                 </View>
               ) : null}
@@ -208,7 +211,7 @@ class MessageRowContainer extends React.PureComponent {
               </CustomText>
             ) : !item.image && item.text ? (
               <View style={styles.staticTextContainerStyle}>
-                {/* <HTML
+                <HTML
                   onLinkPress={(evt, href) => {
                     Linking.openURL(href);
                   }}
@@ -217,7 +220,7 @@ class MessageRowContainer extends React.PureComponent {
                   }}
                   html={Constant.App.disclaimerTextForChat}
                   baseFontStyle={styles.staticTextStyle}
-                /> */}
+                />
                 <Text>{Constant.App.disclaimerTextForChat}</Text>
               </View>
             ) : null}
