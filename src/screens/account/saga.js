@@ -1,20 +1,20 @@
-import {put, takeEvery, select} from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 import Language from '../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
 } from '../../components/customLoader/action';
-import {showOrHideModal} from '../../components/customModal/action';
-import {displayConsole} from '../../utils/helper';
-import {SIGN_OUT_API_HIT} from '../../redux/types';
-import {logout, updateStatus} from '../../utils/firebase';
+import { showOrHideModal } from '../../components/customModal/action';
+import { displayConsole } from '../../utils/helper';
+import { SIGN_OUT_API_HIT } from '../../redux/types';
+import { logout, updateStatus } from '../../utils/firebase';
 import Constant from '../../utils/constants';
-import {clearAskState} from '../ask/action';
+import { clearAskState } from '../ask/action';
 
-let Lang = Language['en'];
+let Lang = Language.en;
 
-function* signout({data}) {
-  const {navigation, isLoaderShow} = data;
+function* signout({ data }) {
+  const { navigation, isLoaderShow } = data;
   try {
     const state = yield select();
     const userData = state.authLoadingReducer.userData;

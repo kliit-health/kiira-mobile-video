@@ -1,28 +1,28 @@
-import React, {useState, useEffect} from 'react';
-import {Container, Header, SearchBar} from '../../components';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Container, Header, SearchBar } from '../../components';
+import { useSelector, useDispatch } from 'react-redux';
 import intl from '../../utils/localization';
-import {screenNames} from '../../utils/constants';
-import {searchObject} from '../../utils/functions';
-import {updateFavoriteExpertsAsync, getFavoriteExpertsAsync} from './actions';
-import {getChatHistoryAsync} from '../treatmentHistory/actions';
-import {List, Favorites} from './sections';
+import { screenNames } from '../../utils/constants';
+import { searchObject } from '../../utils/functions';
+import { updateFavoriteExpertsAsync, getFavoriteExpertsAsync } from './actions';
+import { getChatHistoryAsync } from '../treatmentHistory/actions';
+import { List, Favorites } from './sections';
 
-const CareSquad = ({navigation}) => {
+const CareSquad = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const [deleteMode, setDeleteMode] = useState(false);
   const [isSearching, setSearching] = useState(false);
   const [searchData, setSearchData] = useState([]);
 
-  const {experts} = useSelector((state) => state.careSquad);
-  const {favorites} = useSelector((state) => state.careSquad);
-  const {currentRoute} = useSelector((state) => state.navigator);
+  const { experts } = useSelector((state) => state.careSquad);
+  const { favorites } = useSelector((state) => state.careSquad);
+  const { currentRoute } = useSelector((state) => state.navigator);
 
   useEffect(() => {
     dispatch(getChatHistoryAsync());
     dispatch(getFavoriteExpertsAsync());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setDeleteMode(false);
@@ -32,8 +32,8 @@ const CareSquad = ({navigation}) => {
     navigation.goBack();
   };
 
-  const filterObjectArray = (experts, key) =>
-    experts.filter((object) => searchObject(object, key));
+  const filterObjectArray = (expertsArray, key) =>
+    expertsArray.filter((object) => searchObject(object, key));
 
   const handleSearch = (value) => {
     const searching = Boolean(value);
@@ -43,7 +43,7 @@ const CareSquad = ({navigation}) => {
   };
 
   const handleCardPress = (details) => {
-    navigation.navigate(screenNames.GetTreatment, {details});
+    navigation.navigate(screenNames.GetTreatment, { details });
   };
 
   const handleAddPress = (details) => {
@@ -61,7 +61,7 @@ const CareSquad = ({navigation}) => {
             favorites.filter((favorite) => favorite.uid !== details.uid),
           ),
         )
-      : navigation.navigate(screenNames.GetTreatment, {details});
+      : navigation.navigate(screenNames.GetTreatment, { details });
   };
 
   return (
@@ -71,7 +71,7 @@ const CareSquad = ({navigation}) => {
         onBack={handleBackPress}
         onEditPress={handleEditPress}
         editState={deleteMode}
-        disableEdit={favorites && favorites.length == 0}
+        disableEdit={favorites && favorites.length === 0}
       />
       <Favorites
         onItemPress={handleFavoriteItemPress}

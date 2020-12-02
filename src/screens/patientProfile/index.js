@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './style';
 
 const PatientProfile = (props) => {
   let params = props.navigation.state.params;
-  let {navigation} = props;
-  let {uid, visit, patientInfo} = params;
+  let { navigation } = props;
+  let { visit, patientInfo } = params;
 
   return (
     <View style={styles.container}>
@@ -21,7 +21,7 @@ const PatientProfile = (props) => {
             activeOpacity={0.7}
           />
         </TouchableOpacity>
-        <View style={{alignSelf: 'center'}}>
+        <View style={{ alignSelf: 'center' }}>
           <Text style={styles.headerText}>Patient Profile</Text>
         </View>
       </View>
@@ -29,14 +29,14 @@ const PatientProfile = (props) => {
       <View style={styles.profileContainer}>
         <Image
           defaultSource={require('../../../assets/profile_img_placeholder.png')}
-          containerStyle={{alignSelf: 'center'}}
+          containerStyle={{ alignSelf: 'center' }}
           style={{
             marginLeft: 5,
             width: 60,
             height: 60,
             borderRadius: 50,
           }}
-          source={{uri: patientInfo.profileInfo.profileImageUrl}}
+          source={{ uri: patientInfo.profileInfo.profileImageUrl }}
           activeOpacity={0.7}
         />
         <View>
@@ -49,92 +49,101 @@ const PatientProfile = (props) => {
       <ScrollView>
         <View style={styles.infoContainer}>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/HPI.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>HPI</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/calendar.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>GYN History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/birthcontrol.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Contraceptive/Sexual History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/PMH.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>PMH</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/heart.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Pregnancy History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/heart.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Social History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/chart.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Surgical History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/clock2.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Family History</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('OtherDetails')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../assets/clock2.png')}
-                activeOpacity={0.7}></Image>
+                activeOpacity={0.7}
+              />
               <Text style={styles.info}>Other Details</Text>
             </View>
           </TouchableOpacity>

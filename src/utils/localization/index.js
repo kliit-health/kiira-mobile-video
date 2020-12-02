@@ -74,7 +74,7 @@ export default {
     loss: {
       title: 'I Have Experienced a Loss',
       confirm: 'Confirm',
-      weAreSorry: `We're sorry to hear this.`,
+      weAreSorry: "We're sorry to hear this.",
       youAreNotAlone: 'Many folks experience this. You are not alone.',
       expertsNetwork:
         'Kiira network of expertsis available to support you throught this difficult time.',
@@ -378,6 +378,10 @@ export default {
       signUp: 'Sign up',
       login: 'Log In',
       verify: 'Activate Account',
+    },
+    changePlan: {
+      title: 'Change Plan Membership',
+      confirm: 'Confirm',
     },
   },
 };

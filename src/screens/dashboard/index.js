@@ -1,21 +1,21 @@
-import React, {PureComponent} from 'react';
-import {View, TouchableOpacity, ScrollView, Text, Image} from 'react-native';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { View, TouchableOpacity, ScrollView, Text, Image } from 'react-native';
+import { connect } from 'react-redux';
 import CustomText from '../../components/customText';
-import {showOrHideModal} from '../../components/customModal/action';
+import { showOrHideModal } from '../../components/customModal/action';
 import styles from './style';
 import language from '../../utils/localization';
 import Constant from '../../utils/constants';
-import {getQuestionData, updateQuestion} from './action';
-import {withNavigation} from 'react-navigation';
+import { getQuestionData, updateQuestion } from './action';
+import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import {getTerms} from '../termsAndConditions/action';
-import {getPolicy} from '../privacyPolicy/action';
-import {getLicenses} from '../authLoading/action';
-import {setUserData} from './action';
+import { getTerms } from '../termsAndConditions/action';
+import { getPolicy } from '../privacyPolicy/action';
+import { getLicenses } from '../authLoading/action';
+import { setUserData } from './action';
 import firebase from 'react-native-firebase';
-import {getUserData, getRecentExpertsData} from '../../utils/firebase';
-import {getHealthHistoryAsync} from '../healthHistory/actions';
+import { getUserData, getRecentExpertsData } from '../../utils/firebase';
+import { getHealthHistoryAsync } from '../healthHistory/actions';
 import {
   getExpertsDetailsAsync,
   getFavoriteExpertsAsync,
@@ -127,9 +127,9 @@ class Dashboard extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {question, getLicenses} = this.props;
+    const { question, getLicenses } = this.props;
     this.checkLicenseStatus();
-    getLicenses();
+    // getLicenses();
     if (question) {
       this.setState({
         questionText: question,
@@ -147,7 +147,7 @@ class Dashboard extends PureComponent {
   }
 
   onChangeText = (value) => {
-    const {setQuestionText, question} = this.props;
+    const { setQuestionText, question } = this.props;
     this.setState({
       questionText: value,
     });
@@ -155,17 +155,19 @@ class Dashboard extends PureComponent {
   };
 
   checkLicenseStatus = () => {
-    const {licenses} = this.props;
+    const { licenses } = this.props;
     if (licenses) {
       const isValid = licenses.includes(
         this.props.userData.profileInfo.state.code,
       );
-      if (isValid) this.setState({videoEnabled: true});
+      if (isValid) {
+        this.setState({ videoEnabled: true });
+      }
     }
   };
 
   Header = () => {
-    const {staticImages} = Constant.App;
+    const { staticImages } = Constant.App;
 
     return (
       <View>
@@ -217,9 +219,9 @@ class Dashboard extends PureComponent {
   }
 
   renderHeadingProfileView() {
-    const {userData} = this.props;
-    const {firstName, profileImageUrl} = userData.profileInfo;
-    const {staticImages} = Constant.App;
+    const { userData } = this.props;
+    const { firstName, profileImageUrl } = userData.profileInfo;
+    const { staticImages } = Constant.App;
     return (
       <View style={styles.headingProfileImageParentContainer}>
         <View style={styles.headingTextContainerStyle}>
@@ -235,7 +237,7 @@ class Dashboard extends PureComponent {
               borderRadius: 50,
             }}
             defaultSource={staticImages.profilePlaceholderImg}
-            source={{uri: profileImageUrl}}
+            source={{ uri: profileImageUrl }}
           />
           <TouchableOpacity
             style={styles.badgeContainerStyle}
@@ -250,9 +252,9 @@ class Dashboard extends PureComponent {
   }
 
   renderDashBoard() {
-    const {staticImages} = Constant.App;
-    const {navigation, showHideErrorModal} = this.props;
-    const {videoEnabled} = this.state;
+    const { staticImages } = Constant.App;
+    const { navigation, showHideErrorModal } = this.props;
+    const { videoEnabled } = this.state;
 
     return (
       <View style={styles.dashboardContainer}>
@@ -379,8 +381,8 @@ class Dashboard extends PureComponent {
   }
 
   render() {
-    const {staticImages, screenNames} = Constant.App;
-    const {navigation, showHideErrorModal} = this.props;
+    const { staticImages, screenNames } = Constant.App;
+    const { navigation, showHideErrorModal } = this.props;
 
     return (
       <View style={styles.container}>

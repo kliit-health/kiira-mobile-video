@@ -1,7 +1,7 @@
-import React, {cloneElement} from 'react';
-import {shape, node, object, oneOf, number, func, bool} from 'prop-types';
+import React, { cloneElement } from 'react';
+import { shape, node, object, oneOf, number, func, bool } from 'prop-types';
 import defaultStyles from './styles';
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Image from 'react-native-fast-image';
 
 const IconButton = ({

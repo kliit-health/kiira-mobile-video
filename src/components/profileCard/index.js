@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   shape,
   object,
@@ -10,12 +10,12 @@ import {
   node,
   oneOfType,
 } from 'prop-types';
-import {View, TouchableOpacity, Text} from 'react-native';
-import {addHashtag, cloneChild, cloneChildren} from '../../utils/functions';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { addHashtag, cloneChild, cloneChildren } from '../../utils/functions';
 import Avatar from '../avatar';
 import Card from '../card';
 import Ratings from '../ratings';
-import {Prescriber} from '../icons';
+import { Prescriber } from '../icons';
 import defaultStyles from './styles';
 
 const ProfileCard = ({
@@ -71,11 +71,11 @@ const ProfileCard = ({
         </View>
         <Text style={styles.tagsText}>{addHashtag(tags)}</Text>
         <View style={styles.actionBox}>
-          {cloneChild({children, name: 'TextButton'})}
-          {cloneChild({children, name: 'IconButton'})}
+          {cloneChild({ children, name: 'TextButton' })}
+          {cloneChild({ children, name: 'IconButton' })}
         </View>
         <View style={styles.extra}>
-          {cloneChildren({children, blacklist: ['TextButton', 'IconButton']})}
+          {cloneChildren({ children, blacklist: ['TextButton', 'IconButton'] })}
         </View>
       </Card>
     </TouchableOpacity>
