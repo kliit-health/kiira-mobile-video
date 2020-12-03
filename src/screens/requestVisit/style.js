@@ -1,20 +1,18 @@
-import {StyleSheet} from 'react-native';
-import Constant from '../../utils/constants';
+import { StyleSheet } from 'react-native';
+import { text, colors } from '../../utils/constants';
 import metrices from '../../utils/metrices';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
+import { getStatusBarHeight } from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    // backgroundColor: Constant.App.colors.offWhiteColor,
     marginTop: getStatusBarHeight(),
   },
 
   itemsParentContainerStyle: {
-    // backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'row',
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
@@ -24,14 +22,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 1.5,
   },
-
-  itemTextStyle: {
-    textAlign: 'left',
-    paddingTop: 5,
-    color: Constant.App.colors.blackColor,
-    fontSize: Constant.App.textSize.Normal,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
+  listItemTitle: {
+    color: colors.black,
+    fontSize: text.size.regular,
+    fontFamily: text.fontFamily.poppinsRegular,
   },
 });
-
-export default styles;

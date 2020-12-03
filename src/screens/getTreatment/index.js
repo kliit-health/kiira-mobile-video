@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {
   Container,
@@ -21,6 +21,10 @@ import styles, {modifiers} from './styles';
 import {screenNames} from '../../utils/constants';
 
 const GetTreatment = ({navigation}) => {
+  useEffect(() => {
+    console.warn('called');
+  });
+
   const details = navigation.getParam('details');
   const {rating, profileInfo, clinicInfo} = details;
   const {

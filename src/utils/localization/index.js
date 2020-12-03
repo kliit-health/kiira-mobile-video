@@ -12,7 +12,9 @@ export default {
       healthHistory: 'Health History',
       availablity: 'Update Availablity',
     },
-
+    requestVisit: {
+      title: 'Request a Visit',
+    },
     addCreditCardData: {
       cardNumber: 'Card number',
       securityCode: 'Security Code',
@@ -74,7 +76,7 @@ export default {
     loss: {
       title: 'I Have Experienced a Loss',
       confirm: 'Confirm',
-      weAreSorry: `We're sorry to hear this.`,
+      weAreSorry: "We're sorry to hear this.",
       youAreNotAlone: 'Many folks experience this. You are not alone.',
       expertsNetwork:
         'Kiira network of expertsis available to support you throught this difficult time.',
@@ -253,6 +255,7 @@ export default {
     },
 
     getTreatment: {
+      title: 'Get Treatment',
       seeHistory: 'See History',
       bookVisit: 'Book a Visit',
       about: 'About',
@@ -378,6 +381,11 @@ export default {
       signUp: 'Sign up',
       login: 'Log In',
       verify: 'Activate Account',
+    },
+    agreements: {
+      getStarted: 'Get Started',
+      agree: 'Agree',
+      finish: 'Finish',
     },
   },
 };

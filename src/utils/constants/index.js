@@ -95,8 +95,8 @@ export default {
     logoutInterval: 1000 * 20 * 60,
     Modal: {
       gender: [
-        {value: 'Male', code: 'M'},
-        {value: 'Female', code: 'F'},
+        { value: 'Male', code: 'M' },
+        { value: 'Female', code: 'F' },
       ],
       states: [
         {
@@ -337,13 +337,13 @@ export default {
         },
       ],
       sexuality: [
-        {value: 'Asexual', code: 'Asexual'},
-        {value: 'Bisexual', code: 'Bisexual'},
-        {value: 'Gay', code: 'Gay'},
-        {value: 'Lesbian', code: 'Lesbian'},
-        {value: 'Pansexual', code: 'Pansexual'},
-        {value: 'Straight', code: 'Straight'},
-        {value: 'Queer', code: 'Queer'},
+        { value: 'Asexual', code: 'Asexual' },
+        { value: 'Bisexual', code: 'Bisexual' },
+        { value: 'Gay', code: 'Gay' },
+        { value: 'Lesbian', code: 'Lesbian' },
+        { value: 'Pansexual', code: 'Pansexual' },
+        { value: 'Straight', code: 'Straight' },
+        { value: 'Queer', code: 'Queer' },
       ],
     },
 
@@ -558,7 +558,7 @@ export const icons = {
   checkGreenIcon: require('../../../assets/check_green.png'),
   checkGreyIcon: require('../../../assets/check_grey.png'),
   creditCard: require('../../../assets/credit_card.png'),
-  crossIcon: require('../../../assets/cross.png'),
+  cross: require('../../../assets/cross.png'),
   downArrow: require('../../../assets/down_arrow.png'),
   filterIcon: require('../../../assets/filter.png'),
   greyDownArrow: require('../../../assets/grey_down_arrow.png'),
