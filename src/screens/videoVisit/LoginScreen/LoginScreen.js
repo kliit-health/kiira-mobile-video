@@ -118,7 +118,6 @@ class LoginScreen extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View style={styles.container}>
         <Header
@@ -127,6 +126,7 @@ class LoginScreen extends Component {
         />
         <View style={styles.inputsContainer}>
           <Image
+            resizeMode="contain"
             style={[{height: 150}, {width: 120}, {alignSelf: 'center'}]}
             source={require('../../../../assets/logo.png')}
           />

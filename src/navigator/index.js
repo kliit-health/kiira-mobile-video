@@ -32,6 +32,7 @@ import ChatBot from '../screens/chatBot';
 import ChatExpert from '../screens/chat/expert';
 import Children from '../screens/children';
 import ChooseExpert from '../screens/chooseExpert';
+import Consent from '../screens/patientProfile/consent';
 import Constant from '../utils/constants';
 import CurrentPregnancy from '../screens/pregnancyCurrent';
 import Dashboard from '../screens/dashboard';
@@ -69,6 +70,7 @@ import MainCallScreen from '../screens/videoVisit/MainCallScreen';
 import Medications from '../screens/medications';
 import MedicationsHistory from '../screens/patientProfile/medications';
 import MedicalHistory from '../screens/medicalHistory';
+import MedicalHistoryExpert from '../screens/patientProfile/medicalHistory';
 import NeedsPresciption from '../screens/needsPrescription';
 import NewUser from '../screens/newUser';
 import OtherDetails from '../screens/patientProfile/other';
@@ -437,6 +439,7 @@ const AppStackExpert = createStackNavigator(
   {
     AllergiesHistory: {screen: AllergiesHistory},
     BottomTabExpert: {screen: BottomTabExpert},
+    Consent: {screen: Consent},
     ChangePasswordExpert: {screen: ChangePasswordExpert},
     ChatExpert: {screen: ChatExpert},
     ExpertBlockedUsers: {screen: ExpertBlockedUsers},
@@ -453,6 +456,7 @@ const AppStackExpert = createStackNavigator(
     Help: {screen: Help},
     Learn: {screen: Learn},
     MedicationsHistory: {screen: MedicationsHistory},
+    MedicalHistoryExpert: {screen: MedicalHistoryExpert},
     OtherDetails: {screen: OtherDetails},
     PatientProfile: {screen: PatientProfile},
     PersonalMedicalHistory: {screen: PersonalMedicalHistory},

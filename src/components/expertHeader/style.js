@@ -11,8 +11,9 @@ var childPadding = parentPadding + childPaddingValue * 2;
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
+    justifyContent: 'center',
     width: metrices.DEVICE_WIDTH,
-    paddingVertical: 60,
+    paddingVertical: 40,
     backgroundColor: Constant.App.colors.blueColor,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
@@ -23,13 +24,13 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
     fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
   },
 
   image: {
-    marginLeft: 15,
-    width: 50,
-    height: 50,
+    justifyContent: 'flex-start',
+    marginRight: 35,
+    width: 40,
+    height: 40,
   },
 });
 

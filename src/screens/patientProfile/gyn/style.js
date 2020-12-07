@@ -89,9 +89,21 @@ const styles = StyleSheet.create({
 
   question: {
     alignSelf: 'center',
-    paddingVertical: 60,
+    paddingVertical: 40,
     paddingHorizontal: 20,
     fontSize: Constant.App.textSize.xLarge,
+  },
+
+  singleInput: {
+    textAlign: 'center',
+    borderBottomColor: Constant.App.colors.blueColor,
+    borderBottomWidth: 2,
+    width: metrices.DEVICE_WIDTH * 0.8,
+    alignSelf: 'center',
+    marginTop: 50,
+    // height: 200,
+    color: 'black',
+    padding: 10,
   },
 });
 

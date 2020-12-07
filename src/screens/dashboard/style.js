@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
 
   botContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
     marginVertical: 30,
   },
 
   botLogo: {
-    // alignItems: 'flex-end',
-    // justifyContent: 'flex-end',
     alignSelf: 'flex-end',
+    height: 80,
+    width: 80,
   },
 
   botDescription: {

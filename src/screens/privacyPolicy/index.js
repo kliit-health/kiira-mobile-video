@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Image, ScrollView } from "react-native";
-import { useSelector } from "react-redux";
-import styles from "./styles";
-import CustomText from "../../components/customText";
-import Constant from "../../utils/constants";
+import React, {useState, useEffect} from 'react';
+import {View, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
+import styles from './styles';
+import CustomText from '../../components/customText';
+import Constant from '../../utils/constants';
 
 const PrivacyPolicy = (props) => {
   const [terms, setTerms] = useState([]);
@@ -14,20 +14,19 @@ const PrivacyPolicy = (props) => {
   }, [terms]);
 
   const renderHeaderView = () => {
-    const { navigation } = props;
-    const { staticImages } = Constant.App;
+    const {navigation} = props;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image
             style={{
               width: 20,
               height: 40,
-              transform: [{ rotate: "180deg" }],
+              transform: [{rotate: '180deg'}],
             }}
             resizeMode="contain"
             source={staticImages.rightChevronIcon}
@@ -48,7 +47,8 @@ const PrivacyPolicy = (props) => {
               {section.title}
             </CustomText>
             <CustomText style={styles.sectionTextStyle}>
-              {section.body.replace(/\\n/g, "\n")}
+              {section.body.replace(/\\n/g, '\n').replace(/\\t/g, ' ')}
+              {/* {section.body.replace(/\\t/g, '\t')} */}
             </CustomText>
           </View>
         );
@@ -63,11 +63,10 @@ const PrivacyPolicy = (props) => {
       {renderHeaderView()}
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         <View style={styles.imageContainer}>
           <Image
-            source={require("../../../assets/logo-sm.png")}
+            source={require('../../../assets/logo-sm.png')}
             style={{
               width: 220,
               height: 110,

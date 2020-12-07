@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import metrics from "../../utils/metrices";
-import Constant from "../../utils/constants";
-import { getStatusBarHeight } from "../../components/iPhoneXHelper";
+import {StyleSheet} from 'react-native';
+import metrics from '../../utils/metrices';
+import Constant from '../../utils/constants';
+import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -9,15 +9,15 @@ let parentPadding = parentPaddingValue * 2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
     marginTop: getStatusBarHeight(),
   },
 
   headerStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: parentPaddingValue * 0.5,
     backgroundColor: Constant.App.colors.whiteColor,
     borderBottomColor: Constant.App.colors.greyBgAsk,
@@ -25,16 +25,16 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   sectionContainerStyle: {
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
     paddingTop: parentPaddingValue,
-    flexDirection: "column",
-    justifyContent: "center",
+    flexDirection: 'column',
+    justifyContent: 'center',
     width: metrics.DEVICE_WIDTH,
   },
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   sectionTitleTextStyle: {
@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   titleTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerBold,

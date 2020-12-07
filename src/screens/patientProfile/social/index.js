@@ -80,8 +80,9 @@ const SocialHistory = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ExpertHeader title="Social History" />
-      <Text style={styles.question}>{questions[progress].question}</Text>
       <ScrollView>
+        <Text style={styles.question}>{questions[progress].question}</Text>
+
         {questions[progress].options ? (
           questions[progress].options.map((option) => {
             return (

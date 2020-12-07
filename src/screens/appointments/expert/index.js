@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
+  ScrollView,
   View,
   FlatList,
   Text,
   Image,
   StatusBar,
-  TouchableOpacity,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
@@ -75,9 +75,9 @@ const ExpertAppointments = (props) => {
     <View style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor="#008AFC" />
       <View style={styles.header}>
-        <Text style={styles.headerText}>Patient Profile</Text>
+        <Text style={styles.headerText}>Upcoming Visits</Text>
       </View>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View>
           <View
             style={{
@@ -95,65 +95,67 @@ const ExpertAppointments = (props) => {
               placeholder={'Search'}
             />
           </View>
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-            keyboardShouldPersistTaps={
-              Platform.OS === 'ios' ? 'never' : 'always'
-            }
-            data={dates}
-            horizontal={true}
-            decelerationRate={'fast'}
-            extraData={selectedDate}
-            renderItem={({item, index}) => {
-              item = generateDateInfo(item);
-              return (
-                <View
-                  style={{
-                    height: 100,
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    margin: 15,
-                  }}>
-                  <CustomText
-                    style={
-                      selectedDate === item.date
-                        ? {color: Constant.App.colors.blueColor}
-                        : {color: 'black'}
-                    }>
-                    {item.month}
-                  </CustomText>
-                  <CustomButton
-                    buttonStyle={
-                      selectedDate === item.date
-                        ? styles.dateSelectedContainerStyle
-                        : styles.dateContainerStyle
-                    }
-                    textStyle={
-                      selectedDate === item.date
-                        ? styles.dateSelectedTextStyle
-                        : styles.dateTextStyle
-                    }
-                    onPress={() => {
-                      setSelectedDate(item.date);
-                      // setDay(item.date);
-                      // dispatch(setAppointmentDay(item.date));
-                    }}
-                    text={item.day}
-                  />
-                  <CustomText
-                    style={
-                      selectedDate === item.date
-                        ? {color: Constant.App.colors.blueColor}
-                        : {color: 'black'}
-                    }>
-                    {item.dow}
-                  </CustomText>
-                </View>
-              );
-            }}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <View>
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+              keyboardShouldPersistTaps={
+                Platform.OS === 'ios' ? 'never' : 'always'
+              }
+              data={dates}
+              horizontal={true}
+              decelerationRate={'fast'}
+              extraData={selectedDate}
+              renderItem={({item, index}) => {
+                item = generateDateInfo(item);
+                return (
+                  <View
+                    style={{
+                      height: 100,
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      margin: 15,
+                    }}>
+                    <CustomText
+                      style={
+                        selectedDate === item.date
+                          ? {color: Constant.App.colors.blueColor}
+                          : {color: 'black'}
+                      }>
+                      {item.month}
+                    </CustomText>
+                    <CustomButton
+                      buttonStyle={
+                        selectedDate === item.date
+                          ? styles.dateSelectedContainerStyle
+                          : styles.dateContainerStyle
+                      }
+                      textStyle={
+                        selectedDate === item.date
+                          ? styles.dateSelectedTextStyle
+                          : styles.dateTextStyle
+                      }
+                      onPress={() => {
+                        setSelectedDate(item.date);
+                        // setDay(item.date);
+                        // dispatch(setAppointmentDay(item.date));
+                      }}
+                      text={item.day}
+                    />
+                    <CustomText
+                      style={
+                        selectedDate === item.date
+                          ? {color: Constant.App.colors.blueColor}
+                          : {color: 'black'}
+                      }>
+                      {item.dow}
+                    </CustomText>
+                  </View>
+                );
+              }}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
           {visits.length > 0 ? (
             <View>
               <FlatList
@@ -193,7 +195,7 @@ const ExpertAppointments = (props) => {
             </View>
           )}
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

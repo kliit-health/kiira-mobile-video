@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
   question: {
     alignSelf: 'center',
-    paddingVertical: 80,
+    paddingVertical: 40,
     paddingHorizontal: 15,
     fontSize: Constant.App.textSize.xLarge,
   },

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, Text, Image} from 'react-native';
+import {View, FlatList, Text, Image, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import {Header, RatingModal} from '../../components';
@@ -45,7 +45,7 @@ const Appointments = (props) => {
         onBack={() => navigation.navigate('BottomTab')}
       />
       {visits.length > 0 ? (
-        <View style={styles.parentContainerStyle}>
+        <ScrollView style={styles.parentContainerStyle}>
           <FlatList
             showsVerticalScrollIndicator={false}
             keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
@@ -73,7 +73,7 @@ const Appointments = (props) => {
               })
             }
           /> */}
-        </View>
+        </ScrollView>
       ) : (
         <View style={styles.parentContainerStyle}>
           <Image

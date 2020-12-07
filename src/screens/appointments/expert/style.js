@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
 
   parentContainerStyle: {
-    // flex: 1,
+    // marginBottom: 100,
   },
 
   profileImageParentContainerStyle: {
@@ -306,6 +306,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     margin: 30,
+    paddingBottom: 200,
   },
 
   subtitle: {
@@ -436,7 +437,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'center',
     backgroundColor: 'white',
     // width: metrics.DEVICE_WIDTH,
-    marginVertical: 35,
+    marginVertical: 20,
   },
 
   userInfoContainerResolvedChatStyle: {
@@ -470,7 +471,7 @@ const styles = StyleSheet.create({
 
   timeContainer: {
     backgroundColor: Constant.App.colors.pinkColor,
-    marginLeft: 80,
+    marginLeft: 50,
     // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -483,7 +484,7 @@ const styles = StyleSheet.create({
   header: {
     width: metrics.DEVICE_WIDTH,
     alignItems: 'center',
-    paddingVertical: 60,
+    paddingVertical: 40,
     backgroundColor: Constant.App.colors.blueColor,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
@@ -502,7 +503,7 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH * 0.75,
     backgroundColor: Constant.App.colors.greyBgAsk,
     margin: 5,
-    
+
     backgroundColor: 'transparent',
     borderWidth: 0, //no effect
     shadowColor: 'transparent', //no effect
