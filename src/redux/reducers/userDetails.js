@@ -11,6 +11,9 @@ import {
 const initialState = {
   data: {
     uid: '',
+    agreements: {
+      treatment: false,
+    },
   },
   loading: false,
   error: null,

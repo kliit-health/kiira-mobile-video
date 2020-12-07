@@ -15,6 +15,7 @@ const Agreements = ({
   agreedToTerms,
   setUserDetails,
   navigation,
+  currentRoute,
 }) => {
   const initialAgreement = {
     title: '',
@@ -26,7 +27,7 @@ const Agreements = ({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(!agreedToTerms);
+    setVisible(agreedToTerms == undefined ? false : !agreedToTerms);
     setAgreement(agreements[0]);
   }, [agreedToTerms, agreements]);
 
@@ -87,7 +88,7 @@ const Agreements = ({
   );
 };
 
-const mapStateToProps = ({ agreements, userDetails }) => ({
+const mapStateToProps = ({ agreements, userDetails, navigator }) => ({
   agreements: agreements.data,
   loading: agreements.loading,
   error: agreements.error,
