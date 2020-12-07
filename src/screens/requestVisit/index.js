@@ -1,58 +1,48 @@
-import React from "react";
-import {
-	View,
-	ScrollView,
-	TouchableOpacity,
-	Image,
-	FlatList,
-} from "react-native";
-import { useDispatch } from "react-redux";
-import styles from "./style";
-import CustomText from "../../components/customText";
-import Constant from "../../utils/constants";
-import reasonsForVisit from "../../utils/constants/requestVisit";
-import { reasonForVisit } from "../expertSchedule/action";
-import { Header } from "../../components";
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
+import styles from './style';
+import reasonsForVisit from '../../utils/constants/requestVisit';
+import { ListItem } from '../../components';
+import { reasonForVisit } from '../expertSchedule/action';
+import { Header, Container } from '../../components';
+import Agreements from '../agreements';
+import { screenNames } from '../../utils/constants';
+import intl from '../../utils/localization';
 
-const RequestVisit = props => {
-	const { navigation } = props;
-	const { staticImages } = Constant.App;
-	const dispatch = useDispatch();
+const RequestVisit = ({ navigation }) => {
+  const dispatch = useDispatch();
 
-	return (
-		<View style={styles.container}>
-			<Header title="Request a visit" onBack={() => navigation.goBack()} />
-			<FlatList
-				showsVerticalScrollIndicator={false}
-				keyboardDismissMode={Platform.OS === "ios" ? "none" : "on-drag"}
-				keyboardShouldPersistTaps={Platform.OS === "ios" ? "never" : "always"}
-				data={reasonsForVisit}
-				decelerationRate={"fast"}
-				renderItem={({ item, index }) => {
-					return (
-						<TouchableOpacity
-							style={styles.itemsParentContainerStyle}
-							onPress={() => {
-								dispatch(reasonForVisit(item.title));
-								navigation.navigate(Constant.App.screenNames.NeedsPresciption);
-							}}
-						>
-							<CustomText style={styles.itemTextStyle}>{item.title}</CustomText>
-							<Image
-								style={{
-									width: 20,
-									height: 40,
-								}}
-								resizeMode="contain"
-								source={staticImages.rightChevronIcon}
-							/>
-						</TouchableOpacity>
-					);
-				}}
-				keyExtractor={index => index.title}
-			/>
-		</View>
-	);
+  const handleNavigation = (title) => {
+    dispatch(reasonForVisit(title));
+    navigation.navigate(screenNames.NeedsPresciption);
+  };
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
+  return (
+    <Container unformatted>
+      <Agreements navigation={navigation} />
+      <Header title={intl.en.getTreatment.title} onBack={handleBackPress} />
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={reasonsForVisit}
+        keyExtractor={(index) => index.title}
+        bounces={false}
+        renderItem={({ item: { title } }) => (
+          <ListItem
+            key={title}
+            onPress={() => handleNavigation(title)}
+            displayChevron
+          >
+            <Text style={styles.listItemTitle}>{title}</Text>
+          </ListItem>
+        )}
+      />
+    </Container>
+  );
 };
 
 export default RequestVisit;

@@ -7,7 +7,7 @@ import {
   CLEAR_ASK_STATE,
   CLEAR_QUESTION_VALUE,
   UPDATE_USER_DATA,
-} from "../../redux/types";
+} from '../../redux/types';
 
 export const getRecentExpertsDataSuccess = (data) => ({
   type: GET_RECENT_EXPERTS_DATA_SUCCESS,
