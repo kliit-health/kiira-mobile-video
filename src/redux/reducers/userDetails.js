@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import {createReducer} from '@reduxjs/toolkit';
 import {
   GET_USER_DETAILS_PENDING,
   GET_USER_DETAILS_FULFILLED,
@@ -11,23 +11,20 @@ import {
 const initialState = {
   data: {
     uid: '',
-    agreements: {
-      treatment: false,
-    },
   },
   loading: false,
   error: null,
 };
 
 export default createReducer(initialState, {
-  [GET_USER_DETAILS_PENDING]: () => (state) => {
+  [GET_USER_DETAILS_PENDING]: (state) => {
     state.loading = true;
   },
-  [GET_USER_DETAILS_FULFILLED]: (state, { data }) => ({
+  [GET_USER_DETAILS_FULFILLED]: (state, {data}) => ({
     ...initialState,
-    data: { ...state.data, ...data },
+    data: {...state.data, ...data},
   }),
-  [GET_USER_DETAILS_REJECTED]: (state, { data }) => {
+  [GET_USER_DETAILS_REJECTED]: (state, {data}) => {
     state.loading = false;
     state.error = {
       message: 'Failed to get user details',
@@ -37,11 +34,11 @@ export default createReducer(initialState, {
   [SET_USER_DETAILS_PENDING]: (state) => {
     state.loading = true;
   },
-  [SET_USER_DETAILS_FULFILLED]: (state, { data }) => ({
+  [SET_USER_DETAILS_FULFILLED]: (state, {data}) => ({
     ...initialState,
-    data: { ...state.data, ...data },
+    data: {...state.data, ...data},
   }),
-  [SET_USER_DETAILS_REJECTED]: (state, { data }) => {
+  [SET_USER_DETAILS_REJECTED]: (state, {data}) => {
     state.loading = false;
     state.error = {
       message: 'Failed to update user details',

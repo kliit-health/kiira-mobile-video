@@ -8,12 +8,12 @@ import {
   SET_USER_DETAILS_REJECTED,
   SET_USER_DETAILS_FULFILLED,
 } from '../../redux/types';
-import { put, takeEvery } from 'redux-saga/effects';
-import { firebaseSingleFetch, setUserDetails } from '../../utils/firebase';
+import {put, takeEvery} from 'redux-saga/effects';
+import {firebaseSingleFetch, setUserDetails} from '../../utils/firebase';
 
-function* getUserDetails({ data: { uid } }) {
+function* getUserDetails({data: {uid}}) {
   try {
-    yield put({ type: GET_USER_DETAILS_PENDING });
+    yield put({type: GET_USER_DETAILS_PENDING});
 
     const userDetails = yield firebaseSingleFetch('users', uid);
 
@@ -22,22 +22,19 @@ function* getUserDetails({ data: { uid } }) {
       data: userDetails,
     });
   } catch (error) {
-    yield put({ type: GET_USER_DETAILS_REJECTED, data: error });
+    yield put({type: GET_USER_DETAILS_REJECTED, data: error});
     console.error(error);
   }
 }
 
-function* updateUserData({ data: { uid, ...rest } }) {
+function* updateUserData({data: {uid, ...rest}}) {
   try {
-    yield put({ type: SET_USER_DETAILS_PENDING });
-
-    console.log({ uid, ...rest });
-
-    yield setUserDetails(uid, { ...rest });
+    yield put({type: SET_USER_DETAILS_PENDING});
+    yield setUserDetails(uid, {...rest});
 
     yield put({
       type: SET_USER_DETAILS_FULFILLED,
-      data: { ...rest },
+      data: {...rest},
     });
   } catch (error) {
     yield put({

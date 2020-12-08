@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { text } from '../../utils/constants';
+import {StyleSheet} from 'react-native';
+import {text} from '../../utils/constants';
 
 export default StyleSheet.create({
   activityIndicator: {
@@ -13,20 +13,23 @@ export default StyleSheet.create({
     fontWeight: '500',
     marginBottom: 20,
   },
+  logoContainer: {
+    marginTop: 30,
+    marginBottom: 50,
+  },
   description: {
     fontFamily: text.fontFamily.poppinsRegular,
     fontSize: text.size.regular,
     textAlign: 'justify',
   },
-  content: {
+  contents: {
+    flex: 1,
+  },
+  body: {
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center',
     alignSelf: 'center',
-  },
-  logoContainer: {
-    marginTop: 30,
-    marginBottom: 50,
   },
 });
 
@@ -48,6 +51,11 @@ export const modifiers = {
     },
     container: {
       padding: 20,
+    },
+  },
+  button: {
+    root: {
+      marginTop: 20,
     },
   },
 };
