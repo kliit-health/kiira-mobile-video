@@ -15,7 +15,8 @@ const MedicalHistory = (props) => {
       <ScrollView>
         <View style={styles.infoContainer}>
           {/* <Section title="HPI" image="../../../../../assets/HPI.png" /> */}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('PregnancyHistoryExpert')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}

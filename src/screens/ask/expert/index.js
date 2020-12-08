@@ -44,9 +44,14 @@ const AskExpert = (props) => {
     fetchData();
     dispatch(getTerms());
     dispatch(getPolicy());
+    // setCurrent(questionData);
+    // setResolved(resolvedQuestionsData);
+  }, []);
+
+  useEffect(() => {
     setCurrent(questionData);
     setResolved(resolvedQuestionsData);
-  }, []);
+  }, [userData]);
 
   const toogleActive = () => {
     setRecentActive(!recentActive);

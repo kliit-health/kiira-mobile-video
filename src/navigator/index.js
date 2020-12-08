@@ -81,6 +81,7 @@ import PayPalApproval from '../screens/payment/buyingCredit/paypal';
 import PersonalMedicalHistory from '../screens/patientProfile/pmh';
 import Pregnancy from '../screens/pregnancy';
 import PregnancyHistory from '../screens/pregnancyHistory';
+import PregnancyHistoryExpert from '../screens/patientProfile/pregnancy';
 import PreviousAppointmentsNotes from '../screens/previousAppointmentsNotes';
 import PrivacyPolicy from '../screens/privacyPolicy';
 import ReferFriend from '../screens/referFriend';
@@ -462,6 +463,7 @@ const AppStackExpert = createStackNavigator(
     OtherDetails: {screen: OtherDetails},
     PatientProfile: {screen: PatientProfile},
     PersonalMedicalHistory: {screen: PersonalMedicalHistory},
+    PregnancyHistoryExpert: {screen: PregnancyHistoryExpert},
     PrivacyPolicy: {screen: PrivacyPolicy},
     SocialHistory: {screen: SocialHistory},
     SettingExpert: {screen: SettingExpert},

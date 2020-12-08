@@ -11,7 +11,7 @@ import {switchCase} from '../../../utils/functions';
 
 import styles from './style';
 
-const GynHistory = ({navigation}) => {
+const PregnancyHistory = ({navigation}) => {
   const [yes, setYes] = useState(false);
   const [no, setNo] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -19,92 +19,27 @@ const GynHistory = ({navigation}) => {
 
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
-    lastPeriod: {
-      notes: '',
+    pregnancies: {
+      number: '',
     },
-    periodLength: {
-      lessThan: false,
-      moreThan: false,
+    miscarriages: {
+      number: '',
     },
-    abnormalPap: {
+    fullTermBirths: {
+      number: '',
+    },
+    abortions: {
+      number: '',
+    },
+    cesarean: {
+      number: '',
+    },
+    livingChildren: {
+      number: '',
+    },
+    pregnancyIssues: {
       history: false,
       notes: '',
-    },
-    cycleLength: {
-      lessThan: false,
-      about: false,
-      moreThan: false,
-    },
-    menarche: {
-      notes: '',
-    },
-    papDate: {
-      notes: '',
-    },
-    sti: {
-      chlamydia: false,
-      gonorrhea: false,
-      genitalWarts: false,
-      herpes: false,
-      trichomonas: false,
-      syphilis: false,
-      none: false,
-    },
-    hiv: {
-      history: false,
-      notes: '',
-    },
-    des: {
-      history: false,
-      notes: '',
-    },
-    sexuallyActive: {
-      history: false,
-      notes: '',
-    },
-    underAge: {
-      history: false,
-      notes: '',
-    },
-    multiplePartners: {
-      history: false,
-      notes: '',
-    },
-    useContraception: {
-      history: false,
-      notes: '',
-    },
-    useContraception: {
-      history: false,
-      notes: '',
-    },
-    contraceptions: {
-      condoms: false,
-      thePill: false,
-      pullOut: false,
-      tubesTied: false,
-      diaphram: false,
-      patch: false,
-      flim: false,
-      other: false,
-    },
-    active: {
-      history: false,
-      notes: '',
-    },
-    activeCurrent: {
-      history: false,
-      notes: '',
-    },
-    sexualPartners: {
-      men: false,
-      women: false,
-      other: false,
-    },
-    numberOfPartners: {
-      male: 0,
-      female: 0,
-      other: 0,
     },
   });
 
@@ -154,7 +89,7 @@ const GynHistory = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ExpertHeader title="GYN History" />
+      <ExpertHeader title="Pregnancy History" />
       <Text style={styles.question}>{questions[progress].question}</Text>
       <ScrollView>
         {switchCase({
@@ -211,7 +146,7 @@ const GynHistory = ({navigation}) => {
             <View style={{width: 300, alignSelf: 'center'}}>
               <CustomTextInput
                 onPress={handleOnLabelPress}
-                placeholder={'Men'}
+                placeholder={questions[progress].textPrompt}
                 // value={""}
                 chevron
               />
@@ -219,33 +154,7 @@ const GynHistory = ({navigation}) => {
                 onSave={handleOnSave}
                 onBackdropPress={handleOnBackdropPress}
                 visible={visible}
-                title={'Men'}
-                data={numberOfPartners.map((item) => item)}
-              />
-              <CustomTextInput
-                onPress={handleOnLabelPress}
-                placeholder={'Women'}
-                // value={""}
-                chevron
-              />
-              <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
-                visible={visible}
-                title={'Other'}
-                data={numberOfPartners.map((item) => item)}
-              />
-              <CustomTextInput
-                onPress={handleOnLabelPress}
-                placeholder={'Other'}
-                // value={""}
-                chevron
-              />
-              <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
-                visible={visible}
-                title={'Title'}
+                title={questions[progress].textPrompt}
                 data={numberOfPartners.map((item) => item)}
               />
             </View>
@@ -275,4 +184,4 @@ const GynHistory = ({navigation}) => {
   );
 };
 
-export default GynHistory;
+export default PregnancyHistory;
