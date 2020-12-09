@@ -1,12 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../../utils/constants';
-import { getStatusBarHeight } from '../../components/iPhoneXHelper';
+import {StyleSheet} from 'react-native';
+import {colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.offWhite,
-    marginTop: getStatusBarHeight(),
+    backgroundColor: colors.white,
   },
   container: {
     padding: 20,

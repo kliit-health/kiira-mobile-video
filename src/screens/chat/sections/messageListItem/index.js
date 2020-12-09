@@ -33,7 +33,6 @@ class MessageListItem extends React.PureComponent {
                   html={Constant.App.disclaimerTextForChat}
                   baseFontStyle={styles.staticTextStyle}
                 />
-                <Text>{Constant.App.disclaimerTextForChat}</Text>
               </View>
             </View>
           </View>
@@ -241,6 +240,7 @@ class MessageListItem extends React.PureComponent {
       );
     }
   }
+
   render() {
     const {item, index, textkey, lastIndex} = this.props;
     return this.renderView(item, index, textkey, lastIndex);

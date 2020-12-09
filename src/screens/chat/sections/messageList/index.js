@@ -5,14 +5,17 @@ import {default as MessageListItem} from '../messageListItem';
 import styles from './styles';
 
 const MessageView = ({messages, ...rest}) => {
-  console.log(messages);
+  const handleKeyExtractor = () => generateIdentifier();
+
   return (
     <FlatList
       data={messages}
       style={styles.flatlist}
-      keyExtractor={() => generateIdentifier()}
+      keyExtractor={handleKeyExtractor}
       showsVerticalScrollIndicator={false}
-      renderItem={(itemProps) => <MessageListItem {...itemProps} />}
+      renderItem={(props) => (
+        <MessageListItem {...props} lastIndex={messages.length} />
+      )}
       inverted={true}
       contentContainerStyle={styles.contentContainer}
       {...rest}

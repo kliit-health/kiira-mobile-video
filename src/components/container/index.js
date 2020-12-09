@@ -2,6 +2,8 @@ import React from 'react';
 import {shape, object, node, bool} from 'prop-types';
 import {cloneChild, mergeStyles, cloneChildren} from '../../utils/functions';
 import {View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
 import defaultStyles, {modifiers} from './styles';
 
 const Container = ({styles: customStyles, children, unformatted}) => {
@@ -15,7 +17,7 @@ const Container = ({styles: customStyles, children, unformatted}) => {
   };
 
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       {cloneChild({children, name: 'Header'})}
       {cloneChild({children, name: 'FavoritesBar'})}
       {cloneChild({children, name: 'SearchBar'})}
@@ -26,7 +28,7 @@ const Container = ({styles: customStyles, children, unformatted}) => {
         })}
       </View>
       {cloneChild({children, name: 'Footer'})}
-    </View>
+    </SafeAreaView>
   );
 };
 

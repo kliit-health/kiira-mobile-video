@@ -1,24 +1,19 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../utils/constants";
-import {
-  getStatusBarHeight,
-  getBottomSpace,
-} from "../../components/iPhoneXHelper";
-import metrics from "../../utils/metrices";
+import {StyleSheet} from 'react-native';
+import Constant from '../../utils/constants';
+import metrics from '../../utils/metrices';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
 let parentPadding = parentPaddingValue * 2;
 const styles = StyleSheet.create({
   parentContainer: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
   },
   headerStyle: {
-    paddingTop: getStatusBarHeight() + parentPaddingValue * 0.5,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingLeft: parentPaddingValue,
     paddingBottom: parentPaddingValue * 0.5,
     paddingRight: parentPaddingValue,
@@ -27,9 +22,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
   },
   profileHeaderStyle: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleTextStyle: {
     paddingLeft: 5,
@@ -38,8 +33,8 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.headerBold,
   },
   rowRightParentContainerStyle: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     marginLeft: 70,
     marginTop: 10,
     marginBottom: 10,
@@ -47,21 +42,21 @@ const styles = StyleSheet.create({
   rowRightContainerView: {
     backgroundColor: Constant.App.colors.chatHighLightedBgColor,
     borderRadius: 10,
-    flexWrap: "wrap",
-    justifyContent: "center",
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     marginRight: 5,
     padding: 5,
   },
   messagesRightTextStyle: {
-    alignSelf: "flex-end",
-    backgroundColor: "transparent",
+    alignSelf: 'flex-end',
+    backgroundColor: 'transparent',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     padding: 10,
   },
   rowLeftParentContainerStyle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginRight: 70,
     marginTop: 10,
     marginBottom: 10,
@@ -69,14 +64,14 @@ const styles = StyleSheet.create({
   rowLeftContainerStyle: {
     backgroundColor: Constant.App.colors.greyBgAsk,
     borderRadius: 10,
-    flexWrap: "wrap",
-    justifyContent: "center",
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     marginLeft: 5,
     padding: 5,
   },
   messagesLeftTextStyle: {
-    alignSelf: "flex-start",
-    backgroundColor: "transparent",
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -84,8 +79,8 @@ const styles = StyleSheet.create({
   },
   staticTextContainerStyle: {
     padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   staticTextStyle: {
     color: Constant.App.colors.blackColor,
@@ -93,22 +88,22 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
   dateContainerStyle: {
-    flexDirection: "row",
-    alignSelf: "flex-end",
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
     padding: 5,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dateTextStyle: {
-    alignSelf: "center",
-    backgroundColor: "transparent",
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Small,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     padding: 5,
   },
   chatInputParentContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH,
     padding: parentPaddingValue,
     backgroundColor: Constant.App.colors.whiteColor,
@@ -118,7 +113,7 @@ const styles = StyleSheet.create({
   imageParentContainerStyle: {
     width: metrics.DEVICE_WIDTH * 0.75,
     borderRadius: 15,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
@@ -131,18 +126,18 @@ const styles = StyleSheet.create({
   imageCrossContainerStyle: {
     right: 0,
     marginTop: 20,
-    position: "absolute",
+    position: 'absolute',
   },
   imageCrossStyle: {
     width: 20,
     height: 20,
   },
   chatInputContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: metrics.DEVICE_WIDTH,
   },
   textContainerStyle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginLeft: 2,
     width: metrics.DEVICE_WIDTH - parentPadding - 30,
     borderColor: Constant.App.colors.greyBgAsk,
@@ -152,13 +147,13 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   sendButtonContainerStyle: {
-    alignSelf: "center",
+    alignSelf: 'center',
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 8,
     paddingRight: 8,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width:
       metrics.DEVICE_WIDTH -
       parentPadding -
@@ -173,16 +168,16 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
   cameraContainerStyle: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   resolvedParentContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH,
     padding: parentPaddingValue,
   },
   resovledTextStyle: {
     color: Constant.App.colors.greyColorText,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -190,18 +185,17 @@ const styles = StyleSheet.create({
   //Action Modal Styles
   actionModalParentContainerStyle: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    paddingBottom: getBottomSpace(),
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   actionModalInnerContainerStyle: {
     borderRadius: 10,
-    flexWrap: "wrap",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: 10,
     marginRight: 10,
     width: metrics.DEVICE_WIDTH - 20,
@@ -210,7 +204,7 @@ const styles = StyleSheet.create({
   actionModalTitleTextStyle: {
     width: metrics.DEVICE_WIDTH - 20,
     color: Constant.App.colors.lightGrey,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     padding: 12,
@@ -223,7 +217,7 @@ const styles = StyleSheet.create({
   actionModalBlueTextStyle: {
     width: metrics.DEVICE_WIDTH - 20,
     color: Constant.App.colors.blueColor,
-    textAlign: "center",
+    textAlign: 'center',
     padding: 12,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -237,61 +231,7 @@ const styles = StyleSheet.create({
   },
   actionModalOkBtnErrorTextStyle: {
     color: Constant.App.colors.blueColor,
-    textAlign: "center",
-    fontSize: Constant.App.textSize.Normal,
-    fontFamily: Constant.App.fontFamily.headerBold,
-  },
-
-  // Rating Expert Action Types
-  ratingExpertModalParentContainerStyle: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: getBottomSpace(),
-  },
-  ratingExpertModalInnerContainerStyle: {
-    borderRadius: 10,
-    flexWrap: "wrap",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 20,
-    marginRight: 20,
-    paddingBottom: 25,
-    width: metrics.DEVICE_WIDTH - 40,
-    backgroundColor: Constant.App.colors.whiteColor,
-  },
-  ratingExpertModalTitleTextStyle: {
-    width: metrics.DEVICE_WIDTH - 40,
-    color: Constant.App.colors.blackColor,
-    textAlign: "center",
-    fontSize: Constant.App.textSize.xLarge,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    padding: 25,
-  },
-  ratingExpertModalTextStyle: {
-    width: metrics.DEVICE_WIDTH - 40,
-    color: Constant.App.colors.blackColor,
-    textAlign: "center",
-    fontSize: Constant.App.textSize.Normal,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    padding: 20,
-    fontWeight: "200",
-  },
-  ratingExpertModalBtnContainerStyle: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 10,
-    paddingTop: 10,
-    backgroundColor: Constant.App.colors.blueColor,
-    marginTop: 15,
-    borderRadius: 10,
-  },
-  ratingExpertModalBtnTextStyle: {
-    color: Constant.App.colors.whiteColor,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.headerBold,
   },

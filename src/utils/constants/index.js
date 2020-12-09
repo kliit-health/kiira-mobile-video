@@ -95,8 +95,8 @@ export default {
     logoutInterval: 1000 * 20 * 60,
     Modal: {
       gender: [
-        { value: 'Male', code: 'M' },
-        { value: 'Female', code: 'F' },
+        {value: 'Male', code: 'M'},
+        {value: 'Female', code: 'F'},
       ],
       states: [
         {
@@ -337,13 +337,13 @@ export default {
         },
       ],
       sexuality: [
-        { value: 'Asexual', code: 'Asexual' },
-        { value: 'Bisexual', code: 'Bisexual' },
-        { value: 'Gay', code: 'Gay' },
-        { value: 'Lesbian', code: 'Lesbian' },
-        { value: 'Pansexual', code: 'Pansexual' },
-        { value: 'Straight', code: 'Straight' },
-        { value: 'Queer', code: 'Queer' },
+        {value: 'Asexual', code: 'Asexual'},
+        {value: 'Bisexual', code: 'Bisexual'},
+        {value: 'Gay', code: 'Gay'},
+        {value: 'Lesbian', code: 'Lesbian'},
+        {value: 'Pansexual', code: 'Pansexual'},
+        {value: 'Straight', code: 'Straight'},
+        {value: 'Queer', code: 'Queer'},
       ],
     },
 
@@ -550,7 +550,7 @@ export const icons = {
   applePayIcon: require('../../../assets/apple_pay.png'),
   backIcon: require('../../../assets/back.png'),
   basket: require('../../../assets/basket.png'),
-  cameraGreyIcon: require('../../../assets/camera_grey.png'),
+  camera: require('../../../assets/camera_grey.png'),
   cameraWhiteImg: require('../../../assets/camera_white.png'),
   cardIcon: require('../../../assets/card.png'),
   checkBoxIcon: require('../../../assets/uncheck.png'),
@@ -578,7 +578,7 @@ export const icons = {
   radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
   readMsgIcon: require('../../../assets/read_msg_icon.png'),
   rightChevronIcon: require('../../../assets/right_chevron.png'),
-  sendIcon: require('../../../assets/send.png'),
+  send: require('../../../assets/send.png'),
   shareIcon: require('../../../assets/share.png'),
   tutorialImageOneLarge: require('../../../assets/Onboarding-1.jpg'),
   tutorialImageTwoLarge: require('../../../assets/Onboarding-2.jpg'),

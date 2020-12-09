@@ -94,7 +94,6 @@ export default {
       title: 'Children',
       addChild: 'Add Child',
     },
-
     addChild: {
       title: 'Birth Date',
       save: 'Save',
@@ -180,8 +179,8 @@ export default {
       titleRateExpert: 'Your question has been resolved!',
       subTitleRateExpert: 'Rate your conversation with ',
       rate: 'Rate',
-      enterMsg: 'Enter your Message',
-      resolvedConversationMsg:
+      enterMessage: 'Enter your Message',
+      resolved:
         'This conversation has been resolved. To start a new question, return to the ask tab.',
     },
 

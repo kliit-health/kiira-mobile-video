@@ -1,107 +1,101 @@
-import React, { Fragment } from "react";
-import { View, TouchableOpacity, TextInput, Text } from "react-native";
-import Image from "react-native-fast-image";
-import { icons, colors } from "../../../../utils/constants";
-import metrices from "../../../../utils/metrices";
-import Language from "../../../../utils/localization";
+import React, {Fragment} from 'react';
+import {
+  View,
+  TouchableOpacity,
+  TextInput,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import Image from 'react-native-fast-image';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import styles from "./styles";
-
-const lang = Language["en"];
+import {icons, colors} from '../../../../utils/constants';
+import intl from '../../../../utils/localization';
+import styles from './styles';
 
 const Footer = ({
-	message,
-	onPickerPress,
-	onPickerCancel,
-	onChangeText,
-	imageUri: uri,
-	onSendPress,
-	resolved,
+  message,
+  onPickerPress,
+  onPickerCancel,
+  onChangeText,
+  imageUri: uri,
+  onSendPress,
+  resolved,
 }) => {
-	const handleSend = () => {
-		onSendPress();
-	};
+  const insets = useSafeAreaInsets();
+  const headerHeight = 50;
 
-	return (
-		<Fragment>
-			{resolved ? (
-				<View style={styles.resolvedParentContainer}>
-					<Text style={styles.resovledTextStyle}>
-						{lang.chat.resolvedConversationMsg}
-					</Text>
-				</View>
-			) : (
-				<View style={styles.chatInputParentContainer}>
-					{uri ? (
-						<View style={styles.imageParentContainerStyle}>
-							<TouchableOpacity
-								style={styles.imageCrossContainerStyle}
-								onPress={onPickerCancel}
-							>
-								<Image
-									style={styles.imageCrossStyle}
-									resizeMode="contain"
-									source={icons.crossIcon}
-								/>
-							</TouchableOpacity>
-							<View style={styles.imageContainerStyle}>
-								<Image
-									resizeMode="cover"
-									style={{
-										height: metrices.DEVICE_WIDTH - 100,
-										width: metrices.DEVICE_WIDTH * 0.65,
-									}}
-									source={{ uri }}
-								/>
-							</View>
-						</View>
-					) : null}
-					<View style={styles.chatInputContainer}>
-						<TouchableOpacity
-							style={styles.cameraContainerStyle}
-							onPress={onPickerPress}
-						>
-							<Image
-								style={{
-									width: 28,
-									height: 28,
-								}}
-								resizeMode="contain"
-								source={icons.cameraGreyIcon}
-							/>
-						</TouchableOpacity>
-						<View style={styles.textContainerStyle}>
-							<TextInput
-								maxHeight={100}
-								multiline={true}
-								autoCapitalize="sentences"
-								onChangeText={onChangeText}
-								placeholder={lang.chat.enterMsg}
-								value={message}
-								style={styles.textInputStyle}
-								placeholderTextColor={colors.lightGrey}
-							/>
-							<TouchableOpacity
-								style={styles.sendButtonContainerStyle}
-								onPress={() => (message || uri) && handleSend()}
-							>
-								<Image
-									style={{
-										width: 28,
-										height: 28,
-									}}
-									resizeMode="contain"
-									source={icons.sendIcon}
-								/>
-							</TouchableOpacity>
-						</View>
-					</View>
-				</View>
-			)}
-		</Fragment>
-	);
+  const handleSend = () => {
+    if (message || uri) {
+      onSendPress();
+    }
+  };
+
+  return (
+    <Fragment>
+      {resolved ? (
+        <Text style={styles.resolvedText}>{intl.en.chat.resolved}</Text>
+      ) : (
+        <KeyboardAvoidingView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={insets.top + headerHeight}>
+          <View style={styles.mainContainer}>
+            {uri ? (
+              <View style={styles.importedImageContainer}>
+                <TouchableOpacity onPress={onPickerCancel}>
+                  <Image
+                    style={styles.cancelIcon}
+                    resizeMode="cover"
+                    source={icons.cross}
+                  />
+                </TouchableOpacity>
+                <Image
+                  resizeMode="contain"
+                  style={styles.importedImage}
+                  source={{uri}}
+                />
+              </View>
+            ) : null}
+            <View style={styles.inputContainer}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.cameraContainer}
+                onPress={onPickerPress}>
+                <Image
+                  style={styles.cameraIcon}
+                  resizeMode="contain"
+                  source={icons.camera}
+                />
+              </TouchableOpacity>
+              <View style={styles.messageContainer}>
+                <TextInput
+                  maxHeight={100}
+                  multiline={true}
+                  autoCapitalize="sentences"
+                  onChangeText={onChangeText}
+                  placeholder={intl.en.chat.enterMessage}
+                  value={message}
+                  style={styles.messageInput}
+                  placeholderTextColor={colors.lightGrey}
+                />
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.sendContainer}
+                  onPress={handleSend}>
+                  <Image
+                    style={styles.sendIcon}
+                    resizeMode="contain"
+                    source={icons.send}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      )}
+    </Fragment>
+  );
 };
-
-Footer.displayName = "Footer";
 
 export default Footer;
