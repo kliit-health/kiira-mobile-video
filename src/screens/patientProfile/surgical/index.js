@@ -9,6 +9,7 @@ import styles from './style';
 const SurgicalHistory = ({navigation}) => {
   const [yes, setYes] = useState(false);
   const [no, setNo] = useState(false);
+  const [notes, setNotes] = useState('');
 
   const toggleSelection = (selection) => {
     if (selection === 'yes') {
@@ -40,6 +41,7 @@ const SurgicalHistory = ({navigation}) => {
           />
         </View>
         <TextInput
+          onChangeText={(text) => setNotes(text)}
           style={styles.input}
           multiline
           placeholder="Please type here"
@@ -49,6 +51,7 @@ const SurgicalHistory = ({navigation}) => {
         <CustomButton
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}
+          disabled={!yes && !no}
           onPress={() => {
             dispatch(getAppointmentsList({uid: appointmentDetails.uid}));
             navigation.navigate(Constant.App.screenNames.Appointments);

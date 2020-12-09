@@ -44,14 +44,12 @@ const AskExpert = (props) => {
     fetchData();
     dispatch(getTerms());
     dispatch(getPolicy());
-    // setCurrent(questionData);
-    // setResolved(resolvedQuestionsData);
   }, []);
 
   useEffect(() => {
     setCurrent(questionData);
     setResolved(resolvedQuestionsData);
-  }, [userData]);
+  });
 
   const toogleActive = () => {
     setRecentActive(!recentActive);
@@ -62,7 +60,7 @@ const AskExpert = (props) => {
     if (recentActive) {
       if (input.length) {
         let currentFiltered = current.filter((question) => {
-          return question.userInfo.firstName.includes(input);
+          return question.userInfo.profileInfo.firstName.includes(input);
         });
         setCurrent(currentFiltered);
       } else {
@@ -71,7 +69,7 @@ const AskExpert = (props) => {
     } else {
       if (input.length) {
         let resolvedFiltered = resolved.filter((question) => {
-          return question.userInfo.firstName.includes(input);
+          return question.userInfo.profileInfo.firstName.includes(input);
         });
         setResolved(resolvedFiltered);
       } else {
