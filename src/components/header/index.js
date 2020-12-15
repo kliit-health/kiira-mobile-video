@@ -1,10 +1,11 @@
 import React from 'react';
-import { shape, object, func, string, node, bool } from 'prop-types';
+import {shape, object, func, string, node, bool, oneOf} from 'prop-types';
 import IconButton from '../iconButton';
 import TextButton from '../textButton';
-import { View, Text } from 'react-native';
-import { icons } from '../../utils/constants';
-import defaultStyles from './styles';
+import {View, Text} from 'react-native';
+import {icons} from '../../utils/constants';
+import {mergeStyles} from '../../utils/functions';
+import defaultStyles, {modifiers} from './styles';
 
 const Header = ({
   title,
@@ -15,14 +16,24 @@ const Header = ({
   children,
   disableEdit,
   onClose,
+  themed,
 }) => {
   const styles = {
-    root: [defaultStyles.root, customStyles.root],
-    backButton: {
-      image: defaultStyles.backButton,
-      ...customStyles.backButton,
-    },
-    title: [defaultStyles.title, customStyles.title],
+    root: mergeStyles([
+      defaultStyles.root,
+      [modifiers.themed.root, themed],
+      customStyles.root,
+    ]),
+    backButton: mergeStyles([
+      modifiers.backButton,
+      [modifiers.themed.backButton, themed],
+      customStyles.backButton,
+    ]),
+    title: mergeStyles([
+      defaultStyles.title,
+      [modifiers.themed.title, themed],
+      customStyles.title,
+    ]),
     editButton: {
       root: defaultStyles.editButton,
     },
@@ -35,6 +46,7 @@ const Header = ({
           styles={styles.backButton}
           source={icons.chevron}
           onPress={onBack}
+          boxed={themed}
         />
       )}
       {onClose && <IconButton source={icons.cross} onPress={onClose} />}
@@ -47,8 +59,7 @@ const Header = ({
           disabled={disableEdit}
           styles={styles.editButton}
           link
-          onPress={onEditPress}
-        >
+          onPress={onEditPress}>
           {disableEdit ? 'Edit' : editState ? 'Done' : 'Edit'}
         </TextButton>
       )}
@@ -64,6 +75,7 @@ Header.propTypes = {
   disableEdit: bool,
   children: node,
   editState: bool,
+  themed: bool,
   styles: shape({
     root: object,
     back: shape({
@@ -82,6 +94,7 @@ Header.defaultProps = {
   disableEdit: false,
   editState: true,
   styles: {},
+  themed: false,
 };
 
 Header.displayName = 'Header';

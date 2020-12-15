@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
-import { displayConsole } from '../helper';
+import {displayConsole} from '../helper';
 import moment from 'moment';
-import Constant, { collections } from '../constants';
+import Constant, {collections} from '../constants';
 var voucher_codes = require('voucher-code-generator');
 var RSAKey = require('react-native-rsa');
 var rsa = new RSAKey();
@@ -36,11 +36,11 @@ export function createUser(obj) {
       .auth()
       .createUserWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
-        const { user } = success;
+        const {user} = success;
         return user;
       })
       .catch(function (error) {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         return error;
@@ -58,11 +58,11 @@ export function loginInWithFirebase(obj) {
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
         console.log('Values', firebase.config().getValues());
-        const { user } = success;
+        const {user} = success;
         return user;
       })
       .catch(function (error) {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         return error;
@@ -128,12 +128,12 @@ export function getPlanDetails(planDetails) {
 
 export async function sendEmailVerification(obj) {
   try {
-    const { email } = obj.params;
+    const {email} = obj.params;
     await functions.httpsCallable('sendActivationLink')(email);
-    return { ok: true, data: null };
+    return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -152,7 +152,7 @@ export function uploadImage(obj, success, error) {
         return obj;
       })
       .catch((error) => {
-        const { message } = error;
+        const {message} = error;
         displayConsole('---message--', message);
         const obj = {
           success: true,
@@ -166,7 +166,7 @@ export function uploadImage(obj, success, error) {
   }
 }
 
-export async function getAppointmentsAsync({ data: { uid } }) {
+export async function getAppointmentsAsync({data: {uid}}) {
   try {
     const document = firebase.firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
@@ -178,7 +178,7 @@ export async function getAppointmentsAsync({ data: { uid } }) {
 
 export async function getAppointmentsByDayAsync(data) {
   try {
-    const { calendarID, monthNumber, day, year } = data;
+    const {calendarID, monthNumber, day, year} = data;
 
     let response = {};
     await fetch(
@@ -194,7 +194,7 @@ export async function getAppointmentsByDayAsync(data) {
 
 export async function getAppointmentsForTodayAsync(data) {
   try {
-    const { calendarID } = data;
+    const {calendarID} = data;
     let today = new Date();
     today = moment(today).format('YYYY-MM-DD');
 
@@ -216,7 +216,7 @@ export async function getAppointmentsForTodayAsync(data) {
 
 export async function getAppointmentDatesAsync(data) {
   try {
-    const { calendarID, monthNumber, addMonth, year } = data;
+    const {calendarID, monthNumber, addMonth, year} = data;
     const currentMonth = `${year}-${monthNumber}`;
 
     let response = [];
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
   }
 }
 
-export async function makeAppointment({ data }) {
+export async function makeAppointment({data}) {
   try {
     const {
       firstName,
@@ -302,15 +302,15 @@ export async function makeAppointment({ data }) {
 
       if (prev.data().history) {
         await document.set(
-          { history: [...prev.data().history, response] },
-          { merge: true },
+          {history: [...prev.data().history, response]},
+          {merge: true},
         );
       } else {
         await firebase
           .firestore()
           .collection('appointments')
           .doc(uid)
-          .set({ history: [response] });
+          .set({history: [response]});
       }
 
       const expertDocument = firebase
@@ -322,8 +322,8 @@ export async function makeAppointment({ data }) {
 
       if (expertPrev.data().history[uid]) {
         await expertDocument.set(
-          { history: { [uid]: [...expertPrev.data().history[uid], response] } },
-          { merge: true },
+          {history: {[uid]: [...expertPrev.data().history[uid], response]}},
+          {merge: true},
         );
       } else {
         await firebase
@@ -331,20 +331,20 @@ export async function makeAppointment({ data }) {
           .collection('appointments')
           .doc(expert.uid)
           .set({
-            history: { ...expertPrev.data().history, [uid]: [response] },
+            history: {...expertPrev.data().history, [uid]: [response]},
           });
       }
 
       return;
     }
-    return { availible: false };
+    return {availible: false};
   } catch (error) {
     displayConsole(error);
     return error;
   }
 }
 
-export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
+export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
   try {
     return await fetch(
       `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancel?&id=${id}`,
@@ -366,8 +366,8 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
           (item) => item.id !== id,
         );
         await document.set(
-          { history: [...(appointments.history || [])] },
-          { merge: true },
+          {history: [...(appointments.history || [])]},
+          {merge: true},
         );
 
         const expertDocument = firestore
@@ -380,8 +380,8 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
         ].filter((item) => item.id !== id);
 
         await expertDocument.set(
-          { history: { [uid]: [...(expertAppointments.history[uid] || [])] } },
-          { merge: true },
+          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
+          {merge: true},
         );
       })
       .catch((error) => {
@@ -392,8 +392,8 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   }
 }
 
-export async function changeAppointmentAsync({ data }) {
-  const { id, time, uid } = data;
+export async function changeAppointmentAsync({data}) {
+  const {id, time, uid} = data;
 
   try {
     return await fetch(
@@ -414,10 +414,7 @@ export async function changeAppointmentAsync({ data }) {
           return item;
         });
 
-        await document.set(
-          { history: [...appointments.history] },
-          { merge: true },
-        );
+        await document.set({history: [...appointments.history]}, {merge: true});
       })
       .catch((error) => {
         console.error(error);
@@ -453,7 +450,7 @@ export function addUserData(obj) {
                   return data;
                 },
                 (error) => {
-                  const { message, code } = error;
+                  const {message, code} = error;
                   displayConsole('error message', message);
                   displayConsole('error code', code);
                   const data = {
@@ -476,7 +473,7 @@ export function addUserData(obj) {
                   return data;
                 },
                 (error) => {
-                  const { message, code } = error;
+                  const {message, code} = error;
                   displayConsole('error message', message);
                   displayConsole('error code', code);
                   const data = {
@@ -488,7 +485,7 @@ export function addUserData(obj) {
               );
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -559,7 +556,7 @@ export function getCollectionData(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -594,7 +591,7 @@ export function getCollectionDataWithCondition(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -661,7 +658,7 @@ export function logout(userData) {
         },
         (error) => {
           let data = {};
-          const { message, code } = error;
+          const {message, code} = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           if (code === 'auth/no-current-user') {
@@ -686,10 +683,10 @@ export function logout(userData) {
 export async function resetPassword(email) {
   try {
     await functions.httpsCallable('sendPasswordResetEmail')(email);
-    return { ok: true, data: null };
+    return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -763,7 +760,7 @@ export function getFilterDataWithCondition(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -795,7 +792,7 @@ export function reAunthenticate(userProvidedPassword) {
         return data;
       })
       .catch(function (error) {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -820,7 +817,7 @@ export function changePassword(newPassword) {
         return reAunthenticate(newPassword);
       })
       .catch(function (error) {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
       });
@@ -888,7 +885,7 @@ export function sendEncryptedKeyToFirebase() {
             return JSON.parse(JSON.stringify(keys));
           },
           (error) => {
-            const { message, code } = error;
+            const {message, code} = error;
             displayConsole('message', message);
             displayConsole('code', code);
           },
@@ -922,7 +919,7 @@ export const sendMessage = (obj) => {
       .collection('chat')
       .doc()
       .set(obj.messageParams);
-    const { userUnreadCount, expertUnreadCount } = obj.unreadCount;
+    const {userUnreadCount, expertUnreadCount} = obj.unreadCount;
     const updateData = {
       lastMessage: obj.lastMessage,
       modifiedDate: moment().unix(),
@@ -987,7 +984,7 @@ export function resolvedQuestion(obj) {
           return data;
         },
         (error) => {
-          const { message, code } = error;
+          const {message, code} = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -1018,13 +1015,13 @@ export const updateRefrealcodeForAllUsers = (uid, data) => {
     .firestore()
     .collection('users')
     .doc(uid)
-    .set(data, { merge: true })
+    .set(data, {merge: true})
     .then(
       function () {
         displayConsole('updateRefrealcodeForAllUsers success', true);
       },
       (error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('updateRefrealcodeForAllUsers error message', message);
         displayConsole('updateRefrealcodeForAllUserserror code', code);
       },
@@ -1068,7 +1065,7 @@ export function saveQuestion(obj) {
                 return data;
               },
               (error) => {
-                const { message, code } = error;
+                const {message, code} = error;
                 displayConsole('error message', message);
                 displayConsole('error code', code);
                 const data = {
@@ -1081,7 +1078,7 @@ export function saveQuestion(obj) {
             );
         },
         (error) => {
-          const { message, code } = error;
+          const {message, code} = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -1106,7 +1103,7 @@ export async function updateQuestion(updates, questionId) {
     const document = firestore
       .collection(collections.questions)
       .doc(questionId);
-    await document.set({ ...updates }, { merge: true });
+    await document.set({...updates}, {merge: true});
     return;
   } catch (error) {
     return error;
@@ -1141,14 +1138,14 @@ export function updateReadMessageStatus(obj) {
           })
           .catch((error) => {
             displayConsole('batch error', error);
-            const { message, code } = error;
+            const {message, code} = error;
             displayConsole('batch error message', message);
             displayConsole('batch error code', code);
           });
       })
       .catch((error) => {
         displayConsole('questionDocRef error', error);
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('questionDocRef error message', message);
         displayConsole('questionDocRef error code', code);
       });
@@ -1190,7 +1187,7 @@ export function checkSecretKey(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1227,7 +1224,7 @@ export function checkReferedUserData(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1250,7 +1247,7 @@ export function setDataTesting() {
       .firestore()
       .collection('userSecretKey')
       .doc('bc8uTx6LvbqkvhTrGVHY')
-      .update({ secretKey: 'Admin123#' })
+      .update({secretKey: 'Admin123#'})
       .then(
         function () {
           const data = {
@@ -1259,7 +1256,7 @@ export function setDataTesting() {
           return data;
         },
         (error) => {
-          const { message, code } = error;
+          const {message, code} = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -1292,7 +1289,7 @@ export function deleteUser() {
         },
         function (error) {
           let data = {};
-          const { message, code } = error;
+          const {message, code} = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           if (code === 'auth/no-current-user') {
@@ -1413,7 +1410,7 @@ export function getFiltersDataWithCondition(obj) {
         return data;
       })
       .catch((error) => {
-        const { message, code } = error;
+        const {message, code} = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1442,17 +1439,17 @@ export async function getCreditAmountsData() {
 
 export async function addNewPaymentCard(obj) {
   try {
-    const { card_number, exp_month, exp_year, cvc } = obj;
+    const {card_number, exp_month, exp_year, cvc} = obj;
     await functions.httpsCallable('apiPaymentsAddCard')({
       card_number: card_number,
       exp_month: exp_month,
       exp_year: exp_year,
       cvc: cvc,
     });
-    return { ok: true, data: null };
+    return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -1462,7 +1459,7 @@ export async function getPaymentMethods() {
     if (response.data.data) {
       return {
         ok: true,
-        data: response.data.data.map((data) => ({ ...data.card, id: data.id })),
+        data: response.data.data.map((data) => ({...data.card, id: data.id})),
       };
     } else {
       return {
@@ -1473,7 +1470,7 @@ export async function getPaymentMethods() {
   } catch (err) {
     console.log('ERRROROROROROROROROROR', err);
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -1484,10 +1481,10 @@ export async function payAmount(cardID, amount) {
       card_id: cardID,
       amount: amountInCents,
     });
-    return { ok: response };
+    return {ok: response};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -1500,10 +1497,10 @@ export async function payAmountWithToken(tokenID, amount) {
       token_id: tokenID,
       amount: amountInCents,
     });
-    return { ok: response };
+    return {ok: response};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -1523,9 +1520,9 @@ export async function addUserCredits(visits) {
       .update({
         visits: userData.visits + visits,
       });
-    return { ok: true };
+    return {ok: true};
   } catch (err) {
-    return { ok: false, status: 'internal' };
+    return {ok: false, status: 'internal'};
   }
 }
 
@@ -1535,9 +1532,9 @@ export async function updateCredits(credits, forUser) {
     await firebase.firestore().collection('users').doc(forUser).update({
       credits,
     });
-    return { ok: true, newCredits: credits };
+    return {ok: true, newCredits: credits};
   } catch (err) {
-    return { ok: false, status: 'internal' };
+    return {ok: false, status: 'internal'};
   }
 }
 
@@ -1546,10 +1543,10 @@ export async function getPayPalAccessToken() {
     const response = await functions.httpsCallable(
       'apiPaymentsGetPaypalAccesstoken',
     )();
-    return { ok: true, data: response };
+    return {ok: true, data: response};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return { ok: false, status };
+    return {ok: false, status};
   }
 }
 
@@ -1559,7 +1556,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
       try {
         let query = firestore.collection(collectionName);
         for (let condition of conditions) {
-          const { key, operator, value } = condition;
+          const {key, operator, value} = condition;
           query = query.where(key, operator, value);
         }
         const response = await query.limit(limit).get();
@@ -1577,7 +1574,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
 export async function addHealthHistory(data, uid) {
   try {
     const document = firestore.collection('healthHistory').doc(uid);
-    await document.set(data, { merge: true });
+    await document.set(data, {merge: true});
     return;
   } catch (error) {
     return error;
@@ -1597,7 +1594,7 @@ export async function getHealthHistory(uid) {
 export async function updateFavoriteExperts(favorites, uid) {
   const document = firestore.collection('careSquad').doc(uid);
   try {
-    await document.set({ favorites }, { merge: true });
+    await document.set({favorites}, {merge: true});
     return;
   } catch (error) {
     console.error(error);
@@ -1611,7 +1608,7 @@ export async function getFavoriteExperts(uid) {
   try {
     const favorites = await document.get();
     if (!favorites.data()) {
-      await document.set({ favorites }, { merge: true });
+      await document.set({favorites}, {merge: true});
       return;
     }
     return favorites.data();
@@ -1624,7 +1621,7 @@ export async function getFavoriteExperts(uid) {
 export async function updateUserData(updates, uid) {
   const document = firestore.collection('users').doc(uid);
   try {
-    await document.set(updates, { merge: true });
+    await document.set(updates, {merge: true});
     return;
   } catch (error) {
     console.error(error);
@@ -1650,22 +1647,26 @@ export const firebaseSingleFetch = (collectionName, id) =>
           .collection(collectionName)
           .doc(id)
           .get();
-        const data = document.data();
-        resolve(data);
+        if (document.exists) {
+          const data = document.data();
+          resolve(data);
+        } else {
+          reject('Document not found.');
+        }
       } catch (error) {
         reject(error);
       }
     })(),
   );
 
-export const setUserDetails = (uid, { ...rest }) =>
+export const setUserDetails = (uid, {...rest}) =>
   new Promise((resolve, reject) =>
     (async () => {
       const user = firestore.collection('users').doc(uid);
-      const data = { ...rest, updatedAt: Date.now(), uid };
+      const data = {...rest, updatedAt: Date.now(), uid};
 
       try {
-        await user.set(data, { merge: true });
+        await user.set(data, {merge: true});
         resolve(data);
       } catch (error) {
         reject(error);

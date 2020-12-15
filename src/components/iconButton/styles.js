@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
@@ -13,3 +14,19 @@ export default StyleSheet.create({
     width: 20,
   },
 });
+
+export const modifiers = {
+  boxed: {
+    root: {
+      backgroundColor: colors.white,
+      height: 35,
+      width: 35,
+      borderRadius: 10,
+    },
+    image: {
+      height: 14,
+      width: 14,
+      marginRight: 2,
+    },
+  },
+};

@@ -102,6 +102,7 @@ import VideoPlayer from '../screens/videoVisit/VideoPlayer';
 import Visit from '../screens/visit';
 import Welcome from '../screens/welcome';
 import TreatmentHistory from '../screens/treatmentHistory';
+import PersonalInformation from '../screens/personalInformation';
 
 let lang = Language.en;
 let tabIconSize = 25;
@@ -466,6 +467,7 @@ const AppStackExpert = createStackNavigator(
     SurgicalHistory: {screen: SurgicalHistory},
     TermsConditions: {screen: TermsConditions},
     UpdateAvailablity: {screen: UpdateAvailablity},
+    PersonalInformation: {screen: PersonalInformation},
   },
   {
     headerMode: 'none',

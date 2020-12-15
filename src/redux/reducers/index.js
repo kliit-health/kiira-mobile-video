@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import accountReducer from '../../screens/account/reducer';
 import agreeToTermsReducer from '../../screens/newUser/reducer';
 import addProfileReducer from '../../screens/addProfileData/reducer';
@@ -35,6 +35,7 @@ import treatmentHistory from '../../screens/treatmentHistory/reducer';
 import updateExpertReducer from '../../screens/updateAvailablity/reducer';
 import agreements from '../../screens/agreements/reducer';
 import userDetails from './userDetails';
+import personalInformation from '../../screens/personalInformation/reducer';
 
 export default combineReducers({
   accountReducer,
@@ -73,4 +74,5 @@ export default combineReducers({
   updateExpertReducer,
   agreements,
   userDetails,
+  personalInformation,
 });

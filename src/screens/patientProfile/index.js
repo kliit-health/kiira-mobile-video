@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import ExpertHeader from '../../components/expertHeader';
+import {screenNames} from '../../utils/constants';
+import {useDispatch} from 'react-redux';
+import {getPersonalInformation} from '../personalInformation/actions';
 import Section from './components/section';
 import styles from './style';
 
@@ -8,6 +11,16 @@ const PatientProfile = (props) => {
   let params = props.navigation.state.params;
   let {navigation} = props;
   let {uid, visit, patientInfo} = params;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPersonalInformation({uid: patientInfo.uid}));
+  }, []);
+
+  const handleNavigation = (destination) => {
+    navigation.push(destination, {uid});
+  };
 
   return (
     <View style={styles.container}>
@@ -33,7 +46,8 @@ const PatientProfile = (props) => {
       </View>
       <ScrollView>
         <View style={styles.infoContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleNavigation(screenNames.personalInformation)}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}
