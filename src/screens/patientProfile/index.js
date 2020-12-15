@@ -15,11 +15,17 @@ const PatientProfile = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPersonalInformation({uid: patientInfo.uid}));
+    dispatch(
+      getPersonalInformation({
+        uid: patientInfo.uid,
+      }),
+    );
   }, []);
 
   const handleNavigation = (destination) => {
-    navigation.push(destination, {uid});
+    navigation.push(destination, {
+      uid: patientInfo.uid,
+    });
   };
 
   return (

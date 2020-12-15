@@ -1659,15 +1659,13 @@ export const firebaseSingleFetch = (collectionName, id) =>
     })(),
   );
 
-export const setUserDetails = (uid, {...rest}) =>
+export const updateSingleDocument = (id, collection, updates, merge = true) =>
   new Promise((resolve, reject) =>
     (async () => {
-      const user = firestore.collection('users').doc(uid);
-      const data = {...rest, updatedAt: Date.now(), uid};
-
+      const user = firestore.collection(collection).doc(id);
       try {
-        await user.set(data, {merge: true});
-        resolve(data);
+        await user.set(updates, {merge});
+        resolve(updates);
       } catch (error) {
         reject(error);
       }

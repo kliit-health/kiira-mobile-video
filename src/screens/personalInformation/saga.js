@@ -10,25 +10,35 @@ import {
 } from '../../redux/types';
 import moment from 'moment';
 import {put, takeEvery} from 'redux-saga/effects';
-import {firebaseSingleFetch} from '../../utils/firebase';
+import {firebaseSingleFetch, updateSingleDocument} from '../../utils/firebase';
 
-function* savePersonalInformation() {
+function* savePersonalInformation({data: {uid, data: details, navigation}}) {
   try {
     yield put({type: SAVE_PERSONAL_INFORMATION_PENDING});
-
+    const data = yield updateSingleDocument(uid, 'patient', {
+      personalInformation: {
+        updatedAt: Date.now(),
+        ...details,
+      },
+    });
     yield put({
       type: SAVE_PERSONAL_INFORMATION_FULFILLED,
-      data: '',
+      data: data.personalInformation,
     });
+    navigation.goBack();
   } catch (error) {
-    yield put({type: SET_PERSONAL_INFORMATION_REJECTED, data: error});
-    console.error(error);
+    yield put({
+      type: SAVE_PERSONAL_INFORMATION_REJECTED,
+      data: error,
+    });
   }
 }
 
 function* getPersonalInformation({data: {uid}}) {
   try {
-    yield put({type: GET_PERSONAL_INFORMATION_PENDING});
+    yield put({
+      type: GET_PERSONAL_INFORMATION_PENDING,
+    });
 
     const patient = yield firebaseSingleFetch('patient', uid);
     const data = patient.personalInformation;
@@ -62,6 +72,6 @@ function* getPersonalInformation({data: {uid}}) {
 }
 
 export default function* () {
-  yield takeEvery(SET_PERSONAL_INFORMATION, setPersonalInformation);
+  yield takeEvery(SAVE_PERSONAL_INFORMATION, savePersonalInformation);
   yield takeEvery(GET_PERSONAL_INFORMATION, getPersonalInformation);
 }
