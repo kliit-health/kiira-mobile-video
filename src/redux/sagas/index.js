@@ -1,4 +1,4 @@
-import { all } from 'redux-saga/effects';
+import {all} from 'redux-saga/effects';
 import accountSaga from '../../screens/account/saga';
 import addProfileSaga from '../../screens/addProfileData/saga';
 import agreeToTermsSaga from '../../screens/newUser/sagas';
@@ -31,6 +31,7 @@ import treatmentHistorySaga from '../../screens/treatmentHistory/saga';
 import updateExpertSaga from '../../screens/updateAvailablity/saga';
 import agreementsSaga from '../../screens/agreements/saga';
 import userDetailsSaga from './userDetails';
+import personalInformation from '../../screens/personalInformation/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -66,5 +67,6 @@ export default function* rootSaga() {
     updateExpertSaga(),
     agreementsSaga(),
     userDetailsSaga(),
+    personalInformation(),
   ]);
 }

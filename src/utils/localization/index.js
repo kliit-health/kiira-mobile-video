@@ -29,6 +29,11 @@ export default {
       footer: 'Your information is encrypted and processed by Stripe.',
     },
 
+    personalInformation: {
+      title: 'Personal Information',
+      save: 'Save',
+    },
+
     medications: {
       title: 'Medications',
       save: 'Save',

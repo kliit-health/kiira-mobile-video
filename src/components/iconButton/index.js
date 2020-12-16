@@ -1,6 +1,7 @@
 import React, {cloneElement} from 'react';
 import {shape, node, object, oneOf, number, func, bool} from 'prop-types';
-import defaultStyles from './styles';
+import {mergeStyles} from '../../utils/functions';
+import defaultStyles, {modifiers} from './styles';
 import {TouchableOpacity} from 'react-native';
 import Image from 'react-native-fast-image';
 
@@ -12,13 +13,20 @@ const IconButton = ({
   disabled,
   activeOpacity,
   onPress,
+  boxed,
   ...rest
 }) => {
   const styles = {
-    root: customStyles
-      ? [defaultStyles.root, customStyles.root]
-      : [defaultStyles.root],
-    image: [defaultStyles.image, customStyles.image],
+    root: mergeStyles([
+      defaultStyles.root,
+      [modifiers.boxed.root, boxed],
+      customStyles.root,
+    ]),
+    image: mergeStyles([
+      defaultStyles.image,
+      [modifiers.boxed.image, boxed],
+      customStyles.image,
+    ]),
   };
 
   const handlePress = (event) => {
@@ -51,6 +59,7 @@ IconButton.propTypes = {
   resizeMode: oneOf(['contain', 'cover', 'stretch', 'center', 'repeat']),
   onPress: func,
   disabled: bool,
+  boxed: bool,
   styles: shape({
     root: object,
     image: object,
@@ -62,6 +71,7 @@ IconButton.defaultProps = {
   activeOpacity: 1,
   resizeMode: 'contain',
   disabled: false,
+  boxed: false,
   onPress: () => {},
 };
 

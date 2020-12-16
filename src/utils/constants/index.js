@@ -652,6 +652,7 @@ export const screenNames = {
   UpdateAvailablity: 'UpdateAvailablity',
   Visit: 'Visit',
   VideoVisit: 'VideoVisit',
+  personalInformation: 'PersonalInformation',
 };
 
 export const units = {

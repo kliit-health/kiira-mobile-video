@@ -14,9 +14,6 @@ export default StyleSheet.create({
     shadowRadius: 10,
     shadowOpacity: 0.1,
   },
-  backButton: {
-    transform: [{rotate: '180deg'}],
-  },
   title: {
     position: 'absolute',
     textAlign: 'center',
@@ -32,4 +29,27 @@ export default StyleSheet.create({
   },
 });
 
-export const modifiers = {};
+export const modifiers = {
+  themed: {
+    root: {
+      backgroundColor: colors.azure,
+      height: 70,
+      borderBottomRightRadius: 25,
+      borderBottomLeftRadius: 25,
+    },
+    title: {
+      color: colors.white,
+      fontSize: text.size.xLarge,
+    },
+    backButton: {
+      root: {
+        marginLeft: 5,
+      },
+    },
+  },
+  backButton: {
+    image: {
+      transform: [{rotate: '180deg'}],
+    },
+  },
+};
