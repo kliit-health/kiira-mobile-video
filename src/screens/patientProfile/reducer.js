@@ -5,6 +5,7 @@ import {
   UPDATE_PATIENT_DETAILS_PENDING,
   UPDATE_PATIENT_DETAILS_FULFILLED,
   UPDATE_PATIENT_DETAILS_REJECTED,
+  UPDATE_MEDICAL_HISTORY_EXPERT,
 } from '../../redux/types';
 import {createReducer} from '@reduxjs/toolkit';
 
@@ -15,6 +16,270 @@ const initialState = {
     consentAgreements: [],
   },
   error: null,
+  allergies: {
+    allergic: false,
+    notes: '',
+    complete: false,
+  },
+  medications: {
+    history: false,
+    notes: '',
+    complete: false,
+  },
+  surgical: {
+    surgeries: false,
+    notes: '',
+    complete: false,
+  },
+  social: {
+    smoke: {
+      history: false,
+      notes: '',
+    },
+    alcohol: {
+      history: false,
+      notes: '',
+    },
+    drugs: {
+      history: false,
+      notes: '',
+    },
+    caffine: {
+      history: false,
+      notes: '',
+    },
+    safe: {
+      history: false,
+      notes: '',
+    },
+    abuse: {
+      history: false,
+      notes: '',
+    },
+    currentAbuse: {
+      history: false,
+      notes: '',
+    },
+    status: {
+      married: false,
+      single: false,
+      divorced: false,
+      widowed: false,
+      involved: false,
+      partner: false,
+    },
+    education: {
+      highSchool: false,
+      college: false,
+      graduate: false,
+      other: false,
+    },
+    exercise: {
+      history: false,
+      notes: '',
+    },
+    diet: {
+      history: false,
+      notes: '',
+    },
+    complete: false,
+  },
+  family: {
+    cancer: {
+      history: false,
+      notes: '',
+    },
+    illnesses: {
+      diabetes: false,
+      highBloodPressure: false,
+      giReflux: false,
+      giDisease: false,
+      fibroids: false,
+      endometriosos: false,
+      osteopenia: false,
+      osteoporosis: false,
+      heartDisease: false,
+      highCholesterol: false,
+      hepatitis: false,
+      liverProblems: false,
+      kidneyProblems: false,
+      arthritis: false,
+      jointPain: false,
+      fracture: false,
+      anxiety: false,
+      depression: false,
+      seizures: false,
+      asthma: false,
+      lungProblems: false,
+      tuberculosis: false,
+      thyroidDisease: false,
+      clottingDisorder: false,
+      none: false,
+    },
+    complete: false,
+  },
+  pmh: {
+    cancer: {
+      history: false,
+      notes: '',
+    },
+    disease: {
+      diabetes: false,
+      highBloodPressure: false,
+      giReflux: false,
+      giDisease: false,
+      fibroids: false,
+      endometriosos: false,
+      osteopenia: false,
+      osteoporosis: false,
+      heartDisease: false,
+      highCholesterol: false,
+      hepatitis: false,
+      liverProblems: false,
+      kidneyProblems: false,
+      arthritis: false,
+      jointPain: false,
+      fracture: false,
+      anxiety: false,
+      depression: false,
+      seizures: false,
+      asthma: false,
+      lungProblems: false,
+      tuberculosis: false,
+      thyroidDisease: false,
+      clottingDisorder: false,
+      none: false,
+    },
+    complete: false,
+  },
+  gyn: {
+    lastPeriod: {
+      notes: '',
+    },
+    periodLength: {
+      lessThan: false,
+      moreThan: false,
+    },
+    abnormalPap: {
+      history: false,
+      notes: '',
+    },
+    cycleLength: {
+      lessThan: false,
+      about: false,
+      moreThan: false,
+    },
+    menarche: {
+      notes: '',
+    },
+    papDate: {
+      notes: '',
+    },
+    sti: {
+      chlamydia: false,
+      gonorrhea: false,
+      genitalWarts: false,
+      herpes: false,
+      trichomonas: false,
+      syphilis: false,
+      none: false,
+    },
+    hiv: {
+      history: false,
+      notes: '',
+    },
+    des: {
+      history: false,
+      notes: '',
+    },
+    sexuallyActive: {
+      history: false,
+      notes: '',
+    },
+    underAge: {
+      history: false,
+      notes: '',
+    },
+    multiplePartners: {
+      history: false,
+      notes: '',
+    },
+    useContraception: {
+      history: false,
+      notes: '',
+    },
+    useBirthControl: {
+      history: false,
+      notes: '',
+    },
+    contraceptions: {
+      condoms: false,
+      thePill: false,
+      pullOut: false,
+      tubesTied: false,
+      diaphram: false,
+      patch: false,
+      flim: false,
+      other: false,
+    },
+    active: {
+      history: false,
+      notes: '',
+    },
+    activeCurrent: {
+      history: false,
+      notes: '',
+    },
+    sexualPartners: {
+      men: false,
+      women: false,
+      other: false,
+    },
+    currentlyActive: {
+      history: false,
+      notes: '',
+    },
+    numberOfPartners: {
+      male: {
+        number: '0',
+        visible: false,
+      },
+      female: {
+        number: '0',
+        visible: false,
+      },
+      other: {
+        number: '0',
+        visible: false,
+      },
+    },
+    complete: false,
+  },
+  pregnancy: {
+    pregnancies: {
+      number: '',
+    },
+    miscarriages: {
+      number: '',
+    },
+    fullTermBirths: {
+      number: '',
+    },
+    abortions: {
+      number: '',
+    },
+    cesarean: {
+      number: '',
+    },
+    livingChildren: {
+      number: '',
+    },
+    pregnancyIssues: {
+      history: false,
+      notes: '',
+    },
+    complete: false,
+  },
 };
 
 export default createReducer(initialState, {
@@ -52,5 +317,9 @@ export default createReducer(initialState, {
           ? {...state.data[dataKey], ...updates}
           : [...state.data[dataKey], ...updates],
     },
+    [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, {payload}) => ({
+      ...state,
+      ...payload,
+    }),
   }),
 });

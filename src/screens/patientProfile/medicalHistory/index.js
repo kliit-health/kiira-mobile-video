@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import ExpertHeader from '../../../components/expertHeader';
 import Section from '../components/section';
 import styles from './style';
@@ -8,6 +9,19 @@ const MedicalHistory = (props) => {
   let params = props.navigation.state.params;
   let {navigation} = props;
   let {uid, visit, patientInfo} = params;
+  const medicalHistory = useSelector((state) => state.medicalHistory);
+
+  console.log(params);
+
+  const allComplete = () => {
+    let finshed = true;
+
+    for (let form in medicalHistory) {
+      if (!form.complete) finshed = false;
+    }
+
+    return finshed;
+  };
 
   return (
     <View style={styles.container}>
@@ -25,6 +39,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Pregnancy History</Text>
+              {medicalHistory.pregnancy.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('GynHistory')}>
@@ -36,6 +58,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>GYN History</Text>
+              {medicalHistory.gyn.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -48,11 +78,23 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Past Medical History</Text>
+              {medicalHistory.pmh.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('SurgicalHistory')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
               <Image
                 containerStyle={{alignSelf: 'center'}}
                 style={styles.icon}
@@ -60,6 +102,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Surgical History</Text>
+              {medicalHistory.surgical.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -72,6 +122,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Medications</Text>
+              {medicalHistory.medications.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -84,6 +142,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Allergies</Text>
+              {medicalHistory.allergies.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -96,6 +162,14 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Social History</Text>
+              {medicalHistory.social.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -108,9 +182,19 @@ const MedicalHistory = (props) => {
                 activeOpacity={0.7}
               />
               <Text style={styles.info}>Family History</Text>
+              {medicalHistory.family.complete && (
+                <Image
+                  containerStyle={{alignSelf: 'center'}}
+                  style={styles.icon}
+                  source={require('../../../../assets/check.png')}
+                  activeOpacity={0.7}
+                />
+              )}
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('OtherDetails')}>
+          <TouchableOpacity
+            disabled={allComplete()}
+            onPress={() => navigation.navigate('OtherDetails')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 resizeMode="contain"

@@ -1591,6 +1591,16 @@ export async function getHealthHistory(uid) {
   }
 }
 
+export async function getMedicalHistory(uid) {
+  try {
+    const document = firestore.collection('medicalHistory').doc(uid);
+    const medicalHistory = await document.get();
+    return medicalHistory.data();
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function updateFavoriteExperts(favorites, uid) {
   const document = firestore.collection('careSquad').doc(uid);
   try {

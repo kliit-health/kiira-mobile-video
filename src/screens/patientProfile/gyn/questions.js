@@ -21,7 +21,7 @@ export const questions = [
     options: [
       {title: 'Less than 21 days', key: 'lessThan', section: 'cycleLength'},
       {title: 'About 21-42 days', key: 'about', section: 'cycleLength'},
-      {title: 'More than days', key: 'moreThan', section: 'cycleLength'},
+      {title: 'More than 43 days', key: 'moreThan', section: 'cycleLength'},
     ],
     type: 'objective',
   },
@@ -58,6 +58,7 @@ export const questions = [
         section: 'sti',
       },
     ],
+    key: 'sti',
     type: 'objective',
   },
   {
@@ -115,6 +116,7 @@ export const questions = [
       {title: 'Vaginal Film', key: 'film', section: 'contraceptions'},
       {title: 'Other', key: 'other', section: 'contraceptions'},
     ],
+    key: 'contraceptions',
     type: 'objective',
   },
   {
@@ -135,10 +137,17 @@ export const questions = [
       {title: 'Women', key: 'women', section: 'sexualPartners'},
       {title: 'Other', key: 'other', section: 'sexualPartners'},
     ],
+    key: 'sexualPartners',
     type: 'objective',
   },
   {
     question: 'In the past 12 months, how many sexual partners have you had?',
+    options: [
+      {title: 'Men', key: 'male', section: 'numberOfPartners'},
+      {title: 'Women', key: 'female', section: 'numberOfPartners'},
+      {title: 'Other', key: 'other', section: 'numberOfPartners'},
+    ],
+    picker: true,
     key: 'numberOfPartners',
     type: 'picker',
   },

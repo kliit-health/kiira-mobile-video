@@ -38,7 +38,7 @@ export const questions = [
   {
     question: 'Does patient have any special pregnancy problems?',
     textPrompt: 'Type details',
-    key: 'hiv',
+    key: 'pregnancyIssues',
     type: 'polar',
   },
 ];

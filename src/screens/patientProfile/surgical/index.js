@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const SurgicalHistory = ({navigation}) => {
   const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
+  const [no, setNo] = useState(true);
   const [notes, setNotes] = useState('');
+  const dispatch = useDispatch();
+  const {surgical} = useSelector((state) => state.medicalHistory);
 
   const toggleSelection = (selection) => {
     if (selection === 'yes') {
@@ -23,6 +27,14 @@ const SurgicalHistory = ({navigation}) => {
     }
   };
 
+  const payload = {
+    surgical: {
+      surgeries: yes,
+      notes,
+      complete: true,
+    },
+  };
+  console.log('surgical', surgical);
   return (
     <View style={styles.container}>
       <ExpertHeader title="Surgical History" />
@@ -43,18 +55,17 @@ const SurgicalHistory = ({navigation}) => {
         <TextInput
           onChangeText={(text) => setNotes(text)}
           style={styles.input}
+          value={notes}
           multiline
           placeholder="Please type here"
           placeholderTextColor="black"
         />
-
         <CustomButton
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}
-          disabled={!yes && !no}
           onPress={() => {
-            dispatch(getAppointmentsList({uid: appointmentDetails.uid}));
-            navigation.navigate(Constant.App.screenNames.Appointments);
+            dispatch(updateMedicalHistoryExpert(payload));
+            navigation.goBack();
           }}
           text="Submit"
         />

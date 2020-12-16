@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -8,12 +9,12 @@ import CustomTextInput from '../../../components/textInput';
 import {CheckBox} from 'react-native-elements';
 import {questions} from './questions';
 import {switchCase} from '../../../utils/functions';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const PregnancyHistory = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
+  const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
 
@@ -43,18 +44,19 @@ const PregnancyHistory = ({navigation}) => {
     },
   });
 
-  const numberOfPartners = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
+  const modalData = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
 
-  const toggleSelection = (selection) => {
-    if (selection === 'yes') {
-      setYes(!yes);
-      setNo(false);
-    }
+  const payload = {
+    pregnancy: {
+      ...answers,
+      complete: true,
+    },
+  };
 
-    if (selection === 'no') {
-      setYes(false);
-      setNo(!no);
-    }
+  const toggleSelection = (key) => {
+    let answerToSet = {...answers};
+    answerToSet[key].history = !answerToSet[key].history;
+    setAnswers(answerToSet);
   };
 
   const setAnswer = (option) => {
@@ -67,17 +69,17 @@ const PregnancyHistory = ({navigation}) => {
     setAnswers(answerToSet);
   };
 
-  const handleOnLabelPress = () => {
-    setVisible(true);
+  const toggleModal = () => {
+    setVisible(!visible);
   };
 
-  const handleOnSave = (item) => {
-    onSave(item);
-    setVisible(false);
-  };
-
-  const handleOnBackdropPress = () => {
-    setVisible(false);
+  const handleOnSave = (selection, key) => {
+    console.log('Selection', selection);
+    console.log('Key', key);
+    let answerToSet = {...answers};
+    answerToSet[key].number = selection;
+    setAnswers(answerToSet);
+    toggleModal();
   };
 
   const types = {
@@ -98,13 +100,13 @@ const PregnancyHistory = ({navigation}) => {
               <View style={styles.buttonContainer}>
                 <PolarButton
                   variant="yes"
-                  selected={yes}
-                  onPress={() => toggleSelection('yes')}
+                  selected={answers[questions[progress].key].history}
+                  onPress={() => toggleSelection(questions[progress].key)}
                 />
                 <PolarButton
                   variant="no"
-                  selected={no}
-                  onPress={() => toggleSelection('no')}
+                  selected={!answers[questions[progress].key].history}
+                  onPress={() => toggleSelection(questions[progress].key)}
                 />
               </View>
               {questions[progress].textPrompt ? (
@@ -145,17 +147,19 @@ const PregnancyHistory = ({navigation}) => {
           [types.picker]: (
             <View style={{width: 300, alignSelf: 'center'}}>
               <CustomTextInput
-                onPress={handleOnLabelPress}
+                onPress={toggleModal}
                 placeholder={questions[progress].textPrompt}
-                // value={""}
+                value={answers[questions[progress].key].number}
                 chevron
               />
               <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
+                onSave={(selection) =>
+                  handleOnSave(selection, questions[progress].key)
+                }
+                onBackdropPress={toggleModal}
                 visible={visible}
                 title={questions[progress].textPrompt}
-                data={numberOfPartners.map((item) => item)}
+                data={modalData.map((item) => item)}
               />
             </View>
           ),
@@ -174,7 +178,10 @@ const PregnancyHistory = ({navigation}) => {
             buttonStyle={styles.nextButtonContainerStyle}
             textStyle={styles.nextButtonTextStyle}
             onPress={() => {
-              setProgress(progress + 1);
+              finished
+                ? (dispatch(updateMedicalHistoryExpert(payload)),
+                  navigation.goBack())
+                : setProgress(progress + 1);
             }}
             text={finished ? 'Submit' : 'Next'}
           />

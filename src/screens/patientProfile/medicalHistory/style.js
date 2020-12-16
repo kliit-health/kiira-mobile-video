@@ -75,6 +75,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
+
+  check: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: 20,
+    height: 20,
+  },
 });
 
 export default styles;

@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const Allergies = ({navigation}) => {
   const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
+  const [no, setNo] = useState(true);
+  const [notes, setNotes] = useState('');
+  const dispatch = useDispatch();
 
   const toggleSelection = (selection) => {
     if (selection === 'yes') {
@@ -20,6 +24,14 @@ const Allergies = ({navigation}) => {
       setYes(false);
       setNo(!no);
     }
+  };
+
+  const payload = {
+    allergies: {
+      allergic: yes,
+      notes,
+      complete: true,
+    },
   };
 
   return (
@@ -42,6 +54,7 @@ const Allergies = ({navigation}) => {
           />
         </View>
         <TextInput
+          onChangeText={(text) => setNotes(text)}
           style={styles.input}
           multiline
           placeholder="Please type here"
@@ -52,8 +65,8 @@ const Allergies = ({navigation}) => {
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}
           onPress={() => {
-            dispatch(getAppointmentsList({uid: appointmentDetails.uid}));
-            navigation.navigate(Constant.App.screenNames.Appointments);
+            dispatch(updateMedicalHistoryExpert(payload));
+            navigation.goBack();
           }}
           text="Submit"
         />
