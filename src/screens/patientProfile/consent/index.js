@@ -1,68 +1,50 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
-import ExpertHeader from '../../../components/expertHeader';
-import Section from '../components/section';
-import styles from './style';
+import {View, Text, FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
+import {Header, Container, ListItem} from '../../../components';
+import intl from '../../../utils/localization';
+import {screenNames} from '../../../utils/constants';
+import moment from 'moment';
+import styles from './styles';
 
-const Consent = (props) => {
-  let {navigation} = props;
+const ConsentAgreements = ({navigation}) => {
+  const consentAgreements = useSelector(
+    (state) => state.patientDetails.data.consentAgreements,
+  );
+
+  const handlePress = ({id}) => {
+    navigation.navigate(screenNames.agreementDetails, {id});
+  };
 
   return (
-    <View style={styles.container}>
-      <ExpertHeader title="Consent agreements" />
-      <ScrollView>
-        <View style={styles.infoContainer}>
-          <TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                containerStyle={{alignSelf: 'center'}}
-                style={styles.icon}
-                source={require('../../../../assets/HPI.png')}
-                activeOpacity={0.7}
-              />
-              <Text style={styles.info}>Personal Information</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('MedicalHistoryExpert')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                containerStyle={{alignSelf: 'center'}}
-                style={styles.icon}
-                source={require('../../../../assets/firstaid.png')}
-                activeOpacity={0.7}
-              />
-              <Text style={styles.info}>Medical History</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('PersonalMedicalHistory')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                containerStyle={{alignSelf: 'center'}}
-                style={styles.icon}
-                source={require('../../../../assets/notes.png')}
-                activeOpacity={0.7}
-              />
-              <Text style={styles.info}>Patient Notes</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('SurgicalHistory')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                containerStyle={{alignSelf: 'center'}}
-                style={styles.icon}
-                source={require('../../../../assets/agreement.png')}
-                activeOpacity={0.7}
-              />
-              <Text style={styles.info}>Consent Agreements</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+    <Container unformatted themed>
+      <Header
+        title={intl.en.consent.title}
+        onBack={() => navigation.goBack()}
+        themed
+      />
+      <FlatList
+        data={consentAgreements}
+        renderItem={({item}) => {
+          const {title, updatedAt} = item;
+          return (
+            <ListItem onPress={() => handlePress(item)} displayChevron>
+              <View style={styles.itemContainer}>
+                <Text numberOfLines={1} style={styles.title}>
+                  {title}
+                </Text>
+                <Text style={styles.subtitle}>
+                  {`${intl.en.consent.acceptanceDate}: ${moment(
+                    updatedAt,
+                  ).format('MM/DD/YYYY')}`}
+                </Text>
+              </View>
+            </ListItem>
+          );
+        }}
+      />
+    </Container>
   );
 };
 
-export default Consent;
+export default ConsentAgreements;

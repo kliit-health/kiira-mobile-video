@@ -35,7 +35,7 @@ import treatmentHistory from '../../screens/treatmentHistory/reducer';
 import updateExpertReducer from '../../screens/updateAvailablity/reducer';
 import agreements from '../../screens/agreements/reducer';
 import userDetails from './userDetails';
-import personalInformation from '../../screens/personalInformation/reducer';
+import patientDetails from '../../screens/patientProfile/reducer';
 
 export default combineReducers({
   accountReducer,
@@ -74,5 +74,5 @@ export default combineReducers({
   updateExpertReducer,
   agreements,
   userDetails,
-  personalInformation,
+  patientDetails,
 });

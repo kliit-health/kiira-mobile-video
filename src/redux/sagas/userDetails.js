@@ -9,7 +9,7 @@ import {
   SET_USER_DETAILS_FULFILLED,
 } from '../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {firebaseSingleFetch, setUserDetails} from '../../utils/firebase';
+import {firebaseSingleFetch, updateUserData} from '../../utils/firebase';
 
 function* getUserDetails({data: {uid}}) {
   try {
@@ -27,10 +27,10 @@ function* getUserDetails({data: {uid}}) {
   }
 }
 
-function* updateUserData({data: {uid, ...rest}}) {
+function* updateUserDetails({data: {uid, ...rest}}) {
   try {
     yield put({type: SET_USER_DETAILS_PENDING});
-    yield setUserDetails(uid, {...rest});
+    yield updateUserData({...rest}, uid);
 
     yield put({
       type: SET_USER_DETAILS_FULFILLED,
@@ -47,5 +47,5 @@ function* updateUserData({data: {uid, ...rest}}) {
 
 export default function* () {
   yield takeEvery(GET_USER_DETAILS, getUserDetails);
-  yield takeEvery(SET_USER_DETAILS, updateUserData);
+  yield takeEvery(SET_USER_DETAILS, updateUserDetails);
 }

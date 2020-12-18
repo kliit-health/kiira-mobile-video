@@ -5,18 +5,26 @@ import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import defaultStyles, {modifiers} from './styles';
 
-const Container = ({styles: customStyles, children, unformatted, themed}) => {
+const Container = ({
+  styles: customStyles,
+  children,
+  unformatted,
+  themed,
+  modal,
+}) => {
   const insets = useSafeAreaInsets();
   const styles = {
     root: mergeStyles([defaultStyles.root, customStyles.root]),
     safeAreaTop: mergeStyles([
       {...defaultStyles.safeAreaTop, height: insets.top},
       [modifiers.themed.safeAreaTop, themed],
+      [modifiers.modal.safeAreaTop, modal],
       customStyles.safeAreaTop,
     ]),
     safeAreaBottom: mergeStyles([
       {...defaultStyles.safeAreaBottom, height: insets.bottom},
       [modifiers.themed.safeAreaBottom, themed],
+      [modifiers.modal.safeAreaBottom, modal],
       customStyles.safeAreaBottom,
     ]),
     container: mergeStyles([
@@ -48,6 +56,7 @@ Container.propTypes = {
   children: node.isRequired,
   unformatted: bool,
   themed: bool,
+  modal: bool,
   styles: shape({
     root: object,
     container: object,
@@ -58,6 +67,7 @@ Container.defaultProps = {
   styles: {},
   unformatted: false,
   themed: false,
+  modal: false,
 };
 
 export default Container;

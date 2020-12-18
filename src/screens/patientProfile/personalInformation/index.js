@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -7,18 +7,31 @@ import {
   TextInput,
   TextButton,
   ModalDatePicker,
-} from '../../components';
+} from '../../../components';
 import model from './model';
 import styles, {modifiers} from './styles';
-import {updatePersonalInformation, savePersonalInformation} from './actions';
+import {updatePatientDetails} from '../actions';
 import moment from 'moment';
-import intl from '../../utils/localization';
+import intl from '../../../utils/localization';
 
 const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
+  const [updates, setUpdates] = useState({
+    fullName: '',
+    gender: '',
+    dateOfBirth: '',
+    phoneNumber: '',
+    primaryCarePhysician: '',
+  });
+
   const [picker, setPicker] = useState(false);
-  const data = useSelector((state) => state.personalInformation.data);
-  const uid = navigation.state.params.uid;
+  const uid = useSelector((state) => state.userDetails.data.uid);
+  const data = useSelector(
+    (state) => state.patientDetails.data.personalInformation,
+  );
+  useEffect(() => {
+    setUpdates(data);
+  }, [data]);
 
   const handleDatePress = () => {
     setPicker(true);
@@ -29,16 +42,23 @@ const PersonalInformation = ({navigation}) => {
   };
 
   const handleDateSave = (date) => {
-    handleUpdate('dateOfBirth', date);
+    setUpdates({...updates, dateOfBirth: date});
     setPicker(false);
   };
 
   const handleUpdate = (dataKey, value) => {
-    dispatch(updatePersonalInformation({dataKey, value}));
+    setUpdates({...updates, [dataKey]: value});
   };
 
   const handleSave = () => {
-    dispatch(savePersonalInformation({uid, data, navigation}));
+    dispatch(
+      updatePatientDetails({
+        dataKey: 'personalInformation',
+        updates,
+        uid,
+        navigation,
+      }),
+    );
   };
 
   return (
@@ -51,8 +71,8 @@ const PersonalInformation = ({navigation}) => {
       <View style={styles.body}>
         {model.map(({label, date, dataKey}) => {
           const value = date
-            ? moment(data[dataKey]).format('MM/DD/YYYY')
-            : data[dataKey];
+            ? moment(updates[dataKey]).format('MM/DD/YYYY')
+            : updates[dataKey];
 
           return (
             <TextInput
@@ -66,7 +86,10 @@ const PersonalInformation = ({navigation}) => {
             />
           );
         })}
-        <TextButton styles={modifiers.saveButton} onPress={handleSave}>
+        <TextButton
+          styles={modifiers.saveButton}
+          disabled={!updates}
+          onPress={handleSave}>
           {intl.en.personalInformation.save}
         </TextButton>
       </View>

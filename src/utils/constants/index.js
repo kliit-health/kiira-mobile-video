@@ -653,6 +653,8 @@ export const screenNames = {
   Visit: 'Visit',
   VideoVisit: 'VideoVisit',
   personalInformation: 'PersonalInformation',
+  consent: 'Consent',
+  agreementDetails: 'AgreementDetails',
 };
 
 export const units = {

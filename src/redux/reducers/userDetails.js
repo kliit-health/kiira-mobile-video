@@ -9,9 +9,7 @@ import {
 } from '../types';
 
 const initialState = {
-  data: {
-    uid: '',
-  },
+  data: undefined,
   loading: false,
   error: null,
 };

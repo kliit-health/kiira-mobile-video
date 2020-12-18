@@ -36,15 +36,16 @@ const Agreements = ({
     if (agreement.index < agreements.length - 1) {
       setAgreement(agreements[agreement.index + 1]);
     } else if (action === 'Finish') {
+      const consentAgreements = agreements
+        .filter((agreement) => agreement.document)
+        .map((agreement) => ({
+          id: agreement.id,
+          title: agreement.title,
+          updatedAt: Date.now(),
+        }));
       setUserDetails({
         uid: userDetails.uid,
-        agreements: [
-          {
-            category: 'treatment',
-            updatedAt: Date.now(),
-            accepted: true,
-          },
-        ],
+        consentAgreements,
       });
     }
   };
@@ -65,7 +66,7 @@ const Agreements = ({
       ) : error ? (
         <Text>error</Text>
       ) : (
-        <Container styles={modifiers.container} unformatted>
+        <Container styles={modifiers.container} unformatted modal>
           <Header onClose={handleCancel} />
           <ScrollView
             style={styles.contents}
@@ -94,27 +95,17 @@ const Agreements = ({
   );
 };
 
-const getTreatmentConsentStatus = (userDetails) => {
-  const hasAgreements = userDetails.hasOwnProperty('agreements');
-  if (hasAgreements) {
-    const treatmentConsent = userDetails.agreements.find(
-      ({category}) => category === 'treatment',
-    );
-    return treatmentConsent ? treatmentConsent.accepted : false;
-  }
-  return false;
-};
+const getTreatmentConsentStatus = (userDetails) =>
+  userDetails.hasOwnProperty('consentAgreements');
 
-const mapStateToProps = ({agreements, userDetails, navigator}) => {
-  return {
-    agreements: agreements.data,
-    loading: agreements.loading,
-    error: agreements.error,
-    acceptedTerms: getTreatmentConsentStatus(userDetails.data),
-    userDetails: userDetails.data,
-    currentRoute: navigator.currentRoute,
-  };
-};
+const mapStateToProps = ({agreements, userDetails, navigator}) => ({
+  agreements: agreements.data,
+  loading: agreements.loading,
+  error: agreements.error,
+  acceptedTerms: getTreatmentConsentStatus(userDetails.data),
+  userDetails: userDetails.data,
+  currentRoute: navigator.currentRoute,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   setUserDetails: (details) => dispatch(setUserDetails(details)),
