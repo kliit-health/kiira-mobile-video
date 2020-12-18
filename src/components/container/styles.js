@@ -29,4 +29,12 @@ export const modifiers = {
       backgroundColor: colors.white,
     },
   },
+  modal: {
+    safeAreaTop: {
+      height: 0,
+    },
+    safeAreaBottom: {
+      height: 0,
+    },
+  },
 };

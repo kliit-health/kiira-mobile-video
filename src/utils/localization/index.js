@@ -34,6 +34,15 @@ export default {
       save: 'Save',
     },
 
+    consent: {
+      title: 'Consent Agreements',
+      acceptanceDate: 'Acceptance Date',
+    },
+
+    agreementDetails: {
+      title: 'Agreement Details',
+    },
+
     medications: {
       title: 'Medications',
       save: 'Save',

@@ -1618,16 +1618,18 @@ export async function getFavoriteExperts(uid) {
   }
 }
 
-export async function updateUserData(updates, uid) {
-  const document = firestore.collection('users').doc(uid);
-  try {
-    await document.set(updates, {merge: true});
-    return;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-}
+export const updateUserData = (updates, uid, merge = true) =>
+  new Promise((resolve, reject) =>
+    (async () => {
+      const user = firestore.collection('users').doc(uid);
+      try {
+        await user.set(updates, {merge});
+        resolve(updates);
+      } catch (error) {
+        reject(error);
+      }
+    })(),
+  );
 
 export async function getAppointments(uid) {
   try {

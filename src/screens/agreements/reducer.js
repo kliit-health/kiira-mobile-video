@@ -3,7 +3,7 @@ import {
   GET_AGREEMENTS_FULFILLED,
   GET_AGREEMENTS_REJECTED,
 } from '../../redux/types';
-import { createReducer } from '@reduxjs/toolkit';
+import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
@@ -16,12 +16,12 @@ export default createReducer(initialState, {
     initialState,
     loading: true,
   }),
-  [GET_AGREEMENTS_REJECTED]: (_, { data }) => {
-    console.error(data);
-    return {
-      ...initialState,
-      error: 'Something went wrong. Please try again later.',
-    };
-  },
-  [GET_AGREEMENTS_FULFILLED]: (_, { data }) => ({ ...initialState, data }),
+  [GET_AGREEMENTS_REJECTED]: (_, {data}) => ({
+    ...initialState,
+    error: {
+      message: 'Something went wrong. Please try again later.',
+      details: data,
+    },
+  }),
+  [GET_AGREEMENTS_FULFILLED]: (_, {data}) => ({...initialState, data}),
 });

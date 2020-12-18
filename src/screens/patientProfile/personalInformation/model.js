@@ -1,5 +1,3 @@
-import {screenNames} from '../../utils/constants';
-
 export default [
   {
     label: 'Full Name',
