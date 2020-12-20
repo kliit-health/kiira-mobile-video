@@ -1,18 +1,21 @@
 import React, {useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 import ExpertHeader from '../../components/expertHeader';
+import {useDispatch, useSelector} from 'react-redux';
 import {screenNames} from '../../utils/constants';
 import {useDispatch} from 'react-redux';
 import {getUserDetails} from '../../redux/actions';
 import {getPatientDetails} from './actions';
+import {withNavigation} from 'react-navigation';
 import styles from './style';
 
 const PatientProfile = (props) => {
-  let params = props.navigation.state.params;
   let {navigation} = props;
-  let {uid, visit, patientInfo} = params;
-
   const dispatch = useDispatch();
+  const medicalHistory = useSelector((state) => state.medicalHistory);
+  const {
+    appointment: {visit, patientInfo},
+  } = medicalHistory;
 
   useEffect(() => {
     dispatch(getUserDetails(patientInfo.uid));
@@ -69,13 +72,7 @@ const PatientProfile = (props) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('MedicalHistoryExpert', {
-                uid,
-                visit,
-                patientInfo,
-              })
-            }>
+            onPress={() => navigation.navigate('MedicalHistoryExpert')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}
@@ -116,4 +113,4 @@ const PatientProfile = (props) => {
   );
 };
 
-export default PatientProfile;
+export default withNavigation(PatientProfile);

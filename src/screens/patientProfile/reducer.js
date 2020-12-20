@@ -16,6 +16,10 @@ const initialState = {
     consentAgreements: [],
   },
   error: null,
+  appointment: {
+    visit: {},
+    patientInfo: {},
+  },
   allergies: {
     allergic: false,
     notes: '',
@@ -279,6 +283,12 @@ const initialState = {
       notes: '',
     },
     complete: false,
+  },
+  privateNotes: {
+    summary: '',
+  },
+  patientNotes: {
+    summary: '',
   },
 };
 

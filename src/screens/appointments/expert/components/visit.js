@@ -3,27 +3,31 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import CustomButton from '../../../../components/customButton';
 import CustomText from '../../../../components/customText';
 import styles from '../style';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {cancelAppointment} from '../action';
 import {getUserData} from '../../../../utils/firebase';
 import Constant from '../../../../utils/constants';
+import {updateMedicalHistoryExpert} from '../../../patientProfile/actions';
 import moment from 'moment';
 
-const Visit = ({visit, date, navigation}) => {
+const Visit = ({visit, navigation}) => {
   const dispatch = useDispatch();
+  const medicalHistory = useSelector((state) => state.medicalHistory);
   const [patientInfo, setPatientInfo] = useState(null);
   const [profilePic, setProfilePic] = useState('');
-  const patient = {
-    uid: visit.uid,
-    id: visit.id,
-    expert: visit.expert,
+
+  const payload = {
+    appointment: {
+      visit,
+      patientInfo,
+    },
   };
 
   useEffect(() => {
     try {
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
-        uid: patient.uid,
+        uid: visit.uid,
       };
       getUserData(
         obj,
@@ -46,16 +50,15 @@ const Visit = ({visit, date, navigation}) => {
     }
   }, [patientInfo]);
 
+  console.log('VISIT', medicalHistory);
+
   return (
     <View style={styles.resolveContainer}>
       <View style={styles.recentChatParentContainerStyle}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('PatientProfile', {
-              uid: visit.expert.uid,
-              visit,
-              patientInfo,
-            });
+            dispatch(updateMedicalHistoryExpert(payload));
+            navigation.navigate('PatientProfile');
           }}>
           <View style={styles.recentChatContainerStyle}>
             <Image
