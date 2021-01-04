@@ -30,6 +30,7 @@ class App extends PureComponent {
   }
 
   async componentDidMount() {
+    console.disableYellowBox = true;
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,
