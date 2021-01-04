@@ -421,7 +421,7 @@ export default {
       title: 'Terms and Conditions',
     },
     privacyPolicies: {
-      title: 'Terms and Conditions',
+      title: 'Privacy Policies',
     },
     help: {
       title: 'Help',
