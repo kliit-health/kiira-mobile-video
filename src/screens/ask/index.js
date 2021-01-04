@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
 import styles from './style';
 import language from '../../utils/localization';
-import Constant from '../../utils/constants';
+import Constant, {screenNames} from '../../utils/constants';
 import InputText from '../../components/customInputText/simpleInputText';
 import CustomButton from '../../components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -258,13 +258,9 @@ class Ask extends PureComponent {
                 }>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate(
-                      Constant.App.screenNames.ExpertProfile,
-                      {
-                        isFrom: Constant.App.screenNames.AskUser,
-                        uid: item.uid,
-                      },
-                    );
+                    navigation.navigate(screenNames.getTreatment, {
+                      details: item,
+                    });
                   }}>
                   <View
                     style={{

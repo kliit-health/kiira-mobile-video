@@ -58,16 +58,16 @@ const BasicInfo = ({navigation}) => {
         switchCase({
           [types.textInput]: (
             <TextInput
-              key={title}
+              key={dataKey}
               customStyles={{fontSize: 15}}
-              value={answers[dataKey]}
+              defaultValue={answers[dataKey]}
               placeholder={title}
               onChange={(value) => handleTextInputChange(dataKey, value)}
             />
           ),
           [types.picker]: (
             <Picker
-              key={title}
+              key={dataKey}
               value={answers[dataKey]}
               onSave={(value) => handlePickerSave(dataKey, value)}
               data={units[dataKey]}
@@ -77,7 +77,7 @@ const BasicInfo = ({navigation}) => {
           ),
           [types.datePicker]: (
             <DatePicker
-              key={title}
+              key={dataKey}
               value={answers[dataKey]}
               title={title}
               placeholder={placeholder}

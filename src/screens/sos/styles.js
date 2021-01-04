@@ -1,25 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {text} from '../../utils/constants';
+import {text, colors} from '../../utils/constants';
 
-const styles = StyleSheet.create({
-  question: {
+export default StyleSheet.create({
+  title: {
     fontFamily: text.fontFamily.poppinsRegular,
     fontWeight: '500',
     fontSize: text.size.xxxxLarge,
     textAlign: 'center',
   },
-  container: {
+  buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
   },
 });
-
-export const modifiers = {
-  button: {
-    root: {
-      marginVertical: 5,
-    },
-  },
-};
-
-export default styles;

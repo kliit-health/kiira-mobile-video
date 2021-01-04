@@ -7,6 +7,7 @@ import {searchObject} from '../../utils/functions';
 import {updateFavoriteExpertsAsync, getFavoriteExpertsAsync} from './actions';
 import {getChatHistoryAsync} from '../treatmentHistory/actions';
 import {List, Favorites} from './sections';
+import {modifiers} from './styles';
 
 const CareSquad = ({navigation}) => {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ const CareSquad = ({navigation}) => {
 
   useEffect(() => {
     dispatch(getChatHistoryAsync());
+  }, []);
+
+  useEffect(() => {
     dispatch(getFavoriteExpertsAsync());
   }, []);
 
@@ -32,8 +36,9 @@ const CareSquad = ({navigation}) => {
     navigation.goBack();
   };
 
-  const filterObjectArray = (experts, key) =>
-    experts.filter((object) => searchObject(object, key));
+  const filterObjectArray = (experts, key) => {
+    return experts.filter((expert) => searchObject(expert, key));
+  };
 
   const handleSearch = (value) => {
     const searching = Boolean(value);
@@ -43,7 +48,10 @@ const CareSquad = ({navigation}) => {
   };
 
   const handleCardPress = (details) => {
-    navigation.navigate(screenNames.GetTreatment, {details});
+    navigation.navigate(screenNames.getTreatment, {
+      navigator,
+      details,
+    });
   };
 
   const handleAddPress = (details) => {
@@ -61,7 +69,7 @@ const CareSquad = ({navigation}) => {
             favorites.filter((favorite) => favorite.uid !== details.uid),
           ),
         )
-      : navigation.navigate(screenNames.GetTreatment, {details});
+      : navigation.navigate(screenNames.getTreatment, {details});
   };
 
   return (
@@ -72,6 +80,7 @@ const CareSquad = ({navigation}) => {
         onEditPress={handleEditPress}
         editState={deleteMode}
         disableEdit={favorites && favorites.length == 0}
+        styles={modifiers.header}
       />
       <Favorites
         onItemPress={handleFavoriteItemPress}

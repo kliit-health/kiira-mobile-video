@@ -1,26 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import intl from '../../utils/localization';
-import { model } from './model';
-import { Container, Header, TextInput, TextButton } from '../../components';
+import {model} from './model';
+import {Container, Header, TextInput, TextButton} from '../../components';
 import {
   updateHealthHistory,
   updateHealthHistoryAsync,
 } from '../healthHistory/actions';
 import styles from './styles';
 
-const MedicalHistory = ({ navigation }) => {
+const MedicalHistory = ({navigation}) => {
   const dispatch = useDispatch();
-  const { answers } = useSelector(
-    (state) => state.healthHistory.medicalHistory,
-  );
+  const {answers} = useSelector((state) => state.healthHistory.medicalHistory);
 
   const dispatchUpdate = (dataKey, data) => {
     dispatch(
       updateHealthHistory({
         medicalHistory: {
-          answers: { ...answers, [dataKey]: data },
+          answers: {...answers, [dataKey]: data},
         },
       }),
     );
@@ -37,7 +35,7 @@ const MedicalHistory = ({ navigation }) => {
   const handleSave = () => {
     dispatch(
       updateHealthHistoryAsync({
-        medicalHistory: { answers, completed: true },
+        medicalHistory: {answers, completed: true},
         navigation,
       }),
     );
@@ -46,21 +44,20 @@ const MedicalHistory = ({ navigation }) => {
   return (
     <Container>
       <Header title={intl.en.medicalHistory.title} onBack={handleOnBackPress} />
-      {model.map(({ dataKey, placeholder }) => (
+      {model.map(({dataKey, placeholder}) => (
         <View key={dataKey} style={styles.container}>
           <TextInput
-            value={answers[dataKey]}
+            defaultValue={answers[dataKey]}
             placeholder={placeholder}
             onChange={(value) => handleTextInputChange(dataKey, value)}
-            multiline
+            numberOfLines={5}
           />
         </View>
       ))}
       <TextButton
-        styles={{ root: styles.button }}
+        styles={{root: styles.button}}
         onPress={handleSave}
-        disabled={Object.values(answers).every((answer) => !answer)}
-      >
+        disabled={Object.values(answers).every((answer) => !answer)}>
         {intl.en.medicalHistory.save}
       </TextButton>
     </Container>

@@ -1,83 +1,49 @@
-import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Image, ScrollView} from 'react-native';
-import {useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {View, ScrollView, Text} from 'react-native';
+import Image from 'react-native-fast-image';
+import {useSelector, useDispatch} from 'react-redux';
+import {Header, Container} from '../../components';
+import inlt from '../../utils/localization';
+import {getPolicies} from './action';
 import styles from './styles';
-import CustomText from '../../components/customText';
-import Constant from '../../utils/constants';
 
-const PrivacyPolicy = (props) => {
-  const [terms, setTerms] = useState([]);
-  const legal = useSelector((state) => state.privacyReducer.legal.sections);
+const PrivacyPolicies = ({navigation}) => {
+  const sections = useSelector((state) => state.privacyReducer.legal.sections);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setTerms(legal);
-  }, [terms]);
+    dispatch(getPolicies());
+  }, []);
 
-  const renderHeaderView = () => {
-    const {navigation} = props;
-    const {staticImages} = Constant.App;
-    return (
-      <View style={styles.headerStyle}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Image
-            style={{
-              width: 20,
-              height: 40,
-              transform: [{rotate: '180deg'}],
-            }}
-            resizeMode="contain"
-            source={staticImages.rightChevronIcon}
-          />
-        </TouchableOpacity>
-        <CustomText style={styles.titleTextStyle}>Privacy Policy</CustomText>
-        <CustomText style={styles.doneTextStyle}>{}</CustomText>
-      </View>
-    );
-  };
-
-  const renderInfo = () => {
-    if (terms) {
-      return terms.map((section) => {
-        return (
-          <View key={section.title} style={styles.sectionContainerStyle}>
-            <CustomText style={styles.sectionTitleTextStyle}>
-              {section.title}
-            </CustomText>
-            <CustomText style={styles.sectionTextStyle}>
-              {section.body.replace(/\\n/g, '\n').replace(/\\t/g, ' ')}
-              {/* {section.body.replace(/\\t/g, '\t')} */}
-            </CustomText>
-          </View>
-        );
-      });
-    } else {
-      return null;
-    }
+  const handleOnBackPress = () => {
+    navigation.goBack();
   };
 
   return (
-    <View style={styles.container}>
-      {renderHeaderView()}
+    <Container unformatted>
+      <Header
+        onBack={handleOnBackPress}
+        title={inlt.en.privacyPolicies.title}
+      />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require('../../../assets/logo-sm.png')}
-            style={{
-              width: 220,
-              height: 110,
-            }}
-            resizeMode="contain"
-          />
-        </View>
-        {renderInfo()}
+        <Image
+          source={require('../../../assets/logo-sm.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        {sections.map(({title, body}, index) => (
+          <View key={`${title} ${index}`} style={styles.sectionContainer}>
+            {Boolean(title) && <Text style={styles.sectionTitle}>{title}</Text>}
+            <Text style={styles.sectionContent}>
+              {body.replace(/\\n/g, '\n')}
+            </Text>
+          </View>
+        ))}
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 
-export default PrivacyPolicy;
+export default PrivacyPolicies;

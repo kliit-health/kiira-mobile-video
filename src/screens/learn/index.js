@@ -1,48 +1,24 @@
 import React, {useEffect} from 'react';
-import {View, Linking} from 'react-native';
+import {Linking, Text, View} from 'react-native';
+import {Container, Header, TextButton} from '../../components';
 import {useSelector} from 'react-redux';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
+import intl from '../../utils/localization';
 import Constant from '../../utils/constants';
+import styles, {modifiers} from './styles';
 
-const Learn = (props) => {
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const appScreen = useSelector((state) => state.authLoadingReducer.appScreen);
-
-  useEffect(() => {
-    const {navigation} = props;
-
-    // if (
-    //   appScreen &&
-    //   (appScreen.currentScreen === Constant.App.screenNames.Learn ||
-    //     appScreen.currentScreen === Constant.App.screenNames.LearnExpert)
-    // ) {
+const Learn = ({navigation}) => {
+  const handleOpenUrl = () => {
     Linking.openURL(Constant.App.learnTabUrl);
-    setTimeout(() => {
-      if (userData.role === 'Expert') {
-        navigation.navigate(
-          appScreen.prevScreen
-            ? appScreen.prevScreen
-            : Constant.App.screenNames.AskExpert,
-        );
-      } else {
-        navigation.navigate(
-          appScreen.prevScreen
-            ? appScreen.prevScreen
-            : Constant.App.screenNames.AskUser,
-        );
-      }
-    }, 200);
-    // }
-  });
+  };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        marginTop: getStatusBarHeight(),
-      }}
-    />
+    <Container styles={modifiers.container}>
+      <Text style={styles.question}>{intl.en.learn.learnMore}</Text>
+      <Header title={intl.en.learn.title} />
+      <TextButton onPress={handleOpenUrl} styles={modifiers.button}>
+        {intl.en.learn.seeArticles}
+      </TextButton>
+    </Container>
   );
 };
 

@@ -1,54 +1,44 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
-import CustomButton from '../../components/customButton';
 import {useDispatch, useSelector} from 'react-redux';
-import moment from 'moment';
-import ExpertList from '../../components/expertList';
-import {Header} from '../../components';
+import {Header, TextButton} from '../../components';
+import {screenNames} from '../../utils/constants';
+import intl from '../../utils/localization';
+import {List} from './sections';
 import styles from './style';
-import Constant from '../../utils/constants';
-import {withNavigation} from 'react-navigation';
 
-const SelectExpert = (props) => {
-  const {navigation} = props;
+const SelectExpert = ({navigation}) => {
   const dispatch = useDispatch();
-  const today = moment(new Date()).format('YYYY-MM-DD');
-  const [experts, setExperts] = useState(null);
-  const recentExpertData = useSelector(
-    (state) => state.askReducer.recentExpertData,
+
+  const [availableExperts, setAvailableExperts] = useState([]);
+
+  const experts = useSelector((state) => state.careSquad.experts);
+  const userProfile = useSelector(
+    (state) => state.userDetails.data.profileInfo,
   );
 
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
-
-  useEffect(() => {});
-
   useEffect(() => {
-    if (recentExpertData && userData) {
-      const filteredExperts = recentExpertData.filter((item) => {
-        const expert = item.data();
-        return (
-          expert.profileInfo.state.value === userData.profileInfo.state.value
-        );
+    if (experts.length && userProfile) {
+      const userState = userProfile.state.code;
+      const filteredExperts = experts.filter(({profileInfo}) => {
+        const supportedStates = profileInfo.license.states;
+        return supportedStates.some(({code}) => code === userState);
       });
-
-      setExperts(filteredExperts);
+      setAvailableExperts(filteredExperts);
     }
-  }, [recentExpertData]);
+  }, [experts]);
 
-  const getFirstAppointment = async (calendarID) => {
-    const response = await fetch(
-      `http://localhost:5000/availability/times?calendarID=${calendarID}&date=${today}`,
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-    return response;
+  const handleCardPress = ({uid, calendarID}) => {
+    navigation.navigate(screenNames.expertSchedule, {uid, calendarID});
   };
+
+  const handleBackPress = () => navigation.goBack();
 
   return (
     <View style={styles.container}>
-      <Header title="Request a visit" onBack={() => navigation.goBack()} />
-      {experts && experts.length ? (
-        <ExpertList getFirst={getFirstAppointment} experts={experts} />
+      <Header title={intl.en.requestVisit.title} onBack={handleBackPress} />
+      {availableExperts && availableExperts.length ? (
+        <List onCardPress={handleCardPress} data={availableExperts} />
       ) : (
         <View style={styles.parentContainerStyle}>
           <Image
@@ -65,18 +55,16 @@ const SelectExpert = (props) => {
           <Text style={styles.subtitle}>
             We'll notifiy you when providers are available in your state
           </Text>
-          <CustomButton
-            buttonStyle={styles.yesContainerStyle}
-            textStyle={styles.yesTextStyle}
+          <TextButton
             onPress={() => {
-              props.navigation.navigate(Constant.App.screenNames.BottomTab);
-            }}
-            text="Go Home"
-          />
+              navigation.navigate(screenNames.bottomTab);
+            }}>
+            {intl.en.requestVisit.goHome}
+          </TextButton>
         </View>
       )}
     </View>
   );
 };
 
-export default withNavigation(SelectExpert);
+export default SelectExpert;

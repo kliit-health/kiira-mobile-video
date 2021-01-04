@@ -22,4 +22,9 @@ export const modifiers = {
       marginTop: 'auto',
     },
   },
+  container: {
+    safeAreaBottom: {
+      height: 0,
+    },
+  },
 };

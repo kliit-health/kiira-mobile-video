@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { StatusBar, View, Platform } from 'react-native';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {StatusBar, View, Platform} from 'react-native';
 import SplashScreen from 'react-native-smart-splash-screen';
 import Constant from '../../utils/constants';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
-import { getUserData, updateStatus, makeid } from '../../utils/firebase';
-import { displayConsole } from '../../utils/helper';
-import { setUserData, setFcmToken, setLicenses } from './action';
+import {getUserData, updateStatus, makeid} from '../../utils/firebase';
+import {displayConsole} from '../../utils/helper';
+import {setUserData, setFcmToken, setLicenses} from './action';
 
 let isFirstTime = true;
 class AuthLoadingScreen extends Component {
@@ -38,7 +38,7 @@ class AuthLoadingScreen extends Component {
   }
 
   async getToken() {
-    const { setData, userData, setToken, navigation, setLicenses } = this.props;
+    const {setData, userData, setToken, navigation, setLicenses} = this.props;
     if (!userData) {
       let token = await AsyncStorage.getItem('fcmToken');
       if (!token) {
@@ -53,7 +53,6 @@ class AuthLoadingScreen extends Component {
       }
       this.initNavigation(token);
     } else {
-      console.log('setData userData', userData);
       if (userData && userData.profileInfo) {
         setData(userData);
         if (userData.role == 'Expert') {
@@ -73,7 +72,7 @@ class AuthLoadingScreen extends Component {
   }
 
   initNavigation(token) {
-    const { navigation, setData, userData } = this.props;
+    const {navigation, setData, userData} = this.props;
     const user = firebase.auth().currentUser;
 
     if (user && user.uid) {
@@ -129,7 +128,7 @@ class AuthLoadingScreen extends Component {
             );
           },
           (error) => {
-            const { message, code } = error;
+            const {message, code} = error;
             displayConsole('message', message);
             displayConsole('code', code);
             displayConsole(
@@ -175,7 +174,7 @@ class AuthLoadingScreen extends Component {
       .notifications()
       .onNotificationOpened((notificationOpen) => {
         console.log('inside onNotificationOpened');
-        const { title, body } = notificationOpen.notification;
+        const {title, body} = notificationOpen.notification;
       });
 
     /*
@@ -186,7 +185,7 @@ class AuthLoadingScreen extends Component {
       .getInitialNotification();
     if (notificationOpen) {
       console.log('inside notificationOpen');
-      const { title, body } = notificationOpen.notification;
+      const {title, body} = notificationOpen.notification;
       console.log('title', title);
       console.log('body', body);
       // this.showAlert(title, body);

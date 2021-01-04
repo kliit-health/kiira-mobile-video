@@ -1,28 +1,35 @@
-import React, { PureComponent } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Image } from 'react-native';
-import { connect } from 'react-redux';
+import React, {PureComponent} from 'react';
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  Image,
+  Alert,
+} from 'react-native';
+import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
-import { showOrHideModal } from '../../components/customModal/action';
+import {showOrHideModal} from '../../components/customModal/action';
 import styles from './style';
 import language from '../../utils/localization';
 import Constant from '../../utils/constants';
-import { getQuestionData, updateQuestion } from './action';
-import { withNavigation } from 'react-navigation';
+import {getQuestionData, updateQuestion} from './action';
+import {withNavigation} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
-import { getTerms } from '../termsAndConditions/action';
-import { getPolicy } from '../privacyPolicy/action';
-import { getLicenses } from '../authLoading/action';
-import { setUserData } from './action';
+import {getTerms} from '../termsAndConditions/action';
+import {getPolicy} from '../privacyPolicy/action';
+import {getLicenses} from '../authLoading/action';
+import {setUserData} from './action';
 import firebase from 'react-native-firebase';
-import { getUserData, getRecentExpertsData } from '../../utils/firebase';
-import { getHealthHistoryAsync } from '../healthHistory/actions';
+import {getUserData, getRecentExpertsData} from '../../utils/firebase';
+import {getHealthHistoryAsync} from '../healthHistory/actions';
 import {
   getExpertsDetailsAsync,
   getFavoriteExpertsAsync,
 } from '../careSquad/actions';
 import CustomButton from '../../components/customButton';
-import { getAgreements } from '../agreements/actions';
-import { getUserDetails } from '../../redux/actions';
+import {getAgreements} from '../agreements/actions';
+import {getUserDetails} from '../../redux/actions';
 
 const lang = language.en;
 class Dashboard extends PureComponent {
@@ -102,40 +109,40 @@ class Dashboard extends PureComponent {
     const countStartApp = await AsyncStorage.getItem('countStartApp');
     const count = countStartApp ? parseInt(countStartApp) : 1;
 
-    if (!isAlreadyRate && count % 30 === 0) {
-      Alert.alert('App Rating', 'Please give us your opinion', [
-        {
-          text: 'Later',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            setTimeout(() => {
-              let options = {
-                AppleAppID: '1526336962',
-                GooglePackageName: 'com.kiira',
-                preferredAndroidMarket: AndroidMarket.Google,
-                preferInApp: true,
-                openAppStoreIfInAppFails: true,
-                fallbackPlatformURL: 'https://kirra.io',
-              };
-              Rate.rate(options, (success) => {
-                if (success) {
-                  AsyncStorage.setItem('isAlreadyRate', 'true');
-                }
-              });
-            }, 500);
-          },
-        },
-      ]);
-    }
+    // if (!isAlreadyRate && count % 30 === 0) {
+    //   Alert.alert('App Rating', 'Please give us your opinion', [
+    //     {
+    //       text: 'Later',
+    //       onPress: () => console.log('Cancel Pressed'),
+    //       style: 'cancel',
+    //     },
+    //     {
+    //       text: 'OK',
+    //       onPress: () => {
+    //         setTimeout(() => {
+    //           let options = {
+    //             AppleAppID: '1526336962',
+    //             GooglePackageName: 'com.kiira',
+    //             preferredAndroidMarket: AndroidMarket.Google,
+    //             preferInApp: true,
+    //             openAppStoreIfInAppFails: true,
+    //             fallbackPlatformURL: 'https://kirra.io',
+    //           };
+    //           Rate.rate(options, (success) => {
+    //             if (success) {
+    //               AsyncStorage.setItem('isAlreadyRate', 'true');
+    //             }
+    //           });
+    //         }, 500);
+    //       },
+    //     },
+    //   ]);
+    // }
     await AsyncStorage.setItem('countStartApp', `${count + 1}`);
   }
 
   componentDidUpdate() {
-    const { question, getLicenses } = this.props;
+    const {question, getLicenses} = this.props;
     this.checkLicenseStatus();
     // getLicenses();
     if (question) {
@@ -155,7 +162,7 @@ class Dashboard extends PureComponent {
   }
 
   onChangeText = (value) => {
-    const { setQuestionText, question } = this.props;
+    const {setQuestionText, question} = this.props;
     this.setState({
       questionText: value,
     });
@@ -163,19 +170,19 @@ class Dashboard extends PureComponent {
   };
 
   checkLicenseStatus = () => {
-    const { licenses } = this.props;
+    const {licenses} = this.props;
     if (licenses) {
       const isValid = licenses.includes(
         this.props.userData.profileInfo.state.code,
       );
       if (isValid) {
-        this.setState({ videoEnabled: true });
+        this.setState({videoEnabled: true});
       }
     }
   };
 
   Header = () => {
-    const { staticImages } = Constant.App;
+    const {staticImages} = Constant.App;
 
     return (
       <View>
@@ -227,9 +234,9 @@ class Dashboard extends PureComponent {
   }
 
   renderHeadingProfileView() {
-    const { userData } = this.props;
-    const { firstName, profileImageUrl } = userData.profileInfo;
-    const { staticImages } = Constant.App;
+    const {userData} = this.props;
+    const {firstName, profileImageUrl} = userData.profileInfo;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.headingProfileImageParentContainer}>
         <View style={styles.headingTextContainerStyle}>
@@ -245,12 +252,11 @@ class Dashboard extends PureComponent {
               borderRadius: 50,
             }}
             defaultSource={staticImages.profilePlaceholderImg}
-            source={{ uri: profileImageUrl }}
+            source={{uri: profileImageUrl}}
           />
           <TouchableOpacity
             style={styles.badgeContainerStyle}
-            onPress={() => {}}
-          >
+            onPress={() => {}}>
             <CustomText style={styles.badgeTextStyle}>
               {this.state.credits}
             </CustomText>
@@ -261,9 +267,9 @@ class Dashboard extends PureComponent {
   }
 
   renderDashBoard() {
-    const { staticImages } = Constant.App;
-    const { navigation, showHideErrorModal } = this.props;
-    const { videoEnabled } = this.state;
+    const {staticImages} = Constant.App;
+    const {navigation, showHideErrorModal} = this.props;
+    const {videoEnabled} = this.state;
 
     return (
       <View style={styles.dashboardContainer}>
@@ -274,8 +280,7 @@ class Dashboard extends PureComponent {
             } else {
               showHideErrorModal('Currently unavailable in your state');
             }
-          }}
-        >
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -294,8 +299,7 @@ class Dashboard extends PureComponent {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(Constant.App.screenNames.CareSquad)
-          }
-        >
+          }>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -312,8 +316,7 @@ class Dashboard extends PureComponent {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Constant.App.screenNames.AskUser)}
-        >
+          onPress={() => navigation.navigate(Constant.App.screenNames.AskUser)}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -332,8 +335,7 @@ class Dashboard extends PureComponent {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(Constant.App.screenNames.HealthHistory)
-          }
-        >
+          }>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -356,8 +358,7 @@ class Dashboard extends PureComponent {
             } else {
               showHideErrorModal('Currently unavailable in your state');
             }
-          }}
-        >
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -374,8 +375,7 @@ class Dashboard extends PureComponent {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Constant.App.screenNames.SOS)}
-        >
+          onPress={() => navigation.navigate(Constant.App.screenNames.SOS)}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -396,15 +396,14 @@ class Dashboard extends PureComponent {
   }
 
   render() {
-    const { staticImages, screenNames } = Constant.App;
-    const { navigation, showHideErrorModal } = this.props;
+    const {staticImages, screenNames} = Constant.App;
+    const {navigation, showHideErrorModal} = this.props;
 
     return (
       <View style={styles.container}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
+          showsVerticalScrollIndicator={false}>
           {this.Header()}
           {this.renderHeadingProfileView()}
           {this.renderDashBoard()}
