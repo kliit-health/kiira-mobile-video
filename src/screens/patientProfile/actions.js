@@ -1,7 +1,10 @@
 import {
   GET_PATIENT_DETAILS,
+  LOCK_VISIT,
   UPDATE_PATIENT_DETAILS,
   UPDATE_MEDICAL_HISTORY_EXPERT,
+  GET_MEDICAL_HISTORY,
+  SET_MEDICAL_HISTORY,
 } from '../../redux/types';
 
 export const getPatientDetails = (data) => ({
@@ -15,9 +18,29 @@ export const updatePatientDetails = (data) => ({
 });
 
 export const updateMedicalHistoryExpert = (data) => {
-  console.log(data);
   return {
     type: UPDATE_MEDICAL_HISTORY_EXPERT,
+    payload: data,
+  };
+};
+
+export const lockVisit = (data) => {
+  return {
+    type: LOCK_VISIT,
+    payload: data,
+  };
+};
+
+export const getMedicalHistory = (data) => {
+  return {
+    type: GET_MEDICAL_HISTORY,
+    payload: data,
+  };
+};
+
+export const setMedicalHIstory = (data) => {
+  return {
+    type: SET_MEDICAL_HISTORY,
     payload: data,
   };
 };

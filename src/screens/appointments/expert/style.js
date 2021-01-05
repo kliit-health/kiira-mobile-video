@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   myRecentExpertContainerStyle: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.95,
+    width: metrics.DEVICE_WIDTH * 0.9,
     height: 425,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
@@ -414,6 +414,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: Constant.App.colors.whiteColor,
     alignSelf: 'center',
+    width: metrics.DEVICE_WIDTH,
     borderRadius: 20,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
@@ -421,35 +422,33 @@ const styles = StyleSheet.create({
     shadowRadius: 10, //IOS
     elevation: 2, // Android
     padding: 15,
-    width: metrics.DEVICE_WIDTH * 0.95,
   },
 
-  resolveContainer: {
-    flexDirection: 'row',
+  appointmentContainerStyle: {
+    flexDirection: 'column',
     alignSelf: 'center',
-    // width: metrics.DEVICE_WIDTH,
-    // padding: 40,
+    // width: metrics.DEVICE_WIDTH * 0.9,
   },
 
   recentChatParentContainerStyle: {
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.whiteColor,
-    // alignSelf: 'center',
+    alignSelf: 'center',
     backgroundColor: 'white',
-    // width: metrics.DEVICE_WIDTH,
-    marginVertical: 20,
+    width: metrics.DEVICE_WIDTH,
+    marginVertical: 40,
   },
 
   userInfoContainerResolvedChatStyle: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPadding - 90,
+    width: metrics.DEVICE_WIDTH * 0.9,
     marginLeft: 10,
     justifyContent: 'center',
   },
 
   userInfoContainerStyle: {
     flexDirection: 'column',
-    width: 220,
+    width: metrics.DEVICE_WIDTH * 0.9,
     marginLeft: 10,
     marginRight: 10,
     justifyContent: 'center',
@@ -473,12 +472,19 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.pinkColor,
     marginLeft: 50,
     // flex: 1,
+    // flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 5,
     overflow: 'hidden',
     padding: 5,
+  },
+
+  resolveContainer: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+    width: metrics.DEVICE_WIDTH * 0.9,
   },
 
   header: {
@@ -503,12 +509,18 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH * 0.75,
     backgroundColor: Constant.App.colors.greyBgAsk,
     margin: 5,
-
     backgroundColor: 'transparent',
     borderWidth: 0, //no effect
     shadowColor: 'transparent', //no effect
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
+  },
+
+  reason: {
+    fontSize: Constant.App.textSize.Large,
+    color: Constant.App.colors.blackColor,
+    fontFamily: Constant.App.fontFamily.headerBold,
+    fontWeight: '400',
   },
 });
 

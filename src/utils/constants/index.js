@@ -421,6 +421,7 @@ export default {
 
     staticImages: {
       addIcon: require('../../../assets/add_icon.png'),
+      afterVisit: require('../../../assets/afterVisit.png'),
       allergies: require('../../../assets/allergies.png'),
       applePayIcon: require('../../../assets/apple_pay.png'),
       backIcon: require('../../../assets/back.png'),
@@ -441,6 +442,7 @@ export default {
       creditCard: require('../../../assets/credit_card.png'),
       crossIcon: require('../../../assets/cross.png'),
       downArrow: require('../../../assets/down_arrow.png'),
+      exam: require('../../../assets/exam.png'),
       family: require('../../../assets/family.png'),
       filterIcon: require('../../../assets/filter.png'),
       greyDownArrow: require('../../../assets/grey_down_arrow.png'),
@@ -470,6 +472,7 @@ export default {
       social: require('../../../assets/social.png'),
       sos: require('../../../assets/sos.png'),
       squad: require('../../../assets/squad.png'),
+      time: require('../../../assets/time.png'),
       tutorialImageOneLarge: require('../../../assets/Onboarding-1.jpg'),
       tutorialImageTwoLarge: require('../../../assets/Onboarding-2.jpg'),
       tutorialImageThreeLarge: require('../../../assets/Onboarding-3.jpg'),

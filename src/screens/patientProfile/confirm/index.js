@@ -1,15 +1,29 @@
 import React, {useState} from 'react';
 import {View, ScrollView, Modal, Text, Pressable} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
-import ExpertHeader from '../../../components/expertHeader';
-import Review from './review';
+import Recap from '../recap';
 import styles from './style';
+import {lockVisit} from '../actions';
 
 const Confirm = ({navigation}) => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const medicalHistory = useSelector((state) => state.medicalHistory);
+
+  const fakeNavigation = {
+    state: {
+      params: {item: medicalHistory, short: false, title: 'Confirm and Lock'},
+    },
+  };
+
+  const payload = {
+    ...medicalHistory,
+    lockTime: new Date(),
+  };
+
   return (
     <View style={styles.container}>
-      <ExpertHeader title="Confirm and Lock" />
       <Modal
         animationType="slide"
         transparent={true}
@@ -37,6 +51,8 @@ const Confirm = ({navigation}) => {
               style={styles.lockButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
+                dispatch(lockVisit(payload));
+                navigation.navigate('PatientProfile');
               }}>
               <Text style={styles.textStyle}>Lock</Text>
             </Pressable>
@@ -44,7 +60,7 @@ const Confirm = ({navigation}) => {
         </View>
       </Modal>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Review />
+        <Recap navigation={fakeNavigation} />
         <CustomButton
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}

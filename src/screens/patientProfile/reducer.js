@@ -6,11 +6,14 @@ import {
   UPDATE_PATIENT_DETAILS_FULFILLED,
   UPDATE_PATIENT_DETAILS_REJECTED,
   UPDATE_MEDICAL_HISTORY_EXPERT,
+  LOCK_VISIT,
+  SET_MEDICAL_HISTORY,
 } from '../../redux/types';
 import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
+  history: [],
   data: {
     personalInformation: {},
     consentAgreements: [],
@@ -25,6 +28,14 @@ const initialState = {
     notes: '',
     complete: false,
   },
+  physical: {
+    notes: '',
+    complete: false,
+  },
+  plan: {
+    notes: '',
+    complete: false,
+  },
   medications: {
     history: false,
     notes: '',
@@ -32,6 +43,10 @@ const initialState = {
   },
   surgical: {
     surgeries: false,
+    notes: '',
+    complete: false,
+  },
+  summary: {
     notes: '',
     complete: false,
   },
@@ -293,17 +308,18 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [GET_PATIENT_DETAILS_PENDING]: (state) => {
-    state.error = null;
-    state.loading = true;
-  },
+  [GET_PATIENT_DETAILS_PENDING]: (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  }),
   [GET_PATIENT_DETAILS_REJECTED]: (_, {data: details}) => ({
-    ...initialState,
+    ...state,
     error: 'Failed to get data.',
     details,
   }),
   [GET_PATIENT_DETAILS_FULFILLED]: (state, {data}) => ({
-    ...initialState,
+    ...state,
     data: {
       ...state.data,
       ...data,
@@ -327,9 +343,17 @@ export default createReducer(initialState, {
           ? {...state.data[dataKey], ...updates}
           : [...state.data[dataKey], ...updates],
     },
-    [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, {payload}) => ({
-      ...state,
-      ...payload,
-    }),
+  }),
+  [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, {payload}) => ({
+    ...state,
+    ...payload,
+  }),
+  [LOCK_VISIT]: (state, {payload}) => ({
+    ...state,
+    ...payload,
+  }),
+  [SET_MEDICAL_HISTORY]: (state, {payload}) => ({
+    ...state,
+    ...payload,
   }),
 });

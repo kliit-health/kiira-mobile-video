@@ -48,6 +48,24 @@ export default [
     complete: 'family',
   },
   {
+    title: 'Physical Exam',
+    image: 'exam',
+    screen: 'PhysicalExam',
+    complete: 'physical',
+  },
+  {
+    title: 'Assessment/Plan',
+    image: 'time',
+    screen: 'Plan',
+    complete: 'plan',
+  },
+  {
+    title: 'After Visit Summary',
+    image: 'afterVisit',
+    screen: 'Summary',
+    complete: 'summary',
+  },
+  {
     title: 'Confirm and Lock Patient Info',
     image: 'confirm',
     screen: 'Confirm',

@@ -7,10 +7,19 @@ import {
   UPDATE_PATIENT_DETAILS_PENDING,
   UPDATE_PATIENT_DETAILS_FULFILLED,
   UPDATE_PATIENT_DETAILS_REJECTED,
+  UPDATE_MEDICAL_HISTORY_EXPERT,
+  LOCK_VISIT,
+  GET_MEDICAL_HISTORY,
+  SET_MEDICAL_HISTORY,
 } from '../../redux/types';
 import moment from 'moment';
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {firebaseSingleFetch, updateSingleDocument} from '../../utils/firebase';
+import {
+  firebaseSingleFetch,
+  updateSingleDocument,
+  saveAndLock,
+  getMedicalHistoryAsync,
+} from '../../utils/firebase';
 
 function* getPatientDetails({data}) {
   try {
@@ -86,7 +95,38 @@ function* updatePatientDetails({data}) {
   }
 }
 
+function* lockVisit(data) {
+  try {
+    const update = yield saveAndLock(data);
+
+    yield put({
+      type: UPDATE_MEDICAL_HISTORY_EXPERT,
+      payload: {
+        appointment: {...update},
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function* getMedicalHistory(data) {
+  try {
+    const records = yield getMedicalHistoryAsync(data);
+    yield put({
+      type: SET_MEDICAL_HISTORY,
+      payload: {
+        history: [...records.history],
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* () {
   yield takeEvery(GET_PATIENT_DETAILS, getPatientDetails);
   yield takeEvery(UPDATE_PATIENT_DETAILS, updatePatientDetails);
+  yield takeEvery(LOCK_VISIT, lockVisit);
+  yield takeEvery(GET_MEDICAL_HISTORY, getMedicalHistory);
 }

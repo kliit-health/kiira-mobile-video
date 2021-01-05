@@ -11,7 +11,6 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../components/customText';
-// import SearchBar from '../../../components/searchBar';
 import {SearchBar} from 'react-native-elements';
 import CustomButton from '../../../components/customButton';
 import Constant from '../../../utils/constants';
@@ -39,12 +38,12 @@ const ExpertAppointments = (props) => {
   useEffect(() => {
     dispatch(getAppointmentsList({uid: userData.uid}));
     const dateRange = getDateRange(
-      moment(new Date()),
+      moment(new Date()).subtract(3, 'days'),
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
     setDates(dateRange);
-    setSelectedDate(dateRange[0]);
+    setSelectedDate(dateRange[3]);
   }, []);
 
   useEffect(() => {
@@ -157,7 +156,7 @@ const ExpertAppointments = (props) => {
             />
           </View>
           {visits.length > 0 ? (
-            <View>
+            <View style={styles.appointmentContainerStyle}>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}

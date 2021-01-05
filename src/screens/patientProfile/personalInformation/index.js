@@ -27,7 +27,7 @@ const PersonalInformation = ({navigation}) => {
   const [picker, setPicker] = useState(false);
   const uid = useSelector((state) => state.userDetails.data.uid);
   const data = useSelector(
-    (state) => state.patientDetails.data.personalInformation,
+    (state) => state.medicalHistory.data.personalInformation,
   );
   useEffect(() => {
     setUpdates(data);
