@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import React from 'react';
+import {View, Text, FlatList, ScrollView} from 'react-native';
 import {
   Container,
   Header,
@@ -17,15 +17,14 @@ import {
   formatLanguages,
   calculateRating,
 } from '../../utils/functions';
-import styles, {modifiers} from './styles';
 import {screenNames} from '../../utils/constants';
+import styles, {modifiers} from './styles';
 
 const GetTreatment = ({navigation}) => {
-  useEffect(() => {
-    console.warn('called');
-  });
-
   const details = navigation.getParam('details');
+  const navigator = navigation.getParam('navigator');
+  const calendar = navigation.getParam('calendar');
+
   const {rating, profileInfo, clinicInfo} = details;
   const {
     firstName,
@@ -43,16 +42,16 @@ const GetTreatment = ({navigation}) => {
   };
 
   const handleOnBookPress = () => {
-    navigation.navigate(screenNames.RequestVisit);
+    navigation.navigate(screenNames.requestVisit);
   };
 
   const handleOnHistoryPress = () => {
-    navigation.navigate(screenNames.TreatmentHistory, {details});
+    navigation.navigate(screenNames.treatmentHistory, {details});
   };
 
   return (
-    <Container unformatted>
-      <Header onBack={handleOnBackPress} />
+    <Container styles={modifiers.container} unformatted>
+      <Header styles={modifiers.header} onBack={handleOnBackPress} />
       <View style={styles.profileContainer}>
         <Avatar border source={profileImageUrl} />
         <View style={styles.detailsContainer}>
@@ -62,26 +61,36 @@ const GetTreatment = ({navigation}) => {
         </View>
         <Ratings styles={modifiers.ratings} value={calculateRating(rating)} />
       </View>
-      <View style={styles.buttonsContainer}>
-        <TextButton onPress={handleOnHistoryPress} outlined>
-          {intl.en.getTreatment.seeHistory}
-        </TextButton>
-        <View style={styles.divider} />
-        <TextButton onPress={handleOnBookPress}>
-          {intl.en.getTreatment.bookVisit}
-        </TextButton>
+      {navigator ? (
+        <View style={styles.buttonsContainer}>
+          <TextButton onPress={handleOnHistoryPress} outlined>
+            {intl.en.getTreatment.seeHistory}
+          </TextButton>
+          <View style={styles.divider} />
+          <TextButton onPress={handleOnBookPress}>
+            {intl.en.getTreatment.bookVisit}
+          </TextButton>
+        </View>
+      ) : (
+        <View></View>
+      )}
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.tagsList}
+          contentContainerStyle={styles.tagsContentContainer}>
+          {addHashtag(specialities).map((tag) => (
+            <Text key={tag} style={styles.tagsText}>
+              {tag}
+            </Text>
+          ))}
+        </ScrollView>
       </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.tagsContainer}
-        contentContainerStyle={styles.tagsContentContainer}>
-        <Text style={styles.tagsText}>{addHashtag(specialities)}</Text>
-      </ScrollView>
       <ScrollView contentContainerStyle={styles.detailsContentContainer}>
         <View style={styles.contactContainer}>
           <Linking
-            title={`${city}, ${state.value} (${state.code}), ${zipcode} `}
+            title={`${city}, ${state.value} ${state.code}, ${zipcode}`}
             subtitle={name}
             styles={modifiers.linking}>
             <Arrow />

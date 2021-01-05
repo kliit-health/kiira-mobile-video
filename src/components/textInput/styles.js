@@ -12,13 +12,16 @@ export default StyleSheet.create({
   },
   textInput: {
     flex: 1,
+    height: 40,
     paddingVertical: 4,
     fontSize: text.size.regular,
     fontFamily: text.fontFamily.poppinsRegular,
     justifyContent: 'center',
+    marginHorizontal: 10,
   },
   chevronContainer: {
-    paddingVertical: 4,
+    alignSelf: 'center',
+    marginRight: 10,
   },
   label: {
     fontSize: text.size.regular,
@@ -35,15 +38,15 @@ export const modifiers = {
       borderBottomWidth: 1,
       borderColor: colors.gray,
       borderRadius: 8,
-      padding: 5,
-      paddingLeft: 8,
       marginBottom: 14,
     },
     label: {
       marginHorizontal: 5,
-      marginBottom: 2,
+      marginBottom: 0,
     },
-    textInput: {},
+    textInput: {
+      height: 45,
+    },
     chevronContainer: {
       padding: 5,
       paddingRight: 5,

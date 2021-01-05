@@ -3,14 +3,14 @@ import {colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.offWhite,
     flex: 1,
   },
   safeAreaTop: {
     backgroundColor: colors.white,
   },
   container: {
-    padding: 20,
+    padding: 15,
     flex: 1,
   },
 });

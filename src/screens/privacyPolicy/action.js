@@ -1,10 +1,10 @@
-import { GET_POLICY, SET_POLICY } from "../../redux/types";
+import {GET_POLICY, SET_POLICY} from '../../redux/types';
 
-export const getPolicy = () => ({
+export const getPolicies = () => ({
   type: GET_POLICY,
 });
 
-export const setPolicy = (data) => ({
+export const setPolicies = (data) => ({
   type: SET_POLICY,
   payload: data,
 });

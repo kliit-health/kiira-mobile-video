@@ -2,8 +2,8 @@ export default {
   en: {
     account: {
       logout: 'Logout',
-      setting: 'Settings',
-      termsPolicies: 'Terms & Conditions',
+      settings: 'Settings',
+      termsAndConditions: 'Terms & Conditions',
       privacyPolicies: 'Privacy Policies',
       help: 'Help',
       rate: 'Rate us',
@@ -11,9 +11,13 @@ export default {
       appointments: 'Appointments',
       healthHistory: 'Health History',
       availablity: 'Update Availablity',
+      born: 'Born',
+      pronouns: 'Pronouns',
+      sexuality: 'Sexuality',
     },
     requestVisit: {
       title: 'Request a Visit',
+      goHome: 'Go Home',
     },
     addCreditCardData: {
       cardNumber: 'Card number',
@@ -85,6 +89,12 @@ export default {
 
     dueDate: {
       title: 'Due Date',
+    },
+    needsPrescription: {
+      question: 'Do you need a prescription?',
+      yes: 'Yes',
+      no: 'No',
+      notSure: `I'm not sure`,
     },
 
     loss: {
@@ -384,6 +394,13 @@ export default {
       cardAddedSuccessfully: 'Your card has been added successfully',
     },
 
+    sos: {
+      title: 'SOS',
+      yes: 'Yes',
+      no: 'No',
+      emergency: 'Are you experiencing an emergency?',
+    },
+
     tabs: {
       account: 'Account',
       ask: 'Ask',
@@ -399,6 +416,23 @@ export default {
       getStarted: 'Get Started',
       agree: 'Agree',
       finish: 'Finish',
+    },
+    termsAndConditions: {
+      title: 'Terms and Conditions',
+    },
+    privacyPolicies: {
+      title: 'Privacy Policies',
+    },
+    help: {
+      title: 'Help',
+      ask: 'Ask',
+      question: 'Have a question? Ask the Kiira support team!',
+    },
+    learn: {
+      title: 'Learn',
+      learnMore:
+        'Want to know more about Kiira and Women Health? Read our articles!',
+      seeArticles: 'See Articles',
     },
   },
 };

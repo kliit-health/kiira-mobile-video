@@ -1,12 +1,12 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { useSelector, shallowEqual } from 'react-redux';
-import { Header, ListItem, Container } from '../../components';
+import {Text, View, FlatList} from 'react-native';
+import {useSelector, shallowEqual} from 'react-redux';
+import {Header, ListItem, Container} from '../../components';
 import intl from '../../utils/localization';
 import model from './model';
 import styles from './styles';
 
-const HealthHistory = ({ navigation }) => {
+const HealthHistory = ({navigation}) => {
   const healthHistory = useSelector(
     (state) => state.healthHistory,
     shallowEqual,
@@ -18,16 +18,16 @@ const HealthHistory = ({ navigation }) => {
         title={intl.en.healthHistory.title}
         onBack={() => navigation.goBack()}
       />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
+      <FlatList
+        data={model}
         showsVerticalScrollIndicator={false}
-      >
-        {model.map(({ title, destination, dataKey }) => (
+        style={styles.container}
+        keyExtractor={({dataKey}, index) => `${dataKey} ${index}`}
+        renderItem={({item: {title, destination, dataKey}}) => (
           <ListItem
-            key={title}
+            key={dataKey}
             displayChevron
-            onPress={() => navigation.navigate(destination)}
-          >
+            onPress={() => navigation.navigate(destination)}>
             <View>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.subtitle}>
@@ -37,8 +37,8 @@ const HealthHistory = ({ navigation }) => {
               </Text>
             </View>
           </ListItem>
-        ))}
-      </ScrollView>
+        )}
+      />
     </Container>
   );
 };

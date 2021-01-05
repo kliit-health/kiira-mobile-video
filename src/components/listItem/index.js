@@ -1,7 +1,7 @@
 import React from 'react';
-import { shape, object, func, bool, number } from 'prop-types';
-import { TouchableOpacity, Image } from 'react-native';
-import { icons } from '../../utils/constants';
+import {shape, object, func, bool, number} from 'prop-types';
+import {TouchableOpacity, Image} from 'react-native';
+import {icons} from '../../utils/constants';
 import defaultStyles from './styles';
 
 const ListItem = (props) => {
@@ -11,6 +11,7 @@ const ListItem = (props) => {
     displayChevron,
     children,
     activeOpacity,
+    id,
   } = props;
 
   const styles = {
@@ -18,12 +19,17 @@ const ListItem = (props) => {
     chevron: [defaultStyles.chevron, customStyles.chevron],
   };
 
+  const handlePress = () => {
+    if (onPress) {
+      onPress(id);
+    }
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity}
       style={styles.root}
-      onPress={onPress}
-    >
+      onPress={handlePress}>
       {children}
       {displayChevron && (
         <Image

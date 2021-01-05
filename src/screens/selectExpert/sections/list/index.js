@@ -3,36 +3,21 @@ import {FlatList} from 'react-native';
 import {colors} from '../../../../utils/constants';
 import {ProfileCard, IconButton} from '../../../../components';
 import {calculateRating} from '../../../../utils/functions';
-import Plus from '../../../../svgs/plus.svg';
 import styles from './styles';
 
-const List = ({data, onCardPress, onAddPress, disabledItems}) => (
+const List = ({data, onCardPress}) => (
   <FlatList
     data={data}
     keyExtractor={(item) => item.uid}
     renderItem={({item, index}) => (
-      <ListItem
-        {...item}
-        onAddPress={onAddPress}
-        onCardPress={onCardPress}
-        index={index}
-        disabled={disabledItems.some(({uid}) => item.uid === uid)}
-      />
+      <ListItem {...item} onCardPress={onCardPress} index={index} />
     )}
     contentContainerStyle={styles.flatlistContainer}
   />
 );
 
 const ListItem = (props) => {
-  const {
-    profileInfo,
-    isOnline,
-    rating,
-    onCardPress,
-    index,
-    onAddPress,
-    disabled,
-  } = props;
+  const {profileInfo, isOnline, rating, onCardPress} = props;
   const {
     firstName,
     lastName,
@@ -46,12 +31,6 @@ const ListItem = (props) => {
     }
   };
 
-  const handleAddPress = (itemProps) => {
-    onAddPress(itemProps);
-  };
-
-  const {blue, gray} = colors;
-
   return (
     <ProfileCard
       name={`${firstName} ${lastName}`}
@@ -60,11 +39,8 @@ const ListItem = (props) => {
       tags={specialities.slice(0, 3)}
       avatar={profileImageUrl}
       online={isOnline}
-      onPress={handleCardPress}>
-      <IconButton disabled={disabled} onPress={() => handleAddPress(props)}>
-        <Plus color={disabled ? gray : blue} />
-      </IconButton>
-    </ProfileCard>
+      onPress={handleCardPress}
+    />
   );
 };
 

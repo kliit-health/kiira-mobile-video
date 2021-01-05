@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { text } from '../../utils/constants';
+import {StyleSheet} from 'react-native';
+import {text, colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   title: {
@@ -7,5 +7,8 @@ export default StyleSheet.create({
   },
   subtitle: {
     fontSize: text.size.small,
+  },
+  container: {
+    backgroundColor: colors.offWhite,
   },
 });

@@ -45,7 +45,11 @@ const TextInput = ({
       [modifiers.outlined.label, outlined],
       customStyles.label,
     ]),
-    textInput: mergeStyles([defaultStyles.textInput, customStyles.textInput]),
+    textInput: mergeStyles([
+      defaultStyles.textInput,
+      [modifiers.outlined.textInput, outlined],
+      customStyles.textInput,
+    ]),
     chevronContainer: mergeStyles([
       defaultStyles.chevronContainer,
       [modifiers.outlined.chevronContainer, outlined],
