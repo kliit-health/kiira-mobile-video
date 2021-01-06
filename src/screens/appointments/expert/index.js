@@ -1,33 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  FlatList,
-  Text,
-  Image,
-  StatusBar,
-} from 'react-native';
+import {ScrollView, View, FlatList, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import styles from './style';
 import CustomText from '../../../components/customText';
-// import SearchBar from '../../../components/searchBar';
-import {SearchBar} from 'react-native-elements';
+import {Header, Container, SearchBar} from '../../../components';
 import CustomButton from '../../../components/customButton';
 import Constant from '../../../utils/constants';
 import {getAppointmentsList} from './action';
-import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
 import {generateDateInfo, getDateRange} from '../../../utils/helper';
+import intl from '../../../utils/localization';
+import {screenNames} from '../../../utils/constants';
 import moment from 'moment';
 import _ from 'lodash';
+import styles, {modifiers} from './styles';
 
-const ExpertAppointments = (props) => {
-  const {navigation} = props;
-  const {staticImages} = Constant.App;
+const ExpertAppointments = ({navigation}) => {
   const dispatch = useDispatch();
-
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
+  const uid = useSelector((state) => state.authLoadingReducer.userData.uid);
   const visitData = useSelector(
     (state) => state.expertAppointmentsReducer.history,
   );
@@ -37,7 +26,12 @@ const ExpertAppointments = (props) => {
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
-    dispatch(getAppointmentsList({uid: userData.uid}));
+    dispatch(
+      getAppointmentsList({
+        uid,
+      }),
+    );
+
     const dateRange = getDateRange(
       moment(new Date()),
       moment().add(30, 'days'),
@@ -65,139 +59,112 @@ const ExpertAppointments = (props) => {
         return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
       });
 
-      setVisits([...current]);
+      setVisits([...current], 'current');
     } else {
-      setVisits([...record]);
+      setVisits([...record], 'record');
     }
   }, [visitData, selectedDate]);
 
-  return (
-    <View style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#008AFC" />
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Upcoming Visits</Text>
-      </View>
-      <ScrollView style={styles.container}>
-        <View>
-          <View
-            style={{
-              marginTop: 10,
+  const handleVisitPress = (details) => {
+    navigation.navigate(screenNames.patientProfile, {
+      expert: details.expert,
+      visit: details,
+      patient: {
+        uid: details.uid,
+      },
+    });
+  };
 
-              alignSelf: 'center',
-            }}>
-            <SearchBar
-              containerStyle={styles.searchBar}
-              inputContainerStyle={{
-                borderRadius: 10,
-                backgroundColor: Constant.App.colors.greyBgAsk,
-              }}
-              onChange={(input) => console.log(input)}
-              placeholder={'Search'}
-            />
-          </View>
-          <View>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-              keyboardShouldPersistTaps={
-                Platform.OS === 'ios' ? 'never' : 'always'
-              }
-              data={dates}
-              horizontal={true}
-              decelerationRate={'fast'}
-              extraData={selectedDate}
-              renderItem={({item, index}) => {
-                item = generateDateInfo(item);
-                return (
-                  <View
-                    style={{
-                      height: 100,
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      margin: 15,
-                    }}>
-                    <CustomText
-                      style={
-                        selectedDate === item.date
-                          ? {color: Constant.App.colors.blueColor}
-                          : {color: 'black'}
-                      }>
-                      {item.month}
-                    </CustomText>
-                    <CustomButton
-                      buttonStyle={
-                        selectedDate === item.date
-                          ? styles.dateSelectedContainerStyle
-                          : styles.dateContainerStyle
-                      }
-                      textStyle={
-                        selectedDate === item.date
-                          ? styles.dateSelectedTextStyle
-                          : styles.dateTextStyle
-                      }
-                      onPress={() => {
-                        setSelectedDate(item.date);
-                        // setDay(item.date);
-                        // dispatch(setAppointmentDay(item.date));
-                      }}
-                      text={item.day}
-                    />
-                    <CustomText
-                      style={
-                        selectedDate === item.date
-                          ? {color: Constant.App.colors.blueColor}
-                          : {color: 'black'}
-                      }>
-                      {item.dow}
-                    </CustomText>
-                  </View>
-                );
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </View>
-          {visits.length > 0 ? (
-            <View>
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-                keyboardShouldPersistTaps={
-                  Platform.OS === 'ios' ? 'never' : 'always'
-                }
-                data={visits}
-                decelerationRate={'fast'}
-                extraData={selectedDate}
-                renderItem={({item, index}) => {
-                  const date = generateDateInfo(item.time);
-                  return (
-                    <Visit visit={item} date={date} navigation={navigation} />
-                  );
-                }}
-                keyExtractor={(index) => `${index.id}`}
-              />
-            </View>
-          ) : (
-            <View style={styles.parentContainerStyle}>
-              <Image
+  return (
+    <Container unformatted styles={modifiers.container} themed>
+      <Header title={intl.en.expertAppointments.title} themed />
+      <SearchBar
+        styles={modifiers.searchBar}
+        onChange={(input) => console.log(input)}
+        placeholder="Search"
+      />
+      <ScrollView style={styles.container}>
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
+          data={dates}
+          horizontal={true}
+          decelerationRate={'fast'}
+          extraData={selectedDate}
+          renderItem={({item, index}) => {
+            item = generateDateInfo(item);
+            return (
+              <View
                 style={{
-                  width: 100,
                   height: 100,
-                  alignSelf: 'center',
-                  marginTop: 20,
-                }}
-                resizeMode="contain"
-                source={require('../../../../assets/logo.png')}
-              />
-              <Text style={styles.title}>
-                You do not have any scheduled visits. Upcoming visits will be
-                listed here.
-              </Text>
-            </View>
-          )}
-        </View>
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  margin: 15,
+                }}>
+                <CustomText
+                  style={
+                    selectedDate === item.date
+                      ? {color: Constant.App.colors.blueColor}
+                      : {color: 'black'}
+                  }>
+                  {item.month}
+                </CustomText>
+                <CustomButton
+                  buttonStyle={
+                    selectedDate === item.date
+                      ? styles.dateSelectedContainerStyle
+                      : styles.dateContainerStyle
+                  }
+                  textStyle={
+                    selectedDate === item.date
+                      ? styles.dateSelectedTextStyle
+                      : styles.dateTextStyle
+                  }
+                  onPress={() => {
+                    setSelectedDate(item.date);
+                    // setDay(item.date);
+                    // dispatch(setAppointmentDay(item.date));
+                  }}
+                  text={item.day}
+                />
+                <CustomText
+                  style={
+                    selectedDate === item.date
+                      ? {color: Constant.App.colors.blueColor}
+                      : {color: 'black'}
+                  }>
+                  {item.dow}
+                </CustomText>
+              </View>
+            );
+          }}
+          keyExtractor={(_, index) => index.toString()}
+        />
+        {visits.length > 0 ? (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+            keyboardShouldPersistTaps={
+              Platform.OS === 'ios' ? 'never' : 'always'
+            }
+            data={visits}
+            decelerationRate={'fast'}
+            extraData={selectedDate}
+            renderItem={({item, index}) => (
+              <Visit key={item.uid} onPress={handleVisitPress} {...item} />
+            )}
+            keyExtractor={(index) => `${index.id}`}
+            contentContainerStyle={styles.appointmentsList}
+          />
+        ) : (
+          <Text style={styles.title}>
+            {intl.en.expertAppointments.noVisitsToday}
+          </Text>
+        )}
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 
-export default withNavigation(ExpertAppointments);
+export default ExpertAppointments;

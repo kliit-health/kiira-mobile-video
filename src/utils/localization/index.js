@@ -434,5 +434,27 @@ export default {
         'Want to know more about Kiira and Women Health? Read our articles!',
       seeArticles: 'See Articles',
     },
+    expertAppointments: {
+      title: 'Appointments',
+      noVisitsToday:
+        'You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
+      patientName: 'Patient Name',
+      subject: 'Subject',
+    },
+    expertAccount: {
+      logout: 'Logout',
+      settings: 'Settings',
+      termsAndConditions: 'Terms & Conditions',
+      privacyPolicies: 'Privacy Policies',
+      updateAvailability: 'Update Availability',
+      rate: 'Rate us',
+      refer: 'Refer a Friend, Get 10 Credits',
+      appointments: 'Appointments',
+      healthHistory: 'Health History',
+      availablity: 'Update Availablity',
+      born: 'Born',
+      pronouns: 'Pronouns',
+      location: 'Location',
+    },
   },
 };

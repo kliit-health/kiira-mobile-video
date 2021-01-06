@@ -32,8 +32,9 @@ export const modifiers = {
     root: {
       backgroundColor: colors.azure,
       height: 70,
-      borderBottomRightRadius: 25,
-      borderBottomLeftRadius: 25,
+      borderBottomRightRadius: 20,
+      borderBottomLeftRadius: 20,
+      borderBottomWidth: 0,
     },
     title: {
       color: colors.white,
@@ -41,7 +42,7 @@ export const modifiers = {
     },
     backButton: {
       root: {
-        marginLeft: 5,
+        marginLeft: 8,
       },
     },
   },

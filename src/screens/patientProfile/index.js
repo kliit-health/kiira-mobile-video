@@ -1,34 +1,35 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import Image from 'react-native-fast-image';
 import ExpertHeader from '../../components/expertHeader';
 import {screenNames} from '../../utils/constants';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails} from '../../redux/actions';
 import {getPatientDetails} from './actions';
 import styles from './style';
+import {Avatar} from '../../components';
 
-const PatientProfile = (props) => {
-  let params = props.navigation.state.params;
-  let {navigation} = props;
-  let {uid, visit, patientInfo} = params;
+const PatientProfile = ({navigation}) => {
+  const {expert, visit, patient} = navigation.state.params;
 
   const dispatch = useDispatch();
+  const patientInfo = useSelector((state) => state.userDetails.data);
 
   useEffect(() => {
-    dispatch(getUserDetails(patientInfo.uid));
+    dispatch(getUserDetails(patient.uid));
   }, []);
 
   useEffect(() => {
     dispatch(
       getPatientDetails({
-        uid: patientInfo.uid,
+        uid: patient.uid,
       }),
     );
   }, []);
 
   const handleNavigation = (destination) => {
     navigation.push(destination, {
-      uid: patientInfo.uid,
+      uid: patient.uid,
     });
   };
 
@@ -36,17 +37,9 @@ const PatientProfile = (props) => {
     <View style={styles.container}>
       <ExpertHeader title="Patient Profile" />
       <View style={styles.profileContainer}>
-        <Image
-          defaultSource={require('../../../assets/profile_img_placeholder.png')}
-          containerStyle={{alignSelf: 'center'}}
-          style={{
-            marginLeft: 5,
-            width: 60,
-            height: 60,
-            borderRadius: 50,
-          }}
-          source={{uri: patientInfo.profileInfo.profileImageUrl}}
-          activeOpacity={0.7}
+        <Avatar
+          size="small"
+          source={patientInfo ? patientInfo.profileInfo.profileImageUrl : ''}
         />
         <View>
           <Text style={styles.name}>
@@ -71,7 +64,7 @@ const PatientProfile = (props) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('MedicalHistoryExpert', {
-                uid,
+                uid: expert.uid,
                 visit,
                 patientInfo,
               })

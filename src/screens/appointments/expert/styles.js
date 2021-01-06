@@ -1,8 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
-import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
-import metrices from '../../../utils/metrices';
+import {text, colors} from '../../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -12,7 +11,7 @@ var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   cancelTextStyle: {
     textAlign: 'left',
     color: Constant.App.colors.blackColor,
@@ -61,14 +60,6 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerLight,
     fontWeight: '400',
-  },
-
-  headerStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: parentPaddingValue * 0.5,
-    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   itemsParentContainerStyle: {
@@ -124,10 +115,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10, //IOS
     elevation: 2, // Android
     // margin: 15,
-  },
-
-  parentContainerStyle: {
-    // marginBottom: 100,
   },
 
   profileImageParentContainerStyle: {
@@ -302,11 +289,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    color: colors.black,
+    fontSize: text.size.xxLarge,
+    fontFamily: text.fontFamily.poppinsRegular,
     textAlign: 'center',
-    fontSize: 40,
-    fontWeight: 'bold',
-    margin: 30,
-    paddingBottom: 200,
+    margin: 20,
   },
 
   subtitle: {
@@ -510,6 +497,20 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
   },
+  appointmentsList: {
+    padding: 10,
+  },
 });
 
-export default styles;
+export const modifiers = {
+  searchBar: {
+    root: {
+      marginTop: 20,
+    },
+  },
+  container: {
+    safeAreaBottom: {
+      height: 0,
+    },
+  },
+};

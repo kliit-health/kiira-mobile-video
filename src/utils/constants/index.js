@@ -662,6 +662,9 @@ export const screenNames = {
   termsAndConditions: 'TermsConditions',
   privacyPolicies: 'PrivacyPolicy',
   help: 'Help',
+  patientProfile: 'PatientProfile',
+  updateAvailability: 'UpdateAvailablity',
+  expertSettings: 'SettingExpert',
 };
 
 export const units = {

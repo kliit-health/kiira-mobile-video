@@ -15,7 +15,7 @@ import CustomText from '../../../components/customText';
 import Constant from '../../../utils/constants';
 import {getExpertQuestionData} from './action';
 import {getTerms} from '../../termsAndConditions/action';
-import {getPolicy} from '../../privacyPolicy/action';
+import {getPolicies} from '../../privacyPolicy/action';
 import moment from 'moment';
 import {SearchBar, TextButton} from '../../../components';
 
@@ -43,7 +43,7 @@ const AskExpert = (props) => {
   useEffect(() => {
     fetchData();
     dispatch(getTerms());
-    dispatch(getPolicy());
+    dispatch(getPolicies());
     setCurrent(questionData);
     setResolved(resolvedQuestionsData);
   }, []);

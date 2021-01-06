@@ -23,7 +23,7 @@ const SOS = ({navigation}) => {
           width: 100,
           height: 100,
           alignSelf: 'center',
-          marginTop: 20,
+          margin: 20,
         }}
         resizeMode="contain"
         source={require('../../../assets/sos-purple.png')}
