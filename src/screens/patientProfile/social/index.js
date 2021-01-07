@@ -79,7 +79,6 @@ const SocialHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].history = !answerToSet[key].history;
-
     setAnswers(answerToSet);
   };
 
@@ -89,7 +88,6 @@ const SocialHistory = ({navigation}) => {
     answerToSet[option.section][option.key] = !answerToSet[option.section][
       option.key
     ];
-
     setAnswers(answerToSet);
   };
 
@@ -97,7 +95,6 @@ const SocialHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].notes = text;
-
     setAnswers(answerToSet);
   };
 

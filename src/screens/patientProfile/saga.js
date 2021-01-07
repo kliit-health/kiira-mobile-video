@@ -53,6 +53,7 @@ function* getPatientDetails({data}) {
       const hasConsentAgreements = userDetails.hasOwnProperty(
         'consentAgreements',
       );
+      console.log('CONSENT AGREEMENTS', hasConsentAgreements);
       if (hasConsentAgreements) {
         yield put({
           type: UPDATE_PATIENT_DETAILS,

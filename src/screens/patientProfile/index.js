@@ -9,8 +9,8 @@ import {
   ScrollView,
 } from 'react-native';
 import ExpertHeader from '../../components/expertHeader';
+import PatientCard from './components/patientCard';
 import {useDispatch, useSelector} from 'react-redux';
-import FastImage from 'react-native-fast-image';
 import {screenNames} from '../../utils/constants';
 import {getUserDetails} from '../../redux/actions';
 import {getPatientDetails} from './actions';
@@ -47,27 +47,7 @@ const PatientProfile = (props) => {
   return (
     <View style={styles.container}>
       <ExpertHeader title="Patient Profile" />
-      <View style={styles.profileContainer}>
-        <FastImage
-          defaultSource={require('../../../assets/profile_img_placeholder.png')}
-          containerStyle={{alignSelf: 'center'}}
-          style={{
-            marginLeft: 5,
-            width: 60,
-            height: 60,
-            borderRadius: 50,
-          }}
-          source={{uri: patientInfo.profileInfo.profileImageUrl}}
-          activeOpacity={0.7}
-        />
-        <View>
-          <Text style={styles.name}>
-            {`${visit.firstName} ${visit.lastName}`}
-          </Text>
-          <Text style={styles.reason}>Chief Complaint:</Text>
-          <Text style={styles.reason}>{`${visit.reason}`}</Text>
-        </View>
-      </View>
+      <PatientCard visit={visit} patientInfo={patientInfo} />
       <ScrollView>
         <View style={styles.infoContainer}>
           <TouchableOpacity

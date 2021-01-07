@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Modal, Text, Pressable} from 'react-native';
+import {View, Modal, Text, Pressable} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import Recap from '../recap';
@@ -59,17 +59,15 @@ const Confirm = ({navigation}) => {
           </View>
         </View>
       </Modal>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Recap navigation={fakeNavigation} />
-        <CustomButton
-          buttonStyle={styles.buttonContainerStyle}
-          textStyle={styles.buttonTextStyle}
-          onPress={() => {
-            setModalVisible(!modalVisible);
-          }}
-          text="Confirm"
-        />
-      </ScrollView>
+      <Recap navigation={fakeNavigation} />
+      <CustomButton
+        buttonStyle={styles.buttonContainerStyle}
+        textStyle={styles.buttonTextStyle}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+        text="Confirm"
+      />
     </View>
   );
 };

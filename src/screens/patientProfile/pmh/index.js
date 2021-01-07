@@ -60,7 +60,6 @@ const PersonalMedicalHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].history = !answerToSet[key].history;
-
     setAnswers(answerToSet);
   };
 
@@ -70,7 +69,6 @@ const PersonalMedicalHistory = ({navigation}) => {
     answerToSet[option.section][option.key] = !answerToSet[option.section][
       option.key
     ];
-
     setAnswers(answerToSet);
   };
 
@@ -78,7 +76,6 @@ const PersonalMedicalHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].notes = text;
-
     setAnswers(answerToSet);
   };
 

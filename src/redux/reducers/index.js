@@ -13,6 +13,7 @@ import chat from '../../screens/chat/reducer';
 import chatExpertReducer from '../../screens/chat/expert/reducer';
 import chooseExpertReducer from '../../screens/chooseExpert/reducer';
 import expertAppointmentsReducer from '../../screens/appointments/expert/reducer';
+import expertPatientsReducer from '../../screens/patients/reducer';
 import expertProfileReducer from '../../screens/expertProfile/reducer';
 import expertScheduleReducer from '../../screens/expertSchedule/reducer';
 import forgotPasswordReducer from '../../screens/forgotPassword/reducer';
@@ -53,6 +54,7 @@ export default combineReducers({
   chatExpertReducer,
   chooseExpertReducer,
   expertAppointmentsReducer,
+  expertPatientsReducer,
   expertProfileReducer,
   expertScheduleReducer,
   forgotPasswordReducer,

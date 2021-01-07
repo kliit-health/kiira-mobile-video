@@ -18,7 +18,6 @@ const Header = ({
   onClose,
   themed,
 }) => {
-  console.log('CUSTOM STYLES', customStyles.backButton);
   const styles = {
     root: mergeStyles([
       defaultStyles.root,

@@ -4,13 +4,41 @@ import metrices from '../../../utils/metrices';
 
 const {textSize} = Constant.App;
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
-
 const styles = StyleSheet.create({
+  buttonContainerStyle: {
+    alignSelf: 'center',
+    borderRadius: 25,
+    padding: Constant.App.dimensions.btnPaddingGlobal,
+    width: metrices.DEVICE_WIDTH * 0.85,
+    backgroundColor: Constant.App.colors.blueColor,
+    height: 50,
+  },
+
+  buttonTextStyle: {
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.xxLarge,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    color: Constant.App.colors.whiteColor,
+  },
+
+  cancelButton: {
+    backgroundColor: 'white',
+    borderColor: '#2196F3',
+    borderWidth: 2,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    width: 100,
+    marginBottom: 10,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+
   container: {
     flex: 1,
     paddingBottom: 50,
@@ -33,40 +61,14 @@ const styles = StyleSheet.create({
     marginLeft: metrices.DEVICE_WIDTH * 0.15,
   },
 
-  input: {
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 5,
-    width: metrices.DEVICE_WIDTH * 0.8,
-    alignSelf: 'center',
-    marginTop: 50,
-    height: 400,
-    color: 'black',
+  lockButton: {
+    backgroundColor: '#2196F3',
+    borderRadius: 20,
     padding: 10,
+    elevation: 2,
+    width: 100,
   },
 
-  buttonContainerStyle: {
-    alignSelf: 'center',
-    borderRadius: 25,
-    padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH * 0.85,
-    backgroundColor: Constant.App.colors.blueColor,
-    height: 50,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
-  },
-
-  buttonTextStyle: {
-    textAlign: 'center',
-    fontSize: Constant.App.textSize.xxLarge,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    color: Constant.App.colors.whiteColor,
-  },
-
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
@@ -85,30 +87,21 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 2,
   },
-  cancelButton: {
-    backgroundColor: 'white',
-    borderColor: '#2196F3',
-    borderWidth: 2,
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    width: 100,
-    marginBottom: 10,
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
-  lockButton: {
-    backgroundColor: '#2196F3',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    width: 100,
+
+  subtitle: {
+    width: metrices.DEVICE_WIDTH * 0.85,
+    fontSize: textSize.Large,
+    padding: 20,
   },
+
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
     textAlign: 'center',
   },
 
@@ -118,12 +111,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 10,
-  },
-
-  subtitle: {
-    width: metrices.DEVICE_WIDTH * 0.85,
-    fontSize: textSize.Large,
-    padding: 20,
   },
 });
 

@@ -60,7 +60,6 @@ const FamilyHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].history = !answerToSet[key].history;
-
     setAnswers(answerToSet);
   };
 
@@ -68,7 +67,6 @@ const FamilyHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet.illnesses[key] = !answerToSet.illnesses[key];
-
     setAnswers(answerToSet);
   };
 
@@ -76,7 +74,6 @@ const FamilyHistory = ({navigation}) => {
     let answerToSet = {...answers};
 
     answerToSet[key].notes = text;
-
     setAnswers(answerToSet);
   };
 

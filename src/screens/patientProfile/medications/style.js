@@ -18,23 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  header: {
-    flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
-    paddingVertical: 60,
-    backgroundColor: Constant.App.colors.blueColor,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-
-  headerText: {
-    color: Constant.App.colors.whiteColor,
-    fontSize: Constant.App.textSize.xxLarge,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
-  },
-
   input: {
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 5,
@@ -46,7 +29,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
-  buttonContainerStyle: {
+  question: {
+    alignSelf: 'center',
+    paddingVertical: 40,
+    paddingHorizontal: 15,
+    fontSize: Constant.App.textSize.xLarge,
+  },
+
+  submitButtonStyle: {
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
@@ -55,18 +45,11 @@ const styles = StyleSheet.create({
     marginTop: metrices.DEVICE_HEIGHT * 0.03,
   },
 
-  buttonTextStyle: {
+  submitButtonTextStyle: {
     textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.whiteColor,
-  },
-
-  question: {
-    alignSelf: 'center',
-    paddingVertical: 40,
-    paddingHorizontal: 15,
-    fontSize: Constant.App.textSize.xLarge,
   },
 });
 

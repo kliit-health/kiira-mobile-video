@@ -1,11 +1,35 @@
 import {StyleSheet} from 'react-native';
 import metrics from '../../../utils/metrices';
 import Constant from '../../../utils/constants';
-import metrices from '../../../utils/metrices';
-
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginVertical: 5,
+    borderColor: Constant.App.colors.blueColor,
+    borderWidth: 1,
+    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+    padding: Constant.App.dimensions.btnPaddingGlobal,
+    width: metrics.DEVICE_WIDTH * 0.5,
+    height: 42,
+    backgroundColor: Constant.App.colors.whiteColor,
+  },
+
+  buttonText: {
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    color: Constant.App.colors.blueColor,
+  },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+
   dateContainer: {
     marginTop: 10,
     flexDirection: 'row',
@@ -19,97 +43,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 15,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  parentContainerStyle: {
-    backgroundColor: Constant.App.colors.whiteColor,
-    paddingLeft: parentPaddingValue * 0.2,
-    paddingRight: parentPaddingValue * 0.2,
-    paddingBottom: parentPaddingValue * 0.2,
-    paddingTop: parentPaddingValue * 0.2,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: metrics.DEVICE_WIDTH,
-  },
-
-  expertIsPrescriber: {
-    flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
-  },
-
-  patientImage: {
-    bottom: -100,
-    left: 10,
-    width: 90,
-    height: 90,
-    padding: 2,
-    borderRadius: 60,
-    borderWidth: 2,
-    borderColor: Constant.App.colors.blueColor,
-    position: 'absolute',
-  },
-
-  patientImageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    zIndex: 1,
-  },
-
-  expertName: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  expertPrescriberImage: {
-    width: 20,
-    height: 20,
-  },
-
-  expertPrescriberTextStyle: {
-    color: Constant.App.colors.blueColor,
-    marginLeft: 10,
-  },
-
-  expertProfession: {
-    flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
-    marginVertical: 5,
-  },
-
-  expertProfessionTextStyle: {
-    fontSize: Constant.App.textSize.xxlarge,
-    color: Constant.App.colors.blueGrey,
-    marginRight: 10,
-  },
-
-  name: {
-    marginVertical: metrics.DEVICE_HEIGHT * 0.01,
-    marginLeft: 110,
-    fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: '700',
-    justifyContent: 'flex-start',
-  },
-
-  reason: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.005,
-    marginLeft: 110,
-    fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: '400',
-    justifyContent: 'flex-start',
-  },
-
-  headerStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: parentPaddingValue * 0.5,
-    backgroundColor: Constant.App.colors.whiteColor,
-    width: metrics.DEVICE_WIDTH,
   },
 
   informationContainer: {
@@ -134,6 +67,29 @@ const styles = StyleSheet.create({
     width: 20,
   },
 
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  modalImage: {
+    height: 80,
+    width: 80,
+    marginVertical: 25,
+  },
+
   modalText: {
     marginHorizontal: 15,
     fontSize: 22,
@@ -155,65 +111,31 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-
-  modalImage: {
-    height: 80,
-    width: 80,
-    marginVertical: 25,
-  },
-
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-
-  myRecentExpertContainerStyle: {
-    flexDirection: 'column',
-    paddingLeft: parentPaddingValue + 4,
-    paddingRight: (parentPaddingValue + 4) * 0.5,
-    backgroundColor: 'white',
-    flex: 1,
-    width: 320,
-    height: 150,
-    borderRadius: 15,
-  },
-
-  noContainerStyle: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    marginVertical: 5,
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 1,
-    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-    padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.5,
-    height: 42,
-    backgroundColor: Constant.App.colors.whiteColor,
-  },
-
-  noTextStyle: {
-    textAlign: 'center',
-    fontSize: Constant.App.textSize.Normal,
+  name: {
+    marginVertical: metrics.DEVICE_HEIGHT * 0.01,
+    marginLeft: 110,
+    fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    color: Constant.App.colors.blueColor,
+    fontWeight: '700',
+    justifyContent: 'flex-start',
+  },
+
+  patientImage: {
+    bottom: -100,
+    left: 10,
+    width: 90,
+    height: 90,
+    padding: 2,
+    borderRadius: 60,
+    borderWidth: 2,
+    borderColor: Constant.App.colors.blueColor,
+    position: 'absolute',
+  },
+
+  patientImageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    zIndex: 1,
   },
 
   parentContainerStyle: {
@@ -222,11 +144,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  titleTextStyle: {
-    textAlign: 'left',
-    color: Constant.App.colors.blackColor,
+  reason: {
+    marginTop: metrics.DEVICE_HEIGHT * 0.005,
+    marginLeft: 110,
     fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.headerBold,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    fontWeight: '400',
+    justifyContent: 'flex-start',
   },
 
   textStyle: {

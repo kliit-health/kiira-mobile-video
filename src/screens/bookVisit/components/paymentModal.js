@@ -56,14 +56,14 @@ const PaymentModal = ({
                 }}
                 text="Apply"
               />
-              <CustomButton
+              {/* <CustomButton
                 buttonStyle={styles.yesContainerStyle}
                 textStyle={styles.yesTextStyle}
                 onPress={() => {
                   setShowPlans(!showPlans);
                 }}
                 text="Change Plan"
-              />
+              /> */}
             </View>
           </View>
         ) : (

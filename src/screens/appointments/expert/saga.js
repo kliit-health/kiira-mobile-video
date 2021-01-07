@@ -7,7 +7,7 @@ import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
-  addUserCredits,
+  updatesCredits,
 } from '../../../utils/firebase';
 import {
   showApiLoader,
@@ -63,7 +63,7 @@ function* cancelAppointment(data) {
       );
     } else {
       console.log('EXPERT CANCEL SUCCESSFUL');
-      yield addUserCredits(1, data);
+      yield updateCredits(1, data);
     }
 
     yield put({type: FETCH_EXPERT_APPOINTMENTS, data: appointments.history});

@@ -186,8 +186,6 @@ const GynHistory = ({navigation}) => {
     input: 'input',
   };
 
-  console.log(answers[questions[progress].key]);
-
   return (
     <View style={styles.container}>
       <ExpertHeader title="GYN History" />

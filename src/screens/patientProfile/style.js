@@ -5,6 +5,20 @@ import metrices from '../../utils/metrices';
 const {textSize} = Constant.App;
 
 const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+
+  check: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    marginRight: 15,
+  },
+
   container: {
     flex: 1,
   },
@@ -26,32 +40,14 @@ const styles = StyleSheet.create({
     marginLeft: metrices.DEVICE_WIDTH * 0.15,
   },
 
-  profileContainer: {
-    flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH * 0.8,
-    position: 'relative',
-    top: -30,
-    left: metrices.DEVICE_WIDTH * 0.1,
-    backgroundColor: Constant.App.colors.whiteColor,
-    borderRadius: 20,
-    padding: 10,
-    shadowColor: 'rgba(0,0,0, .4)', // IOS
-    shadowOffset: {height: 3, width: 1}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 3, //IOS
-    elevation: 2, // Android
+  icon: {
+    marginLeft: 5,
+    width: 20,
+    height: 20,
   },
 
-  name: {
-    marginLeft: 10,
-    fontSize: Constant.App.textSize.Normal,
-    fontWeight: '800',
-  },
-
-  reason: {
-    marginTop: 5,
-    marginLeft: 10,
-    color: Constant.App.colors.blackColor,
+  info: {
+    padding: 20,
   },
 
   infoContainer: {
@@ -67,14 +63,17 @@ const styles = StyleSheet.create({
     elevation: 2, // Android
   },
 
-  info: {
-    padding: 20,
+  lockButton: {
+    backgroundColor: '#2196F3',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    width: 100,
   },
 
-  icon: {
-    marginLeft: 5,
-    width: 20,
-    height: 20,
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 
   modalView: {
@@ -96,20 +95,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 
-  lockButton: {
-    backgroundColor: '#2196F3',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    width: 100,
+  subtitle: {
+    width: metrices.DEVICE_WIDTH * 0.85,
+    fontSize: textSize.Large,
+    padding: 20,
   },
+
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
     textAlign: 'center',
   },
 
@@ -119,32 +113,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 10,
-  },
-
-  subtitle: {
-    width: metrices.DEVICE_WIDTH * 0.85,
-    fontSize: textSize.Large,
-    padding: 20,
-  },
-
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-
-  icon: {
-    marginLeft: 5,
-    width: 20,
-    height: 20,
-  },
-
-  check: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    marginRight: 15,
   },
 });
 

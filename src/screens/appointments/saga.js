@@ -7,7 +7,7 @@ import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
-  addUserCredits,
+  updateCredits,
 } from '../../utils/firebase';
 import {
   showApiLoader,
@@ -48,7 +48,7 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
-      yield addUserCredits(1, data);
+      yield updateCredits(1, data);
     }
     yield put({type: FETCH_APPOINTMENTS, data: appointments});
     yield put(hideApiLoader());

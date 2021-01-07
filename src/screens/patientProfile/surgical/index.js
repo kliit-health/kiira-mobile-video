@@ -34,7 +34,7 @@ const SurgicalHistory = ({navigation}) => {
       complete: true,
     },
   };
-  console.log('surgical', surgical);
+
   return (
     <View style={styles.container}>
       <ExpertHeader title="Surgical History" />
@@ -61,8 +61,8 @@ const SurgicalHistory = ({navigation}) => {
           placeholderTextColor="black"
         />
         <CustomButton
-          buttonStyle={styles.buttonContainerStyle}
-          textStyle={styles.buttonTextStyle}
+          buttonStyle={styles.submitButtonStyle}
+          textStyle={styles.submitButtonTextStyle}
           onPress={() => {
             dispatch(updateMedicalHistoryExpert(payload));
             navigation.goBack();

@@ -55,6 +55,7 @@ const PregnancyHistory = ({navigation}) => {
 
   const toggleSelection = (key) => {
     let answerToSet = {...answers};
+
     answerToSet[key].history = !answerToSet[key].history;
     setAnswers(answerToSet);
   };
@@ -65,7 +66,6 @@ const PregnancyHistory = ({navigation}) => {
     answerToSet[option.section][option.key] = !answerToSet[option.section][
       option.key
     ];
-
     setAnswers(answerToSet);
   };
 
@@ -74,9 +74,8 @@ const PregnancyHistory = ({navigation}) => {
   };
 
   const handleOnSave = (selection, key) => {
-    console.log('Selection', selection);
-    console.log('Key', key);
     let answerToSet = {...answers};
+
     answerToSet[key].number = selection;
     setAnswers(answerToSet);
     toggleModal();

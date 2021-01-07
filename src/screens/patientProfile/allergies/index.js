@@ -60,7 +60,6 @@ const Allergies = ({navigation}) => {
           placeholder="Please type here"
           placeholderTextColor="black"
         />
-
         <CustomButton
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}

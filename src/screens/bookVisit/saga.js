@@ -1,7 +1,11 @@
 import {UPDATE_APPOINTMENT, MAKE_APPOINTMENT} from '../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
 import {navigation} from 'react-navigation';
-import {addUserData, makeAppointment} from '../../utils/firebase';
+import {
+  addUserData,
+  makeAppointment,
+  updateCredits,
+} from '../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
@@ -22,15 +26,18 @@ import {showOrHideModal} from '../../components/customModal/action';
 function* setAppointment(data) {
   try {
     yield put(showApiLoader());
+
     let appointment = yield makeAppointment(data);
     yield put(hideApiLoader());
-    console.log('SET APPOINTMENT', appointment);
+
     if (appointment && !appointment.availible) {
       yield put(
         showOrHideModal('Appointment is unavailible please reschedule.'),
       );
       navigation.goBack();
     }
+
+    yield put(updateCredits(-1, data));
   } catch (error) {
     console.error(error);
   }

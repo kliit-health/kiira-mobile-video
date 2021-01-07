@@ -208,7 +208,6 @@ export async function getAppointmentsForTodayAsync(data) {
         response.today = data;
       });
 
-    console.log(response);
     return response;
   } catch (error) {
     return error;
@@ -1505,7 +1504,7 @@ export async function payAmountWithToken(tokenID, amount) {
   }
 }
 
-export async function addUserCredits(visits, {data}) {
+export async function updateCredits(visits, {data}) {
   try {
     const docData = await firebase
       .firestore()
@@ -1527,17 +1526,16 @@ export async function addUserCredits(visits, {data}) {
   }
 }
 
-// TODO: Remove this function during refactor phase
-export async function updateCredits(credits, forUser) {
-  try {
-    await firebase.firestore().collection('users').doc(forUser).update({
-      credits,
-    });
-    return {ok: true, newCredits: credits};
-  } catch (err) {
-    return {ok: false, status: 'internal'};
-  }
-}
+// export async function updateCredits(credits, forUser) {
+//   try {
+//     await firebase.firestore().collection('users').doc(forUser).update({
+//       credits,
+//     });
+//     return {ok: true, newCredits: credits};
+//   } catch (err) {
+//     return {ok: false, status: 'internal'};
+//   }
+// }
 
 export async function getPayPalAccessToken() {
   try {

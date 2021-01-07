@@ -32,8 +32,8 @@ const PhysicalExam = ({navigation}) => {
           placeholderTextColor="black"
         />
         <CustomButton
-          buttonStyle={styles.buttonContainerStyle}
-          textStyle={styles.buttonTextStyle}
+          buttonStyle={styles.submitButtonStyle}
+          textStyle={styles.submitButtonTextStyle}
           onPress={() => {
             dispatch(updateMedicalHistoryExpert(payload));
             navigation.goBack();

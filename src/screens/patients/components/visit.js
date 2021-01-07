@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
 import CustomButton from '../../../components/customButton';
+import CancelModal from './cancelModal';
 import styles from '../style';
 import {useDispatch} from 'react-redux';
 import {cancelAppointment} from '../action';
@@ -9,94 +10,63 @@ import Constant from '../../../utils/constants';
 
 const Visit = ({visit, date, navigation}) => {
   const dispatch = useDispatch();
-  const [patientInfo, setPatientInfo] = useState(null);
+  let [visible, setVisible] = useState(false);
+  // const [patientInfo, setPatientInfo] = useState(null);
   const patient = {
     uid: visit.uid,
     id: visit.id,
     expert: visit.expert,
   };
 
-  useEffect(() => {
-    try {
-      const obj = {
-        tableName: Constant.App.firebaseTableNames.users,
-        uid: patient.uid,
-      };
-      getUserData(
-        obj,
-        (querySnapshot) => {
-          const data = querySnapshot.data();
-          setPatientInfo(data);
-        },
-        (error) => {
-          console.log(error);
-        },
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const obj = {
+  //       tableName: Constant.App.firebaseTableNames.users,
+  //       uid: patient.uid,
+  //     };
+  //     getUserData(
+  //       obj,
+  //       (querySnapshot) => {
+  //         const data = querySnapshot.data();
+  //         setPatientInfo(data);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  //   return () => setPatientInfo(null);
+  // }, []);
 
   return (
-    <View style={{alignSelf: 'center', paddingBottom: 50}}>
-      <View style={styles.myRecentExpertContainerStyle}>
-        <Text style={{alignSelf: 'center', margin: 15, fontSize: 20}}>
+    <View style={{alignSelf: 'center'}}>
+      <View style={styles.visitContainer}>
+        <CancelModal visit={visit} visible={visible} setVisible={setVisible} />
+        <Text style={styles.title}>
           {`${visit.firstName} ${visit.lastName}`}
         </Text>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.expertImageContainer}>
-            <Image
-              style={styles.expertImage}
-              source={
-                patientInfo
-                  ? {
-                      uri: patientInfo.profileInfo.profileImageUrl,
-                    }
-                  : require('../../../../assets/profile_img_placeholder.png')
-              }
-              activeOpacity={0.7}
-            />
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-          }}>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.dow}
-            </Text>
+        <Text style={styles.title}>{`CC: ${visit.reason}`}</Text>
+        <View style={styles.detailContainer}>
+          <View style={styles.detail}>
+            <Text style={styles.detailText}>{date.dow}</Text>
             <Text>{`${date.month} ${date.day}`}</Text>
           </View>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.hour.time}
-            </Text>
+          <View style={styles.detail}>
+            <Text style={styles.detailText}>{date.hour.time}</Text>
             <Text>{date.hour.am_pm}</Text>
           </View>
-          <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>30</Text>
+          <View style={styles.detail}>
+            <Text style={styles.detailText}>30</Text>
             <Text>MIN</Text>
           </View>
         </View>
         <CustomButton
-          buttonStyle={styles.yesContainerStyle}
-          textStyle={styles.yesTextStyle}
-          onPress={() => {
-            navigation.navigate('ExpertLoginScreen', {
-              uid: visit.expert.uid,
-              visit,
-              patientInfo,
-            });
-          }}
-          text="Join"
-        />
-
-        <CustomButton
-          buttonStyle={styles.noContainerStyle}
-          textStyle={styles.noTextStyle}
-          onPress={() => dispatch(cancelAppointment(patient))}
+          buttonStyle={styles.cancelButton}
+          textStyle={styles.cancelButtonText}
+          onPress={() => setVisible(!visible)}
           text="Cancel"
         />
       </View>
