@@ -15,7 +15,6 @@ import CustomText from '../../../components/customText';
 import Constant from '../../../utils/constants';
 import {getExpertQuestionData} from './action';
 import {getTerms} from '../../termsAndConditions/action';
-import {getPolicy} from '../../privacyPolicy/action';
 import moment from 'moment';
 import {SearchBar, TextButton} from '../../../components';
 
@@ -43,10 +42,12 @@ const AskExpert = (props) => {
   useEffect(() => {
     fetchData();
     dispatch(getTerms());
-    dispatch(getPolicy());
+  }, []);
+
+  useEffect(() => {
     setCurrent(questionData);
     setResolved(resolvedQuestionsData);
-  }, []);
+  });
 
   const toogleActive = () => {
     setRecentActive(!recentActive);
@@ -57,7 +58,7 @@ const AskExpert = (props) => {
     if (recentActive) {
       if (input.length) {
         let currentFiltered = current.filter((question) => {
-          return question.userInfo.firstName.includes(input);
+          return question.userInfo.profileInfo.firstName.includes(input);
         });
         setCurrent(currentFiltered);
       } else {
@@ -66,7 +67,7 @@ const AskExpert = (props) => {
     } else {
       if (input.length) {
         let resolvedFiltered = resolved.filter((question) => {
-          return question.userInfo.firstName.includes(input);
+          return question.userInfo.profileInfo.firstName.includes(input);
         });
         setResolved(resolvedFiltered);
       } else {

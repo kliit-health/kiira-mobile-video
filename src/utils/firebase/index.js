@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections} from '../constants';
+import appointments from '../../screens/appointments';
 var voucher_codes = require('voucher-code-generator');
 var RSAKey = require('react-native-rsa');
 var rsa = new RSAKey();
@@ -207,7 +208,6 @@ export async function getAppointmentsForTodayAsync(data) {
         response.today = data;
       });
 
-    console.log(response);
     return response;
   } catch (error) {
     return error;
@@ -290,8 +290,8 @@ export async function makeAppointment({data}) {
             uid,
             id: data.body.id,
             expert,
+            locked: false,
           };
-          console.log(data);
         })
         .catch((error) => {
           console.error(error);
@@ -1504,39 +1504,38 @@ export async function payAmountWithToken(tokenID, amount) {
   }
 }
 
-export async function addUserCredits(visits) {
+export async function updateCredits(visits, {data}) {
   try {
-    const userID = firebase.auth().currentUser.uid;
     const docData = await firebase
       .firestore()
       .collection('users')
-      .doc(userID)
+      .doc(data.uid)
       .get();
     const userData = docData.data();
     await firebase
       .firestore()
       .collection('users')
-      .doc(userID)
+      .doc(data.uid)
       .update({
         visits: userData.visits + visits,
       });
+
     return {ok: true};
   } catch (err) {
     return {ok: false, status: 'internal'};
   }
 }
 
-// TODO: Remove this function during refactor phase
-export async function updateCredits(credits, forUser) {
-  try {
-    await firebase.firestore().collection('users').doc(forUser).update({
-      credits,
-    });
-    return {ok: true, newCredits: credits};
-  } catch (err) {
-    return {ok: false, status: 'internal'};
-  }
-}
+// export async function updateCredits(credits, forUser) {
+//   try {
+//     await firebase.firestore().collection('users').doc(forUser).update({
+//       credits,
+//     });
+//     return {ok: true, newCredits: credits};
+//   } catch (err) {
+//     return {ok: false, status: 'internal'};
+//   }
+// }
 
 export async function getPayPalAccessToken() {
   try {
@@ -1586,6 +1585,17 @@ export async function getHealthHistory(uid) {
     const document = firestore.collection('healthHistory').doc(uid);
     const healthHistory = await document.get();
     return healthHistory.data();
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getMedicalHistoryAsync(data) {
+  const uid = data.payload;
+  try {
+    const document = firestore.collection('medicalHistory').doc(uid);
+    const medicalHistory = await document.get();
+    return medicalHistory.data();
   } catch (error) {
     return error;
   }
@@ -1673,3 +1683,79 @@ export const updateSingleDocument = (id, collection, updates, merge = true) =>
       }
     })(),
   );
+
+export async function saveAndLock({payload}) {
+  const {appointment} = payload;
+  const {visit} = appointment;
+
+  try {
+    lockPaitentRecord(visit);
+    lockExpertRecord(visit);
+    saveMedicalHistory(payload, visit);
+    const update = {...appointment, visit: {...visit, locked: true}};
+    return update;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+async function lockPaitentRecord({uid, id}) {
+  const document = firestore.collection('appointments').doc(uid);
+  const appointments = await document.get();
+  const appointmentList = appointments.data();
+
+  appointmentList.history.map((item) => {
+    if (item.id === id) {
+      item.locked = true;
+      return item;
+    }
+    return item;
+  });
+
+  await document.set({...appointmentList}, {merge: true});
+}
+
+async function lockExpertRecord({uid, id, expert}) {
+  const document = firestore.collection('appointments').doc(expert.uid);
+  const appointments = await document.get();
+  const appointmentList = appointments.data();
+
+  appointmentList.history[uid].map((item) => {
+    if (item.id === id) {
+      item.locked = true;
+      console.log('Record', item);
+      return item;
+    }
+    return item;
+  });
+
+  await document.set({history: {...appointmentList.history}}, {merge: true});
+}
+
+async function saveMedicalHistory(payload, visit) {
+  delete payload.loading;
+  delete payload.error;
+
+  try {
+    const document = firestore.collection('medicalHistory').doc(visit.uid);
+    const record = await document.get();
+    const recordList = record.data();
+
+    if (recordList.history.length) {
+      await document.set(
+        {history: [...recordList.history, payload]},
+        {merge: true},
+      );
+    } else {
+      await firebase
+        .firestore()
+        .collection('medicalHistory')
+        .doc(visit.uid)
+        .set({history: [payload]});
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}

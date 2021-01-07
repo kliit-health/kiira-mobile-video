@@ -20,23 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  header: {
-    flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
-    paddingVertical: 60,
-    backgroundColor: Constant.App.colors.blueColor,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-
-  headerText: {
-    color: Constant.App.colors.whiteColor,
-    fontSize: Constant.App.textSize.xxLarge,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
-  },
-
   input: {
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 5,
@@ -66,6 +49,11 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blueColor,
   },
 
+  progressContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+
   nextButtonContainerStyle: {
     justifyContent: 'space-around',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
@@ -82,11 +70,6 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.whiteColor,
   },
 
-  progressContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
-
   question: {
     alignSelf: 'center',
     paddingVertical: 40,
@@ -101,7 +84,6 @@ const styles = StyleSheet.create({
     width: metrices.DEVICE_WIDTH * 0.8,
     alignSelf: 'center',
     marginTop: 50,
-    // height: 200,
     color: 'black',
     padding: 10,
   },

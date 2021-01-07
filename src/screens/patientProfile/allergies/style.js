@@ -14,38 +14,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
 
-  container: {
-    flex: 1,
-  },
-
-  header: {
-    flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
-    paddingVertical: 60,
-    backgroundColor: Constant.App.colors.blueColor,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-
-  headerText: {
-    color: Constant.App.colors.whiteColor,
-    fontSize: Constant.App.textSize.xxLarge,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
-  },
-
-  input: {
-    borderColor: Constant.App.colors.blueColor,
-    borderWidth: 5,
-    width: metrices.DEVICE_WIDTH * 0.8,
-    alignSelf: 'center',
-    marginTop: 50,
-    height: 200,
-    color: 'black',
-    padding: 10,
-  },
-
   buttonContainerStyle: {
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
@@ -60,6 +28,21 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.whiteColor,
+  },
+
+  container: {
+    flex: 1,
+  },
+
+  input: {
+    borderColor: Constant.App.colors.blueColor,
+    borderWidth: 5,
+    width: metrices.DEVICE_WIDTH * 0.8,
+    alignSelf: 'center',
+    marginTop: 50,
+    height: 200,
+    color: 'black',
+    padding: 10,
   },
 
   question: {

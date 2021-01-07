@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
 import {CheckBox} from 'react-native-elements';
 import {questions} from './questions';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const FamilyHistory = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
   const [progress, setProgress] = useState(0);
+  const dispatch = useDispatch();
 
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
@@ -19,7 +20,7 @@ const FamilyHistory = ({navigation}) => {
       history: false,
       notes: '',
     },
-    disease: {
+    illnesses: {
       diabetes: false,
       highBloodPressure: false,
       giReflux: false,
@@ -48,27 +49,33 @@ const FamilyHistory = ({navigation}) => {
     },
   });
 
-  const toggleSelection = (selection) => {
-    if (selection === 'yes') {
-      setYes(!yes);
-      setNo(false);
-    }
+  const payload = {
+    family: {
+      ...answers,
+      complete: true,
+    },
+  };
 
-    if (selection === 'no') {
-      setYes(false);
-      setNo(!no);
-    }
+  const toggleSelection = (key) => {
+    let answerToSet = {...answers};
+
+    answerToSet[key].history = !answerToSet[key].history;
+    setAnswers(answerToSet);
   };
 
   const setAnswer = (key) => {
     let answerToSet = {...answers};
 
-    answerToSet.disease[key] = !answerToSet.disease[key];
-
+    answerToSet.illnesses[key] = !answerToSet.illnesses[key];
     setAnswers(answerToSet);
   };
 
-  console.log(questions[progress].options);
+  const setNotes = (key, text) => {
+    let answerToSet = {...answers};
+
+    answerToSet[key].notes = text;
+    setAnswers(answerToSet);
+  };
 
   return (
     <View style={styles.container}>
@@ -84,7 +91,7 @@ const FamilyHistory = ({navigation}) => {
                 title={option.title}
                 checkedIcon="check"
                 uncheckedIcon="square-o"
-                checked={answers.disease[option.key]}
+                checked={answers.illnesses[option.key]}
               />
             );
           })
@@ -93,17 +100,19 @@ const FamilyHistory = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <PolarButton
                 variant="yes"
-                selected={yes}
-                onPress={() => toggleSelection('yes')}
+                selected={answers[questions[progress].key].history}
+                onPress={() => toggleSelection(questions[progress].key)}
               />
               <PolarButton
                 variant="no"
-                selected={no}
-                onPress={() => toggleSelection('no')}
+                selected={!answers[questions[progress].key].history}
+                onPress={() => toggleSelection(questions[progress].key)}
               />
             </View>
             <TextInput
+              onChangeText={(text) => setNotes(questions[progress].key, text)}
               style={styles.input}
+              value={answers[questions[progress].key].notes}
               multiline
               placeholder={questions[progress].textPrompt}
               placeholderTextColor="black"
@@ -124,7 +133,10 @@ const FamilyHistory = ({navigation}) => {
             buttonStyle={styles.nextButtonContainerStyle}
             textStyle={styles.nextButtonTextStyle}
             onPress={() => {
-              setProgress(progress + 1);
+              finished
+                ? (dispatch(updateMedicalHistoryExpert(payload)),
+                  navigation.goBack())
+                : setProgress(progress + 1);
             }}
             text={finished ? 'Submit' : 'Next'}
           />

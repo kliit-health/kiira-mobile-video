@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {View, Text, Image} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import CustomButton from '../../../components/customButton';
 import CustomText from '../../../components/customText';
 import {Rating} from 'react-native-elements';
@@ -27,7 +28,7 @@ const Visit = ({visit, date, navigation}) => {
       <View style={styles.myRecentExpertContainerStyle}>
         <View style={{flexDirection: 'row'}}>
           <View style={styles.expertImageContainer}>
-            <Image
+            <FastImage
               style={styles.expertImage}
               defaultSource={require('../../../../assets/profile_img_placeholder.png')}
               source={{uri: visit.expert.imageUrl}}

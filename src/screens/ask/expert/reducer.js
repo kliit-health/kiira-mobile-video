@@ -1,4 +1,4 @@
-import * as types from '../../../redux/types'
+import * as types from '../../../redux/types';
 const initialState = {
   resolvedQuestionsData: [],
   questionData: [],
@@ -11,13 +11,13 @@ const askExpertReducer = (state = initialState, action) => {
         ...state,
         questionData: action.data,
         isDataFetch: true,
-      }
+      };
     case types.GET_EXPERT_RESOLVED_QUESTION_SUCCESS:
       return {
         ...state,
         resolvedQuestionsData: action.data,
         isDataFetch: true,
-      }
+      };
     default:
       return {
         ...state,

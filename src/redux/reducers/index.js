@@ -13,6 +13,7 @@ import chat from '../../screens/chat/reducer';
 import chatExpertReducer from '../../screens/chat/expert/reducer';
 import chooseExpertReducer from '../../screens/chooseExpert/reducer';
 import expertAppointmentsReducer from '../../screens/appointments/expert/reducer';
+import expertPatientsReducer from '../../screens/patients/reducer';
 import expertProfileReducer from '../../screens/expertProfile/reducer';
 import expertScheduleReducer from '../../screens/expertSchedule/reducer';
 import forgotPasswordReducer from '../../screens/forgotPassword/reducer';
@@ -35,7 +36,8 @@ import treatmentHistory from '../../screens/treatmentHistory/reducer';
 import updateExpertReducer from '../../screens/updateAvailablity/reducer';
 import agreements from '../../screens/agreements/reducer';
 import userDetails from './userDetails';
-import patientDetails from '../../screens/patientProfile/reducer';
+// import personalInformation from '../../screens/personalInformation/reducer';
+import medicalHistory from '../../screens/patientProfile/reducer';
 
 export default combineReducers({
   accountReducer,
@@ -52,6 +54,7 @@ export default combineReducers({
   chatExpertReducer,
   chooseExpertReducer,
   expertAppointmentsReducer,
+  expertPatientsReducer,
   expertProfileReducer,
   expertScheduleReducer,
   forgotPasswordReducer,
@@ -74,5 +77,6 @@ export default combineReducers({
   updateExpertReducer,
   agreements,
   userDetails,
-  patientDetails,
+  // personalInformation,
+  medicalHistory,
 });

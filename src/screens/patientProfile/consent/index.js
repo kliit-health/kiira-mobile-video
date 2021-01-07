@@ -9,7 +9,7 @@ import styles from './styles';
 
 const ConsentAgreements = ({navigation}) => {
   const consentAgreements = useSelector(
-    (state) => state.patientDetails.data.consentAgreements,
+    (state) => state.medicalHistory.data.consentAgreements,
   );
 
   const handlePress = ({id}) => {

@@ -1,10 +1,10 @@
-import {FETCH_EXPERT_APPOINTMENTS} from '../../../redux/types';
+import {FETCH_EXPERT_APPOINTMENTS} from '../../redux/types';
 
 const initialState = {
   history: [],
 };
 
-const expertAppointmentsReducer = (state = initialState, action) => {
+const expertPatientsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EXPERT_APPOINTMENTS:
       return {
@@ -18,4 +18,4 @@ const expertAppointmentsReducer = (state = initialState, action) => {
   }
 };
 
-export default expertAppointmentsReducer;
+export default expertPatientsReducer;

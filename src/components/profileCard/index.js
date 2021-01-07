@@ -30,6 +30,7 @@ const ProfileCard = ({
   activeOpacity,
   onPress,
   id,
+  prescriber,
 }) => {
   const [layout, setLayout] = useState(undefined);
 
@@ -64,11 +65,9 @@ const ProfileCard = ({
             <Text style={styles.nameText}>{name}</Text>
             <Text style={styles.titleText}>{title}</Text>
           </View>
-          <Ratings value={rating} />
+          {rating && <Ratings value={rating} />}
         </View>
-        <View style={styles.labelsBox}>
-          <Prescriber />
-        </View>
+        <View style={styles.labelsBox}>{prescriber && <Prescriber />}</View>
         <Text style={styles.tagsText}>{addHashtag(tags)}</Text>
         <View style={styles.actionBox}>
           {cloneChild({children, name: 'TextButton'})}
@@ -96,6 +95,7 @@ ProfileCard.propTypes = {
   children: node,
   id: oneOfType([string, number]),
   activeOpacity: number,
+  prescriber: bool,
 };
 
 ProfileCard.defaultProps = {
@@ -109,6 +109,7 @@ ProfileCard.defaultProps = {
   tags: [],
   id: undefined,
   activeOpacity: 1,
+  prescriber: false,
 };
 
 export default ProfileCard;

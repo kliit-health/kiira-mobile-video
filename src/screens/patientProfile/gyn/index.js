@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -8,15 +9,13 @@ import CustomTextInput from '../../../components/textInput';
 import {CheckBox} from 'react-native-elements';
 import {questions} from './questions';
 import {switchCase} from '../../../utils/functions';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const GynHistory = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
+  const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
-  const [visible, setVisible] = useState(false);
-
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
     lastPeriod: {
@@ -74,7 +73,7 @@ const GynHistory = ({navigation}) => {
       history: false,
       notes: '',
     },
-    useContraception: {
+    useBirthControl: {
       history: false,
       notes: '',
     },
@@ -101,25 +100,51 @@ const GynHistory = ({navigation}) => {
       women: false,
       other: false,
     },
+    currentlyActive: {
+      history: false,
+      notes: '',
+    },
     numberOfPartners: {
-      male: 0,
-      female: 0,
-      other: 0,
+      male: {
+        number: '',
+        visible: false,
+      },
+      female: {
+        number: '',
+        visible: false,
+      },
+      other: {
+        number: '',
+        visible: false,
+      },
     },
   });
 
-  const numberOfPartners = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
+  const numberOfPartners = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10+',
+  ];
 
-  const toggleSelection = (selection) => {
-    if (selection === 'yes') {
-      setYes(!yes);
-      setNo(false);
-    }
+  const payload = {
+    gyn: {
+      ...answers,
+      complete: true,
+    },
+  };
 
-    if (selection === 'no') {
-      setYes(false);
-      setNo(!no);
-    }
+  const toggleSelection = (key) => {
+    let answerToSet = {...answers};
+    answerToSet[key].history = !answerToSet[key].history;
+    setAnswers(answerToSet);
   };
 
   const setAnswer = (option) => {
@@ -132,17 +157,26 @@ const GynHistory = ({navigation}) => {
     setAnswers(answerToSet);
   };
 
-  const handleOnLabelPress = () => {
-    setVisible(true);
+  const toggleModal = (option) => {
+    let answerToSet = {...answers};
+    answerToSet[option.section][option.key].visible = !answerToSet[
+      option.section
+    ][option.key].visible;
+
+    setAnswers(answerToSet);
   };
 
-  const handleOnSave = (item) => {
-    onSave(item);
-    setVisible(false);
+  const handleOnSave = (selection, option) => {
+    let answerToSet = {...answers};
+    answerToSet[option.section][option.key].number = selection;
+    setAnswers(answerToSet);
+    toggleModal(option);
   };
 
-  const handleOnBackdropPress = () => {
-    setVisible(false);
+  const setNotes = (key, text) => {
+    let answerToSet = {...answers};
+    answerToSet[key].notes = text;
+    setAnswers(answerToSet);
   };
 
   const types = {
@@ -151,8 +185,6 @@ const GynHistory = ({navigation}) => {
     picker: 'picker',
     input: 'input',
   };
-
-  console.log(answers);
 
   return (
     <View style={styles.container}>
@@ -165,18 +197,22 @@ const GynHistory = ({navigation}) => {
               <View style={styles.buttonContainer}>
                 <PolarButton
                   variant="yes"
-                  selected={yes}
-                  onPress={() => toggleSelection('yes')}
+                  selected={answers[questions[progress].key].history}
+                  onPress={() => toggleSelection(questions[progress].key)}
                 />
                 <PolarButton
                   variant="no"
-                  selected={no}
-                  onPress={() => toggleSelection('no')}
+                  selected={!answers[questions[progress].key].history}
+                  onPress={() => toggleSelection(questions[progress].key)}
                 />
               </View>
               {questions[progress].textPrompt ? (
                 <TextInput
+                  onChangeText={(text) =>
+                    setNotes(questions[progress].key, text)
+                  }
                   style={styles.input}
+                  value={answers[questions[progress].key].notes}
                   multiline
                   placeholder={questions[progress].textPrompt}
                   placeholderTextColor="black"
@@ -189,7 +225,9 @@ const GynHistory = ({navigation}) => {
           [types.input]: (
             <View>
               <TextInput
+                onChangeText={(text) => setNotes(questions[progress].key, text)}
                 style={styles.singleInput}
+                value={answers[questions[progress].key].notes}
                 placeholder={questions[progress].textPrompt}
                 placeholderTextColor="black"
               />
@@ -210,46 +248,25 @@ const GynHistory = ({navigation}) => {
               );
             }),
           [types.picker]: (
-            <View>
-              <CustomTextInput
-                onPress={handleOnLabelPress}
-                placeholder={'Men'}
-                // value={""}
-                chevron
-              />
-              <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
-                visible={visible}
-                title={'Men'}
-                data={numberOfPartners.map((item) => item)}
-              />
-              <CustomTextInput
-                onPress={handleOnLabelPress}
-                placeholder={'Women'}
-                // value={""}
-                chevron
-              />
-              <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
-                visible={visible}
-                title={'Other'}
-                data={numberOfPartners.map((item) => item)}
-              />
-              <CustomTextInput
-                onPress={handleOnLabelPress}
-                placeholder={'Other'}
-                // value={""}
-                chevron
-              />
-              <ModalPicker
-                onSave={handleOnSave}
-                onBackdropPress={handleOnBackdropPress}
-                visible={visible}
-                title={'Title'}
-                data={numberOfPartners.map((item) => item)}
-              />
+            <View style={{width: 300, alignSelf: 'center'}}>
+              {questions[progress].picker &&
+                questions[progress].options.map((option) => (
+                  <View>
+                    <CustomTextInput
+                      onPress={() => toggleModal(option)}
+                      placeholder={option.title}
+                      value={answers.numberOfPartners[option.key].number}
+                      chevron
+                    />
+                    <ModalPicker
+                      onSave={(selection) => handleOnSave(selection, option)}
+                      onBackdropPress={() => toggleModal(option)}
+                      visible={answers.numberOfPartners[option.key].visible}
+                      title={option.title}
+                      data={numberOfPartners.map((item) => item)}
+                    />
+                  </View>
+                ))}
             </View>
           ),
         })(undefined)(questions[progress].type)}
@@ -267,7 +284,10 @@ const GynHistory = ({navigation}) => {
             buttonStyle={styles.nextButtonContainerStyle}
             textStyle={styles.nextButtonTextStyle}
             onPress={() => {
-              setProgress(progress + 1);
+              finished
+                ? (dispatch(updateMedicalHistoryExpert(payload)),
+                  navigation.goBack())
+                : setProgress(progress + 1);
             }}
             text={finished ? 'Submit' : 'Next'}
           />
@@ -278,89 +298,3 @@ const GynHistory = ({navigation}) => {
 };
 
 export default GynHistory;
-
-// {switchCase({
-//   [types.polar]: (
-//     <View>
-//     <View style={styles.buttonContainer}>
-//       <PolarButton
-//         variant="yes"
-//         selected={yes}
-//         onPress={() => toggleSelection('yes')}
-//       />
-//       <PolarButton
-//         variant="no"
-//         selected={no}
-//         onPress={() => toggleSelection('no')}
-//       />
-//     </View>
-//     {questions[progress].textPrompt ? (
-//       <TextInput
-//         style={styles.input}
-//         multiline
-//         placeholder={questions[progress].textPrompt}
-//         placeholderTextColor="black"
-//       />
-//     ) : (
-//       <View style={styles.blank} />
-//     )}
-//   </View>
-//   ),
-//   [types.objective]: (
-//     questions[progress].options ? (
-//       questions[progress].options.map((option) => {
-//         return (
-//           <CheckBox
-//             key={option.title}
-//             onPress={() => setAnswer(option)}
-//             title={option.title}
-//             checkedIcon="check"
-//             uncheckedIcon="square-o"
-//             checked={answers[option.section][option.key]}
-//           />
-//         )}))
-//   ),
-//   [types.picker]: (
-//     <View></View>
-//   ),
-// })(undefined)(type)}
-
-// {questions[progress].options ? (
-//   questions[progress].options.map((option) => {
-//     return (
-//       <CheckBox
-//         key={option.title}
-//         onPress={() => setAnswer(option)}
-//         title={option.title}
-//         checkedIcon="check"
-//         uncheckedIcon="square-o"
-//         checked={answers[option.section][option.key]}
-//       />
-//     );
-//   })
-// ) : (
-//   <View>
-//     <View style={styles.buttonContainer}>
-//       <PolarButton
-//         variant="yes"
-//         selected={yes}
-//         onPress={() => toggleSelection('yes')}
-//       />
-//       <PolarButton
-//         variant="no"
-//         selected={no}
-//         onPress={() => toggleSelection('no')}
-//       />
-//     </View>
-//     {questions[progress].textPrompt ? (
-//       <TextInput
-//         style={styles.input}
-//         multiline
-//         placeholder={questions[progress].textPrompt}
-//         placeholderTextColor="black"
-//       />
-//     ) : (
-//       <View style={styles.blank} />
-//     )}
-//   </View>
-// )}

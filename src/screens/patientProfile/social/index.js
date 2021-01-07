@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
 import {CheckBox} from 'react-native-elements';
 import {questions} from './questions';
+import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';
 
 const SocialHistory = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(false);
   const [progress, setProgress] = useState(0);
+  const dispatch = useDispatch();
 
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
@@ -20,7 +21,7 @@ const SocialHistory = ({navigation}) => {
       notes: '',
     },
     alcohol: {
-      history: true,
+      history: false,
       notes: '',
     },
     drugs: {
@@ -28,6 +29,18 @@ const SocialHistory = ({navigation}) => {
       notes: '',
     },
     caffine: {
+      history: false,
+      notes: '',
+    },
+    safe: {
+      history: false,
+      notes: '',
+    },
+    abuse: {
+      history: false,
+      notes: '',
+    },
+    currentAbuse: {
       history: false,
       notes: '',
     },
@@ -55,16 +68,18 @@ const SocialHistory = ({navigation}) => {
     },
   });
 
-  const toggleSelection = (selection) => {
-    if (selection === 'yes') {
-      setYes(!yes);
-      setNo(false);
-    }
+  const payload = {
+    social: {
+      ...answers,
+      complete: true,
+    },
+  };
 
-    if (selection === 'no') {
-      setYes(false);
-      setNo(!no);
-    }
+  const toggleSelection = (key) => {
+    let answerToSet = {...answers};
+
+    answerToSet[key].history = !answerToSet[key].history;
+    setAnswers(answerToSet);
   };
 
   const setAnswer = (option) => {
@@ -73,7 +88,13 @@ const SocialHistory = ({navigation}) => {
     answerToSet[option.section][option.key] = !answerToSet[option.section][
       option.key
     ];
+    setAnswers(answerToSet);
+  };
 
+  const setNotes = (key, text) => {
+    let answerToSet = {...answers};
+
+    answerToSet[key].notes = text;
     setAnswers(answerToSet);
   };
 
@@ -82,7 +103,6 @@ const SocialHistory = ({navigation}) => {
       <ExpertHeader title="Social History" />
       <ScrollView>
         <Text style={styles.question}>{questions[progress].question}</Text>
-
         {questions[progress].options ? (
           questions[progress].options.map((option) => {
             return (
@@ -101,17 +121,19 @@ const SocialHistory = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <PolarButton
                 variant="yes"
-                selected={yes}
-                onPress={() => toggleSelection('yes')}
+                selected={answers[questions[progress].key].history}
+                onPress={() => toggleSelection(questions[progress].key)}
               />
               <PolarButton
                 variant="no"
-                selected={no}
-                onPress={() => toggleSelection('no')}
+                selected={!answers[questions[progress].key].history}
+                onPress={() => toggleSelection(questions[progress].key)}
               />
             </View>
             <TextInput
+              onChangeText={(text) => setNotes(questions[progress].key, text)}
               style={styles.input}
+              value={answers[questions[progress].key].notes}
               multiline
               placeholder={questions[progress].textPrompt}
               placeholderTextColor="black"
@@ -132,7 +154,10 @@ const SocialHistory = ({navigation}) => {
             buttonStyle={styles.nextButtonContainerStyle}
             textStyle={styles.nextButtonTextStyle}
             onPress={() => {
-              setProgress(progress + 1);
+              finished
+                ? (dispatch(updateMedicalHistoryExpert(payload)),
+                  navigation.goBack())
+                : setProgress(progress + 1);
             }}
             text={finished ? 'Submit' : 'Next'}
           />

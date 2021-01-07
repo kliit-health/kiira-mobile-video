@@ -1,17 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  FlatList,
-  Text,
-  Image,
-  StatusBar,
-} from 'react-native';
+import {ScrollView, View, FlatList, Text, Image, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../components/customText';
-// import SearchBar from '../../../components/searchBar';
 import {SearchBar} from 'react-native-elements';
 import CustomButton from '../../../components/customButton';
 import Constant from '../../../utils/constants';
@@ -24,7 +15,6 @@ import _ from 'lodash';
 
 const ExpertAppointments = (props) => {
   const {navigation} = props;
-  const {staticImages} = Constant.App;
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
@@ -39,12 +29,12 @@ const ExpertAppointments = (props) => {
   useEffect(() => {
     dispatch(getAppointmentsList({uid: userData.uid}));
     const dateRange = getDateRange(
-      moment(new Date()),
+      moment(new Date()).subtract(3, 'days'),
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
     setDates(dateRange);
-    setSelectedDate(dateRange[0]);
+    setSelectedDate(dateRange[3]);
   }, []);
 
   useEffect(() => {
@@ -79,22 +69,15 @@ const ExpertAppointments = (props) => {
       </View>
       <ScrollView style={styles.container}>
         <View>
-          <View
-            style={{
-              marginTop: 10,
-
-              alignSelf: 'center',
-            }}>
-            <SearchBar
-              containerStyle={styles.searchBar}
-              inputContainerStyle={{
-                borderRadius: 10,
-                backgroundColor: Constant.App.colors.greyBgAsk,
-              }}
-              onChange={(input) => console.log(input)}
-              placeholder={'Search'}
-            />
-          </View>
+          <SearchBar
+            containerStyle={styles.searchBar}
+            inputContainerStyle={{
+              borderRadius: 10,
+              backgroundColor: Constant.App.colors.greyBgAsk,
+            }}
+            onChange={(input) => console.log(input)}
+            placeholder={'Search'}
+          />
           <View>
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -109,13 +92,7 @@ const ExpertAppointments = (props) => {
               renderItem={({item, index}) => {
                 item = generateDateInfo(item);
                 return (
-                  <View
-                    style={{
-                      height: 100,
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      margin: 15,
-                    }}>
+                  <View style={styles.dates}>
                     <CustomText
                       style={
                         selectedDate === item.date
@@ -137,8 +114,6 @@ const ExpertAppointments = (props) => {
                       }
                       onPress={() => {
                         setSelectedDate(item.date);
-                        // setDay(item.date);
-                        // dispatch(setAppointmentDay(item.date));
                       }}
                       text={item.day}
                     />
@@ -157,7 +132,7 @@ const ExpertAppointments = (props) => {
             />
           </View>
           {visits.length > 0 ? (
-            <View>
+            <View style={styles.appointmentContainerStyle}>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
@@ -177,14 +152,9 @@ const ExpertAppointments = (props) => {
               />
             </View>
           ) : (
-            <View style={styles.parentContainerStyle}>
+            <View>
               <Image
-                style={{
-                  width: 100,
-                  height: 100,
-                  alignSelf: 'center',
-                  marginTop: 20,
-                }}
+                style={styles.logo}
                 resizeMode="contain"
                 source={require('../../../../assets/logo.png')}
               />
