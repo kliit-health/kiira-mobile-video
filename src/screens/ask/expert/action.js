@@ -1,21 +1,14 @@
 import {
-    GET_EXPERT_QUESTION_DATA,
-    GET_EXPERT_QUESTION_SUCCESS,
-    GET_EXPERT_RESOLVED_QUESTION_SUCCESS,
-} from "../../../redux/types";
+  GET_EXPERT_ACTIVE_QUESTIONS,
+  GET_EXPERT_RESOLVED_QUESTIONS,
+} from '../../../redux/types';
 
-export const getExpertQuestionData = (data, dispatch) => ({
-    type: GET_EXPERT_QUESTION_DATA,
-    data,
-    dispatch,
+export const getActiveQuestions = (data) => ({
+  type: GET_EXPERT_ACTIVE_QUESTIONS,
+  data,
 });
 
-export const getExpertQuestionSuccess = (data) => ({
-    type: GET_EXPERT_QUESTION_SUCCESS,
-    data,
-});
-
-export const getExpertResolvedQuestionSuccess = (data) => ({
-    type: GET_EXPERT_RESOLVED_QUESTION_SUCCESS,
-    data,
+export const getResolvedQuestions = (data) => ({
+  type: GET_EXPERT_RESOLVED_QUESTIONS,
+  data,
 });

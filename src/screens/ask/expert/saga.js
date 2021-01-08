@@ -1,79 +1,68 @@
-
-import { put, takeEvery } from 'redux-saga/effects';
-import Language from '../../../utils/localization';
-import { showApiLoader, hideApiLoader } from '../../../components/customLoader/action';
+import {call, put, takeEvery, take} from 'redux-saga/effects';
+import {eventChannel} from 'redux-saga';
+import {firebaseRealTimeFetch} from '../../../utils/firebase';
+import {collections} from '../../../utils/constants';
 import {
-    getQuestionsData,
-    getExpertQuestionsData,
-} from '../../../utils/firebase';
-import { showOrHideModal } from '../../../components/customModal/action';
-import { GET_EXPERT_QUESTION_DATA } from '../../../redux/types';
-import { displayConsole } from '../../../utils/helper';
-import { getExpertQuestionDataSuccess, getExpertQuestionSuccess, getExpertResolvedQuestionSuccess } from './action';
+  GET_EXPERT_ACTIVE_QUESTIONS,
+  GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
+  GET_EXPERT_RESOLVED_QUESTIONS,
+  GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+} from '../../../redux/types';
 
-let Lang = Language['en'];
-const delay = ms => new Promise(res => setTimeout(res, ms));
-let delayTime = 100;
-function* getExpertQuestions({ data, dispatch }) {
-    try {
-        const { questionParams, previousQuestionParams } = data;
-        yield put(showApiLoader(Lang.apiLoader.loadingText));
-        yield delay(delayTime);
-        yield getExpertQuestionsData(questionParams, querySnapshot => {
-            let questionsData = [];
-            querySnapshot
-                .docs
-                .forEach(doc => {
-                    questionsData.push(doc.data());
-                });
-            dispatch(hideApiLoader());
-            dispatch(getExpertQuestionSuccess(questionsData));
-            displayConsole('questionsData', questionsData)
-            displayConsole('--------------**** getExpertQuestionsData end ********-----------\n\n');
-        }, error => {
-            const { message, code } = error;
-            displayConsole("message", message);
-            displayConsole("code", code);
-            const data = {
-                success: false,
-                message: message,
-            };
-            displayConsole('data', data);
-            displayConsole('--------------**** getExpertQuestionsData end ********-----------\n\n');
-        });
-        yield delay(delayTime);
-        yield getExpertQuestionsData(previousQuestionParams, querySnapshot => {
-            let prevQuestionsData = [];
-            querySnapshot
-                .docs
-                .forEach(doc => {
-                    prevQuestionsData.push(doc.data());
-                });
-            dispatch(getExpertResolvedQuestionSuccess(prevQuestionsData));
-            dispatch(hideApiLoader());
-            displayConsole('prevQuestionsData', prevQuestionsData)
-            displayConsole('--------------**** getExpertPrevQuestionsData end ********-----------\n\n');
-        }, error => {
-            const { message, code } = error;
-            displayConsole("message", message);
-            displayConsole("code", code);
-            const data = {
-                success: false,
-                message: message,
-            };
-            displayConsole('data', data);
-            displayConsole('--------------**** getExpertPrevQuestionsData end ********-----------\n\n');
-        });
-    } catch (error) {
-        yield delay(500);
-        yield put(hideApiLoader());
-        yield delay(500);
-        yield put(
-            showOrHideModal(Lang.errorMessage.serverError),
-        );
+function getQuestions(collection, conditions) {
+  return eventChannel((emit) => {
+    const unsubscribe = firebaseRealTimeFetch(
+      collection,
+      conditions,
+      (questions) => emit(questions),
+    );
+    return () => unsubscribe();
+  });
+}
+
+function* getActiveQuestions({data: {uid}}) {
+  const conditions = [
+    {key: 'expertInfo.uid', operator: '==', value: uid},
+    {key: 'isResolved', operator: '==', value: false},
+  ];
+
+  const channel = yield call(getQuestions, collections.questions, conditions);
+
+  try {
+    while (true) {
+      let questions = yield take(channel);
+      yield put({
+        type: GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
+        data: questions,
+      });
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* getResolvedQuestions({data: {uid}}) {
+  const conditions = [
+    {key: 'expertInfo.uid', operator: '==', value: uid},
+    {key: 'isResolved', operator: '==', value: true},
+  ];
+
+  const channel = yield call(getQuestions, collections.questions, conditions);
+
+  try {
+    while (true) {
+      let questions = yield take(channel);
+      yield put({
+        type: GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+        data: questions,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default function* askExpertSaga() {
-    yield takeEvery(GET_EXPERT_QUESTION_DATA, getExpertQuestions);
+  yield takeEvery(GET_EXPERT_ACTIVE_QUESTIONS, getActiveQuestions);
+  yield takeEvery(GET_EXPERT_RESOLVED_QUESTIONS, getResolvedQuestions);
 }

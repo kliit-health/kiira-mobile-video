@@ -54,8 +54,8 @@ const CareSquad = ({navigation}) => {
     });
   };
 
-  const handleAddPress = (details) => {
-    dispatch(updateFavoriteExpertsAsync([...favorites, details]));
+  const handleAddPress = ({uid}) => {
+    dispatch(updateFavoriteExpertsAsync([...favorites, uid]));
   };
 
   const handleEditPress = () => {
@@ -66,10 +66,21 @@ const CareSquad = ({navigation}) => {
     deleteMode
       ? dispatch(
           updateFavoriteExpertsAsync(
-            favorites.filter((favorite) => favorite.uid !== details.uid),
+            favorites.filter((uid) => uid !== details.uid),
           ),
         )
       : navigation.navigate(screenNames.getTreatment, {details});
+  };
+
+  const getFavoriteExperts = (favorites, experts) => {
+    if (favorites.length > 0 && experts.length > 0) {
+      const fav = experts.filter((experts) =>
+        favorites.some((uid) => experts.uid === uid),
+      );
+      console.log(fav);
+      return fav;
+    }
+    return [];
   };
 
   return (
@@ -84,7 +95,7 @@ const CareSquad = ({navigation}) => {
       />
       <Favorites
         onItemPress={handleFavoriteItemPress}
-        data={favorites}
+        data={getFavoriteExperts(favorites, experts)}
         deleteMode={deleteMode}
       />
       <SearchBar
@@ -95,7 +106,7 @@ const CareSquad = ({navigation}) => {
         onCardPress={handleCardPress}
         onAddPress={handleAddPress}
         data={isSearching ? searchData : experts}
-        disabledItems={favorites}
+        disabledItems={getFavoriteExperts(favorites, experts)}
       />
     </Container>
   );

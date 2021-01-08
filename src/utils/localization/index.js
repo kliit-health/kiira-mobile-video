@@ -433,6 +433,15 @@ export default {
       learnMore:
         'Want to know more about Kiira and Women Health? Read our articles!',
       seeArticles: 'See Articles',
+      explore: 'Explore tips and content on Kick it with Kiira.',
+      sexualHealth: 'Sexual Health',
+      mentalHealth: 'Mental Health',
+      obstetrics: 'Obstetrics',
+      gynecology: 'Gynecology',
+      breastHealth: 'Breast Health',
+      wellness: 'Wellness',
+      newsAndNoteworthy: 'News and Noteworthy',
+      prevention: 'Prevention',
     },
     expertAppointments: {
       title: 'Appointments',
@@ -455,6 +464,21 @@ export default {
       born: 'Born',
       pronouns: 'Pronouns',
       location: 'Location',
+    },
+    appointments: {
+      scheduleAppointment: 'Schedule Appointment',
+      notify: `We'll notifiy you about upcoming appointments, new messages, and more`,
+      noVisits: `You have no upcoming visits`,
+    },
+    expertChats: {
+      title: 'Chats',
+      resolved: 'Resolved',
+      active: 'Active',
+      chats: 'Chats',
+      patientName: 'Patient Name',
+      noQuestions: 'You have not been asked any questions. Check back later.',
+      subject: 'Subject',
+      lastMessage: 'Last Message',
     },
   },
 };

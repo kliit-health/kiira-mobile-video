@@ -12,4 +12,10 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+  image: {
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+    margin: 20,
+  },
 });

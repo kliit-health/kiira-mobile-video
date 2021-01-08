@@ -1,27 +1,23 @@
-import * as types from '../../../redux/types'
+import {createReducer} from '@reduxjs/toolkit';
+import {
+  GET_EXPERT_ACTIVE_QUESTIONS_PENDING,
+  GET_EXPERT_ACTIVE_QUESTIONS_REJECTED,
+  GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
+  GET_EXPERT_RESOLVED_QUESTIONS_PENDING,
+  GET_EXPERT_RESOLVED_QUESTIONS_REJECTED,
+  GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+} from '../../../redux/types';
+
 const initialState = {
-  resolvedQuestionsData: [],
-  questionData: [],
-  isDataFetch: false,
+  active: [],
+  resolved: [],
 };
-const askExpertReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case types.GET_EXPERT_QUESTION_SUCCESS:
-      return {
-        ...state,
-        questionData: action.data,
-        isDataFetch: true,
-      }
-    case types.GET_EXPERT_RESOLVED_QUESTION_SUCCESS:
-      return {
-        ...state,
-        resolvedQuestionsData: action.data,
-        isDataFetch: true,
-      }
-    default:
-      return {
-        ...state,
-      };
-  }
-};
-export default askExpertReducer;
+
+export default createReducer(initialState, {
+  [GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED]: (state, {data}) => {
+    state.active = data;
+  },
+  [GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED]: (state, {data}) => {
+    state.resolved = data;
+  },
+});

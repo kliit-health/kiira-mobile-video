@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import {put, takeEvery} from 'redux-saga/effects';
 import firebase from 'react-native-firebase';
 import {
   GET_EXPERTS_DETAILS_ASYNC,
@@ -15,7 +15,7 @@ import {
 } from '../../utils/firebase';
 
 function* getExpertsDetailsAsync() {
-  const condition = [{ key: 'role', operator: '==', value: 'Expert' }];
+  const condition = [{key: 'role', operator: '==', value: 'Expert'}];
   try {
     const details = yield firebaseFetch('users', condition);
     yield put({
@@ -27,11 +27,10 @@ function* getExpertsDetailsAsync() {
   }
 }
 
-function* updateFavoriteExpertsAsync({ data }) {
-  const { uid } = firebase.auth().currentUser;
-  const uids = data.map((favorite) => favorite.uid);
+function* updateFavoriteExpertsAsync({data}) {
+  const {uid} = firebase.auth().currentUser;
   try {
-    yield updateFavoriteExperts(uids, uid);
+    yield updateFavoriteExperts(data, uid);
     yield put({
       type: UPDATE_FAVORITE_EXPERTS,
       data,
@@ -42,9 +41,9 @@ function* updateFavoriteExpertsAsync({ data }) {
 }
 
 function* getFavoriteExpertsAsync() {
-  const { uid } = firebase.auth().currentUser;
+  const {uid} = firebase.auth().currentUser;
   try {
-    const { favorites } = yield getFavoriteExperts(uid);
+    const {favorites} = yield getFavoriteExperts(uid);
     yield put({
       type: GET_FAVORITE_EXPERTS,
       data: favorites,

@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList, Text, Image, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import styles from './style';
-import {Header, RatingModal} from '../../components';
-import CustomButton from '../../components/customButton';
-import Constant from '../../utils/constants';
+import styles, {modifiers} from './style';
+import {Container, Header, TextButton} from '../../components';
+import Constant, {screenNames} from '../../utils/constants';
 import {getAppointmentsList} from './action';
-import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
 import {generateDateInfo} from '../../utils/helper';
 import moment from 'moment';
+import intl from '../../utils/localization';
 
-const Appointments = (props) => {
-  const {navigation} = props;
+const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
@@ -38,6 +36,10 @@ const Appointments = (props) => {
     setVisits(filtered);
   }, [visitData]);
 
+  const handleNavigation = (destination) => {
+    navigation.navigate(destination);
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -45,64 +47,35 @@ const Appointments = (props) => {
         onBack={() => navigation.navigate('BottomTab')}
       />
       {visits.length > 0 ? (
-        <ScrollView style={styles.parentContainerStyle}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-            keyboardShouldPersistTaps={
-              Platform.OS === 'ios' ? 'never' : 'always'
-            }
-            data={visits}
-            decelerationRate={'fast'}
-            renderItem={({item, index}) => {
-              const date = generateDateInfo(item.time);
-              return <Visit visit={item} date={date} navigation={navigation} />;
-            }}
-            keyExtractor={(index) => `${index.id}`}
-          />
-          {/* <RatingModal
-            visible={true}
-            title="Your visit had ended!"
-            // description={`Rate your conversation with ${fullName}`}
-            // avatarUrl={profileImageUrl}
-            onSubmit={(rating) =>
-              this.handleRatingSubmit({
-                rating: rating * 2,
-                questionId: questionData ? questionData.questionId : null,
-                expertDetails,
-              })
-            }
-          /> */}
-        </ScrollView>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
+          data={visits}
+          decelerationRate={'fast'}
+          renderItem={({item, index}) => {
+            const date = generateDateInfo(item.time);
+            return <Visit visit={item} date={date} navigation={navigation} />;
+          }}
+          keyExtractor={(index) => `${index.id}`}
+        />
       ) : (
-        <View style={styles.parentContainerStyle}>
+        <Container>
           <Image
-            style={{
-              width: 100,
-              height: 100,
-              alignSelf: 'center',
-              marginTop: 20,
-            }}
+            style={styles.image}
             resizeMode="contain"
             source={require('../../../assets/bell.png')}
           />
-          <Text style={styles.title}>You have no upcoming visits</Text>
-          <Text style={styles.subtitle}>
-            We'll notifiy you about upcoming appointments, new messages, and
-            more
-          </Text>
-          <CustomButton
-            buttonStyle={styles.yesContainerStyle}
-            textStyle={styles.yesTextStyle}
-            onPress={() => {
-              navigation.navigate(Constant.App.screenNames.RequestVisit);
-            }}
-            text="Schedule Visit"
-          />
-        </View>
+          <Text style={styles.title}>{intl.en.appointments.noVisits}</Text>
+          <TextButton
+            styles={modifiers.button}
+            onPress={() => handleNavigation(screenNames.requestVisit)}>
+            {intl.en.appointments.scheduleAppointment}
+          </TextButton>
+        </Container>
       )}
     </View>
   );
 };
 
-export default withNavigation(Appointments);
+export default Appointments;

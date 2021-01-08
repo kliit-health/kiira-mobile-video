@@ -1,7 +1,7 @@
 import React from 'react';
-import {shape, object, node, bool} from 'prop-types';
+import {shape, object, node, bool, oneOf} from 'prop-types';
 import {cloneChild, mergeStyles, cloneChildren} from '../../utils/functions';
-import {View} from 'react-native';
+import {View, StatusBar} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import defaultStyles, {modifiers} from './styles';
 
@@ -11,6 +11,7 @@ const Container = ({
   unformatted,
   themed,
   modal,
+  barStyle,
 }) => {
   const insets = useSafeAreaInsets();
   const styles = {
@@ -36,6 +37,7 @@ const Container = ({
 
   return (
     <View style={styles.root}>
+      <StatusBar barStyle={barStyle} />
       <View style={styles.safeAreaTop} />
       {cloneChild({children, name: 'Header'})}
       {cloneChild({children, name: 'FavoritesBar'})}
@@ -61,10 +63,12 @@ Container.propTypes = {
     root: object,
     container: object,
   }),
+  barStyle: oneOf('dark-content', 'dark-content', 'default'),
 };
 
 Container.defaultProps = {
   styles: {},
+  barStyle: 'dark-content',
   unformatted: false,
   themed: false,
   modal: false,

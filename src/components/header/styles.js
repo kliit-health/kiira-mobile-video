@@ -31,9 +31,6 @@ export const modifiers = {
   themed: {
     root: {
       backgroundColor: colors.azure,
-      height: 70,
-      borderBottomRightRadius: 20,
-      borderBottomLeftRadius: 20,
       borderBottomWidth: 0,
     },
     title: {
@@ -41,9 +38,7 @@ export const modifiers = {
       fontSize: text.size.xLarge,
     },
     backButton: {
-      root: {
-        marginLeft: 8,
-      },
+      root: {},
     },
   },
   backButton: {
