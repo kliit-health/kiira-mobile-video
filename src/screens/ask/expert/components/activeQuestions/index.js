@@ -19,6 +19,7 @@ const ActiveQuestions = ({data, navigation, visible}) => {
       contentContainerStyle={styles.list.listContainer}
       style={styles.list.mainContainer}
       ListEmptyComponent={() => <Fallback />}
+      showsVerticalScrollIndicator={false}
       renderItem={({item, index}) => (
         <ListItem {...item} onPress={handleItemPress} />
       )}
@@ -46,13 +47,13 @@ const ListItem = (props) => {
       <View style={styles.item.outerContainer}>
         <View>
           <Text style={styles.item.title}>
-            {intl.en.expertAppointments.patientName}
+            {intl.en.expertChats.patientName}
           </Text>
           <Text style={styles.item.subtitle}>{`${firstName} ${lastName}`}</Text>
         </View>
         <View style={styles.item.innerContainer}>
           <Text numberOfLines={1} style={styles.item.title}>
-            {intl.en.expertAppointments.subject}
+            {intl.en.expertChats.lastMessage}
           </Text>
           <Text numberOfLines={1} style={styles.item.subtitle}>
             {lastMessage}

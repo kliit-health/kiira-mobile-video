@@ -1,5 +1,6 @@
-import {call, put, takeEvery, take} from 'redux-saga/effects';
-import {eventChannel} from 'redux-saga';
+import {call, put, takeEvery, take, select} from 'redux-saga/effects';
+import {eventChannel, END} from 'redux-saga';
+import {orderBy} from 'lodash';
 import {firebaseRealTimeFetch} from '../../../utils/firebase';
 import {collections} from '../../../utils/constants';
 import {
@@ -7,6 +8,7 @@ import {
   GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
   GET_EXPERT_RESOLVED_QUESTIONS,
   GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+  SEARCH_EXPERT_QUESTIONS,
 } from '../../../redux/types';
 
 function getQuestions(collection, conditions) {
@@ -15,8 +17,12 @@ function getQuestions(collection, conditions) {
       collection,
       conditions,
       (questions) => emit(questions),
+      (error) => {
+        emit(END);
+        console.log(error);
+      },
     );
-    return () => unsubscribe();
+    return () => unsubscribe;
   });
 }
 
@@ -33,7 +39,7 @@ function* getActiveQuestions({data: {uid}}) {
       let questions = yield take(channel);
       yield put({
         type: GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
-        data: questions,
+        data: orderBy(questions, 'modifiedDate', 'desc'),
       });
     }
   } catch (error) {
@@ -54,7 +60,7 @@ function* getResolvedQuestions({data: {uid}}) {
       let questions = yield take(channel);
       yield put({
         type: GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
-        data: questions,
+        data: orderBy(questions, 'modifiedDate', 'desc'),
       });
     }
   } catch (error) {
@@ -62,7 +68,25 @@ function* getResolvedQuestions({data: {uid}}) {
   }
 }
 
+function* searchQuestions({data: {value, status}}) {
+  const state = yield select();
+  const questions = state.askExpertReducer[status];
+
+  if (questions.length > 0) {
+    const searchResult = questions.filter((question) => {
+      const {firstName, lastName} = question.userInfo.profileInfo;
+      return `${firstName} ${lastName}`.includes(value);
+    });
+
+    yield put({
+      type: `SEARCH_EXPERT_${status.toUpperCase()}_QUESTIONS_FULFILLED`,
+      data: value ? searchResult : [],
+    });
+  }
+}
+
 export default function* askExpertSaga() {
   yield takeEvery(GET_EXPERT_ACTIVE_QUESTIONS, getActiveQuestions);
   yield takeEvery(GET_EXPERT_RESOLVED_QUESTIONS, getResolvedQuestions);
+  yield takeEvery(SEARCH_EXPERT_QUESTIONS, searchQuestions);
 }

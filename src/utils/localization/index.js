@@ -479,6 +479,7 @@ export default {
       noQuestions: 'You have not been asked any questions. Check back later.',
       subject: 'Subject',
       lastMessage: 'Last Message',
+      searchName: 'Search Name',
     },
   },
 };
