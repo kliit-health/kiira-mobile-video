@@ -2,32 +2,10 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../utils/constants';
 import metrices from '../../../../utils/metrices';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-
-  header: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
-    paddingVertical: 60,
-    backgroundColor: Constant.App.colors.blueColor,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-
-  headerText: {
-    color: Constant.App.colors.whiteColor,
-    fontSize: Constant.App.textSize.xxLarge,
-    fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
+    alignItems: 'center',
   },
 
   profileContainer: {
@@ -59,11 +37,8 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
-    // flex: 1,
     width: metrices.DEVICE_WIDTH * 0.8,
     alignSelf: 'center',
-    // borderWidth: 1,
-    // borderColor: 'black',
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
     padding: 10,
@@ -82,6 +57,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     width: 20,
     height: 20,
+  },
+
+  check: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    marginRight: 15,
   },
 });
 

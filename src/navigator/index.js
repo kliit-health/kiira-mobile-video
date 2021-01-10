@@ -73,16 +73,21 @@ import MedicalHistory from '../screens/medicalHistory';
 import MedicalHistoryExpert from '../screens/patientProfile/medicalHistory';
 import NeedsPresciption from '../screens/needsPrescription';
 import NewUser from '../screens/newUser';
-import OtherDetails from '../screens/patientProfile/other';
+import Confirm from '../screens/patientProfile/confirm';
 import Patients from '../screens/patients';
 import PatientProfile from '../screens/patientProfile';
 import PaymentMethods from '../screens/payment/paymentMethods';
 import PayPalApproval from '../screens/payment/buyingCredit/paypal';
 import PersonalMedicalHistory from '../screens/patientProfile/pmh';
+import PhysicalExam from '../screens/patientProfile/physical';
+import Plan from '../screens/patientProfile/plan';
 import Pregnancy from '../screens/pregnancy';
 import PregnancyHistory from '../screens/pregnancyHistory';
+import PregnancyHistoryExpert from '../screens/patientProfile/pregnancy';
+import PreviousVisits from '../screens/patientProfile/previousVisits';
 import PreviousAppointmentsNotes from '../screens/previousAppointmentsNotes';
 import PrivacyPolicy from '../screens/privacyPolicy';
+import Recap from '../screens/patientProfile/recap';
 import ReferFriend from '../screens/referFriend';
 import RescheduleVisit from '../screens/rescheduleVisit';
 import RequestVisit from '../screens/requestVisit';
@@ -92,6 +97,7 @@ import Setting from '../screens/setting';
 import SettingExpert from '../screens/setting/expert';
 import SocialHistory from '../screens/patientProfile/social';
 import SurgicalHistory from '../screens/patientProfile/surgical';
+import Summary from '../screens/patientProfile/summary';
 import SOS from '../screens/sos';
 import Tutorial from '../screens/tutorial';
 import TermsConditions from '../screens/termsAndConditions';
@@ -100,6 +106,7 @@ import UpdateAvailablity from '../screens/updateAvailablity';
 import Verify from '../screens/verify';
 import VideoPlayer from '../screens/videoVisit/VideoPlayer';
 import Visit from '../screens/visit';
+import VisitExpert from '../screens/visit/expert';
 import Welcome from '../screens/welcome';
 import TreatmentHistory from '../screens/treatmentHistory';
 import PersonalInformation from '../screens/patientProfile/personalInformation';
@@ -460,17 +467,24 @@ const AppStackExpert = createStackNavigator(
     Learn: {screen: Learn},
     MedicationsHistory: {screen: MedicationsHistory},
     MedicalHistoryExpert: {screen: MedicalHistoryExpert},
-    OtherDetails: {screen: OtherDetails},
+    Confirm: {screen: Confirm},
     PatientProfile: {screen: PatientProfile},
     PersonalMedicalHistory: {screen: PersonalMedicalHistory},
+    PhysicalExam: {screen: PhysicalExam},
+    Plan: {screen: Plan},
+    PregnancyHistoryExpert: {screen: PregnancyHistoryExpert},
+    PreviousVisits: {screen: PreviousVisits},
     PrivacyPolicy: {screen: PrivacyPolicy},
+    Recap: {screen: Recap},
     SocialHistory: {screen: SocialHistory},
     SettingExpert: {screen: SettingExpert},
+    Summary: {screen: Summary},
     SurgicalHistory: {screen: SurgicalHistory},
     TermsConditions: {screen: TermsConditions},
     UpdateAvailablity: {screen: UpdateAvailablity},
     PersonalInformation: {screen: PersonalInformation},
     AgreementDetails: {screen: AgreementDetails},
+    VisitExpert: {screen: VisitExpert},
   },
   {
     headerMode: 'none',

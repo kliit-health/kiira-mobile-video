@@ -89,7 +89,6 @@ const SheduleModal = ({
                 decelerationRate={'fast'}
                 extraData={selectedDate}
                 renderItem={({item, index}) => {
-                  console.log(item);
                   item = generateDateInfo(item.date);
                   return (
                     <View

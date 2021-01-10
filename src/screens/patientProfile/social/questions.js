@@ -20,18 +20,18 @@ export const questions = [
     key: 'caffine',
   },
   {
-    question: 'Does patient feel safe at home?',
-    textPrompt: 'Please neter details',
+    question: 'Does patient (not) feel safe at home?',
+    textPrompt: 'Please enter details',
     key: 'safe',
   },
   {
     question: 'Does patient have history of domestic / sexual abuse?',
-    textPrompt: 'Please neter details',
+    textPrompt: 'Please enter details',
     key: 'abuse',
   },
   {
     question: 'Is patient currently being abused?',
-    textPrompt: 'Please neter details',
+    textPrompt: 'Please enter details',
     key: 'currentAbuse',
   },
   {
@@ -44,6 +44,7 @@ export const questions = [
       {title: 'Significantly Involved', key: 'involved', section: 'status'},
       {title: 'Domestic Partner', key: 'partner', section: 'status'},
     ],
+    key: 'status',
   },
   {
     question: 'What is patients education level?',
@@ -53,6 +54,7 @@ export const questions = [
       {title: 'Graduate degree', key: 'degree', section: 'education'},
       {title: 'Other', key: 'other', section: 'education'},
     ],
+    key: 'education',
   },
   {
     question: 'Does patient exercise?',

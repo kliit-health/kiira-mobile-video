@@ -7,6 +7,7 @@ import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
+  updateCredits,
 } from '../../utils/firebase';
 import {
   showApiLoader,
@@ -46,6 +47,8 @@ function* cancelAppointment(data) {
           'Appointments must be canceled at least 24 hours in advance.',
         ),
       );
+    } else {
+      yield updateCredits(1, data);
     }
     yield put({type: FETCH_APPOINTMENTS, data: appointments});
     yield put(hideApiLoader());

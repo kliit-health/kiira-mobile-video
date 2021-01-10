@@ -48,7 +48,6 @@ class Dashboard extends PureComponent {
   async componentDidMount() {
     const {
       question,
-      getPolicy,
       getTerms,
       getHealthHistory,
       getExpertsDetails,
@@ -60,6 +59,7 @@ class Dashboard extends PureComponent {
 
     getLicenses();
     getAgreements();
+    getTerms();
 
     this.checkLicenseStatus();
     if (question) {
@@ -71,7 +71,7 @@ class Dashboard extends PureComponent {
         questionText: '',
       });
     }
-    getTerms();
+
     this.fetchData();
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
       getHealthHistory();

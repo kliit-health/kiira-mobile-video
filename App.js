@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {View, Alert, BackHandler, AppState} from 'react-native';
+import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigator';
 import {showOrHideModal} from './src/components/customModal/action';
@@ -30,7 +30,7 @@ class App extends PureComponent {
   }
 
   async componentDidMount() {
-    console.disableYellowBox = true;
+    LogBox.ignoreAllLogs();
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,

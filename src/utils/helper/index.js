@@ -66,3 +66,13 @@ export const getDateRange = (startDate, endDate, dateFormat) => {
 export const generateCometChatUser = (user) => {
   return user.firstName.toLowerCase() + '_' + user.lastName.toLowerCase();
 };
+
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const convertCamelCase = (str) => {
+  const strArr = str.split(/(?=[A-Z])/);
+  const converted = strArr.map(capitalizeFirstLetter);
+  return converted.join(' ');
+};

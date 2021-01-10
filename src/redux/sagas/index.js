@@ -12,6 +12,7 @@ import chatSaga from '../../screens/chat/saga';
 import chatExpertSaga from '../../screens/chat/expert/saga';
 import chooseExpertSaga from '../../screens/chooseExpert/saga';
 import expertAppointmentsSaga from '../../screens/appointments/expert/saga';
+import expertPatientsSaga from '../../screens/patients/saga';
 import expertProfileSaga from '../../screens/expertProfile/saga';
 import expertScheduleSaga from '../../screens/expertSchedule/saga';
 import forgotPasswordSaga from '../../screens/forgotPassword/saga';
@@ -48,6 +49,7 @@ export default function* rootSaga() {
     chatExpertSaga(),
     chooseExpertSaga(),
     expertAppointmentsSaga(),
+    expertPatientsSaga(),
     expertProfileSaga(),
     expertScheduleSaga(),
     forgotPasswordSaga(),

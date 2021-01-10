@@ -1,56 +1,43 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { View, ScrollView } from "react-native";
-import { Header } from "../../../components";
-import { withNavigation } from "react-navigation";
-import { ExpertInfo, VisitDetails } from "./components";
-import { getExpertsData } from "../../expertSchedule/action";
-import Constant from "../../../utils/constants";
-import styles from "./styles";
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {View, ScrollView} from 'react-native';
+import {ExpertHeader} from '../../../components';
+import {PatientDetails, VisitDetails} from './components';
+import {getExpertsData} from '../../expertSchedule/action';
+import Constant from '../../../utils/constants';
 
-const ExpertVisit = props => {
-	const dispatch = useDispatch();
-	const { navigation } = props;
-	const { uid, visit, patientInfo } = props.navigation.state.params;
-	const expertData = useSelector(
-		state => state.expertProfileReducer.expertData
-	);
+const ExpertVisit = () => {
+  const dispatch = useDispatch();
 
-	const params = {
-		expertsParams: {
-			tableName: Constant.App.firebaseTableNames.users,
-			uid,
-		},
-	};
+  const medicalHistory = useSelector((state) => state.medicalHistory);
+  const {
+    appointment: {visit, patientInfo},
+  } = medicalHistory;
 
-	useEffect(() => {
-		dispatch(getExpertsData(params));
-	}, []);
+  const params = {
+    expertsParams: {
+      tableName: Constant.App.firebaseTableNames.users,
+      uid: visit.uid,
+    },
+  };
 
-	return (
-		<View style={styles.parentContainerStyle}>
-			<ScrollView
-				keyboardShouldPersistTaps="handled"
-				showsVerticalScrollIndicator={false}
-			>
-				{expertData && (
-					<View>
-						<Header
-							title="Appointment Details"
-							onBack={() => navigation.goBack()}
-						/>
-						<ExpertInfo
-							expertData={expertData}
-							visit={visit}
-							patientInfo={patientInfo}
-						/>
+  useEffect(() => {
+    dispatch(getExpertsData(params));
+  }, []);
 
-						<VisitDetails visit={visit} />
-					</View>
-				)}
-			</ScrollView>
-		</View>
-	);
+  return (
+    <View style={{flex: 1}}>
+      <ExpertHeader title="Appointment Details" />
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
+        <View style={{flex: 1}}>
+          <PatientDetails visit={visit} patientInfo={patientInfo} />
+          <VisitDetails visit={visit} />
+        </View>
+      </ScrollView>
+    </View>
+  );
 };
 
-export default withNavigation(ExpertVisit);
+export default ExpertVisit;

@@ -12,6 +12,7 @@ export const questions = [
       {title: 'Osteopenia', key: 'osteopenia'},
       {title: 'Osteoporosis', key: 'osteoporosis'},
     ],
+    key: 'illnesses',
   },
   {
     question:
@@ -26,6 +27,7 @@ export const questions = [
       {title: 'Joint Pain', key: 'jointPain'},
       {title: 'Fracture', key: 'fracture'},
     ],
+    key: 'illnesses',
   },
   {
     question:
@@ -41,9 +43,11 @@ export const questions = [
       {title: 'Clotting Disorder', key: 'clottingDisorder'},
       {title: 'Patient has never had any of the conditions above', key: 'none'},
     ],
+    key: 'illnesses',
   },
   {
     question: 'Has anyone in patients family been diagnosed with cancer?',
     textPrompt: 'Please Type cancer details.',
+    key: 'cancer',
   },
 ];

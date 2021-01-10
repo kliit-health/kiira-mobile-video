@@ -33,12 +33,12 @@ const ExpertAppointments = ({navigation}) => {
     );
 
     const dateRange = getDateRange(
-      moment(new Date()),
+      moment(new Date()).subtract(3, 'days'),
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
     setDates(dateRange);
-    setSelectedDate(dateRange[0]);
+    setSelectedDate(dateRange[3]);
   }, []);
 
   useEffect(() => {
