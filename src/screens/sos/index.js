@@ -19,12 +19,7 @@ const SOS = ({navigation}) => {
     <Container>
       <Header title={intl.en.sos.title} onBack={handleBackPress} />
       <Image
-        style={{
-          width: 100,
-          height: 100,
-          alignSelf: 'center',
-          marginTop: 20,
-        }}
+        style={styles.image}
         resizeMode="contain"
         source={require('../../../assets/sos-purple.png')}
       />

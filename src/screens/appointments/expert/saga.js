@@ -7,7 +7,7 @@ import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
-  updatesCredits,
+  updateCredits,
 } from '../../../utils/firebase';
 import {
   showApiLoader,

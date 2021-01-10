@@ -1,20 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import CustomText from '../../../../components/customText';
-import styles from '../style';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
+import moment from 'moment';
+import {TimeDisplay} from '../../../../components';
+import intl from '../../../../utils/localization';
+import {updateMedicalHistoryExpert} from '../../../patientProfile/actions';
 import {getUserData} from '../../../../utils/firebase';
 import Constant from '../../../../utils/constants';
-import {updateMedicalHistoryExpert} from '../../../patientProfile/actions';
-import moment from 'moment';
+import styles from './styles';
 
-const {staticImages} = Constant.App;
-
-const Visit = ({visit, navigation}) => {
+const Visit = (props) => {
+  const {firstName, lastName, reason, time, onPress, visit} = props;
   const dispatch = useDispatch();
   const [patientInfo, setPatientInfo] = useState(null);
-  const [profilePic, setProfilePic] = useState('');
+
+  const handlePress = () => {
+    dispatch(updateMedicalHistoryExpert(payload));
+    if (onPress) {
+      onPress(props);
+    }
+  };
 
   const payload = {
     appointment: {
@@ -46,56 +51,29 @@ const Visit = ({visit, navigation}) => {
     return () => setPatientInfo(null);
   }, []);
 
-  useEffect(() => {
-    if (patientInfo) {
-      setProfilePic(patientInfo.profileInfo.profileImageUrl);
-    }
-  }, [patientInfo]);
-
   return (
-    <View style={styles.visitParentContainerStyle}>
-      <TouchableOpacity
-        onPress={() => {
-          dispatch(updateMedicalHistoryExpert(payload));
-          navigation.navigate('PatientProfile');
-        }}>
-        <View style={styles.visitContainerStyle}>
-          <FastImage
-            containerStyle={{alignSelf: 'center'}}
-            defaultSource={staticImages.profilePlaceholderImg}
-            style={{
-              width: 60,
-              height: 60,
-              borderRadius: 50,
-            }}
-            source={{
-              uri: profilePic,
-            }}
-            activeOpacity={0.7}
-          />
-          <View style={styles.userInfo}>
-            <View style={{flexDirection: 'row', flexWrap: 'wrap', flex: 1}}>
-              <CustomText style={styles.userInfoText}>
-                {`${visit.firstName} ${visit.lastName}`}
-              </CustomText>
-              <View style={styles.timeContainer}>
-                <Image
-                  style={styles.timeImage}
-                  resizeMode="contain"
-                  defaultSource={require('../../../../../assets/clock.png')}
-                  source={require('../../../../../assets/clock.png')}
-                />
-                <CustomText style={styles.timeTextStyle}>
-                  {moment(visit.time).format('hh:mm A')}
-                </CustomText>
-              </View>
-            </View>
-            <CustomText>{'Chief Complaint:'}</CustomText>
-            <CustomText>{visit.reason}</CustomText>
-          </View>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      style={styles.card}
+      onPress={handlePress}>
+      <View style={styles.outerContainer}>
+        <View>
+          <Text style={styles.title}>
+            {intl.en.expertAppointments.patientName}
+          </Text>
+          <Text style={styles.subtitle}>{`${firstName} ${lastName}`}</Text>
         </View>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.innerContainer}>
+          <Text numberOfLines={1} style={styles.title}>
+            {intl.en.expertAppointments.subject}
+          </Text>
+          <Text numberOfLines={1} style={styles.subtitle}>
+            {reason}
+          </Text>
+        </View>
+      </View>
+      <TimeDisplay time={moment(time).format('hh:mm A')} />
+    </TouchableOpacity>
   );
 };
 

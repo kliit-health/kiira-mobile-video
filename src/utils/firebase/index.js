@@ -1684,6 +1684,35 @@ export const updateSingleDocument = (id, collection, updates, merge = true) =>
     })(),
   );
 
+export const firebaseRealTimeFetch = (
+  collectionName,
+  conditions = [],
+  onSucess,
+  onError,
+) => {
+  let query = firestore.collection(collectionName);
+
+  for (let condition of conditions) {
+    const {key, operator, value} = condition;
+    query = query.where(key, operator, value);
+  }
+
+  query.onSnapshot(
+    (snapshot) => {
+      const data = snapshot.docs.map((item) => ({
+        ...item.data(),
+        id: item.id,
+      }));
+      if (data) {
+        onSucess(data);
+      }
+    },
+    (error) => {
+      onError(error);
+    },
+  );
+};
+
 export async function saveAndLock({payload}) {
   const {appointment} = payload;
   const {visit} = appointment;

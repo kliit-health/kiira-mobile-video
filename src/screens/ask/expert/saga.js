@@ -1,83 +1,92 @@
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../utils/localization';
+import {call, put, takeEvery, take, select} from 'redux-saga/effects';
+import {eventChannel, END} from 'redux-saga';
+import {orderBy} from 'lodash';
+import {firebaseRealTimeFetch} from '../../../utils/firebase';
+import {collections} from '../../../utils/constants';
 import {
-  showApiLoader,
-  hideApiLoader,
-} from '../../../components/customLoader/action';
-import {getExpertQuestionsData} from '../../../utils/firebase';
-import {showOrHideModal} from '../../../components/customModal/action';
-import {GET_EXPERT_QUESTION_DATA} from '../../../redux/types';
-import {displayConsole} from '../../../utils/helper';
-import {
-  getExpertQuestionSuccess,
-  getExpertResolvedQuestionSuccess,
-} from './action';
+  GET_EXPERT_ACTIVE_QUESTIONS,
+  GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
+  GET_EXPERT_RESOLVED_QUESTIONS,
+  GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+  SEARCH_EXPERT_QUESTIONS,
+} from '../../../redux/types';
 
-let Lang = Language['en'];
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-let delayTime = 100;
-function* getExpertQuestions({data, dispatch}) {
+function getQuestions(collection, conditions) {
+  return eventChannel((emit) => {
+    const unsubscribe = firebaseRealTimeFetch(
+      collection,
+      conditions,
+      (questions) => emit(questions),
+      (error) => {
+        emit(END);
+        console.log(error);
+      },
+    );
+    return () => unsubscribe;
+  });
+}
+
+function* getActiveQuestions({data: {uid}}) {
+  const conditions = [
+    {key: 'expertInfo.uid', operator: '==', value: uid},
+    {key: 'isResolved', operator: '==', value: false},
+  ];
+
+  const channel = yield call(getQuestions, collections.questions, conditions);
+
   try {
-    const {questionParams, previousQuestionParams} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
-    yield delay(delayTime);
-    yield getExpertQuestionsData(
-      questionParams,
-      (querySnapshot) => {
-        let questionsData = [];
-        querySnapshot.docs.forEach((doc) => {
-          questionsData.push(doc.data());
-        });
-        dispatch(hideApiLoader());
-        dispatch(getExpertQuestionSuccess(questionsData));
-      },
-      (error) => {
-        const {message, code} = error;
-        displayConsole('message', message);
-        displayConsole('code', code);
-        const data = {
-          success: false,
-          message: message,
-        };
-        displayConsole('data', data);
-        displayConsole(
-          '--------------**** getExpertQuestionsData end ********-----------\n\n',
-        );
-      },
-    );
-    yield delay(delayTime);
-    yield getExpertQuestionsData(
-      previousQuestionParams,
-      (querySnapshot) => {
-        let prevQuestionsData = [];
-        querySnapshot.docs.forEach((doc) => {
-          prevQuestionsData.push(doc.data());
-        });
-        dispatch(getExpertResolvedQuestionSuccess(prevQuestionsData));
-        dispatch(hideApiLoader());
-      },
-      (error) => {
-        const {message, code} = error;
-        displayConsole('message', message);
-        displayConsole('code', code);
-        const data = {
-          success: false,
-          message: message,
-        };
-        displayConsole('data', data);
-        displayConsole(
-          '--------------**** getExpertPrevQuestionsData end ********-----------\n\n',
-        );
-      },
-    );
+    while (true) {
+      let questions = yield take(channel);
+      yield put({
+        type: GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
+        data: orderBy(questions, 'modifiedDate', 'desc'),
+      });
+    }
   } catch (error) {
-    yield delay(500);
-    yield put(hideApiLoader());
-    yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    console.log(error);
+  }
+}
+
+function* getResolvedQuestions({data: {uid}}) {
+  const conditions = [
+    {key: 'expertInfo.uid', operator: '==', value: uid},
+    {key: 'isResolved', operator: '==', value: true},
+  ];
+
+  const channel = yield call(getQuestions, collections.questions, conditions);
+
+  try {
+    while (true) {
+      let questions = yield take(channel);
+      yield put({
+        type: GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
+        data: orderBy(questions, 'modifiedDate', 'desc'),
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* searchQuestions({data: {value, status}}) {
+  const state = yield select();
+  const questions = state.askExpertReducer[status];
+
+  if (questions.length > 0) {
+    const searchResult = questions.filter((question) => {
+      const {firstName, lastName} = question.userInfo.profileInfo;
+      return `${firstName} ${lastName}`.includes(value);
+    });
+
+    yield put({
+      type: `SEARCH_EXPERT_${status.toUpperCase()}_QUESTIONS_FULFILLED`,
+      data: value ? searchResult : [],
+    });
   }
 }
 
 export default function* askExpertSaga() {
-  yield takeEvery(GET_EXPERT_QUESTION_DATA, getExpertQuestions);
+  yield takeEvery(GET_EXPERT_ACTIVE_QUESTIONS, getActiveQuestions);
+  yield takeEvery(GET_EXPERT_RESOLVED_QUESTIONS, getResolvedQuestions);
+  yield takeEvery(SEARCH_EXPERT_QUESTIONS, searchQuestions);
 }

@@ -131,3 +131,16 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+export const modifiers = {
+  searchBar: {
+    root: {
+      marginTop: 20,
+    },
+  },
+  container: {
+    safeAreaBottom: {
+      height: 0,
+    },
+  },
+};

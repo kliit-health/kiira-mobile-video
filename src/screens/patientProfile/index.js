@@ -2,45 +2,42 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
+  ScrollView,
   Modal,
   Pressable,
-  ScrollView,
 } from 'react-native';
+import Image from 'react-native-fast-image';
 import ExpertHeader from '../../components/expertHeader';
 import PatientCard from './components/patientCard';
-import {useDispatch, useSelector} from 'react-redux';
 import {screenNames} from '../../utils/constants';
+import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails} from '../../redux/actions';
 import {getPatientDetails} from './actions';
 import {withNavigation} from 'react-navigation';
 import styles from './style';
 
-const PatientProfile = (props) => {
-  let {navigation} = props;
-  const dispatch = useDispatch();
+const PatientProfile = ({navigation}) => {
+  const {expert, visit, patient} = navigation.state.params;
   const [modalVisible, setModalVisible] = useState(false);
-  const medicalHistory = useSelector((state) => state.medicalHistory);
-  const {
-    appointment: {visit, patientInfo},
-  } = medicalHistory;
+  const dispatch = useDispatch();
+  const patientInfo = useSelector((state) => state.userDetails.data);
 
   useEffect(() => {
-    dispatch(getUserDetails(patientInfo.uid));
+    dispatch(getUserDetails(patient.uid));
   }, []);
 
   useEffect(() => {
     dispatch(
       getPatientDetails({
-        uid: patientInfo.uid,
+        uid: patient.uid,
       }),
     );
   }, []);
 
   const handleNavigation = (destination) => {
     navigation.push(destination, {
-      uid: patientInfo.uid,
+      uid: patient.uid,
     });
   };
 
@@ -63,13 +60,13 @@ const PatientProfile = (props) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              if (!visit.locked) {
-                navigation.navigate('MedicalHistoryExpert');
-              } else {
-                setModalVisible(!modalVisible);
-              }
-            }}>
+            onPress={() =>
+              navigation.navigate('MedicalHistoryExpert', {
+                uid: expert.uid,
+                visit,
+                patientInfo,
+              })
+            }>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}

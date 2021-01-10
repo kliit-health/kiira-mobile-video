@@ -410,6 +410,7 @@ export default {
       Verify: 'Verify',
       Visit: 'Visit',
       Welcome: 'Welcome',
+      expertChat: 'ChatExpert',
     },
 
     stack: {
@@ -674,6 +675,12 @@ export const screenNames = {
   termsAndConditions: 'TermsConditions',
   privacyPolicies: 'PrivacyPolicy',
   help: 'Help',
+  patientProfile: 'PatientProfile',
+  updateAvailability: 'UpdateAvailablity',
+  expertSettings: 'SettingExpert',
+  learn: 'Learn',
+  webView: 'WebView',
+  expertChat: 'ChatExpert',
 };
 
 export const units = {

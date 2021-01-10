@@ -65,6 +65,7 @@ function* getPatientDetails({data}) {
         });
       }
     } catch (error) {
+      console.log('ERROR', error);
       yield put({
         type: GET_PATIENT_DETAILS_REJECTED,
         data: error,

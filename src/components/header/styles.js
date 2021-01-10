@@ -31,18 +31,14 @@ export const modifiers = {
   themed: {
     root: {
       backgroundColor: colors.azure,
-      height: 70,
-      borderBottomRightRadius: 25,
-      borderBottomLeftRadius: 25,
+      borderBottomWidth: 0,
     },
     title: {
       color: colors.white,
       fontSize: text.size.xLarge,
     },
     backButton: {
-      root: {
-        marginLeft: 5,
-      },
+      root: {},
     },
   },
   backButton: {

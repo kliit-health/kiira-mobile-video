@@ -1,8 +1,7 @@
 import {StyleSheet} from 'react-native';
-import Constant from '../../utils/constants';
-import metrics from '../../utils/metrices';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
-import {text, colors} from '../../utils/constants';
+import Constant from '../../../utils/constants';
+import metrics from '../../../utils/metrices';
+import {text, colors} from '../../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -12,7 +11,7 @@ var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   cancelTextStyle: {
     textAlign: 'left',
     color: Constant.App.colors.blackColor,
@@ -24,7 +23,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    marginTop: getStatusBarHeight(),
+    width: metrics.DEVICE_WIDTH,
+    // marginTop: getStatusBarHeight(),
   },
 
   creditButtonStyle: {
@@ -60,14 +60,6 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerLight,
     fontWeight: '400',
-  },
-
-  headerStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: parentPaddingValue * 0.5,
-    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   itemsParentContainerStyle: {
@@ -114,19 +106,15 @@ const styles = StyleSheet.create({
   myRecentExpertContainerStyle: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
-    height: 480,
+    width: metrics.DEVICE_WIDTH * 0.95,
+    height: 425,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 10, //IOS
     elevation: 2, // Android
-    margin: 15,
-  },
-
-  parentContainerStyle: {
-    flex: 1,
+    // margin: 15,
   },
 
   profileImageParentContainerStyle: {
@@ -135,85 +123,6 @@ const styles = StyleSheet.create({
 
   profileInfoParentContainerStyle: {
     flexDirection: 'column',
-    alignSelf: 'center',
-    width: metrics.DEVICE_WIDTH - AVATAR_SIZE - parentPadding,
-  },
-
-  titleTextStyle: {
-    textAlign: 'left',
-    color: Constant.App.colors.blackColor,
-    fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.headerBold,
-  },
-
-  expertImage: {
-    width: 120,
-    height: 120,
-    padding: 2,
-    borderRadius: 60,
-    borderWidth: 2,
-    margin: 5,
-    borderColor: Constant.App.colors.blueColor,
-  },
-
-  expertImageContainer: {
-    flexDirection: 'row',
-    margin: 10,
-    zIndex: 1,
-  },
-
-  expertName: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  expertNameTextStyle: {
-    color: Constant.App.colors.blackColor,
-    fontSize: 35,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  expertPrescriberImage: {
-    width: 20,
-    height: 20,
-  },
-
-  expertPrescriberTextStyle: {
-    color: Constant.App.colors.blueColor,
-    marginLeft: 10,
-  },
-
-  expertProfession: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 5,
-  },
-
-  expertProfessionTextStyle: {
-    fontSize: Constant.App.textSize.xxlarge,
-    color: Constant.App.colors.blueGrey,
-    marginRight: 10,
-  },
-
-  expertNameTextStyle: {
-    flex: 1,
-    marginTop: metrics.DEVICE_HEIGHT * 0.025,
-    fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  expertRatingImage: {
-    width: 20,
-    height: 20,
-    padding: 5,
-  },
-
-  expertRatingTextStyle: {
-    fontSize: Constant.App.textSize.Large,
-    color: Constant.App.colors.blueGrey,
-  },
-
-  expertDetailsCard: {
     alignItems: 'center',
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
@@ -299,31 +208,202 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    color: colors.black,
+    fontSize: text.size.xxLarge,
     fontFamily: text.fontFamily.poppinsRegular,
-    fontWeight: '500',
-    fontSize: text.size.xxxxLarge,
     textAlign: 'center',
+    margin: 20,
   },
+
   subtitle: {
-    fontFamily: text.fontFamily.poppinsRegular,
-    fontSize: text.size.regular,
     textAlign: 'center',
-    marginTop: 20,
+    fontSize: 20,
+    fontWeight: '400',
+    margin: 30,
   },
-  image: {
+
+  titleContainerStyle: {
+    // flex: 1,
+    backgroundColor: Constant.App.colors.blueColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: metrics.DEVICE_WIDTH,
+    // height: 200,
+    borderRadius: 50,
+    overflow: 'hidden',
+  },
+
+  titleTextStyle: {
+    color: Constant.App.colors.whiteColor,
+    fontSize: Constant.App.textSize.xxLarge,
+    fontFamily: Constant.App.fontFamily.headerBold,
+    fontWeight: '500',
+  },
+
+  safeArea: {
+    flex: 1,
+  },
+
+  dateContainerStyle: {
+    alignSelf: 'center',
+    borderColor: Constant.App.colors.blueColor,
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 8,
+    backgroundColor: Constant.App.colors.whiteColor,
+    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+  },
+
+  dateSelectedContainerStyle: {
+    alignSelf: 'center',
+    borderColor: Constant.App.colors.blueColor,
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 8,
+    backgroundColor: Constant.App.colors.blueColor,
+    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+  },
+
+  dateSelectedTextStyle: {
+    textAlign: 'center',
+    color: Constant.App.colors.whiteColor,
+    width: 18,
+  },
+
+  dateTextStyle: {
+    textAlign: 'center',
+    width: 18,
+  },
+
+  header: {
+    width: metrics.DEVICE_WIDTH,
+    alignItems: 'center',
+    paddingVertical: 40,
+    backgroundColor: Constant.App.colors.blueColor,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    overflow: 'hidden',
+  },
+
+  headerText: {
+    color: Constant.App.colors.whiteColor,
+    fontSize: Constant.App.textSize.xxLarge,
+    fontFamily: Constant.App.fontFamily.headerBold,
+    fontWeight: '500',
+  },
+
+  logo: {
     width: 100,
     height: 100,
     alignSelf: 'center',
-    margin: 20,
+    marginTop: 20,
+  },
+
+  safeArea: {
+    flex: 1,
+  },
+
+  searchBar: {
+    alignSelf: 'center',
+    width: metrics.DEVICE_WIDTH * 0.75,
+    backgroundColor: Constant.App.colors.greyBgAsk,
+    margin: 5,
+    backgroundColor: 'transparent',
+    borderWidth: 0, //no effect
+    shadowColor: 'transparent', //no effect
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent',
+  },
+
+  title: {
+    textAlign: 'center',
+    fontSize: 40,
+    fontWeight: 'bold',
+    margin: 30,
+    paddingBottom: 200,
+  },
+
+  visitContainerStyle: {
+    padding: parentPaddingValue,
+    flexDirection: 'row',
+    backgroundColor: Constant.App.colors.whiteColor,
+    alignSelf: 'center',
+    width: metrics.DEVICE_WIDTH * 0.9,
+    overflow: 'visible',
+    borderRadius: 20,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: {height: 13, width: 1}, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 10, //IOS
+    elevation: 2, // Android
+    padding: 15,
+  },
+
+  visitParentContainerStyle: {
+    flexDirection: 'column',
+    backgroundColor: Constant.App.colors.whiteColor,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    width: metrics.DEVICE_WIDTH * 0.9,
+    overflow: 'visible',
+    marginVertical: 40,
+    marginHorizontal: 20,
+  },
+
+  userInfo: {
+    flexDirection: 'column',
+    width: metrics.DEVICE_WIDTH * 0.9,
+    marginLeft: 10,
+    marginRight: 10,
+    justifyContent: 'center',
+  },
+
+  userInfoText: {
+    fontSize: Constant.App.textSize.Large,
+    color: Constant.App.colors.blackColor,
+    fontFamily: Constant.App.fontFamily.headerBold,
+    fontWeight: '400',
+  },
+
+  timeContainer: {
+    backgroundColor: Constant.App.colors.pinkColor,
+    marginLeft: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderRadius: 5,
+    overflow: 'hidden',
+    padding: 5,
+  },
+
+  timeImage: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+
+  timeTextStyle: {
+    fontSize: Constant.App.textSize.Normal,
+    color: Constant.App.colors.whiteColor,
+    fontWeight: '200',
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+  },
+  appointmentsList: {
+    padding: 10,
   },
 });
 
-export default styles;
-
 export const modifiers = {
-  button: {
+  searchBar: {
     root: {
-      marginTop: 'auto',
+      marginTop: 20,
+    },
+  },
+  container: {
+    safeAreaBottom: {
+      height: 0,
     },
   },
 };
