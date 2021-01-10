@@ -1,20 +1,25 @@
-import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+  Pressable,
+} from 'react-native';
 import Image from 'react-native-fast-image';
 import ExpertHeader from '../../components/expertHeader';
 import PatientCard from './components/patientCard';
-import {useDispatch, useSelector} from 'react-redux';
 import {screenNames} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails} from '../../redux/actions';
 import {getPatientDetails} from './actions';
 import {withNavigation} from 'react-navigation';
 import styles from './style';
-import {Avatar} from '../../components';
 
 const PatientProfile = ({navigation}) => {
   const {expert, visit, patient} = navigation.state.params;
-
+  const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const patientInfo = useSelector((state) => state.userDetails.data);
 
@@ -39,17 +44,7 @@ const PatientProfile = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ExpertHeader title="Patient Profile" />
-      <View style={styles.profileContainer}>
-        <Avatar
-          size="small"
-          source={patientInfo ? patientInfo.profileInfo.profileImageUrl : ''}
-        />
-        <View>
-          <Text style={styles.name}>
-            {`${visit.firstName} ${visit.lastName}`}
-          </Text>
-        </View>
-      </View>
+      <PatientCard visit={visit} patientInfo={patientInfo} />
       <ScrollView>
         <View style={styles.infoContainer}>
           <TouchableOpacity

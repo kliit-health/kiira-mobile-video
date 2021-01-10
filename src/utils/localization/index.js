@@ -445,10 +445,11 @@ export default {
     },
     expertAppointments: {
       title: 'Appointments',
+      future: 'Future Appointments',
       noVisitsToday:
         'You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
       patientName: 'Patient Name',
-      subject: 'Subject',
+      subject: 'CC',
     },
     expertAccount: {
       logout: 'Logout',

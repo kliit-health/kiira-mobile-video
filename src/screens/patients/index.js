@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import styles from './style';
+import styles, {modifiers} from './style';
 import {getPatientsList} from './action';
 import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
 import {generateDateInfo} from '../../utils/helper';
 import moment from 'moment';
 import _ from 'lodash';
-import {Header, SearchBar} from '../../components';
+import {Header, SearchBar, Container} from '../../components';
+
+import intl from '../../utils/localization';
 
 const Patients = (props) => {
   const {navigation} = props;
@@ -56,7 +58,7 @@ const Patients = (props) => {
 
     if (term) {
       filtered = filtered.filter(({firstName, lastName, time}) => {
-        const date = moment(time).format('lll');
+        const date = moment(time).format('llll');
         if (
           firstName.includes(term) ||
           lastName.includes(term) ||
@@ -70,8 +72,8 @@ const Patients = (props) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Header title="Future Appointments" />
+    <Container unformatted styles={modifiers.container} themed>
+      <Header title={intl.en.expertAppointments.future} themed />
       <SearchBar
         onChange={handleSearch}
         value={searchTerm}
@@ -95,7 +97,7 @@ const Patients = (props) => {
           />
         )}
       </View>
-    </SafeAreaView>
+    </Container>
   );
 };
 

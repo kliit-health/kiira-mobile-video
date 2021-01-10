@@ -24,6 +24,7 @@ const ExpertAppointments = ({navigation}) => {
   const [visits, setVisits] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dates, setDates] = useState([]);
+  const [search, setSearch] = useState(visits);
 
   useEffect(() => {
     dispatch(
@@ -37,6 +38,7 @@ const ExpertAppointments = ({navigation}) => {
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
+
     setDates(dateRange);
     setSelectedDate(dateRange[3]);
   }, []);
@@ -59,9 +61,11 @@ const ExpertAppointments = ({navigation}) => {
         return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
       });
 
-      setVisits([...current], 'current');
+      setVisits([...current]);
+      setSearch([...current]);
     } else {
-      setVisits([...record], 'record');
+      setVisits([...record]);
+      setSearch([...record]);
     }
   }, [visitData, selectedDate]);
 
@@ -75,12 +79,25 @@ const ExpertAppointments = ({navigation}) => {
     });
   };
 
+  const handleSearch = (term) => {
+    setSearch(term);
+
+    let filtered = [...visits];
+
+    if (term) {
+      filtered = filtered.filter(({firstName, lastName}) => {
+        if (firstName.includes(term) || lastName.includes(term)) return true;
+      });
+    }
+    setSearch([...filtered]);
+  };
+
   return (
     <Container unformatted styles={modifiers.container} themed>
       <Header title={intl.en.expertAppointments.title} themed />
       <SearchBar
         styles={modifiers.searchBar}
-        onChange={(input) => console.log(input)}
+        onChange={handleSearch}
         placeholder="Search"
       />
       <ScrollView style={styles.container}>
@@ -123,8 +140,6 @@ const ExpertAppointments = ({navigation}) => {
                   }
                   onPress={() => {
                     setSelectedDate(item.date);
-                    // setDay(item.date);
-                    // dispatch(setAppointmentDay(item.date));
                   }}
                   text={item.day}
                 />
@@ -148,11 +163,16 @@ const ExpertAppointments = ({navigation}) => {
             keyboardShouldPersistTaps={
               Platform.OS === 'ios' ? 'never' : 'always'
             }
-            data={visits}
+            data={search}
             decelerationRate={'fast'}
             extraData={selectedDate}
             renderItem={({item, index}) => (
-              <Visit key={item.uid} onPress={handleVisitPress} {...item} />
+              <Visit
+                key={item.uid}
+                onPress={handleVisitPress}
+                visit={item}
+                {...item}
+              />
             )}
             keyExtractor={(index) => `${index.id}`}
             contentContainerStyle={styles.appointmentsList}

@@ -20,3 +20,4 @@ export {default as RatingModal} from './ratingModal';
 export {default as SearchBar} from './searchBar';
 export {default as TextButton} from './textButton';
 export {default as TextInput} from './textInput';
+export {default as TimeDisplay} from './timeDisplay';

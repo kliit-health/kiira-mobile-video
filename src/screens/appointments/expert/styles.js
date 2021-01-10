@@ -4,6 +4,11 @@ import metrics from '../../../utils/metrices';
 import {text, colors} from '../../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPadding = parentPaddingValue * 2;
+
+let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+var childPadding = parentPadding + childPaddingValue * 2;
+
 export const AVATAR_SIZE = 111;
 
 export default StyleSheet.create({

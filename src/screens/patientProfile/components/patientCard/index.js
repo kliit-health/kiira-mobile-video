@@ -11,7 +11,9 @@ const PatientCard = ({visit, patientInfo}) => {
         defaultSource={require('../../../../../assets/profile_img_placeholder.png')}
         containerStyle={{alignSelf: 'center'}}
         style={styles.profileImage}
-        source={{uri: patientInfo.profileInfo.profileImageUrl}}
+        source={{
+          uri: patientInfo ? patientInfo.profileInfo.profileImageUrl : '',
+        }}
         activeOpacity={0.7}
       />
       <View>
