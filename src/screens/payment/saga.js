@@ -18,7 +18,7 @@ import {
   getCreditAmountsData,
   getPaymentMethods as getPaymentMethodsCloudFunction,
   payAmount,
-  addUserCredits,
+  updateCredits,
   payAmountWithToken,
   getPayPalAccessToken,
   getDataFromTable,
@@ -112,24 +112,20 @@ function* getPaymentMethods() {
 }
 
 function* handlePayResponse(response, credits, navigation) {
-  console.log('Response from card', response);
   if (response.ok) {
-    response = yield call(addUserCredits, credits);
+    const user = firebase.auth().currentUser;
+    yield call(updateCredits, credits, {data: {uid: user.uid}});
     if (response.ok) {
-      console.log('RESPONSE WAS OK');
-      const user = firebase.auth().currentUser;
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
         uid: user.uid,
       };
       const userData = yield getDataFromTable(obj);
       yield put(setData(userData));
-      yield put(showOrHideModal(Lang.successMessages.creditAddedSuccessfully));
+      yield put(showOrHideModal(Lang.successMessages.visitAddedSuccessfully));
       if (navigation === undefined) {
-        console.log("NAVIGATION DOESN'T EXIST");
         NavigationService.goBack();
       } else {
-        console.log('NAVIGATION EXISTS');
         navigation.goBack();
       }
     }
@@ -152,7 +148,7 @@ function* buyCreditsWithToken({payload: {tokenID, credits, amount}}) {
   yield put(showApiLoader(Lang.apiLoader.loadingText));
   let response = yield call(payAmountWithToken, tokenID, amount);
   yield put(hideApiLoader());
-
+  console.log('RESPONSE BUY WITH TOKEN', response);
   yield handlePayResponse(response, credits);
 }
 

@@ -218,7 +218,7 @@ class BuyingCredit extends PureComponent {
       return this.renderAddPaymentMethodCell();
     } else if (option.type === PaymentMethodsTypes.payPal) {
       return this.renderPayPalCell(option.title);
-    } else if (option.type === PaymentMethodsTypes.applePay) {l
+    } else if (option.type === PaymentMethodsTypes.applePay) {
       return this.renderApplePayCell(option.title);
     } else if (option.type === PaymentMethodsTypes.card) {
       return this.renderPaymentMethodCell(option, isSelected);

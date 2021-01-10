@@ -18,9 +18,9 @@ if (!global.atob) {
 
 this.DOMParser = require('xmldom').DOMParser;
 
-let appID = '250962e6be718e6';
-let apiKey = 'f9fdf2c3b58835823c6f3d05e1217a1343a43fee';
-let restKey = 'c8e128ec8a07b1a15d77c9820095dc3c6bc53e38';
+let appID = '28070529bb911c1';
+let apiKey = 'd4acb0f852b0d67a0ad92689ff888500c7b6d934';
+let restKey = '7b598a589f2c92ce9655fec31ad9d5b553ec6bd3';
 let appRegion = 'US';
 
 class LoginScreen extends Component {
@@ -99,12 +99,12 @@ class LoginScreen extends Component {
       },
       body: {
         uid: generateCometChatUser(userData),
-        name: `${userData.firstName} ${userData.lastName}`,
+        name: `${userData.profileInfo.firstName} ${userData.profileInfo.lastName}`,
       },
     };
 
     fetch(
-      `https://api-us.cometchat.io/v2.0/users?name=${userData.firstName} ${userData.lastName}&uid=${uid}`,
+      `https://api-us.cometchat.io/v2.0/users?name=${userData.profileInfo.firstName} ${userData.profileInfo.lastName}&uid=${uid}`,
       options,
     )
       .then((res) => res.json())

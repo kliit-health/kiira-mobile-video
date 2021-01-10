@@ -51,16 +51,16 @@ const Visit = ({visit, date, navigation}) => {
         <Text style={styles.title}>{`CC: ${visit.reason}`}</Text>
         <View style={styles.detailContainer}>
           <View style={styles.detail}>
-            <Text style={styles.detailText}>{date.dow}</Text>
+            <Text style={styles.detailText}>{date.dow} </Text>
             <Text>{`${date.month} ${date.day}`}</Text>
           </View>
           <View style={styles.detail}>
-            <Text style={styles.detailText}>{date.hour.time}</Text>
-            <Text>{date.hour.am_pm}</Text>
+            <Text style={styles.detailText}>{date.hour.time} </Text>
+            <Text>{date.hour.am_pm} </Text>
           </View>
           <View style={styles.detail}>
-            <Text style={styles.detailText}>30</Text>
-            <Text>MIN</Text>
+            <Text style={styles.detailText}>30 </Text>
+            <Text>MIN </Text>
           </View>
         </View>
         <CustomButton

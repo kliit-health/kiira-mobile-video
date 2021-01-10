@@ -390,7 +390,7 @@ export default {
     },
 
     successMessages: {
-      creditAddedSuccessfully: 'Your credit has increased successfully',
+      visitAddedSuccessfully: 'Your payment was successful',
       cardAddedSuccessfully: 'Your card has been added successfully',
     },
 

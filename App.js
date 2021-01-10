@@ -15,7 +15,7 @@ import {
 } from './src/screens/authLoading/action';
 import {signoutApihit} from './src/screens/account/action';
 import Constant from './src/utils/constants';
-// import BackgroundTimer from 'react-native-background-timer';
+// import BackgroundTimerMain from 'react-native-background-timer';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigator';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
@@ -60,7 +60,7 @@ class App extends PureComponent {
   }
 
   componentWillUnmount() {
-    // firebase.auth().signOut();
+    firebase.auth().signOut();
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,
@@ -75,16 +75,16 @@ class App extends PureComponent {
         clearTimeout(this.timer);
       }
       // if (this.timeoutId) {
-      //   BackgroundTimer.clearTimeout(this.timeoutId);
+      //   BackgroundTimerMain.clearTimeout(this.timeoutId);
       // }
     } else {
       setState(false);
 
       // if (this.timeoutId) {
-      //   BackgroundTimer.clearTimeout(this.timeoutId);
+      //   BackgroundTimerMain.clearTimeout(this.timeoutId);
       // }
 
-      // this.timeoutId = BackgroundTimer.setTimeout(() => {
+      // this.timeoutId = BackgroundTimerMain.setTimeout(() => {
       //   const payload = {
       //     navigation: this.navigator._navigation,
       //     isLoaderShow: false,
