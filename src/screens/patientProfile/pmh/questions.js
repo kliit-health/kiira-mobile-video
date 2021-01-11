@@ -10,11 +10,6 @@ export const questions = [
       {title: 'Arthritis', key: 'arthritis', section: 'disease'},
       {title: 'Joint Pain', key: 'jointPain', section: 'disease'},
       {title: 'Fracture', key: 'fracture', section: 'disease'},
-    ],
-  },
-  {
-    question: 'Has the patient had any of the following major illnesses?',
-    options: [
       {title: 'Anxiety', key: 'anxiety', section: 'disease'},
       {title: 'Depression', key: 'depression', section: 'disease'},
       {title: 'Seizures', key: 'seizures', section: 'disease'},
@@ -23,11 +18,6 @@ export const questions = [
       {title: 'Tuberculosis', key: 'tuberculosis', section: 'disease'},
       {title: 'Thyroid disease', key: 'thyroidDisease', section: 'disease'},
       {title: 'Clotting disorder', key: 'clottingDisorder', section: 'disease'},
-    ],
-  },
-  {
-    question: 'Has the patient had any of the following major illnesses?',
-    options: [
       {title: 'Diabetes', key: 'diabetes', section: 'disease'},
       {
         title: 'High Blood Pressure',
@@ -46,6 +36,12 @@ export const questions = [
         section: 'disease',
       },
     ],
+  },
+  {
+    question:
+      "Does the paitent have any diseases or syndromes that weren't mentioned?",
+    textPrompt: 'Please Type details.',
+    key: 'rareDisease',
   },
   {
     question: 'Has anyone in patients family been diagnosed with cancer?',

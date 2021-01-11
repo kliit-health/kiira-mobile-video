@@ -109,6 +109,10 @@ const initialState = {
       history: false,
       notes: '',
     },
+    rareDisease: {
+      history: false,
+      notes: '',
+    },
     illnesses: {
       diabetes: false,
       highBloodPressure: false,
@@ -140,6 +144,10 @@ const initialState = {
   },
   pmh: {
     cancer: {
+      history: false,
+      notes: '',
+    },
+    rareDisease: {
       history: false,
       notes: '',
     },

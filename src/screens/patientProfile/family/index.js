@@ -20,6 +20,10 @@ const FamilyHistory = ({navigation}) => {
       history: false,
       notes: '',
     },
+    rareDisease: {
+      history: false,
+      notes: '',
+    },
     illnesses: {
       diabetes: false,
       highBloodPressure: false,

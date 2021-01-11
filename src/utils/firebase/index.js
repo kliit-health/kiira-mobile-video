@@ -416,6 +416,24 @@ export async function changeAppointmentAsync({data}) {
         });
 
         await document.set({history: [...appointments.history]}, {merge: true});
+
+        const expertDocument = firestore
+          .collection('appointments')
+          .doc(expert.uid);
+        const expertResponse = await expertDocument.get();
+        let expertAppointments = expertResponse.data();
+        expertAppointments.history[uid] = expertAppointments.history[uid].map(
+          (item) => {
+            if (item.id === id) {
+              return (item = data);
+            }
+          },
+        );
+
+        await expertDocument.set(
+          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
+          {merge: true},
+        );
       })
       .catch((error) => {
         console.error(error);

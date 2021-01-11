@@ -7,7 +7,10 @@ import {withNavigation} from 'react-navigation';
 
 const VisitDetails = ({navigation, visit, ...props}) => {
   let today = moment().startOf('day');
-  let appointment = moment(visit.time).format('YYYY-MM-DD');
+  let appointment =
+    typeof visit.time === 'number'
+      ? moment.unix(visit.time).format('MM/DD/YYYY')
+      : moment(visit.time).format('YYYY-MM-DD');
   let daysUntilVisit = Math.abs(
     moment.duration(today.diff(appointment)).asDays(),
   );

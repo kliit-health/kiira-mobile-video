@@ -53,7 +53,9 @@ const ExpertInfo = ({expertData, visit}) => {
         </View>
         <View style={styles.dateContainer}>
           <Text style={styles.dateText}>
-            {moment(visit.time).format('llll')}
+            {typeof visit.time === 'number'
+              ? moment.unix(visit.time).format('llll')
+              : moment(visit.time).format('llll')}
           </Text>
         </View>
       </View>
