@@ -34,8 +34,6 @@ class ChatBotScreen extends Component {
       sexuality,
     } = userInfo;
 
-    console.log('USER INFO', userInfo);
-
     if (!first_name.value.trim()) {
       showHideErrorModal(lang.addProfileData.emptyFirstNameMsg);
     } else if (!last_name.value.trim()) {

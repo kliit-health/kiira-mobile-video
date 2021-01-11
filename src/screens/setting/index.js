@@ -486,7 +486,7 @@ class Setting extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoadingReducer.userData,
+  userData: state.userDetails.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({

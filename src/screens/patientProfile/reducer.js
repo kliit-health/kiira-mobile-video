@@ -10,6 +10,7 @@ import {
   SET_MEDICAL_HISTORY,
 } from '../../redux/types';
 import {createReducer} from '@reduxjs/toolkit';
+import {isArray} from 'lodash';
 
 const initialState = {
   loading: false,
@@ -338,10 +339,9 @@ export default createReducer(initialState, {
     ...initialState,
     data: {
       ...state.data,
-      [dataKey]:
-        typeof updates === 'object'
-          ? {...state.data[dataKey], ...updates}
-          : [...state.data[dataKey], ...updates],
+      [dataKey]: isArray(updates)
+        ? [...state.data[dataKey], ...updates]
+        : {...state.data[dataKey], ...updates},
     },
   }),
   [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, {payload}) => ({

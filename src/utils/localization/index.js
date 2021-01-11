@@ -429,7 +429,7 @@ export default {
       question: 'Have a question? Ask the Kiira support team!',
     },
     learn: {
-      title: 'Learn',
+      title: 'Kick it with Kiira',
       learnMore:
         'Want to know more about Kiira and Women Health? Read our articles!',
       seeArticles: 'See Articles',
