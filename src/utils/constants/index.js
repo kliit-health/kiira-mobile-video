@@ -453,6 +453,7 @@ export default {
       lockIcon: require('../../../assets/npLock.png'),
       loginLogoImage: require('../../../assets/logo.png'),
       loginLogoImage2: require('../../../assets/logo2.png'),
+      logo: require('../../../assets/logo.png'),
       logoHorizontal: require('../../../assets/logo-sm.png'),
       medication: require('../../../assets/medication.png'),
       menuDotIcon: require('../../../assets/menu_dot.png'),

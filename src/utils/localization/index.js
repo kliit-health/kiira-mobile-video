@@ -2,7 +2,7 @@ export default {
   en: {
     account: {
       logout: 'Logout',
-      settings: 'Settings',
+      settings: 'My Profile',
       termsAndConditions: 'Terms & Conditions',
       privacyPolicies: 'Privacy Policies',
       help: 'Help',

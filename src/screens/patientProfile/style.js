@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1, // IOS
     shadowRadius: 3, //IOS
     elevation: 2, // Android
+    marginBottom: 30,
   },
 
   lockButton: {

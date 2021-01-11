@@ -7,12 +7,8 @@ import metrices from '../../utils/metrices';
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
 let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
-
-// let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
-// let parentPadding = parentPaddingValue * 2;
-
 let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
+let childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
   backContainerStyle: {
@@ -92,7 +88,6 @@ const styles = StyleSheet.create({
   },
 
   dateTimeSlotContainerStyle: {
-    // alignItems: "flex-start",
     alignSelf: 'flex-start',
     flexDirection: 'row',
     borderColor: Constant.App.colors.blueColor,
@@ -107,7 +102,6 @@ const styles = StyleSheet.create({
   },
 
   dateTimeSelectedSlotContainerStyle: {
-    // alignItems: "flex-start",
     alignSelf: 'flex-start',
     flexDirection: 'row',
     borderColor: Constant.App.colors.blueColor,
@@ -148,9 +142,6 @@ const styles = StyleSheet.create({
   },
 
   expertInfoProfessionTextStyle: {
-    // marginTop: metrics.DEVICE_HEIGHT * 0.03,
-    // marginBottom: 10,
-    // marginLeft: 10,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Small,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -302,6 +293,12 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     alignSelf: 'flex-start',
     justifyContent: 'flex-end',
+  },
+
+  logo: {
+    height: 80,
+    marginBottom: 10,
+    alignSelf: 'center',
   },
 
   myRecentExpertContainerStyle: {

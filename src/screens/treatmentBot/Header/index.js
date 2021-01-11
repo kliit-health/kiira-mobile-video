@@ -1,29 +1,36 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Image, Text, SafeAreaView} from 'react-native';
 import Constant from '../../../utils/constants';
-import style from './style';
+import IconButton from '../../../components/iconButton';
+import styles from './style';
 
-const Header = () => {
+const Header = ({handleClose}) => {
   const {staticImages} = Constant.App;
 
   return (
-    <View style={style.container}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.xContainer}>
+        <IconButton
+          source={Constant.App.staticImages.xCloseIcon}
+          onPress={handleClose}
+        />
+      </View>
       <Image
         resizeMode="contain"
         source={staticImages.logoHorizontal}
-        style={style.logoStyle}
+        style={styles.logoStyle}
       />
-      <View style={style.subHeadingContainer}>
-        <Text style={style.subHeadingTitle}>
+      <View style={styles.subHeadingContainer}>
+        <Text style={styles.subHeadingTitle}>
           Get Treatment{'  '}
           <Image
             resizeMode="contain"
             source={staticImages.bandaidGrey}
-            style={style.bandaid}
+            style={styles.bandaid}
           />
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

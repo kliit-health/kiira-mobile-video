@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Modal} from 'react-native';
+import {View, Text, Modal, Image} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import IconButton from '../../../components/iconButton';
 import CustomButton from '../../../components/customButton';
@@ -18,6 +18,7 @@ const PaymentModal = ({
   const userData = useSelector((state) => state.authLoadingReducer.userData);
   const dispatch = useDispatch();
   const [planType, setPlanType] = useState('');
+  const {staticImages} = Constant.App;
 
   useEffect(() => {
     async function getPlanInfo() {
@@ -41,9 +42,14 @@ const PaymentModal = ({
                 }}
               />
 
-              <Text style={styles.modalText}>Current Plan</Text>
+              {/* <Text style={styles.modalText}>Current Plan</Text> */}
+              <Image
+                resizeMode="contain"
+                style={styles.logo}
+                source={staticImages.logoHorizontal}
+              />
               <Text style={{...styles.modalText, fontSize: 20}}>
-                {`Kiira ${planType.title}: ${userData.visits} Video visit(s) left`}
+                {`${userData.visits} Video visit(s) available`}
               </Text>
               <CustomButton
                 buttonStyle={styles.noContainerStyle}

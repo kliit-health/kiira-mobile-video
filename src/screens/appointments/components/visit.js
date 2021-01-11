@@ -8,7 +8,6 @@ import Language from '../../../utils/localization';
 import styles from '../style';
 import {useDispatch} from 'react-redux';
 import {cancelAppointment} from '../action';
-import moment from 'moment';
 
 const lang = Language['en'];
 
@@ -20,8 +19,6 @@ const Visit = ({visit, date, navigation}) => {
     id: visit.id,
     expert: visit.expert,
   };
-
-  // const isAfter = moment(visit.time).isAfter(new Date());
 
   return (
     <View style={{alignSelf: 'center', paddingBottom: 50}}>

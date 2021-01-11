@@ -6802,6 +6802,11 @@ react-native-elements@^2.2.1:
     react-native-ratings "^7.2.0"
     react-native-status-bar-height "^2.5.0"
 
+react-native-error-boundary@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-error-boundary/-/react-native-error-boundary-1.1.6.tgz#5e649d4bfebab48b7789824141d26b7ac393ea69"
+  integrity sha512-IqNcD0Qigx2Dk4fP+OcTYLH8XjbijPEmLZqCh2flLijUkEo8G/D151tRcUV6DHU0IL0ZHOB+/wF2kEUT+liPdg==
+
 react-native-fast-image@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.2.tgz#e9db271b70b9634b7be054760914d80954f9898c"
@@ -7017,7 +7022,7 @@ react-native-video@^5.1.0-alpha8:
     prop-types "^15.7.2"
     shaka-player "^2.5.9"
 
-react-native-webview@^8.1.0:
+react-native-webview@^8.2.1:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-8.2.1.tgz#23f9e156a3361fee316d54b60e64da1a27f9f73b"
   integrity sha512-A2+JTOPloKHrBkKtJVEaT1jKeM4Lv+qx9e6+w/GISVkCMQj8WhBsx7YTvqi0jj0m3dxk7gkrtwVtUDaS7xK/ug==
