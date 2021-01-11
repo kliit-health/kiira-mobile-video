@@ -38,7 +38,9 @@ export const modifiers = {
       fontSize: text.size.xLarge,
     },
     backButton: {
-      root: {},
+      root: {
+        marginBottom: 3,
+      },
     },
   },
   backButton: {

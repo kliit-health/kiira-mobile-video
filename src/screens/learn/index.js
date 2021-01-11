@@ -22,7 +22,7 @@ const Learn = ({navigation}) => {
           </View>
           <Image
             style={styles.bannerImage}
-            source={require('../../../assets/image_not_found.png')}
+            source={require('../../../assets/banner.jpeg')}
             resizeMode="cover"
           />
         </View>

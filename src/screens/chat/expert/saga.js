@@ -286,7 +286,6 @@ function* resolveQuestion({data}) {
   try {
     displayConsole('data', data);
     const {resolveQuestionParams, navigation} = data;
-    console.log(data);
     const responseResolvedQuestion = yield resolvedQuestion(
       resolveQuestionParams,
     );

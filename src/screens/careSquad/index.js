@@ -77,7 +77,6 @@ const CareSquad = ({navigation}) => {
       const fav = experts.filter((experts) =>
         favorites.some((uid) => experts.uid === uid),
       );
-      console.log(fav);
       return fav;
     }
     return [];
