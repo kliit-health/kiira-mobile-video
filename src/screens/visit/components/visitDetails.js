@@ -12,10 +12,6 @@ const VisitDetails = ({navigation, visit, ...props}) => {
     moment.duration(today.diff(appointment)).asDays(),
   );
 
-  // var now  = ;
-  // var then = "04/02/2016 14:20:30";
-  // var diff = moment.duration(moment(then).diff(moment(now)));
-
   return (
     <View style={{alignSelf: 'center'}}>
       <View style={styles.visitDetailsParentContainer}>
@@ -37,7 +33,7 @@ const VisitDetails = ({navigation, visit, ...props}) => {
                   daysUntilVisit > 0
                     ? `in ${Math.round(daysUntilVisit)} days.`
                     : 'today.'
-                } Please return to this page at least 5 minutes before your appointment time.`}
+                } Please return to this page and enter the waiting room at least 5 minutes before your appointment time.`}
               </Text>
             </View>
           </View>

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import ChatBot from '../../components/chatBot';
-import Review from './Review';
-import StateModal from './statesModal';
 import Header from './Header';
-import moment from 'moment';
 import {connect} from 'react-redux';
 import {updateUserDataToFirebase} from './action';
 import {showOrHideModal} from '../../components/customModal/action';
@@ -37,7 +34,7 @@ class TreatmentBotScreen extends Component {
         handleEnd={({steps}) => {
           this.book();
         }}
-        headerComponent={<Header />}
+        headerComponent={<Header handleClose={this.leave} />}
         steps={[
           {
             id: 'intro',

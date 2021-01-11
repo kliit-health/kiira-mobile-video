@@ -388,6 +388,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
         console.error(error);
       });
   } catch (error) {
+    console.log('Cancel Error', error);
     return error;
   }
 }
@@ -1448,6 +1449,7 @@ export async function addNewPaymentCard(obj) {
     });
     return {ok: true, data: null};
   } catch (err) {
+    console.log('Card payment error', err);
     let status = err.status ? err.status : 'internal';
     return {ok: false, status};
   }

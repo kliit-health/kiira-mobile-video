@@ -59,11 +59,8 @@ const Patients = (props) => {
     if (term) {
       filtered = filtered.filter(({firstName, lastName, time}) => {
         const date = moment(time).format('llll');
-        if (
-          firstName.includes(term) ||
-          lastName.includes(term) ||
-          date.includes(term)
-        ) {
+        const fullName = `${firstName} ${lastName}`;
+        if (fullName.includes(term) || date.includes(term)) {
           return true;
         }
       });

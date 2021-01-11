@@ -8,7 +8,6 @@ import Language from '../../../utils/localization';
 import styles from '../style';
 import {useDispatch} from 'react-redux';
 import {cancelAppointment} from '../action';
-import moment from 'moment';
 
 const lang = Language['en'];
 
@@ -20,8 +19,6 @@ const Visit = ({visit, date, navigation}) => {
     id: visit.id,
     expert: visit.expert,
   };
-
-  // const isAfter = moment(visit.time).isAfter(new Date());
 
   return (
     <View style={{alignSelf: 'center', paddingBottom: 50}}>
@@ -72,19 +69,19 @@ const Visit = ({visit, date, navigation}) => {
           }}>
           <View style={{alignItems: 'center', margin: 20}}>
             <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.dow}
+              {date.dow}{' '}
             </Text>
             <Text>{`${date.month} ${date.day}`}</Text>
           </View>
           <View style={{alignItems: 'center', margin: 20}}>
             <Text style={{marginBottom: 10, fontWeight: 'bold'}}>
-              {date.hour.time}
+              {date.hour.time}{' '}
             </Text>
-            <Text>{date.hour.am_pm}</Text>
+            <Text>{date.hour.am_pm} </Text>
           </View>
           <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>30</Text>
-            <Text>MIN</Text>
+            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>30 </Text>
+            <Text>MIN </Text>
           </View>
         </View>
         <CustomButton

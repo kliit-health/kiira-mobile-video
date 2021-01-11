@@ -2,7 +2,7 @@ export default {
   en: {
     account: {
       logout: 'Logout',
-      settings: 'Settings',
+      settings: 'My Profile',
       termsAndConditions: 'Terms & Conditions',
       privacyPolicies: 'Privacy Policies',
       help: 'Help',
@@ -390,7 +390,7 @@ export default {
     },
 
     successMessages: {
-      creditAddedSuccessfully: 'Your credit has increased successfully',
+      visitAddedSuccessfully: 'Your payment was successful',
       cardAddedSuccessfully: 'Your card has been added successfully',
     },
 

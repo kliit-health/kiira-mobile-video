@@ -6,7 +6,6 @@ import styles from '../style';
 import Constant from '../../../utils/constants';
 import {makeAppointment} from '../action';
 import {getAppointmentsList} from '../../appointments/action';
-import {showOrHideModal} from '../../../components/customModal/action';
 
 const Buttons = ({
   applyCredit,
@@ -52,13 +51,9 @@ const Buttons = ({
         buttonStyle={styles.yesContainerStyle}
         textStyle={styles.yesTextStyle}
         onPress={() => {
-          if (userData.demo) {
-            dispatch(showOrHideModal('Currently Unavailible'));
-          } else {
-            navigation.navigate('BuyingCredit');
-          }
+          navigation.navigate('BuyingCredit');
         }}
-        text="Pay"
+        text="Buy Credit"
       />
       <CustomButton
         disabled={userData.visits === 0}
@@ -73,13 +68,9 @@ const Buttons = ({
             : styles.noTextStyle
         }
         onPress={() => {
-          if (userData.demo) {
-            dispatch(showOrHideModal('Currently Unavailible'));
-          } else {
-            setModalVisible(!modalVisible);
-          }
+          setModalVisible(!modalVisible);
         }}
-        text="Apply Plan Credit"
+        text="Apply Credit"
       />
     </Fragment>
   );

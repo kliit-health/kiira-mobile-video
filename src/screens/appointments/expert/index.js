@@ -5,6 +5,7 @@ import CustomText from '../../../components/customText';
 import {Header, Container, SearchBar} from '../../../components';
 import CustomButton from '../../../components/customButton';
 import Constant from '../../../utils/constants';
+import ErrorBoundary from 'react-native-error-boundary';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
 import {generateDateInfo, getDateRange} from '../../../utils/helper';
@@ -167,12 +168,14 @@ const ExpertAppointments = ({navigation}) => {
             decelerationRate={'fast'}
             extraData={selectedDate}
             renderItem={({item, index}) => (
-              <Visit
-                key={item.uid}
-                onPress={handleVisitPress}
-                visit={item}
-                {...item}
-              />
+              <ErrorBoundary>
+                <Visit
+                  key={item.uid}
+                  onPress={handleVisitPress}
+                  visit={item}
+                  {...item}
+                />
+              </ErrorBoundary>
             )}
             keyExtractor={(index) => `${index.id}`}
             contentContainerStyle={styles.appointmentsList}

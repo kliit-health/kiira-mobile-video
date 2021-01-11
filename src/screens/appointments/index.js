@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, Text, Image, ScrollView} from 'react-native';
+import {View, FlatList, Text, Image} from 'react-native';
+import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
 import {Container, Header, TextButton} from '../../components';
-import Constant, {screenNames} from '../../utils/constants';
+import {screenNames} from '../../utils/constants';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
 import {generateDateInfo} from '../../utils/helper';
@@ -40,6 +41,14 @@ const Appointments = ({navigation}) => {
     navigation.navigate(destination);
   };
 
+  // const CustomFallback = (props: { error: Error, resetError: Function }) => (
+  //   <View>
+  //     <Text>Something happened!</Text>
+  //     <Text>{props.error.toString()}</Text>
+  //     <Button onPress={props.resetError} title={'Try again'} />
+  //   </View>
+  // )
+
   return (
     <View style={styles.container}>
       <Header
@@ -55,7 +64,11 @@ const Appointments = ({navigation}) => {
           decelerationRate={'fast'}
           renderItem={({item, index}) => {
             const date = generateDateInfo(item.time);
-            return <Visit visit={item} date={date} navigation={navigation} />;
+            return (
+              <ErrorBoundary onError={() => navigation.navigate('BottomTab')}>
+                <Visit visit={item} date={date} navigation={navigation} />
+              </ErrorBoundary>
+            );
           }}
           keyExtractor={(index) => `${index.id}`}
         />

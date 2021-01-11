@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3, //IOS
     elevation: 2, // Android
     marginTop: 20,
+    marginBottom: 20,
   },
 
   name: {

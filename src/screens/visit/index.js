@@ -5,6 +5,7 @@ import {Header} from '../../components';
 import {withNavigation} from 'react-navigation';
 import {ExpertInfo, VisitDetails} from './components';
 import {getExpertsData} from '../expertSchedule/action';
+import ErrorBoundary from 'react-native-error-boundary';
 import Constant from '../../utils/constants';
 import styles from './styles';
 
@@ -34,13 +35,15 @@ const Visit = (props) => {
         showsVerticalScrollIndicator={false}>
         {expertData && (
           <View>
-            <Header
-              title="Appointment Details"
-              onBack={() => navigation.goBack()}
-            />
-            <ExpertInfo expertData={expertData} visit={visit} />
+            <ErrorBoundary onError={() => navigation.goBack()}>
+              <Header
+                title="Appointment Details"
+                onBack={() => navigation.goBack()}
+              />
+              <ExpertInfo expertData={expertData} visit={visit} />
 
-            <VisitDetails visit={visit} />
+              <VisitDetails visit={visit} />
+            </ErrorBoundary>
           </View>
         )}
       </ScrollView>

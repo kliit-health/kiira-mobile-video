@@ -219,11 +219,7 @@ class Ask extends PureComponent {
         buttonStyle={styles.buttonContainerStyle}
         textStyle={styles.buttonTextStyle}
         onPress={() => {
-          if (userData.demo) {
-            showHideErrorModal('Currently unavailable');
-          } else {
-            navigation.navigate(Constant.App.screenNames.ChooseExpert);
-          }
+          navigation.navigate(Constant.App.screenNames.ChooseExpert);
         }}
         text={lang.askUser.btnText}
       />
