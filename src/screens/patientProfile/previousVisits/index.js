@@ -35,12 +35,7 @@ const PreviousVisits = ({navigation}) => {
           <FastImage
             defaultSource={require('../../../../assets/profile_img_placeholder.png')}
             containerStyle={{alignSelf: 'center'}}
-            style={{
-              marginHorizontal: 5,
-              width: 60,
-              height: 60,
-              borderRadius: 50,
-            }}
+            style={styles.image}
             source={{uri: visit.expert.imageUrl}}
             activeOpacity={0.7}
           />

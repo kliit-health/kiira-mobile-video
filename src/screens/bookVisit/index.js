@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {View, ScrollView} from 'react-native';
 import {Header} from '../../components';
+import {getCreditAmountsData} from '../../utils/firebase';
 import styles from './style';
 
 import {ExpertInfo, VisitDetails, Buttons, PaymentModal} from './components';
@@ -13,12 +14,19 @@ const BookVisit = (props) => {
   const [applyCredit, setApplyCredit] = useState(false);
   const [applyPayment, setApplyPayment] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [price, setPrice] = useState('');
   const expertData = useSelector(
     (state) => state.expertProfileReducer.expertData,
   );
 
   const visitData = useSelector((state) => state.expertScheduleReducer);
   const userData = useSelector((state) => state.authLoadingReducer.userData);
+
+  useEffect(() => {
+    getCreditAmountsData().then((pricing) =>
+      setPrice(JSON.parse(pricing)[0].amount),
+    );
+  }, []);
 
   const appointmentDetails = {
     firstName: userData.profileInfo.firstName,
@@ -55,6 +63,7 @@ const BookVisit = (props) => {
     visitData,
     expertData,
     userData,
+    price,
   };
 
   return (

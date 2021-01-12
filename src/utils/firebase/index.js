@@ -58,7 +58,6 @@ export function loginInWithFirebase(obj) {
       .auth()
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
-        console.log('Values', firebase.config().getValues());
         const {user} = success;
         return user;
       })
@@ -167,7 +166,14 @@ export function uploadImage(obj, success, error) {
   }
 }
 
-export async function getAppointmentsAsync({data: {uid}}) {
+export async function getAppointmentsAsync({data}) {
+  console.log(data);
+  let uid = data.uid;
+  console.log(uid);
+  if (Object.keys(data).includes('expert')) {
+    uid = data.expert.uid;
+  }
+
   try {
     const document = firebase.firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
@@ -427,9 +433,10 @@ export async function changeAppointmentAsync({data}) {
             if (item.id === id) {
               return (item = data);
             }
+            return item;
           },
         );
-
+        console.log('EXPERT APPOINTMENTS', expertAppointments);
         await expertDocument.set(
           {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
           {merge: true},

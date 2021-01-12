@@ -252,6 +252,7 @@ export default StyleSheet.create({
     padding: 8,
     backgroundColor: Constant.App.colors.whiteColor,
     marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    elevation: 3,
   },
 
   dateSelectedContainerStyle: {
@@ -262,17 +263,21 @@ export default StyleSheet.create({
     padding: 8,
     backgroundColor: Constant.App.colors.blueColor,
     marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    elevation: 3,
   },
 
   dateSelectedTextStyle: {
     textAlign: 'center',
     color: Constant.App.colors.whiteColor,
     width: 18,
+    elevation: 3,
   },
 
   dateTextStyle: {
     textAlign: 'center',
+    color: Constant.App.colors.blackColor,
     width: 18,
+    elevation: 3,
   },
 
   header: {
