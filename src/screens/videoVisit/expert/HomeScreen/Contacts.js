@@ -216,13 +216,14 @@ class Contacts extends Component {
               style={{marginLeft: 15}}>
               <Text
                 style={{
-                  overflow: 'hidden',
+                  //   overflow: 'hidden',
                   alignSelf: 'center',
                   backgroundColor: '#6AC5FF',
                   color: '#FFF',
                   padding: 10,
                   justifyContent: 'center',
                   borderRadius: 5,
+                  elevation: 3,
                 }}>
                 Join
               </Text>

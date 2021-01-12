@@ -453,7 +453,7 @@ export default {
     },
     expertAccount: {
       logout: 'Logout',
-      settings: 'Settings',
+      settings: 'My Profile',
       termsAndConditions: 'Terms & Conditions',
       privacyPolicies: 'Privacy Policies',
       updateAvailability: 'Update Availability',

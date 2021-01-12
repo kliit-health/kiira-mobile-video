@@ -31,7 +31,6 @@ const VideoHistory = ({navigation, expertDetails}) => {
   return (
     <SectionList
       style={listStyles.root}
-      contentContainerStyle={listStyles.contentContainer}
       ListEmptyComponent={() => <Fallback />}
       keyExtractor={({visit}, index) => `${visit.id} ${index}`}
       sections={getSections(
@@ -105,7 +104,7 @@ const ItemPast = ({reason, time, id}) => (
     <View style={itemPastStyles.subtitleContainer}>
       <Text style={itemPastStyles.dateText}>
         {moment.unix(time).calendar(null, {
-          sameElse: 'DD/MM/YYYY',
+          sameElse: 'MM/DD/YYYY',
         })}
       </Text>
     </View>

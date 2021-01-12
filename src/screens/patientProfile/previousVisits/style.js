@@ -27,6 +27,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+  image: {
+    marginHorizontal: 5,
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+  },
+
   info: {
     padding: 20,
   },

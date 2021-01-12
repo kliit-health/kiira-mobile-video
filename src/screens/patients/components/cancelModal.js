@@ -13,7 +13,7 @@ const CancelModal = ({visit, setVisible, visible}) => {
     id: visit.id,
     expert: visit.expert,
   };
-
+  console.log('Cancel DATA', data);
   return (
     <Modal
       animationType="slide"

@@ -20,6 +20,10 @@ const PersonalMedicalHistory = ({navigation}) => {
       history: false,
       notes: '',
     },
+    rareDisease: {
+      history: false,
+      notes: '',
+    },
     disease: {
       diabetes: false,
       highBloodPressure: false,

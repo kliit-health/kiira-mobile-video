@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    paddingBottom: 50,
   },
 
   nextButtonContainerStyle: {

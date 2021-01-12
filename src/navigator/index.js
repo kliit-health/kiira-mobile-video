@@ -236,8 +236,8 @@ const BottomTab = createBottomTabNavigator(
                 style={{width: tabIconSize, height: tabIconSize}}
                 source={
                   focused
-                    ? require('../../assets/community-active.png')
-                    : require('../../assets/community.png')
+                    ? require('../../assets/kiira_icon.png')
+                    : require('../../assets/kiira_icon_inactive.png')
                 }
               />
             </View>

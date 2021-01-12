@@ -2,10 +2,11 @@ import React from 'react';
 import {Modal, View, Image, Pressable, Text} from 'react-native';
 import {cancelAppointment} from '../../../appointments/expert/action';
 import {useDispatch} from 'react-redux';
+import {withNavigation} from 'react-navigation';
 
 import styles from '../styles';
 
-const CancelModal = ({visit, setVisible, visible}) => {
+const CancelModal = ({visit, setVisible, visible, navigation}) => {
   const dispatch = useDispatch();
 
   const data = {
@@ -57,4 +58,4 @@ const CancelModal = ({visit, setVisible, visible}) => {
   );
 };
 
-export default CancelModal;
+export default withNavigation(CancelModal);

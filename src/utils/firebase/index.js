@@ -58,7 +58,6 @@ export function loginInWithFirebase(obj) {
       .auth()
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
-        console.log('Values', firebase.config().getValues());
         const {user} = success;
         return user;
       })
@@ -167,7 +166,14 @@ export function uploadImage(obj, success, error) {
   }
 }
 
-export async function getAppointmentsAsync({data: {uid}}) {
+export async function getAppointmentsAsync({data}) {
+  console.log(data);
+  let uid = data.uid;
+  console.log(uid);
+  if (Object.keys(data).includes('expert')) {
+    uid = data.expert.uid;
+  }
+
   try {
     const document = firebase.firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
@@ -416,6 +422,25 @@ export async function changeAppointmentAsync({data}) {
         });
 
         await document.set({history: [...appointments.history]}, {merge: true});
+
+        const expertDocument = firestore
+          .collection('appointments')
+          .doc(expert.uid);
+        const expertResponse = await expertDocument.get();
+        let expertAppointments = expertResponse.data();
+        expertAppointments.history[uid] = expertAppointments.history[uid].map(
+          (item) => {
+            if (item.id === id) {
+              return (item = data);
+            }
+            return item;
+          },
+        );
+        console.log('EXPERT APPOINTMENTS', expertAppointments);
+        await expertDocument.set(
+          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
+          {merge: true},
+        );
       })
       .catch((error) => {
         console.error(error);
@@ -1773,7 +1798,7 @@ async function saveMedicalHistory(payload, visit) {
     const record = await document.get();
     const recordList = record.data();
 
-    if (recordList.history.length) {
+    if (recordList) {
       await document.set(
         {history: [...recordList.history, payload]},
         {merge: true},
