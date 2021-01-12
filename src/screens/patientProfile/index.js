@@ -60,6 +60,7 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled={visit.locked}
             onPress={() =>
               navigation.navigate('MedicalHistoryExpert', {
                 uid: expert.uid,

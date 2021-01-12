@@ -1798,7 +1798,7 @@ async function saveMedicalHistory(payload, visit) {
     const record = await document.get();
     const recordList = record.data();
 
-    if (recordList.history.length) {
+    if (recordList) {
       await document.set(
         {history: [...recordList.history, payload]},
         {merge: true},

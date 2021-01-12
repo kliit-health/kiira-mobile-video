@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     flexDirection: 'row',
     width: '100%',
-    zIndex: 1,
   },
   blockedUserText: {
     color: 'red',
