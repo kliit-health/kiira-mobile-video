@@ -9,7 +9,7 @@ import {signOut} from './action';
 import styles, {modifiers} from './styles';
 
 const Account = ({navigation}) => {
-  const details = useSelector((state) => state.userDetails.data);
+  const details = useSelector((state) => state.authLoadingReducer.userData);
   const dispatch = useDispatch();
 
   const handleNavigation = (destination) => {
