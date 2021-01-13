@@ -112,8 +112,8 @@ import TreatmentHistory from '../screens/treatmentHistory';
 import PersonalInformation from '../screens/patientProfile/personalInformation';
 import AgreementDetails from '../screens/patientProfile/agreementDetails';
 import WebView from '../screens/webView';
+import VisitSummary from '../screens/visitSummary';
 
-let lang = Language.en;
 let tabIconSize = 25;
 const screenNames = Constant.App.screenNames;
 
@@ -540,6 +540,7 @@ const MainAppStack = createStackNavigator(
     TreatmentBot: {screen: TreatmentBot},
     Visit: {screen: Visit},
     WebView: {screen: WebView},
+    VisitSummary: {screen: VisitSummary},
   },
   {
     headerMode: 'none',

@@ -682,6 +682,8 @@ export const screenNames = {
   learn: 'Learn',
   webView: 'WebView',
   expertChat: 'ChatExpert',
+  visitSummary: 'VisitSummary',
+  visit: 'Visit',
 };
 
 export const units = {

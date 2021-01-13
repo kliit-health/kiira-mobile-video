@@ -21,11 +21,19 @@ const VideoHistory = ({navigation, expertDetails}) => {
     shallowEqual,
   );
 
-  const handleViewDetails = (visit) => {
-    navigation.navigate(screenNames.Visit, {
+  const handleFutureItemPress = (visit) => {
+    navigation.navigate(screenNames.visit, {
       uid: expertDetails.uid,
       visit,
     });
+  };
+
+  const handlePastItemPress = ({id, locked}) => {
+    if (locked) {
+      navigation.navigate(screenNames.visitSummary, {
+        id,
+      });
+    }
   };
 
   return (
@@ -43,19 +51,26 @@ const VideoHistory = ({navigation, expertDetails}) => {
         return isUpcoming ? (
           <ItemFuture
             key={visit.id}
-            onPress={() => handleViewDetails(visit)}
+            onPress={handleFutureItemPress}
             {...visit}
           />
         ) : (
-          <ItemPast key={visit.id} {...visit} />
+          <ItemPast key={visit.id} onPress={handlePastItemPress} {...visit} />
         );
       }}
     />
   );
 };
 
-const ItemFuture = ({reason, time, expert, onPress}) => {
+const ItemFuture = (props) => {
+  const {reason, time, expert, onPress} = props;
   const {firstName, lastName} = expert;
+
+  const handlePress = () => {
+    if (onPress) {
+      onPress(props);
+    }
+  };
 
   return (
     <View style={itemFutureStyles.root}>
@@ -78,38 +93,48 @@ const ItemFuture = ({reason, time, expert, onPress}) => {
           </View>
         ))}
       </View>
-      <TextButton onPress={onPress} outlined styles={itemModifiers.button}>
+      <TextButton onPress={handlePress} outlined styles={itemModifiers.button}>
         {intl.en.videoHistory.viewDetails}
       </TextButton>
     </View>
   );
 };
 
-const ItemPast = ({reason, time, id}) => (
-  <ListItem styles={itemModifiers.list}>
-    <View>
-      <View style={itemPastStyles.subtitleContainer}>
-        <Text style={itemPastStyles.subject}>
-          {intl.en.videoHistory.subject}
-        </Text>
-        <Text style={itemPastStyles.subtitle}>{reason}</Text>
+const ItemPast = (props) => {
+  const {reason, time, id, onPress} = props;
+
+  const handlePress = () => {
+    if (onPress) {
+      onPress(props);
+    }
+  };
+
+  return (
+    <ListItem onPress={handlePress} styles={itemModifiers.list}>
+      <View>
+        <View style={itemPastStyles.subtitleContainer}>
+          <Text style={itemPastStyles.subject}>
+            {intl.en.videoHistory.subject}
+          </Text>
+          <Text style={itemPastStyles.subtitle}>{reason}</Text>
+        </View>
+        <View style={itemPastStyles.subtitleContainer}>
+          <Text style={itemPastStyles.subject}>
+            {intl.en.videoHistory.visitId}
+          </Text>
+          <Text style={itemPastStyles.subtitle}>{id}</Text>
+        </View>
       </View>
       <View style={itemPastStyles.subtitleContainer}>
-        <Text style={itemPastStyles.subject}>
-          {intl.en.videoHistory.visitId}
+        <Text style={itemPastStyles.dateText}>
+          {moment.unix(time).calendar(null, {
+            sameElse: 'MM/DD/YYYY',
+          })}
         </Text>
-        <Text style={itemPastStyles.subtitle}>{id}</Text>
       </View>
-    </View>
-    <View style={itemPastStyles.subtitleContainer}>
-      <Text style={itemPastStyles.dateText}>
-        {moment.unix(time).calendar(null, {
-          sameElse: 'MM/DD/YYYY',
-        })}
-      </Text>
-    </View>
-  </ListItem>
-);
+    </ListItem>
+  );
+};
 
 const SectionSeparator = ({title}) => (
   <View style={separatorStyles.container}>

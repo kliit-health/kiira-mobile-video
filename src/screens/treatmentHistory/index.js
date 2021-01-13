@@ -4,9 +4,11 @@ import {useDispatch} from 'react-redux';
 import {Container, Header, TextButton, Avatar, Ratings} from '../../components';
 import {Prescriber} from '../../components/icons';
 import intl from '../../utils/localization';
-import styles from './styles';
+import styles, {modifiers} from './styles';
+import {calculateRating} from '../../utils/functions';
 import {ChatHistory, VideoHistory} from './sections';
 import {getChatHistoryAsync, getVideoHistoryAsync} from './actions';
+import {getMedicalHistory} from '../../redux/actions';
 import {useDidMount} from '../../utils/hooks';
 
 const TreatmentHistory = ({navigation}) => {
@@ -20,11 +22,15 @@ const TreatmentHistory = ({navigation}) => {
   const [activeSection, setActiveSection] = useState('video');
 
   useDidMount(() => {
-    const focusListener = navigation.addListener('didFocus', () => {
-      dispatch(getChatHistoryAsync());
-      dispatch(getVideoHistoryAsync());
-    });
-    return () => focusListener.remove();
+    dispatch(getChatHistoryAsync());
+  }, []);
+
+  useDidMount(() => {
+    dispatch(getVideoHistoryAsync());
+  }, []);
+
+  useDidMount(() => {
+    dispatch(getMedicalHistory());
   }, []);
 
   const handleOnBackPress = () => {
@@ -49,7 +55,7 @@ const TreatmentHistory = ({navigation}) => {
           <Text style={styles.titleText}>{fullName}</Text>
           <Prescriber />
         </View>
-        {/* <Ratings styles={modifiers.ratings} value={calculateRating(rating)} /> */}
+        <Ratings styles={modifiers.ratings} value={calculateRating(rating)} />
       </View>
       <View style={styles.buttonsContainer}>
         <TextButton
