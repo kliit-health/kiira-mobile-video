@@ -36,6 +36,7 @@ import treatmentHistory from '../../screens/treatmentHistory/reducer';
 import updateExpertReducer from '../../screens/updateAvailablity/reducer';
 import agreements from '../../screens/agreements/reducer';
 import userDetails from './userDetails';
+import clientMedicalHistory from './medicalHistory';
 // import personalInformation from '../../screens/personalInformation/reducer';
 import medicalHistory from '../../screens/patientProfile/reducer';
 
@@ -79,4 +80,5 @@ export default combineReducers({
   userDetails,
   // personalInformation,
   medicalHistory,
+  clientMedicalHistory,
 });

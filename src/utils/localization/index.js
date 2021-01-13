@@ -482,5 +482,18 @@ export default {
       lastMessage: 'Last Message',
       searchName: 'Search Name',
     },
+    visitSummary: {
+      title: 'Visit Summary',
+      visitInformation: 'Visit Information',
+      chiefComplaint: 'Chief Complaint',
+      assessmentPlan: 'Assessment / Plan',
+      afterVisitSummary: 'After Visit Summary',
+      patientName: 'Patient Name',
+      dateAndTime: 'Date and Time',
+      provider: 'Provider',
+      locked: 'Record Locked',
+      none: 'None',
+      reason: 'Reason',
+    },
   },
 };
