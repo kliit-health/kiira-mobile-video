@@ -23,7 +23,7 @@ const Visit = ({visit, date, navigation}) => {
   return (
     <View style={{alignSelf: 'center', paddingBottom: 50}}>
       <View style={styles.myRecentExpertContainerStyle}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={styles.expertContainer}>
           <View style={styles.expertImageContainer}>
             <FastImage
               style={styles.expertImage}

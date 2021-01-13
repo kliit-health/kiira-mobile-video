@@ -11,7 +11,6 @@ import {
 import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import CustomText from '../../../components/customText';
-import SearchBar from '../../../components/searchBar';
 import styles from '../style';
 import moment from 'moment';
 import Constant from '../../../utils/constants';
@@ -141,21 +140,24 @@ const SheduleModal = ({
                 keyExtractor={(item, index) => index.toString()}
               />
             )}
+
             <CustomText style={styles.firstAvaliable}>
               Select Appointment Time
             </CustomText>
+
             <ScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{
+                flex: 1,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 justifyContent: 'space-evenly',
-                paddingBottom: 50,
               }}>
               {showShedule &&
                 appointmentData.appointments.future &&
                 appointmentData.appointments.future.map((item, i) => {
                   const selected = selectedTime === i;
+
                   return (
                     <CustomButton
                       key={item.time}
@@ -182,6 +184,7 @@ const SheduleModal = ({
           </View>
         </Fragment>
       )}
+
       <TouchableOpacity
         onPress={() =>
           day && time

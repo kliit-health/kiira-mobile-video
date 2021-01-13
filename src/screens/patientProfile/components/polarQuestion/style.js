@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import PolarButton from '../../../../components/polarButton';
 import styles from './style';
 
-const PolarQuestion = () => (
+const PolarQuestion = ({progress}) => (
   <View>
     <View style={styles.buttonContainer}>
       <PolarButton
@@ -17,7 +17,7 @@ const PolarQuestion = () => (
         onPress={() => toggleSelection('no')}
       />
     </View>
-    {questions[progress].textPrompt ? (
+    {progress.textPrompt ? (
       <TextInput
         style={styles.input}
         multiline

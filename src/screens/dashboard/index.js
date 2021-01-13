@@ -251,6 +251,7 @@ class Dashboard extends PureComponent {
               height: 70,
               borderRadius: 50,
             }}
+            resizeMode="cover"
             defaultSource={staticImages.profilePlaceholderImg}
             source={{uri: profileImageUrl}}
           />

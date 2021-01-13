@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {
   ScrollView,
   View,
@@ -49,133 +49,149 @@ const SheduleModal = ({
       style={
         showShedule ? styles.showSheduleContainer : styles.sheduleContainer
       }>
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            setShowShedule(!showShedule);
-            setSelectedTime(null);
-            setTime(null);
-          }}>
-          <Image
-            resizeMode="contain"
-            source={staticImages.rightChevronIcon}
-            style={{
-              width: 20,
-              height: 40,
-              transform: [{rotate: '90deg'}],
-            }}
-          />
-        </TouchableOpacity>
-      </View>
-      <CustomText style={styles.firstAvaliable}>
-        Select Appointment Date
-      </CustomText>
-      {showShedule && !appointmentData.dates ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
-          data={appointmentData.dates}
-          horizontal={true}
-          decelerationRate={'fast'}
-          extraData={selectedDate}
-          renderItem={({item, index}) => {
-            item = generateDateInfo(item.date);
-            return (
-              <View
+      {showShedule && (
+        <Fragment>
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                setShowShedule(!showShedule);
+                setSelectedTime(null);
+                setTime(null);
+              }}>
+              <Image
+                resizeMode="contain"
+                source={staticImages.rightChevronIcon}
                 style={{
-                  height: 180,
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  margin: 10,
-                }}>
-                <CustomText
-                  style={
-                    selectedDate === item.date
-                      ? {color: Constant.App.colors.blueColor}
-                      : {color: 'black'}
-                  }>
-                  {item.month}
-                </CustomText>
-                <CustomButton
-                  buttonStyle={
-                    selectedDate === item.date
-                      ? styles.dateSelectedContainerStyle
-                      : styles.dateContainerStyle
-                  }
-                  textStyle={
-                    selectedDate === item.date
-                      ? styles.dateSelectedTextStyle
-                      : styles.dateTextStyle
-                  }
-                  onPress={() => {
-                    dispatch(getAppointmentsByDay({...item, calendarID}));
-                    setSelectedDate(item.date);
-                    setTime(null);
-                    setSelectedTime(null);
-                    setDay(item.date);
-                    dispatch(setAppointmentDay(item.date));
-                  }}
-                  text={item.day}
-                />
-                <CustomText
-                  style={
-                    selectedDate === item.date
-                      ? {color: Constant.App.colors.blueColor}
-                      : {color: 'black'}
-                  }>
-                  {item.dow}
-                </CustomText>
-              </View>
-            );
-          }}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      )}
-      <CustomText style={styles.firstAvaliable}>
-        Select Appointment Time
-      </CustomText>
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          flexBasis: 3,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-evenly',
-        }}>
-        {showShedule &&
-          appointmentData.appointments.future &&
-          appointmentData.appointments.future.map((item, i) => {
-            const selected = selectedTime === i;
-            return (
-              <CustomButton
-                key={item.time}
-                buttonStyle={
-                  selected
-                    ? styles.dateTimeSelectedSlotContainerStyle
-                    : styles.dateTimeSlotContainerStyle
-                }
-                textStyle={
-                  selected
-                    ? styles.dateTimeSelectedSlotTextStyle
-                    : styles.dateTimeSlotTextStyle
-                }
-                onPress={() => {
-                  setSelectedTime(i);
-                  setTime(item.time);
-                  dispatch(setAppointmentTime(item.time));
+                  width: 20,
+                  height: 40,
+                  transform: [{rotate: '90deg'}],
                 }}
-                text={moment(item.time).format('h:mm a')}
               />
-            );
-          })}
-      </ScrollView>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              marginBottom: 20,
+            }}>
+            <CustomText style={styles.firstAvaliable}>
+              Select Appointment Date
+            </CustomText>
+            {showShedule && !appointmentData.dates ? (
+              <ActivityIndicator size="large" />
+            ) : (
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+                keyboardShouldPersistTaps={
+                  Platform.OS === 'ios' ? 'never' : 'always'
+                }
+                data={appointmentData.dates}
+                horizontal={true}
+                decelerationRate={'fast'}
+                extraData={selectedDate}
+                renderItem={({item, index}) => {
+                  item = generateDateInfo(item.date);
+                  return (
+                    <View
+                      style={{
+                        height: 180,
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        margin: 10,
+                      }}>
+                      <CustomText
+                        style={
+                          selectedDate === item.date
+                            ? {color: Constant.App.colors.blueColor}
+                            : {color: 'black'}
+                        }>
+                        {item.month}
+                      </CustomText>
+                      <CustomButton
+                        buttonStyle={
+                          selectedDate === item.date
+                            ? styles.dateSelectedContainerStyle
+                            : styles.dateContainerStyle
+                        }
+                        textStyle={
+                          selectedDate === item.date
+                            ? styles.dateSelectedTextStyle
+                            : styles.dateTextStyle
+                        }
+                        onPress={() => {
+                          dispatch(getAppointmentsByDay({...item, calendarID}));
+                          setSelectedDate(item.date);
+                          setTime(null);
+                          setSelectedTime(null);
+                          setDay(item.date);
+                          dispatch(setAppointmentDay(item.date));
+                        }}
+                        text={item.day}
+                      />
+                      <CustomText
+                        style={
+                          selectedDate === item.date
+                            ? {color: Constant.App.colors.blueColor}
+                            : {color: 'black'}
+                        }>
+                        {item.dow}
+                      </CustomText>
+                    </View>
+                  );
+                }}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            )}
+
+            <CustomText style={styles.firstAvaliable}>
+              Select Appointment Time
+            </CustomText>
+
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-evenly',
+              }}>
+              {showShedule &&
+                appointmentData.appointments.future &&
+                appointmentData.appointments.future.map((item, i) => {
+                  const selected = selectedTime === i;
+
+                  return (
+                    <CustomButton
+                      key={item.time}
+                      buttonStyle={
+                        selected
+                          ? styles.dateTimeSelectedSlotContainerStyle
+                          : styles.dateTimeSlotContainerStyle
+                      }
+                      textStyle={
+                        selected
+                          ? styles.dateTimeSelectedSlotTextStyle
+                          : styles.dateTimeSlotTextStyle
+                      }
+                      onPress={() => {
+                        setSelectedTime(i);
+                        setTime(item.time);
+                        dispatch(setAppointmentTime(item.time));
+                      }}
+                      text={moment(item.time).format('h:mm a')}
+                    />
+                  );
+                })}
+            </ScrollView>
+          </View>
+        </Fragment>
+      )}
+
       <TouchableOpacity
         onPress={() =>
           day && time
-            ? dispatch(updateVisit({data: {...visit, time}, navigation}))
+            ? navigation.navigate('BookVisit', {uid})
             : setShowShedule(!showShedule)
         }
         style={

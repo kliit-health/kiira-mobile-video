@@ -1,6 +1,6 @@
 import {StyleSheet, Platform} from 'react-native';
 import Constant from '../../utils/constants';
-import metrics from '../../utils/metrices';
+import metrics, {smallScreen} from '../../utils/metrices';
 import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
   },
 
   dashboardItemLogo: {
-    height: 105,
-    width: 105,
+    height: smallScreen ? 85 : 100,
+    width: smallScreen ? 85 : 100,
     borderRadius: 10,
     backgroundColor: '#3CAAFF',
     marginBottom: 5,

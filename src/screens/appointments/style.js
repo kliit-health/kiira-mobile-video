@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Constant from '../../utils/constants';
-import metrics from '../../utils/metrices';
+import metrics, {smallScreen} from '../../utils/metrices';
 import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 import {text, colors} from '../../utils/constants';
 
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: 'white',
     width: metrics.DEVICE_WIDTH * 0.85,
-    height: 480,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
@@ -123,6 +122,7 @@ const styles = StyleSheet.create({
     shadowRadius: 10, //IOS
     elevation: 2, // Android
     margin: 15,
+    padding: 15,
   },
 
   parentContainerStyle: {
@@ -146,9 +146,14 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.headerBold,
   },
 
+  expertContainer: {
+    flexDirection: smallScreen ? 'column' : 'row',
+    alignSelf: 'center',
+  },
+
   expertImage: {
-    width: 120,
-    height: 120,
+    width: smallScreen ? 90 : 100,
+    height: smallScreen ? 90 : 100,
     padding: 2,
     borderRadius: 60,
     borderWidth: 2,
@@ -159,6 +164,7 @@ const styles = StyleSheet.create({
   expertImageContainer: {
     flexDirection: 'row',
     margin: 10,
+    alignSelf: 'center',
     zIndex: 1,
   },
 

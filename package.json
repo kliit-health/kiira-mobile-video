@@ -10,7 +10,8 @@
     "prettier": "prettier \"./**/*.js\" --write",
     "postinstall": "npx jetify && cd ios && pod install && npx react-native-fix-image",
     "ios-device": "react-native run-ios --device",
-    "clean": "npx react-native-clean-project"
+    "clean": "npx react-native-clean-project",
+    "show-ios": "xcrun simctl list devices"
   },
   "dependencies": {
     "@cometchat-pro/react-native-calls": "^1.0.0",
