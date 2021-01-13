@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
-import metrics from '../../../utils/metrices';
+import metrics, {smallScreen} from '../../../utils/metrices';
 import Constant from '../../../utils/constants';
+
+let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPadding = parentPaddingValue * 2;
+let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   },
 
   informationContainer: {
-    marginHorizontal: 32,
+    marginHorizontal: 25,
     flexDirection: 'column',
   },
 
@@ -113,35 +117,87 @@ const styles = StyleSheet.create({
 
   name: {
     marginVertical: metrics.DEVICE_HEIGHT * 0.01,
-    marginLeft: 110,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     fontWeight: '700',
-    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
-  patientImage: {
-    bottom: -100,
-    left: 10,
-    width: 90,
-    height: 90,
-    padding: 2,
+  expertName: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  expertNameTextStyle: {
+    color: Constant.App.colors.blackColor,
+    fontSize: Constant.App.textSize.Large,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    fontWeight: '700',
+  },
+
+  expertProfession: {
+    flexDirection: 'row',
+  },
+
+  availability: {
+    fontSize: Constant.App.textSize.Large,
+    fontWeight: '500',
+    marginLeft: -70,
+    marginTop: 20,
+    width: metrics.DEVICE_WIDTH,
+  },
+
+  expertProfessionTextStyle: {
+    fontSize: Constant.App.textSize.Medium,
+    color: Constant.App.colors.blackColor,
+    marginRight: 10,
+  },
+
+  patientParentContainerStyle: {
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingLeft: parentPaddingValue * 0.2,
+    paddingRight: parentPaddingValue * 0.2,
+    paddingBottom: parentPaddingValue * 0.2,
+    paddingTop: parentPaddingValue * 0.2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: metrics.DEVICE_WIDTH,
+    // marginTop: 10,
+  },
+
+  myRecentExpertContainerStyle: {
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingLeft: parentPaddingValue * 0.2,
+    paddingRight: parentPaddingValue * 0.2,
+    paddingBottom: parentPaddingValue * 0.2,
+    paddingTop: parentPaddingValue * 0.2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: metrics.DEVICE_WIDTH,
+    marginTop: 10,
+  },
+
+  expertImage: {
+    width: smallScreen ? 80 : 100,
+    height: smallScreen ? 80 : 100,
     borderRadius: 60,
     borderWidth: 2,
     borderColor: Constant.App.colors.blueColor,
-    position: 'absolute',
   },
 
-  patientImageContainer: {
+  expertImageContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     zIndex: 1,
   },
 
   parentContainerStyle: {
-    flex: 1,
-    alignItems: 'flex-start',
     flexDirection: 'column',
+    paddingLeft: parentPaddingValue + 4,
+    paddingRight: (parentPaddingValue + 4) * 0.5,
+    backgroundColor: 'white',
+    borderRadius: 15,
   },
 
   reason: {
@@ -156,6 +212,18 @@ const styles = StyleSheet.create({
   textStyle: {
     color: Constant.App.colors.whiteColor,
     textAlign: 'center',
+  },
+
+  expertInfoParentContainerStyle: {
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingLeft: parentPaddingValue * 0.2,
+    paddingRight: parentPaddingValue * 0.2,
+    paddingBottom: parentPaddingValue * 0.2,
+    paddingTop: parentPaddingValue * 0.2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: metrics.DEVICE_WIDTH,
+    marginTop: 10,
   },
 
   visitDetailsTitle: {

@@ -1,15 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStatusBarHeight} from '../../components/iPhoneXHelper';
-import metrics from '../../utils/metrices';
+import metrics, {smallScreen} from '../../utils/metrices';
 import Constant from '../../utils/constants';
-import metrices from '../../utils/metrices';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
-
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
   dateContainer: {
@@ -17,7 +11,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: Constant.App.colors.greyColorText,
-    width: metrics.DEVICE_WIDTH * 0.9,
+    width: metrics.DEVICE_WIDTH,
   },
 
   dateText: {
@@ -38,47 +32,38 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH,
   },
 
-  expertInfoProfessionTextStyle: {
-    color: Constant.App.colors.blackColor,
-    fontSize: Constant.App.textSize.Small,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: '200',
-  },
-
   expertIsPrescriber: {
     flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
   },
 
   expertImage: {
-    bottom: -120,
-    left: 10,
-    width: 120,
-    height: 120,
-    padding: 2,
+    width: smallScreen ? 80 : 100,
+    height: smallScreen ? 80 : 100,
     borderRadius: 60,
     borderWidth: 2,
     borderColor: Constant.App.colors.blueColor,
-    position: 'absolute',
   },
 
   expertImageContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     zIndex: 1,
+  },
+
+  expertInfoParentContainerStyle: {
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingLeft: parentPaddingValue * 0.2,
+    paddingRight: parentPaddingValue * 0.2,
+    paddingBottom: parentPaddingValue * 0.2,
+    paddingTop: parentPaddingValue * 0.2,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: metrics.DEVICE_WIDTH,
   },
 
   expertName: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-  },
-
-  expertNameTextStyle: {
-    color: Constant.App.colors.blackColor,
-    fontSize: 35,
-    fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
   expertPrescriberImage: {
@@ -93,7 +78,6 @@ const styles = StyleSheet.create({
 
   expertProfession: {
     flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
     marginVertical: 5,
   },
 
@@ -120,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   informationContainer: {
-    marginHorizontal: 32,
+    marginHorizontal: 25,
   },
 
   informationTitle: {
@@ -145,9 +129,6 @@ const styles = StyleSheet.create({
     paddingLeft: parentPaddingValue + 4,
     paddingRight: (parentPaddingValue + 4) * 0.5,
     backgroundColor: 'white',
-    flex: 1,
-    width: 320,
-    height: 150,
     borderRadius: 15,
   },
 
@@ -158,7 +139,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.5,
+    width: metrics.DEVICE_WIDTH * 0.7,
     height: 42,
     backgroundColor: Constant.App.colors.whiteColor,
   },

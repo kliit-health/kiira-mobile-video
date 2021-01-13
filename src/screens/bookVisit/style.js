@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStatusBarHeight} from '../../components/iPhoneXHelper';
-import metrics from '../../utils/metrices';
+import metrics, {smallScreen} from '../../utils/metrices';
 import Constant from '../../utils/constants';
 import metrices from '../../utils/metrices';
 
@@ -136,8 +136,7 @@ const styles = StyleSheet.create({
     paddingBottom: parentPaddingValue * 0.2,
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: metrics.DEVICE_WIDTH,
   },
 
@@ -214,32 +213,25 @@ const styles = StyleSheet.create({
 
   expertIsPrescriber: {
     flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
   },
 
   expertImage: {
-    bottom: -120,
-    left: 10,
-    width: 120,
-    height: 120,
-    padding: 2,
+    width: smallScreen ? 80 : 100,
+    height: smallScreen ? 80 : 100,
     borderRadius: 60,
     borderWidth: 2,
     borderColor: Constant.App.colors.blueColor,
-    position: 'absolute',
   },
 
   expertImageContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginTop: 10,
+    alignItems: 'flex-start',
     zIndex: 1,
   },
 
   expertName: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
   },
 
   expertNameTextStyle: {
@@ -260,7 +252,6 @@ const styles = StyleSheet.create({
 
   expertProfession: {
     flexDirection: 'row',
-    marginLeft: metrices.DEVICE_WIDTH * 0.22,
     marginVertical: 5,
   },
 
@@ -306,9 +297,6 @@ const styles = StyleSheet.create({
     paddingLeft: parentPaddingValue + 4,
     paddingRight: (parentPaddingValue + 4) * 0.5,
     backgroundColor: 'white',
-    flex: 1,
-    width: 320,
-    height: 150,
     borderRadius: 15,
   },
 

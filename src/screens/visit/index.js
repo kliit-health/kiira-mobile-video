@@ -5,6 +5,7 @@ import {Header} from '../../components';
 import {withNavigation} from 'react-navigation';
 import {ExpertInfo, VisitDetails} from './components';
 import {getExpertsData} from '../expertSchedule/action';
+import {setVisit} from './actions';
 import ErrorBoundary from 'react-native-error-boundary';
 import Constant from '../../utils/constants';
 import styles from './styles';
@@ -12,6 +13,7 @@ import styles from './styles';
 const Visit = (props) => {
   const dispatch = useDispatch();
   const {navigation} = props;
+
   const {uid, visit} = props.navigation.state.params;
   const expertData = useSelector(
     (state) => state.expertProfileReducer.expertData,
@@ -26,6 +28,7 @@ const Visit = (props) => {
 
   useEffect(() => {
     dispatch(getExpertsData(params));
+    dispatch(setVisit(visit));
   }, []);
 
   return (
@@ -41,7 +44,6 @@ const Visit = (props) => {
                 onBack={() => navigation.goBack()}
               />
               <ExpertInfo expertData={expertData} visit={visit} />
-
               <VisitDetails visit={visit} />
             </ErrorBoundary>
           </View>

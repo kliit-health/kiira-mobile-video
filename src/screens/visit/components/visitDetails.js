@@ -45,7 +45,7 @@ const VisitDetails = ({navigation, visit, ...props}) => {
           buttonStyle={styles.noContainerStyle}
           textStyle={styles.noTextStyle}
           onPress={() => {
-            navigation.navigate('Video', {visit: props.visit});
+            navigation.navigate('VideoLogin', {visit: visit});
           }}
           text="Enter Waiting Room"
         />

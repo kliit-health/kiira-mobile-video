@@ -40,6 +40,15 @@ class MainCallScreen extends Component {
           call.getSessionId(),
         );
 
+        CometChat.endCall(this.sessionId).then(
+          (call) => {
+            console.log('Called Ended by User', call);
+          },
+          (err) => {
+            console.log('Error ending call', err);
+          },
+        );
+
         CometChat.logout().then(
           () => {
             console.log('Logout completed successfully');

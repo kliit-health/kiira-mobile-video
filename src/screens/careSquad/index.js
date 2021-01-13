@@ -69,7 +69,7 @@ const CareSquad = ({navigation}) => {
             favorites.filter((uid) => uid !== details.uid),
           ),
         )
-      : navigation.navigate(screenNames.getTreatment, {details});
+      : navigation.navigate(screenNames.getTreatment, {navigator, details});
   };
 
   const getFavoriteExperts = (favorites, experts) => {

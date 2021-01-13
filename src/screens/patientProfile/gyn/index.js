@@ -250,23 +250,25 @@ const GynHistory = ({navigation}) => {
           [types.picker]: (
             <View style={{width: 300, alignSelf: 'center'}}>
               {questions[progress].picker &&
-                questions[progress].options.map((option) => (
-                  <View>
-                    <CustomTextInput
-                      onPress={() => toggleModal(option)}
-                      placeholder={option.title}
-                      value={answers.numberOfPartners[option.key].number}
-                      chevron
-                    />
-                    <ModalPicker
-                      onSave={(selection) => handleOnSave(selection, option)}
-                      onBackdropPress={() => toggleModal(option)}
-                      visible={answers.numberOfPartners[option.key].visible}
-                      title={option.title}
-                      data={numberOfPartners.map((item) => item)}
-                    />
-                  </View>
-                ))}
+                questions[progress].options.map((option, index) => {
+                  return (
+                    <View key={questions[progress].options[index].title}>
+                      <CustomTextInput
+                        onPress={() => toggleModal(option)}
+                        placeholder={option.title}
+                        value={answers.numberOfPartners[option.key].number}
+                        chevron
+                      />
+                      <ModalPicker
+                        onSave={(selection) => handleOnSave(selection, option)}
+                        onBackdropPress={() => toggleModal(option)}
+                        visible={answers.numberOfPartners[option.key].visible}
+                        title={option.title}
+                        data={numberOfPartners.map((item) => item)}
+                      />
+                    </View>
+                  );
+                })}
             </View>
           ),
         })(undefined)(questions[progress].type)}

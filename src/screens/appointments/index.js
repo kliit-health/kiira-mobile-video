@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import {View, FlatList, Text, Image} from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
-import {Container, Header, TextButton} from '../../components';
+import {Container, Header, TextButton, RatingModal} from '../../components';
 import {screenNames} from '../../utils/constants';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
@@ -16,7 +16,11 @@ const Appointments = ({navigation}) => {
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
   const visitData = useSelector((state) => state.appointmentsReducer);
+  const completedCall = useSelector((state) => state.visitReducer);
+  const {previousRoute} = useSelector((state) => state.navigator);
   const [visits, setVisits] = useState([]);
+
+  const showRating = previousRoute === 'MainCallScreen';
 
   useEffect(() => {
     dispatch(getAppointmentsList({uid: userData.uid}));
@@ -41,37 +45,40 @@ const Appointments = ({navigation}) => {
     navigation.navigate(destination);
   };
 
-  // const CustomFallback = (props: { error: Error, resetError: Function }) => (
-  //   <View>
-  //     <Text>Something happened!</Text>
-  //     <Text>{props.error.toString()}</Text>
-  //     <Button onPress={props.resetError} title={'Try again'} />
-  //   </View>
-  // )
-
   return (
     <View style={styles.container}>
       <Header
         title="Upcoming Visits"
         onBack={() => navigation.navigate('BottomTab')}
       />
-      {visits.length > 0 ? (
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
-          data={visits}
-          decelerationRate={'fast'}
-          renderItem={({item, index}) => {
-            const date = generateDateInfo(item.time);
-            return (
-              <ErrorBoundary onError={() => navigation.navigate('BottomTab')}>
-                <Visit visit={item} date={date} navigation={navigation} />
-              </ErrorBoundary>
-            );
-          }}
-          keyExtractor={(index) => `${index.id}`}
+      {showRating && (
+        <RatingModal
+          title="Your Telemedicine visit has ended"
+          description="Please rate your visit"
+          visible={showRating}
         />
+      )}
+      {visits.length > 0 ? (
+        <Fragment>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+            keyboardShouldPersistTaps={
+              Platform.OS === 'ios' ? 'never' : 'always'
+            }
+            data={visits}
+            decelerationRate={'fast'}
+            renderItem={({item, index}) => {
+              const date = generateDateInfo(item.time);
+              return (
+                <ErrorBoundary onError={() => navigation.navigate('BottomTab')}>
+                  <Visit visit={item} date={date} navigation={navigation} />
+                </ErrorBoundary>
+              );
+            }}
+            keyExtractor={(index) => `${index.id}`}
+          />
+        </Fragment>
       ) : (
         <Container>
           <Image
