@@ -20,7 +20,6 @@ import AskExpert from '../screens/ask/expert';
 import AuthLoadingScreen from '../screens/authLoading';
 import BasicInfo from '../screens/basicInfo';
 import Birth from '../screens/birth';
-import BlockedUsers from '../screens/videoVisit/BlockedUsers';
 import BookVisit from '../screens/bookVisit';
 import BuyingCredit from '../screens/payment/buyingCredit';
 import CallingScreen from '../screens/videoVisit/CallingScreen';
@@ -52,15 +51,12 @@ import ExpertVisit from '../screens/visit/expert';
 import FamilyHistory from '../screens/patientProfile/family';
 import ForgotPassword from '../screens/forgotPassword';
 import GetStarted from '../screens/getStarted';
-import GroupChatScreen from '../screens/videoVisit/GroupChatScreen';
 import GynHistory from '../screens/patientProfile/gyn';
 import HealthHistory from '../screens/healthHistory/';
 import HomeScreen from '../screens/videoVisit/HomeScreen/HomeScreen';
 import GetTreatment from '../screens/getTreatment';
 import Help from '../screens/help';
-import ImageViewer from '../screens/videoVisit/ImageViewer';
 import Insurance from '../screens/insurance';
-import Language from '../utils/localization';
 import Learn from '../screens/learn';
 import Lifestyle from '../screens/lifestyle';
 import Loss from '../screens/loss';
@@ -87,6 +83,7 @@ import PregnancyHistoryExpert from '../screens/patientProfile/pregnancy';
 import PreviousVisits from '../screens/patientProfile/previousVisits';
 import PreviousAppointmentsNotes from '../screens/previousAppointmentsNotes';
 import PrivacyPolicy from '../screens/privacyPolicy';
+import Rating from '../screens/videoVisit/rating';
 import Recap from '../screens/patientProfile/recap';
 import ReferFriend from '../screens/referFriend';
 import RescheduleVisit from '../screens/rescheduleVisit';
@@ -552,13 +549,10 @@ const VideoStack = createStackNavigator(
   {
     VideoLogin: {screen: LoginScreen},
     Home: {screen: HomeScreen},
-    // VideoChat: ChatScreen,
-    Group: {screen: GroupChatScreen},
     Video: {screen: VideoPlayer},
-    Block: {screen: BlockedUsers},
-    Image: {screen: ImageViewer},
     MainCallScreen: {screen: MainCallScreen},
     CallingScreen: {screen: CallingScreen},
+    RatingScreen: {screen: Rating},
   },
   {
     initialRouteName: 'VideoLogin',

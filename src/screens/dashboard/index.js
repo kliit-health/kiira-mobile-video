@@ -41,6 +41,7 @@ class Dashboard extends PureComponent {
       credits: this.props.userData.credits,
       videoChat: 0,
       videoEnabled: false,
+      chatEnabled: this.props.userData.questions === 'Unlimited',
       modalOpen: true,
     };
   }
@@ -109,35 +110,35 @@ class Dashboard extends PureComponent {
     const countStartApp = await AsyncStorage.getItem('countStartApp');
     const count = countStartApp ? parseInt(countStartApp) : 1;
 
-    // if (!isAlreadyRate && count % 30 === 0) {
-    //   Alert.alert('App Rating', 'Please give us your opinion', [
-    //     {
-    //       text: 'Later',
-    //       onPress: () => console.log('Cancel Pressed'),
-    //       style: 'cancel',
-    //     },
-    //     {
-    //       text: 'OK',
-    //       onPress: () => {
-    //         setTimeout(() => {
-    //           let options = {
-    //             AppleAppID: '1526336962',
-    //             GooglePackageName: 'com.kiira',
-    //             preferredAndroidMarket: AndroidMarket.Google,
-    //             preferInApp: true,
-    //             openAppStoreIfInAppFails: true,
-    //             fallbackPlatformURL: 'https://kirra.io',
-    //           };
-    //           Rate.rate(options, (success) => {
-    //             if (success) {
-    //               AsyncStorage.setItem('isAlreadyRate', 'true');
-    //             }
-    //           });
-    //         }, 500);
-    //       },
-    //     },
-    //   ]);
-    // }
+    if (!isAlreadyRate && count % 30 === 0) {
+      Alert.alert('App Rating', 'Please give us your opinion', [
+        {
+          text: 'Later',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            setTimeout(() => {
+              let options = {
+                AppleAppID: '1526336962',
+                GooglePackageName: 'com.kiira',
+                preferredAndroidMarket: AndroidMarket.Google,
+                preferInApp: true,
+                openAppStoreIfInAppFails: true,
+                fallbackPlatformURL: 'https://kirra.io',
+              };
+              Rate.rate(options, (success) => {
+                if (success) {
+                  AsyncStorage.setItem('isAlreadyRate', 'true');
+                }
+              });
+            }, 500);
+          },
+        },
+      ]);
+    }
     await AsyncStorage.setItem('countStartApp', `${count + 1}`);
   }
 
@@ -270,7 +271,7 @@ class Dashboard extends PureComponent {
   renderDashBoard() {
     const {staticImages} = Constant.App;
     const {navigation, showHideErrorModal} = this.props;
-    const {videoEnabled} = this.state;
+    const {videoEnabled, chatEnabled} = this.state;
 
     return (
       <View style={styles.dashboardContainer}>
@@ -317,7 +318,13 @@ class Dashboard extends PureComponent {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Constant.App.screenNames.AskUser)}>
+          onPress={() => {
+            if (chatEnabled) {
+              navigation.navigate(Constant.App.screenNames.AskUser);
+            } else {
+              showHideErrorModal('Chat unavailable with current plan');
+            }
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image

@@ -26,7 +26,7 @@ const ExpertAccount = ({navigation}) => {
         <View style={styles.profileBackground} />
         <ProfileCard {...details} />
       </View>
-      <View>
+      {/* <View>
         {list.map(({title, destination}) => (
           <ListItem
             key={title}
@@ -36,7 +36,7 @@ const ExpertAccount = ({navigation}) => {
             <Text style={styles.itemTitle}>{title}</Text>
           </ListItem>
         ))}
-      </View>
+      </View> */}
       <View style={styles.logoutContainer}>
         <TextButton onPress={handleSignOut} styles={modifiers.button} link>
           {intl.en.expertAccount.logout}

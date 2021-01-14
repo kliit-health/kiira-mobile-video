@@ -16,7 +16,7 @@ import {
 
 import {showOrHideModal} from '../../../components/customModal/action';
 
-function* getAppointments(data) {
+function* getAppointments({data}) {
   function getUserAppointments(data) {
     let users = Object.values(data);
     let allApponitments = users.reduce((acc, item) => {
@@ -28,7 +28,7 @@ function* getAppointments(data) {
 
   try {
     yield put(showApiLoader());
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(data.uid);
     const allApponitments = yield getUserAppointments(appointments);
     yield put({
       type: FETCH_EXPERT_APPOINTMENTS,
@@ -51,10 +51,11 @@ function* updateAppointment({data: {uid, navigation, ...rest}}) {
 }
 
 function* cancelAppointment(data) {
+  const {expert} = data;
   try {
     yield put(showApiLoader());
     const result = yield cancelAppointmentAsync(data);
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(expert.uid);
     if (result) {
       yield put(
         showOrHideModal(

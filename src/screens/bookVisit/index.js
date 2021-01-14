@@ -28,6 +28,8 @@ const BookVisit = (props) => {
     );
   }, []);
 
+  console.log(userData);
+
   const appointmentDetails = {
     firstName: userData.profileInfo.firstName,
     lastName: userData.profileInfo.lastName,

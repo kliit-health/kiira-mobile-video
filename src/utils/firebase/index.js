@@ -166,14 +166,7 @@ export function uploadImage(obj, success, error) {
   }
 }
 
-export async function getAppointmentsAsync({data}) {
-  console.log(data);
-  let uid = data.uid;
-  console.log(uid);
-  if (Object.keys(data).includes('expert')) {
-    uid = data.expert.uid;
-  }
-
+export async function getAppointmentsAsync(uid) {
   try {
     const document = firebase.firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
@@ -400,7 +393,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
 }
 
 export async function changeAppointmentAsync({data}) {
-  const {id, time, uid} = data;
+  const {id, time, uid, expert} = data;
 
   try {
     return await fetch(
@@ -426,6 +419,7 @@ export async function changeAppointmentAsync({data}) {
         const expertDocument = firestore
           .collection('appointments')
           .doc(expert.uid);
+
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
         expertAppointments.history[uid] = expertAppointments.history[uid].map(
@@ -436,7 +430,6 @@ export async function changeAppointmentAsync({data}) {
             return item;
           },
         );
-        console.log('EXPERT APPOINTMENTS', expertAppointments);
         await expertDocument.set(
           {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
           {merge: true},
@@ -1780,13 +1773,27 @@ async function lockExpertRecord({uid, id, expert}) {
   appointmentList.history[uid].map((item) => {
     if (item.id === id) {
       item.locked = true;
-      console.log('Record', item);
       return item;
     }
     return item;
   });
 
   await document.set({history: {...appointmentList.history}}, {merge: true});
+}
+
+export async function setVideoVisitRating(data) {
+  const {
+    rating,
+    visit: {expert, uid},
+  } = data;
+  const document = firestore.collection('users').doc(expert.uid);
+  const expertDoc = await document.get();
+  const expertData = expertDoc.data();
+
+  await document.set(
+    {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
+    {merge: true},
+  );
 }
 
 async function saveMedicalHistory(payload, visit) {

@@ -187,11 +187,10 @@ const SheduleModal = ({
           </View>
         </Fragment>
       )}
-
       <TouchableOpacity
         onPress={() =>
           day && time
-            ? navigation.navigate('BookVisit', {uid})
+            ? dispatch(updateVisit({data: {...visit, time}, navigation}))
             : setShowShedule(!showShedule)
         }
         style={

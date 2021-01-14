@@ -68,7 +68,7 @@ const ExpertAppointments = ({navigation}) => {
       setVisits([...record]);
       setSearch([...record]);
     }
-  }, [selectedDate]);
+  }, [visitData]);
 
   const handleVisitPress = (details) => {
     navigation.navigate(screenNames.patientProfile, {

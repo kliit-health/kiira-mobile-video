@@ -16,10 +16,8 @@ import {
 
 import {showOrHideModal} from '../../components/customModal/action';
 
-function* getExpertPatients(data) {
-  console.log('GET APPOINTMENTS CALLED');
+function* getExpertPatients({data}) {
   function getUserAppointments(data) {
-    console.log('DATA USER', data);
     let users = Object.values(data);
     let allApponitments = users.reduce((acc, item) => {
       if (Object.values(item).length) return [...acc, ...Object.values(item)];
@@ -30,8 +28,7 @@ function* getExpertPatients(data) {
 
   try {
     yield put(showApiLoader());
-    const appointments = yield getAppointmentsAsync(data);
-    console.log('APPOINTMENTS', appointments);
+    const appointments = yield getAppointmentsAsync(data.uid);
     const allApponitments = yield getUserAppointments(appointments);
     yield put({
       type: FETCH_EXPERT_APPOINTMENTS,
@@ -54,10 +51,12 @@ function* updateAppointment({data: {uid, navigation, ...rest}}) {
 }
 
 function* cancelAppointment(data) {
+  const {expert} = data;
+  console.log(data);
   try {
     yield put(showApiLoader());
     const result = yield cancelAppointmentAsync(data);
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(expert.uid);
     if (result) {
       yield put(
         showOrHideModal(
@@ -65,9 +64,11 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
+      console.log('EXPERT CANCEL SUCCESSFUL');
       yield updateCredits(1, data);
     }
-    yield put({type: FETCH_EXPERT_APPOINTMENTS, data: appointments});
+
+    yield put({type: FETCH_EXPERT_APPOINTMENTS, data: appointments.history});
     yield put(hideApiLoader());
   } catch (error) {
     console.error(error);

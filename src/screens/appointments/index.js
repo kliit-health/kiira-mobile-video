@@ -3,7 +3,7 @@ import {View, FlatList, Text, Image} from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
-import {Container, Header, TextButton, RatingModal} from '../../components';
+import {Container, Header, TextButton} from '../../components';
 import {screenNames} from '../../utils/constants';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
@@ -16,11 +16,7 @@ const Appointments = ({navigation}) => {
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
   const visitData = useSelector((state) => state.appointmentsReducer);
-  const completedCall = useSelector((state) => state.visitReducer);
-  const {previousRoute} = useSelector((state) => state.navigator);
   const [visits, setVisits] = useState([]);
-
-  const showRating = previousRoute === 'MainCallScreen';
 
   useEffect(() => {
     dispatch(getAppointmentsList({uid: userData.uid}));
@@ -51,13 +47,6 @@ const Appointments = ({navigation}) => {
         title="Upcoming Visits"
         onBack={() => navigation.navigate('BottomTab')}
       />
-      {showRating && (
-        <RatingModal
-          title="Your Telemedicine visit has ended"
-          description="Please rate your visit"
-          visible={showRating}
-        />
-      )}
       {visits.length > 0 ? (
         <Fragment>
           <FlatList

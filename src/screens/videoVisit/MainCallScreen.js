@@ -32,7 +32,7 @@ class MainCallScreen extends Component {
             console.log('Logout failed with exception:', {error});
           },
         );
-        this.props.navigation.navigate('Appointments');
+        this.props.navigation.navigate('RatingScreen');
       },
       onCallEnded: (call) => {
         console.log(
@@ -57,7 +57,7 @@ class MainCallScreen extends Component {
             console.log('Logout failed with exception:', {error});
           },
         );
-        this.props.navigation.navigate('Appointments');
+        this.props.navigation.navigate('RatingScreen');
       },
     });
     this.addCallListner();
