@@ -303,6 +303,8 @@ export default {
       visitId: 'Visit ID: ',
       viewDetails: 'View Details',
       videoWith: 'Video visit with',
+      afterVisit:
+        'After visit summary has not been provided by your expert. Check again later.',
     },
 
     basicInfo: {

@@ -22,7 +22,6 @@ export default StyleSheet.create({
   logoutContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
