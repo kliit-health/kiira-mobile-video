@@ -28,8 +28,11 @@ const Visit = (props) => {
 
   useEffect(() => {
     dispatch(getExpertsData(params));
-    dispatch(setVisit(visit));
   }, []);
+
+  useEffect(() => {
+    dispatch(setVisit(visit));
+  });
 
   return (
     <View style={styles.parentContainerStyle}>

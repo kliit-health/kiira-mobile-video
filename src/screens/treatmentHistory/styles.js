@@ -39,6 +39,19 @@ export default StyleSheet.create({
 });
 
 export const modifiers = {
-  linking: {root: {paddingBottom: 5}},
-  ratings: {root: {alignSelf: 'flex-start'}},
+  linking: {
+    root: {
+      paddingBottom: 5,
+    },
+  },
+  ratings: {
+    root: {
+      alignSelf: 'flex-start',
+    },
+  },
+  header: {
+    root: {
+      borderBottomWidth: 0,
+    },
+  },
 };

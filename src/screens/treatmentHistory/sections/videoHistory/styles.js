@@ -10,10 +10,11 @@ export const listStyles = StyleSheet.create({
 export const itemFutureStyles = StyleSheet.create({
   root: {
     padding: 10,
-    margin: 20,
-    marginTop: 10,
+    marginBottom: 10,
+    marginHorizontal: 10,
     backgroundColor: colors.white,
     padding: 20,
+    borderRadius: 10,
     shadowColor: colors.black,
     shadowOffset: {width: 1, height: 1},
     shadowRadius: 5,
@@ -110,7 +111,9 @@ export const separatorStyles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: colors.offWhite,
+    backgroundColor: colors.white,
+    borderBottomColor: colors.gray,
+    borderBottomWidth: 0.3,
   },
   title: {
     fontFamily: text.fontFamily.poppinsRegular,
@@ -131,5 +134,35 @@ export const itemModifiers = {
     root: {
       flex: 0,
     },
+  },
+};
+
+export const messageStyles = StyleSheet.create({
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: 10,
+    padding: 20,
+    maxWidth: '80%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    position: 'relative',
+    paddingBottom: 20,
+  },
+  messageText: {
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.regular,
+    color: colors.black,
+  },
+});
+
+export const messageModifiers = {
+  root: {
+    backgroundColor: 'transparent',
+    top: 0,
+    bottom: 0,
+    margin: 'auto',
+    left: 0,
+    right: 0,
   },
 };

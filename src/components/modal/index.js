@@ -1,6 +1,6 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import { shape, object, func, bool, node, number } from 'prop-types';
+import {shape, object, func, bool, node, number} from 'prop-types';
 import defaultStyles from './styles';
 
 const Modal = ({
@@ -22,8 +22,7 @@ const Modal = ({
       style={styles.root}
       useNativeDriver
       hideModalContentWhileAnimating
-      {...rest}
-    >
+      {...rest}>
       {children}
     </NativeModal>
   );

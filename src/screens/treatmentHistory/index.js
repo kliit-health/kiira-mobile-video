@@ -47,7 +47,7 @@ const TreatmentHistory = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header onBack={handleOnBackPress} />
+      <Header styles={modifiers.header} onBack={handleOnBackPress} />
       <View style={styles.profileContainer}>
         <Avatar border source={profileImageUrl} />
         <View style={styles.detailsContainer}>
