@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {useDispatch} from 'react-redux';
+import FastImage from 'react-native-fast-image';
 import CustomButton from '../../../components/customButton';
 import CustomText from '../../../components/customText';
 import {Rating} from 'react-native-elements';
@@ -32,17 +33,10 @@ const ExpertInfo = ({
     <View>
       <View style={styles.expertInfoParentContainerStyle}>
         <View style={styles.expertImageContainer}>
-          <Image
+          <FastImage
             style={styles.expertImage}
-            defaultSource={staticImages.profilePlaceholderImg}
             resizeMode="cover"
-            source={
-              expertData.profileInfo.profileImageUrl
-                ? {
-                    uri: expertData.profileInfo.profileImageUrl,
-                  }
-                : staticImages.profilePlaceholderImg
-            }
+            source={{uri: expertData.profileInfo.profileImageUrl}}
             activeOpacity={0.7}
           />
           <View>
@@ -116,7 +110,9 @@ const ExpertInfo = ({
                 </View>
               ) : appointments.todayLoading &&
                 !appointmentData.appointments.today.length ? (
-                <ActivityIndicator size="large" />
+                <View alignSelf="flex-start">
+                  <ActivityIndicator size="large" />
+                </View>
               ) : (
                 <CustomText style={styles.noAvailability}>
                   No appointments

@@ -16,17 +16,10 @@ const PatientDetails = ({visit, patientInfo}) => {
   return (
     <View style={styles.expertInfoParentContainerStyle}>
       <View style={styles.expertImageContainer}>
-        <Image
+        <FastImage
           style={styles.expertImage}
-          defaultSource={staticImages.profilePlaceholderImg}
           resizeMode="cover"
-          source={
-            patientInfo.profileInfo.profileImageUrl
-              ? {
-                  uri: patientInfo.profileInfo.profileImageUrl,
-                }
-              : staticImages.profilePlaceholderImg
-          }
+          source={{uri: patientInfo.profileInfo.profileImageUrl}}
           activeOpacity={0.7}
         />
         <View>

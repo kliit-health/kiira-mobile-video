@@ -8,6 +8,7 @@ import {
   Modal,
   AppState,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {connect} from 'react-redux';
 import styles from './style';
 import Language from '../../../utils/localization';
@@ -32,7 +33,6 @@ import {getChatItems} from '../selectors';
 import moment from 'moment';
 import CustomButton from '../../../components/customButton';
 import {stopObserverChat} from '../action';
-import CachedImage from 'react-native-image-cache-wrapper';
 
 // var RSAKey = require('react-native-rsa');
 // var rsa = new RSAKey();
@@ -240,20 +240,14 @@ class ChatExpert extends React.PureComponent {
           />
         </TouchableOpacity>
         <View style={styles.profileHeaderStyle}>
-          <CachedImage
+          <FastImage
             containerStyle={{alignSelf: 'center'}}
             style={{
               width: 50,
               height: 50,
               borderRadius: 50,
             }}
-            source={
-              questionData.userInfo.profileInfo.profileImageUrl
-                ? {
-                    uri: questionData.userInfo.profileInfo.profileImageUrl,
-                  }
-                : staticImages.profilePlaceholderImg
-            }
+            source={{uri: questionData.userInfo.profileInfo.profileImageUrl}}
             activeOpacity={0.7}
           />
           <CustomText style={styles.titleTextStyle}>

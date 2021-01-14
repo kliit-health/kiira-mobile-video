@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import CustomText from '../../../components/customText';
 import Language from '../../../utils/localization';
 import Constant from '../../../utils/constants';
@@ -15,17 +16,10 @@ const ExpertInfo = ({expertData, visit}) => {
     <View style={{marginTop: 10}}>
       <View style={styles.expertInfoParentContainerStyle}>
         <View style={styles.expertImageContainer}>
-          <Image
+          <FastImage
             style={styles.expertImage}
-            defaultSource={staticImages.profilePlaceholderImg}
-            resizeMode="cover"
-            source={
-              expertData.profileInfo.profileImageUrl
-                ? {
-                    uri: expertData.profileInfo.profileImageUrl,
-                  }
-                : staticImages.profilePlaceholderImg
-            }
+            defaultSource={require('../../../../assets/profile_img_placeholder.png')}
+            source={{uri: expertData.profileInfo.profileImageUrl}}
             activeOpacity={0.7}
           />
           <View>

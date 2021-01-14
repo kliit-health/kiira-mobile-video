@@ -8,6 +8,7 @@ import {
   Modal,
   ScrollView,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {getExpertsData, clearChooseExpertState} from './action';
 import styles from './style';
 import CustomText from '../../components/customText';
@@ -18,7 +19,6 @@ import CustomButton from '../../components/customButton';
 import InputText from '../../components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {updateQuestion} from '../ask/action';
-import CachedImage from 'react-native-image-cache-wrapper';
 
 const lang = Language['en'];
 class ChooseExpert extends Component {
@@ -90,7 +90,7 @@ class ChooseExpert extends Component {
                 });
               }}>
               <View style={styles.expertInfoParentContainerStyle}>
-                <CachedImage
+                <FastImage
                   containerStyle={{alignSelf: 'flex-start'}}
                   style={{
                     width: 80,

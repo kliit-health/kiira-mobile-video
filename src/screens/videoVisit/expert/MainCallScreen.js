@@ -19,21 +19,20 @@ class ExpertMainCallScreen extends Component {
         CometChat.endCall(this.sessionId).then(
           (call) => {
             console.log('Called Ended by User', call);
+            CometChat.logout().then(
+              () => {
+                console.log('Logout completed successfully');
+                this.props.navigation.navigate('ExpertAppointments');
+              },
+              (error) => {
+                console.log('Logout failed with exception:', {error});
+              },
+            );
           },
           (err) => {
             console.log('Error ending call', err);
           },
         );
-
-        CometChat.logout().then(
-          () => {
-            console.log('Logout completed successfully');
-          },
-          (error) => {
-            console.log('Logout failed with exception:', {error});
-          },
-        );
-        this.props.navigation.navigate('ExpertAppointments');
       },
       onCallEnded: (call) => {
         console.log(
@@ -44,20 +43,19 @@ class ExpertMainCallScreen extends Component {
         CometChat.endCall(this.sessionId).then(
           (call) => {
             console.log('Called Ended by User', call);
+            CometChat.logout().then(
+              () => {
+                console.log('Logout completed successfully');
+                this.props.navigation.navigate('ExpertAppointments');
+              },
+              (error) => {
+                console.log('Logout failed with exception:', {error});
+                this.props.navigation.navigate('ExpertAppointments');
+              },
+            );
           },
           (err) => {
             console.log('Error ending call', err);
-          },
-        );
-
-        CometChat.logout().then(
-          () => {
-            console.log('Logout completed successfully');
-            this.props.navigation.navigate('ExpertAppointments');
-          },
-          (error) => {
-            console.log('Logout failed with exception:', {error});
-            this.props.navigation.navigate('ExpertAppointments');
           },
         );
       },
@@ -92,9 +90,29 @@ class ExpertMainCallScreen extends Component {
         onIncomingCallReceived(call) {
           var sessionID = call.getSessionId();
           var status = CometChat.CALL_STATUS.BUSY;
+
+          ExpertAppointments;
           CometChat.rejectCall(sessionID, status).then(
             (rejectedCall) => {
               console.log('Incoming Call rejected', rejectedCall);
+              CometChat.endCall(this.sessionId).then(
+                (call) => {
+                  console.log('Called Ended by User', call);
+                  CometChat.logout().then(
+                    () => {
+                      console.log('Logout completed successfully');
+                      this.props.navigation.navigate('ExpertAppointments');
+                    },
+                    (error) => {
+                      console.log('Logout failed with exception:', {error});
+                      this.props.navigation.navigate('ExpertAppointments');
+                    },
+                  );
+                },
+                (err) => {
+                  console.log('Error ending call', err);
+                },
+              );
             },
             (error) => {
               console.log('Call rejection failed with error:', error);

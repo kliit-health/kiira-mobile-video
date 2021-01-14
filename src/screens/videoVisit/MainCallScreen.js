@@ -18,22 +18,22 @@ class MainCallScreen extends Component {
         CometChat.endCall(this.sessionId).then(
           (call) => {
             console.log('Called Ended by User', call);
+            CometChat.logout().then(
+              () => {
+                console.log('Logout completed successfully');
+                this.props.navigation.navigate('RatingScreen');
+              },
+              (error) => {
+                console.log('Logout failed with exception:', {error});
+              },
+            );
           },
           (err) => {
             console.log('Error ending call', err);
           },
         );
-
-        CometChat.logout().then(
-          () => {
-            console.log('Logout completed successfully');
-          },
-          (error) => {
-            console.log('Logout failed with exception:', {error});
-          },
-        );
-        this.props.navigation.navigate('RatingScreen');
       },
+
       onCallEnded: (call) => {
         console.log(
           'OngoingCallListener: Call ended listener',
@@ -43,21 +43,20 @@ class MainCallScreen extends Component {
         CometChat.endCall(this.sessionId).then(
           (call) => {
             console.log('Called Ended by User', call);
+            CometChat.logout().then(
+              () => {
+                console.log('Logout completed successfully');
+                this.props.navigation.navigate('RatingScreen');
+              },
+              (error) => {
+                console.log('Logout failed with exception:', {error});
+              },
+            );
           },
           (err) => {
             console.log('Error ending call', err);
           },
         );
-
-        CometChat.logout().then(
-          () => {
-            console.log('Logout completed successfully');
-          },
-          (error) => {
-            console.log('Logout failed with exception:', {error});
-          },
-        );
-        this.props.navigation.navigate('RatingScreen');
       },
     });
     this.addCallListner();
@@ -94,6 +93,15 @@ class MainCallScreen extends Component {
           CometChat.rejectCall(sessionID, status).then(
             (rejectedCall) => {
               console.log('Incoming Call rejected', rejectedCall);
+              CometChat.logout().then(
+                () => {
+                  console.log('Logout completed successfully');
+                  this.props.navigation.navigate('Appointments');
+                },
+                (error) => {
+                  console.log('Logout failed with exception:', {error});
+                },
+              );
             },
             (error) => {
               console.log('Call rejection failed with error:', error);

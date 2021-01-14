@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
+import FastImage from 'react-native-fast-image';
 import CustomText from '../../components/customText';
 import {showOrHideModal} from '../../components/customModal/action';
 import styles from './style';
@@ -246,14 +247,13 @@ class Dashboard extends PureComponent {
           </CustomText>
         </View>
         <View style={styles.profileImgViewStyle}>
-          <Image
+          <FastImage
             style={{
               width: 70,
               height: 70,
               borderRadius: 50,
             }}
             resizeMode="cover"
-            defaultSource={staticImages.profilePlaceholderImg}
             source={{uri: profileImageUrl}}
           />
           <TouchableOpacity
