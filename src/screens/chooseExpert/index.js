@@ -69,10 +69,7 @@ class ChooseExpert extends Component {
   renderExpertInfoView() {
     const {staticImages} = Constant.App;
     const {navigation, expertData} = this.props;
-
-    const chatEnabled = expertData.filter(
-      (expert) => expert.chatEnabled === true,
-    );
+    const chatEnabled = expertData.filter((expert) => expert.chatEnabled);
 
     return (
       <View style={styles.expertsParentContainerStyle}>

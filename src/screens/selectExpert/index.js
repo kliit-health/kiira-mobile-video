@@ -20,11 +20,14 @@ const SelectExpert = ({navigation}) => {
   useEffect(() => {
     if (experts.length && userProfile) {
       const userState = userProfile.state.code;
-      const filteredExperts = experts.filter(({profileInfo}) => {
+      const stateAvailableExperts = experts.filter(({profileInfo}) => {
         const supportedStates = profileInfo.license.states;
         return supportedStates.some(({code}) => code === userState);
       });
-      setAvailableExperts(filteredExperts);
+      const videoEnabledExperts = stateAvailableExperts.filter(
+        ({videoEnabled}) => videoEnabled,
+      );
+      setAvailableExperts(videoEnabledExperts);
     }
   }, [experts]);
 
