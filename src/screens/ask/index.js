@@ -493,9 +493,9 @@ class Ask extends PureComponent {
             this.state.credits === 0 &&
             this.state.questions === 0 &&
             this.renderEmptyCreditView()}
-          {recentExpertData &&
+          {/* {recentExpertData &&
             recentExpertData.length > 0 &&
-            this.renderRecentExpertView()}
+            this.renderRecentExpertView()} */}
           {previousQuestionData &&
             previousQuestionData.length > 0 &&
             this.renderPreviousQuestionView()}
