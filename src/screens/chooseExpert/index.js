@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
   Image,
   View,
@@ -7,36 +7,36 @@ import {
   TouchableOpacity,
   Modal,
   ScrollView,
-} from "react-native";
-import { getExpertsData, clearChooseExpertState } from "./action";
-import styles from "./style";
-import CustomText from "../../components/customText";
-import Constant from "../../utils/constants";
-import { Rating } from "react-native-elements";
-import Language from "../../utils/localization";
-import CustomButton from "../../components/customButton";
-import InputText from "../../components/customInputText/simpleInputText";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import { updateQuestion } from "../ask/action";
-import CachedImage from "react-native-image-cache-wrapper";
+} from 'react-native';
+import {getExpertsData, clearChooseExpertState} from './action';
+import styles from './style';
+import CustomText from '../../components/customText';
+import Constant from '../../utils/constants';
+import {Rating} from 'react-native-elements';
+import Language from '../../utils/localization';
+import CustomButton from '../../components/customButton';
+import InputText from '../../components/customInputText/simpleInputText';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import {updateQuestion} from '../ask/action';
+import CachedImage from 'react-native-image-cache-wrapper';
 
-const lang = Language["en"];
+const lang = Language['en'];
 class ChooseExpert extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showEditQuestionModal: false,
       showFilterModal: false,
-      question: "",
+      question: '',
       genderItemsArr: [
         {
-          title: "Female Only",
-          code: "Female",
+          title: 'Female Only',
+          code: 'Female',
           selected: false,
         },
         {
-          title: "Male Only",
-          code: "Male",
+          title: 'Male Only',
+          code: 'Male',
           selected: false,
         },
       ],
@@ -48,8 +48,8 @@ class ChooseExpert extends Component {
   }
 
   fetchData() {
-    const { getExperts, question } = this.props;
-    this.setState({ question });
+    const {getExperts, question} = this.props;
+    this.setState({question});
     const params = {
       expertsParams: {
         tableName: Constant.App.firebaseTableNames.users,
@@ -62,97 +62,94 @@ class ChooseExpert extends Component {
   }
 
   componentWillUnmount() {
-    const { clearState } = this.props;
+    const {clearState} = this.props;
     clearState();
   }
 
   renderExpertInfoView() {
-    const { staticImages } = Constant.App;
-    const { navigation, expertData } = this.props;
+    const {staticImages} = Constant.App;
+    const {navigation, expertData} = this.props;
+
+    const chatEnabled = expertData.filter(
+      (expert) => expert.chatEnabled === true,
+    );
+
     return (
       <View style={styles.expertsParentContainerStyle}>
         <FlatList
           showsHorizontalScrollIndicator={false}
-          keyboardDismissMode={Platform.OS === "ios" ? "none" : "on-drag"}
-          keyboardShouldPersistTaps={Platform.OS === "ios" ? "never" : "always"}
-          data={expertData}
-          renderItem={({ item }) => {
-            item = item.data();
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(Constant.App.screenNames.ExpertProfile, {
-                    isFrom: Constant.App.screenNames.ChooseExpert,
-                    uid: item.uid,
-                  });
-                }}
-              >
-                <View style={styles.expertInfoParentContainerStyle}>
-                  <CachedImage
-                    containerStyle={{ alignSelf: "flex-start" }}
+          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
+          data={chatEnabled}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(Constant.App.screenNames.ExpertProfile, {
+                  isFrom: Constant.App.screenNames.ChooseExpert,
+                  uid: item.uid,
+                });
+              }}>
+              <View style={styles.expertInfoParentContainerStyle}>
+                <CachedImage
+                  containerStyle={{alignSelf: 'flex-start'}}
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 50,
+                  }}
+                  source={{uri: item.profileInfo.profileImageUrl}}
+                  activeOpacity={0.7}
+                />
+                {item.isOnline ? (
+                  <View
                     style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: 50,
+                      left: 90,
+                      width: 16,
+                      height: 16,
+                      top: 15,
+                      borderRadius: 8,
+                      backgroundColor: Constant.App.colors.greenColor,
+                      position: 'absolute',
                     }}
-                    source={{ uri: item.profileInfo.profileImageUrl }}
-                    activeOpacity={0.7}
                   />
-                  {item.isOnline ? (
-                    <View
-                      style={{
-                        left: 90,
-                        width: 16,
-                        height: 16,
-                        top: 15,
-                        borderRadius: 8,
-                        backgroundColor: Constant.App.colors.greenColor,
-                        position: "absolute",
-                      }}
-                    />
-                  ) : (
-                    <View
-                      style={{
-                        left: 90,
-                        width: 16,
-                        height: 16,
-                        top: 15,
-                        borderRadius: 8,
-                        backgroundColor: Constant.App.colors.grayColor,
-                        position: "absolute",
-                      }}
-                    />
-                  )}
-                  <View style={styles.expertInfoContainerStyle}>
-                    <CustomText style={styles.expertNameTextBoldStyle}>
-                      {`${item.profileInfo.firstName} ${
-                        item.profileInfo.lastName
-                      }`}
-                    </CustomText>
-                    <CustomText style={styles.expertInfoProfessionTextStyle}>
-                      {item.profileInfo.profession.shortName}
-                    </CustomText>
-                    <CustomText style={styles.expertProfessionLoctionBoldStyle}>
-                      {`${item.profileInfo.city}, ${
-                        item.profileInfo.state.code
-                      }`}
-                    </CustomText>
-                    <Rating
-                      imageSize={20}
-                      readonly
-                      startingValue={parseFloat(item.rating / 2)}
-                      style={{ alignSelf: "flex-start" }}
-                    />
-                  </View>
-                  <Image
-                    resizeMode="contain"
-                    source={staticImages.rightChevronIcon}
-                    style={styles.rightChevronIconStyle}
+                ) : (
+                  <View
+                    style={{
+                      left: 90,
+                      width: 16,
+                      height: 16,
+                      top: 15,
+                      borderRadius: 8,
+                      backgroundColor: Constant.App.colors.grayColor,
+                      position: 'absolute',
+                    }}
+                  />
+                )}
+                <View style={styles.expertInfoContainerStyle}>
+                  <CustomText style={styles.expertNameTextBoldStyle}>
+                    {`${item.profileInfo.firstName} ${item.profileInfo.lastName}`}
+                  </CustomText>
+                  <CustomText style={styles.expertInfoProfessionTextStyle}>
+                    {item.profileInfo.profession.shortName}
+                  </CustomText>
+                  <CustomText style={styles.expertProfessionLoctionBoldStyle}>
+                    {`${item.profileInfo.city}, ${item.profileInfo.state.code}`}
+                  </CustomText>
+                  <Rating
+                    imageSize={20}
+                    readonly
+                    startingValue={parseFloat(item.rating / 2)}
+                    style={{alignSelf: 'flex-start'}}
                   />
                 </View>
-              </TouchableOpacity>
-            );
-          }}
+                <Image
+                  resizeMode="contain"
+                  source={staticImages.rightChevronIcon}
+                  style={styles.rightChevronIconStyle}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
           ListHeaderComponent={() =>
             !expertData.length ? (
               <CustomText style={styles.noDataTextStyle}>
@@ -167,15 +164,14 @@ class ChooseExpert extends Component {
   }
 
   renderHeaderView() {
-    const { navigation } = this.props;
-    const { staticImages } = Constant.App;
+    const {navigation} = this.props;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <CustomText style={styles.cancelTextStyle}>
             {lang.chooseExpert.cancel}
           </CustomText>
@@ -185,8 +181,7 @@ class ChooseExpert extends Component {
             this.setState({
               showFilterModal: true,
             });
-          }}
-        >
+          }}>
           <Image
             resizeMode="contain"
             source={staticImages.filterIcon}
@@ -198,7 +193,7 @@ class ChooseExpert extends Component {
   }
 
   renderQuestionView() {
-    const { question } = this.props;
+    const {question} = this.props;
     return (
       <View style={styles.questionParentContainer}>
         <CustomText style={styles.questionTitleTextStyle}>
@@ -211,8 +206,7 @@ class ChooseExpert extends Component {
               showEditQuestionModal: true,
               question: question,
             });
-          }}
-        >
+          }}>
           <CustomText style={styles.editTextStyle}>
             {lang.chooseExpert.edit}
           </CustomText>
@@ -222,15 +216,14 @@ class ChooseExpert extends Component {
   }
 
   renderEditQuestionModal() {
-    const { showEditQuestionModal, question } = this.state;
-    const { setQuestionText } = this.props;
+    const {showEditQuestionModal, question} = this.state;
+    const {setQuestionText} = this.props;
     return (
       <Modal
         animationType="fade"
         onRequestClose={() => {}}
         transparent
-        isVisible={showEditQuestionModal}
-      >
+        isVisible={showEditQuestionModal}>
         <View style={styles.editQuestionModalParentContainerStyle}>
           <View style={styles.editQuestionModalInnerContainerStyle}>
             <View style={styles.editQuestionModalInputTextContainerStyle}>
@@ -238,16 +231,13 @@ class ChooseExpert extends Component {
                 maxHeight={100}
                 multiline={true}
                 autoCapitalize="none"
-                onChangeText={(value) => this.setState({ question: value })}
+                onChangeText={(value) => this.setState({question: value})}
                 placeholder={lang.askUser.placehorderText}
                 value={question}
                 style={
                   question
                     ? styles.editQuestionModalInputTypeStyle
-                    : [
-                        styles.editQuestionModalInputTypeStyle,
-                        { lineHeight: 25 },
-                      ]
+                    : [styles.editQuestionModalInputTypeStyle, {lineHeight: 25}]
                 }
                 placeholderTextColor={Constant.App.colors.lightGrey}
               />
@@ -260,7 +250,7 @@ class ChooseExpert extends Component {
                 onPress={() =>
                   this.setState({
                     showEditQuestionModal: false,
-                    question: "",
+                    question: '',
                   })
                 }
               />
@@ -273,7 +263,7 @@ class ChooseExpert extends Component {
                   setQuestionText(question);
                   this.setState({
                     showEditQuestionModal: false,
-                    question: "",
+                    question: '',
                   });
                 }}
               />
@@ -285,25 +275,24 @@ class ChooseExpert extends Component {
   }
 
   renderFilterModal() {
-    const { showFilterModal, genderItemsArr } = this.state;
-    const { staticImages } = Constant.App;
-    const { professionData, languagesData, getExperts } = this.props;
+    const {showFilterModal, genderItemsArr} = this.state;
+    const {staticImages} = Constant.App;
+    const {professionData, languagesData, getExperts} = this.props;
     return (
       <Modal
         animationType="fade"
         onRequestClose={() => {}}
         transparent
-        isVisible={showFilterModal}
-      >
+        isVisible={showFilterModal}>
         <View style={styles.filterModalParentContainerStyle}>
           <View style={styles.filterModalTitleContainerStyle}>
             <CustomText style={styles.filterModalTitleTextStyle}>
               {lang.chooseExpert.filterTitle}
             </CustomText>
             <TouchableOpacity
-              style={{ alignSelf: "flex-end" }}
+              style={{alignSelf: 'flex-end'}}
               onPress={() => {
-                this.setState({ showFilterModal: false });
+                this.setState({showFilterModal: false});
                 let isFilerSelected = false;
                 const filterParams = {
                   tableName: Constant.App.firebaseTableNames.users,
@@ -320,7 +309,7 @@ class ChooseExpert extends Component {
                   genderKey:
                     Constant.App.firebaseTableKeyValuesNames
                       .filterConditionGenderKey,
-                  genderValue: "",
+                  genderValue: '',
                   languages: [],
                   professions: [],
                 };
@@ -368,8 +357,7 @@ class ChooseExpert extends Component {
                   };
                   getExperts(params);
                 }
-              }}
-            >
+              }}>
               <CustomText style={styles.filterModalDoneTextStyle}>
                 {lang.chooseExpert.done}
               </CustomText>
@@ -395,8 +383,7 @@ class ChooseExpert extends Component {
                   this.setState({
                     genderItemsArr: Object.assign([], [], genderItemsArr),
                   });
-                }}
-              >
+                }}>
                 <View style={styles.filterModalItemContainerStyle}>
                   <Image
                     resizeMode="contain"
@@ -434,8 +421,7 @@ class ChooseExpert extends Component {
                   this.setState({
                     professionData: Object.assign([], [], professionData),
                   });
-                }}
-              >
+                }}>
                 <View style={styles.filterModalItemContainerStyle}>
                   <Image
                     resizeMode="contain"
@@ -468,8 +454,7 @@ class ChooseExpert extends Component {
                   this.setState({
                     languagesData: Object.assign([], [], languagesData),
                   });
-                }}
-              >
+                }}>
                 <View style={styles.filterModalItemContainerStyle}>
                   <Image
                     resizeMode="contain"
@@ -493,14 +478,13 @@ class ChooseExpert extends Component {
   }
 
   render() {
-    const { showEditQuestionModal, showFilterModal } = this.state;
-    const { expertData } = this.props;
+    const {showEditQuestionModal, showFilterModal} = this.state;
+    const {expertData} = this.props;
     return (
       <View style={styles.parentContainerStyle}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
+          showsVerticalScrollIndicator={false}>
           <View>
             {this.renderHeaderView()}
             {this.renderQuestionView()}
@@ -509,7 +493,7 @@ class ChooseExpert extends Component {
             {showFilterModal ? this.renderFilterModal() : null}
           </View>
         </ScrollView>
-        {Platform.OS === "ios" && <KeyboardSpacer />}
+        {Platform.OS === 'ios' && <KeyboardSpacer />}
       </View>
     );
   }
@@ -528,7 +512,4 @@ const mapDispatchToProps = (dispatch) => ({
   clearState: () => dispatch(clearChooseExpertState()),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChooseExpert);
+export default connect(mapStateToProps, mapDispatchToProps)(ChooseExpert);

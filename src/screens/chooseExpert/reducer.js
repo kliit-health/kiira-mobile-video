@@ -1,43 +1,43 @@
-import { GET_EXPERTS_DATA_SUCCESS, CLEAR_CHOOSE_EXPERT_STATE, GET_PROFESSIONS_DATA_SUCCESS, GET_LANGUAGES_DATA_SUCCESS } from "../../redux/types";
+import {switchCase} from '../../utils/functions';
+import {
+  GET_EXPERTS_DATA_SUCCESS,
+  CLEAR_CHOOSE_EXPERT_STATE,
+  GET_PROFESSIONS_DATA_SUCCESS,
+  GET_LANGUAGES_DATA_SUCCESS,
+} from '../../redux/types';
 
 const initialState = {
   expertData: null,
   professionData: null,
   languagesData: null,
 };
-const chooseExpertReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_EXPERTS_DATA_SUCCESS:
-      return {
-        ...state,
-        expertData: action.data,
-      };
 
-    case CLEAR_CHOOSE_EXPERT_STATE:
-      return {
-        ...state,
-        expertData: null,
-        professionData: null,
-        languagesData: null,
-      };
+export const chooseExpertReducer = (state = initialState, action) => {
+  const {data, type} = action;
+  return switchCase({
+    [GET_EXPERTS_DATA_SUCCESS]: () => {
+      const expertData = data.map((item) => item.data());
 
-    case GET_PROFESSIONS_DATA_SUCCESS:
       return {
         ...state,
-        professionData: action.data,
+        expertData,
       };
-
-    case GET_LANGUAGES_DATA_SUCCESS:
-      return {
-        ...state,
-        languagesData: action.data,
-      };
-
-    default:
-      return {
-        ...state,
-      };
-  }
+    },
+    [CLEAR_CHOOSE_EXPERT_STATE]: {
+      ...state,
+      expertData: null,
+      professionData: null,
+      languagesData: null,
+    },
+    [GET_PROFESSIONS_DATA_SUCCESS]: {
+      ...state,
+      professionData: data,
+    },
+    [GET_LANGUAGES_DATA_SUCCESS]: {
+      ...state,
+      languagesData: data,
+    },
+  })(state)(type);
 };
 
 export default chooseExpertReducer;
