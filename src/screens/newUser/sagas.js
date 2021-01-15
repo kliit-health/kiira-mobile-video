@@ -9,6 +9,10 @@ import {
 
 let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+const defaultImage =
+  'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf';
+
 function* agreeToTerms(data) {
   try {
     const {navigation} = data.payload;
@@ -26,7 +30,7 @@ function* agreeToTerms(data) {
       profileInfo: {
         profileImageUrl: userData.profileInfo.profileImageUrl
           ? userData.profileImageUrl
-          : '',
+          : defaultImage,
         firstName: userData.profileInfo.firstName,
         lastName: userData.profileInfo.lastName,
         dob: userData.profileInfo.dob,
