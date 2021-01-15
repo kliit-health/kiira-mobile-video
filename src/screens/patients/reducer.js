@@ -1,4 +1,4 @@
-import {FETCH_EXPERT_APPOINTMENTS} from '../../redux/types';
+import {FETCH_PAITENT_APPOINTMENTS} from '../../redux/types';
 
 const initialState = {
   history: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 const expertPatientsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_EXPERT_APPOINTMENTS:
+    case FETCH_PAITENT_APPOINTMENTS:
       return {
         ...state,
         history: [...action.data],

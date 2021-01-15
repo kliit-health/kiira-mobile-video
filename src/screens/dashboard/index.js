@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   Alert,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import FastImage from 'react-native-fast-image';
@@ -409,6 +410,7 @@ class Dashboard extends PureComponent {
 
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" translucent={true} />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>

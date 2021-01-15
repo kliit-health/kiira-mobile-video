@@ -34,7 +34,7 @@ class VideoRating extends Component {
     let {
       current: {visit},
     } = this.props;
-    console.log(this.props);
+
     return (
       <ScrollView>
         <StatusBar barStyle="light-content" translucent={true} />

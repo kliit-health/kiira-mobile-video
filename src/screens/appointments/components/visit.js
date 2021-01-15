@@ -18,6 +18,7 @@ const Visit = ({visit, date, navigation}) => {
     uid: visit.uid,
     id: visit.id,
     expert: visit.expert,
+    prepaid: visit.prepaid,
   };
 
   return (

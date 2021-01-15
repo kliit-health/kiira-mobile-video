@@ -23,7 +23,9 @@ function* getAppointments({data}) {
   try {
     yield put(showApiLoader());
     const appointments = yield getAppointmentsAsync(data.uid);
-    yield put({type: FETCH_APPOINTMENTS, data: appointments});
+
+    if (appointments) yield put({type: FETCH_APPOINTMENTS, data: appointments});
+
     yield put(hideApiLoader());
   } catch (error) {
     console.error(error);
@@ -40,10 +42,14 @@ function* updateAppointment({data: {uid, navigation, ...rest}}) {
 }
 
 function* cancelAppointment(data) {
+  const {
+    data: {uid},
+  } = data;
+
   try {
     yield put(showApiLoader());
     const result = yield cancelAppointmentAsync(data);
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(uid);
     if (result) {
       yield put(
         showOrHideModal(

@@ -2,7 +2,6 @@ import firebase from 'react-native-firebase';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections} from '../constants';
-import appointments from '../../screens/appointments';
 var voucher_codes = require('voucher-code-generator');
 var RSAKey = require('react-native-rsa');
 var rsa = new RSAKey();
@@ -253,6 +252,7 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
+      prepaid,
     } = data;
 
     let response;
@@ -290,6 +290,7 @@ export async function makeAppointment({data}) {
             id: data.body.id,
             expert,
             locked: false,
+            prepaid,
           };
         })
         .catch((error) => {
@@ -299,7 +300,7 @@ export async function makeAppointment({data}) {
       const document = firebase.firestore().collection('appointments').doc(uid);
       const prev = await document.get();
 
-      if (prev.data().history) {
+      if (prev.exists) {
         await document.set(
           {history: [...prev.data().history, response]},
           {merge: true},
@@ -318,7 +319,6 @@ export async function makeAppointment({data}) {
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
-
       if (expertPrev.data().history[uid]) {
         await expertDocument.set(
           {history: {[uid]: [...expertPrev.data().history[uid], response]}},
@@ -360,10 +360,10 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
         const document = firestore.collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
-
         appointments.history = appointments.history.filter(
           (item) => item.id !== id,
         );
+
         await document.set(
           {history: [...(appointments.history || [])]},
           {merge: true},
@@ -374,12 +374,12 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
           .doc(expert.uid);
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
-        expertAppointments.history[uid] = expertAppointments.history[
-          uid
-        ].filter((item) => item.id !== id);
+        let filtered = expertAppointments.history[uid].filter((item) => {
+          return item.id !== id ? item : false;
+        });
 
         await expertDocument.set(
-          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
+          {history: {[uid]: [...(filtered || [])]}},
           {merge: true},
         );
       })
@@ -1532,30 +1532,19 @@ export async function updateCredits(visits, {data}) {
       .doc(data.uid)
       .get();
     const userData = docData.data();
+    const paymentType = data.prepaid
+      ? {prepaid: userData.prepaid + visits}
+      : {visits: userData.visits + visits};
     await firebase
       .firestore()
       .collection('users')
       .doc(data.uid)
-      .update({
-        visits: userData.visits + visits,
-      });
-
+      .update(paymentType);
     return {ok: true};
   } catch (err) {
     return {ok: false, status: 'internal'};
   }
 }
-
-// export async function updateCredits(credits, forUser) {
-//   try {
-//     await firebase.firestore().collection('users').doc(forUser).update({
-//       credits,
-//     });
-//     return {ok: true, newCredits: credits};
-//   } catch (err) {
-//     return {ok: false, status: 'internal'};
-//   }
-// }
 
 export async function getPayPalAccessToken() {
   try {
