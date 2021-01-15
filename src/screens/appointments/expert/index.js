@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, FlatList, Text} from 'react-native';
+import {ScrollView, View, FlatList, Text, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CustomText from '../../../components/customText';
 import {Header, Container, SearchBar} from '../../../components';
@@ -68,7 +68,7 @@ const ExpertAppointments = ({navigation}) => {
       setVisits([...record]);
       setSearch([...record]);
     }
-  }, [selectedDate]);
+  }, [visitData, selectedDate]);
 
   const handleVisitPress = (details) => {
     navigation.navigate(screenNames.patientProfile, {
@@ -95,6 +95,7 @@ const ExpertAppointments = ({navigation}) => {
 
   return (
     <Container unformatted styles={modifiers.container} themed>
+      <StatusBar barStyle="light-content" translucent={true} />
       <Header title={intl.en.expertAppointments.title} themed />
       <SearchBar
         styles={modifiers.searchBar}

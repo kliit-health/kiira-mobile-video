@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal, Image} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import IconButton from '../../../components/iconButton';
 import CustomButton from '../../../components/customButton';
 import styles from '../style';
@@ -11,12 +11,11 @@ const PaymentModal = ({
   modalVisible,
   setModalVisible,
   setApplyCredit,
-  navigation,
   setShowPlans,
   showPlans,
+  disableApplyCredit,
+  userData,
 }) => {
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const dispatch = useDispatch();
   const [planType, setPlanType] = useState('');
   const {staticImages} = Constant.App;
 
@@ -49,13 +48,24 @@ const PaymentModal = ({
                 source={staticImages.logoHorizontal}
               />
               <Text style={{...styles.modalText, fontSize: 20}}>
-                {`${userData.visits} Video visit(s) available`}
+                {`${
+                  userData.visits + userData.prepaid
+                } Video visit(s) available`}
               </Text>
               <CustomButton
-                buttonStyle={styles.noContainerStyle}
-                textStyle={styles.noTextStyle}
+                disabled={disableApplyCredit}
+                buttonStyle={
+                  disableApplyCredit
+                    ? styles.noContainerDisabledStyle
+                    : styles.noContainerStyle
+                }
+                textStyle={
+                  disableApplyCredit
+                    ? styles.noTextDisabledStyle
+                    : styles.noTextStyle
+                }
                 onPress={() => {
-                  if (userData.visits > 0) {
+                  if (userData.visits > 0 || userData.prepaid > 0) {
                     setModalVisible(!modalVisible);
                     setApplyCredit(true);
                   }

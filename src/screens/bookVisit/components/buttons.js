@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import styles from '../style';
 import Constant from '../../../utils/constants';
-import {makeAppointment} from '../action';
+import {makeAppointment, prepaidAppointment} from '../action';
 import {getAppointmentsList} from '../../appointments/action';
 
 const Buttons = ({
@@ -16,6 +16,7 @@ const Buttons = ({
   navigation,
   setModalVisible,
   setBooked,
+  disableApplyCredit,
   userData,
 }) => {
   const dispatch = useDispatch();
@@ -35,12 +36,9 @@ const Buttons = ({
         buttonStyle={styles.noContainerStyle}
         textStyle={styles.noTextStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ExpertSchedule, {
-            uid: expertData.uid,
-            calendarID: expertData.calendarID,
-          });
+          navigation.navigate(Constant.App.screenNames.BottomTab);
         }}
-        text="Reschedule Visit  "
+        text="Go Home"
       />
     </Fragment>
   );
@@ -56,18 +54,19 @@ const Buttons = ({
         text="Buy Credit"
       />
       <CustomButton
-        disabled={userData.visits === 0}
+        disabled={disableApplyCredit}
         buttonStyle={
-          userData.visits === 0
+          disableApplyCredit
             ? styles.noContainerDisabledStyle
             : styles.noContainerStyle
         }
         textStyle={
-          userData.visits === 0
-            ? styles.noTextDisabledStyle
-            : styles.noTextStyle
+          disableApplyCredit ? styles.noTextDisabledStyle : styles.noTextStyle
         }
         onPress={() => {
+          if (userData.visits === 0) {
+            dispatch(prepaidAppointment());
+          }
           setModalVisible(!modalVisible);
         }}
         text="Apply Credit"

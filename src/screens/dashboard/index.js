@@ -6,8 +6,10 @@ import {
   Text,
   Image,
   Alert,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
+import FastImage from 'react-native-fast-image';
 import CustomText from '../../components/customText';
 import {showOrHideModal} from '../../components/customModal/action';
 import styles from './style';
@@ -27,6 +29,7 @@ import {
   getExpertsDetailsAsync,
   getFavoriteExpertsAsync,
 } from '../careSquad/actions';
+import Rate, {AndroidMarket} from 'react-native-rate';
 import CustomButton from '../../components/customButton';
 import {getAgreements} from '../agreements/actions';
 import {getUserDetails} from '../../redux/actions';
@@ -41,6 +44,7 @@ class Dashboard extends PureComponent {
       credits: this.props.userData.credits,
       videoChat: 0,
       videoEnabled: false,
+      chatEnabled: this.props.userData.questions === 'Unlimited',
       modalOpen: true,
     };
   }
@@ -109,35 +113,37 @@ class Dashboard extends PureComponent {
     const countStartApp = await AsyncStorage.getItem('countStartApp');
     const count = countStartApp ? parseInt(countStartApp) : 1;
 
-    // if (!isAlreadyRate && count % 30 === 0) {
-    //   Alert.alert('App Rating', 'Please give us your opinion', [
-    //     {
-    //       text: 'Later',
-    //       onPress: () => console.log('Cancel Pressed'),
-    //       style: 'cancel',
-    //     },
-    //     {
-    //       text: 'OK',
-    //       onPress: () => {
-    //         setTimeout(() => {
-    //           let options = {
-    //             AppleAppID: '1526336962',
-    //             GooglePackageName: 'com.kiira',
-    //             preferredAndroidMarket: AndroidMarket.Google,
-    //             preferInApp: true,
-    //             openAppStoreIfInAppFails: true,
-    //             fallbackPlatformURL: 'https://kirra.io',
-    //           };
-    //           Rate.rate(options, (success) => {
-    //             if (success) {
-    //               AsyncStorage.setItem('isAlreadyRate', 'true');
-    //             }
-    //           });
-    //         }, 500);
-    //       },
-    //     },
-    //   ]);
-    // }
+    if (!isAlreadyRate && count % 30 === 0) {
+      Alert.alert('App Rating', 'Please give us your opinion', [
+        {
+          text: 'Later',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            setTimeout(() => {
+              let options = {
+                AppleAppID: '1526336962',
+                GooglePackageName: 'com.kiira',
+                OtherAndroidURL:
+                  'https://play.google.com/store/apps/details?id=com.kiira&hl=en_US&gl=US',
+                preferredAndroidMarket: AndroidMarket.Google,
+                preferInApp: true,
+                openAppStoreIfInAppFails: true,
+                fallbackPlatformURL: 'https://kirra.io',
+              };
+              Rate.rate(options, (success) => {
+                if (success) {
+                  AsyncStorage.setItem('isAlreadyRate', 'true');
+                }
+              });
+            }, 500);
+          },
+        },
+      ]);
+    }
     await AsyncStorage.setItem('countStartApp', `${count + 1}`);
   }
 
@@ -245,14 +251,13 @@ class Dashboard extends PureComponent {
           </CustomText>
         </View>
         <View style={styles.profileImgViewStyle}>
-          <Image
+          <FastImage
             style={{
               width: 70,
               height: 70,
               borderRadius: 50,
             }}
             resizeMode="cover"
-            defaultSource={staticImages.profilePlaceholderImg}
             source={{uri: profileImageUrl}}
           />
           <TouchableOpacity
@@ -270,7 +275,7 @@ class Dashboard extends PureComponent {
   renderDashBoard() {
     const {staticImages} = Constant.App;
     const {navigation, showHideErrorModal} = this.props;
-    const {videoEnabled} = this.state;
+    const {videoEnabled, chatEnabled} = this.state;
 
     return (
       <View style={styles.dashboardContainer}>
@@ -317,7 +322,13 @@ class Dashboard extends PureComponent {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(Constant.App.screenNames.AskUser)}>
+          onPress={() => {
+            if (chatEnabled) {
+              navigation.navigate(Constant.App.screenNames.AskUser);
+            } else {
+              showHideErrorModal('Chat unavailable with current plan');
+            }
+          }}>
           <View style={styles.dashboardItem}>
             <View style={styles.dashboardItemLogo}>
               <Image
@@ -402,6 +413,7 @@ class Dashboard extends PureComponent {
 
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" translucent={true} />
         <ScrollView
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>

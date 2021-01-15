@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, FlatList} from 'react-native';
+import {StatusBar, View, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
 import {getPatientsList} from './action';
@@ -17,9 +17,7 @@ const Patients = (props) => {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const visitData = useSelector(
-    (state) => state.expertAppointmentsReducer.history,
-  );
+  const visitData = useSelector((state) => state.expertPatientsReducer.history);
   const [visits, setVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchVisits, setSearchVisits] = useState([]);
@@ -70,6 +68,7 @@ const Patients = (props) => {
 
   return (
     <Container unformatted styles={modifiers.container} themed>
+      <StatusBar barStyle="light-content" translucent={true} />
       <Header title={intl.en.expertAppointments.future} themed />
       <SearchBar
         onChange={handleSearch}

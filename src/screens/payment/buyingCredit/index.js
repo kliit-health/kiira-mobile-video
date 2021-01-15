@@ -346,12 +346,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCreditAmountOptions: () => dispatch(getCreditAmountsOptions()),
   getPaymentMethods: () => dispatch(getPaymentMethods()),
-  buyCredits: (cardID, credits, amount) =>
-    dispatch(buyCreditsWithCard(cardID, credits, amount)),
-  buyCreditsWithToken: (tokenID, credits, amount) =>
-    dispatch(buyCreditsWithToken(tokenID, credits, amount)),
-  buyCreditsUsingPayPal: (credits, amount, navigation) =>
-    dispatch(buyCreditsUsingPayPal(credits, amount, navigation)),
+  buyCredits: (cardID, credits, amount, prepaid) =>
+    dispatch(buyCreditsWithCard(cardID, credits, amount, prepaid)),
+  buyCreditsWithToken: (tokenID, credits, amount, prepaid) =>
+    dispatch(buyCreditsWithToken(tokenID, credits, amount, prepaid)),
+  buyCreditsUsingPayPal: (credits, amount, navigation, prepaid) =>
+    dispatch(buyCreditsUsingPayPal(credits, amount, navigation, prepaid)),
   showAlert: (message) => dispatch(showOrHideModal(message)),
 });
 

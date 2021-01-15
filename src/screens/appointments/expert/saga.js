@@ -16,19 +16,19 @@ import {
 
 import {showOrHideModal} from '../../../components/customModal/action';
 
-function* getAppointments(data) {
-  function getUserAppointments(data) {
-    let users = Object.values(data);
-    let allApponitments = users.reduce((acc, item) => {
-      if (Object.values(item).length) return [...acc, ...Object.values(item)];
-    }, []);
+function getUserAppointments(data) {
+  let users = Object.values(data);
+  let allApponitments = users.reduce((acc, item) => {
+    if (Object.values(item).length) return [...acc, ...Object.values(item)];
+  }, []);
 
-    return allApponitments;
-  }
+  return allApponitments;
+}
 
+function* getAppointments({data}) {
   try {
     yield put(showApiLoader());
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(data.uid);
     const allApponitments = yield getUserAppointments(appointments);
     yield put({
       type: FETCH_EXPERT_APPOINTMENTS,
@@ -41,20 +41,17 @@ function* getAppointments(data) {
   }
 }
 
-function* updateAppointment({data: {uid, navigation, ...rest}}) {
-  try {
-    yield appointment({...rest}, uid);
-    yield put({type: UPDATE_HEALTH_HISTORY, data: {...rest}});
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 function* cancelAppointment(data) {
+  const {
+    data: {expert},
+  } = data;
+
   try {
     yield put(showApiLoader());
     const result = yield cancelAppointmentAsync(data);
-    const appointments = yield getAppointmentsAsync(data);
+    const appointments = yield getAppointmentsAsync(expert.uid);
+    const allApponitments = yield getUserAppointments(appointments);
+
     if (result) {
       yield put(
         showOrHideModal(
@@ -66,7 +63,7 @@ function* cancelAppointment(data) {
       yield updateCredits(1, data);
     }
 
-    yield put({type: FETCH_EXPERT_APPOINTMENTS, data: appointments.history});
+    yield put({type: FETCH_EXPERT_APPOINTMENTS, data: allApponitments});
     yield put(hideApiLoader());
   } catch (error) {
     console.error(error);

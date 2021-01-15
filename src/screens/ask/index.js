@@ -5,7 +5,6 @@ import {
   ScrollView,
   FlatList,
   Platform,
-  Image,
 } from 'react-native';
 import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
@@ -21,7 +20,7 @@ import {withNavigation} from 'react-navigation';
 import {Header} from '../../components';
 import {getTerms} from '../termsAndConditions/action';
 import {getPolicy} from '../privacyPolicy/action';
-import CachedImage from 'react-native-image-cache-wrapper';
+import FastImage from 'react-native-fast-image';
 import {setUserData} from './action';
 import firebase from 'react-native-firebase';
 import {getUserData} from '../../utils/firebase';
@@ -156,13 +155,12 @@ class Ask extends PureComponent {
           </CustomText>
         </View>
         <View style={styles.profileImgViewStyle}>
-          <Image
+          <FastImage
             style={{
               width: 70,
               height: 70,
               borderRadius: 50,
             }}
-            defaultSource={staticImages.profilePlaceholderImg}
             source={{uri: profileImageUrl}}
             activeOpacity={0.7}
           />
@@ -264,20 +262,16 @@ class Ask extends PureComponent {
                       height: 100,
                       alignSelf: 'center',
                     }}>
-                    <CachedImage
+                    <FastImage
                       containerStyle={{alignSelf: 'center'}}
                       style={{
                         width: 100,
                         height: 100,
                         borderRadius: 50,
                       }}
-                      source={
-                        item.profileInfo.profileImageUrl
-                          ? {
-                              uri: item.profileInfo.profileImageUrl,
-                            }
-                          : staticImages.profilePlaceholderImg
-                      }
+                      source={{
+                        uri: item.profileInfo.profileImageUrl,
+                      }}
                       activeOpacity={0.7}
                     />
                     {item.isOnline ? (
@@ -364,16 +358,16 @@ class Ask extends PureComponent {
                           },
                         );
                       }}>
-                      <CachedImage
+                      <FastImage
                         containerStyle={{alignSelf: 'center'}}
                         style={{
                           width: 50,
                           height: 50,
+                          borderRadius: 50,
                         }}
+                        resizeMode="cover"
                         source={{
-                          uri: item.expertInfo.profileInfo.profileImageUrl
-                            ? item.expertInfo.profileInfo.profileImageUrl
-                            : '',
+                          uri: item.expertInfo.profileInfo.profileImageUrl,
                         }}
                         activeOpacity={0.7}
                       />
@@ -435,7 +429,7 @@ class Ask extends PureComponent {
             {questionData.question}
           </CustomText>
           <View style={styles.expertInfoContainerStyle}>
-            <CachedImage
+            <FastImage
               containerStyle={{alignSelf: 'center'}}
               style={{
                 width: 50,
@@ -443,9 +437,7 @@ class Ask extends PureComponent {
                 borderRadius: 50,
               }}
               source={{
-                uri: questionData.expertInfo.profileInfo.profileImageUrl
-                  ? questionData.expertInfo.profileInfo.profileImageUrl
-                  : '',
+                uri: questionData.expertInfo.profileInfo.profileImageUrl,
               }}
               activeOpacity={0.7}
             />

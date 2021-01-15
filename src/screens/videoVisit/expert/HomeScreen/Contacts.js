@@ -1,21 +1,8 @@
 import React, {Component} from 'react';
-import {View, Image, FlatList} from 'react-native';
+import {View, Image, FlatList, Pressable, Text} from 'react-native';
 import {CometChat} from '@cometchat-pro/react-native-chat';
+import FastImage from 'react-native-fast-image';
 import {withNavigation} from 'react-navigation';
-import {
-  TouchableRipple,
-  Text,
-  BottomNavigation,
-  DefaultTheme,
-} from 'react-native-paper';
-import {Header} from '../../../../components';
-import {
-  requestMultiple,
-  checkMultiple,
-  PERMISSIONS,
-  RESULTS,
-} from 'react-native-permissions';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   Menu,
   MenuOptions,
@@ -146,12 +133,26 @@ class Contacts extends Component {
     );
   }
 
+  goHome = () => {
+    CometChat.logout().then(
+      () => {
+        console.log('Logout completed successfully');
+        this.props.navigation.navigate('ExpertAppointments');
+      },
+      (error) => {
+        console.log('Logout failed with exception:', {error});
+        this.props.navigation.navigate('ExpertAppointments');
+      },
+    );
+  };
+
   renderItem = ({item}) => {
     var isOnline, showUnreadCount, showBlockedLabel;
     const {
       reason,
       firstName,
       lastName,
+      avatar,
     } = this.props.navigation.state.params.visit;
     console.log(this.props.navigation.state.params.visit);
     item.avatar = item.avatar ? item.avatar : 'user';
@@ -162,72 +163,53 @@ class Contacts extends Component {
       : (showBlockedLabel = false);
 
     return (
-      <View style={styles.item}>
-        {item.avatar === 'user' ? (
-          <FontAwesome
-            style={[
-              {
-                alignSelf: 'center',
-                height: 50,
-                width: 50,
-                borderRadius: 30,
-              },
-            ]}
-            name="user"
-            size={50}
-            color="#3f51b5"
-          />
-        ) : (
-          <Image
-            style={styles.image}
-            resizeMode={'cover'}
-            defaultSource={require('../../../../../assets/profile_img_placeholder.png')}
-            source={{uri: item.avatar}}
-          />
-        )}
-        <View>
-          <View style={styles.itemView}>
-            <Text style={{fontSize: 20, marginLeft: 15}}>{firstName}</Text>
-            <Text style={{fontSize: 20, marginLeft: 5}}>{lastName}</Text>
+      <View style={styles.infoContainer}>
+        <FastImage
+          containerStyle={{alignSelf: 'center'}}
+          style={styles.image}
+          source={{uri: avatar}}
+        />
+        <View style={styles.detailsContainer}>
+          <View style={{flexDirection: 'row'}}>
             <View
               style={[
                 styles.circle,
                 {
-                  marginTop: 10,
+                  flexDirection: 'row',
+                  alignSelf: 'center',
+                  marginRight: 10,
                   backgroundColor: isOnline ? '#76ff03' : '#9e9e9e',
                 },
               ]}
             />
-            <Text style={{fontSize: 20, marginStart: 5}}>{item.status}</Text>
-          </View>
-          <View style={styles.itemView}></View>
-          <View style={{marginBottom: 15, ...styles.itemView}}>
             <Text
               style={{
-                fontSize: 16,
-                marginLeft: 15,
-                width: 200,
-              }}>{`Reason: ${reason}`}</Text>
+                flexDirection: 'row',
+                alignSelf: 'flex-end',
+                fontSize: 15,
+              }}>
+              {item.status.toUpperCase()}
+            </Text>
           </View>
-          <View style={styles.itemView}>
-            <TouchableOpacity
+          <Text
+            style={{
+              fontSize: 20,
+            }}>{`${firstName} ${lastName}`}</Text>
+          <Text
+            style={{
+              fontSize: 15,
+            }}>{`CC: ${reason}`}</Text>
+
+          <View style={styles.buttonContainer}>
+            <Pressable
               disabled={item.status === 'offline'}
               onPress={() => this.onPress(item)}
-              style={{marginLeft: 15}}>
-              <Text
-                style={{
-                  //   overflow: 'hidden',
-                  alignSelf: 'center',
-                  backgroundColor: '#6AC5FF',
-                  color: '#FFF',
-                  padding: 10,
-                  justifyContent: 'center',
-                  borderRadius: 5,
-                  elevation: 3,
-                }}>
-                Join
-              </Text>
-            </TouchableOpacity>
+              style={styles.button}>
+              <Text style={{...styles.textStyle, color: '#2196F3'}}>Join</Text>
+            </Pressable>
+            <Pressable onPress={this.goHome} style={styles.button}>
+              <Text style={{...styles.textStyle, color: '#2196F3'}}>Home</Text>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -267,20 +249,20 @@ class Contacts extends Component {
           style={[{height: 150, width: '90%', alignSelf: 'center'}]}
           source={require('../../../../../assets/logo-sm.png')}
         />
-        <View style={styles.inputsContainer}>
-          <FlatList
-            data={this.state.users}
-            keyExtractor={(item) => item.uid}
-            renderItem={this.renderItem}
-          />
-          <View style={styles.activityView}>
-            <MenuContext>
-              <MenuOptions>
-                <MenuOption onSelect={this.logout} text="Logout" />
-              </MenuOptions>
-            </MenuContext>
-          </View>
+        {/* <View style={styles.inputsContainer}> */}
+        <FlatList
+          data={this.state.users}
+          keyExtractor={(item) => item.uid}
+          renderItem={this.renderItem}
+        />
+        <View style={styles.activityView}>
+          <MenuContext>
+            <MenuOptions>
+              <MenuOption onSelect={this.logout} text="Logout" />
+            </MenuOptions>
+          </MenuContext>
         </View>
+        {/* </View> */}
       </View>
     );
   }

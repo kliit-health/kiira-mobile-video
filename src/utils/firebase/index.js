@@ -2,7 +2,6 @@ import firebase from 'react-native-firebase';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections} from '../constants';
-import appointments from '../../screens/appointments';
 var voucher_codes = require('voucher-code-generator');
 var RSAKey = require('react-native-rsa');
 var rsa = new RSAKey();
@@ -166,14 +165,7 @@ export function uploadImage(obj, success, error) {
   }
 }
 
-export async function getAppointmentsAsync({data}) {
-  console.log(data);
-  let uid = data.uid;
-  console.log(uid);
-  if (Object.keys(data).includes('expert')) {
-    uid = data.expert.uid;
-  }
-
+export async function getAppointmentsAsync(uid) {
   try {
     const document = firebase.firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
@@ -260,6 +252,7 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
+      prepaid,
     } = data;
 
     let response;
@@ -297,6 +290,7 @@ export async function makeAppointment({data}) {
             id: data.body.id,
             expert,
             locked: false,
+            prepaid,
           };
         })
         .catch((error) => {
@@ -306,7 +300,7 @@ export async function makeAppointment({data}) {
       const document = firebase.firestore().collection('appointments').doc(uid);
       const prev = await document.get();
 
-      if (prev.data().history) {
+      if (prev.exists) {
         await document.set(
           {history: [...prev.data().history, response]},
           {merge: true},
@@ -325,7 +319,6 @@ export async function makeAppointment({data}) {
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
-
       if (expertPrev.data().history[uid]) {
         await expertDocument.set(
           {history: {[uid]: [...expertPrev.data().history[uid], response]}},
@@ -367,10 +360,10 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
         const document = firestore.collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
-
         appointments.history = appointments.history.filter(
           (item) => item.id !== id,
         );
+
         await document.set(
           {history: [...(appointments.history || [])]},
           {merge: true},
@@ -381,12 +374,12 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
           .doc(expert.uid);
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
-        expertAppointments.history[uid] = expertAppointments.history[
-          uid
-        ].filter((item) => item.id !== id);
+        let filtered = expertAppointments.history[uid].filter((item) => {
+          return item.id !== id ? item : false;
+        });
 
         await expertDocument.set(
-          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
+          {history: {[uid]: [...(filtered || [])]}},
           {merge: true},
         );
       })
@@ -400,7 +393,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
 }
 
 export async function changeAppointmentAsync({data}) {
-  const {id, time, uid} = data;
+  const {id, time, uid, expert} = data;
 
   try {
     return await fetch(
@@ -426,6 +419,7 @@ export async function changeAppointmentAsync({data}) {
         const expertDocument = firestore
           .collection('appointments')
           .doc(expert.uid);
+
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
         expertAppointments.history[uid] = expertAppointments.history[uid].map(
@@ -436,7 +430,6 @@ export async function changeAppointmentAsync({data}) {
             return item;
           },
         );
-        console.log('EXPERT APPOINTMENTS', expertAppointments);
         await expertDocument.set(
           {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
           {merge: true},
@@ -1539,30 +1532,19 @@ export async function updateCredits(visits, {data}) {
       .doc(data.uid)
       .get();
     const userData = docData.data();
+    const paymentType = data.prepaid
+      ? {prepaid: userData.prepaid + visits}
+      : {visits: userData.visits + visits};
     await firebase
       .firestore()
       .collection('users')
       .doc(data.uid)
-      .update({
-        visits: userData.visits + visits,
-      });
-
+      .update(paymentType);
     return {ok: true};
   } catch (err) {
     return {ok: false, status: 'internal'};
   }
 }
-
-// export async function updateCredits(credits, forUser) {
-//   try {
-//     await firebase.firestore().collection('users').doc(forUser).update({
-//       credits,
-//     });
-//     return {ok: true, newCredits: credits};
-//   } catch (err) {
-//     return {ok: false, status: 'internal'};
-//   }
-// }
 
 export async function getPayPalAccessToken() {
   try {
@@ -1780,13 +1762,27 @@ async function lockExpertRecord({uid, id, expert}) {
   appointmentList.history[uid].map((item) => {
     if (item.id === id) {
       item.locked = true;
-      console.log('Record', item);
       return item;
     }
     return item;
   });
 
   await document.set({history: {...appointmentList.history}}, {merge: true});
+}
+
+export async function setVideoVisitRating(data) {
+  const {
+    rating,
+    visit: {expert, uid},
+  } = data;
+  const document = firestore.collection('users').doc(expert.uid);
+  const expertDoc = await document.get();
+  const expertData = expertDoc.data();
+
+  await document.set(
+    {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
+    {merge: true},
+  );
 }
 
 async function saveMedicalHistory(payload, visit) {

@@ -22,6 +22,7 @@ const PatientProfile = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const patientInfo = useSelector((state) => state.userDetails.data);
+  const appointment = useSelector((state) => state.medicalHistory.appointment);
 
   useEffect(() => {
     dispatch(getUserDetails(patient.uid));
@@ -60,7 +61,7 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={visit.locked}
+            disabled={appointment.visit.locked}
             onPress={() =>
               navigation.navigate('MedicalHistoryExpert', {
                 uid: expert.uid,
@@ -77,7 +78,7 @@ const PatientProfile = ({navigation}) => {
               />
               <Text style={styles.info}>Medical History</Text>
               <View style={styles.check}>
-                {visit.locked && (
+                {appointment.visit.locked && (
                   <Image
                     resizeMode="contain"
                     containerStyle={{alignSelf: 'center'}}

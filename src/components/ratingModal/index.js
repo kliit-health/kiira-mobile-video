@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {AirbnbRating as Rating} from 'react-native-elements';
 import {shape, object, string, func, bool, number, oneOf} from 'prop-types';
-import {View, Text, Modal} from 'react-native';
-// import Modal from 'react-native-modal';
+import {View, Text} from 'react-native';
+import Modal from 'react-native-modal';
 import TextButton from '../textButton';
 import Avatar from '../avatar';
 import defaultStyles, {modifiers} from './styles';
@@ -22,7 +22,7 @@ const RatingModal = ({
 }) => {
   const [isVisible, setVisible] = useState(false);
   const [rating, setRating] = useState(0);
-  console.log('RATING MODAL', visible);
+
   useEffect(() => {
     setVisible(visible);
   }, [visible]);
@@ -47,41 +47,39 @@ const RatingModal = ({
   };
 
   return (
-    <View style={{justifyContent: 'center'}}>
-      <Modal
-        isVisible={isVisible}
-        onRequestClose={onRequestClose}
-        useNativeDriver={true}
-        transparent={true}
-        animationIn="fadeIn"
-        animationOut="fadeOut">
-        <View style={styles.root}>
-          <Text style={styles.title}>{title}</Text>
-          <Avatar
-            styles={modifiers.avatar}
-            source={avatarUrl}
-            size={avatarSize}
-            border
-          />
-          <Text style={styles.description}>{description}</Text>
-          <Rating
-            size={starSize}
-            readonly={false}
-            startingValue={startingValue}
-            showRating={false}
-            starStyle={styles.ratingStar}
-            defaultRating={defaultRating}
-            onFinishRating={handleRatingChange}
-          />
-          <TextButton
-            styles={styles.submitButton}
-            disabled={rating === 0}
-            onPress={handleRatingSubmit}>
-            Rate
-          </TextButton>
-        </View>
-      </Modal>
-    </View>
+    <Modal
+      isVisible={isVisible}
+      onRequestClose={onRequestClose}
+      useNativeDriver={true}
+      transparent={true}
+      animationIn="fadeIn"
+      animationOut="fadeOut">
+      <View style={styles.root}>
+        <Text style={styles.title}>{title}</Text>
+        <Avatar
+          styles={modifiers.avatar}
+          source={avatarUrl}
+          size={avatarSize}
+          border
+        />
+        <Text style={styles.description}>{description}</Text>
+        <Rating
+          size={starSize}
+          readonly={false}
+          startingValue={startingValue}
+          showRating={false}
+          starStyle={styles.ratingStar}
+          defaultRating={defaultRating}
+          onFinishRating={handleRatingChange}
+        />
+        <TextButton
+          styles={styles.submitButton}
+          disabled={rating === 0}
+          onPress={handleRatingSubmit}>
+          Rate
+        </TextButton>
+      </View>
+    </Modal>
   );
 };
 

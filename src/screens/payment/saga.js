@@ -3,6 +3,7 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../components/customLoader/action';
+import {setUserDetails} from '../../redux/actions';
 import Language from '../../utils/localization';
 import {
   CREATE_PAYMENT_CARD,
@@ -12,6 +13,7 @@ import {
   BUY_CREDITS_WITH_TOKEN,
   BUY_CREDITS_WITH_PAYPAL,
   CAPTURE_PAYMENT,
+  SET_PREPAID,
 } from '../../redux/types';
 import {
   addNewPaymentCard,
@@ -114,7 +116,8 @@ function* getPaymentMethods() {
 function* handlePayResponse(response, credits, navigation) {
   if (response.ok) {
     const user = firebase.auth().currentUser;
-    yield call(updateCredits, credits, {data: {uid: user.uid}});
+    yield put({type: SET_PREPAID});
+    yield call(updateCredits, credits, {data: {uid: user.uid, prepaid: true}});
     if (response.ok) {
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
@@ -122,6 +125,7 @@ function* handlePayResponse(response, credits, navigation) {
       };
       const userData = yield getDataFromTable(obj);
       yield put(setData(userData));
+      yield put(setUserDetails(userData));
       yield put(showOrHideModal(Lang.successMessages.visitAddedSuccessfully));
       if (navigation === undefined) {
         NavigationService.goBack();

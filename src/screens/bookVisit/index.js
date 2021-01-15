@@ -20,7 +20,10 @@ const BookVisit = (props) => {
   );
 
   const visitData = useSelector((state) => state.expertScheduleReducer);
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
+  const userData = useSelector((state) => state.userDetails.data);
+  const bookVisit = useSelector((state) => state.bookVisitReducer);
+
+  const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;
 
   useEffect(() => {
     getCreditAmountsData().then((pricing) =>
@@ -38,6 +41,7 @@ const BookVisit = (props) => {
     prescription: visitData.prescription,
     navigation,
     uid: userData.uid,
+    prepaid: bookVisit.prepaid,
     expert: {
       firstName: expertData.profileInfo.firstName,
       lastName: expertData.profileInfo.lastName,
@@ -64,6 +68,7 @@ const BookVisit = (props) => {
     expertData,
     userData,
     price,
+    disableApplyCredit,
   };
 
   return (
