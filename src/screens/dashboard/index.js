@@ -44,7 +44,7 @@ class Dashboard extends PureComponent {
       credits: this.props.userData.credits,
       videoChat: 0,
       videoEnabled: false,
-      chatEnabled: this.props.userData.questions === 'Unlimited',
+      chatEnabled: this.props.userData.chats === 'Unlimited',
       modalOpen: true,
     };
   }
