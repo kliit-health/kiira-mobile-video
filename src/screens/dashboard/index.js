@@ -29,6 +29,7 @@ import {
   getExpertsDetailsAsync,
   getFavoriteExpertsAsync,
 } from '../careSquad/actions';
+import Rate, {AndroidMarket} from 'react-native-rate';
 import CustomButton from '../../components/customButton';
 import {getAgreements} from '../agreements/actions';
 import {getUserDetails} from '../../redux/actions';
@@ -126,6 +127,8 @@ class Dashboard extends PureComponent {
               let options = {
                 AppleAppID: '1526336962',
                 GooglePackageName: 'com.kiira',
+                OtherAndroidURL:
+                  'https://play.google.com/store/apps/details?id=com.kiira&hl=en_US&gl=US',
                 preferredAndroidMarket: AndroidMarket.Google,
                 preferInApp: true,
                 openAppStoreIfInAppFails: true,

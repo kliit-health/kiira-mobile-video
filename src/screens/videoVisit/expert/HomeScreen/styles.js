@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import metrices from '../../../../utils/metrices';
+import Constant from '../../../../utils/constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,10 +16,50 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '20%',
   },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    width: metrices.DEVICE_WIDTH * 0.8,
+    alignSelf: 'center',
+    backgroundColor: Constant.App.colors.whiteColor,
+    borderRadius: 20,
+    padding: 10,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: {height: 3, width: 1}, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 3, //IOS
+    elevation: 2, // Android
+    marginTop: 20,
+    marginBottom: 20,
+  },
   image: {
-    height: 80,
-    width: 80,
+    marginRight: 5,
+    width: 60,
+    height: 60,
     borderRadius: 50,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  button: {
+    backgroundColor: 'white',
+    borderColor: '#2196F3',
+    borderWidth: 2,
+    borderRadius: 20,
+    padding: 5,
+    elevation: 2,
+    width: 100,
+    marginTop: 5,
+    marginRight: 10,
+  },
+  detailsContainer: {
+    flexDirection: 'column',
+    marginLeft: 10,
   },
   userName: {
     marginStart: 16,
@@ -61,8 +103,8 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 10 / 2,
-    marginTop: 5,
-    marginStart: 15,
+    // marginTop: 5,
+    // marginStart: 15,
   },
   unreadCountView: {
     marginLeft: '50%',
