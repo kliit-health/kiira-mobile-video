@@ -39,6 +39,7 @@ const style = StyleSheet.create({
   xContainer: {
     flexDirection: 'row',
     alignSelf: 'flex-end',
+    marginTop: 35,
   },
 });
 

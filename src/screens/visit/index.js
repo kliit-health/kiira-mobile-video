@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, SafeAreaView} from 'react-native';
 import {Header} from '../../components';
 import {withNavigation} from 'react-navigation';
 import {ExpertInfo, VisitDetails} from './components';
@@ -35,7 +35,7 @@ const Visit = (props) => {
   });
 
   return (
-    <View style={styles.parentContainerStyle}>
+    <SafeAreaView style={styles.parentContainerStyle}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
@@ -52,7 +52,7 @@ const Visit = (props) => {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

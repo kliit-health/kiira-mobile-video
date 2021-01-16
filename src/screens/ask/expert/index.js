@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SearchBar, TextButton, Header, Container} from '../../../components';
 import {
@@ -79,6 +79,7 @@ const AskExpert = ({navigation}) => {
 
   return (
     <Container themed unformatted>
+      <StatusBar barStyle="light-content" translucent={true} />
       <Header themed title={intl.en.expertChats.title} />
       <SearchBar
         styles={modifiers.searchBar}

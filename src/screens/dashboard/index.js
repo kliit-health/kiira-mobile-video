@@ -260,13 +260,6 @@ class Dashboard extends PureComponent {
             resizeMode="cover"
             source={{uri: profileImageUrl}}
           />
-          <TouchableOpacity
-            style={styles.badgeContainerStyle}
-            onPress={() => {}}>
-            <CustomText style={styles.badgeTextStyle}>
-              {this.state.credits}
-            </CustomText>
-          </TouchableOpacity>
         </View>
       </View>
     );

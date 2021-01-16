@@ -28,9 +28,7 @@ function* agreeToTerms(data) {
       prepaid: userData.prepaid,
       firstLogin: false,
       profileInfo: {
-        profileImageUrl: userData.profileInfo.profileImageUrl
-          ? userData.profileImageUrl
-          : defaultImage,
+        profileImageUrl: defaultImage,
         firstName: userData.profileInfo.firstName,
         lastName: userData.profileInfo.lastName,
         dob: userData.profileInfo.dob,

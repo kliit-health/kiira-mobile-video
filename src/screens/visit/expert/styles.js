@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     width: metrics.DEVICE_WIDTH,
-    // marginTop: 10,
   },
 
   myRecentExpertContainerStyle: {

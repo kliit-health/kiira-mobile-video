@@ -136,6 +136,19 @@ export async function sendEmailVerification(obj) {
   }
 }
 
+export async function sendEmailSummary(obj) {
+  try {
+    const {email} = obj.params;
+    await functions.httpsCallable('sendMailNotificationOnMedicalRecordSave')(
+      email,
+    );
+    return {ok: true, data: null};
+  } catch (err) {
+    let status = err.status ? err.status : 'internal';
+    return {ok: false, status};
+  }
+}
+
 export function uploadImage(obj, success, error) {
   try {
     const result = firebase
@@ -1809,5 +1822,24 @@ async function saveMedicalHistory(payload, visit) {
   } catch (error) {
     console.log(error);
     return error;
+  }
+}
+
+export async function createCometChatUser(user) {
+  try {
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    };
+    await fetch(
+      `http://localhost:5001/kiira-health-app/us-central1/createCometChatUser`,
+      options,
+    ).then((res) => console.log(res));
+  } catch (error) {
+    console.log(error);
   }
 }

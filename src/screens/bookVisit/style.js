@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     marginTop: getStatusBarHeight(),
     backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'column',
+    marginTop: 35,
   },
 
   phoneNumberTextStyleBold: {

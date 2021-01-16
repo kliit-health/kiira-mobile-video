@@ -397,6 +397,7 @@ class Ask extends PureComponent {
     const {staticImages} = Constant.App;
     return (
       <TouchableOpacity
+        style={{marginBottom: 20}}
         onPress={() => {
           const expertDetails = experts.find(
             (expert) => expert.uid === questionData.expertInfo.uid,
@@ -476,7 +477,7 @@ class Ask extends PureComponent {
       navigation,
       userData,
     } = this.props;
-    console.log('USER DATA', userData);
+
     return (
       <View style={styles.container}>
         <Header title="" onBack={() => navigation.goBack()} />

@@ -40,7 +40,6 @@ class ExpertLoginScreen extends Component {
     this.state = {
       loaderVisible: false,
     };
-    this.state.entredUID = 'James';
     this.buttonPressed = this.buttonPressed.bind(this);
     var appSettings = new CometChat.AppSettingsBuilder()
       .subscribePresenceForAllUsers()

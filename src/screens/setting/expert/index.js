@@ -457,8 +457,7 @@ class SettingExpert extends PureComponent {
   }
 
   render() {
-    const {showSelectStateModal, showSelectSexualityModal} = this.state;
-    console.log(this.state.location);
+    const {showSelectStateModal} = this.state;
     return (
       <View style={styles.container}>
         {this.renderHeaderView()}

@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Constant from '../../utils/constants';
 import metrics, {smallScreen} from '../../utils/metrices';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 import {text, colors} from '../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    marginTop: getStatusBarHeight(),
+    marginTop: 35,
   },
 
   creditButtonStyle: {

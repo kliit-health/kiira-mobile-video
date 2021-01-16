@@ -1,13 +1,13 @@
-import React from "react";
-import { View, Image, Text } from "react-native";
-import Constant from "../../utils/constants";
-import styles from "./styles";
-import CustomButton from "../../components/customButton";
+import React from 'react';
+import {View, Image, Text} from 'react-native';
+import Constant from '../../utils/constants';
+import styles from './styles';
+import CustomButton from '../../components/customButton';
 
 const Welcome = (props) => {
-  const { staticImages } = Constant.App;
-  const { navigation } = props;
-  const { userData } = props.navigation.state.params;
+  const {staticImages} = Constant.App;
+  const {navigation} = props;
+  const {userData} = props.navigation.state.params;
 
   return (
     <View style={styles.container}>
@@ -22,9 +22,9 @@ const Welcome = (props) => {
         </Text>
         <View style={styles.imageContainer}>
           <Image
-            source={require("../../../assets/kiira_penguin_b.png")}
+            source={require('../../../assets/kiira_penguin_b.png')}
             style={{
-              height: 420,
+              height: 400,
             }}
             resizeMode="contain"
           />
