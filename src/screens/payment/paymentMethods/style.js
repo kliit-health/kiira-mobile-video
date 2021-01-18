@@ -1,16 +1,15 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../../utils/constants";
-import metrices from "../../../utils/metrices";
-import { getStatusBarHeight } from "../../../components/iPhoneXHelper";
+import {StyleSheet, Platform} from 'react-native';
+import Constant from '../../../utils/constants';
+import metrices from '../../../utils/metrices';
 
 let parentPaddingValue = metrices.DEVICE_WIDTH * 0.08;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: getStatusBarHeight(),
+    marginTop: Platform.OS === 'android' ? 35 : 0,
   },
 
   crossBottom: {
@@ -23,8 +22,8 @@ const styles = StyleSheet.create({
 
   expiredContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 
   expiredLabel: {
@@ -35,8 +34,8 @@ const styles = StyleSheet.create({
   },
 
   headerStyle: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingLeft: parentPaddingValue,
     backgroundColor: Constant.App.colors.whiteColor,
     borderBottomColor: Constant.App.colors.greyBgAsk,
@@ -45,15 +44,15 @@ const styles = StyleSheet.create({
 
   parentContainerStyle: {
     backgroundColor: Constant.App.colors.whiteColor,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrices.DEVICE_WIDTH,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
   },
 
   paymentMethodContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     width: metrices.DEVICE_WIDTH,
     height: 42,
   },
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
   },
 
   titleTextStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     color: Constant.App.colors.blackTwoColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import Constant from '../../../utils/constants';
 import {
   getStatusBarHeight,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: getBottomSpace(),
+    paddingBottom: 20,
   },
 
   actionModalOkBtnErrorContainerStyle: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    marginTop: 35,
+    marginTop: Platform.OS === 'android' ? 35 : 0,
   },
 
   profileHeaderStyle: {

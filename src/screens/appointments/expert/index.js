@@ -106,6 +106,8 @@ const ExpertAppointments = ({navigation}) => {
     setSearch([...filtered]);
   };
 
+  const FallBack = () => <View></View>;
+
   return (
     <Container unformatted styles={modifiers.container} themed>
       <StatusBar barStyle="light-content" translucent={true} />
@@ -182,7 +184,7 @@ const ExpertAppointments = ({navigation}) => {
             decelerationRate={'fast'}
             extraData={selectedDate}
             renderItem={({item, index}) => (
-              <ErrorBoundary>
+              <ErrorBoundary FallbackComponent={FallBack}>
                 <Visit
                   key={item.uid}
                   onPress={handleVisitPress}

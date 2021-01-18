@@ -34,6 +34,8 @@ const Visit = (props) => {
     dispatch(setVisit(visit));
   });
 
+  const FallBack = () => <View></View>;
+
   return (
     <SafeAreaView style={styles.parentContainerStyle}>
       <ScrollView
@@ -41,7 +43,9 @@ const Visit = (props) => {
         showsVerticalScrollIndicator={false}>
         {expertData && (
           <View>
-            <ErrorBoundary onError={() => navigation.goBack()}>
+            <ErrorBoundary
+              FallbackComponent={FallBack}
+              onError={() => navigation.goBack()}>
               <Header
                 title="Appointment Details"
                 onBack={() => navigation.goBack()}

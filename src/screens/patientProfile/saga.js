@@ -102,7 +102,7 @@ function* updatePatientDetails({data}) {
 function* lockVisit(data) {
   try {
     const update = yield call(saveAndLock, data);
-    // yield call(sendVisitRecap, data);
+    yield call(sendVisitRecap, data);
     yield put({
       type: UPDATE_MEDICAL_HISTORY_EXPERT,
       payload: {

@@ -1,7 +1,6 @@
 import {StyleSheet, Platform} from 'react-native';
 import Constant from '../../utils/constants';
 import metrics from '../../utils/metrices';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
 
   parentContainerStyle: {
     flex: 1,
-    marginTop: 35,
+    marginTop: Platform.OS === 'android' ? 35 : 0,
   },
 
   profileImgViewStyle: {

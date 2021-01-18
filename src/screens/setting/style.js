@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
     borderBottomColor: Constant.App.colors.greyBgAsk,
     borderBottomWidth: 3,
-    marginTop: 35,
+    marginTop: Platform.OS === 'android' ? 35 : 0,
   },
 
   inputTextParentContainerStyle: {
