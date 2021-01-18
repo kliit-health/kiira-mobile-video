@@ -288,8 +288,8 @@ export async function makeAppointment({data}) {
 
     if (checkTime.valid) {
       await fetch(`https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMake?
-			&firstName=${firstName}&lastName=${lastName}&email=${email}
-			&calendarID=${calendarID}&time=${time}&reason=${reason}&prescription=${prescription}&notes=${notes}`)
+    	&firstName=${firstName}&lastName=${lastName}&email=${email}
+    	&calendarID=${calendarID}&time=${time}&reason=${reason}&prescription=${prescription}&notes=${notes}`)
         .then((res) => res.json())
         .then((data) => {
           response = {
@@ -339,13 +339,9 @@ export async function makeAppointment({data}) {
           {merge: true},
         );
       } else {
-        await firebase
-          .firestore()
-          .collection('appointments')
-          .doc(expert.uid)
-          .set({
-            history: {...expertPrev.data().history, [uid]: [response]},
-          });
+        await expertDocument.set({
+          history: {...expertPrev.data().history, [uid]: [response]},
+        });
       }
 
       return;
