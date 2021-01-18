@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: Platform.OS === 'android' ? 35 : 0,
+    marginTop: 35,
   },
 
   crossBottom: {

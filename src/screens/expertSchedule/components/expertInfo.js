@@ -85,7 +85,6 @@ const ExpertInfo = ({
                     horizontal={true}
                     decelerationRate={'fast'}
                     renderItem={({item, index}) => {
-                      console.log(appointmentData);
                       return (
                         <CustomButton
                           buttonStyle={styles.timeSlotContainerStyle}
