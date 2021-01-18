@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import Constant from '../../utils/constants';
 import metrics from '../../utils/metrices';
-import { getStatusBarHeight } from '../../components/iPhoneXHelper';
+import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: getStatusBarHeight(),
+    marginTop: 35,
   },
 
   headerStyle: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrics.DEVICE_WIDTH - parentPadding - (metrics.DEVICE_WIDTH * 0.05),
+    width: metrics.DEVICE_WIDTH - parentPadding - metrics.DEVICE_WIDTH * 0.05,
   },
 
   passwordHideShowIconStyle: {
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerBold,
   },
-
 });
 
 export default styles;

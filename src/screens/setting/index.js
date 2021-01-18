@@ -261,15 +261,16 @@ class Setting extends PureComponent {
           source={{uri: imageSrc ? imageSrc : ''}}
           activeOpacity={0.7}
         />
-
-        <TouchableOpacity
-          onPress={() => {
-            this.requestCameraPermission();
-          }}>
-          <CustomText style={styles.changeProfileTextStyle}>
-            {lang.setting.changePhoto}
-          </CustomText>
-        </TouchableOpacity>
+        {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={() => {
+              this.requestCameraPermission();
+            }}>
+            <CustomText style={styles.changeProfileTextStyle}>
+              {lang.setting.changePhoto}
+            </CustomText>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }

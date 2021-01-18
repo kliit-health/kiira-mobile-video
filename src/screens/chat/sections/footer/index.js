@@ -58,16 +58,18 @@ const Footer = ({
               </View>
             ) : null}
             <View style={styles.inputContainer}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.cameraContainer}
-                onPress={onPickerPress}>
-                <Image
-                  style={styles.cameraIcon}
-                  resizeMode="contain"
-                  source={icons.camera}
-                />
-              </TouchableOpacity>
+              {Platform.OS === 'ios' && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={styles.cameraContainer}
+                  onPress={onPickerPress}>
+                  <Image
+                    style={styles.cameraIcon}
+                    resizeMode="contain"
+                    source={icons.camera}
+                  />
+                </TouchableOpacity>
+              )}
               <View style={styles.messageContainer}>
                 <TextInput
                   maxHeight={100}
