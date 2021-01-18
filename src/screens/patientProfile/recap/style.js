@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   notes: {
     alignSelf: 'flex-start',
     marginHorizontal: 20,
-    marginBottom: 5,
+    marginVertical: 5,
     borderWidth: 2,
     padding: 10,
   },
