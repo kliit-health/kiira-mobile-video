@@ -20,6 +20,7 @@ const TextInput = ({
   outlined,
   label,
   defaultValue,
+  editable,
   ...rest
 }) => {
   const handleChange = (value) => {
@@ -65,6 +66,7 @@ const TextInput = ({
         onPress={handlePress}
         style={styles.root}>
         <Input
+          editable={editable}
           pointerEvents={onPress ? 'none' : 'auto'}
           value={value}
           onChangeText={handleChange}
@@ -96,6 +98,7 @@ TextInput.propTypes = {
   outlined: bool,
   label: string,
   defaultValue: string,
+  editable: bool,
   styles: shape({
     root: object,
   }),
@@ -111,6 +114,7 @@ TextInput.defaultProps = {
   styles: {},
   label: undefined,
   defaultValue: undefined,
+  editable: true,
 };
 
 export default TextInput;

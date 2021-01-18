@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -11,60 +11,73 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const SocialHistory = ({navigation}) => {
+  const {
+    smoke,
+    alcohol,
+    drugs,
+    caffine,
+    safe,
+    abuse,
+    currentAbuse,
+    status,
+    education,
+    exercise,
+    diet,
+  } = useSelector((state) => state.medicalHistory.social);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
 
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
     smoke: {
-      history: false,
-      notes: '',
+      history: smoke.history,
+      notes: smoke.notes,
     },
     alcohol: {
-      history: false,
-      notes: '',
+      history: alcohol.history,
+      notes: alcohol.notes,
     },
     drugs: {
-      history: false,
-      notes: '',
+      history: drugs.history,
+      notes: drugs.notes,
     },
     caffine: {
-      history: false,
-      notes: '',
+      history: caffine.history,
+      notes: caffine.notes,
     },
     safe: {
-      history: false,
-      notes: '',
+      history: safe.history,
+      notes: safe.notes,
     },
     abuse: {
-      history: false,
-      notes: '',
+      history: abuse.history,
+      notes: abuse.notes,
     },
     currentAbuse: {
-      history: false,
-      notes: '',
+      history: currentAbuse.history,
+      notes: currentAbuse.notes,
     },
     status: {
-      married: false,
-      single: false,
-      divorced: false,
-      widowed: false,
-      involved: false,
-      partner: false,
+      married: status.married,
+      single: status.single,
+      divorced: status.divorced,
+      widowed: status.widowed,
+      involved: status.involved,
+      partner: status.partner,
     },
     education: {
-      highSchool: false,
-      college: false,
-      graduate: false,
-      other: false,
+      highSchool: education.highSchool,
+      college: education.college,
+      graduate: education.graduate,
+      other: education.other,
     },
     exercise: {
-      history: false,
-      notes: '',
+      history: exercise.history,
+      notes: exercise.notes,
     },
     diet: {
-      history: false,
-      notes: '',
+      history: diet.history,
+      notes: diet.notes,
     },
   });
 

@@ -34,6 +34,7 @@ import agreementsSaga from '../../screens/agreements/saga';
 import userDetailsSaga from './userDetails';
 import patientDetails from '../../screens/patientProfile/saga';
 import clientMedicalHistory from './medicalHistory';
+import visitSaga from '../../screens/visit/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -72,5 +73,6 @@ export default function* rootSaga() {
     userDetailsSaga(),
     patientDetails(),
     clientMedicalHistory(),
+    visitSaga(),
   ]);
 }

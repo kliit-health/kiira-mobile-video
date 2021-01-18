@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     height: 200,
     color: 'black',
     padding: 10,
+    textAlignVertical: 'top',
   },
 
   question: {

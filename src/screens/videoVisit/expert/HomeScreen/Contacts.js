@@ -45,7 +45,7 @@ class Contacts extends Component {
   async logout() {
     CometChat.removeConnectionListener('XMPPConnectionListener');
     await CometChat.logout();
-    NavigationService.navigate('Login');
+    this.props.navigation.navigate('ExpertAppointments');
   }
 
   fetchUser() {
@@ -167,7 +167,7 @@ class Contacts extends Component {
         <FastImage
           containerStyle={{alignSelf: 'center'}}
           style={styles.image}
-          source={{uri: avatar}}
+          source={{uri: item.avatar}}
         />
         <View style={styles.detailsContainer}>
           <View style={{flexDirection: 'row'}}>
@@ -204,11 +204,13 @@ class Contacts extends Component {
             <Pressable
               disabled={item.status === 'offline'}
               onPress={() => this.onPress(item)}
-              style={styles.button}>
-              <Text style={{...styles.textStyle, color: '#2196F3'}}>Join</Text>
+              style={isOnline ? styles.button : styles.buttonDisabled}>
+              <Text style={isOnline ? styles.textStyle : styles.textDisabled}>
+                Join
+              </Text>
             </Pressable>
             <Pressable onPress={this.goHome} style={styles.button}>
-              <Text style={{...styles.textStyle, color: '#2196F3'}}>Home</Text>
+              <Text style={styles.textStyle}>Home</Text>
             </Pressable>
           </View>
         </View>
@@ -241,7 +243,6 @@ class Contacts extends Component {
   }
 
   render() {
-    console.log('PROPS', this.props);
     return (
       <View style={styles.activityBackground}>
         <Image
@@ -249,7 +250,6 @@ class Contacts extends Component {
           style={[{height: 150, width: '90%', alignSelf: 'center'}]}
           source={require('../../../../../assets/logo-sm.png')}
         />
-        {/* <View style={styles.inputsContainer}> */}
         <FlatList
           data={this.state.users}
           keyExtractor={(item) => item.uid}
@@ -262,7 +262,6 @@ class Contacts extends Component {
             </MenuOptions>
           </MenuContext>
         </View>
-        {/* </View> */}
       </View>
     );
   }

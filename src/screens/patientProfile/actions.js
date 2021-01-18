@@ -5,6 +5,7 @@ import {
   UPDATE_MEDICAL_HISTORY_EXPERT,
   GET_MEDICAL_HISTORY,
   SET_MEDICAL_HISTORY,
+  CLEAR_MEDICAL_HISTORY,
 } from '../../redux/types';
 
 export const getPatientDetails = (data) => ({
@@ -42,5 +43,11 @@ export const setMedicalHIstory = (data) => {
   return {
     type: SET_MEDICAL_HISTORY,
     payload: data,
+  };
+};
+
+export const clearMedicalHistory = () => {
+  return {
+    type: CLEAR_MEDICAL_HISTORY,
   };
 };

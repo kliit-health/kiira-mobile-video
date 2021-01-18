@@ -9,6 +9,7 @@ import ErrorBoundary from 'react-native-error-boundary';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
 import {generateDateInfo, getDateRange} from '../../../utils/helper';
+import {clearMedicalHistory} from '../../patientProfile/actions';
 import intl from '../../../utils/localization';
 import {screenNames} from '../../../utils/constants';
 import moment from 'moment';
@@ -28,6 +29,10 @@ const ExpertAppointments = ({navigation}) => {
   const [search, setSearch] = useState(visits);
 
   useEffect(() => {
+    dispatch(clearMedicalHistory());
+  }, []);
+
+  useEffect(() => {
     dispatch(
       getAppointmentsList({
         uid,
@@ -43,6 +48,14 @@ const ExpertAppointments = ({navigation}) => {
     setDates(dateRange);
     setSelectedDate(dateRange[3]);
   }, []);
+
+  useEffect(() => {
+    dispatch(
+      getAppointmentsList({
+        uid,
+      }),
+    );
+  }, [selectedDate]);
 
   useEffect(() => {
     let record = _.flatten(visitData);

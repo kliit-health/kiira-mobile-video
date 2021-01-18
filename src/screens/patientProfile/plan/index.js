@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import {updateMedicalHistoryExpert} from '../actions';
@@ -8,7 +8,8 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const Plan = ({navigation}) => {
-  const [notes, setNotes] = useState('');
+  const {plan} = useSelector((state) => state.medicalHistory);
+  const [notes, setNotes] = useState(plan.notes);
   const dispatch = useDispatch();
 
   const payload = {

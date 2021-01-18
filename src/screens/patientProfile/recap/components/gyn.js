@@ -28,7 +28,6 @@ const GYN = ({gyn}) => {
       <Text style={styles.info}>{`Last PAP Smear: ${gyn.papDate.notes}`}</Text>
 
       <CheckItem
-        key="Pap Date"
         checked={gyn.abnormalPap.history}
         title="Abnormal Pap"
         notes={gyn.abnormalPap.notes}

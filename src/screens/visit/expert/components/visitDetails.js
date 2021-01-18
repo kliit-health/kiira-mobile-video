@@ -3,11 +3,13 @@ import {View, Image, Text} from 'react-native';
 import moment from 'moment';
 import CustomButton from '../../../../components/customButton';
 import styles from '../styles';
-
+import {useDispatch} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 import CancelModal from './cancelModal';
+import {getLogin} from '../../actions';
 
 const VisitDetails = ({navigation, visit, ...props}) => {
+  const dispatch = useDispatch();
   let today = moment().startOf('day');
   let appointment = moment(visit.time).format('YYYY-MM-DD');
   let daysUntilVisit = Math.abs(
@@ -38,9 +40,9 @@ const VisitDetails = ({navigation, visit, ...props}) => {
         <CustomButton
           buttonStyle={styles.buttonStyle}
           textStyle={styles.buttonText}
-          onPress={() => {
-            navigation.navigate('ExpertLoginScreen', {visit: visit});
-          }}
+          onPress={() =>
+            dispatch(getLogin({destination: 'ExpertLoginScreen', visit}))
+          }
           text="Start Visit"
         />
         <CustomButton

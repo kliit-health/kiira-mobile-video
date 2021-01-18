@@ -17,18 +17,18 @@ import {showOrHideModal} from '../../components/customModal/action';
 
 function* setAppointment(data) {
   try {
-    // yield put(showApiLoader());
-    // let appointment = yield makeAppointment(data);
-    // yield put(hideApiLoader());
+    yield put(showApiLoader());
+    let appointment = yield makeAppointment(data);
+    yield put(hideApiLoader());
 
-    // if (appointment && !appointment.availible) {
-    //   yield put(
-    //     showOrHideModal('Appointment is unavailible please reschedule.'),
-    //   );
-    //   navigation.goBack();
-    // }
+    if (appointment && !appointment.availible) {
+      yield put(
+        showOrHideModal('Appointment is unavailible please reschedule.'),
+      );
+      navigation.goBack();
+    }
 
-    // yield updateCredits(-1, data);
+    yield updateCredits(-1, data);
     const obj = {
       tableName: Constant.App.firebaseTableNames.users,
       uid: data.data.uid,

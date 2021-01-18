@@ -8,6 +8,7 @@ import {
   UPDATE_MEDICAL_HISTORY_EXPERT,
   LOCK_VISIT,
   SET_MEDICAL_HISTORY,
+  CLEAR_MEDICAL_HISTORY,
 } from '../../redux/types';
 import {createReducer} from '@reduxjs/toolkit';
 import {isArray} from 'lodash';
@@ -364,4 +365,11 @@ export default createReducer(initialState, {
     ...state,
     ...payload,
   }),
+  [CLEAR_MEDICAL_HISTORY]: (state) => {
+    const {appointment} = state;
+    return {
+      ...state,
+      ...appointment,
+    };
+  },
 });

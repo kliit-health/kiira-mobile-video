@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -14,6 +14,15 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const PregnancyHistory = ({navigation}) => {
+  const {
+    pregnancies,
+    miscarriages,
+    fullTermBirths,
+    abortions,
+    cesarean,
+    livingChildren,
+    pregnancyIssues,
+  } = useSelector((state) => state.medicalHistory.pregnancy);
   const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -21,26 +30,26 @@ const PregnancyHistory = ({navigation}) => {
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
     pregnancies: {
-      number: '',
+      number: pregnancies.number,
     },
     miscarriages: {
-      number: '',
+      number: miscarriages.number,
     },
     fullTermBirths: {
-      number: '',
+      number: fullTermBirths.number,
     },
     abortions: {
-      number: '',
+      number: abortions.number,
     },
     cesarean: {
-      number: '',
+      number: cesarean.number,
     },
     livingChildren: {
-      number: '',
+      number: livingChildren.number,
     },
     pregnancyIssues: {
-      history: false,
-      notes: '',
+      history: pregnancyIssues.history,
+      notes: pregnancyIssues.notes,
     },
   });
 
@@ -146,6 +155,7 @@ const PregnancyHistory = ({navigation}) => {
           [types.picker]: (
             <View style={{width: 300, alignSelf: 'center'}}>
               <CustomTextInput
+                editable={false}
                 onPress={toggleModal}
                 placeholder={questions[progress].textPrompt}
                 value={answers[questions[progress].key].number}

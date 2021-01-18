@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -14,125 +14,135 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const GynHistory = ({navigation}) => {
+  const {
+    lastPeriod,
+    periodLength,
+    abnormalPap,
+    cycleLength,
+    menarche,
+    papDate,
+    sti,
+    hiv,
+    des,
+    sexuallyActive,
+    underAge,
+    multiplePartners,
+    useContraception,
+    useBirthControl,
+    contraceptions,
+    active,
+    activeCurrent,
+    sexualPartners,
+    currentlyActive,
+    numberOfPartners,
+  } = useSelector((state) => state.medicalHistory.gyn);
   const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
     lastPeriod: {
-      notes: '',
+      notes: lastPeriod.notes,
     },
     periodLength: {
-      lessThan: false,
-      moreThan: false,
+      lessThan: periodLength.lessThan,
+      moreThan: periodLength.moreThan,
     },
     abnormalPap: {
-      history: false,
-      notes: '',
+      history: abnormalPap.history,
+      notes: abnormalPap.notes,
     },
     cycleLength: {
-      lessThan: false,
-      about: false,
-      moreThan: false,
+      lessThan: cycleLength.lessThan,
+      about: cycleLength.about,
+      moreThan: cycleLength.moreThan,
     },
     menarche: {
-      notes: '',
+      notes: menarche.notes,
     },
     papDate: {
-      notes: '',
+      notes: papDate.notes,
     },
     sti: {
-      chlamydia: false,
-      gonorrhea: false,
-      genitalWarts: false,
-      herpes: false,
-      trichomonas: false,
-      syphilis: false,
-      none: false,
+      chlamydia: sti.chlamydia,
+      gonorrhea: sti.gonorrhea,
+      genitalWarts: sti.genitalWarts,
+      herpes: sti.herpes,
+      trichomonas: sti.trichomonas,
+      syphilis: sti.syphilis,
+      none: sti.none,
     },
     hiv: {
-      history: false,
-      notes: '',
+      history: hiv.history,
+      notes: hiv.notes,
     },
     des: {
-      history: false,
-      notes: '',
+      history: des.history,
+      notes: des.notes,
     },
     sexuallyActive: {
-      history: false,
-      notes: '',
+      history: sexuallyActive.history,
+      notes: sexuallyActive.notes,
     },
     underAge: {
-      history: false,
-      notes: '',
+      history: underAge.history,
+      notes: underAge.notes,
     },
     multiplePartners: {
-      history: false,
-      notes: '',
+      history: multiplePartners.history,
+      notes: multiplePartners.notes,
     },
     useContraception: {
-      history: false,
-      notes: '',
+      history: useContraception.history,
+      notes: useContraception.notes,
     },
     useBirthControl: {
-      history: false,
-      notes: '',
+      history: useBirthControl.history,
+      notes: useBirthControl.notes,
     },
     contraceptions: {
-      condoms: false,
-      thePill: false,
-      pullOut: false,
-      tubesTied: false,
-      diaphram: false,
-      patch: false,
-      flim: false,
-      other: false,
+      condoms: contraceptions.condoms,
+      thePill: contraceptions.thePill,
+      pullOut: contraceptions.pullOut,
+      tubesTied: contraceptions.tubesTied,
+      diaphram: contraceptions.diaphram,
+      patch: contraceptions.patch,
+      flim: contraceptions.flim,
+      other: contraceptions.other,
     },
     active: {
-      history: false,
-      notes: '',
+      history: active.history,
+      notes: active.notes,
     },
     activeCurrent: {
-      history: false,
-      notes: '',
+      history: activeCurrent.history,
+      notes: activeCurrent.notes,
     },
     sexualPartners: {
-      men: false,
-      women: false,
-      other: false,
+      men: sexualPartners.men,
+      women: sexualPartners.women,
+      other: sexualPartners.other,
     },
     currentlyActive: {
-      history: false,
-      notes: '',
+      history: currentlyActive.history,
+      notes: currentlyActive.notes,
     },
     numberOfPartners: {
       male: {
-        number: '',
+        number: numberOfPartners.male.number,
         visible: false,
       },
       female: {
-        number: '',
+        number: numberOfPartners.female.number,
         visible: false,
       },
       other: {
-        number: '',
+        number: numberOfPartners.other.number,
         visible: false,
       },
     },
   });
 
-  const numberOfPartners = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10+',
-  ];
+  const partners = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
 
   const payload = {
     gyn: {
@@ -253,10 +263,14 @@ const GynHistory = ({navigation}) => {
                 questions[progress].options.map((option, index) => {
                   return (
                     <View key={questions[progress].options[index].title}>
+                      <Text>{option.title}</Text>
                       <CustomTextInput
+                        editable={false}
                         onPress={() => toggleModal(option)}
                         placeholder={option.title}
-                        value={answers.numberOfPartners[option.key].number}
+                        value={answers.numberOfPartners[
+                          option.key
+                        ].number.toString()}
                         chevron
                       />
                       <ModalPicker
@@ -264,7 +278,7 @@ const GynHistory = ({navigation}) => {
                         onBackdropPress={() => toggleModal(option)}
                         visible={answers.numberOfPartners[option.key].visible}
                         title={option.title}
-                        data={numberOfPartners.map((item) => item)}
+                        data={partners.map((item) => item)}
                       />
                     </View>
                   );

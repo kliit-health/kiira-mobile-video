@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -9,9 +9,10 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const Medications = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(true);
-  const [notes, setNotes] = useState('');
+  const medications = useSelector((state) => state.medicalHistory.medications);
+  const [yes, setYes] = useState(medications.history);
+  const [no, setNo] = useState(!medications.history);
+  const [notes, setNotes] = useState(medications.notes);
   const dispatch = useDispatch();
 
   const toggleSelection = (selection) => {
@@ -56,6 +57,7 @@ const Medications = ({navigation}) => {
         <TextInput
           onChangeText={(text) => setNotes(text)}
           style={styles.input}
+          value={notes}
           multiline
           placeholder="Please type here"
           placeholderTextColor="black"

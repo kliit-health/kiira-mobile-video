@@ -2,7 +2,7 @@ import stripe from 'tipsi-stripe';
 import {Platform} from 'react-native';
 
 stripe.setOptions({
-  publishableKey: 'pk_test_lNJDgwEtGeMEcjcOBWzmVttH00Ig4ewVWF',
+  publishableKey: 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K',
   merchantId: 'merchant.com.kliit',
   androidPayMode: __DEV__ ? 'test' : 'production',
 });

@@ -52,7 +52,7 @@ const Confirm = ({navigation}) => {
               onPress={() => {
                 setModalVisible(!modalVisible);
                 dispatch(lockVisit(payload));
-                navigation.navigate('PatientProfile');
+                navigation.navigate('ExpertAppointments');
               }}>
               <Text style={styles.textStyle}>Lock</Text>
             </Pressable>
