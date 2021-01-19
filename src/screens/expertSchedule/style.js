@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 import metrics, {smallScreen} from '../../utils/metrices';
 import Constant from '../../utils/constants';
 
@@ -248,7 +247,7 @@ const styles = StyleSheet.create({
   },
 
   parentContainerStyle: {
-    marginTop: getStatusBarHeight(),
+    marginTop: 35,
     backgroundColor: Constant.App.colors.greyBgAsk,
     flexDirection: 'column',
   },

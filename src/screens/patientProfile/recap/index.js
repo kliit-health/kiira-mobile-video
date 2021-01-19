@@ -33,10 +33,10 @@ const Recap = (props) => {
     gyn,
     surgical,
     pmh,
-    privateNotes,
+    summary,
     lockTime,
     pregnancy,
-    patientNotes,
+    plan,
     physical,
   } = item;
 
@@ -45,8 +45,8 @@ const Recap = (props) => {
       <ExpertHeader title={title} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.document}>
         <VisitInfo visit={visit} lockTime={lockTime} />
-        <Plan plan={patientNotes} />
-        <Summary summary={privateNotes} />
+        <Plan plan={plan} />
+        <Summary summary={summary} />
         {!short && (
           <Fragment>
             <Pregnancy pregnancy={pregnancy} />

@@ -29,6 +29,7 @@ const PreviousVisits = ({navigation}) => {
     const {
       appointment: {visit},
     } = item;
+
     return (
       <Fragment>
         <View style={styles.infoContainer}>
@@ -83,7 +84,9 @@ const PreviousVisits = ({navigation}) => {
       {history.length ? (
         <FlatList
           data={history}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) =>
+            item.appointment.visit.lastName + index
+          }
           renderItem={Visit}
         />
       ) : null}

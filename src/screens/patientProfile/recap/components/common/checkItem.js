@@ -18,7 +18,7 @@ const CheckItem = ({key, checked, title, notes = null}) => {
         />
         <Text>{title}</Text>
       </View>
-      {checked && notes && (
+      {checked && notes !== null && (
         <Text style={styles.notes}>{`Notes: ${notes}`}</Text>
       )}
     </Fragment>

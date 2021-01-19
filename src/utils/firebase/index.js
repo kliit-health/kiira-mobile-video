@@ -11,7 +11,7 @@ const mySecretSalt = 'klit280391';
 
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
-export const functions = firebase.functions();
+export let functions = firebase.functions();
 
 export function getPlans(plan) {
   try {
@@ -136,6 +136,19 @@ export async function sendEmailVerification(obj) {
   }
 }
 
+export async function sendEmailSummary(obj) {
+  try {
+    const {email} = obj.params;
+    await functions.httpsCallable('sendMailNotificationOnMedicalRecordSave')(
+      email,
+    );
+    return {ok: true, data: null};
+  } catch (err) {
+    let status = err.status ? err.status : 'internal';
+    return {ok: false, status};
+  }
+}
+
 export function uploadImage(obj, success, error) {
   try {
     const result = firebase
@@ -234,6 +247,7 @@ export async function getAppointmentDatesAsync(data) {
       .then((data) => {
         response = [...response, ...data];
       });
+
     return response;
   } catch (error) {
     return error;
@@ -274,8 +288,8 @@ export async function makeAppointment({data}) {
 
     if (checkTime.valid) {
       await fetch(`https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMake?
-			&firstName=${firstName}&lastName=${lastName}&email=${email}
-			&calendarID=${calendarID}&time=${time}&reason=${reason}&prescription=${prescription}&notes=${notes}`)
+    	&firstName=${firstName}&lastName=${lastName}&email=${email}
+    	&calendarID=${calendarID}&time=${time}&reason=${reason}&prescription=${prescription}&notes=${notes}`)
         .then((res) => res.json())
         .then((data) => {
           response = {
@@ -325,13 +339,9 @@ export async function makeAppointment({data}) {
           {merge: true},
         );
       } else {
-        await firebase
-          .firestore()
-          .collection('appointments')
-          .doc(expert.uid)
-          .set({
-            history: {...expertPrev.data().history, [uid]: [response]},
-          });
+        await expertDocument.set({
+          history: {...expertPrev.data().history, [uid]: [response]},
+        });
       }
 
       return;
@@ -1459,6 +1469,7 @@ export async function getCreditAmountsData() {
 export async function addNewPaymentCard(obj) {
   try {
     const {card_number, exp_month, exp_year, cvc} = obj;
+
     await functions.httpsCallable('apiPaymentsAddCard')({
       card_number: card_number,
       exp_month: exp_month,
@@ -1770,21 +1781,6 @@ async function lockExpertRecord({uid, id, expert}) {
   await document.set({history: {...appointmentList.history}}, {merge: true});
 }
 
-export async function setVideoVisitRating(data) {
-  const {
-    rating,
-    visit: {expert, uid},
-  } = data;
-  const document = firestore.collection('users').doc(expert.uid);
-  const expertDoc = await document.get();
-  const expertData = expertDoc.data();
-
-  await document.set(
-    {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
-    {merge: true},
-  );
-}
-
 async function saveMedicalHistory(payload, visit) {
   delete payload.loading;
   delete payload.error;
@@ -1809,5 +1805,58 @@ async function saveMedicalHistory(payload, visit) {
   } catch (error) {
     console.log(error);
     return error;
+  }
+}
+
+export async function setVideoVisitRating(data) {
+  const {
+    rating,
+    visit: {expert, uid},
+  } = data;
+  const document = firestore.collection('users').doc(expert.uid);
+  const expertDoc = await document.get();
+  const expertData = expertDoc.data();
+
+  await document.set(
+    {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
+    {merge: true},
+  );
+}
+
+export async function createCometChatUser(user) {
+  try {
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    };
+    await fetch(
+      `https://us-central1-kiira-health-app.cloudfunctions.net/createCometChatUser`,
+      options,
+    ).then((res) => console.log(res));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getCometChatDetailsAsync() {
+  try {
+    const details = await functions.httpsCallable('getCometChatCredentials')();
+    return details;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function sendVisitRecap({payload}) {
+  try {
+    await functions.httpsCallable('sendMailNotificationOnMedicalRecordCreate')(
+      payload,
+    );
+  } catch (error) {
+    console.log(error);
   }
 }

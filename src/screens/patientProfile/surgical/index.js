@@ -9,11 +9,11 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const SurgicalHistory = ({navigation}) => {
-  const [yes, setYes] = useState(false);
-  const [no, setNo] = useState(true);
-  const [notes, setNotes] = useState('');
+  const surgical = useSelector((state) => state.medicalHistory.surgical);
+  const [yes, setYes] = useState(surgical.surgeries);
+  const [no, setNo] = useState(!surgical.surgeries);
+  const [notes, setNotes] = useState(surgical.notes);
   const dispatch = useDispatch();
-  const {surgical} = useSelector((state) => state.medicalHistory);
 
   const toggleSelection = (selection) => {
     if (selection === 'yes') {

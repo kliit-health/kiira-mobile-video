@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../components/customButton';
 import ExpertHeader from '../../../components/expertHeader';
 import PolarButton from '../../../components/polarButton';
@@ -11,45 +11,48 @@ import {updateMedicalHistoryExpert} from '../actions';
 import styles from './style';
 
 const FamilyHistory = ({navigation}) => {
+  const {cancer, rareDisease, illnesses} = useSelector(
+    (state) => state.medicalHistory.family,
+  );
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
 
   const finished = progress === questions.length - 1;
   const [answers, setAnswers] = useState({
     cancer: {
-      history: false,
-      notes: '',
+      history: cancer.history,
+      notes: cancer.notes,
     },
     rareDisease: {
-      history: false,
-      notes: '',
+      history: rareDisease.history,
+      notes: rareDisease.notes,
     },
     illnesses: {
-      diabetes: false,
-      highBloodPressure: false,
-      giReflux: false,
-      giDisease: false,
-      fibroids: false,
-      endometriosos: false,
-      osteopenia: false,
-      osteoporosis: false,
-      heartDisease: false,
-      highCholesterol: false,
-      hepatitis: false,
-      liverProblems: false,
-      kidneyProblems: false,
-      arthritis: false,
-      jointPain: false,
-      fracture: false,
-      anxiety: false,
-      depression: false,
-      seizures: false,
-      asthma: false,
-      lungProblems: false,
-      tuberculosis: false,
-      thyroidDisease: false,
-      clottingDisorder: false,
-      none: false,
+      diabetes: illnesses.diabetes,
+      highBloodPressure: illnesses.highBloodPressure,
+      giReflux: illnesses.giReflux,
+      giDisease: illnesses.giDisease,
+      fibroids: illnesses.fibroids,
+      endometriosos: illnesses.endometriosos,
+      osteopenia: illnesses.osteopenia,
+      osteoporosis: illnesses.osteoporosis,
+      heartDisease: illnesses.heartDisease,
+      highCholesterol: illnesses.highCholesterol,
+      hepatitis: illnesses.hepatitis,
+      liverProblems: illnesses.liverProblems,
+      kidneyProblems: illnesses.kidneyProblems,
+      arthritis: illnesses.arthritis,
+      jointPain: illnesses.jointPain,
+      fracture: illnesses.fracture,
+      anxiety: illnesses.anxiety,
+      depression: illnesses.depression,
+      seizures: illnesses.seizures,
+      asthma: illnesses.asthma,
+      lungProblems: illnesses.lungProblems,
+      tuberculosis: illnesses.tuberculosis,
+      thyroidDisease: illnesses.thyroidDisease,
+      clottingDisorder: illnesses.clottingDisorder,
+      none: illnesses.none,
     },
   });
 

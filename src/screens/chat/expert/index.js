@@ -316,18 +316,20 @@ class ChatExpert extends React.PureComponent {
           </View>
         ) : null}
         <View style={styles.chatInputContainer}>
-          <TouchableOpacity
-            style={styles.cameraContainerStyle}
-            onPress={() => this.pickImage()}>
-            <Image
-              style={{
-                width: 28,
-                height: 28,
-              }}
-              resizeMode="contain"
-              source={staticImages.cameraGreyIcon}
-            />
-          </TouchableOpacity>
+          {Platform.OS === 'ios' && (
+            <TouchableOpacity
+              style={styles.cameraContainerStyle}
+              onPress={() => this.pickImage()}>
+              <Image
+                style={{
+                  width: 28,
+                  height: 28,
+                }}
+                resizeMode="contain"
+                source={staticImages.cameraGreyIcon}
+              />
+            </TouchableOpacity>
+          )}
           <View style={styles.textContainerStyle}>
             <InputText
               maxHeight={100}

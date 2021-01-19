@@ -1,11 +1,14 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import CustomButton from '../../../components/customButton';
 import styles from '../styles';
+import {getLogin} from '../actions';
 import {withNavigation} from 'react-navigation';
 
 const VisitDetails = ({navigation, visit, ...props}) => {
+  const dispatch = useDispatch();
   let today = moment().startOf('day');
   let appointment =
     typeof visit.time === 'number'
@@ -44,9 +47,7 @@ const VisitDetails = ({navigation, visit, ...props}) => {
         <CustomButton
           buttonStyle={styles.noContainerStyle}
           textStyle={styles.noTextStyle}
-          onPress={() => {
-            navigation.navigate('VideoLogin', {visit: visit});
-          }}
+          onPress={() => dispatch(getLogin({destination: 'VideoLogin', visit}))}
           text="Enter Waiting Room"
         />
       </View>

@@ -17,13 +17,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>public.app-category.healthcare-fitness</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -39,14 +39,18 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Kiira would like to use your microphone.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Kiira would like to use your camera.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Kiira would like to access your location when in use</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Kiira would like to use your microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App would like access to your photo gallery to upload the profile picture.</string>
+	<string>Kiira would like access to your photo gallery to upload the profile picture.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Kiira would like to access your contacts for scheduling</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Kiira would like to access your contacts for scheduling</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AvenirLTStd-Black.otf</string>
@@ -98,12 +102,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

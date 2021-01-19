@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     height: 400,
     color: 'black',
     padding: 10,
+    textAlignVertical: 'top',
   },
 
   submitButtonStyle: {

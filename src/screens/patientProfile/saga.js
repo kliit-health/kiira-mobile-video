@@ -11,14 +11,16 @@ import {
   LOCK_VISIT,
   GET_MEDICAL_HISTORY,
   SET_MEDICAL_HISTORY,
+  CLEAR_MEDICAL_HISTORY,
 } from '../../redux/types';
 import moment from 'moment';
-import {put, takeEvery, select} from 'redux-saga/effects';
+import {put, takeEvery, select, call} from 'redux-saga/effects';
 import {
   firebaseSingleFetch,
   updateSingleDocument,
   saveAndLock,
   getMedicalHistoryAsync,
+  sendVisitRecap,
 } from '../../utils/firebase';
 
 function* getPatientDetails({data}) {
@@ -99,8 +101,8 @@ function* updatePatientDetails({data}) {
 
 function* lockVisit(data) {
   try {
-    const update = yield saveAndLock(data);
-
+    const update = yield call(saveAndLock, data);
+    yield call(sendVisitRecap, data);
     yield put({
       type: UPDATE_MEDICAL_HISTORY_EXPERT,
       payload: {

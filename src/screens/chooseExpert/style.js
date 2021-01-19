@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import { getStatusBarHeight } from "../../components/iPhoneXHelper";
-import metrics from "../../utils/metrices";
-import Constant from "../../utils/constants";
+import {StyleSheet, Platform} from 'react-native';
+import {getStatusBarHeight} from '../../components/iPhoneXHelper';
+import metrics from '../../utils/metrices';
+import Constant from '../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
   cancelBtnEditQuestionModalTextStyle: {
     color: Constant.App.colors.whiteColor,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -29,33 +29,33 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Medium,
     color: Constant.App.colors.blackColor,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: "100",
+    fontWeight: '100',
   },
 
   editTextStyle: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     paddingRight: parentPaddingValue * 0.5,
     fontSize: Constant.App.textSize.Medium,
     color: Constant.App.colors.blueColor,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: "100",
+    fontWeight: '100',
   },
 
   editQuestionModalButtonContainerStyle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: metrics.DEVICE_WIDTH - 100,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 15,
   },
 
   editQuestionModalInnerContainerStyle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderRadius: 10,
-    flexWrap: "wrap",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingLeft: 5,
     paddingRight: 5,
     paddingTop: 15,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
   editQuestionModalInputTextContainerStyle: {
     width: metrics.DEVICE_WIDTH - 100,
-    paddingBottom: Platform.OS === "ios" ? metrics.DEVICE_HEIGHT * 0.01 : 0,
+    paddingBottom: Platform.OS === 'ios' ? metrics.DEVICE_HEIGHT * 0.01 : 0,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
   },
@@ -77,22 +77,22 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH - 100,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    textAlign: "left",
-    fontWeight: "200",
-    textAlignVertical: "top",
+    textAlign: 'left',
+    fontWeight: '200',
+    textAlignVertical: 'top',
   },
 
   editQuestionModalParentContainerStyle: {
     flex: 1,
     backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   expertInfoContainerStyle: {
     marginLeft: 10,
     width: metrics.DEVICE_WIDTH - parentPadding - 105,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   expertInfoParentContainerStyle: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingRight: parentPaddingValue,
     paddingTop: metrics.DEVICE_WIDTH * 0.03,
     paddingBottom: metrics.DEVICE_WIDTH * 0.03,
-    flexDirection: "row",
+    flexDirection: 'row',
     width: metrics.DEVICE_WIDTH,
     backgroundColor: Constant.App.colors.whiteColor,
   },
@@ -113,21 +113,21 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Small,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: "200",
+    fontWeight: '200',
   },
 
   expertNameTextBoldStyle: {
     width: metrics.DEVICE_WIDTH - parentPadding - 105,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
-    fontWeight: "500",
+    fontWeight: '500',
     fontFamily: Constant.App.fontFamily.headerBold,
   },
 
   expertsParentContainerStyle: {
     marginTop: 5,
     width: metrics.DEVICE_WIDTH,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   expertProfessionLoctionBoldStyle: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     width: metrics.DEVICE_WIDTH - parentPadding - 105,
     color: Constant.App.colors.greyColorText,
     fontSize: Constant.App.textSize.Small,
-    fontWeight: "200",
+    fontWeight: '200',
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 
   filterModalDoneTextStyle: {
     color: Constant.App.colors.blueColor,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   filterModalGenderParentContainerStyle: {
     margin: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
     borderBottomColor: Constant.App.colors.grayColor,
     borderBottomWidth: 1,
@@ -164,23 +164,23 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerRegular,
-    fontWeight: "300",
+    fontWeight: '300',
   },
 
   filterModalItemContainerStyle: {
     marginTop: metrics.DEVICE_HEIGHT * 0.02,
     width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   filterModalItemParentContainerStyle: {
     marginTop: metrics.DEVICE_HEIGHT * 0.01,
     width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   filterModalItemChecboxIconStyle: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.greyColorText,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    textAlign: "left",
+    textAlign: 'left',
     width:
       metrics.DEVICE_WIDTH -
       parentPaddingFilterModal -
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     marginRight: parentPaddingValueFilterModal,
     marginBottom: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
   },
 
@@ -213,12 +213,12 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerRegular,
-    fontWeight: "300",
+    fontWeight: '300',
   },
 
   filterModalParentContainerStyle: {
     marginTop: getStatusBarHeight(),
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH,
     height: metrics.DEVICE_HEIGHT,
     backgroundColor: Constant.App.colors.whiteColor,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     marginRight: parentPaddingValueFilterModal,
     marginBottom: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
     borderBottomColor: Constant.App.colors.grayColor,
     borderBottomWidth: 1,
@@ -239,32 +239,32 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerRegular,
-    fontWeight: "300",
+    fontWeight: '300',
   },
 
   filterModalTitleContainerStyle: {
     padding: parentPaddingValueFilterModal,
-    flexDirection: "column",
+    flexDirection: 'column',
     width: metrics.DEVICE_WIDTH,
     borderBottomColor: Constant.App.colors.borderColorFilterModal,
     borderBottomWidth: 4,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   filterModalTitleTextStyle: {
-    alignSelf: "center",
-    position: "absolute",
+    alignSelf: 'center',
+    position: 'absolute',
     color: Constant.App.colors.blackColor,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerBold,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 
   headerStyle: {
-    justifyContent: "space-between",
-    flexDirection: "row",
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
     paddingTop: parentPaddingValue,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
 
   noDataTextStyle: {
     marginTop: 50,
-    alignSelf: "center",
+    alignSelf: 'center',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -282,13 +282,13 @@ const styles = StyleSheet.create({
 
   parentContainerStyle: {
     flex: 1,
-    alignItems: "center",
-    marginTop: getStatusBarHeight(),
+    alignItems: 'center',
+    marginTop: 35,
     backgroundColor: Constant.App.colors.bgChooseExpertColor,
   },
 
   questionParentContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingLeft: parentPaddingValue + childPaddingValue,
     paddingRight: parentPaddingValue + childPaddingValue,
     paddingBottom: childPaddingValue,
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Medium,
     color: Constant.App.colors.blackColor,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontWeight: "100",
+    fontWeight: '100',
   },
 
   questionTextStyle: {
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   rightChevronIconStyle: {
     width: 15,
     height: 15,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 
   saveBtnEditQuestionModalContainerStyle: {
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
 
   saveBtnEditQuestionModalTextStyle: {
     color: Constant.App.colors.whiteColor,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },

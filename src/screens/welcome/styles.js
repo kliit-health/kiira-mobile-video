@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../utils/constants";
-import metrices from "../../utils/metrices";
-import { getStatusBarHeight } from "../../components/iPhoneXHelper";
+import {StyleSheet} from 'react-native';
+import Constant from '../../utils/constants';
+import metrices from '../../utils/metrices';
+import {getStatusBarHeight} from '../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -13,14 +13,14 @@ export const AVATAR_SIZE = 111;
 
 const style = StyleSheet.create({
   logoStyle: {
-    alignSelf: "center",
+    alignSelf: 'center',
     height: metrices.DEVICE_WIDTH * 0.15,
     width: metrices.DEVICE_WIDTH * 0.32,
     marginTop: 30,
   },
 
   buttonContainerStyle: {
-    alignSelf: "center",
+    alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
     width: metrices.DEVICE_WIDTH - childPadding,
@@ -29,14 +29,14 @@ const style = StyleSheet.create({
   },
 
   buttonTextStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.whiteColor,
   },
 
   cancelTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -44,7 +44,7 @@ const style = StyleSheet.create({
 
   container: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
     marginTop: getStatusBarHeight(),
   },
@@ -59,7 +59,7 @@ const style = StyleSheet.create({
   },
 
   creditButtonTextStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 11,
     fontFamily: Constant.App.fontFamily.avenirMedium,
     fontSize: Constant.App.textSize.Normal,
@@ -67,27 +67,27 @@ const style = StyleSheet.create({
   },
 
   creditTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     paddingTop: 10,
     color: Constant.App.colors.whiteColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerMedium,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   genderTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     paddingTop: 5,
     color: Constant.App.colors.whiteColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerLight,
-    fontWeight: "400",
+    fontWeight: '400',
   },
 
   headerStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: parentPaddingValue * 0.5,
     backgroundColor: Constant.App.colors.whiteColor,
     borderBottomColor: Constant.App.colors.greyBgAsk,
@@ -95,26 +95,26 @@ const style = StyleSheet.create({
   },
 
   imageContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     // height: 400,
     // width: 100,
   },
 
   itemsParentContainerStyle: {
     backgroundColor: Constant.App.colors.whiteColor,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
     paddingTop: parentPaddingValue * 0.5,
     paddingBottom: parentPaddingValue * 0.5,
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 1.5,
   },
 
   itemTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     paddingTop: 5,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Normal,
@@ -127,7 +127,7 @@ const style = StyleSheet.create({
   },
 
   logoutTextStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 10,
     color: Constant.App.colors.redColorLogout,
     fontSize: Constant.App.textSize.xLarge,
@@ -136,33 +136,33 @@ const style = StyleSheet.create({
   },
 
   nameTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     color: Constant.App.colors.whiteColor,
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.headerSemiBold,
   },
 
   profileImageParentContainerStyle: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
 
   profileInfoParentContainerStyle: {
-    flexDirection: "column",
-    alignSelf: "center",
+    flexDirection: 'column',
+    alignSelf: 'center',
     width: metrices.DEVICE_WIDTH - AVATAR_SIZE - parentPadding,
   },
 
   titleTextStyle: {
-    textAlign: "left",
+    textAlign: 'left',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerBold,
   },
 
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontFamily: Constant.App.fontFamily.headerBold,
     margin: 30,
   },
@@ -174,7 +174,7 @@ const style = StyleSheet.create({
 
   question: {
     fontSize: 16,
-    fontWeight: "400",
+    fontWeight: '400',
   },
 });
 

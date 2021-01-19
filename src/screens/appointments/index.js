@@ -41,6 +41,8 @@ const Appointments = ({navigation}) => {
     navigation.navigate(destination);
   };
 
+  const FallBack = () => <View></View>;
+
   return (
     <View style={styles.container}>
       <Header
@@ -60,7 +62,9 @@ const Appointments = ({navigation}) => {
             renderItem={({item, index}) => {
               const date = generateDateInfo(item.time);
               return (
-                <ErrorBoundary onError={() => navigation.navigate('BottomTab')}>
+                <ErrorBoundary
+                  FallbackComponent={FallBack}
+                  onError={() => navigation.navigate('BottomTab')}>
                   <Visit visit={item} date={date} navigation={navigation} />
                 </ErrorBoundary>
               );

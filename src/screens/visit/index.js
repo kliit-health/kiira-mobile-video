@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, SafeAreaView} from 'react-native';
 import {Header} from '../../components';
 import {withNavigation} from 'react-navigation';
 import {ExpertInfo, VisitDetails} from './components';
@@ -34,14 +34,18 @@ const Visit = (props) => {
     dispatch(setVisit(visit));
   });
 
+  const FallBack = () => <View></View>;
+
   return (
-    <View style={styles.parentContainerStyle}>
+    <SafeAreaView style={styles.parentContainerStyle}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         {expertData && (
           <View>
-            <ErrorBoundary onError={() => navigation.goBack()}>
+            <ErrorBoundary
+              FallbackComponent={FallBack}
+              onError={() => navigation.goBack()}>
               <Header
                 title="Appointment Details"
                 onBack={() => navigation.goBack()}
@@ -52,7 +56,7 @@ const Visit = (props) => {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

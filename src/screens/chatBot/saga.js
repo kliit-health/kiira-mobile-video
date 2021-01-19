@@ -14,6 +14,9 @@ import {setUserData} from '../authLoading/action';
 
 let Lang = Language['en'];
 
+const defaultImage =
+  'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf';
+
 function* updateNewUserData({data}) {
   try {
     yield put(showApiLoader(Lang.apiLoader.loadingText));
@@ -28,7 +31,7 @@ function* updateNewUserData({data}) {
       firstLogin: false,
       signUpDate: userParams.signUpDate,
       profileInfo: {
-        profileImageUrl: userParams.profileImageUrl || '',
+        profileImageUrl: defaultImage,
         firstName: userParams.firstName,
         lastName: userParams.lastName,
         email: userParams.email,

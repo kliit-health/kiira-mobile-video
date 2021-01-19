@@ -6,10 +6,12 @@ import {
   Platform,
   ScrollView,
   PermissionsAndroid,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
 import CustomText from '../../components/customText';
+import Container from '../../components/container';
 import Language from '../../utils/localization';
 import Constant from '../../utils/constants';
 import {Avatar} from 'react-native-elements';
@@ -220,11 +222,12 @@ class Setting extends PureComponent {
       },
     };
     ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
-        console.log('You cancelled image picker');
-      } else if (response.error) {
+      console.log('RESPONSE BEGINING', response);
+      if (response.error) {
+        console.log('RESPONSE ERROR', response);
         alert('And error occured: ' + JSON.stringify(response));
       } else {
+        console.log('RESPONSE', response);
         const source = {uri: response.uri};
         this.setState({
           imageSrc: response.uri,
@@ -258,15 +261,16 @@ class Setting extends PureComponent {
           source={{uri: imageSrc ? imageSrc : ''}}
           activeOpacity={0.7}
         />
-
-        <TouchableOpacity
-          onPress={() => {
-            this.requestCameraPermission();
-          }}>
-          <CustomText style={styles.changeProfileTextStyle}>
-            {lang.setting.changePhoto}
-          </CustomText>
-        </TouchableOpacity>
+        {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={() => {
+              this.requestCameraPermission();
+            }}>
+            <CustomText style={styles.changeProfileTextStyle}>
+              {lang.setting.changePhoto}
+            </CustomText>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -433,7 +437,7 @@ class Setting extends PureComponent {
     const {showSelectStateModal, showSelectSexualityModal} = this.state;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {this.renderHeaderView()}
         <ScrollView
           keyboardShouldPersistTaps="handled"
@@ -480,7 +484,7 @@ class Setting extends PureComponent {
           ) : null}
         </ScrollView>
         {Platform.OS === 'ios' && <KeyboardSpacer />}
-      </View>
+      </SafeAreaView>
     );
   }
 }

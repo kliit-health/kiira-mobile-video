@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   View,
   ScrollView,
   Image,
   TouchableOpacity,
   Platform,
-} from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import CustomText from "../../components/customText";
-import styles from "./style";
-import Constant from "../../utils/constants";
-import CustomInputText from "../../components/customInputText";
-import Language from "../../utils/localization";
-import CustomButton from "../../components/customButton";
-import { showOrHideModal } from "../../components/customModal/action";
-import { isEmail } from "../../utils/helper";
-import { loginApi, resetLoginState } from "./action";
-import KeyboardSpacer from "react-native-keyboard-spacer";
+} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import CustomText from '../../components/customText';
+import styles from './style';
+import Constant from '../../utils/constants';
+import CustomInputText from '../../components/customInputText';
+import Language from '../../utils/localization';
+import CustomButton from '../../components/customButton';
+import {showOrHideModal} from '../../components/customModal/action';
+import {isEmail} from '../../utils/helper';
+import {loginApi, resetLoginState} from './action';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-let lang = Language["en"];
+let lang = Language['en'];
 const Login = (props) => {
   const loginFailure = useSelector((state) => state.loginReducer.loginFailure);
   const dispatch = useDispatch();
-  const { navigation } = props;
-  const { staticImages } = Constant.App;
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {navigation} = props;
+  const {staticImages} = Constant.App;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (loginFailure) {
-      setPassword("");
+      setPassword('');
       dispatch(resetLoginState());
     }
   });
@@ -47,7 +47,7 @@ const Login = (props) => {
             style={
               email
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: "100" }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -62,7 +62,7 @@ const Login = (props) => {
             style={
               password
                 ? styles.inputTypePasswordStyle
-                : [styles.inputTypePasswordStyle, { fontWeight: "100" }]
+                : [styles.inputTypePasswordStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -87,8 +87,7 @@ const Login = (props) => {
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
-        }}
-      >
+        }}>
         <Image
           resizeMode="contain"
           source={staticImages.crossIcon}
@@ -148,8 +147,7 @@ const Login = (props) => {
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(Constant.App.screenNames.ForgotPassword);
-        }}
-      >
+        }}>
         <CustomText style={styles.forgotPasswordTextStyle}>
           {lang.login.ForgotPassword}
         </CustomText>
@@ -161,8 +159,7 @@ const Login = (props) => {
     <View style={styles.parentContainerStyle}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {renderCrossIconView()}
         <View style={styles.contentContainerStyle}>
           {renderLogoView()}
@@ -171,7 +168,7 @@ const Login = (props) => {
           {renderForgotPasswordView()}
         </View>
       </ScrollView>
-      {Platform.OS === "ios" && <KeyboardSpacer />}
+      {Platform.OS === 'ios' && <KeyboardSpacer />}
     </View>
   );
 };

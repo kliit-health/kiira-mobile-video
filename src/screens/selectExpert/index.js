@@ -1,17 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {Header, TextButton} from '../../components';
+import {useSelector} from 'react-redux';
+import {Header, TextButton, Container} from '../../components';
 import {screenNames} from '../../utils/constants';
 import intl from '../../utils/localization';
 import {List} from './sections';
 import styles from './style';
 
 const SelectExpert = ({navigation}) => {
-  const dispatch = useDispatch();
-
   const [availableExperts, setAvailableExperts] = useState([]);
-
   const experts = useSelector((state) => state.careSquad.experts);
   const userProfile = useSelector(
     (state) => state.userDetails.data.profileInfo,
@@ -38,7 +35,7 @@ const SelectExpert = ({navigation}) => {
   const handleBackPress = () => navigation.goBack();
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Header title={intl.en.requestVisit.title} onBack={handleBackPress} />
       {availableExperts && availableExperts.length ? (
         <List onCardPress={handleCardPress} data={availableExperts} />
@@ -66,7 +63,7 @@ const SelectExpert = ({navigation}) => {
           </TextButton>
         </View>
       )}
-    </View>
+    </Container>
   );
 };
 

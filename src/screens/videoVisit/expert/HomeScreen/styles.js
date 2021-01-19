@@ -11,16 +11,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 70,
     flexDirection: 'row',
-    // justifyContent: "flex-start",
-    // alignItems: "center",
     backgroundColor: 'white',
     width: '20%',
   },
   textStyle: {
-    color: 'white',
+    color: '#2196F3',
     fontWeight: 'bold',
     textAlign: 'center',
   },
+
+  textDisabled: {
+    color: '#8e8e93',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
   infoContainer: {
     flexDirection: 'row',
     width: metrices.DEVICE_WIDTH * 0.8,
@@ -49,6 +54,18 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'white',
     borderColor: '#2196F3',
+    borderWidth: 2,
+    borderRadius: 20,
+    padding: 5,
+    elevation: 2,
+    width: 100,
+    marginTop: 5,
+    marginRight: 10,
+  },
+
+  buttonDisabled: {
+    backgroundColor: 'white',
+    borderColor: '#8e8e93',
     borderWidth: 2,
     borderRadius: 20,
     padding: 5,

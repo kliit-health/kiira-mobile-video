@@ -7,6 +7,7 @@ import {ActivityIndicator} from 'react-native-paper';
 import {decode, encode} from 'base-64';
 import styles from './styles';
 import {generateCometChatUser} from '../../../utils/helper';
+import {createCometChatUser} from '../../../utils/firebase';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -18,28 +19,30 @@ if (!global.atob) {
 
 this.DOMParser = require('xmldom').DOMParser;
 
-let appID = '28070529bb911c1';
-let apiKey = 'd4acb0f852b0d67a0ad92689ff888500c7b6d934';
-let restKey = '7b598a589f2c92ce9655fec31ad9d5b553ec6bd3';
-let appRegion = 'US';
-
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loaderVisible: false,
+      UID: generateCometChatUser(props.userData),
+      apikey: props.cometChat.apikey,
+      appId: props.cometChat.appid,
     };
-    this.state.entredUID = '';
     this.buttonPressed = this.buttonPressed.bind(this);
+  }
+
+  componentDidMount() {
     var appSettings = new CometChat.AppSettingsBuilder()
       .subscribePresenceForAllUsers()
-      .setRegion(appRegion)
+      .setRegion(this.props.cometChat.appregion)
       .build();
-    CometChat.init(appID, appSettings).then(
+    const {appId} = this.state;
+
+    CometChat.init(appId, appSettings).then(
       () => {
         CometChat.addConnectionListener(
           'XMPPConnectionListener',
@@ -68,53 +71,34 @@ class LoginScreen extends Component {
   }
 
   buttonPressed() {
-    UID = generateCometChatUser(this.props.userData);
     this.cometchatLogin();
   }
 
   cometchatLogin() {
     this.setState({loaderVisible: true});
-    CometChat.login(UID, apiKey).then(
+    CometChat.login(this.state.UID, this.state.apikey).then(
       (user) => {
         this.setState({loaderVisible: false});
         this.props.navigation.navigate('Home');
       },
       (error) => {
-        this.setState({loaderVisible: false});
-        this.createUser();
+        if (error.code === 'ERR_UID_NOT_FOUND') {
+          this.createUser();
+        }
         console.log('Login failed with exception:', {error});
       },
     );
   }
 
-  createUser() {
+  async createUser() {
     const {userData} = this.props;
-    const uid = generateCometChatUser(userData);
-    var options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        apiKey: restKey,
-        appId: appID,
-      },
-      body: {
-        uid: generateCometChatUser(userData),
-        name: `${userData.profileInfo.firstName} ${userData.profileInfo.lastName}`,
-      },
-    };
 
-    fetch(
-      `https://api-us.cometchat.io/v2.0/users?name=${userData.profileInfo.firstName} ${userData.profileInfo.lastName}&uid=${uid}`,
-      options,
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.data.name) {
-          this.cometchatLogin();
-        } else {
-          console.log('Error', res);
-        }
-      });
+    try {
+      await createCometChatUser(userData);
+      this.cometchatLogin();
+    } catch (error) {
+      console.log('Error: ', error);
+    }
   }
 
   render() {
@@ -157,6 +141,7 @@ class LoginScreen extends Component {
 
 const mapStateToProps = (state) => ({
   userData: state.authLoadingReducer.userData,
+  cometChat: state.visitReducer.details.data,
 });
 
 export default connect(mapStateToProps)(LoginScreen);

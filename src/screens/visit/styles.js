@@ -21,15 +21,10 @@ const styles = StyleSheet.create({
   },
 
   parentContainerStyle: {
-    backgroundColor: Constant.App.colors.whiteColor,
-    paddingLeft: parentPaddingValue * 0.2,
-    paddingRight: parentPaddingValue * 0.2,
-    paddingBottom: parentPaddingValue * 0.2,
-    paddingTop: parentPaddingValue * 0.2,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    width: metrics.DEVICE_WIDTH,
+    marginTop: 35,
+    flexDirection: 'column',
   },
 
   expertIsPrescriber: {
@@ -149,13 +144,6 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.blueColor,
-  },
-
-  parentContainerStyle: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: getStatusBarHeight(),
-    flexDirection: 'column',
   },
 
   titleTextStyle: {
