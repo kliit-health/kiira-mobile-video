@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import metrices from '../../../../utils/metrices';
 import Constant from '../../../../utils/constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Platform.OS === 'android' ? 35 : 0,
   },
   item: {
     padding: 15,

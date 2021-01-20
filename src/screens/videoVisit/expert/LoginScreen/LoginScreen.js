@@ -81,8 +81,9 @@ class ExpertLoginScreen extends Component {
     const expert = {
       firstName: visit.expert.firstName.toLowerCase(),
       lastName: visit.expert.lastName.toLowerCase(),
+      uid: visit.expert.uid.substr(-5).toLowerCase(),
     };
-    const expertUID = `${expert.firstName}_${expert.lastName}`;
+    const expertUID = `${expert.firstName}_${expert.lastName}_${expert.uid}`;
     UID = expertUID;
     this.cometchatLogin();
   }

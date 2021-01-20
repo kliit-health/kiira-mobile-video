@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
+	<string>1.2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -48,9 +48,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Kiira would like access to your photo gallery to upload the profile picture.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Kiira would like to access your contacts for scheduling</string>
+    <string>Kiira would like access to your contacts for scheduling</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Kiira would like to access your contacts for scheduling</string>
+    <string>Kiira would like access to your contacts for scheduling</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AvenirLTStd-Black.otf</string>

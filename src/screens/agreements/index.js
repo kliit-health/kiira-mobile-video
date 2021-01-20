@@ -62,7 +62,7 @@ const Agreements = ({
       animationOut="fadeOutDown"
       visible={visible}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color="#008AFC" />
       ) : error ? (
         <Text>error</Text>
       ) : (

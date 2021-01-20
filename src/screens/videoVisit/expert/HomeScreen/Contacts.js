@@ -13,6 +13,7 @@ import {
 import ActionSheet from 'react-native-actionsheet';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {generateCometChatUser} from '../../../../utils/helper';
 
 class Contacts extends Component {
   showActionSheet = (item) => {
@@ -50,7 +51,7 @@ class Contacts extends Component {
 
   fetchUser() {
     let {visit} = this.props.navigation.state.params;
-    let patientName = `${visit.firstName} ${visit.lastName}`;
+
     let limit = 30;
     let usersRequest = new CometChat.UsersRequestBuilder()
       .setLimit(limit)
@@ -68,9 +69,9 @@ class Contacts extends Component {
                 }
               });
             }
-            const filtered = userList.filter(
-              (user) => user.name === patientName,
-            );
+            const filtered = userList.filter((user) => {
+              return user.uid === visit.comet;
+            });
             this.setState({
               users: filtered,
             });
@@ -154,6 +155,7 @@ class Contacts extends Component {
       lastName,
       avatar,
     } = this.props.navigation.state.params.visit;
+
     console.log(this.props.navigation.state.params.visit);
     item.avatar = item.avatar ? item.avatar : 'user';
     item.status === 'online' ? (isOnline = true) : (isOnline = false);
@@ -220,9 +222,16 @@ class Contacts extends Component {
 
   onPress(item) {
     var call = new CometChat.Call(item.uid, 'video', 'user');
+    let {expert} = this.props.navigation.state.params.visit;
+    let expertUID =
+      expert.firstName.toLowerCase() +
+      '_' +
+      expert.lastName.toLowerCase() +
+      '_' +
+      expert.uid.substr(-5).toLowerCase();
+
     CometChat.initiateCall(call).then((Call) => {
-      CometChat.getUser('candice_fraser').then((user) => {
-        console.log(user);
+      CometChat.getUser(expertUID).then((user) => {
         if (user) {
           const isAudio = 0;
           const defaultLayout = 1;

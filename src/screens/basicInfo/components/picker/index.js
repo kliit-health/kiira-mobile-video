@@ -20,6 +20,7 @@ const Picker = ({value, data, title, onSave, placeholder}) => {
   return (
     <Fragment>
       <TextInput
+        editable={false}
         placeholder={placeholder}
         chevron
         value={value}

@@ -9,7 +9,7 @@ export default [
     title: 'Injury or pain',
   },
   {
-    title: 'Urinary tract or yeast infecetion',
+    title: 'Urinary tract or yeast infection',
   },
   {
     title: 'Prenatal health',

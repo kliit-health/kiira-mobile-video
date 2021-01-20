@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { View, Modal, TouchableOpacity, Platform } from "react-native";
-import CustomText from "../customText";
-import styles from "./style";
-import CustomButton from "../customButton";
-import Moment from "moment";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
+import React, {useState} from 'react';
+import {View, Modal, TouchableOpacity, Platform} from 'react-native';
+import CustomText from '../customText';
+import styles from './style';
+import CustomButton from '../customButton';
+import Moment from 'moment';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const DatePicker = (props) => {
-  const { placeHolder, textStyle, onSelection, selectedDate } = props;
-  const [date, setDate] = useState(new Date());
+  const {placeHolder, textStyle, onSelection, selectedDate} = props;
+  const [date, setDate] = useState();
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState(selectedDate);
 
   const dateChange = (event, selectedDate) => {
     const currentDate = selectedDate;
-    setShow(Platform.OS === "ios");
+    setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
 
   const doneButtonModalDatePickerClick = () => {
-    const selectedDate = Moment(date).format("MM/DD/YYYY");
+    const selectedDate = Moment(date).format('MM/DD/YYYY');
     onSelection(selectedDate);
     setSelected(selectedDate);
     setShow(!show);
@@ -34,30 +34,28 @@ const DatePicker = (props) => {
         animationType="slide"
         transparent={true}
         onRequestClose={() => {}}
-        visible={true}
-      >
+        visible={true}>
         <View
           style={{
             flex: 1,
-            backgroundColor: "rgba(0,0,0,0.5)",
-            justifyContent: "flex-end",
-          }}
-        >
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            justifyContent: 'flex-end',
+          }}>
           <View style={styles.modalDatePickerContainer}>
             <CustomButton
               buttonStyle={styles.cancelDatePicketButtonStyle}
               textStyle={styles.cancelDatePicketButtonTextStyle}
-              text={"Close"}
+              text={'Close'}
               onPress={() => setShow(!show)}
             />
             <CustomButton
               buttonStyle={styles.cancelDatePicketButtonStyle}
               textStyle={styles.cancelDatePicketButtonTextStyle}
-              text={"Done"}
+              text={'Done'}
               onPress={doneButtonModalDatePickerClick}
             />
           </View>
-          <View style={{ backgroundColor: "white" }}>
+          <View style={{backgroundColor: 'white'}}>
             <RNDateTimePicker
               value={date}
               maximumDate={deliveryWindow}
@@ -78,11 +76,10 @@ const DatePicker = (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: "rgba(0,0,0,0.5)",
-          justifyContent: "flex-end",
-        }}
-      >
-        <View style={{ backgroundColor: "white" }}>
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          justifyContent: 'flex-end',
+        }}>
+        <View style={{backgroundColor: 'white'}}>
           <RNDateTimePicker
             value={date}
             maximumDate={deliveryWindow}
@@ -99,14 +96,13 @@ const DatePicker = (props) => {
       <TouchableOpacity
         onPress={() => {
           setShow(!show);
-        }}
-      >
+        }}>
         <CustomText style={textStyle ? textStyle : styles.dateTextStyle}>
-          {selected ? selected : placeHolder ? placeHolder : "Select date"}
+          {selected ? selected : placeHolder ? placeHolder : 'Select date'}
         </CustomText>
       </TouchableOpacity>
-      {show && Platform.OS === "ios" ? renderDatePickerModalView() : null}
-      {show && Platform.OS !== "ios" ? renderDatePickerNonModalView() : null}
+      {show && Platform.OS === 'ios' ? renderDatePickerModalView() : null}
+      {show && Platform.OS !== 'ios' ? renderDatePickerNonModalView() : null}
     </View>
   );
 };

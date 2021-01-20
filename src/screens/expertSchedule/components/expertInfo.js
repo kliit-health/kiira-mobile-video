@@ -111,7 +111,7 @@ const ExpertInfo = ({
               ) : appointments.todayLoading &&
                 !appointmentData.appointments.today.length ? (
                 <View alignSelf="flex-start">
-                  <ActivityIndicator size="large" />
+                  <ActivityIndicator size="large" color="#008AFC" />
                 </View>
               ) : (
                 <CustomText style={styles.noAvailability}>

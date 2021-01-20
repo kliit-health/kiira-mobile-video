@@ -47,9 +47,11 @@ const MedicalHistory = ({navigation}) => {
       {model.map(({dataKey, placeholder}) => (
         <View key={dataKey} style={styles.container}>
           <TextInput
+            style={styles.input}
             defaultValue={answers[dataKey]}
             placeholder={placeholder}
             onChange={(value) => handleTextInputChange(dataKey, value)}
+            multiline
             numberOfLines={5}
           />
         </View>
