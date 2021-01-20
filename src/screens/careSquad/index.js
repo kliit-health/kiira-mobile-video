@@ -37,7 +37,15 @@ const CareSquad = ({navigation}) => {
   };
 
   const filterObjectArray = (experts, key) => {
-    return experts.filter((expert) => searchObject(expert, key));
+    return experts.filter((expert) => {
+      let {bio, profession} = expert.profileInfo;
+      let specialities = profession.specialities.reduce(
+        (acc, item) => (acc += `${item} `),
+        '',
+      );
+
+      return bio.includes(key) || specialities.includes(key);
+    });
   };
 
   const handleSearch = (value) => {

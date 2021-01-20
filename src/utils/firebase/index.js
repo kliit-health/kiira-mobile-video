@@ -209,8 +209,8 @@ export async function getAppointmentsForTodayAsync(data) {
     const {calendarID} = data;
     let today = new Date();
     today = moment(today).format('YYYY-MM-DD');
-
     let response = {};
+
     await fetch(
       `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDay?calendarID=${calendarID}&date=${today}`,
     )
@@ -274,6 +274,13 @@ export async function makeAppointment({data}) {
     let yesPrescription = 'I need a prescription,';
     let reasonForVisit = `and would like to talk about ${reason}`;
 
+    let userName =
+      firstName.toLowerCase() +
+      '_' +
+      lastName.toLowerCase() +
+      '_' +
+      uid.substr(-5).toLowerCase();
+
     let notes = prescription
       ? `${yesPrescription} ${reasonForVisit}`
       : `${noPrescription} ${reasonForVisit}`;
@@ -305,6 +312,7 @@ export async function makeAppointment({data}) {
             expert,
             locked: false,
             prepaid,
+            comet: userName,
           };
         })
         .catch((error) => {
@@ -1836,7 +1844,7 @@ export async function createCometChatUser(user) {
     await fetch(
       `https://us-central1-kiira-health-app.cloudfunctions.net/createCometChatUser`,
       options,
-    ).then((res) => console.log(res));
+    ).then((res) => res);
   } catch (error) {
     console.log(error);
   }

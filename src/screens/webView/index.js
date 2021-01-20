@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, View} from 'react-native';
-import {Header, Container, TextButton} from '../../components';
-import Image from 'react-native-fast-image';
-import intl from '../../utils/localization';
+import {Header, Container} from '../../components';
 import {WebView as ReactNativeWebView} from 'react-native-webview';
 import {mergeStyles} from '../../utils/functions';
 import defaultStyles, {modifiers} from './styles';
@@ -39,7 +37,7 @@ const WebView = ({navigation}) => {
         source={{uri: url}}
       />
       <View style={styles.loadingContainer}>
-        <ActivityIndicator />
+        <ActivityIndicator color="#008AFC" />
       </View>
     </Container>
   );

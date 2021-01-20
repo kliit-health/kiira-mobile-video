@@ -109,6 +109,7 @@ import TreatmentHistory from '../screens/treatmentHistory';
 import PersonalInformation from '../screens/patientProfile/personalInformation';
 import AgreementDetails from '../screens/patientProfile/agreementDetails';
 import WebView from '../screens/webView';
+import VisitEnd from '../screens/videoVisit/visitEnd';
 import VisitSummary from '../screens/visitSummary';
 
 let tabIconSize = 25;
@@ -553,6 +554,7 @@ const VideoStack = createStackNavigator(
     MainCallScreen: {screen: MainCallScreen},
     CallingScreen: {screen: CallingScreen},
     RatingScreen: {screen: Rating},
+    VisitEnd: {screen: VisitEnd},
   },
   {
     initialRouteName: 'VideoLogin',

@@ -67,7 +67,9 @@ export const generateCometChatUser = (user) => {
   return (
     user.profileInfo.firstName.toLowerCase() +
     '_' +
-    user.profileInfo.lastName.toLowerCase()
+    user.profileInfo.lastName.toLowerCase() +
+    '_' +
+    user.uid.substr(-5).toLowerCase()
   );
 };
 

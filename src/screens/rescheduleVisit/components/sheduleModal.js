@@ -78,7 +78,7 @@ const SheduleModal = ({
               Select Appointment Date
             </CustomText>
             {showShedule && !appointmentData.dates ? (
-              <ActivityIndicator size="large" />
+              <ActivityIndicator size="large" color="#008AFC" />
             ) : (
               <FlatList
                 showsHorizontalScrollIndicator={false}

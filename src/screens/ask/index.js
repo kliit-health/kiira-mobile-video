@@ -164,13 +164,13 @@ class Ask extends PureComponent {
             source={{uri: profileImageUrl}}
             activeOpacity={0.7}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.badgeContainerStyle}
             onPress={() => {}}>
             <CustomText style={styles.badgeTextStyle}>
               {this.state.credits}
             </CustomText>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     );

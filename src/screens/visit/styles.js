@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   informationText: {
     fontSize: 16,
     fontFamily: Constant.App.fontFamily.bodyRegular,
+    marginRight: 20,
   },
 
   locationImage: {
@@ -139,11 +140,30 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
+  noContainerDisabledStyle: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderColor: Constant.App.colors.grayColor,
+    borderWidth: 1,
+    borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+    padding: Constant.App.dimensions.btnPaddingGlobal,
+    width: metrics.DEVICE_WIDTH * 0.7,
+    height: 42,
+    backgroundColor: Constant.App.colors.whiteColor,
+  },
+
   noTextStyle: {
     textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     color: Constant.App.colors.blueColor,
+  },
+
+  noTextDisabledStyle: {
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    color: Constant.App.colors.grayColor,
   },
 
   titleTextStyle: {

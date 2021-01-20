@@ -18,6 +18,9 @@ const VisitDetails = ({navigation, visit, ...props}) => {
     moment.duration(today.diff(appointment)).asDays(),
   );
 
+  // To test video after booking
+  // let daysUntilVisit = 0;
+
   return (
     <View style={{alignSelf: 'center'}}>
       <View style={styles.visitDetailsParentContainer}>
@@ -39,14 +42,23 @@ const VisitDetails = ({navigation, visit, ...props}) => {
                   daysUntilVisit > 0
                     ? `in ${Math.round(daysUntilVisit)} days.`
                     : 'today.'
-                } Please return to this page and enter the waiting room at least 5 minutes before your appointment time.`}
+                } Please return to this screen and enter the waiting room at least 5 minutes before your appointment time.`}
               </Text>
             </View>
           </View>
         </View>
         <CustomButton
-          buttonStyle={styles.noContainerStyle}
-          textStyle={styles.noTextStyle}
+          disabled={Math.round(daysUntilVisit) > 0}
+          buttonStyle={
+            Math.round(daysUntilVisit) > 0
+              ? styles.noContainerDisabledStyle
+              : styles.noContainerStyle
+          }
+          textStyle={
+            Math.round(daysUntilVisit) > 0
+              ? styles.noTextDisabledStyle
+              : styles.noTextStyle
+          }
           onPress={() => dispatch(getLogin({destination: 'VideoLogin', visit}))}
           text="Enter Waiting Room"
         />

@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   },
 
   buttonContainerStyle: {
-    // alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
     width: metrics.DEVICE_WIDTH * 0.65,
