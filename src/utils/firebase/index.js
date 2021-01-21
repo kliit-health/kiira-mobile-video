@@ -267,6 +267,8 @@ export async function makeAppointment({data}) {
       uid,
       expert,
       prepaid,
+      insurance,
+      plan,
     } = data;
 
     let response;
@@ -313,6 +315,8 @@ export async function makeAppointment({data}) {
             locked: false,
             prepaid,
             comet: userName,
+            insurance,
+            plan,
           };
         })
         .catch((error) => {

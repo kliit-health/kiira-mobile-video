@@ -1,19 +1,19 @@
-import { put, takeEvery } from "redux-saga/effects";
-import Language from "../../utils/localization";
+import {put, takeEvery} from 'redux-saga/effects';
+import Language from '../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from "../../components/customLoader/action";
-import { showOrHideModal } from "../../components/customModal/action";
-import { FORGOT_PASSWORD } from "../../redux/types";
-import { resetPassword } from "../../utils/firebase";
-import { forgotPasswordApiHitSuccess } from "./action";
+} from '../../components/customLoader/action';
+import {showOrHideModal} from '../../components/customModal/action';
+import {FORGOT_PASSWORD} from '../../redux/types';
+import {resetPassword} from '../../utils/firebase';
+import {forgotPasswordApiHitSuccess} from './action';
 
-let Lang = Language["en"];
+let Lang = Language['en'];
 
-function* forgotPassword({ data }) {
+function* forgotPassword({data}) {
   try {
-    const { email } = data;
+    const {email} = data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
     const response = yield resetPassword(email);
     yield put(hideApiLoader());
@@ -23,8 +23,8 @@ function* forgotPassword({ data }) {
     } else {
       yield put(
         showOrHideModal(
-          response.message ? response.message : Lang.errorMessage.serverError
-        )
+          response.message ? response.message : Lang.errorMessage.serverError,
+        ),
       );
     }
   } catch (error) {

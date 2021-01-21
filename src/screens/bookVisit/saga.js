@@ -1,6 +1,5 @@
 import {MAKE_APPOINTMENT} from '../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {navigation} from 'react-navigation';
 import {
   getDataFromTable,
   makeAppointment,
@@ -13,6 +12,7 @@ import {
 } from '../../components/customLoader/action';
 import {setUserData} from '../authLoading/action';
 import Constant from '../../utils/constants';
+import {NavigationService} from '../../navigator';
 import {showOrHideModal} from '../../components/customModal/action';
 
 function* setAppointment(data) {
@@ -25,7 +25,7 @@ function* setAppointment(data) {
       yield put(
         showOrHideModal('Appointment is unavailible please reschedule.'),
       );
-      navigation.goBack();
+      NavigationService.goBack();
     }
 
     yield updateCredits(-1, data);
@@ -35,8 +35,8 @@ function* setAppointment(data) {
     };
 
     const userData = yield getDataFromTable(obj);
-    const response = yield createCometChatUser(userData);
-    console.log(response);
+    yield createCometChatUser(userData);
+
     yield put(setUserData(userData));
   } catch (error) {
     console.error(error);

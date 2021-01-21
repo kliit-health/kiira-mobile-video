@@ -100,14 +100,59 @@ class TreatmentBotScreen extends Component {
           },
           {
             id: '5',
-            message:
-              'We can help with a variety of conditions: \n \n Fertility \n \n Birth Control \n \n Injury or Pain \n \n Urinary or Yeast Infection \n \n Prenatal Health \n \n Postpartum \n \n Sex Therapy \n \n Therapy \n \n STI or STD',
-            trigger: '7',
+            message: 'We can help with a variety of conditions: ',
+            trigger: 'conditions',
           },
 
           {
-            id: '7',
-            message: 'Would you like to book a visit?',
+            id: 'conditions',
+            options: [
+              {
+                value: 'Fertility',
+                label: 'Fertility',
+                end: true,
+              },
+              {
+                value: 'Birth Control',
+                label: 'Birth Control',
+                end: true,
+              },
+              {
+                value: 'Injury or Pain',
+                label: 'Injury or Pain',
+                end: true,
+              },
+              {
+                value: 'Urinary or Yeast Infection',
+                label: 'Urinary or Yeast Infection',
+                end: true,
+              },
+              {
+                value: 'Prenatal Health',
+                label: 'Prenatal Health',
+                end: true,
+              },
+              {
+                value: 'Postpartum',
+                label: 'Postpartum',
+                end: true,
+              },
+              {
+                value: 'Sex Therapy',
+                label: 'Sex Therapy',
+                end: true,
+              },
+              {
+                value: 'Therapy',
+                label: 'Therapy',
+                end: true,
+              },
+              {
+                value: 'STI or STD',
+                label: 'STI or STD',
+                end: true,
+              },
+            ],
             trigger: 'check_book',
           },
           {

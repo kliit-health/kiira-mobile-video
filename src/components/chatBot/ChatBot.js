@@ -81,15 +81,15 @@ class ChatBot extends Component {
     const defaultBotSettings = {
       delay: botDelay,
       avatar: botAvatar,
-      bubbleColor: '#3591F6',
-      fontColor: botFontColor,
+      bubbleColor: '#F0F0F0',
+      fontColor: 'black',
       optionBubbleColor: optionBubbleColor,
       optionFontColor: optionFontColor,
     };
     const defaultUserSettings = {
       delay: userDelay,
       avatar: userAvatar,
-      bubbleColor: '#ECBEC6',
+      bubbleColor: '#3591F6',
       fontColor: userFontColor,
     };
     const defaultCustomSettings = {
@@ -588,7 +588,7 @@ class ChatBot extends Component {
                 <ButtonText
                   className="rsc-button-text"
                   invalid={inputInvalid}
-                  fontColor={botFontColor}>
+                  fontColor={'white'}>
                   {submitButtonContent}
                 </ButtonText>
               </Button>
@@ -647,7 +647,7 @@ ChatBot.defaultProps = {
   avatarWrapperStyle: {},
   botBubbleColor: '#6E48AA',
   botDelay: 1300,
-  botFontColor: '#fff',
+  botFontColor: 'black',
   bubbleStyle: {},
   optionStyle: {
     borderWidth: 1,

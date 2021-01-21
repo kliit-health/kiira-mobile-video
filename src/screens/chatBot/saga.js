@@ -34,12 +34,13 @@ function* updateNewUserData({data}) {
         profileImageUrl: defaultImage,
         firstName: userParams.firstName,
         lastName: userParams.lastName,
-        email: userParams.email,
         dob: userParams.dob,
         pronouns: userParams.pronouns,
         isActive: false,
         state: userParams.state,
         sexuality: userParams.sexuality,
+        insurance: userParams.insurance,
+        plan: userParams.plan,
       },
     };
     const response = yield addUserData(userRegistrationParams);

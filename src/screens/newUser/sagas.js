@@ -33,9 +33,11 @@ function* agreeToTerms(data) {
         lastName: userData.profileInfo.lastName,
         dob: userData.profileInfo.dob,
         pronouns: userData.profileInfo.pronouns,
-        isActive: false,
+        isActive: true,
         state: userData.profileInfo.state,
         sexuality: userData.profileInfo.sexuality,
+        insurance: userData.profileInfo.insurance,
+        plan: userData.profileInfo.plan,
       },
     };
     yield addUserData(userRegistrationParams);

@@ -142,7 +142,7 @@ export default {
       sheHer: 'She/Her',
       heHim: 'He/Him',
       theyThem: 'They/Them',
-      pronounsTitle: 'Your pronouns (check all that apply)',
+      pronounsTitle: 'Your preferred pronouns:',
       partnersTitle: 'Your partners (check all that apply)',
       emptyProfileImageMsg: 'Profile image is a required field',
       emptyFirstNameMsg: 'First name is a required field',
@@ -150,6 +150,8 @@ export default {
       emptyDobMsg: 'Your birthday is a required field',
       emptyStateSelectionMsg: 'State of residence is a required field',
       emptyPronounsMsg: 'Your pronouns is a required field',
+      insurance: 'Insurance',
+      plan: 'Plan',
     },
 
     askUser: {

@@ -32,11 +32,11 @@ export default [
     destination: screenNames.MedicalHistory,
     dataKey: 'medicalHistory',
   },
-  {
-    title: intl.en.healthHistory.insurance,
-    destination: screenNames.Insurance,
-    dataKey: 'insurance',
-  },
+  // {
+  //   title: intl.en.healthHistory.insurance,
+  //   destination: screenNames.Insurance,
+  //   dataKey: 'insurance',
+  // },
   //   {
   //     title: intl.en.healthHistory.notes,
   //     destination: screenNames.PreviousAppointmentsNotes,
