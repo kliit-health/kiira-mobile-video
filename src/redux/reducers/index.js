@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import accountReducer from '../../screens/account/reducer';
+import accountReducer from '../../screens/patient/account/reducer';
 import agreeToTermsReducer from '../../screens/newUser/reducer';
 import addProfileReducer from '../../screens/addProfileData/reducer';
 import addNewProfileReducer from '../../screens/chatBot/reducer';

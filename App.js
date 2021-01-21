@@ -19,8 +19,8 @@ import {
   setFcmToken,
   setAppState,
   setAppScreen,
-} from './src/screens/authLoading/action';
-import {signOut} from './src/screens/account/action';
+} from './src/screens/auth/authLoading/action';
+import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import FastImage from 'react-native-fast-image';
 // import BackgroundTask from 'react-native-background-task';
