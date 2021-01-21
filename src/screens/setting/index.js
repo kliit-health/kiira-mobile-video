@@ -45,6 +45,8 @@ class Setting extends PureComponent {
       selectedSexuality: userData.profileInfo.sexuality,
       states: Constant.App.Modal.states,
       sexuality: Constant.App.Modal.sexuality,
+      insurance: userData.profileInfo.insurance,
+      plan: userData.profileInfo.plan,
       pronounsArr: [
         {
           title: lang.addProfileData.sheHer,
@@ -104,7 +106,6 @@ class Setting extends PureComponent {
     const {
       firstName,
       lastName,
-      credits,
       dob,
       email,
       pronounsArr,
@@ -113,6 +114,8 @@ class Setting extends PureComponent {
       filepath,
       selectedState,
       selectedSexuality,
+      insurance,
+      plan,
     } = this.state;
     return (
       <View style={styles.headerStyle}>
@@ -151,7 +154,8 @@ class Setting extends PureComponent {
                   pronouns: this.getSelectedPronoun(pronounsArr),
                   state: selectedState,
                   sexuality: selectedSexuality,
-                  credits,
+                  insurance,
+                  plan,
                 },
                 navigation,
               };
@@ -284,6 +288,8 @@ class Setting extends PureComponent {
       showSelectSexualityModal,
       selectedState,
       selectedSexuality,
+      insurance,
+      plan,
     } = this.state;
     const {staticImages} = Constant.App;
     return (
@@ -311,6 +317,37 @@ class Setting extends PureComponent {
               value={lastName}
               style={
                 lastName
+                  ? styles.inputTypeStyle
+                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+              }
+              placeholderTextColor={Constant.App.colors.blackColor}
+            />
+          </View>
+        </View>
+
+        <View style={styles.inputTextContainerStyle}>
+          <View style={styles.inputTextFirstNameContainerStyle}>
+            <CustomInputText
+              autoCapitalize="words"
+              onChangeText={(value) => this.setState({insurance: value})}
+              placeholder={lang.addProfileData.insurance}
+              value={insurance}
+              style={
+                insurance
+                  ? styles.inputTypeStyle
+                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+              }
+              placeholderTextColor={Constant.App.colors.blackColor}
+            />
+          </View>
+          <View style={styles.inputTextFirstNameContainerStyle}>
+            <CustomInputText
+              autoCapitalize="words"
+              onChangeText={(value) => this.setState({plan: value})}
+              placeholder={lang.addProfileData.plan}
+              value={plan}
+              style={
+                plan
                   ? styles.inputTypeStyle
                   : [styles.inputTypeStyle, {fontWeight: '100'}]
               }

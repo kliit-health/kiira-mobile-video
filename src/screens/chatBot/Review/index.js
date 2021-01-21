@@ -14,6 +14,7 @@ const Review = (props) => {
 
   useEffect(() => {
     const {steps} = props;
+
     const {
       first_name,
       last_name,
@@ -22,6 +23,8 @@ const Review = (props) => {
       state,
       gender,
       sexuality,
+      insurance,
+      plan,
     } = steps;
     setState({
       first_name,
@@ -31,10 +34,20 @@ const Review = (props) => {
       state: state.value,
       gender,
       sexuality: sexuality.value,
+      insurance,
+      plan,
     });
   }, []);
 
-  const {first_name, last_name, pronouns, dob, gender} = currentState;
+  const {
+    first_name,
+    last_name,
+    pronouns,
+    dob,
+    gender,
+    insurance,
+    plan,
+  } = currentState;
   let state =
     props.steps['update-state'] && props.steps['update-state'].value
       ? props.steps['update-state'].value
@@ -93,6 +106,24 @@ const Review = (props) => {
             <Text> </Text>
           ) : (
             <Text style={style.value}>{sexuality.value || ''}</Text>
+          )}
+        </View>
+
+        <View style={{width: 100}}>
+          <Text style={style.category}>Insurance:</Text>
+          {typeof insurance === null || !insurance ? (
+            <Text> </Text>
+          ) : (
+            <Text style={style.value}>{insurance.value || ''}</Text>
+          )}
+        </View>
+
+        <View>
+          <Text style={{...style.category, alignSelf: 'center'}}>Plan:</Text>
+          {typeof plan === null || !plan ? (
+            <Text> </Text>
+          ) : (
+            <Text style={style.plan}>{plan.value || ''}</Text>
           )}
         </View>
       </View>

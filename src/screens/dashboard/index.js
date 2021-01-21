@@ -7,6 +7,7 @@ import {
   Image,
   Alert,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import FastImage from 'react-native-fast-image';
@@ -14,7 +15,7 @@ import CustomText from '../../components/customText';
 import {showOrHideModal} from '../../components/customModal/action';
 import styles from './style';
 import language from '../../utils/localization';
-import Constant from '../../utils/constants';
+import Constant, {screenNames} from '../../utils/constants';
 import {getQuestionData, updateQuestion} from './action';
 import {withNavigation} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -59,8 +60,11 @@ class Dashboard extends PureComponent {
       getLicenses,
       getAgreements,
       getUserDetails,
+      userData,
     } = this.props;
-
+    if (userData.firstLogin) {
+      this.props.navigation.navigate(screenNames.Login);
+    }
     getLicenses();
     getAgreements();
     getTerms();
@@ -405,7 +409,7 @@ class Dashboard extends PureComponent {
     const {navigation, showHideErrorModal} = this.props;
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" translucent={true} />
         <ScrollView
           keyboardShouldPersistTaps="handled"
@@ -444,7 +448,7 @@ class Dashboard extends PureComponent {
             </View>
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }

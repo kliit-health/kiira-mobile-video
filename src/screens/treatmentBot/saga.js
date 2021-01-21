@@ -20,14 +20,13 @@ function* updateNewUserData({data}) {
     const {userParams, navigation} = data;
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
-      credits: userParams.credits,
       uid: user.uid,
       role: 'User',
       isActive: false,
       firstLogin: false,
       signUpDate: userParams.signUpDate,
       profileInfo: {
-        profileImageUrl: userParams.profileImageUrl || '',
+        profileImageUrl: userParams.profileImageUrl,
         firstName: userParams.firstName,
         lastName: userParams.lastName,
         email: userParams.email,

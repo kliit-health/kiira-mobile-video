@@ -23,7 +23,6 @@ class ChatBotScreen extends Component {
 
   handleSubmit = (userInfo) => {
     const {navigation, updateUserData} = this.props;
-    const {userData} = this.props.navigation.state.params;
     const {
       first_name,
       last_name,
@@ -32,6 +31,8 @@ class ChatBotScreen extends Component {
       pronouns,
       state,
       sexuality,
+      insurance,
+      plan,
     } = userInfo;
 
     if (!first_name.value.trim()) {
@@ -48,18 +49,18 @@ class ChatBotScreen extends Component {
           firstName: first_name.value.trim(),
           lastName: last_name.value.trim(),
           dob: dob.value ? dob.value : '',
-          email: userData.email,
           gender: gender.value.trim(),
           pronouns: pronouns.value,
           state: userInfo['update-state']
             ? userInfo['update-state'].value
             : state.value,
           signUpDate: new Date(),
-          credits: 0,
           sexuality: userInfo['update-sexuality']
             ? userInfo['update-sexuality'].value
             : sexuality.value,
           prepaid: 0,
+          insurance: insurance.value,
+          plan: plan.value.trim(),
         },
         navigation,
       };
@@ -189,8 +190,69 @@ class ChatBotScreen extends Component {
           {
             id: 'sexuality',
             component: (
-              <ChatModal data={Constant.App.Modal.sexuality} trigger="9" />
+              <ChatModal data={Constant.App.Modal.sexuality} trigger="25" />
             ),
+          },
+          {
+            id: '25',
+            message: 'What is your current Insurance status?',
+            trigger: 'insurance',
+          },
+          {
+            id: 'insurance',
+            options: [
+              {
+                value: 'Aetna Health',
+                label: 'Aetna Health',
+                trigger: '26',
+              },
+              {
+                value: 'Blue Cross/Blue Shild',
+                label: 'Blue Cross/Blue Shild',
+                trigger: '26',
+              },
+              {
+                value: 'Cigna',
+                label: 'Cigna',
+                trigger: '26',
+              },
+              {
+                value: 'Kaiser',
+                label: 'Kaiser',
+                trigger: '26',
+              },
+              {
+                value: 'United Health',
+                label: 'United Health',
+                trigger: '26',
+              },
+              {
+                value: 'WellPoint',
+                label: 'WellPoint',
+                trigger: '26',
+              },
+              {
+                value: 'Other',
+                label: 'Other',
+                trigger: '26',
+              },
+              {
+                value: 'None',
+                label: 'None',
+                trigger: '26',
+              },
+            ],
+          },
+          {
+            id: '26',
+            message:
+              'If applicable, What is your plan, id, or group number. Otherwise press send',
+            trigger: 'plan',
+          },
+          {
+            id: 'plan',
+            user: true,
+            trigger: '9',
           },
           {
             id: '22',
@@ -255,6 +317,11 @@ class ChatBotScreen extends Component {
                 label: 'Sexuality',
                 trigger: 'update-sexuality',
               },
+              {
+                value: 'insurance',
+                label: 'Insurance',
+                trigger: 'update-insurance',
+              },
             ],
           },
           {
@@ -295,6 +362,22 @@ class ChatBotScreen extends Component {
             component: (
               <ChatModal data={Constant.App.Modal.sexuality} trigger="9" />
             ),
+          },
+          {
+            id: 'update-insurance',
+            update: 'insurance',
+            trigger: 'plan-id',
+          },
+          {
+            id: 'plan-id',
+            message:
+              'If applicable, What is your plan, id, or group number. Otherwise press send',
+            trigger: 'update-plan',
+          },
+          {
+            id: 'update-plan',
+            update: 'plan',
+            trigger: '9',
           },
           {
             id: 'end-message',

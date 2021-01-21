@@ -20,16 +20,6 @@ const Header = ({handleClose}) => {
         source={staticImages.logoHorizontal}
         style={styles.logoStyle}
       />
-      <View style={styles.subHeadingContainer}>
-        <Text style={styles.subHeadingTitle}>
-          Get Treatment{'  '}
-          <Image
-            resizeMode="contain"
-            source={staticImages.bandaidGrey}
-            style={styles.bandaid}
-          />
-        </Text>
-      </View>
     </SafeAreaView>
   );
 };
