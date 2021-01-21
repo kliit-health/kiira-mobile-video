@@ -11,7 +11,6 @@ const Buttons = ({
   applyCredit,
   appointmentDetails,
   booked,
-  expertData,
   modalVisible,
   navigation,
   setModalVisible,
