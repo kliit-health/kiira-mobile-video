@@ -672,7 +672,7 @@ export const screenNames = {
   selectExpert: 'SelectExpert',
   expertSchedule: 'ExpertSchedule',
   bottomTab: 'BottomTab',
-  settings: 'Setting',
+  settings: 'Settings',
   termsAndConditions: 'TermsConditions',
   privacyPolicies: 'PrivacyPolicy',
   help: 'Help',

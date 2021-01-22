@@ -6,7 +6,7 @@ import styles, {modifiers} from './style';
 import {Container, Header, TextButton} from '../../../../components';
 import {screenNames} from '../../../../utils/constants';
 import {getAppointmentsList} from './action';
-import Visit from './components/visit';
+import Appointment from './components/appointment';
 import {generateDateInfo} from '../../../../utils/helper';
 import moment from 'moment';
 import intl from '../../../../utils/localization';
@@ -65,7 +65,11 @@ const Appointments = ({navigation}) => {
                 <ErrorBoundary
                   FallbackComponent={FallBack}
                   onError={() => navigation.navigate('BottomTab')}>
-                  <Visit visit={item} date={date} navigation={navigation} />
+                  <Appointment
+                    visit={item}
+                    date={date}
+                    navigation={navigation}
+                  />
                 </ErrorBoundary>
               );
             }}

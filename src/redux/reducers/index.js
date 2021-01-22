@@ -5,7 +5,7 @@ import agreeToTermsReducer from '../../screens/auth/newUser/reducer';
 import addProfileReducer from '../../screens/patient/account/settings/addProfileData/reducer';
 import addNewProfileReducer from '../../screens/auth/chatBot/reducer';
 import appointmentsReducer from '../../screens/patient/dashboard/appointments/reducer';
-import askReducer from '../../screens/patient/dashboard/ask';
+import askReducer from '../../screens/patient/dashboard/ask/reducer';
 // import askExpertReducer from '../../screens/ask/expert/reducer';
 import authLoadingReducer from '../../screens/auth/authLoading/reducer';
 import bookVisitReducer from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
@@ -15,7 +15,7 @@ import chat from '../../screens/patient/dashboard/ask/chat/reducer';
 import chooseExpertReducer from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
 // import expertAppointmentsReducer from '../../screens/appointments/expert/reducer';
 // import expertPatientsReducer from '../../screens/patients/reducer';
-// import expertProfileReducer from '../../screens/expertProfile/reducer';
+import expertProfileReducer from '../../screens/patient/dashboard/appointments/reducer';
 import expertScheduleReducer from '../../screens/patient/dashboard/getTreatment/expertSchedule/reducer';
 import forgotPasswordReducer from '../../screens/auth/forgotPassword/reducer';
 import loaderReducer from '../../components/customLoader/reducer';
@@ -57,7 +57,7 @@ export default combineReducers({
   chooseExpertReducer,
   // expertAppointmentsReducer,
   // expertPatientsReducer,
-  // expertProfileReducer,
+  expertProfileReducer,
   expertScheduleReducer,
   forgotPasswordReducer,
   healthHistory,

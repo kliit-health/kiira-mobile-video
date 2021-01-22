@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {View, ScrollView, SafeAreaView} from 'react-native';
 import {Header} from '../../../../../components';
 import {withNavigation} from 'react-navigation';
@@ -15,9 +15,6 @@ const Visit = (props) => {
   const {navigation} = props;
 
   const {uid, visit} = props.navigation.state.params;
-  const expertData = useSelector(
-    (state) => state.expertProfileReducer.expertData,
-  );
 
   const params = {
     expertsParams: {
@@ -41,20 +38,18 @@ const Visit = (props) => {
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
-        {expertData && (
-          <View>
-            <ErrorBoundary
-              FallbackComponent={FallBack}
-              onError={() => navigation.goBack()}>
-              <Header
-                title="Appointment Details"
-                onBack={() => navigation.goBack()}
-              />
-              <ExpertInfo expertData={expertData} visit={visit} />
-              <VisitDetails visit={visit} />
-            </ErrorBoundary>
-          </View>
-        )}
+        <View>
+          <ErrorBoundary
+            FallbackComponent={FallBack}
+            onError={() => navigation.goBack()}>
+            <Header
+              title="Appointment Details"
+              onBack={() => navigation.goBack()}
+            />
+            <ExpertInfo visit={visit} />
+            <VisitDetails visit={visit} />
+          </ErrorBoundary>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

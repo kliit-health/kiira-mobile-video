@@ -45,8 +45,8 @@ function* loginFirebase({data}) {
           },
         };
         yield updateStatus(updateStatusParams);
-        yield put(getLicenses());
-        yield put(getTerms());
+        // yield put(getLicenses());
+        // yield put(getTerms());
         if (userData && userData.role === 'User' && !userData.firstLogin) {
           yield put(setUserData(userData));
           if (userData.agreeToTerms) {

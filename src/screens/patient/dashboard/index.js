@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import FastImage from 'react-native-fast-image';
-import CustomText from '../../../components';
+import CustomText from '../../../components/customText';
 import {showOrHideModal} from '../../../components/customModal/action';
 import styles from './style';
 import language from '../../../utils/localization';
 import Constant, {screenNames} from '../../../utils/constants';
-// import {getQuestionData, updateQuestion} from './action';
+import {getQuestionData, updateQuestion} from './action';
 import {withNavigation} from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {getTerms} from '../../common/termsAndConditions/action';
@@ -40,9 +40,6 @@ class Dashboard extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      // questionText: '',
-      // questions: this.props.userData.questions,
-      // credits: this.props.userData.credits,
       videoChat: 0,
       videoEnabled: false,
       chatEnabled: this.props.userData.chats === 'Unlimited',
@@ -52,65 +49,34 @@ class Dashboard extends PureComponent {
 
   async componentDidMount() {
     const {
-      // question,
       getTerms,
       getHealthHistory,
-      // getExpertsDetails,
-      // getFavoriteExperts,
       getLicenses,
       getAgreements,
       getUserDetails,
+      getExpertsDetails,
+      getFavoriteExperts,
       userData,
     } = this.props;
     if (userData.firstLogin) {
       this.props.navigation.navigate(screenNames.Login);
     }
+
     getLicenses();
     getAgreements();
     getTerms();
-
+    getExpertsDetails();
+    getFavoriteExperts();
     this.checkLicenseStatus();
-    // if (question) {
-    //   this.setState({
-    //     questionText: question,
-    //   });
-    // } else if (!question) {
-    //   this.setState({
-    //     questionText: '',
-    //   });
-    // }
 
-    this.fetchData();
+    this.fetchData(userData.uid);
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
+      getExpertsDetails();
       getHealthHistory();
-      // getExpertsDetails();
-
       var user = firebase.auth().currentUser;
       if (user && user.uid) {
-        // getFavoriteExperts();
+        getFavoriteExperts();
         getUserDetails(user.uid);
-
-        try {
-          const obj = {
-            tableName: Constant.App.firebaseTableNames.users,
-            uid: user.uid,
-          };
-          getUserData(
-            obj,
-            (querySnapshot) => {
-              const data = querySnapshot.data();
-              // this.setState({
-              //   questions: data.questions,
-              //   credits: data.credits,
-              // });
-            },
-            (error) => {
-              console.log(error);
-            },
-          );
-        } catch (error) {
-          console.log(error);
-        }
       }
     });
     const isAlreadyRate = await AsyncStorage.getItem('isAlreadyRate');
@@ -152,32 +118,13 @@ class Dashboard extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {getLicenses} = this.props;
     this.checkLicenseStatus();
-    getLicenses();
-    // if (question) {
-    //   this.setState({
-    //     questionText: question,
-    //   });
-    // } else if (!question) {
-    //   this.setState({
-    //     questionText: '',
-    //   });
-    // }
   }
 
   componentWillUnmount() {
     // Remove the event listener
     this.focusListener.remove();
   }
-
-  // onChangeText = (value) => {
-  //   const {setQuestionText, question} = this.props;
-  //   this.setState({
-  //     questionText: value,
-  //   });
-  //   setQuestionText(value);
-  // };
 
   checkLicenseStatus = () => {
     const {licenses} = this.props;
@@ -207,7 +154,7 @@ class Dashboard extends PureComponent {
 
   fetchData() {
     const {
-      // getQuestion,
+      getQuestion,
       userData,
       getHealthHistory,
       getExpertsDetails,
@@ -237,7 +184,7 @@ class Dashboard extends PureComponent {
           Constant.App.firebaseTableKeyValuesNames.questionUserConditionKey,
       },
     };
-    // getQuestion(params);
+    getQuestion(params);
     getRecentExpertsData(params);
     getHealthHistory();
     getExpertsDetails();
@@ -246,10 +193,10 @@ class Dashboard extends PureComponent {
   renderHeadingProfileView() {
     const {userData} = this.props;
     const {firstName, profileImageUrl} = userData.profileInfo;
-    console.log(userData);
+
     return (
       <View style={styles.headingProfileImageParentContainer}>
-        {/* <View style={styles.headingTextContainerStyle}>
+        <View style={styles.headingTextContainerStyle}>
           <CustomText style={styles.headingTextStyle}>
             {`Hello, ${firstName} !`}
           </CustomText>
@@ -264,7 +211,7 @@ class Dashboard extends PureComponent {
             resizeMode="cover"
             source={{uri: profileImageUrl}}
           />
-        </View> */}
+        </View>
       </View>
     );
   }
@@ -456,16 +403,15 @@ class Dashboard extends PureComponent {
 const mapStateToProps = (state) => ({
   licenses: state.authLoadingReducer.licenses,
   userData: state.authLoadingReducer.userData,
-  // recentExpertData: state.askReducer.recentExpertData,
-  // previousQuestionData: state.askReducer.previousQuestionData,
-  // questionData: state.askReducer.questionData,
-  // question: state.askReducer.question,
+  recentExpertData: state.askReducer.recentExpertData,
+  previousQuestionData: state.askReducer.previousQuestionData,
+  questionData: state.askReducer.questionData,
+  question: state.askReducer.question,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // setData: (data) => dispatch(setUserData(data)),
-  // getQuestion: (value) => dispatch(getQuestionData(value, dispatch)),
-  // setQuestionText: (value) => dispatch(updateQuestion(value)),
+  setData: (data) => dispatch(setUserData(data)),
+  getQuestion: (value) => dispatch(getQuestionData(value, dispatch)),
   getTerms: () => dispatch(getTerms()),
   getPolicy: () => dispatch(getPolicy()),
   getLicenses: () => dispatch(getLicenses()),

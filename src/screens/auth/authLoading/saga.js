@@ -1,4 +1,4 @@
-import {put, takeEvery} from 'redux-saga/effects';
+import {put, takeLatest} from 'redux-saga/effects';
 import {GET_LICENSES} from '../../../redux/types';
 import Language from '../../../utils/localization';
 import {hideApiLoader} from '../../../components/customLoader/action';
@@ -18,5 +18,5 @@ function* getLicenses() {
 }
 
 export default function* authLoadingSaga() {
-  yield takeEvery(GET_LICENSES, getLicenses);
+  yield takeLatest(GET_LICENSES, getLicenses);
 }

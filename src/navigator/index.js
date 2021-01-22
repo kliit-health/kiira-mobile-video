@@ -101,7 +101,7 @@ import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
 // import UpdateAvailablity from '../screens/updateAvailablity';
 import Verify from '../screens/auth/verify';
 import VideoPlayer from '../screens/patient/dashboard/appointments/videoVisit/VideoPlayer';
-import Visit from '../screens/patient/dashboard/appointments/visit';
+import Visit from '../screens/patient/dashboard/appointments/visit/index';
 // import VisitExpert from '../screens/visit/expert';
 import Welcome from '../screens/auth/welcome';
 import TreatmentHistory from '../screens/patient/dashboard/careSquad/treatmentHistory';

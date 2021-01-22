@@ -11,7 +11,7 @@ import {cancelAppointment} from '../action';
 
 const lang = Language['en'];
 
-const Visit = ({visit, date, navigation}) => {
+const Appointment = ({visit, date, navigation}) => {
   const dispatch = useDispatch();
   const {uid, calendarID} = visit;
   const data = {
@@ -122,4 +122,4 @@ const Visit = ({visit, date, navigation}) => {
   );
 };
 
-export default Visit;
+export default Appointment;

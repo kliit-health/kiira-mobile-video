@@ -9,7 +9,7 @@ import styles from '../styles';
 
 let lang = Language['en'];
 
-const ExpertInfo = ({expertData, visit}) => {
+const ExpertInfo = ({visit}) => {
   return (
     <View style={{marginTop: 10}}>
       <View style={styles.expertInfoParentContainerStyle}>
@@ -17,19 +17,19 @@ const ExpertInfo = ({expertData, visit}) => {
           <FastImage
             style={styles.expertImage}
             defaultSource={require('../../../../../../../assets/profile_img_placeholder.png')}
-            source={{uri: expertData.profileInfo.profileImageUrl}}
+            source={{uri: visit.expert.imageUrl}}
             activeOpacity={0.7}
           />
           <View>
             <View style={styles.myRecentExpertContainerStyle}>
               <View style={styles.expertName}>
                 <Text style={styles.expertNameTextStyle}>
-                  {`${expertData.profileInfo.firstName} ${expertData.profileInfo.lastName}`}
+                  {`${visit.expert.firstName} ${visit.expert.lastName}`}
                 </Text>
               </View>
               <View style={styles.expertProfession}>
                 <CustomText style={styles.expertProfessionTextStyle}>
-                  {expertData.profileInfo.profession.shortName}
+                  {visit.expert.profession}
                 </CustomText>
                 <Image
                   style={styles.expertPrescriberImage}
@@ -44,7 +44,7 @@ const ExpertInfo = ({expertData, visit}) => {
                 <Rating
                   imageSize={20}
                   readonly
-                  startingValue={parseFloat(expertData.rating / 2)}
+                  startingValue={parseFloat(visit.expert.rating / 2)}
                 />
               </View>
             </View>
