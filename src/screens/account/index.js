@@ -1,8 +1,9 @@
-import React from 'react';
-import {Container, ListItem, TextButton} from '../../components';
+import React, {useState} from 'react';
+import {Container, ListItem, ModalConfirm, TextButton} from '../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
 import intl from '../../utils/localization';
+import ChangePlan from '../changePlan';
 import {ProfileCard} from './sections';
 import {list} from './model';
 import {signOut} from './action';
@@ -12,12 +13,31 @@ const Account = ({navigation}) => {
   const details = useSelector((state) => state.authLoadingReducer.userData);
   const dispatch = useDispatch();
 
+  const [changePlanVisible, setChangePlanVisible] = useState(false);
+  const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
+
   const handleNavigation = (destination) => {
     navigation.navigate(destination);
   };
 
   const handleSignOut = () => {
     dispatch(signOut({navigation}));
+  };
+
+  const handleConfirm = () => {
+    setModalConfirmVisible(!modalConfirmVisible);
+  };
+
+  const handleCancel = () => {
+    setModalConfirmVisible(!modalConfirmVisible);
+  };
+
+  const toggleChangePlan = () => {
+    setChangePlanVisible(!changePlanVisible);
+  };
+
+  const toggleConfirmModal = () => {
+    setModalConfirmVisible(!modalConfirmVisible);
   };
 
   return (
@@ -27,6 +47,15 @@ const Account = ({navigation}) => {
         <View style={styles.profileContainter}>
           <View style={styles.profileBackground} />
           <ProfileCard {...details} />
+        </View>
+        <View style={styles.actionsContainer}>
+          <TextButton onPress={toggleChangePlan}>
+            {intl.en.account.changePlan}
+          </TextButton>
+          <View style={styles.divider} />
+          <TextButton onPress={toggleConfirmModal} outlined>
+            {intl.en.account.cancelPlamn}
+          </TextButton>
         </View>
         <View>
           {list.map(({title, destination}) => (
@@ -45,6 +74,13 @@ const Account = ({navigation}) => {
           </TextButton>
         </View>
       </ScrollView>
+      <ChangePlan visible={changePlanVisible} onClose={toggleChangePlan} />
+      <ModalConfirm
+        message={intl.en.account.cancelConfirm}
+        visible={modalConfirmVisible}
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
     </Container>
   );
 };

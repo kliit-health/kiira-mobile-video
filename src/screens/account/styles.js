@@ -22,6 +22,15 @@ export default StyleSheet.create({
   logoutContainer: {
     flex: 1,
     alignItems: 'center',
+    marginTop: 20,
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 40,
+    marginBottom: 20,
+  },
+  divider: {
+    width: 20,
   },
 });
 

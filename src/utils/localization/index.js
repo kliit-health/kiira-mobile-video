@@ -14,6 +14,9 @@ export default {
       born: 'Born',
       pronouns: 'Pronouns',
       sexuality: 'Sexuality',
+      cancelPlamn: 'Cancel Plan',
+      changePlan: 'Change Plan',
+      cancelConfirm: 'Are you sure you want to cancel your membership?',
     },
     requestVisit: {
       title: 'Request a Visit',
@@ -498,6 +501,11 @@ export default {
       locked: 'Record Locked',
       none: 'None',
       reason: 'Reason',
+    },
+    changePlan: {
+      title: 'Change Plan',
+      confirm: 'Confirm',
+      cancel: 'Cancel',
     },
   },
 };

@@ -39,6 +39,7 @@ import userDetails from './userDetails';
 import clientMedicalHistory from './medicalHistory';
 import visitReducer from '../../screens/visit/reducer';
 import medicalHistory from '../../screens/patientProfile/reducer';
+import changePlan from '../../screens/changePlan/reducer';
 
 export default combineReducers({
   accountReducer,
@@ -81,4 +82,5 @@ export default combineReducers({
   visitReducer,
   medicalHistory,
   clientMedicalHistory,
+  changePlan,
 });
