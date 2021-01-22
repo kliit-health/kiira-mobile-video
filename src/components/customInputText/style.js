@@ -1,21 +1,21 @@
-import { StyleSheet, I18nManager, Platform } from "react-native";
-import Constant from "../../utils/constants";
+import {StyleSheet} from 'react-native';
+import Constant from '../../utils/constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Constant.App.colors.whiteColor,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 
   fieldLabel: {
     fontSize: Constant.App.textSize.Small,
     color: Constant.App.colors.blackColor,
-    fontWeight: "100",
+    fontWeight: '100',
   },
 
   floatingLabel: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
   },

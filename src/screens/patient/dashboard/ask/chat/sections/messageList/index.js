@@ -1,5 +1,5 @@
 import React from 'react';
-import {generateIdentifier} from '../../../../utils/functions';
+import {generateIdentifier} from '../../../../../../../utils/functions';
 import {FlatList} from 'react-native';
 import {default as MessageListItem} from '../messageListItem';
 import styles from './styles';

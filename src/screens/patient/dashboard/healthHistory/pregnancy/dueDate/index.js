@@ -1,14 +1,10 @@
 import React from 'react';
-import {Container, Header, TextButton} from '../../components';
-import {View} from 'react-native';
+import {Container, Header, TextButton} from '../../../../../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {model} from './model';
 import {DatePicker} from './components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
-import intl from '../../utils/localization';
+import {updateHealthHistory, updateHealthHistoryAsync} from '../../actions';
+import intl from '../../../../../../utils/localization';
 import styles from './styles';
 
 const {placeholder, dataKey, title} = model;

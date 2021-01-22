@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {useSelector, shallowEqual} from 'react-redux';
-import {Header, ListItem, Container} from '../../components';
-import intl from '../../utils/localization';
+import {Header, ListItem, Container} from '../../../../components';
+import intl from '../../../../utils/localization';
 import model from './model';
 import styles from './styles';
 

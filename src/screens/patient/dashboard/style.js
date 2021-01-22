@@ -1,7 +1,7 @@
 import {StyleSheet, Platform} from 'react-native';
-import Constant from '../../utils/constants';
-import metrics, {smallScreen} from '../../utils/metrices';
-import {getStatusBarHeight} from '../../components/iPhoneXHelper';
+import Constant from '../../../utils/constants';
+import metrics, {smallScreen} from '../../../utils/metrices';
+import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
 let parentPadding = parentPaddingValue * 2;

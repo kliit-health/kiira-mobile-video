@@ -1,15 +1,13 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import CustomText from '../../../components/customText';
-import Language from '../../../utils/localization';
-import Constant from '../../../utils/constants';
+import CustomText from '../../../../../../components/customText';
+import Language from '../../../../../../utils/localization';
 import {Rating} from 'react-native-elements';
 import moment from 'moment';
 import styles from '../styles';
 
 let lang = Language['en'];
-const staticImages = Constant.App;
 
 const ExpertInfo = ({expertData, visit}) => {
   return (
@@ -18,7 +16,7 @@ const ExpertInfo = ({expertData, visit}) => {
         <View style={styles.expertImageContainer}>
           <FastImage
             style={styles.expertImage}
-            defaultSource={require('../../../../assets/profile_img_placeholder.png')}
+            defaultSource={require('../../../../../../../assets/profile_img_placeholder.png')}
             source={{uri: expertData.profileInfo.profileImageUrl}}
             activeOpacity={0.7}
           />
@@ -35,7 +33,7 @@ const ExpertInfo = ({expertData, visit}) => {
                 </CustomText>
                 <Image
                   style={styles.expertPrescriberImage}
-                  source={require('../../../../assets/rx.png')}
+                  source={require('../../../../../../../assets/rx.png')}
                   resizeMode="contain"
                 />
                 <CustomText style={styles.expertPrescriberTextStyle}>

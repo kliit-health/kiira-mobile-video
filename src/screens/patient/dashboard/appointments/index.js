@@ -3,13 +3,13 @@ import {View, FlatList, Text, Image} from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
-import {Container, Header, TextButton} from '../../components';
-import {screenNames} from '../../utils/constants';
+import {Container, Header, TextButton} from '../../../../components';
+import {screenNames} from '../../../../utils/constants';
 import {getAppointmentsList} from './action';
 import Visit from './components/visit';
-import {generateDateInfo} from '../../utils/helper';
+import {generateDateInfo} from '../../../../utils/helper';
 import moment from 'moment';
-import intl from '../../utils/localization';
+import intl from '../../../../utils/localization';
 
 const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const Appointments = ({navigation}) => {
           <Image
             style={styles.image}
             resizeMode="contain"
-            source={require('../../../assets/bell.png')}
+            source={require('../../../../../assets/bell.png')}
           />
           <Text style={styles.title}>{intl.en.appointments.noVisits}</Text>
           <TextButton

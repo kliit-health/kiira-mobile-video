@@ -5,13 +5,13 @@ import {
   UPDATE_QUESTION,
   CLEAR_ASK_STATE,
   CLEAR_QUESTION_VALUE,
-} from "../../redux/types";
+} from '../../../redux/types';
 
 const initialState = {
   recentExpertData: [],
   previousQuestionData: [],
   questionData: null,
-  question: "",
+  question: '',
 };
 const askReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -41,12 +41,12 @@ const askReducer = (state = initialState, action) => {
         recentExpertData: [],
         previousQuestionData: [],
         questionData: null,
-        question: "",
+        question: '',
       };
     case CLEAR_QUESTION_VALUE:
       return {
         ...state,
-        question: "",
+        question: '',
       };
     default:
       return {

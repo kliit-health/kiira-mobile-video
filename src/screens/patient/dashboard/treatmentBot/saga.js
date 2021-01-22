@@ -1,16 +1,16 @@
 import {UPDATE_NEW_USER_DETAIL_DATA} from '../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../utils/localization';
+import Language from '../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {addUserData, getDataFromTable} from '../../utils/firebase';
-import {showOrHideModal} from '../../components/customModal/action';
-import Constant from '../../utils/constants';
-import {displayConsole} from '../../utils/helper';
+} from '../../../../components/customLoader/action';
+import {addUserData, getDataFromTable} from '../../../../utils/firebase';
+import {showOrHideModal} from '../../../../components/customModal/action';
+import Constant from '../../../../utils/constants';
+import {displayConsole} from '../../../../utils/helper';
 import firebase from 'react-native-firebase';
-import {setUserData} from '../authLoading/action';
+import {setUserData} from '../../../auth/authLoading/action';
 
 let Lang = Language['en'];
 

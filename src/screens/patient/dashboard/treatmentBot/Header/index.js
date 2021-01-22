@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Image, Text, SafeAreaView} from 'react-native';
-import Constant from '../../../utils/constants';
-import IconButton from '../../../components/iconButton';
+import {View, Image, SafeAreaView} from 'react-native';
+import Constant from '../../../../../utils/constants';
+import IconButton from '../../../../../components/iconButton';
 import styles from './style';
 
 const Header = ({handleClose}) => {

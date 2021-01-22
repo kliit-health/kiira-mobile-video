@@ -4,7 +4,7 @@ import {
   CLEAR_EXPERT_PROFILE_STATE,
   MAKE_APPOINTMENT,
   SET_PREPAID,
-} from '../../redux/types';
+} from '../../../../../redux/types';
 
 export const getExpertsData = (data) => ({
   type: GET_EXPERTS_DETAIL_DATA,

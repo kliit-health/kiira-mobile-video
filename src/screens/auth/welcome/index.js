@@ -22,7 +22,7 @@ const Welcome = (props) => {
         </Text>
         <View style={styles.imageContainer}>
           <Image
-            source={require('../../../assets/kiira_penguin_b.png')}
+            source={require('../../../../assets/kiira_penguin_b.png')}
             style={{
               height: 400,
             }}

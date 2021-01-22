@@ -4,22 +4,22 @@ import {
   GET_APPOINTMENT_DATES,
   GET_APPOINTMENTS_FOR_TODAY,
   UPDATE_APPOINTMENT,
-} from '../../redux/types';
+} from '../../../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../utils/localization';
+import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
+} from '../../../../../components/customLoader/action';
 import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
   getAppointmentsForTodayAsync,
   changeAppointmentAsync,
-} from '../../utils/firebase';
-import {getAppointmentsList} from '../appointments/action';
-import {showOrHideModal} from '../../components/customModal/action';
+} from '../../../../../utils/firebase';
+import {getAppointmentsList} from '../action';
+import {showOrHideModal} from '../../../../../components/customModal/action';
 import {setTimes, setAppointmentDates} from './action';
 
 let Lang = Language['en'];

@@ -1,10 +1,7 @@
-import {put, takeEvery, select} from 'redux-saga/effects';
-import {GET_LICENSES, SET_LICENSES} from '../../../redux/types';
+import {put, takeEvery} from 'redux-saga/effects';
+import {GET_LICENSES} from '../../../redux/types';
 import Language from '../../../utils/localization';
-import {
-  showApiLoader,
-  hideApiLoader,
-} from '../../../components/customLoader/action';
+import {hideApiLoader} from '../../../components/customLoader/action';
 import {getLicensesAsync} from '../../../utils/firebase';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {setLicenses} from './action';

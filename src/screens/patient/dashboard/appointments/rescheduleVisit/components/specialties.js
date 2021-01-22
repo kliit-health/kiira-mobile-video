@@ -14,7 +14,7 @@ const Specialties = ({expertData}) => {
       </CustomText>
       <CustomText style={styles.bioTextStyle}>
         {expertData.profileInfo.profession.specialities.map(
-          (item, key) => `${item}    `,
+          (item) => `${item}    `,
         )}
       </CustomText>
     </View>

@@ -1,4 +1,4 @@
-import {SET_VISIT, GET_LOGIN} from '../../redux/types';
+import {SET_VISIT, GET_LOGIN} from '../../../../../redux/types';
 
 export const setVisit = (data) => ({
   type: SET_VISIT,

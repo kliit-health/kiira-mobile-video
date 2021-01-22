@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {ScrollView, View, Text, StatusBar, Modal} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating, Rating} from 'react-native-elements';
-import {CustomButton} from '../../../components';
-import Constant from '../../../utils/constants';
+import {CustomButton} from '../../../../../../components';
+import Constant from '../../../../../../utils/constants';
 import {connect} from 'react-redux';
-import {rateVisit} from '../../appointments/action';
+import {rateVisit} from '../../../appointments/action';
 
 import styles from './style';
 

@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {Container, Header, TextButton, Avatar, Ratings} from '../../components';
-import {Prescriber} from '../../components/icons';
-import intl from '../../utils/localization';
+import {
+  Container,
+  Header,
+  TextButton,
+  Avatar,
+  Ratings,
+} from '../../../../../components';
+import {Prescriber} from '../../../../../components/icons';
+import intl from '../../../../../utils/localization';
 import styles, {modifiers} from './styles';
-import {calculateRating} from '../../utils/functions';
+import {calculateRating} from '../../../../../utils/functions';
 import {ChatHistory, VideoHistory} from './sections';
 import {getChatHistoryAsync, getVideoHistoryAsync} from './actions';
-import {getMedicalHistory} from '../../redux/actions';
-import {useDidMount} from '../../utils/hooks';
+import {getMedicalHistory} from '../../../../../redux/actions';
+import {useDidMount} from '../../../../../utils/hooks';
 
 const TreatmentHistory = ({navigation}) => {
   const dispatch = useDispatch();

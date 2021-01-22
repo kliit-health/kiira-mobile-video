@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
 import {Container, Header} from '../../../../../components';
 import intl from '../../../../../utils/localization';
-import styles from './styles';
 
 const PreviousAppointmentsNotes = ({navigation}) => {
   const [selected, setSelected] = useState(false);

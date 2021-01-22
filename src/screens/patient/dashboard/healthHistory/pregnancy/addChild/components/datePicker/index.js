@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import moment from 'moment';
-import {TextInput, ModalDatePicker} from '../../../../components';
+import {TextInput, ModalDatePicker} from '../../../../../../../../components';
 
 const DatePicker = ({value, title, onSave, placeholder}) => {
   const [visible, setVisible] = useState(false);

@@ -1,31 +1,31 @@
-import { put, takeLatest } from 'redux-saga/effects';
-import { CREATE_USER } from '../../redux/types';
-import Language from '../../utils/localization';
+import {put, takeLatest} from 'redux-saga/effects';
+import {CREATE_USER} from '../../../redux/types';
+import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
+} from '../../../components/customLoader/action';
 import {
   createUser,
   checkReferedUserData,
   addUserData,
   deleteUser,
   updateCredits,
-} from '../../utils/firebase';
-import { showOrHideModal } from '../../components/customModal/action';
-import Constant from '../../utils/constants';
-import { StackActions, NavigationActions } from 'react-navigation';
+} from '../../../utils/firebase';
+import {showOrHideModal} from '../../../components/customModal/action';
+import Constant from '../../../utils/constants';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 let Lang = Language.en;
-function* signUp({ data }) {
+function* signUp({data}) {
   try {
-    const { params, navigation, referalCode } = data;
+    const {params, navigation, referalCode} = data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
     const newUser = yield createUser(params);
-    const { uid } = newUser;
+    const {uid} = newUser;
     if (uid) {
       if (referalCode) {
-        const referrerData = yield checkReferedUserData({ referalCode });
+        const referrerData = yield checkReferedUserData({referalCode});
         if (referrerData.success) {
           if (referrerData.data) {
             const referrerCredits = referrerData.data.credits;
@@ -34,7 +34,10 @@ function* signUp({ data }) {
               referedCode: referalCode,
               uid,
             };
-            const updateCreditsResponse = yield updateCredits(referrerCredits + Constant.App.referalCredits, referrerData.data.uid);
+            const updateCreditsResponse = yield updateCredits(
+              referrerCredits + Constant.App.referalCredits,
+              referrerData.data.uid,
+            );
             if (updateCreditsResponse.ok) {
               const response = yield addUserData(userRegistrationParams);
               if (response.success) {
@@ -54,8 +57,8 @@ function* signUp({ data }) {
                   showOrHideModal(
                     response.message
                       ? response.message
-                      : Lang.errorMessage.serverError
-                  )
+                      : Lang.errorMessage.serverError,
+                  ),
                 );
               }
             } else {
@@ -75,8 +78,8 @@ function* signUp({ data }) {
             showOrHideModal(
               referrerData.message
                 ? referrerData.message
-                : Lang.errorMessage.serverError
-            )
+                : Lang.errorMessage.serverError,
+            ),
           );
         }
       } else {
@@ -95,8 +98,8 @@ function* signUp({ data }) {
       yield put(hideApiLoader());
       yield put(
         showOrHideModal(
-          newUser.message ? newUser.message : Lang.errorMessage.serverError
-        )
+          newUser.message ? newUser.message : Lang.errorMessage.serverError,
+        ),
       );
     }
   } catch (error) {

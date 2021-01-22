@@ -1,10 +1,10 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {View, Text, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import CustomButton from '../../../components/customButton';
-import CustomText from '../../../components/customText';
+import CustomButton from '../../../../../components/customButton';
+import CustomText from '../../../../../components/customText';
 import {Rating} from 'react-native-elements';
-import Language from '../../../utils/localization';
+import Language from '../../../../../utils/localization';
 import styles from '../style';
 import {useDispatch} from 'react-redux';
 import {cancelAppointment} from '../action';
@@ -28,7 +28,7 @@ const Visit = ({visit, date, navigation}) => {
           <View style={styles.expertImageContainer}>
             <FastImage
               style={styles.expertImage}
-              defaultSource={require('../../../../assets/profile_img_placeholder.png')}
+              defaultSource={require('../../../../../../assets/profile_img_placeholder.png')}
               source={{uri: visit.expert.imageUrl}}
               activeOpacity={0.7}
             />
@@ -46,7 +46,7 @@ const Visit = ({visit, date, navigation}) => {
               <View>
                 <Image
                   style={styles.expertPrescriberImage}
-                  source={require('../../../../assets/rx.png')}
+                  source={require('../../../../../../assets/rx.png')}
                   resizeMode="contain"
                 />
               </View>

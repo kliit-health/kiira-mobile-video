@@ -1,13 +1,13 @@
 import {put, takeEvery} from 'redux-saga/effects';
-import {GET_LOGIN, SET_LOGIN} from '../../redux/types';
-import {NavigationService} from '../../navigator';
-import Language from '../../utils/localization';
+import {GET_LOGIN, SET_LOGIN} from '../../../../../redux/types';
+import {NavigationService} from '../../../../../navigator';
+import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {getCometChatDetailsAsync} from '../../utils/firebase';
-import {showOrHideModal} from '../../components/customModal/action';
+} from '../../../../../components/customLoader/action';
+import {getCometChatDetailsAsync} from '../../../../../utils/firebase';
+import {showOrHideModal} from '../../../../../components/customModal/action';
 
 let Lang = Language['en'];
 

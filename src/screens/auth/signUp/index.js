@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, {PureComponent} from 'react';
 import {
   View,
   ScrollView,
@@ -6,19 +6,19 @@ import {
   TouchableOpacity,
   Linking,
   Platform,
-} from "react-native";
-import { connect } from "react-redux";
-import CustomText from "../../components/customText";
-import styles from "./style";
-import Constant from "../../utils/constants";
-import CustomInputText from "../../components/customInputText";
-import Language from "../../utils/localization";
-import CustomButton from "../../components/customButton";
-import { isEmail, hasSpecialCharactors } from "../../utils/helper";
-import { showOrHideModal } from "../../components/customModal/action";
-import { createUser } from "./action";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import _ from "lodash";
+} from 'react-native';
+import {connect} from 'react-redux';
+import CustomText from '../../../components/customText';
+import styles from './style';
+import Constant from '../../../utils/constants';
+import CustomInputText from '../../../components/customInputText';
+import Language from '../../../utils/localization';
+import CustomButton from '../../../components/customButton';
+import {isEmail, hasSpecialCharactors} from '../../../utils/helper';
+import {showOrHideModal} from '../../../components/customModal/action';
+import {createUser} from './action';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import _ from 'lodash';
 
 let lang = Language.en;
 
@@ -27,31 +27,31 @@ class SignUp extends PureComponent {
     super(props);
     this.onSignUpClicked = _.debounce(this.onSignUp, 500);
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       showPassword: false,
       isUser: true,
       isPasswordHasSpecialChar: false,
       isPasswordContainsSevenChar: false,
-      referalCode: "",
+      referalCode: '',
     };
   }
 
   renderInputTextView() {
-    const { email, password, showPassword } = this.state;
-    const { staticImages } = Constant.App;
+    const {email, password, showPassword} = this.state;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.inputTextParentContainerStyle}>
         <View style={styles.inputTextContainerStyle}>
           <CustomInputText
             autoCapitalize="none"
-            onChangeText={(value) => this.setState({ email: value })}
+            onChangeText={(value) => this.setState({email: value})}
             placeholder={lang.login.Email}
             value={email}
             style={
               email
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: "100" }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -60,16 +60,16 @@ class SignUp extends PureComponent {
           <CustomInputText
             autoCapitalize="none"
             onChangeText={(value) => {
-              this.setState({ password: value });
+              this.setState({password: value});
               if (value.trim().length < 7) {
-                this.setState({ isPasswordContainsSevenChar: false });
+                this.setState({isPasswordContainsSevenChar: false});
               } else {
-                this.setState({ isPasswordContainsSevenChar: true });
+                this.setState({isPasswordContainsSevenChar: true});
               }
               if (hasSpecialCharactors(value)) {
-                this.setState({ isPasswordHasSpecialChar: true });
+                this.setState({isPasswordHasSpecialChar: true});
               } else {
-                this.setState({ isPasswordHasSpecialChar: false });
+                this.setState({isPasswordHasSpecialChar: false});
               }
             }}
             placeholder={lang.login.Password}
@@ -78,13 +78,12 @@ class SignUp extends PureComponent {
             style={
               password
                 ? styles.inputTypePasswordStyle
-                : [styles.inputTypePasswordStyle, { fontWeight: "100" }]
+                : [styles.inputTypePasswordStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
           <TouchableOpacity
-            onPress={() => this.setState({ showPassword: !showPassword })}
-          >
+            onPress={() => this.setState({showPassword: !showPassword})}>
             <Image
               resizeMode="contain"
               source={
@@ -109,8 +108,7 @@ class SignUp extends PureComponent {
         <TouchableOpacity
           onPress={() => {
             Linking.openURL(Constant.App.termsAndConditionsUrl);
-          }}
-        >
+          }}>
           <CustomText style={styles.termsConditionsTextHighlightedStyle}>
             {lang.signUp.termsConditionsText2}
           </CustomText>
@@ -121,8 +119,7 @@ class SignUp extends PureComponent {
         <TouchableOpacity
           onPress={() => {
             Linking.openURL(Constant.App.privacyPolicyurl);
-          }}
-        >
+          }}>
           <CustomText style={styles.termsConditionsTextHighlightedStyle}>
             {lang.signUp.termsConditionsText4}
           </CustomText>
@@ -132,14 +129,13 @@ class SignUp extends PureComponent {
   }
 
   renderCrossIconView() {
-    const { navigation } = this.props;
-    const { staticImages } = Constant.App;
+    const {navigation} = this.props;
+    const {staticImages} = Constant.App;
     return (
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
-        }}
-      >
+        }}>
         <Image
           resizeMode="contain"
           source={staticImages.crossIcon}
@@ -150,7 +146,7 @@ class SignUp extends PureComponent {
   }
 
   renderLogoView() {
-    const { staticImages } = Constant.App;
+    const {staticImages} = Constant.App;
     return (
       <Image
         resizeMode="contain"
@@ -174,11 +170,8 @@ class SignUp extends PureComponent {
   }
 
   renderPasswordValidationView() {
-    const { staticImages } = Constant.App;
-    const {
-      isPasswordContainsSevenChar,
-      isPasswordHasSpecialChar,
-    } = this.state;
+    const {staticImages} = Constant.App;
+    const {isPasswordContainsSevenChar, isPasswordHasSpecialChar} = this.state;
     return (
       <View>
         <View style={styles.passwordValidationContainerStyle}>
@@ -214,8 +207,8 @@ class SignUp extends PureComponent {
   }
 
   onSignUp = () => {
-    const { navigation, showHideErrorModal, signUp } = this.props;
-    const { email, password, referalCode } = this.state;
+    const {navigation, showHideErrorModal, signUp} = this.props;
+    const {email, password, referalCode} = this.state;
     if (!email.trim()) {
       showHideErrorModal(lang.signUp.EmptyEmailMsg);
     } else if (!isEmail(email.trim())) {
@@ -259,7 +252,7 @@ class SignUp extends PureComponent {
   }
 
   renderReferralSceretCodeView() {
-    const { referalCode } = this.state;
+    const {referalCode} = this.state;
     return (
       <View style={styles.inputTextParentContainerStyle}>
         <View style={styles.referalCodeInputTextContainerStyle}>
@@ -275,7 +268,7 @@ class SignUp extends PureComponent {
             style={
               referalCode
                 ? styles.referalCodeInputTypeStyle
-                : [styles.referalCodeInputTypeStyle, { fontWeight: "100" }]
+                : [styles.referalCodeInputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -289,8 +282,7 @@ class SignUp extends PureComponent {
       <View style={styles.parentContainerStyle}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
+          showsVerticalScrollIndicator={false}>
           {this.renderCrossIconView()}
           <View style={styles.contentContainerStyle}>
             {this.renderLogoView()}
@@ -303,7 +295,7 @@ class SignUp extends PureComponent {
             {this.renderDescriptionView()}
           </View>
         </ScrollView>
-        {Platform.OS === "ios" && <KeyboardSpacer />}
+        {Platform.OS === 'ios' && <KeyboardSpacer />}
       </View>
     );
   }
@@ -314,7 +306,4 @@ const mapDispatchToProps = (dispatch) => ({
   signUp: (value) => dispatch(createUser(value, dispatch)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUp);
+export default connect(null, mapDispatchToProps)(SignUp);

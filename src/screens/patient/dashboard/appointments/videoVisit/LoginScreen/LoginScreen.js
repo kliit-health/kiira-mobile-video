@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Text, View, Image, TouchableOpacity} from 'react-native';
-import {Header} from '../../../components';
+import {Header} from '../../../../../../components';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import {connect} from 'react-redux';
 import {ActivityIndicator} from 'react-native-paper';
 import {decode, encode} from 'base-64';
 import styles from './styles';
-import {generateCometChatUser} from '../../../utils/helper';
-import {createCometChatUser} from '../../../utils/firebase';
+import {generateCometChatUser} from '../../../../../../utils/helper';
+import {createCometChatUser} from '../../../../../../utils/firebase';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -112,7 +112,7 @@ class LoginScreen extends Component {
           <Image
             resizeMode="contain"
             style={[{height: 150}, {width: 120}, {alignSelf: 'center'}]}
-            source={require('../../../../assets/logo.png')}
+            source={require('../../../../../../../assets/logo.png')}
           />
           <View style={styles.textlayout}>
             <Text style={styles.subtitle}>

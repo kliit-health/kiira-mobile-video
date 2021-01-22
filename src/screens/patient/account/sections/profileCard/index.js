@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {Avatar} from '../../../../components';
+import {Avatar} from '../../../../../components';
 import {cardDetails} from './model';
 import styles, {modifiers} from './styles';
 

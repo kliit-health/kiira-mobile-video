@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {Modal, TextButton, Header, Container} from '../../../../../components';
-import Logo from '../../svgs/penguin.svg';
+import Logo from '../../../../../svgs/penguin.svg';
 import {setUserDetails} from '../../../../../redux/actions';
 import styles, {modifiers} from './styles';
 

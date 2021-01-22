@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from '../style';
-import CustomText from '../../../components/customText';
+import CustomText from '../../../../../../components/customText';
 import {Rating} from 'react-native-elements';
-import Language from '../../../utils/localization';
+import Language from '../../../../../../utils/localization';
 
 const lang = Language['en'];
 
@@ -32,7 +32,7 @@ const ExpertInfo = ({expertData}) => {
                 </CustomText>
                 <Image
                   style={styles.expertPrescriberImage}
-                  source={require('../../../../assets/rx.png')}
+                  source={require('../../../../../../../assets/rx.png')}
                   resizeMode="contain"
                 />
                 <CustomText style={styles.expertPrescriberTextStyle}>

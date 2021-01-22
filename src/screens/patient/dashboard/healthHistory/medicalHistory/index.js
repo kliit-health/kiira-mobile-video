@@ -1,13 +1,18 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import intl from '../../utils/localization';
+import intl from '../../../../../utils/localization';
 import {model} from './model';
-import {Container, Header, TextInput, TextButton} from '../../components';
+import {
+  Container,
+  Header,
+  TextInput,
+  TextButton,
+} from '../../../../../components';
 import {
   updateHealthHistory,
   updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+} from '../../healthHistory/actions';
 import styles from './styles';
 
 const MedicalHistory = ({navigation}) => {

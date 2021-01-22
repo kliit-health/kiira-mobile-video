@@ -11,9 +11,9 @@ import {
   SET_ORDER_DATA,
   CAPTURE_PAYMENT,
   SET_USER_DATA,
-} from '../../redux/types';
+} from '../../../../../redux/types';
 
-export const createPaymentCard = data => ({
+export const createPaymentCard = (data) => ({
   type: CREATE_PAYMENT_CARD,
   data,
 });
@@ -22,7 +22,7 @@ export const getCreditAmountsOptions = () => ({
   type: GET_CREDIT_AMOUNT_OPTIONS,
 });
 
-export const setCreditAmountsOptions = creditAmountOptions => ({
+export const setCreditAmountsOptions = (creditAmountOptions) => ({
   type: SET_CREDIT_AMOUNT_OPTIONS,
   payload: {
     creditAmountOptions,
@@ -33,7 +33,7 @@ export const getPaymentMethods = () => ({
   type: GET_PAYMENT_METHODS,
 });
 
-export const setPaymentMethods = paymentMethods => ({
+export const setPaymentMethods = (paymentMethods) => ({
   type: SET_PAYMENT_METHODS,
   payload: {
     paymentMethods,
@@ -69,15 +69,15 @@ export const buyCreditsUsingPayPal = (credits, amount, navigation) => ({
 
 export const capturePayment = (capturePaymentURL, credits, navigation) => ({
   type: CAPTURE_PAYMENT,
-  payload: { capturePaymentURL, credits, navigation },
+  payload: {capturePaymentURL, credits, navigation},
 });
 
-export const setOrderData = orderData => ({
+export const setOrderData = (orderData) => ({
   type: SET_ORDER_DATA,
-  payload: { orderData },
+  payload: {orderData},
 });
 
-export const setNativePaySupport = isSupported => ({
+export const setNativePaySupport = (isSupported) => ({
   type: SET_NATIVE_PAY_SUPPORT,
   payload: {
     isNativePaySupported: isSupported,

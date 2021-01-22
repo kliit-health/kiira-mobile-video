@@ -7,12 +7,12 @@ import {
   UPDATE_FAVORITE_EXPERTS,
   GET_FAVORITE_EXPERTS_ASYNC,
   GET_FAVORITE_EXPERTS,
-} from '../../redux/types';
+} from '../../../../redux/types';
 import {
   firebaseFetch,
   updateFavoriteExperts,
   getFavoriteExperts,
-} from '../../utils/firebase';
+} from '../../../../utils/firebase';
 
 function* getExpertsDetailsAsync() {
   const condition = [{key: 'role', operator: '==', value: 'Expert'}];

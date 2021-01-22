@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal, Image} from 'react-native';
-import {useSelector} from 'react-redux';
 import IconButton from '../../../../../../components/iconButton';
 import CustomButton from '../../../../../../components/customButton';
 import styles from '../style';

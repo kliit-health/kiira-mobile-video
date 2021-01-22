@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 import styles from './style';
 import reasonsForVisit from '../../../../../utils/constants/requestVisit';

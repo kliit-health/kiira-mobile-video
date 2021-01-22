@@ -3,7 +3,7 @@ import {
   GET_EXPERTS_DETAILS,
   UPDATE_FAVORITE_EXPERTS,
   GET_FAVORITE_EXPERTS,
-} from '../../redux/types';
+} from '../../../../redux/types';
 
 const initialState = {
   experts: [],

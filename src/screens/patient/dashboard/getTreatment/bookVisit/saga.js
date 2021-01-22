@@ -1,19 +1,19 @@
-import {MAKE_APPOINTMENT} from '../../redux/types';
+import {MAKE_APPOINTMENT} from '../../../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
 import {
   getDataFromTable,
   makeAppointment,
   updateCredits,
   createCometChatUser,
-} from '../../utils/firebase';
+} from '../../../../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {setUserData} from '../authLoading/action';
-import Constant from '../../utils/constants';
-import {NavigationService} from '../../navigator';
-import {showOrHideModal} from '../../components/customModal/action';
+} from '../../../../../components/customLoader/action';
+import {setUserData} from '../../../../auth/authLoading/action';
+import Constant from '../../../../../utils/constants';
+import {NavigationService} from '../../../../../navigator';
+import {showOrHideModal} from '../../../../../components/customModal/action';
 
 function* setAppointment(data) {
   try {

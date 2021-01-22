@@ -3,11 +3,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {StatusBar, View, Platform} from 'react-native';
 import SplashScreen from 'react-native-smart-splash-screen';
-import Constant from '../../utils/constants';
+import Constant from '../../../utils/constants';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
-import {getUserData, updateStatus, makeid} from '../../utils/firebase';
-import {displayConsole} from '../../utils/helper';
+import {getUserData, updateStatus, makeid} from '../../../utils/firebase';
+import {displayConsole} from '../../../utils/helper';
 import {setUserData, setFcmToken, setLicenses} from './action';
 
 let isFirstTime = true;

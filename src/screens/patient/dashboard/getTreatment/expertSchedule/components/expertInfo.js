@@ -52,7 +52,7 @@ const ExpertInfo = ({
                 </CustomText>
                 <Image
                   style={styles.expertPrescriberImage}
-                  source={require('../../../../assets/rx.png')}
+                  source={require('../../../../../../../assets/rx.png')}
                   resizeMode="contain"
                 />
                 <CustomText style={styles.expertPrescriberTextStyle}>

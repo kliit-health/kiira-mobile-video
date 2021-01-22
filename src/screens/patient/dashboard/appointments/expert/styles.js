@@ -24,7 +24,6 @@ export default StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
     width: metrics.DEVICE_WIDTH,
-    // marginTop: getStatusBarHeight(),
   },
 
   creditButtonStyle: {

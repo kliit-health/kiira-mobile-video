@@ -1,15 +1,15 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import Language from '../../utils/localization';
+import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {showOrHideModal} from '../../components/customModal/action';
-import {displayConsole} from '../../utils/helper';
-import {SIGN_OUT_API_HIT} from '../../redux/types';
-import {logout, updateStatus} from '../../utils/firebase';
-import Constant from '../../utils/constants';
-import {clearAskState} from '../ask/action';
+} from '../../../components/customLoader/action';
+import {showOrHideModal} from '../../../components/customModal/action';
+import {displayConsole} from '../../../utils/helper';
+import {SIGN_OUT_API_HIT} from '../../../redux/types';
+import {logout, updateStatus} from '../../../utils/firebase';
+import Constant from '../../../utils/constants';
+import {clearAskState} from '../dashboard/ask/action';
 
 let Lang = Language['en'];
 

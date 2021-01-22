@@ -3,21 +3,21 @@ import {
   GET_APPOINTMENTS_BY_DAY,
   GET_APPOINTMENT_DATES,
   GET_APPOINTMENTS_FOR_TODAY,
-} from '../../redux/types';
+} from '../../../../../redux/types';
 
 import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../utils/localization';
+import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
+} from '../../../../../components/customLoader/action';
 import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
   getAppointmentsForTodayAsync,
-} from '../../utils/firebase';
-import {showOrHideModal} from '../../components/customModal/action';
+} from '../../../../../utils/firebase';
+import {showOrHideModal} from '../../../../../components/customModal/action';
 import {setTimes, setAppointmentDates} from './action';
 
 let Lang = Language['en'];

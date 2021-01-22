@@ -2,9 +2,9 @@ import {put, takeLatest, call} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {setUserDetails} from '../../redux/actions';
-import Language from '../../utils/localization';
+} from '../../../../../components/customLoader/action';
+import {setUserDetails} from '../../../../../redux/actions';
+import Language from '../../../../../utils/localization';
 import {
   CREATE_PAYMENT_CARD,
   GET_CREDIT_AMOUNT_OPTIONS,
@@ -14,7 +14,7 @@ import {
   BUY_CREDITS_WITH_PAYPAL,
   CAPTURE_PAYMENT,
   SET_PREPAID,
-} from '../../redux/types';
+} from '../../../../../redux/types';
 import {
   addNewPaymentCard,
   getCreditAmountsData,
@@ -24,12 +24,12 @@ import {
   payAmountWithToken,
   getPayPalAccessToken,
   getDataFromTable,
-} from '../../utils/firebase';
+} from '../../../../../utils/firebase';
 
 import {
   createPayPalOrder,
   capturePayPalPaymentAPI,
-} from '../../utils/webServices';
+} from '../../../../../utils/webServices';
 import {
   setCreditAmountsOptions,
   setPaymentMethods,
@@ -38,11 +38,11 @@ import {
   setData,
 } from './action';
 
-import {showOrHideModal} from '../../components/customModal/action';
-import {parseCardInfo} from '../../utils/helper/payment';
-import {NavigationService} from '../../navigator';
-import {deviceSupportsNativePay} from '../../utils/payment';
-import Constant from '../../utils/constants';
+import {showOrHideModal} from '../../../../../components/customModal/action';
+import {parseCardInfo} from '../../../../../utils/helper/payment';
+import {NavigationService} from '../../../../../navigator';
+import {deviceSupportsNativePay} from '../../../../../utils/payment';
+import Constant from '../../../../../utils/constants';
 import firebase from 'react-native-firebase';
 
 let Lang = Language.en;

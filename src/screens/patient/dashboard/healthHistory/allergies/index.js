@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {switchCase, insertAtIndex} from '../../utils/functions';
-import {Container, Header, FooterNavigation} from '../../components';
-import intl from '../../utils/localization';
+import {switchCase, insertAtIndex} from '../../../../../utils/functions';
+import {Container, Header, FooterNavigation} from '../../../../../components';
+import intl from '../../../../../utils/localization';
 import {initialQuestions, extraQuestions, types} from './model';
 import {PolarQuestion, ObjectiveQuestion} from './components';
 import {
   updateHealthHistory,
   updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+} from '../../healthHistory/actions';
 import styles from './styles';
 
 const Allergies = ({navigation}) => {

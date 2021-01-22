@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, text} from '../../utils/constants';
-import {metrices} from '../../utils/metrices';
+import {colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {

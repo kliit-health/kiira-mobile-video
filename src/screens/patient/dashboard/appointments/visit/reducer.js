@@ -1,4 +1,4 @@
-import {SET_VISIT, SET_LOGIN} from '../../redux/types';
+import {SET_VISIT, SET_LOGIN} from '../../../../../redux/types';
 
 const initialState = {
   visit: {},

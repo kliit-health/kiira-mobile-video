@@ -2,10 +2,10 @@ import React from 'react';
 import {withNavigation} from 'react-navigation';
 import {useDispatch} from 'react-redux';
 import {View, Text} from 'react-native';
-import {TextButton, Header, Container} from '../../components';
+import {TextButton, Header, Container} from '../../../../../components';
 import {needsPrescription} from '../expertSchedule/action';
-import {screenNames} from '../../utils/constants';
-import intl from '../../utils/localization';
+import {screenNames} from '../../../../../utils/constants';
+import intl from '../../../../../utils/localization';
 import styles, {modifiers} from './style';
 
 const NeedsPresciption = (props) => {

@@ -2,7 +2,7 @@ import {
   GET_HEALTH_HISTORY_ASYNC,
   UPDATE_HEALTH_HISTORY_ASYNC,
   UPDATE_HEALTH_HISTORY,
-} from '../../redux/types';
+} from '../../../../redux/types';
 
 export const getHealthHistoryAsync = () => ({
   type: GET_HEALTH_HISTORY_ASYNC,

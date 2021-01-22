@@ -18,7 +18,6 @@ import ImagePicker from 'react-native-image-picker';
 import InputText from '../../../components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MessageContainer from './MessageContainer';
-// import { sendEncryptedKeyToFirebase } from '../../../utils/firebase';
 import metrices from '../../../utils/metrices';
 import {
   loadExpertMessages,
@@ -34,8 +33,6 @@ import moment from 'moment';
 import CustomButton from '../../../components/customButton';
 import {stopObserverChat} from '../action';
 
-// var RSAKey = require('react-native-rsa');
-// var rsa = new RSAKey();
 const lang = Language.en;
 let key;
 class ChatExpert extends React.PureComponent {

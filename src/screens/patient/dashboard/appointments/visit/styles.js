@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {getStatusBarHeight} from '../../../../../components/iPhoneXHelper';
 import metrics, {smallScreen} from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 

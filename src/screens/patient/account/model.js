@@ -1,5 +1,5 @@
-import intl from '../../utils/localization';
-import {screenNames} from '../../utils/constants';
+import intl from '../../../utils/localization';
+import {screenNames} from '../../../utils/constants';
 
 export const list = [
   {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {PolarButton} from '../../../../components';
+import {PolarButton} from '../../../../../../../components';
 import styles from './styles';
 
 export const PolarQuestion = ({value, onPress}) => (

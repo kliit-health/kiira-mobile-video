@@ -1,12 +1,12 @@
 import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../utils/localization';
+import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
-import {showOrHideModal} from '../../components/customModal/action';
-import {FORGOT_PASSWORD} from '../../redux/types';
-import {resetPassword} from '../../utils/firebase';
+} from '../../../components/customLoader/action';
+import {showOrHideModal} from '../../../components/customModal/action';
+import {FORGOT_PASSWORD} from '../../../redux/types';
+import {resetPassword} from '../../../utils/firebase';
 import {forgotPasswordApiHitSuccess} from './action';
 
 let Lang = Language['en'];

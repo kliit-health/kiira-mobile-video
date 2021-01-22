@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {TextInput, ModalPicker} from '../../../../components';
+import {TextInput, ModalPicker} from '../../../../../../../components';
 
 const Picker = ({value, data, title, onSave, placeholder}) => {
   const [visible, setVisible] = useState(false);

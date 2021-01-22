@@ -1,6 +1,6 @@
-import {StyleSheet, Platform} from 'react-native';
-import Constant from '../../../utils/constants';
-import metrices from '../../../utils/metrices';
+import {StyleSheet} from 'react-native';
+import Constant from '../../../../../../utils/constants';
+import metrices from '../../../../../../utils/metrices';
 
 let parentPaddingValue = metrices.DEVICE_WIDTH * 0.08;
 

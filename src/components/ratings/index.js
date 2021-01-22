@@ -1,14 +1,5 @@
 import React, {Fragment} from 'react';
-import {
-  shape,
-  object,
-  bool,
-  string,
-  func,
-  number,
-  oneOf,
-  node,
-} from 'prop-types';
+import {shape, object, bool, number} from 'prop-types';
 import Star from '../../svgs/star.svg';
 import {View, Text} from 'react-native';
 import {colors} from '../../utils/constants';

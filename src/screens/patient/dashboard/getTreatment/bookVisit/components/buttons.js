@@ -1,11 +1,14 @@
 import React, {Fragment} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import CustomButton from '../../../components/customButton';
+import CustomButton from '../../../../../../components/customButton';
 import styles from '../style';
-import Constant from '../../../utils/constants';
-import {makeAppointment, prepaidAppointment} from '../action';
-import {getAppointmentsList} from '../../appointments/action';
+import Constant from '../../../../../../utils/constants';
+import {
+  makeAppointment,
+  prepaidAppointment,
+  getAppointmentsList,
+} from '../../../appointments/action';
 
 const Buttons = ({
   applyCredit,

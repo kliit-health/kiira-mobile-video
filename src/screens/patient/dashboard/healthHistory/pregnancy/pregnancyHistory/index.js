@@ -1,13 +1,15 @@
 import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Container, Header, TextButton, RadioGroup} from '../../components';
-import {model} from './model';
-import intl from '../../utils/localization';
 import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+  Container,
+  Header,
+  TextButton,
+  RadioGroup,
+} from '../../../../../../components';
+import {model} from './model';
+import intl from '../../../../../../utils/localization';
+import {updateHealthHistory, updateHealthHistoryAsync} from '../../actions';
 import styles, {modifiers} from './styles';
 
 const PregnancyHistory = ({navigation}) => {

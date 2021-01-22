@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
-import {Container, Header, TextButton} from '../../components';
-import intl from '../../utils/localization';
+import {Container, Header} from '../../../components';
+import intl from '../../../utils/localization';
 import Image from 'react-native-fast-image';
 import model from './model';
 import styles, {modifiers} from './styles';
-import {screenNames} from '../../utils/constants';
+import {screenNames} from '../../../utils/constants';
 
 const Learn = ({navigation}) => {
   const handleOpenUrl = ({url, title}) => {
@@ -22,7 +22,7 @@ const Learn = ({navigation}) => {
           </View>
           <Image
             style={styles.bannerImage}
-            source={require('../../../assets/banner.jpeg')}
+            source={require('../../../../assets/banner.jpeg')}
             resizeMode="cover"
           />
         </View>

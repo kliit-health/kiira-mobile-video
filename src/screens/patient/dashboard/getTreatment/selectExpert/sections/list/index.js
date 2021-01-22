@@ -1,7 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {colors} from '../../../../../../../utils/constants';
-import {ProfileCard, IconButton} from '../../../../../../../components';
+import {ProfileCard} from '../../../../../../../components';
 import {calculateRating} from '../../../../../../../utils/functions';
 import styles from './styles';
 

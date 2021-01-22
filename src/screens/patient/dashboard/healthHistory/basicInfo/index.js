@@ -1,15 +1,20 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {switchCase} from '../../utils/functions';
-import intl from '../../utils/localization';
-import {units} from '../../utils/constants';
+import {switchCase} from '../../../../../utils/functions';
+import intl from '../../../../../utils/localization';
+import {units} from '../../../../../utils/constants';
 import {model, types} from './model';
-import {Container, Header, TextInput, TextButton} from '../../components';
+import {
+  Container,
+  Header,
+  TextInput,
+  TextButton,
+} from '../../../../../components';
 import {Picker, DatePicker} from './components';
 import {
   updateHealthHistory,
   updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+} from '../../healthHistory/actions';
 import styles from './styles';
 
 const BasicInfo = ({navigation}) => {

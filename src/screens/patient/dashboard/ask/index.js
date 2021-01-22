@@ -7,24 +7,24 @@ import {
   Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
-import CustomText from '../../components/customText';
+import CustomText from '../../../../components/customText';
 import styles from './style';
-import language from '../../utils/localization';
-import Constant, {screenNames} from '../../utils/constants';
-import InputText from '../../components/customInputText/simpleInputText';
-import CustomButton from '../../components/customButton';
+import language from '../../../../utils/localization';
+import Constant, {screenNames} from '../../../../utils/constants';
+import InputText from '../../../../components/customInputText/simpleInputText';
+import CustomButton from '../../../../components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {getQuestionData, updateQuestion} from './action';
 import moment from 'moment';
 import {withNavigation} from 'react-navigation';
-import {Header} from '../../components';
-import {getTerms} from '../termsAndConditions/action';
-import {getPolicy} from '../privacyPolicy/action';
+import {Header} from '../../../../components';
+import {getTerms} from '../../../common/termsAndConditions/action';
+import {getPolicy} from '../../../common/privacyPolicy/action';
 import FastImage from 'react-native-fast-image';
 import {setUserData} from './action';
 import firebase from 'react-native-firebase';
-import {getUserData} from '../../utils/firebase';
-import {showOrHideModal} from '../../components/customModal/action';
+import {getUserData} from '../../../../utils/firebase';
+import {showOrHideModal} from '../../../../components/customModal/action';
 
 const lang = language.en;
 class Ask extends PureComponent {

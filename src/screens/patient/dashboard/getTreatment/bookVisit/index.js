@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {View, ScrollView} from 'react-native';
-import {Header} from '../../components';
-import {getCreditAmountsData} from '../../utils/firebase';
+import {Header} from '../../../../../components';
+import {getCreditAmountsData} from '../../../../../utils/firebase';
 import styles from './style';
 
 import {ExpertInfo, VisitDetails, Buttons, PaymentModal} from './components';

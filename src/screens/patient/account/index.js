@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, ListItem, TextButton} from '../../components';
+import {Container, ListItem, TextButton} from '../../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
-import intl from '../../utils/localization';
+import intl from '../../../utils/localization';
 import {ProfileCard} from './sections';
 import {list} from './model';
 import {signOut} from './action';

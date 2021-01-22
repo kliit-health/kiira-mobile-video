@@ -1,9 +1,9 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {colors} from '../../../../utils/constants';
-import {ProfileCard, IconButton} from '../../../../components';
-import {calculateRating} from '../../../../utils/functions';
-import Plus from '../../../../svgs/plus.svg';
+import {colors} from '../../../../../../utils/constants';
+import {ProfileCard, IconButton} from '../../../../../../components';
+import {calculateRating} from '../../../../../../utils/functions';
+import Plus from '../../../../../../svgs/plus.svg';
 import styles from './styles';
 
 const List = ({data, onCardPress, onAddPress, disabledItems}) => (
@@ -29,7 +29,6 @@ const ListItem = (props) => {
     isOnline,
     rating,
     onCardPress,
-    index,
     onAddPress,
     disabled,
   } = props;

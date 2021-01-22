@@ -1,4 +1,4 @@
-import { SEND_VERIFICATION_EMAIL } from "../../redux/types";
+import {SEND_VERIFICATION_EMAIL} from '../../../redux/types';
 
 const verifyReducer = (state = {}, action) => {
   switch (action.type) {

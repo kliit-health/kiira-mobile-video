@@ -4,9 +4,9 @@ import {
   GET_HEALTH_HISTORY,
   GET_HEALTH_HISTORY_ASYNC,
   UPDATE_HEALTH_HISTORY_ASYNC,
-} from '../../redux/types';
+} from '../../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {getHealthHistory, addHealthHistory} from '../../utils/firebase';
+import {getHealthHistory, addHealthHistory} from '../../../../utils/firebase';
 
 function* getHealthHistoryAsync() {
   const {uid} = firebase.auth().currentUser;

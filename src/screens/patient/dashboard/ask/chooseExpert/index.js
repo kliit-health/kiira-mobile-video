@@ -18,7 +18,7 @@ import Language from '../../../../../utils/localization';
 import CustomButton from '../../../../../components/customButton';
 import InputText from '../../../../../components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {updateQuestion} from '../ask/action';
+import {updateQuestion} from '../../ask/action';
 
 const lang = Language['en'];
 class ChooseExpert extends Component {

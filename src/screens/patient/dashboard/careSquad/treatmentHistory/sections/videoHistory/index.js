@@ -2,9 +2,9 @@ import React, {Fragment, useState} from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, SectionList} from 'react-native';
 import moment from 'moment';
-import intl from '../../../../utils/localization';
-import {screenNames} from '../../../../utils/constants';
-import {ListItem, TextButton, Modal} from '../../../../components';
+import intl from '../../../../../../../utils/localization';
+import {screenNames} from '../../../../../../../utils/constants';
+import {ListItem, TextButton, Modal} from '../../../../../../../components';
 import {getSections, formatTime} from './helpers';
 import {
   listStyles,

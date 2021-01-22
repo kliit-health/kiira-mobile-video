@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View, Platform, Linking} from 'react-native';
-import {Header, Container, TextButton} from '../../components';
+import {Header, Container, TextButton} from '../../../../components';
 import Image from 'react-native-fast-image';
-import intl from '../../utils/localization';
+import intl from '../../../../utils/localization';
 import styles from './styles';
 
 const SOS = ({navigation}) => {
@@ -21,7 +21,7 @@ const SOS = ({navigation}) => {
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={require('../../../assets/sos-purple.png')}
+        source={require('../../../../../assets/sos-purple.png')}
       />
       <Text style={styles.title}>{intl.en.sos.emergency}</Text>
       <View style={styles.buttonContainer}>

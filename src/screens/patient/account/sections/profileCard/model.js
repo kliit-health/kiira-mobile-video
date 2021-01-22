@@ -1,4 +1,4 @@
-import intl from '../../../../utils/localization';
+import intl from '../../../../../utils/localization';
 
 export const cardDetails = [
   {

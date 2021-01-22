@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { View, ScrollView, Image, TouchableOpacity } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import CustomText from "../../components/customText";
-import styles from "./style";
-import Constant from "../../utils/constants";
-import CustomInputText from "../../components/customInputText";
-import Language from "../../utils/localization";
-import CustomButton from "../../components/customButton";
-import { showOrHideModal } from "../../components/customModal/action";
-import { forgotPasswordApiHit, resertForgotPasswordState } from "./action";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import { isEmail } from "../../utils/helper";
+import React, {useState, useEffect} from 'react';
+import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import CustomText from '../../../components/customText';
+import styles from './style';
+import Constant from '../../../utils/constants';
+import CustomInputText from '../../../components/customInputText';
+import Language from '../../../utils/localization';
+import CustomButton from '../../../components/customButton';
+import {showOrHideModal} from '../../../components/customModal/action';
+import {forgotPasswordApiHit, resertForgotPasswordState} from './action';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import {isEmail} from '../../../utils/helper';
 
-let lang = Language["en"];
+let lang = Language['en'];
 const ForgotPassword = (props) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const { navigation } = props;
-  const { staticImages } = Constant.App;
+  const [email, setEmail] = useState('');
+  const {navigation} = props;
+  const {staticImages} = Constant.App;
   const forgotPasswordSuccess = useSelector(
-    (state) => state.forgotPasswordReducer.forgotPasswordSuccess
+    (state) => state.forgotPasswordReducer.forgotPasswordSuccess,
   );
 
   useEffect(() => {
     if (forgotPasswordSuccess) {
-      setEmail("");
+      setEmail('');
       dispatch(resertForgotPasswordState());
     }
   });
@@ -41,7 +41,7 @@ const ForgotPassword = (props) => {
             style={
               email
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: "100" }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -55,8 +55,7 @@ const ForgotPassword = (props) => {
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
-        }}
-      >
+        }}>
         <Image
           resizeMode="contain"
           source={staticImages.crossIcon}
@@ -115,8 +114,7 @@ const ForgotPassword = (props) => {
     <View style={styles.parentContainerStyle}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {renderCrossIconView()}
         <View style={styles.contentContainerStyle}>
           {renderLogoView()}
@@ -125,7 +123,7 @@ const ForgotPassword = (props) => {
           {renderButtonView()}
         </View>
       </ScrollView>
-      {Platform.OS === "ios" && <KeyboardSpacer />}
+      {Platform.OS === 'ios' && <KeyboardSpacer />}
     </View>
   );
 };

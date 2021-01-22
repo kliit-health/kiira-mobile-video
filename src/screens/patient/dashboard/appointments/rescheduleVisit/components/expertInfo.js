@@ -2,17 +2,15 @@ import React from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {useDispatch} from 'react-redux';
 import FastImage from 'react-native-fast-image';
-import CustomButton from '../../../components/customButton';
-import CustomText from '../../../components/customText';
+import CustomButton from '../../../../../../components/customButton';
+import CustomText from '../../../../../../components/customText';
 import {Rating} from 'react-native-elements';
-import Language from '../../../utils/localization';
-import Constant from '../../../utils/constants';
+import Language from '../../../../../../utils/localization';
 import styles from '../style';
 import {getAppointmentsByDay} from '../action';
 import moment from 'moment';
 
 const lang = Language['en'];
-const {staticImages} = Constant.App;
 
 const ExpertInfo = ({
   expertData,
@@ -52,7 +50,7 @@ const ExpertInfo = ({
                 </CustomText>
                 <Image
                   style={styles.expertPrescriberImage}
-                  source={require('../../../../assets/rx.png')}
+                  source={require('../../../../../../../assets/rx.png')}
                   resizeMode="contain"
                 />
                 <CustomText style={styles.expertPrescriberTextStyle}>

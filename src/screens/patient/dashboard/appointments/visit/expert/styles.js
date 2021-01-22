@@ -3,8 +3,6 @@ import metrics, {smallScreen} from '../../../utils/metrices';
 import Constant from '../../../utils/constants';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
 
 const styles = StyleSheet.create({
   buttonStyle: {

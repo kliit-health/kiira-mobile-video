@@ -48,7 +48,7 @@ class VisitEnd extends Component {
         <Image
           style={styles.logo}
           resizeMode="contain"
-          source={require('../../../../assets/logo.png')}
+          source={require('../../../../../../../assets/logo.png')}
         />
         <View style={styles.buttonStyle}>
           <TouchableOpacity

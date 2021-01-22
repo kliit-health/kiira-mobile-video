@@ -1,4 +1,7 @@
-import { GET_EXPERTS_DETAIL_DATA_SUCCESS, CLEAR_EXPERT_PROFILE_STATE } from "../../redux/types";
+import {
+  GET_EXPERTS_DETAIL_DATA_SUCCESS,
+  CLEAR_EXPERT_PROFILE_STATE,
+} from '../../../../../redux/types';
 
 const initialState = {
   expertData: null,

@@ -10,8 +10,8 @@ import {
 import Image from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {icons, colors} from '../../../../utils/constants';
-import intl from '../../../../utils/localization';
+import {icons, colors} from '../../../../../../../utils/constants';
+import intl from '../../../../../../../utils/localization';
 import styles from './styles';
 
 const Footer = ({

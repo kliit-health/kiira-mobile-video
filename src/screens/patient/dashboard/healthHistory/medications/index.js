@@ -9,10 +9,7 @@ import {
   TextInput,
   TextButton,
 } from '../../../../../components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+import {updateHealthHistory, updateHealthHistoryAsync} from '../actions';
 import styles from './styles';
 
 const Medications = ({navigation}) => {

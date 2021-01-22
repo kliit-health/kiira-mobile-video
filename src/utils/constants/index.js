@@ -1778,3 +1778,25 @@ export const collections = {
   careSquad: 'careSquad',
   appointments: 'appointments',
 };
+
+export const reduxScreenPaths = {
+  account: '../../screens/patient/account',
+  auth: '../../screens/auth',
+  appointments: '../screens/patient/dashboard/appointments',
+  dashboard: '../../screens/patient/dashboard',
+  getTreatment: '../../screens/patient/dashboard/getTreatment',
+  healthHistory: '../../screens/patient/dashboard/healthHistory',
+  patient: '../../screens/patient',
+  provider: '../../screens/provider',
+};
+
+export const navigationScreenPaths = {
+  account: '../screens/patient/account',
+  auth: '../screens/auth',
+  appointments: '../screens/patient/dashboard/appointments',
+  dashboard: '../screens/patient/dashboard',
+  getTreatment: '../screens/patient/dashboard/getTreatment',
+  healthHistory: '../screens/patient/dashboard/healthHistory',
+  patient: '../screens/patient',
+  provider: '../screens/provider',
+};

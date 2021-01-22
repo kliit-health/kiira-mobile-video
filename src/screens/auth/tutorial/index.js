@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   StatusBar,
   View,
   ImageBackground,
   ScrollView,
   Dimensions,
-} from "react-native";
-import styles from "./style";
-import Constant from "../../utils/constants";
-import CustomButton from "../../components/customButton";
-import Language from "../../utils/localization";
-import Carousel from "react-native-banner-carousel";
+} from 'react-native';
+import styles from './style';
+import Constant from '../../../utils/constants';
+import CustomButton from '../../../components/customButton';
+import Language from '../../../utils/localization';
+import Carousel from 'react-native-banner-carousel';
 
-const largeDisplay = Dimensions.get("window").height > 800;
+const largeDisplay = Dimensions.get('window').height > 800;
 
 let banner = [
   {
@@ -41,9 +41,9 @@ let banner = [
   },
 ];
 
-let lang = Language["en"];
+let lang = Language['en'];
 const Tutorial = (props) => {
-  const { navigation } = props;
+  const {navigation} = props;
 
   const renderSliderView = () => {
     return (
@@ -54,11 +54,10 @@ const Tutorial = (props) => {
           autoplayTimeout={5000}
           loop
           index={0}
-          pageSize={Dimensions.get("window").width}
+          pageSize={Dimensions.get('window').width}
           activePageIndicatorStyle={{
             backgroundColor: Constant.App.colors.blueColor,
-          }}
-        >
+          }}>
           {banner.map((item, key) => (
             <View key={key}>
               <ImageBackground
@@ -96,8 +95,7 @@ const Tutorial = (props) => {
     <View style={styles.containerStyle}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {renderSliderView()}
         {renderButtonView()}
       </ScrollView>

@@ -1,21 +1,21 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {LOGIN_FIREBASE_USER} from '../../redux/types';
-import Language from '../../utils/localization';
+import {LOGIN_FIREBASE_USER} from '../../../redux/types';
+import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
+} from '../../../components/customLoader/action';
 import {
   loginInWithFirebase,
   getDataFromTable,
   updateStatus,
-} from '../../utils/firebase';
-import {showOrHideModal} from '../../components/customModal/action';
-import Constant from '../../utils/constants';
+} from '../../../utils/firebase';
+import {showOrHideModal} from '../../../components/customModal/action';
+import Constant from '../../../utils/constants';
 import {loginFailure} from './action';
-import {signoutApihit} from '../account/action';
+import {signoutApihit} from '../../patient/account/action';
 import {setUserData, getLicenses} from '../authLoading/action';
-import {getTerms} from '../termsAndConditions/action';
+import {getTerms} from '../../common/termsAndConditions/action';
 
 let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));

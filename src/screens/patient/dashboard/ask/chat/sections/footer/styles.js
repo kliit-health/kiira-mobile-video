@@ -1,8 +1,5 @@
 import {StyleSheet} from 'react-native';
-import Constant, {colors, text} from '../../../../utils/constants';
-import metrics from '../../../../utils/metrices';
-
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
+import {colors, text} from '../../../../../../../utils/constants';
 
 const styles = StyleSheet.create({
   resolvedText: {

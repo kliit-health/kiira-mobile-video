@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import ChatBot from '../../components/chatBot';
+import ChatBot from '../../../../components/chatBot';
 import Header from './Header';
 import {connect} from 'react-redux';
 import {updateUserDataToFirebase} from './action';
-import {showOrHideModal} from '../../components/customModal/action';
-import Constant from '../../utils/constants';
+import {showOrHideModal} from '../../../../components/customModal/action';
+import Constant from '../../../../utils/constants';
 
 class TreatmentBotScreen extends Component {
   constructor(props) {

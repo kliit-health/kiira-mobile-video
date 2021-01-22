@@ -1,4 +1,7 @@
-import { FORGOT_PASSWORD_SUCCESS, RESET_FORGOT_PASSWORD_STATE } from "../../redux/types";
+import {
+  FORGOT_PASSWORD_SUCCESS,
+  RESET_FORGOT_PASSWORD_STATE,
+} from '../../../redux/types';
 
 const initialState = {
   forgotPasswordSuccess: null,

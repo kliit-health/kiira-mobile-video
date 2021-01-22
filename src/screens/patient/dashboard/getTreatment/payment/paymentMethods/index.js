@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import {
   View,
   ScrollView,
@@ -7,15 +7,15 @@ import {
   Platform,
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import Language from '../../../utils/localization';
-import CustomText from '../../../components/customText';
-import { connect } from 'react-redux';
+import Language from '../../../../../../utils/localization';
+import CustomText from '../../../../../../components/customText';
+import {connect} from 'react-redux';
 import styles from './style';
-import Constant from '../../../utils/constants';
+import Constant from '../../../../../../utils/constants';
 import {
   defaultPaymentMethods,
   PaymentMethodsTypes,
-} from '../../../utils/helper/payment';
+} from '../../../../../../utils/helper/payment';
 
 let lang = Language.en;
 class PaymentMethods extends PureComponent {
@@ -31,18 +31,17 @@ class PaymentMethods extends PureComponent {
   }
 
   renderHeaderView() {
-    const { navigation } = this.props;
-    const { staticImages } = Constant.App;
+    const {navigation} = this.props;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image
             style={styles.crossBottom}
-            resizeMode='contain'
+            resizeMode="contain"
             source={staticImages.crossIcon}
           />
         </TouchableOpacity>
@@ -54,7 +53,7 @@ class PaymentMethods extends PureComponent {
   }
 
   renderPaymentMethod(method, index) {
-    const { navigation } = this.props;
+    const {navigation} = this.props;
 
     return (
       <TouchableOpacity
@@ -63,11 +62,10 @@ class PaymentMethods extends PureComponent {
         onPress={() => {
           navigation.goBack();
         }}
-        disabled={true}
-      >
+        disabled={true}>
         <Image
           style={styles.paymentMethodImage}
-          resizeMode='contain'
+          resizeMode="contain"
           source={this.getPaymentMethodIcon(method.type)}
         />
         <CustomText style={styles.sectionText}>
@@ -85,7 +83,7 @@ class PaymentMethods extends PureComponent {
   }
 
   getPaymentMethodIcon = (methodType) => {
-    const { cardIcon, applePayIcon, payPalIcon } = Constant.App.staticImages;
+    const {cardIcon, applePayIcon, payPalIcon} = Constant.App.staticImages;
     switch (methodType) {
       case PaymentMethodsTypes.applePay:
         return applePayIcon;
@@ -111,15 +109,15 @@ class PaymentMethods extends PureComponent {
           {lang.paymentMethods.myPayment}
         </CustomText>
         {paymentMethods.map((item, index) =>
-          this.renderPaymentMethod(item, index)
+          this.renderPaymentMethod(item, index),
         )}
       </View>
     );
   }
 
   renderAddPaymentMethodView() {
-    const { navigation } = this.props;
-    const { staticImages } = Constant.App;
+    const {navigation} = this.props;
+    const {staticImages} = Constant.App;
 
     return (
       <View style={styles.parentContainerStyle}>
@@ -131,11 +129,10 @@ class PaymentMethods extends PureComponent {
           style={styles.paymentMethodContainer}
           onPress={() => {
             navigation.navigate(Constant.App.screenNames.AddCreditOrDebitCard);
-          }}
-        >
+          }}>
           <Image
             style={styles.plusIcon}
-            resizeMode='contain'
+            resizeMode="contain"
             source={staticImages.plusIcon}
           />
           <CustomText style={styles.sectionText}>
@@ -151,9 +148,8 @@ class PaymentMethods extends PureComponent {
       <View style={styles.container}>
         {this.renderHeaderView()}
         <ScrollView
-          keyboardShouldPersistTaps='handled'
-          showsVerticalScrollIndicator={false}
-        >
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
           {this.renderMyPaymentMethodsView()}
           {this.renderAddPaymentMethodView()}
         </ScrollView>

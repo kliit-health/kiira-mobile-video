@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Image, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
-import CustomButton from '../../../components/customButton';
+import CustomButton from '../../../../../../components/customButton';
 import styles from '../styles';
 import {getLogin} from '../actions';
 import {withNavigation} from 'react-navigation';
 
-const VisitDetails = ({navigation, visit, ...props}) => {
+const VisitDetails = ({visit}) => {
   const dispatch = useDispatch();
   let today = moment().startOf('day');
   let appointment =
@@ -29,7 +29,7 @@ const VisitDetails = ({navigation, visit, ...props}) => {
           <View style={styles.expertImageContainer}>
             <Image
               style={styles.locationImage}
-              source={require('../../../../assets/blue_location.jpg')}
+              source={require('../../../../../../../assets/blue_location.jpg')}
               activeOpacity={0.7}
             />
             <View style={styles.informationContainer}>

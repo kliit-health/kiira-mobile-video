@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {
   Container,
   Header,
@@ -7,23 +7,22 @@ import {
   Avatar,
   Ratings,
   Linking,
-} from '../../components';
-import Arrow from '../../svgs/arrow.svg';
-import Phone from '../../svgs/phone.svg';
-import {Prescriber} from '../../components/icons';
-import intl from '../../utils/localization';
+} from '../../../../components';
+import Arrow from '../../../../svgs/arrow.svg';
+import Phone from '../../../../svgs/phone.svg';
+import {Prescriber} from '../../../../components/icons';
+import intl from '../../../../utils/localization';
 import {
   addHashtag,
   formatLanguages,
   calculateRating,
-} from '../../utils/functions';
-import {screenNames} from '../../utils/constants';
+} from '../../../../utils/functions';
+import {screenNames} from '../../../../utils/constants';
 import styles, {modifiers} from './styles';
 
 const GetTreatment = ({navigation}) => {
   const details = navigation.getParam('details');
   const navigator = navigation.getParam('navigator');
-  const calendar = navigation.getParam('calendar');
 
   const {rating, profileInfo, clinicInfo} = details;
   const {

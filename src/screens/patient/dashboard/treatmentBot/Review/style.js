@@ -1,45 +1,45 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../../utils/constants";
+import {StyleSheet} from 'react-native';
+import Constant from '../../../../../utils/constants';
 
 const style = StyleSheet.create({
   category: {
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
     fontFamily: Constant.App.fontFamily.headerSemiBold,
   },
 
   value: {
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
     fontFamily: Constant.App.fontFamily.proximaNovaSemiBold,
-    color: "#509AEC",
+    color: '#509AEC',
     marginBottom: 10,
   },
 
   container: {
-    width: "100%",
-    backgroundColor: "#fff",
+    width: '100%',
+    backgroundColor: '#fff',
     borderRadius: 10,
   },
 
   rowContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: 42,
     marginVertical: 10,
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
 
   pronounsContainer: {
-    flexDirection: "column",
+    flexDirection: 'column',
     margin: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   title: {
     fontFamily: Constant.App.fontFamily.headerSemiBold,
     fontSize: Constant.App.textSize.xLarge,
-    textAlign: "center",
+    textAlign: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: "black",
+    borderBottomColor: 'black',
     marginHorizontal: 8,
   },
 });

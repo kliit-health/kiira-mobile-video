@@ -49,7 +49,7 @@ const SelectExpert = ({navigation}) => {
               marginTop: 20,
             }}
             resizeMode="contain"
-            source={require('../../../assets/bell.png')}
+            source={require('../../../../../../assets/bell.png')}
           />
           <Text style={styles.title}>No Providers found</Text>
           <Text style={styles.subtitle}>

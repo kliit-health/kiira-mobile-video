@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import {
   View,
   ScrollView,
@@ -6,15 +6,15 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import Language from '../../../utils/localization';
-import CustomText from '../../../components/customText';
+import Language from '../../../../../../utils/localization';
+import CustomText from '../../../../../../components/customText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import styles from './style';
-import Constant from '../../../utils/constants';
-import CustomInputText from '../../../components/customInputText';
-import CustomButton from '../../../components/customButton';
-import { createPaymentCard } from '../action';
+import Constant from '../../../../../../utils/constants';
+import CustomInputText from '../../../../../../components/customInputText';
+import CustomButton from '../../../../../../components/customButton';
+import {createPaymentCard} from '../action';
 
 let lang = Language.en;
 class AddCreditOrDebitCard extends PureComponent {
@@ -29,18 +29,17 @@ class AddCreditOrDebitCard extends PureComponent {
     };
   }
   renderHeaderView() {
-    const { navigation } = this.props;
-    const { staticImages } = Constant.App;
+    const {navigation} = this.props;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Image
             style={styles.crossBottom}
-            resizeMode='contain'
+            resizeMode="contain"
             source={staticImages.crossIcon}
           />
         </TouchableOpacity>
@@ -64,14 +63,14 @@ class AddCreditOrDebitCard extends PureComponent {
       <View style={styles.parentContainerStyle}>
         <View style={styles.inputTextMargin}>
           <CustomInputText
-            autoCapitalize='words'
-            onChangeText={(value) => this.setState({ cardNumber: value })}
+            autoCapitalize="words"
+            onChangeText={(value) => this.setState({cardNumber: value})}
             placeholder={lang.addCreditCardData.cardNumber}
             value={cardNumber}
             style={
               cardNumber
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: '100' }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -81,7 +80,7 @@ class AddCreditOrDebitCard extends PureComponent {
             <CustomInputText
               maxLength={5}
               keyboardType={'number-pad'}
-              autoCapitalize='words'
+              autoCapitalize="words"
               onChangeText={(value) => {
                 var formatted = value;
                 if (value.length == 2) {
@@ -91,14 +90,14 @@ class AddCreditOrDebitCard extends PureComponent {
                     formatted = value;
                   }
                 }
-                this.setState({ expireDate: formatted });
+                this.setState({expireDate: formatted});
               }}
               placeholder={lang.addCreditCardData.expireDate}
               value={expireDate}
               style={
                 (expireDate
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }],
+                  : [styles.inputTypeStyle, {fontWeight: '100'}],
                 styles.expireDateWidh)
               }
               placeholderTextColor={Constant.App.colors.blackColor}
@@ -107,14 +106,14 @@ class AddCreditOrDebitCard extends PureComponent {
           <View>
             <CustomInputText
               maxLength={3}
-              autoCapitalize='words'
-              onChangeText={(value) => this.setState({ securityCode: value })}
+              autoCapitalize="words"
+              onChangeText={(value) => this.setState({securityCode: value})}
               placeholder={lang.addCreditCardData.securityCode}
               value={securityCode}
               style={
                 (securityCode
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }],
+                  : [styles.inputTypeStyle, {fontWeight: '100'}],
                 styles.securityCodeWidth)
               }
               placeholderTextColor={Constant.App.colors.blackColor}
@@ -124,28 +123,28 @@ class AddCreditOrDebitCard extends PureComponent {
 
         <View style={styles.inputTextMargin}>
           <CustomInputText
-            autoCapitalize='words'
-            onChangeText={(value) => this.setState({ firstName: value })}
+            autoCapitalize="words"
+            onChangeText={(value) => this.setState({firstName: value})}
             placeholder={lang.addCreditCardData.firstName}
             value={firstName}
             style={
               firstName
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: '100' }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
         </View>
         <View style={styles.inputTextMargin}>
           <CustomInputText
-            autoCapitalize='words'
-            onChangeText={(value) => this.setState({ lastName: value })}
+            autoCapitalize="words"
+            onChangeText={(value) => this.setState({lastName: value})}
             placeholder={lang.addCreditCardData.lastName}
             value={lastName}
             style={
               lastName
                 ? styles.inputTypeStyle
-                : [styles.inputTypeStyle, { fontWeight: '100' }]
+                : [styles.inputTypeStyle, {fontWeight: '100'}]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -154,7 +153,7 @@ class AddCreditOrDebitCard extends PureComponent {
     );
   }
   renderButtonView() {
-    const { paymentCard, navigation } = this.props;
+    const {paymentCard, navigation} = this.props;
     const {
       firstName,
       lastName,
@@ -188,12 +187,12 @@ class AddCreditOrDebitCard extends PureComponent {
     );
   }
   renderFooter() {
-    const { staticImages } = Constant.App;
+    const {staticImages} = Constant.App;
     return (
       <View style={styles.parentContainerStyle}>
         <Image
           style={styles.lockImage}
-          resizeMode='contain'
+          resizeMode="contain"
           source={staticImages.lockIcon}
         />
         <CustomText style={styles.footerTextStyle}>
@@ -207,9 +206,8 @@ class AddCreditOrDebitCard extends PureComponent {
       <View style={styles.container}>
         {this.renderHeaderView()}
         <ScrollView
-          keyboardShouldPersistTaps='handled'
-          showsVerticalScrollIndicator={false}
-        >
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
           {this.renderInputTextView()}
           {this.renderButtonView()}
           {this.renderFooter()}
