@@ -12,7 +12,7 @@ import ExpertHeader from '../../components/expertHeader';
 import PatientCard from './components/patientCard';
 import {screenNames} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserDetails} from '../../redux/actions';
+import {getUser} from '../../redux/actions';
 import {getPatientDetails} from './actions';
 import {withNavigation} from 'react-navigation';
 import styles from './style';
@@ -21,11 +21,11 @@ const PatientProfile = ({navigation}) => {
   const {expert, visit, patient} = navigation.state.params;
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const patientInfo = useSelector((state) => state.userDetails.data);
+  const patientInfo = useSelector((state) => state.user.data);
   const appointment = useSelector((state) => state.medicalHistory.appointment);
 
   useEffect(() => {
-    dispatch(getUserDetails(patient.uid));
+    dispatch(getUser(patient.uid));
   }, []);
 
   useEffect(() => {

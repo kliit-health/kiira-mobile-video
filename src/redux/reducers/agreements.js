@@ -2,7 +2,7 @@ import {
   GET_AGREEMENTS_PENDING,
   GET_AGREEMENTS_FULFILLED,
   GET_AGREEMENTS_REJECTED,
-} from '../../redux/types';
+} from '../types';
 import {createReducer} from '@reduxjs/toolkit';
 
 const initialState = {

@@ -8,7 +8,7 @@ import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {getUserData, updateStatus, makeid} from '../../utils/firebase';
 import {displayConsole} from '../../utils/helper';
-import {setUserData, setFcmToken, setLicenses} from './action';
+import {setUserData, setFcmToken} from './action';
 
 let isFirstTime = true;
 class AuthLoadingScreen extends Component {
@@ -38,7 +38,7 @@ class AuthLoadingScreen extends Component {
   }
 
   async getToken() {
-    const {setData, userData, setToken, navigation, setLicenses} = this.props;
+    const {setData, userData, setToken, navigation} = this.props;
     if (!userData) {
       let token = await AsyncStorage.getItem('fcmToken');
       if (!token) {
@@ -222,7 +222,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setData: (data) => dispatch(setUserData(data)),
   setToken: (value) => dispatch(setFcmToken(value)),
-  setLicense: () => dispatch(setLicenses),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);

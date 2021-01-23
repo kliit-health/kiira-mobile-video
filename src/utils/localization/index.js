@@ -427,8 +427,8 @@ export default {
     termsAndConditions: {
       title: 'Terms and Conditions',
     },
-    privacyPolicies: {
-      title: 'Privacy Policies',
+    privacyPolicy: {
+      title: 'Privacy Policy',
     },
     help: {
       title: 'Help',
@@ -506,6 +506,19 @@ export default {
       title: 'Change Plan',
       confirm: 'Confirm',
       cancel: 'Cancel',
+    },
+    dashboard: {
+      title: 'Dashboard',
+      getTreatment: 'Get Treatment',
+      mySquad: 'My Squad',
+      chatExpert: 'Chat with an Expert',
+      myHistory: 'My History',
+      reminders: 'Reminders',
+      sos: 'SOS',
+      helloName: 'Hello, ',
+      notFeelingSick: `I'm not feeling sick`,
+      nowMention: 'Now that you mention it',
+      kiira: 'Kiira',
     },
   },
 };

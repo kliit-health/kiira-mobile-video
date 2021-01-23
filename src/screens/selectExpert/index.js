@@ -9,10 +9,8 @@ import styles from './style';
 
 const SelectExpert = ({navigation}) => {
   const [availableExperts, setAvailableExperts] = useState([]);
-  const experts = useSelector((state) => state.careSquad.experts);
-  const userProfile = useSelector(
-    (state) => state.userDetails.data.profileInfo,
-  );
+  const experts = useSelector((state) => state.experts.data);
+  const userProfile = useSelector((state) => state.user.data.profileInfo);
 
   useEffect(() => {
     if (experts.length && userProfile) {
@@ -35,7 +33,7 @@ const SelectExpert = ({navigation}) => {
   const handleBackPress = () => navigation.goBack();
 
   return (
-    <Container>
+    <Container unformatted>
       <Header title={intl.en.requestVisit.title} onBack={handleBackPress} />
       {availableExperts && availableExperts.length ? (
         <List onCardPress={handleCardPress} data={availableExperts} />

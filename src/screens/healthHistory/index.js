@@ -8,7 +8,7 @@ import styles from './styles';
 
 const HealthHistory = ({navigation}) => {
   const healthHistory = useSelector(
-    (state) => state.healthHistory,
+    (state) => state.healthHistory.data,
     shallowEqual,
   );
 

@@ -15,7 +15,7 @@ import Constant from '../../utils/constants';
 import {loginFailure} from './action';
 import {signoutApihit} from '../account/action';
 import {setUserData, getLicenses} from '../authLoading/action';
-import {getTerms} from '../termsAndConditions/action';
+import {getTermsAndConditions} from '../../redux/actions';
 
 let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -46,7 +46,7 @@ function* loginFirebase({data}) {
         };
         yield updateStatus(updateStatusParams);
         yield put(getLicenses());
-        yield put(getTerms());
+        yield put(getTermsAndConditions());
         if (userData && userData.role === 'User' && !userData.firstLogin) {
           yield put(setUserData(userData));
           if (userData.agreeToTerms) {

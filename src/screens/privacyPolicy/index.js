@@ -1,19 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import Image from 'react-native-fast-image';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Header, Container} from '../../components';
 import inlt from '../../utils/localization';
-import {getPolicies} from './action';
 import styles from './styles';
 
-const PrivacyPolicies = ({navigation}) => {
-  const sections = useSelector((state) => state.privacyReducer.legal.sections);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPolicies());
-  }, []);
+const PrivacyPolicy = ({navigation}) => {
+  const sections = useSelector((state) => state.privacyPolicy.data.sections);
 
   const handleOnBackPress = () => {
     navigation.goBack();
@@ -21,10 +15,7 @@ const PrivacyPolicies = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header
-        onBack={handleOnBackPress}
-        title={inlt.en.privacyPolicies.title}
-      />
+      <Header onBack={handleOnBackPress} title={inlt.en.privacyPolicy.title} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
@@ -46,4 +37,4 @@ const PrivacyPolicies = ({navigation}) => {
   );
 };
 
-export default PrivacyPolicies;
+export default PrivacyPolicy;

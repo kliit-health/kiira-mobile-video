@@ -7,8 +7,8 @@ import {
   getResolvedQuestions,
   searchQuestions,
 } from './action';
-import {getTerms} from '../../termsAndConditions/action';
-import {getPolicies} from '../../privacyPolicy/action';
+import {getTermsAndConditions} from '../../../redux/actions';
+import {getPrivacyPolicy} from '../../../redux/actions';
 import {ActiveQuestions, ResolvedQuestions} from './components';
 import intl from '../../../utils/localization';
 
@@ -35,11 +35,11 @@ const AskExpert = ({navigation}) => {
   );
 
   useEffect(() => {
-    dispatch(getTerms());
+    dispatch(getTermsAndConditions());
   }, []);
 
   useEffect(() => {
-    dispatch(getPolicies());
+    dispatch(getPrivacyPolicy());
   }, []);
 
   useEffect(() => {

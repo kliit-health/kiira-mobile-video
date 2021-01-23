@@ -10,7 +10,7 @@ import {signOut} from './action';
 import styles, {modifiers} from './styles';
 
 const Account = ({navigation}) => {
-  const details = useSelector((state) => state.authLoadingReducer.userData);
+  const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
   const [changePlanVisible, setChangePlanVisible] = useState(false);
@@ -46,7 +46,7 @@ const Account = ({navigation}) => {
       <ScrollView>
         <View style={styles.profileContainter}>
           <View style={styles.profileBackground} />
-          <ProfileCard {...details} />
+          <ProfileCard {...user} />
         </View>
         <View style={styles.actionsContainer}>
           <TextButton onPress={toggleChangePlan}>

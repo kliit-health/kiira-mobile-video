@@ -1,25 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {ActivityIndicator, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bool, func} from 'prop-types';
 import {Modal, Header, TextButton} from '../../components';
 import {useDidMount} from '../../utils/hooks';
 import intl from '../../utils/localization';
 import {PlanCard} from './sections';
-import {getPlans, changePlan} from './actions';
+import {getPlans, updatePlan} from '../../redux/actions';
 import styles, {modifiers} from './styles';
 
 const ChangePlan = ({
   visible,
   onClose,
   getPlans,
-  changePlan,
+  updatePlan,
   loading,
   plans,
-  currentPlan,
+  plan,
   subscription,
 }) => {
-  const [selectedPlan, setSelectedPlan] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState({id: ''});
 
   useDidMount(() => {
     getPlans();
@@ -34,6 +34,10 @@ const ChangePlan = ({
   };
 
   const handlePlanChange = () => {
+    updatePlan({
+      subscriptionId: subscription.id,
+      planId: selectedPlan.id,
+    });
     handleClose();
   };
 
@@ -54,7 +58,7 @@ const ChangePlan = ({
                 key={props.id}
                 onPress={handleSelection}
                 selected={selectedPlan.id === props.id}
-                disabled={currentPlan.id === props.id}
+                disabled={plan.id === props.id}
                 {...props}
               />
             ))}
@@ -80,16 +84,16 @@ ChangePlan.defaultProps = {
   loading: false,
 };
 
-const mapStateToProps = ({changePlan, authLoadingReducer}) => ({
-  plans: changePlan.plans,
-  loading: changePlan.loading,
-  currentPlan: authLoadingReducer.userData.plan,
-  subscription: authLoadingReducer.userData.subscription,
+const mapStateToProps = ({plans, plan, subscription}) => ({
+  plans: plans.data,
+  loading: plans.loading,
+  plan: plan.data,
+  subscription: subscription.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getPlans: () => dispatch(getPlans()),
-  changePlan: (details) => dispatch(changePlan(details)),
+  updatePlan: (details) => dispatch(updatePlan(details)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePlan);

@@ -21,25 +21,30 @@ import loaderReducer from '../../components/customLoader/reducer';
 import loginReducer from '../../screens/login/reducer';
 import modalReducer from '../../components/customModal/reducer';
 import paymentReducer from '../../screens/payment/reducer';
-import privacyReducer from '../../screens/privacyPolicy/reducer';
 import rescheduleReducer from '../../screens/rescheduleVisit/reducer';
 import settingExpertReducer from '../../screens/setting/expert/reducer';
 import settingReducer from '../../screens/setting/reducer';
 import signupReducer from '../../screens/signUp/reducer';
-import termsReducer from '../../screens/termsAndConditions/reducer';
 import toastReducer from '../../components/customToast/reducer';
 import verifyReducer from '../../screens/verify/reducer';
-import healthHistory from '../../screens/healthHistory/reducer';
-import careSquad from '../../screens/careSquad/reducer';
 import navigator from './navigator';
 import treatmentHistory from '../../screens/treatmentHistory/reducer';
 import updateExpertReducer from '../../screens/updateAvailablity/reducer';
-import agreements from '../../screens/agreements/reducer';
-import userDetails from './userDetails';
+import agreements from './agreements';
+import user from './user';
 import clientMedicalHistory from './medicalHistory';
 import visitReducer from '../../screens/visit/reducer';
 import medicalHistory from '../../screens/patientProfile/reducer';
-import changePlan from '../../screens/changePlan/reducer';
+import plan from './plan';
+import subscription from './subscription';
+import termsAndConditions from './termsAndConditions';
+import privacyPolicy from './privacyPolicy';
+import licenses from './licenses';
+import healthHistory from './healthHistory';
+import plans from './plans';
+import experts from './experts';
+import questions from './questions';
+import favoriteExperts from './favoriteExperts';
 
 export default combineReducers({
   accountReducer,
@@ -65,22 +70,27 @@ export default combineReducers({
   loginReducer,
   modalReducer,
   paymentReducer,
-  privacyReducer,
   rescheduleReducer,
   settingExpertReducer,
   settingReducer,
   signupReducer,
-  termsReducer,
   toastReducer,
   verifyReducer,
-  careSquad,
   navigator,
   treatmentHistory,
   updateExpertReducer,
   agreements,
-  userDetails,
+  user,
   visitReducer,
   medicalHistory,
   clientMedicalHistory,
-  changePlan,
+  plan,
+  termsAndConditions,
+  privacyPolicy,
+  licenses,
+  subscription,
+  plans,
+  experts,
+  questions,
+  favoriteExperts,
 });

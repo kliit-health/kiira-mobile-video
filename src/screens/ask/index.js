@@ -5,12 +5,13 @@ import {
   ScrollView,
   FlatList,
   Platform,
+  Image,
 } from 'react-native';
 import {connect} from 'react-redux';
 import CustomText from '../../components/customText';
 import styles from './style';
 import language from '../../utils/localization';
-import Constant, {screenNames} from '../../utils/constants';
+import Constant from '../../utils/constants';
 import InputText from '../../components/customInputText/simpleInputText';
 import CustomButton from '../../components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -18,12 +19,10 @@ import {getQuestionData, updateQuestion} from './action';
 import moment from 'moment';
 import {withNavigation} from 'react-navigation';
 import {Header} from '../../components';
-import {getTerms} from '../termsAndConditions/action';
-import {getPolicy} from '../privacyPolicy/action';
-import FastImage from 'react-native-fast-image';
-import {setUserData} from './action';
+import CachedImage from 'react-native-image-cache-wrapper';
+import {setuser} from './action';
 import firebase from 'react-native-firebase';
-import {getUserData} from '../../utils/firebase';
+import {getuser} from '../../utils/firebase';
 import {showOrHideModal} from '../../components/customModal/action';
 
 const lang = language.en;
@@ -32,8 +31,8 @@ class Ask extends PureComponent {
     super(props);
     this.state = {
       questionText: '',
-      questions: this.props.userData.questions,
-      credits: this.props.userData.credits,
+      questions: this.props.user.questions,
+      credits: this.props.user.credits,
       videoChat: 0,
     };
   }
@@ -59,7 +58,7 @@ class Ask extends PureComponent {
             tableName: Constant.App.firebaseTableNames.users,
             uid: user.uid,
           };
-          getUserData(
+          getuser(
             obj,
             (querySnapshot) => {
               const data = querySnapshot.data();
@@ -106,11 +105,11 @@ class Ask extends PureComponent {
   };
 
   fetchData() {
-    const {getQuestion, userData} = this.props;
+    const {getQuestion, user} = this.props;
     const params = {
       questionParams: {
         tableName: Constant.App.firebaseTableNames.questions,
-        uid: userData.uid,
+        uid: user.uid,
         collection: Constant.App.firebaseTableNames.questionList,
         key: Constant.App.firebaseTableKeyValuesNames.questionConditionKey,
         value: false,
@@ -124,7 +123,7 @@ class Ask extends PureComponent {
       },
       previousQuestionParams: {
         tableName: Constant.App.firebaseTableNames.questions,
-        uid: userData.uid,
+        uid: user.uid,
         collection: Constant.App.firebaseTableNames.questionList,
         key: Constant.App.firebaseTableKeyValuesNames.questionConditionKey,
         value: true,
@@ -136,8 +135,8 @@ class Ask extends PureComponent {
   }
 
   renderHeadingProfileView() {
-    const {userData, questionData} = this.props;
-    const {firstName, lastName, profileImageUrl} = userData.profileInfo;
+    const {user, questionData} = this.props;
+    const {firstName, lastName, profileImageUrl} = user.profileInfo;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.headingProfileImageParentContainer}>
@@ -155,22 +154,23 @@ class Ask extends PureComponent {
           </CustomText>
         </View>
         <View style={styles.profileImgViewStyle}>
-          <FastImage
+          <Image
             style={{
               width: 70,
               height: 70,
               borderRadius: 50,
             }}
+            defaultSource={staticImages.profilePlaceholderImg}
             source={{uri: profileImageUrl}}
             activeOpacity={0.7}
           />
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={styles.badgeContainerStyle}
             onPress={() => {}}>
             <CustomText style={styles.badgeTextStyle}>
               {this.state.credits}
             </CustomText>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -210,14 +210,18 @@ class Ask extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation, question, userData, showHideErrorModal} = this.props;
+    const {navigation, question, user, showHideErrorModal} = this.props;
     return (
       <CustomButton
         disabled={question ? false : true}
         buttonStyle={styles.buttonContainerStyle}
         textStyle={styles.buttonTextStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ChooseExpert);
+          if (user.demo) {
+            showHideErrorModal('Currently unavailable');
+          } else {
+            navigation.navigate(Constant.App.screenNames.ChooseExpert);
+          }
         }}
         text={lang.askUser.btnText}
       />
@@ -252,9 +256,13 @@ class Ask extends PureComponent {
                 }>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.navigate(screenNames.getTreatment, {
-                      details: item,
-                    });
+                    navigation.navigate(
+                      Constant.App.screenNames.ExpertProfile,
+                      {
+                        isFrom: Constant.App.screenNames.AskUser,
+                        uid: item.uid,
+                      },
+                    );
                   }}>
                   <View
                     style={{
@@ -262,16 +270,20 @@ class Ask extends PureComponent {
                       height: 100,
                       alignSelf: 'center',
                     }}>
-                    <FastImage
+                    <CachedImage
                       containerStyle={{alignSelf: 'center'}}
                       style={{
                         width: 100,
                         height: 100,
                         borderRadius: 50,
                       }}
-                      source={{
-                        uri: item.profileInfo.profileImageUrl,
-                      }}
+                      source={
+                        item.profileInfo.profileImageUrl
+                          ? {
+                              uri: item.profileInfo.profileImageUrl,
+                            }
+                          : staticImages.profilePlaceholderImg
+                      }
                       activeOpacity={0.7}
                     />
                     {item.isOnline ? (
@@ -330,7 +342,6 @@ class Ask extends PureComponent {
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
           data={previousQuestionData}
           renderItem={({item}) => {
-            item = item.data();
             return (
               <TouchableOpacity
                 onPress={() => {
@@ -358,16 +369,16 @@ class Ask extends PureComponent {
                           },
                         );
                       }}>
-                      <FastImage
+                      <CachedImage
                         containerStyle={{alignSelf: 'center'}}
                         style={{
                           width: 50,
                           height: 50,
-                          borderRadius: 50,
                         }}
-                        resizeMode="cover"
                         source={{
-                          uri: item.expertInfo.profileInfo.profileImageUrl,
+                          uri: item.expertInfo.profileInfo.profileImageUrl
+                            ? item.expertInfo.profileInfo.profileImageUrl
+                            : '',
                         }}
                         activeOpacity={0.7}
                       />
@@ -397,7 +408,6 @@ class Ask extends PureComponent {
     const {staticImages} = Constant.App;
     return (
       <TouchableOpacity
-        style={{marginBottom: 20}}
         onPress={() => {
           const expertDetails = experts.find(
             (expert) => expert.uid === questionData.expertInfo.uid,
@@ -430,7 +440,7 @@ class Ask extends PureComponent {
             {questionData.question}
           </CustomText>
           <View style={styles.expertInfoContainerStyle}>
-            <FastImage
+            <CachedImage
               containerStyle={{alignSelf: 'center'}}
               style={{
                 width: 50,
@@ -438,7 +448,9 @@ class Ask extends PureComponent {
                 borderRadius: 50,
               }}
               source={{
-                uri: questionData.expertInfo.profileInfo.profileImageUrl,
+                uri: questionData.expertInfo.profileInfo.profileImageUrl
+                  ? questionData.expertInfo.profileInfo.profileImageUrl
+                  : '',
               }}
               activeOpacity={0.7}
             />
@@ -475,7 +487,7 @@ class Ask extends PureComponent {
       previousQuestionData,
       questionData,
       navigation,
-      userData,
+      user,
     } = this.props;
 
     return (
@@ -494,9 +506,9 @@ class Ask extends PureComponent {
             this.state.credits === 0 &&
             this.state.questions === 0 &&
             this.renderEmptyCreditView()}
-          {/* {recentExpertData &&
+          {recentExpertData &&
             recentExpertData.length > 0 &&
-            this.renderRecentExpertView()} */}
+            this.renderRecentExpertView()}
           {previousQuestionData &&
             previousQuestionData.length > 0 &&
             this.renderPreviousQuestionView()}
@@ -508,20 +520,18 @@ class Ask extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoadingReducer.userData,
+  user: state.user.data,
   recentExpertData: state.askReducer.recentExpertData,
-  previousQuestionData: state.askReducer.previousQuestionData,
+  previousQuestionData: state.questions.resolved.data,
   questionData: state.askReducer.questionData,
   question: state.askReducer.question,
-  experts: state.careSquad.experts,
+  experts: state.experts.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setData: (data) => dispatch(setUserData(data)),
+  setData: (data) => dispatch(setuser(data)),
   getQuestion: (value) => dispatch(getQuestionData(value, dispatch)),
   setQuestionText: (value) => dispatch(updateQuestion(value)),
-  getTerms: () => dispatch(getTerms()),
-  getPolicy: () => dispatch(getPolicy()),
   showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
 });
 

@@ -20,7 +20,7 @@ const BookVisit = (props) => {
   );
 
   const visitData = useSelector((state) => state.expertScheduleReducer);
-  const userData = useSelector((state) => state.userDetails.data);
+  const userData = useSelector((state) => state.user.data);
   const bookVisit = useSelector((state) => state.bookVisitReducer);
 
   const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;

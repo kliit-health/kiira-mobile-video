@@ -6,10 +6,7 @@ import {switchCase} from '../../utils/functions';
 import {initialQuestions, extraQuestions, types} from './model';
 import {useSelector, useDispatch} from 'react-redux';
 import {PolarQuestion, ObjectiveQuestion, PickerQuestion} from './components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+import {updateHealthHistory} from '../../redux/actions';
 import styles from './styles';
 
 const Lifestyle = ({navigation}) => {
@@ -112,7 +109,7 @@ const Lifestyle = ({navigation}) => {
 
   const handleFinishPress = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
         lifestyle: {
           answers,
           completed: true,

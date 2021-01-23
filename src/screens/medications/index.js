@@ -4,10 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import intl from '../../utils/localization';
 import {model} from './model';
 import {Container, Header, TextInput, TextButton} from '../../components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+import {updateHealthHistory} from '../../redux/actions';
 import styles from './styles';
 
 const Medications = ({navigation}) => {
@@ -34,7 +31,7 @@ const Medications = ({navigation}) => {
 
   const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
         medications: {answers, completed: true},
         navigation,
       }),

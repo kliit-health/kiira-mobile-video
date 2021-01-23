@@ -17,7 +17,7 @@ import moment from 'moment';
 import {put, takeEvery, select, call} from 'redux-saga/effects';
 import {
   firebaseSingleFetch,
-  updateSingleDocument,
+  firebaseSingleUpdate,
   saveAndLock,
   getMedicalHistoryAsync,
   sendVisitRecap,
@@ -34,11 +34,11 @@ function* getPatientDetails({data}) {
     });
   } catch (error) {
     try {
-      const userDetails = yield select((state) => state.userDetails.data);
+      const user = yield select((state) => state.user.data);
       const {
         uid,
         profileInfo: {firstName, lastName, dob},
-      } = userDetails;
+      } = user;
 
       yield put({
         type: UPDATE_PATIENT_DETAILS,
@@ -52,16 +52,14 @@ function* getPatientDetails({data}) {
         },
       });
 
-      const hasConsentAgreements = userDetails.hasOwnProperty(
-        'consentAgreements',
-      );
+      const hasConsentAgreements = user.hasOwnProperty('consentAgreements');
       console.log('CONSENT AGREEMENTS', hasConsentAgreements);
       if (hasConsentAgreements) {
         yield put({
           type: UPDATE_PATIENT_DETAILS,
           data: {
             dataKey: 'consentAgreements',
-            updates: userDetails.consentAgreements,
+            updates: user.consentAgreements,
             uid,
           },
         });
@@ -82,7 +80,7 @@ function* updatePatientDetails({data}) {
 
   try {
     yield put({type: UPDATE_PATIENT_DETAILS_PENDING});
-    yield updateSingleDocument(uid, 'patient', {[dataKey]: updates});
+    yield firebaseSingleUpdate(uid, 'patient', {[dataKey]: updates});
     yield put({
       type: UPDATE_PATIENT_DETAILS_FULFILLED,
       data: {updates, dataKey},

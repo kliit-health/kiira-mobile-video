@@ -3,7 +3,7 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../components/customLoader/action';
-import {setUserDetails} from '../../redux/actions';
+import {updateUser} from '../../redux/actions';
 import Language from '../../utils/localization';
 import {
   CREATE_PAYMENT_CARD,
@@ -125,7 +125,7 @@ function* handlePayResponse(response, credits, navigation) {
       };
       const userData = yield getDataFromTable(obj);
       yield put(setData(userData));
-      yield put(setUserDetails(userData));
+      yield put(updateUser(userData));
       yield put(showOrHideModal(Lang.successMessages.visitAddedSuccessfully));
       if (navigation === undefined) {
         NavigationService.goBack();

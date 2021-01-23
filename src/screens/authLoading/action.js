@@ -26,12 +26,3 @@ export const setAppScreen = (data) => ({
   type: SET_APP_SCREEN,
   data,
 });
-
-export const getLicenses = () => ({
-  type: GET_LICENSES,
-});
-
-export const setLicenses = (data) => ({
-  type: SET_LICENSES,
-  data,
-});

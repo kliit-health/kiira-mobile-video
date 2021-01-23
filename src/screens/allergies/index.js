@@ -6,10 +6,8 @@ import {Container, Header, FooterNavigation} from '../../components';
 import intl from '../../utils/localization';
 import {initialQuestions, extraQuestions, types} from './model';
 import {PolarQuestion, ObjectiveQuestion} from './components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../healthHistory/actions';
+import {updateHealthHistory} from '../../redux/actions';
+
 import styles from './styles';
 
 const Allergies = ({navigation}) => {
@@ -104,7 +102,7 @@ const Allergies = ({navigation}) => {
 
   const handleFinishPress = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
         allergies: {
           answers,
           completed: true,

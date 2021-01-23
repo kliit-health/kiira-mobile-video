@@ -3,8 +3,7 @@ import {Container, Header, SearchBar} from '../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import intl from '../../utils/localization';
 import {screenNames} from '../../utils/constants';
-import {searchObject} from '../../utils/functions';
-import {updateFavoriteExpertsAsync, getFavoriteExpertsAsync} from './actions';
+import {updateFavoriteExperts} from '../../redux/actions';
 import {getChatHistoryAsync} from '../treatmentHistory/actions';
 import {List, Favorites} from './sections';
 import {modifiers} from './styles';
@@ -16,16 +15,13 @@ const CareSquad = ({navigation}) => {
   const [isSearching, setSearching] = useState(false);
   const [searchData, setSearchData] = useState([]);
 
-  const {experts} = useSelector((state) => state.careSquad);
-  const {favorites} = useSelector((state) => state.careSquad);
-  const {currentRoute} = useSelector((state) => state.navigator);
+  const user = useSelector((state) => state.user.data);
+  const experts = useSelector((state) => state.experts.data);
+  const favorites = useSelector((state) => state.favoriteExperts.data);
+  const currentRoute = useSelector((state) => state.navigator.currentRoute);
 
   useEffect(() => {
     dispatch(getChatHistoryAsync());
-  }, []);
-
-  useEffect(() => {
-    dispatch(getFavoriteExpertsAsync());
   }, []);
 
   useEffect(() => {
@@ -63,7 +59,9 @@ const CareSquad = ({navigation}) => {
   };
 
   const handleAddPress = ({uid}) => {
-    dispatch(updateFavoriteExpertsAsync([...favorites, uid]));
+    dispatch(
+      updateFavoriteExperts({uid: user.uid, favorites: [...favorites, uid]}),
+    );
   };
 
   const handleEditPress = () => {
@@ -73,9 +71,10 @@ const CareSquad = ({navigation}) => {
   const handleFavoriteItemPress = (details) => {
     deleteMode
       ? dispatch(
-          updateFavoriteExpertsAsync(
-            favorites.filter((uid) => uid !== details.uid),
-          ),
+          updateFavoriteExperts({
+            uid: user.uid,
+            favorites: favorites.filter((uid) => uid !== details.uid),
+          }),
         )
       : navigation.navigate(screenNames.getTreatment, {navigator, details});
   };
