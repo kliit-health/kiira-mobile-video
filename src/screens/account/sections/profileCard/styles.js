@@ -5,14 +5,14 @@ export default StyleSheet.create({
   root: {
     backgroundColor: colors.white,
     borderRadius: 16,
-    height: 200,
+    height: 180,
     width: '100%',
     alignSelf: 'center',
     marginTop: 50,
   },
   detailsContainer: {
     marginTop: 50,
-    padding: 20,
+    padding: 10,
     paddingBottom: 0,
     marginBottom: 0,
     alignItems: 'center',

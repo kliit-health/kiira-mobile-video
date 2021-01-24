@@ -41,6 +41,11 @@ const TextInput = ({
       [modifiers.outlined.root, outlined],
       customStyles.root,
     ]),
+    touchable: mergeStyles([
+      defaultStyles.touchable,
+      [modifiers.outlined.touchable, outlined],
+      customStyles.touchable,
+    ]),
     label: mergeStyles([
       defaultStyles.label,
       [modifiers.outlined.label, outlined],
@@ -59,12 +64,12 @@ const TextInput = ({
   };
 
   return (
-    <View>
+    <View style={styles.root}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TouchableOpacity
         activeOpacity={1}
         onPress={handlePress}
-        style={styles.root}>
+        style={styles.touchable}>
         <Input
           editable={editable}
           pointerEvents={onPress ? 'none' : 'auto'}

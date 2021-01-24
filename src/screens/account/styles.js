@@ -4,6 +4,7 @@ import {text, colors} from '../../utils/constants';
 export default StyleSheet.create({
   profileContainter: {
     padding: 20,
+    paddingBottom: 20,
     position: 'relative',
     backgroundColor: colors.offWhite,
   },
@@ -22,7 +23,6 @@ export default StyleSheet.create({
   logoutContainer: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 20,
   },
   actionsContainer: {
     flexDirection: 'row',

@@ -31,46 +31,46 @@ const initialState = {
     },
     allergies: {
       answers: {
-        medicationAllergic: null,
+        medicationAllergic: '',
         medicationAllergies: [],
-        foodAllergic: null,
+        foodAllergic: '',
         foodAllergies: [],
       },
       completed: false,
     },
     medications: {
       answers: {
-        currentMedications: null,
-        previousMedications: null,
+        currentMedications: '',
+        previousMedications: '',
       },
       completed: false,
     },
     medicalHistory: {
       answers: {
-        ongoingHealthConditions: null,
-        medicalHistory: null,
+        ongoingHealthConditions: '',
+        medicalHistory: '',
       },
       completed: false,
     },
     insurance: {
       answers: {
-        insuranceCompany: null,
+        insuranceCompany: '',
       },
       completed: false,
     },
     pregnancyHistory: {
       answers: {
-        pregnancies: null,
-        fulltermBirths: null,
-        pretermBirths: null,
-        abortions: null,
-        miscarriages: null,
+        pregnancies: '',
+        fulltermBirths: '',
+        pretermBirths: '',
+        abortions: '',
+        miscarriages: '',
       },
       completed: false,
     },
     pregnancyCurrent: {
       answers: {
-        dueDate: null,
+        dueDate: '',
       },
       completed: false,
     },
@@ -82,7 +82,7 @@ const initialState = {
     },
   },
   loading: false,
-  error: null,
+  error: '',
 };
 
 export default createReducer(initialState, {
@@ -105,7 +105,7 @@ export default createReducer(initialState, {
   },
   [UPDATE_HEALTH_HISTORY_FULFILLED]: (state, {data}) => {
     state.loading = false;
-    state.error = null;
+    state.error = '';
     state.data = {...state.data, ...data};
   },
   [UPDATE_HEALTH_HISTORY_REJECTED]: (state, {data}) => {

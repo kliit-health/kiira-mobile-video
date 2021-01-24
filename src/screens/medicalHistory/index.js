@@ -1,5 +1,5 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Keyboard} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import intl from '../../utils/localization';
 import {model} from './model';
@@ -9,20 +9,24 @@ import styles from './styles';
 
 const MedicalHistory = ({navigation}) => {
   const dispatch = useDispatch();
-  const {answers} = useSelector((state) => state.healthHistory.medicalHistory);
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.medicalHistory.answers,
+  );
 
-  const dispatchUpdate = (dataKey, data) => {
-    dispatch(
-      updateHealthHistory({
-        medicalHistory: {
-          answers: {...answers, [dataKey]: data},
-        },
-      }),
-    );
-  };
+  const [medicalHistory, setMedicalHistory] = useState({
+    ongoingHealthConditions: '',
+    medicalHistory: '',
+  });
 
-  const handleTextInputChange = (dataKey, data) => {
-    dispatchUpdate(dataKey, data);
+  useEffect(() => {
+    if (answers) {
+      setMedicalHistory(answers);
+    }
+  }, [answers]);
+
+  const handleChange = (dataKey, value) => {
+    setMedicalHistory({...medicalHistory, [dataKey]: value});
   };
 
   const handleOnBackPress = () => {
@@ -32,31 +36,30 @@ const MedicalHistory = ({navigation}) => {
   const handleSave = () => {
     dispatch(
       updateHealthHistory({
-        medicalHistory: {answers, completed: true},
+        uid: user.uid,
         navigation,
+        medicalHistory: {
+          answers: medicalHistory,
+          completed: true,
+        },
       }),
     );
   };
-
   return (
     <Container>
       <Header title={intl.en.medicalHistory.title} onBack={handleOnBackPress} />
       {model.map(({dataKey, placeholder}) => (
-        <View key={dataKey} style={styles.container}>
-          <TextInput
-            style={styles.input}
-            defaultValue={answers[dataKey]}
-            placeholder={placeholder}
-            onChange={(value) => handleTextInputChange(dataKey, value)}
-            multiline
-            numberOfLines={5}
-          />
-        </View>
+        <TextInput
+          styles={styles.input}
+          defaultValue={medicalHistory[dataKey]}
+          placeholder={placeholder}
+          onChange={(value) => handleChange(dataKey, value)}
+          multiline
+          blurOnSubmit
+          onSubmitEditing={() => Keyboard.dismiss()}
+        />
       ))}
-      <TextButton
-        styles={{root: styles.button}}
-        onPress={handleSave}
-        disabled={Object.values(answers).every((answer) => !answer)}>
+      <TextButton styles={styles.button} onPress={handleSave}>
         {intl.en.medicalHistory.save}
       </TextButton>
     </Container>
