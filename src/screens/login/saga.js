@@ -14,7 +14,7 @@ import {showOrHideModal} from '../../components/customModal/action';
 import Constant from '../../utils/constants';
 import {loginFailure} from './action';
 import {signoutApihit} from '../account/action';
-import {setUserData, getLicenses} from '../authLoading/action';
+import {setUserData} from '../authLoading/action';
 import {getTermsAndConditions} from '../../redux/actions';
 
 let Lang = Language['en'];
@@ -45,7 +45,6 @@ function* loginFirebase({data}) {
           },
         };
         yield updateStatus(updateStatusParams);
-        yield put(getLicenses());
         yield put(getTermsAndConditions());
         if (userData && userData.role === 'User' && !userData.firstLogin) {
           yield put(setUserData(userData));

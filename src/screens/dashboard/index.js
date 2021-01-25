@@ -1,110 +1,144 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {ScrollView} from 'react-native';
 import {useDidMount} from '../../utils/hooks';
-import {Dashboard} from './Dashboard';
-import {
-  getAgreements,
-  getPrivacyPolicy,
-  getTermsAndConditions,
-  getLicenses,
-  getUser,
-  getHealthHistory,
-  getSubscription,
-  getPlan,
-  getPlans,
-  getExperts,
-  getResolvedQuestion,
-  getUnresolvedQuestions,
-  getFavoriteExperts,
-} from '../../redux/actions';
-import {model} from './model';
+import * as actions from '../../redux/actions';
+import {Container} from '../../components';
+import {Bot, Items, Intro} from './sections';
 import intl from '../../utils/localization';
+import {screenNames} from '../../utils/constants';
+import styles from './styles';
 
-const Controller = ({navigation}) => {
+const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.data);
   const subscription = useSelector((state) => state.subscription.data);
-  const licenses = useSelector((state) => state.licenses.data);
+  const licenses = useSelector((state) => state.licenses.data.current);
+
+  const [videoEnabled, setVideoEnabled] = useState(false);
+  const [chatEnabled, setChatEnabled] = useState(false);
 
   useDidMount(() => {
-    dispatch(getAgreements());
+    dispatch(actions.getAgreements());
   });
 
   useDidMount(() => {
-    dispatch(getTermsAndConditions());
+    dispatch(actions.getTermsAndConditions());
   });
 
   useDidMount(() => {
-    dispatch(getPrivacyPolicy());
+    dispatch(actions.getPrivacyPolicy());
   });
 
   useDidMount(() => {
-    dispatch(getLicenses());
+    dispatch(actions.getLicenses());
   });
 
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(actions.getUser());
   }, []);
 
   useEffect(() => {
-    dispatch(getPlans());
+    dispatch(actions.getPlans());
   }, []);
 
   useEffect(() => {
-    dispatch(getExperts());
+    dispatch(actions.getExperts());
   }, []);
 
   useEffect(() => {
     if (user.uid) {
-      dispatch(getHealthHistory({uid: user.uid}));
+      dispatch(actions.getHealthHistory({uid: user.uid}));
     }
   }, [user]);
 
   useEffect(() => {
     if (user.subscription.id) {
-      dispatch(getSubscription({id: user.subscription.id}));
+      dispatch(actions.getSubscription({id: user.subscription.id}));
     }
   }, [user]);
 
   useEffect(() => {
     if (subscription.plan.id) {
-      dispatch(getPlan({id: subscription.plan.id}));
+      dispatch(actions.getPlan({id: subscription.plan.id}));
     }
   }, [subscription]);
 
   useEffect(() => {
     if (user.uid) {
-      dispatch(getResolvedQuestion({uid: user.uid}));
+      dispatch(actions.getResolvedQuestion({uid: user.uid}));
     }
   }, [user]);
 
   useEffect(() => {
     if (user.uid) {
-      dispatch(getUnresolvedQuestions({uid: user.uid}));
+      dispatch(actions.getUnresolvedQuestions({uid: user.uid}));
     }
   }, [user]);
 
   useEffect(() => {
     if (user.uid) {
-      dispatch(getFavoriteExperts({uid: user.uid}));
+      dispatch(actions.getFavoriteExperts({uid: user.uid}));
     }
   }, [user]);
 
-  const handleNavigation = (destination) => {
+  useEffect(() => {
+    if (licenses.includes(user.profileInfo.state.code)) {
+      setVideoEnabled(true);
+    }
+  }, [user, licenses]);
+
+  useEffect(() => {
+    if (user.chats === 'Unlimited') {
+      setChatEnabled(true);
+    }
+  }, [user]);
+
+  const handleNavigation = (destination, features) => {
+    if (features === 'video' && !videoEnabled) {
+      dispatch(
+        actions.showMessage({
+          message: intl.en.dashboard.serviceUnavailable,
+        }),
+      );
+      return;
+    }
+
+    if (features === 'chat' && !chatEnabled) {
+      dispatch(
+        actions.showMessage({
+          message: intl.en.dashboard.chatNotAvailable,
+        }),
+      );
+      return;
+    }
+
     navigation.navigate(destination);
   };
 
+  const handleRejectAssistance = () =>
+    dispatch(
+      actions.showMessage({
+        message: intl.en.dashboard.great,
+      }),
+    );
+
   return (
-    <Dashboard
-      title={intl.en.dashboard.title}
-      licenses={licenses}
-      displayName={user.profileInfo.firstName}
-      profileImageUrl={user.profileInfo.profileImageUrl}
-      handleNavigation={handleNavigation}
-      model={model}
-    />
+    <Container styles={styles.container} unformatted>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Intro
+          displayName={user.profileInfo.firstName}
+          profileImageUrl={user.profileInfo.profileImageUrl}
+        />
+        <Items onPress={handleNavigation} />
+        <Bot
+          onRequestAssistence={handleNavigation}
+          onRejectAssistence={handleRejectAssistance}
+        />
+      </ScrollView>
+    </Container>
   );
 };
 
-export default Controller;
+export default Dashboard;

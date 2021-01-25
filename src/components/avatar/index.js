@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {shape, object, bool, string, func, number, oneOf} from 'prop-types';
 import {View, TouchableOpacity, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -46,39 +46,21 @@ const Avatar = ({
     ]),
   };
 
-  const [errored, setErrored] = useState(false);
-
   const handleLayout = (event) => {
     const layout = event.nativeEvent.layout;
     onLayout(layout);
   };
 
-  const handleError = () => {
-    setErrored(true);
-  };
-
-  const handleLoad = () => {
-    setErrored(false);
-  };
-
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
       <View onLayout={handleLayout} style={styles.root}>
-        {errored ? (
-          <Image
-            style={styles.image}
-            resizeMode={resizeMode}
-            source={require('../../../assets/avatar.png')}
-          />
-        ) : (
-          <FastImage
-            style={styles.image}
-            source={{uri: source ? source : null}}
-            resizeMode={resizeMode}
-            onError={handleError}
-            onLoad={handleLoad}
-          />
-        )}
+        <FastImage
+          style={styles.image}
+          source={{uri: source}}
+          fallback={true}
+          resizeMode={resizeMode}
+          defaultSource={require('../../../assets/avatar.png')}
+        />
         <View style={styles.status} />
         {deleteMode && (
           <View style={styles.deleteIcon}>

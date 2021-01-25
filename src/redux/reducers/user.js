@@ -14,6 +14,7 @@ const initialState = {
     subscription: {
       id: '',
     },
+    chats: '',
     displayName: '',
     profileInfo: {
       firstName: '',

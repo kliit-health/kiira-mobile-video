@@ -611,6 +611,7 @@ export const icons = {
   tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
   unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
   xCloseIcon: require('../../../assets/xclose.png'),
+  kiiraLogo: require('../../../assets/logo.png'),
 };
 
 export const screenNames = {
@@ -698,6 +699,7 @@ export const screenNames = {
   sos: 'SOS',
   ask: 'Ask',
   addChild: 'AddChild',
+  treatmentBot: 'TreatmentBot',
 };
 
 export const units = {

@@ -40,6 +40,7 @@ import plan from './plan';
 import experts from './experts';
 import questions from './questions';
 import favoriteExperts from './favoriteExperts';
+import messaging from './messaging';
 
 export default function* rootSaga() {
   yield all([
@@ -84,5 +85,6 @@ export default function* rootSaga() {
     experts(),
     questions(),
     favoriteExperts(),
+    messaging(),
   ]);
 }

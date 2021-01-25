@@ -519,6 +519,10 @@ export default {
       notFeelingSick: `I'm not feeling sick`,
       nowMention: 'Now that you mention it',
       kiira: 'Kiira',
+      bot: `Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?`,
+      great: `That's great! If that changes let us know.`,
+      serviceUnavailable: 'This Service is currently unavailable in your state',
+      chatNotAvailable: 'Chat unavailable with current plan',
     },
   },
 };

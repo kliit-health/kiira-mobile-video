@@ -45,6 +45,7 @@ import plans from './plans';
 import experts from './experts';
 import questions from './questions';
 import favoriteExperts from './favoriteExperts';
+import messaging from './messaging';
 
 export default combineReducers({
   accountReducer,
@@ -93,4 +94,5 @@ export default combineReducers({
   experts,
   questions,
   favoriteExperts,
+  messaging,
 });

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigator';
+import {Messaging} from './src/services';
 import {showOrHideModal} from './src/components/customModal/action';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
@@ -232,6 +233,7 @@ class App extends PureComponent {
             setPreviousRoute(prevScreen);
           }}
         />
+        <Messaging />
         {showModalError ? (
           <CustomModal
             onPressErrorButtonOk={() => hideErrorModal()}
