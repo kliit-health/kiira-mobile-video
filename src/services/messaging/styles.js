@@ -7,7 +7,7 @@ export default {
       backgroundColor: colors.white,
       borderRadius: 10,
       padding: 20,
-      maxWidth: '80%',
+      maxWidth: '90%',
       alignSelf: 'center',
       justifyContent: 'center',
       alignContent: 'center',
@@ -16,9 +16,9 @@ export default {
     },
     text: {
       fontFamily: text.fontFamily.poppinsRegular,
-      fontSize: text.size.regular,
+      fontSize: text.size.large,
       color: colors.black,
-      textAlign: 'justify',
+      textAlign: 'auto',
     },
   },
   modal: StyleSheet.create({

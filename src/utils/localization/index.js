@@ -18,7 +18,8 @@ export default {
       changePlan: 'Change Plan',
       cancelConfirm: 'Are you sure you want to cancel your membership?',
       planCanceled: 'Plan has been canceled. Service will end on ',
-      processing: '...processing',
+      canceling: '...canceling',
+      emailUs: 'Please email us at kiira@support.io to get more information.',
     },
     requestVisit: {
       title: 'Request a Visit',

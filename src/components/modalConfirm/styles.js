@@ -16,13 +16,13 @@ export const styles = {
     card: {
       backgroundColor: colors.white,
       borderRadius: 10,
-      padding: 30,
+      padding: 20,
       maxWidth: '80%',
       alignSelf: 'center',
       justifyContent: 'center',
       alignContent: 'center',
       position: 'relative',
-      paddingBottom: 30,
+      paddingBottom: 20,
     },
     text: {
       fontFamily: text.fontFamily.poppinsRegular,

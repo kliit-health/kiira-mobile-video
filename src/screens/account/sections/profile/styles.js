@@ -2,6 +2,20 @@ import {StyleSheet} from 'react-native';
 import {colors, text} from '../../../../utils/constants';
 
 export default StyleSheet.create({
+  container: {
+    backgroundColor: colors.offwhite,
+    zIndex: 100,
+    paddingHorizontal: '10%',
+    paddingVertical: 20,
+  },
+  curtain: {
+    position: 'absolute',
+    top: -50,
+    left: 0,
+    right: 0,
+    height: '100%',
+    backgroundColor: colors.azure,
+  },
   root: {
     backgroundColor: colors.white,
     borderRadius: 16,
