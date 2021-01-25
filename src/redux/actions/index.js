@@ -2,7 +2,7 @@ export {setCurrentRoute, setPreviousRoute} from './navigator';
 export {updateUser, getUser} from './user';
 export {getMedicalHistory} from './medicalHistory';
 export {getPlan} from './plan';
-export {getSubscription} from './subscritption';
+export {getSubscription, cancelSubscription} from './subscritption';
 export {getTermsAndConditions} from './termsAndConditions';
 export {getAgreements} from './agreements';
 export {getPrivacyPolicy} from './privacyPolicy';

@@ -1863,3 +1863,19 @@ export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
       }
     })(),
   );
+
+export const cancelSubscription = ({subscriptionId, userId}) =>
+  new Promise((resolve, reject) =>
+    (async function () {
+      const cancelSubscription = functions.httpsCallable('cancelSubscription');
+      try {
+        const response = await cancelSubscription({
+          subscriptionId,
+          userId,
+        });
+        resolve(response.data);
+      } catch (error) {
+        reject(error.details);
+      }
+    })(),
+  );

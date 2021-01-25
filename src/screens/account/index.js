@@ -1,16 +1,22 @@
 import React, {useState} from 'react';
 import {Container, ListItem, ModalConfirm, TextButton} from '../../components';
 import {useSelector, useDispatch} from 'react-redux';
+import moment from 'moment';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
 import intl from '../../utils/localization';
 import ChangePlan from '../changePlan';
 import {ProfileCard} from './sections';
 import {list} from './model';
 import {signOut} from './action';
+import {cancelSubscription} from '../../redux/actions';
 import styles, {modifiers} from './styles';
 
 const Account = ({navigation}) => {
+  const subscription = useSelector((state) => state.subscription.data);
+  const processing = useSelector((state) => state.subscription.cancel.loading);
   const user = useSelector((state) => state.user.data);
+  const plan = useSelector((state) => state.plan.data);
+
   const dispatch = useDispatch();
 
   const [changePlanVisible, setChangePlanVisible] = useState(false);
@@ -26,6 +32,12 @@ const Account = ({navigation}) => {
 
   const handleConfirm = () => {
     setModalConfirmVisible(!modalConfirmVisible);
+    dispatch(
+      cancelSubscription({
+        subscriptionId: subscription.id,
+        userId: user.id,
+      }),
+    );
   };
 
   const handleCancel = () => {
@@ -48,15 +60,31 @@ const Account = ({navigation}) => {
           <View style={styles.profileBackground} />
           <ProfileCard {...user} />
         </View>
+        {plan.title && <Text style={styles.planTitle}>{plan.title}</Text>}
+        {subscription.canceled && (
+          <Text style={styles.canceledMessage}>
+            {intl.en.account.planCanceled}
+            {moment.unix(subscription.currentPeriodEnd).format('MM/DD/YYYY')}
+          </Text>
+        )}
+        {processing && (
+          <Text style={styles.processingMessage}>
+            {intl.en.account.processing}
+          </Text>
+        )}
         <View style={styles.actionsContainer}>
           <TextButton onPress={toggleChangePlan}>
             {intl.en.account.changePlan}
           </TextButton>
           <View style={styles.divider} />
-          <TextButton onPress={toggleConfirmModal} outlined>
-            {intl.en.account.cancelPlamn}
+          <TextButton
+            onPress={toggleConfirmModal}
+            outlined
+            disabled={subscription.canceled}>
+            {intl.en.account.cancelPlan}
           </TextButton>
         </View>
+
         <View>
           {list.map(({title, destination}) => (
             <ListItem

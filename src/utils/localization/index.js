@@ -14,9 +14,11 @@ export default {
       born: 'Born',
       pronouns: 'Pronouns',
       sexuality: 'Sexuality',
-      cancelPlamn: 'Cancel Plan',
+      cancelPlan: 'Cancel Plan',
       changePlan: 'Change Plan',
       cancelConfirm: 'Are you sure you want to cancel your membership?',
+      planCanceled: 'Plan has been canceled. Service will end on ',
+      processing: '...processing',
     },
     requestVisit: {
       title: 'Request a Visit',
