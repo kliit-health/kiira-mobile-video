@@ -4,6 +4,7 @@ import {
   CLEAR_EXPERT_PROFILE_STATE,
   MAKE_APPOINTMENT,
   SET_PREPAID,
+  GET_APPOINTMENTS,
 } from '../../../../../redux/types';
 
 export const getExpertsData = (data) => ({
@@ -28,4 +29,9 @@ export const makeAppointment = (data) => ({
 
 export const prepaidAppointment = () => ({
   type: SET_PREPAID,
+});
+
+export const getAppointmentsList = (data) => ({
+  type: GET_APPOINTMENTS,
+  data,
 });

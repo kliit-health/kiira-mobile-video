@@ -21,6 +21,9 @@ import {
   getMedicalHistoryAsync,
   sendVisitRecap,
 } from '../../../../utils/firebase';
+import * as actions from '../../../../redux/actions';
+import intl from '../../../../utils/localization';
+import {clearMedicalHistory} from './actions';
 
 function* getPatientDetails({data}) {
   try {
@@ -100,13 +103,18 @@ function* lockVisit(data) {
   try {
     const update = yield call(saveAndLock, data);
     yield call(sendVisitRecap, data);
+    yield put(clearMedicalHistory());
     yield put({
       type: UPDATE_MEDICAL_HISTORY_EXPERT,
       payload: {
         appointment: {...update},
       },
     });
+    data.navigation.navigate('ExpertAppointments');
   } catch (error) {
+    yield put(
+      actions.showMessage({message: intl.en.expertAppointments.lockError}),
+    );
     console.error(error);
   }
 }

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
 import {connect} from 'react-redux';
-import AppNavigator from './src/navigator';
+import AppNavigator from './src/navigation';
 import {Messaging} from './src/services';
 import {showOrHideModal} from './src/components/customModal/action';
 import CustomLoader from './src/components/customLoader';
@@ -19,7 +19,7 @@ import FastImage from 'react-native-fast-image';
 // import BackgroundTask from 'react-native-background-task';
 // import BackgroundTimerMain from 'react-native-background-timer';
 import {updateStatus} from './src/utils/firebase';
-import {NavigationService} from './src/navigator';
+import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 
 class App extends PureComponent {

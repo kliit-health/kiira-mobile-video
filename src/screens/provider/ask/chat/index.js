@@ -31,7 +31,7 @@ import {
 import {getChatItems} from './selectors';
 import moment from 'moment';
 import CustomButton from '../../../../components/customButton';
-import {stopObserverChat} from '../action';
+import {stopObserverChat} from './action';
 
 const lang = Language.en;
 let key;

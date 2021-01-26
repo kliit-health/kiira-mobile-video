@@ -51,7 +51,7 @@ import FamilyHistory from '../screens/provider/appointments/patientProfile/famil
 import ForgotPassword from '../screens/auth/forgotPassword';
 import GetStarted from '../screens/auth/getStarted';
 import GynHistory from '../screens/provider/appointments/patientProfile/gyn';
-import HealthHistory from '../screens/patient/dashboard/healthHistory/';
+import HealthHistory from '../screens/patient/dashboard/healthHistory';
 import HomeScreen from '../screens/patient/dashboard/appointments/videoVisit/HomeScreen/HomeScreen';
 import GetTreatment from '../screens/patient/dashboard/getTreatment';
 import Help from '../screens/common/help';
@@ -64,7 +64,7 @@ import LoginScreen from '../screens/patient/dashboard/appointments/videoVisit/Lo
 import MainCallScreen from '../screens/patient/dashboard/appointments/videoVisit/MainCallScreen';
 import Medications from '../screens/patient/dashboard/healthHistory/medications';
 import MedicationsHistory from '../screens/provider/appointments/patientProfile/medications';
-// import MedicalHistory from '../screens/medicalHistory';
+import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
 import MedicalHistoryExpert from '../screens/provider/appointments/patientProfile/medicalHistory';
 import NeedsPresciption from '../screens/patient/dashboard/getTreatment/needsPrescription';
 import NewUser from '../screens/auth/newUser';
@@ -519,7 +519,7 @@ const MainAppStack = createStackNavigator(
     Lifestyle: {screen: Lifestyle},
     Loss: {screen: Loss},
     Medications: {screen: Medications},
-    // MedicalHistory: {screen: MedicalHistory},
+    MedicalHistory: {screen: MedicalHistory},
     NeedsPresciption: {screen: NeedsPresciption},
     NewUser: {screen: NewUser},
     PaymentMethods: {screen: PaymentMethods},

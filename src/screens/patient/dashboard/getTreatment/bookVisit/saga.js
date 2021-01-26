@@ -12,7 +12,7 @@ import {
 } from '../../../../../components/customLoader/action';
 import {setUserData} from '../../../../auth/authLoading/action';
 import Constant from '../../../../../utils/constants';
-import {NavigationService} from '../../../../../navigator';
+import {NavigationService} from '../../../../../navigation';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 
 function* setAppointment(data) {

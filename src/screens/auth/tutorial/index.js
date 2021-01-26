@@ -50,6 +50,7 @@ const Tutorial = (props) => {
       <View style={styles.sliderViewStyle}>
         <StatusBar hidden />
         <Carousel
+          useNativeDriver
           autoplay
           autoplayTimeout={5000}
           loop

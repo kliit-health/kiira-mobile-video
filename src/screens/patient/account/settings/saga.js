@@ -15,6 +15,7 @@ import Constant from '../../../../utils/constants';
 import {displayConsole} from '../../../../utils/helper';
 import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
+import {getUser} from '../../../../redux/actions';
 
 let Lang = Language['en'];
 
@@ -58,6 +59,7 @@ function* updateUserData({data}) {
           };
           const userData = yield getDataFromTable(obj);
           yield put(setUserData(userData));
+          yield put(getUser());
           navigation.goBack();
         } else {
           yield put(
@@ -109,6 +111,7 @@ function* updateUserData({data}) {
         const userData = yield getDataFromTable(obj);
         displayConsole('userData', userData);
         yield put(setUserData(userData));
+        yield put(getUser());
       } else {
         yield put(
           showOrHideModal(

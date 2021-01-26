@@ -5,6 +5,7 @@ import CustomButton from '../../../../../components/customButton';
 import Recap from '../recap';
 import styles from './style';
 import {lockVisit} from '../actions';
+import {withNavigation} from 'react-navigation';
 
 const Confirm = ({navigation}) => {
   const dispatch = useDispatch();
@@ -51,8 +52,8 @@ const Confirm = ({navigation}) => {
               style={styles.lockButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                dispatch(lockVisit(payload));
-                navigation.navigate('ExpertAppointments');
+                console.log(navigation);
+                dispatch(lockVisit(payload, navigation));
               }}>
               <Text style={styles.textStyle}>Lock</Text>
             </Pressable>
@@ -72,4 +73,4 @@ const Confirm = ({navigation}) => {
   );
 };
 
-export default Confirm;
+export default withNavigation(Confirm);

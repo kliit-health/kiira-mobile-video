@@ -3,7 +3,7 @@ import {View, Image, FlatList, Pressable, Text} from 'react-native';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import FastImage from 'react-native-fast-image';
 import {withNavigation} from 'react-navigation';
-import {MenuOptions, MenuOption} from 'react-native-popup-menu';
+import {MenuContext, MenuOptions, MenuOption} from 'react-native-popup-menu';
 import styles from './styles';
 
 class Contacts extends Component {

@@ -25,10 +25,11 @@ export const updateMedicalHistoryExpert = (data) => {
   };
 };
 
-export const lockVisit = (data) => {
+export const lockVisit = (data, navigation) => {
   return {
     type: LOCK_VISIT,
     payload: data,
+    navigation,
   };
 };
 

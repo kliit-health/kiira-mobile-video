@@ -40,7 +40,7 @@ import {
 
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {parseCardInfo} from '../../../../../utils/helper/payment';
-import {NavigationService} from '../../../../../navigator';
+import {NavigationService} from '../../../../../navigation';
 import {deviceSupportsNativePay} from '../../../../../utils/payment';
 import Constant from '../../../../../utils/constants';
 import firebase from 'react-native-firebase';

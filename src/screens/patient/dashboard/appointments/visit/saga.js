@@ -1,6 +1,6 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import {GET_LOGIN, SET_LOGIN} from '../../../../../redux/types';
-import {NavigationService} from '../../../../../navigator';
+import {NavigationService} from '../../../../../navigation';
 import Language from '../../../../../utils/localization';
 import {
   showApiLoader,

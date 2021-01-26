@@ -7,7 +7,11 @@ import {
   getResolvedQuestions,
   searchQuestions,
 } from './action';
-import {getTermsAndConditions, getPrivacyPolicy} from '../../../redux/actions';
+import {
+  getTermsAndConditions,
+  getPrivacyPolicy,
+  getUser,
+} from '../../../redux/actions';
 import {ActiveQuestions, ResolvedQuestions} from './components';
 import intl from '../../../utils/localization';
 
@@ -60,6 +64,10 @@ const AskExpert = ({navigation}) => {
   const toggleActive = () => {
     setActive(!active);
   };
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
 
   const handleSearch = (value) => {
     setValue(value);

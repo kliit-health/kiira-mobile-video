@@ -460,6 +460,7 @@ export default {
         'You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
       patientName: 'Patient Name',
       subject: 'CC',
+      lockError: 'There was an error saving the record please retry shortly',
     },
     expertAccount: {
       logout: 'Logout',

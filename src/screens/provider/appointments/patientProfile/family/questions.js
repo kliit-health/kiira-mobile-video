@@ -39,7 +39,7 @@ export const questions = [
   },
   {
     question:
-      "Does the paitent have any diseases or syndromes that weren't mentioned?",
+      'Is there a family history of diseases or syndromes not previously mentioned?',
     textPrompt: 'Please Type details.',
     key: 'rareDisease',
   },

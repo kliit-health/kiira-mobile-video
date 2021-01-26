@@ -1,4 +1,4 @@
-import {UPDATE_USER_DETAIL_DATA} from '../../../../redux/types';
+import {UPDATE_EXPERT_DETAIL_DATA} from '../../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
 import Language from '../../../../utils/localization';
 import {
@@ -15,26 +15,32 @@ import Constant from '../../../../utils/constants';
 import {displayConsole} from '../../../../utils/helper';
 import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
+import {getUser} from '../../../../redux/actions';
 
 let Lang = Language['en'];
 
-function* updateUserData({data}) {
+function* updateExpertData({data}) {
   try {
     const {userParams, imageParams, navigation} = data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
-
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
-
       if (responseImage.success) {
         const user = firebase.auth().currentUser;
         const {downloadURL} = responseImage.data;
         const userRegistrationParams = {
           credits: userParams.credits,
           uid: user.uid,
-          role: 'User',
+          role: 'Expert',
           isActive: false,
+          clinicInfo: {
+            ...userParams.clinicInfo,
+            name: userParams.location,
+            license: userParams.license,
+          },
           profileInfo: {
+            ...userParams.profileInfo,
+            bio: userParams.bio,
             profileImageUrl: downloadURL ? downloadURL : '',
             firstName: userParams.firstName,
             lastName: userParams.lastName,
@@ -42,9 +48,7 @@ function* updateUserData({data}) {
             pronouns: userParams.pronouns,
             isActive: false,
             state: userParams.state,
-            sexuality: userParams.sexuality,
-            insurance: userParams.insurance,
-            plan: userParams.plan,
+            gender: userParams.gender,
           },
         };
 
@@ -58,8 +62,10 @@ function* updateUserData({data}) {
           };
           const userData = yield getDataFromTable(obj);
           yield put(setUserData(userData));
+          yield put(getUser());
           navigation.goBack();
         } else {
+          console.log('RESPONSE 1', response);
           yield put(
             showOrHideModal(
               response.message
@@ -70,6 +76,7 @@ function* updateUserData({data}) {
         }
       } else {
         yield put(hideApiLoader());
+        console.log('RESPONSE 2', response);
         yield put(
           showOrHideModal(
             responseImage.message
@@ -81,27 +88,32 @@ function* updateUserData({data}) {
     } else {
       const user = firebase.auth().currentUser;
       const userRegistrationParams = {
+        credits: userParams.credits,
         uid: user.uid,
-        role: 'User',
-        isActive: false,
+        role: 'Expert',
+        isActive: true,
+        clinicInfo: {
+          ...userParams.clinicInfo,
+          name: userParams.location,
+          license: userParams.license,
+        },
         profileInfo: {
-          profileImageUrl: userParams.profileImageUrl,
+          ...userParams.profileInfo,
+          bio: userParams.bio,
+          profileImageUrl: userParams.profileImageUrl || '',
           firstName: userParams.firstName,
           lastName: userParams.lastName,
+          email: userParams.email,
           dob: userParams.dob,
           pronouns: userParams.pronouns,
           isActive: false,
           state: userParams.state,
-          sexuality: userParams.sexuality,
-          insurance: userParams.insurance,
-          plan: userParams.plan,
         },
       };
       const response = yield addUserData(userRegistrationParams);
       displayConsole('response', response);
       yield put(hideApiLoader());
       if (response.success) {
-        navigation.goBack();
         const obj = {
           tableName: Constant.App.firebaseTableNames.users,
           uid: user.uid,
@@ -109,7 +121,10 @@ function* updateUserData({data}) {
         const userData = yield getDataFromTable(obj);
         displayConsole('userData', userData);
         yield put(setUserData(userData));
+        yield put(getUser());
+        navigation.goBack();
       } else {
+        console.log('RESPONSE 3', response);
         yield put(
           showOrHideModal(
             response.message ? response.message : Lang.errorMessage.serverError,
@@ -122,7 +137,6 @@ function* updateUserData({data}) {
     yield put(showOrHideModal(Lang.errorMessage.serverError));
   }
 }
-
-export default function* settingSaga() {
-  yield takeEvery(UPDATE_USER_DETAIL_DATA, updateUserData);
+export default function* settingExpertSaga() {
+  yield takeEvery(UPDATE_EXPERT_DETAIL_DATA, updateExpertData);
 }
