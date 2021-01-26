@@ -1,78 +1,90 @@
 import {all} from 'redux-saga/effects';
-import accountSaga from '../../screens/account/saga';
-import addProfileSaga from '../../screens/addProfileData/saga';
-import agreeToTermsSaga from '../../screens/newUser/sagas';
-import appointmentsSaga from '../../screens/appointments/saga';
-import askExpertSaga from '../../screens/ask/expert/saga';
-import askSaga from '../../screens/ask/saga';
-import authLoadingSaga from '../../screens/authLoading/saga';
-import bookVisitSaga from '../../screens/bookVisit/saga';
-import changePasswordSaga from '../../screens/changePassword/saga';
-import chatSaga from '../../screens/chat/saga';
-import chatExpertSaga from '../../screens/chat/expert/saga';
-import chooseExpertSaga from '../../screens/chooseExpert/saga';
-import expertAppointmentsSaga from '../../screens/appointments/expert/saga';
-import expertPatientsSaga from '../../screens/patients/saga';
-import expertProfileSaga from '../../screens/expertProfile/saga';
-import expertScheduleSaga from '../../screens/expertSchedule/saga';
-import forgotPasswordSaga from '../../screens/forgotPassword/saga';
-import healthHistorySaga from '../../screens/healthHistory/saga';
-import loginSaga from '../../screens/login/saga';
-import newUserSaga from '../../screens/chatBot/saga';
-import paymentSaga from '../../screens/payment/saga';
-import privacySaga from '../../screens/privacyPolicy/saga';
-import rescheduleSaga from '../../screens/rescheduleVisit/saga';
-import settingExpertSaga from '../../screens/setting/expert/saga';
-import settingSaga from '../../screens/setting/saga';
-import signupSaga from '../../screens/signUp/saga';
-import termsSaga from '../../screens/termsAndConditions/saga';
-import verificationSaga from '../../screens/verify/saga';
-import careSquadSaga from '../../screens/careSquad/saga';
-import treatmentHistorySaga from '../../screens/treatmentHistory/saga';
-import updateExpertSaga from '../../screens/updateAvailablity/saga';
-import agreementsSaga from '../../screens/agreements/saga';
-import userDetailsSaga from './userDetails';
-import patientDetails from '../../screens/patientProfile/saga';
+import account from '../../screens/patient/account/saga';
+import addProfile from '../../screens/patient/account/settings/addProfileData/saga';
+import agreeToTerms from '../../screens/auth/newUser/saga';
+import agreements from './agreements';
+import appointments from '../../screens/patient/dashboard/appointments/saga';
+import ask from '../../screens/patient/dashboard/ask/saga';
+import askExpert from '../../screens/provider/ask/saga';
+import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/saga';
+import changePassword from '../../screens/patient/account/settings/changePassword/saga';
+import chat from '../../screens/patient/dashboard/ask/chat/saga';
+import chatExpert from '../../screens/provider/ask/chat/saga';
+import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/saga';
 import clientMedicalHistory from './medicalHistory';
-import visitSaga from '../../screens/visit/saga';
+import expertAppointments from '../../screens/provider/appointments/saga';
+import expertPatients from '../../screens/provider/patients/saga';
+import expertProfile from '../../screens/common/expertProfile/saga';
+import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/saga';
+import experts from './experts';
+import favoriteExperts from './favoriteExperts';
+import forgotPassword from '../../screens/auth/forgotPassword/saga';
+import healthHistory from './healthHistory';
+import licenses from './licenses';
+import login from '../../screens/auth/login/saga';
+import messaging from './messaging';
+import newUser from '../../screens/auth/newUser/saga';
+import patientDetails from '../../screens/provider/appointments/patientProfile/saga';
+import payment from '../../screens/patient/dashboard/getTreatment/payment/saga';
+import plan from './plan';
+import plans from './plans';
+import privacyPolicy from './privacyPolicy';
+import questions from './questions';
+import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/saga';
+import setting from '../../screens/patient/account/settings/saga';
+import settingExpert from '../../screens/provider/account/settings/saga';
+import signup from '../../screens/auth/signUp/saga';
+import subscription from './subscription';
+import verification from '../../screens/auth/verify/saga';
+import termsAndConditions from './termsAndConditions';
+import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/saga';
+import user from './user';
+import updateExpert from '../../screens/provider/account/updateAvailablity/saga';
+import visit from '../../screens/patient/dashboard/appointments/visit/saga';
 
 export default function* rootSaga() {
   yield all([
-    accountSaga(),
-    addProfileSaga(),
-    agreeToTermsSaga(),
-    appointmentsSaga(),
-    askExpertSaga(),
-    askSaga(),
-    authLoadingSaga(),
-    bookVisitSaga(),
-    changePasswordSaga(),
-    chatSaga(),
-    chatExpertSaga(),
-    chooseExpertSaga(),
-    expertAppointmentsSaga(),
-    expertPatientsSaga(),
-    expertProfileSaga(),
-    expertScheduleSaga(),
-    forgotPasswordSaga(),
-    healthHistorySaga(),
-    loginSaga(),
-    newUserSaga(),
-    paymentSaga(),
-    privacySaga(),
-    rescheduleSaga(),
-    settingExpertSaga(),
-    settingSaga(),
-    signupSaga(),
-    termsSaga(),
-    verificationSaga(),
-    careSquadSaga(),
-    treatmentHistorySaga(),
-    updateExpertSaga(),
-    agreementsSaga(),
-    userDetailsSaga(),
-    patientDetails(),
+    account(),
+    addProfile(),
+    agreeToTerms(),
+    agreements(),
+    appointments(),
+    askExpert(),
+    ask(),
+    bookVisit(),
+    changePassword(),
+    chat(),
+    chatExpert(),
+    chooseExpert(),
     clientMedicalHistory(),
-    visitSaga(),
+    expertAppointments(),
+    expertPatients(),
+    expertProfile(),
+    expertSchedule(),
+    experts(),
+    favoriteExperts(),
+    forgotPassword(),
+    healthHistory(),
+    licenses(),
+    login(),
+    messaging(),
+    newUser(),
+    patientDetails(),
+    payment(),
+    plan(),
+    plans(),
+    privacyPolicy(),
+    questions(),
+    reschedule(),
+    settingExpert(),
+    setting(),
+    signup(),
+    subscription(),
+    termsAndConditions(),
+    verification(),
+    treatmentHistory(),
+    updateExpert(),
+    user(),
+    visit(),
   ]);
 }

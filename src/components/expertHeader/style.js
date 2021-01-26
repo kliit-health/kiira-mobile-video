@@ -2,12 +2,6 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../utils/constants';
 import metrices from '../../utils/metrices';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
-let parentPadding = parentPaddingValue * 2;
-
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
-
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',

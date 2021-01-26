@@ -20,7 +20,6 @@ const Modal = ({
       transparent
       isVisible={visible}
       style={styles.root}
-      useNativeDriver
       hideModalContentWhileAnimating
       {...rest}>
       {children}

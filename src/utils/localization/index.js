@@ -14,6 +14,12 @@ export default {
       born: 'Born',
       pronouns: 'Pronouns',
       sexuality: 'Sexuality',
+      cancelPlan: 'Cancel Plan',
+      changePlan: 'Change Plan',
+      cancelConfirm: 'Are you sure you want to cancel your membership?',
+      planCanceled: 'Plan has been canceled. Service will end on ',
+      canceling: '...canceling',
+      emailUs: 'Please email us at kiira@support.io to get more information.',
     },
     requestVisit: {
       title: 'Request a Visit',
@@ -424,8 +430,8 @@ export default {
     termsAndConditions: {
       title: 'Terms and Conditions',
     },
-    privacyPolicies: {
-      title: 'Privacy Policies',
+    privacyPolicy: {
+      title: 'Privacy Policy',
     },
     help: {
       title: 'Help',
@@ -454,6 +460,7 @@ export default {
         'You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
       patientName: 'Patient Name',
       subject: 'CC',
+      lockError: 'There was an error saving the record please retry shortly',
     },
     expertAccount: {
       logout: 'Logout',
@@ -498,6 +505,28 @@ export default {
       locked: 'Record Locked',
       none: 'None',
       reason: 'Reason',
+    },
+    changePlan: {
+      title: 'Change Plan',
+      confirm: 'Confirm',
+      cancel: 'Cancel',
+    },
+    dashboard: {
+      title: 'Dashboard',
+      getTreatment: 'Get Treatment',
+      mySquad: 'My Squad',
+      chatExpert: 'Chat with an Expert',
+      myHistory: 'My History',
+      reminders: 'Reminders',
+      sos: 'SOS',
+      helloName: 'Hello, ',
+      notFeelingSick: `I'm not feeling sick`,
+      nowMention: 'Now that you mention it',
+      kiira: 'Kiira',
+      bot: `Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?`,
+      great: `That's great! If that changes let us know.`,
+      serviceUnavailable: 'This Service is currently unavailable in your state',
+      chatNotAvailable: 'Chat unavailable with current plan',
     },
   },
 };

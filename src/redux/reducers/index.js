@@ -1,84 +1,98 @@
 import {combineReducers} from 'redux';
-import accountReducer from '../../screens/account/reducer';
-import agreeToTermsReducer from '../../screens/newUser/reducer';
-import addProfileReducer from '../../screens/addProfileData/reducer';
-import addNewProfileReducer from '../../screens/chatBot/reducer';
-import appointmentsReducer from '../../screens/appointments/reducer';
-import askReducer from '../../screens/ask/reducer';
-import askExpertReducer from '../../screens/ask/expert/reducer';
-import authLoadingReducer from '../../screens/authLoading/reducer';
-import bookVisitReducer from '../../screens/bookVisit/reducer';
-import changePasswordReducer from '../../screens/changePassword/reducer';
-import chat from '../../screens/chat/reducer';
-import chatExpertReducer from '../../screens/chat/expert/reducer';
-import chooseExpertReducer from '../../screens/chooseExpert/reducer';
-import expertAppointmentsReducer from '../../screens/appointments/expert/reducer';
-import expertPatientsReducer from '../../screens/patients/reducer';
-import expertProfileReducer from '../../screens/expertProfile/reducer';
-import expertScheduleReducer from '../../screens/expertSchedule/reducer';
-import forgotPasswordReducer from '../../screens/forgotPassword/reducer';
-import loaderReducer from '../../components/customLoader/reducer';
-import loginReducer from '../../screens/login/reducer';
-import modalReducer from '../../components/customModal/reducer';
-import paymentReducer from '../../screens/payment/reducer';
-import privacyReducer from '../../screens/privacyPolicy/reducer';
-import rescheduleReducer from '../../screens/rescheduleVisit/reducer';
-import settingExpertReducer from '../../screens/setting/expert/reducer';
-import settingReducer from '../../screens/setting/reducer';
-import signupReducer from '../../screens/signUp/reducer';
-import termsReducer from '../../screens/termsAndConditions/reducer';
-import toastReducer from '../../components/customToast/reducer';
-import verifyReducer from '../../screens/verify/reducer';
-import healthHistory from '../../screens/healthHistory/reducer';
-import careSquad from '../../screens/careSquad/reducer';
-import navigator from './navigator';
-import treatmentHistory from '../../screens/treatmentHistory/reducer';
-import updateExpertReducer from '../../screens/updateAvailablity/reducer';
-import agreements from '../../screens/agreements/reducer';
-import userDetails from './userDetails';
+import account from '../../screens/patient/account/reducer';
+import agreeToTerms from '../../screens/auth/newUser/reducer';
+import agreements from './agreements';
+import addProfile from '../../screens/patient/account/settings/addProfileData/reducer';
+import addNewProfile from '../../screens/auth/chatBot/reducer';
+import appointments from '../../screens/patient/dashboard/appointments/reducer';
+import ask from '../../screens/patient/dashboard/ask/reducer';
+import askExpert from '../../screens/provider/ask/reducer';
+import authLoading from '../../screens/auth/authLoading/reducer';
+import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
+import changePassword from '../../screens/patient/account/settings/changePassword/reducer';
+import chat from '../../screens/patient/dashboard/ask/chat/reducer';
+import chatExpert from '../../screens/provider/ask/chat/reducer';
+import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
 import clientMedicalHistory from './medicalHistory';
-import visitReducer from '../../screens/visit/reducer';
-import medicalHistory from '../../screens/patientProfile/reducer';
+import expertAppointments from '../../screens/provider/appointments/reducer';
+import expertPatients from '../../screens/provider/patients/reducer';
+import expertProfile from '../../screens/common/expertProfile/reducer';
+import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/reducer';
+import experts from './experts';
+import favoriteExperts from './favoriteExperts';
+import forgotPassword from '../../screens/auth/forgotPassword/reducer';
+import healthHistory from './healthHistory';
+import licenses from './licenses';
+import loader from '../../components/customLoader/reducer';
+import login from '../../screens/auth/login/reducer';
+import medicalHistory from '../../screens/provider/appointments/patientProfile/reducer';
+import messaging from './messaging';
+import modal from '../../components/customModal/reducer';
+import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
+import plan from './plan';
+import plans from './plans';
+import privacyPolicy from './privacyPolicy';
+import questions from './questions';
+import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/reducer';
+import settings from '../../screens/patient/account/settings/reducer';
+import settingsExpert from '../../screens/provider/account/settings/reducer';
+import signup from '../../screens/auth/signUp/reducer';
+import subscription from './subscription';
+import termsAndConditions from './termsAndConditions';
+import toast from '../../components/customToast/reducer';
+import verify from '../../screens/auth/verify/reducer';
+import navigator from './navigator';
+import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/reducer';
+import user from './user';
+import updateExpert from '../../screens/provider/account/updateAvailablity/reducer';
+import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
 
 export default combineReducers({
-  accountReducer,
-  agreeToTermsReducer,
-  addProfileReducer,
-  addNewProfileReducer,
-  appointmentsReducer,
-  askReducer,
-  askExpertReducer,
-  authLoadingReducer,
-  bookVisitReducer,
-  changePasswordReducer,
-  chat,
-  chatExpertReducer,
-  chooseExpertReducer,
-  expertAppointmentsReducer,
-  expertPatientsReducer,
-  expertProfileReducer,
-  expertScheduleReducer,
-  forgotPasswordReducer,
-  healthHistory,
-  loaderReducer,
-  loginReducer,
-  modalReducer,
-  paymentReducer,
-  privacyReducer,
-  rescheduleReducer,
-  settingExpertReducer,
-  settingReducer,
-  signupReducer,
-  termsReducer,
-  toastReducer,
-  verifyReducer,
-  careSquad,
-  navigator,
-  treatmentHistory,
-  updateExpertReducer,
+  account,
+  agreeToTerms,
+  addProfile,
+  addNewProfile,
   agreements,
-  userDetails,
-  visitReducer,
-  medicalHistory,
+  appointments,
+  ask,
+  askExpert,
+  authLoading,
+  bookVisit,
+  changePassword,
+  chat,
+  chatExpert,
+  chooseExpert,
   clientMedicalHistory,
+  expertAppointments,
+  expertPatients,
+  expertProfile,
+  expertSchedule,
+  experts,
+  favoriteExperts,
+  forgotPassword,
+  healthHistory,
+  licenses,
+  loader,
+  login,
+  medicalHistory,
+  messaging,
+  modal,
+  navigator,
+  payment,
+  plan,
+  plans,
+  privacyPolicy,
+  questions,
+  reschedule,
+  settings,
+  settingsExpert,
+  signup,
+  subscription,
+  termsAndConditions,
+  treatmentHistory,
+  toast,
+  updateExpert,
+  user,
+  verify,
+  visit,
 });

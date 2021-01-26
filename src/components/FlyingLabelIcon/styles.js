@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import Constant from "../../utils/constants";
+import {StyleSheet} from 'react-native';
+import Constant from '../../utils/constants';
 
 const styles = StyleSheet.create({
   arrowIcon: {
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
 
   iconContainer: {
     width: 31.6,
-    height: "100%",
-    justifyContent: "flex-end",
+    height: '100%',
+    justifyContent: 'flex-end',
     marginRight: 14.4,
   },
 
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
 
   labelContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   separator: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
   topContainer: {
     height: 61,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });
 

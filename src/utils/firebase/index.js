@@ -1633,33 +1633,6 @@ export async function getMedicalHistoryAsync(data) {
   }
 }
 
-export async function updateFavoriteExperts(favorites, uid) {
-  const document = firestore.collection('careSquad').doc(uid);
-  try {
-    await document.set({favorites}, {merge: true});
-    return;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
-}
-
-export async function getFavoriteExperts(uid) {
-  const document = firestore.collection('careSquad').doc(uid);
-
-  try {
-    const favorites = await document.get();
-    if (!favorites.data()) {
-      await document.set({favorites}, {merge: true});
-      return;
-    }
-    return favorites.data();
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-}
-
 export const updateUserData = (updates, uid, merge = true) =>
   new Promise((resolve, reject) =>
     (async () => {
@@ -1703,7 +1676,7 @@ export const firebaseSingleFetch = (collectionName, id) =>
     })(),
   );
 
-export const updateSingleDocument = (id, collection, updates, merge = true) =>
+export const firebaseSingleUpdate = (id, collection, updates, merge = true) =>
   new Promise((resolve, reject) =>
     (async () => {
       const user = firestore.collection(collection).doc(id);
@@ -1872,3 +1845,37 @@ export async function sendVisitRecap({payload}) {
     console.log(error);
   }
 }
+
+export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
+  new Promise((resolve, reject) =>
+    (async function () {
+      const updateSubscriptionPlan = functions.httpsCallable(
+        'changeSubscriptionPlan',
+      );
+      try {
+        const response = await updateSubscriptionPlan({
+          subscriptionId,
+          planId,
+        });
+        resolve(response.data);
+      } catch (error) {
+        reject(error.details);
+      }
+    })(),
+  );
+
+export const cancelSubscription = ({subscriptionId, userId}) =>
+  new Promise((resolve, reject) =>
+    (async function () {
+      const cancelSubscription = functions.httpsCallable('cancelSubscription');
+      try {
+        const response = await cancelSubscription({
+          subscriptionId,
+          userId,
+        });
+        resolve(response.data);
+      } catch (error) {
+        reject(error.details);
+      }
+    })(),
+  );

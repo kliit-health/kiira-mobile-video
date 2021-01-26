@@ -1,21 +1,20 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, {useState, useEffect} from 'react';
 import {
-	shape,
-	object,
-	bool,
-	string,
-	number,
-	func,
-	arrayOf,
-	oneOfType,
-	any,
-} from "prop-types";
-import { View } from "react-native";
-import RadioButton from "../radioButton";
-import { useDidMount } from "../../utils/hooks";
-import { isEqual } from "lodash";
-import { generateIdentifier, mergeStyles } from "../../utils/functions";
-import defaultStyles, { modifiers } from "./styles";
+  shape,
+  object,
+  bool,
+  string,
+  number,
+  func,
+  arrayOf,
+  oneOfType,
+  any,
+} from 'prop-types';
+import {View} from 'react-native';
+import RadioButton from '../radioButton';
+import {isEqual} from 'lodash';
+import {mergeStyles} from '../../utils/functions';
+import defaultStyles, {modifiers} from './styles';
 
 /**
  * @desc - Radio Group Component
@@ -32,119 +31,115 @@ import defaultStyles, { modifiers } from "./styles";
  */
 
 const RadioGroup = ({
-	styles: customStyles,
-	data,
-	initialValue,
-	initialIndex,
-	onChange,
-	boxed,
-	horizontal,
+  styles: customStyles,
+  data,
+  initialValue,
+  initialIndex,
+  onChange,
+  boxed,
+  horizontal,
 }) => {
-	const [selected, setSelected] = useState(undefined);
-	const [index, setIndex] = useState(undefined);
+  const [selected, setSelected] = useState(undefined);
+  const [index, setIndex] = useState(undefined);
 
-	useDidMount(() => {
-		if (initialValue) {
-			setSelected(initialValue);
-		}
+  useEffect(() => {
+    if (initialValue) {
+      setSelected(initialValue);
+    }
+  }, [initialValue]);
 
-		if (initialIndex) {
-			setSelected(data[initialIndex]);
-		}
-	});
+  useEffect(() => {
+    if (initialIndex) {
+      setSelected(data[initialIndex]);
+    }
+  }, [initialIndex]);
 
-	useEffect(() => {
-		onChange(selected, index);
-	}, [selected, index]);
+  useEffect(() => {
+    onChange(selected, index);
+  }, [selected, index]);
 
-	const handlePress = item => {
-		setSelected(item);
-		setIndex(index);
-	};
+  const handlePress = (item) => {
+    setSelected(item);
+    setIndex(index);
+  };
 
-	const styles = {
-		root: mergeStyles([
-			defaultStyles.root,
-			[modifiers.horizontal.root, horizontal],
-			customStyles.root,
-		]),
-		button: {
-			root: mergeStyles([
-				defaultStyles.button,
-				[modifiers.boxed.button, boxed],
-				[modifiers.horizontal.button, horizontal],
-			]),
-		},
-	};
+  const styles = {
+    root: mergeStyles([
+      defaultStyles.root,
+      [modifiers.horizontal.root, horizontal],
+      customStyles.root,
+    ]),
+    button: {
+      root: mergeStyles([
+        defaultStyles.button,
+        [modifiers.boxed.button, boxed],
+        [modifiers.horizontal.button, horizontal],
+      ]),
+    },
+  };
 
-	const compare = (first, second) => {
-		return typeof first === "object"
-			? isEqual(first, second)
-			: first === second;
-	};
+  const compare = (first, second) => {
+    return typeof first === 'object'
+      ? isEqual(first, second)
+      : first === second;
+  };
 
-	return (
-		<View style={styles.root}>
-			{data.map((item, index) => {
-				const key = generateIdentifier();
-				return useMemo(
-					() => (
-						<RadioButton
-							label={typeof item === "object" ? item.label : item}
-							selected={compare(item, selected)}
-							onPress={() => handlePress(item, index)}
-							boxed={horizontal ? false : boxed}
-							key={key}
-							styles={styles.button}
-						/>
-					),
-					[selected]
-				);
-			})}
-		</View>
-	);
+  return (
+    <View style={styles.root}>
+      {data.map((item, index) => (
+        <RadioButton
+          label={typeof item === 'object' ? item.label : item}
+          selected={compare(item, selected)}
+          onPress={() => handlePress(item, index)}
+          boxed={horizontal ? false : boxed}
+          key={item.label}
+          styles={styles.button}
+        />
+      ))}
+    </View>
+  );
 };
 
 RadioGroup.propTypes = {
-	styles: shape({
-		root: object,
-		radio: shape({
-			root: object,
-			ring: object,
-			circle: object,
-			label: object,
-		}),
-	}),
-	initialIndex: number,
-	initialValue: oneOfType([
-		string,
-		shape({
-			label: string,
-			value: any,
-		}),
-	]),
-	data: arrayOf(
-		oneOfType([
-			string,
-			shape({
-				label: string,
-				value: any,
-			}),
-		])
-	),
-	onChange: func,
-	boxed: bool,
-	horizontal: bool,
+  styles: shape({
+    root: object,
+    radio: shape({
+      root: object,
+      ring: object,
+      circle: object,
+      label: object,
+    }),
+  }),
+  initialIndex: number,
+  initialValue: oneOfType([
+    string,
+    shape({
+      label: string,
+      value: any,
+    }),
+  ]),
+  data: arrayOf(
+    oneOfType([
+      string,
+      shape({
+        label: string,
+        value: any,
+      }),
+    ]),
+  ),
+  onChange: func,
+  boxed: bool,
+  horizontal: bool,
 };
 
 RadioGroup.defaultProps = {
-	styles: {},
-	initialIndex: undefined,
-	initialValue: undefined,
-	data: [],
-	onChange: () => {},
-	boxed: true,
-	horizontal: false,
+  styles: {},
+  initialIndex: undefined,
+  initialValue: undefined,
+  data: [],
+  onChange: () => {},
+  boxed: true,
+  horizontal: false,
 };
 
 export default RadioGroup;

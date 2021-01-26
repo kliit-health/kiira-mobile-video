@@ -1,0 +1,41 @@
+import React from 'react';
+import {Container, TextButton} from '../../../components';
+import {useSelector, useDispatch} from 'react-redux';
+import {ScrollView, StatusBar} from 'react-native';
+import intl from '../../../utils/localization';
+import {Profile, List, Plan} from './sections';
+import {signOut} from './action';
+import {modifiers} from './styles';
+
+const Account = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const subscription = useSelector((state) => state.subscription);
+  const user = useSelector((state) => state.user.data);
+
+  const handleNavigation = (destination) => {
+    navigation.navigate(destination);
+  };
+
+  const handleSignOut = () => {
+    dispatch(signOut({navigation}));
+  };
+
+  return (
+    <Container styles={modifiers.container} themed unformatted>
+      <StatusBar barStyle="light-content" translucent={true} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Profile {...user} />
+        {!!subscription.data.id && (
+          <Plan subscription={subscription} user={user} />
+        )}
+        <List onItemPress={handleNavigation} />
+        <TextButton onPress={handleSignOut} styles={modifiers.button} link>
+          {intl.en.account.logout}
+        </TextButton>
+      </ScrollView>
+    </Container>
+  );
+};
+
+export default Account;
