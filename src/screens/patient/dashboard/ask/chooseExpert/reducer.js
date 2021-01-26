@@ -12,7 +12,7 @@ const initialState = {
   languagesData: null,
 };
 
-export const chooseExpertReducer = (state = initialState, action) => {
+export const chooseExpert = (state = initialState, action) => {
   const {data, type} = action;
   return switchCase({
     [GET_EXPERTS_DATA_SUCCESS]: () => {
@@ -40,4 +40,4 @@ export const chooseExpertReducer = (state = initialState, action) => {
   })(state)(type);
 };
 
-export default chooseExpertReducer;
+export default chooseExpert;

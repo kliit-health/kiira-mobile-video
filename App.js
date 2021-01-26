@@ -1,14 +1,8 @@
 import React, {PureComponent} from 'react';
-import {
-  View,
-  Alert,
-  BackHandler,
-  AppState,
-  LogBox,
-  Platform,
-} from 'react-native';
+import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigator';
+import {Messaging} from './src/services';
 import {showOrHideModal} from './src/components/customModal/action';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
@@ -21,7 +15,6 @@ import {
   setAppScreen,
 } from './src/screens/auth/authLoading/action';
 import {signOut} from './src/screens/patient/account/action';
-import Constant from './src/utils/constants';
 import FastImage from 'react-native-fast-image';
 // import BackgroundTask from 'react-native-background-task';
 // import BackgroundTimerMain from 'react-native-background-timer';
@@ -232,6 +225,7 @@ class App extends PureComponent {
             setPreviousRoute(prevScreen);
           }}
         />
+        <Messaging />
         {showModalError ? (
           <CustomModal
             onPressErrorButtonOk={() => hideErrorModal()}
@@ -261,12 +255,12 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  spinnerState: state.loaderReducer,
-  toastState: state.toastReducer,
-  showModalError: state.modalReducer.showModalError,
-  errorMessage: state.modalReducer.errorMessage,
-  userData: state.authLoadingReducer.userData,
-  isActive: state.authLoadingReducer.isActive,
+  spinnerState: state.loader,
+  toastState: state.toast,
+  showModalError: state.modal.showModalError,
+  errorMessage: state.modal.errorMessage,
+  userData: state.authLoading.userData,
+  isActive: state.authLoading.isActive,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -160,8 +160,8 @@ class PaymentMethods extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  paymentMethods: state.paymentReducer.paymentMethods,
-  isNativePaySupported: state.paymentReducer.isNativePaySupported,
+  paymentMethods: state.payment.paymentMethods,
+  isNativePaySupported: state.payment.isNativePaySupported,
 });
 
 export default connect(mapStateToProps)(PaymentMethods);

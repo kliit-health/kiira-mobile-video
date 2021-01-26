@@ -22,7 +22,7 @@ const initialState = {
   },
 };
 
-const rescheduleReducer = (state = initialState, action) => {
+const reschedule = (state = initialState, action) => {
   switch (action.type) {
     case NEEDS_PRESCRIPTION:
       return {
@@ -66,4 +66,4 @@ const rescheduleReducer = (state = initialState, action) => {
   }
 };
 
-export default rescheduleReducer;
+export default reschedule;

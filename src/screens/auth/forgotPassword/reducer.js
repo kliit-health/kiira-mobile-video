@@ -6,7 +6,7 @@ import {
 const initialState = {
   forgotPasswordSuccess: null,
 };
-const forgotPasswordReducer = (state = initialState, action) => {
+const forgotPassword = (state = initialState, action) => {
   switch (action.type) {
     case FORGOT_PASSWORD_SUCCESS:
       return {
@@ -25,4 +25,4 @@ const forgotPasswordReducer = (state = initialState, action) => {
   }
 };
 
-export default forgotPasswordReducer;
+export default forgotPassword;

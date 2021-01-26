@@ -4,7 +4,7 @@ const initialState = {
   history: [],
 };
 
-const appointmentsReducer = (state = initialState, action) => {
+const appointments = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_APPOINTMENTS:
       return {
@@ -18,4 +18,4 @@ const appointmentsReducer = (state = initialState, action) => {
   }
 };
 
-export default appointmentsReducer;
+export default appointments;

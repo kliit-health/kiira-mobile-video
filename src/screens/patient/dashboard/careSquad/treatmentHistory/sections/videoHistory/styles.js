@@ -141,13 +141,13 @@ export const messageStyles = StyleSheet.create({
   card: {
     backgroundColor: colors.white,
     borderRadius: 10,
-    padding: 20,
+    padding: 30,
     maxWidth: '80%',
     alignSelf: 'center',
     justifyContent: 'center',
     alignContent: 'center',
     position: 'relative',
-    paddingBottom: 20,
+    paddingBottom: 30,
   },
   messageText: {
     fontFamily: text.fontFamily.poppinsRegular,

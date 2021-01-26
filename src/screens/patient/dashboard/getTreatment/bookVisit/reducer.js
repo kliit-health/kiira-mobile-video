@@ -4,7 +4,7 @@ const initialState = {
   prepaid: false,
 };
 
-const bookVisitReducer = (state = initialState, action) => {
+const bookVisit = (state = initialState, action) => {
   switch (action.type) {
     case SET_PREPAID:
       return {
@@ -18,4 +18,4 @@ const bookVisitReducer = (state = initialState, action) => {
   }
 };
 
-export default bookVisitReducer;
+export default bookVisit;

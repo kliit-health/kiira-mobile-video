@@ -8,7 +8,7 @@ import {
   makeAppointment,
   prepaidAppointment,
   getAppointmentsList,
-} from '../../../appointments/action';
+} from '../action';
 
 const Buttons = ({
   applyCredit,

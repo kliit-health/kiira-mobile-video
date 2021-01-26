@@ -3,7 +3,7 @@ import {
   GET_CLIENT_MEDICAL_HISTORY_FULFILLED,
   GET_CLIENT_MEDICAL_HISTORY_PENDING,
   GET_CLIENT_MEDICAL_HISTORY_REJECTED,
-} from '../../redux/types';
+} from '../types';
 import {put, takeEvery} from 'redux-saga/effects';
 import {firebaseSingleFetch, auth} from '../../utils/firebase';
 

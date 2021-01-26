@@ -27,11 +27,9 @@ const RescheduleVisit = (props) => {
   const {navigation, visit} = props.navigation.state.params;
   const {calendarID, expert, uid, id} = visit;
 
-  const expertData = useSelector(
-    (state) => state.expertProfileReducer.expertData,
-  );
+  const expertData = useSelector((state) => state.expertProfile.expertData);
 
-  const appointmentData = useSelector((state) => state.expertScheduleReducer);
+  const appointmentData = useSelector((state) => state.expertSchedule);
   const today = moment(new Date()).format('YYYY-MM-DD');
   const current = generateDateInfo(today);
   const [day, setDay] = useState(null);

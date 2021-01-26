@@ -1,27 +1,27 @@
-import React, { PureComponent } from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { WebView } from "react-native-webview";
-import { capturePayment } from "../action";
+import React, {PureComponent} from 'react';
+import {View} from 'react-native';
+import {connect} from 'react-redux';
+import {WebView} from 'react-native-webview';
+import {capturePayment} from '../action';
 
 class PayPalCheckout extends PureComponent {
   _onNavigationStateChange = (webViewState) => {
-    console.log("_onNavigationStateChange ", webViewState.url);
-    if (webViewState.url.includes("https://example.com/success")) {
-      const { captureURL, credits, navigation } = this.props;
+    console.log('_onNavigationStateChange ', webViewState.url);
+    if (webViewState.url.includes('https://example.com/success')) {
+      const {captureURL, credits, navigation} = this.props;
       this.props.capturePayment(captureURL, credits, navigation);
       navigation.goBack();
-    } else if (webViewState.url.includes("https://example.com/fail")) {
+    } else if (webViewState.url.includes('https://example.com/fail')) {
       this.props.navigation.goBack();
     }
   };
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
         <WebView
-          style={{ marginTop: 50 }}
-          source={{ uri: this.props.approvalUrl }}
+          style={{marginTop: 50}}
+          source={{uri: this.props.approvalUrl}}
           onNavigationStateChange={this._onNavigationStateChange}
           javaScriptEnabled={true}
           domStorageEnabled={true}
@@ -33,10 +33,10 @@ class PayPalCheckout extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  approvalUrl: state.paymentReducer.orderData.approvalUrl,
-  captureURL: state.paymentReducer.orderData.capturePaymentURL,
-  credits: state.paymentReducer.orderData.credits,
-  userData: state.authLoadingReducer.userData,
+  approvalUrl: state.payment.orderData.approvalUrl,
+  captureURL: state.payment.orderData.capturePaymentURL,
+  credits: state.payment.orderData.credits,
+  userData: state.authLoading.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -44,7 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(capturePayment(captureURL, credits, navigation)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PayPalCheckout);
+export default connect(mapStateToProps, mapDispatchToProps)(PayPalCheckout);

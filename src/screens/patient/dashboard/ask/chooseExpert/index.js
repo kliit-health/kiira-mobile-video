@@ -497,10 +497,10 @@ class ChooseExpert extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  expertData: state.chooseExpertReducer.expertData,
-  question: state.askReducer.question,
-  professionData: state.chooseExpertReducer.professionData,
-  languagesData: state.chooseExpertReducer.languagesData,
+  expertData: state.chooseExpert.expertData,
+  question: state.ask.question,
+  professionData: state.chooseExpert.professionData,
+  languagesData: state.chooseExpert.languagesData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

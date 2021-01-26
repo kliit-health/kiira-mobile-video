@@ -8,7 +8,7 @@ import {screenNames} from '../../../utils/constants';
 import styles, {modifiers} from './styles';
 
 const Help = ({navigation}) => {
-  const {appScreen} = useSelector((state) => state.authLoadingReducer);
+  const {appScreen} = useSelector((state) => state.authLoading);
 
   const handleBack = () => {
     navigation.goBack();

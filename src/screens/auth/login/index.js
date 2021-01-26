@@ -20,7 +20,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 let lang = Language['en'];
 const Login = (props) => {
-  const loginFailure = useSelector((state) => state.loginReducer.loginFailure);
+  const loginFailure = useSelector((state) => state.login.loginFailure);
   const dispatch = useDispatch();
   const {navigation} = props;
   const {staticImages} = Constant.App;

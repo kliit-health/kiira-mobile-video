@@ -140,8 +140,8 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoadingReducer.userData,
-  cometChat: state.visitReducer.details.data,
+  userData: state.authLoading.userData,
+  cometChat: state.visit.details.data,
 });
 
 export default connect(mapStateToProps)(LoginScreen);

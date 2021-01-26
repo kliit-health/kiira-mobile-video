@@ -1,5 +1,5 @@
 const initialState = {};
-const agreeToTermsReducer = (state = initialState, action) => {
+const agreeToTerms = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
@@ -7,4 +7,4 @@ const agreeToTermsReducer = (state = initialState, action) => {
       };
   }
 };
-export default agreeToTermsReducer;
+export default agreeToTerms;

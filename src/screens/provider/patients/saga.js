@@ -2,19 +2,19 @@ import {
   GET_PATIENTS_LIST,
   FETCH_PAITENT_APPOINTMENTS,
   PAITENT_CANCEL_APPOINTMENT,
-} from '../../redux/types';
+} from '../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
   updateCredits,
-} from '../../utils/firebase';
+} from '../../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../components/customLoader/action';
+} from '../../../components/customLoader/action';
 
-import {showOrHideModal} from '../../components/customModal/action';
+import {showOrHideModal} from '../../../components/customModal/action';
 
 function getUserAppointments(data) {
   let users = Object.values(data);

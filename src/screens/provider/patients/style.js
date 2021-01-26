@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
-import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -41,8 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    // marginTop: getStatusBarHeight(),
-    // marginBottom: 50,
   },
 
   detail: {

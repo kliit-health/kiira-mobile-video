@@ -1,9 +1,9 @@
 import React from 'react';
 import {Container, Header, TextButton} from '../../../../../../components';
 import {Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import intl from '../../../../../../utils/localization';
-import {updateHealthHistory, updateHealthHistoryAsync} from '../../actions';
+import {updateHealthHistory} from '../../../../../../redux/actions';
 import styles from './styles';
 
 const initialState = {
@@ -15,21 +15,17 @@ const initialState = {
 
 const Loss = ({navigation}) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.data);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
-  const handleConfirm = () => {
-    dispatch(
-      updateHealthHistoryAsync({
-        pregnancyCurrent: initialState,
-        navigation,
-      }),
-    );
-
+  const handleSave = () => {
     dispatch(
       updateHealthHistory({
+        navigation,
+        uid: user.uid,
         pregnancyCurrent: initialState,
       }),
     );
@@ -41,7 +37,7 @@ const Loss = ({navigation}) => {
       <Text style={styles.title}>{intl.en.loss.weAreSorry}</Text>
       <Text style={styles.description}>{intl.en.loss.youAreNotAlone}</Text>
       <Text style={styles.description}>{intl.en.loss.expertsNetwork}</Text>
-      <TextButton styles={{root: styles.button}} onPress={handleConfirm}>
+      <TextButton styles={{root: styles.button}} onPress={handleSave}>
         {intl.en.loss.confirm}
       </TextButton>
     </Container>

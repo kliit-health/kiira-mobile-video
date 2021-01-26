@@ -19,7 +19,7 @@ const ForgotPassword = (props) => {
   const {navigation} = props;
   const {staticImages} = Constant.App;
   const forgotPasswordSuccess = useSelector(
-    (state) => state.forgotPasswordReducer.forgotPasswordSuccess,
+    (state) => state.forgotPassword.forgotPasswordSuccess,
   );
 
   useEffect(() => {

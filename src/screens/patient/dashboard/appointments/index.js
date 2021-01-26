@@ -14,8 +14,8 @@ import intl from '../../../../utils/localization';
 const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const visitData = useSelector((state) => state.appointmentsReducer);
+  const userData = useSelector((state) => state.authLoading.userData);
+  const visitData = useSelector((state) => state.appointments);
   const [visits, setVisits] = useState([]);
 
   useEffect(() => {

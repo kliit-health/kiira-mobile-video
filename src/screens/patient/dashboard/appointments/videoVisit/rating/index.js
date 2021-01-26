@@ -124,7 +124,7 @@ class VideoRating extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  current: state.visitReducer,
+  current: state.visit,
 });
 
 const mapDispatchToProps = (dispatch) => ({

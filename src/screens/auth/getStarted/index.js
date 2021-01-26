@@ -11,7 +11,7 @@ let lang = Language['en'];
 const GetStarted = (props) => {
   const {navigation} = props;
   const {staticImages} = Constant.App;
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
+  const userData = useSelector((state) => state.authLoading.userData);
 
   const renderLogoView = () => {
     return (

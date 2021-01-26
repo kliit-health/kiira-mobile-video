@@ -6,31 +6,43 @@ import {Container, Header, FooterNavigation} from '../../../../../components';
 import intl from '../../../../../utils/localization';
 import {initialQuestions, extraQuestions, types} from './model';
 import {PolarQuestion, ObjectiveQuestion} from './components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../../healthHistory/actions';
+import {updateHealthHistory} from '../../../../../redux/actions';
 import styles from './styles';
 
 const Allergies = ({navigation}) => {
   const dispatch = useDispatch();
-  const answers = useSelector((state) => state.healthHistory.allergies.answers);
-
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.allergies.answers,
+  );
   const [questions, setQuestions] = useState(initialQuestions);
   const [finish, setFinish] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  const [allergies, setAllergies] = useState({
+    medicationAllergic: null,
+    medicationAllergies: [],
+    foodAllergic: null,
+    foodAllergies: [],
+  });
 
   const [{dataKey, question, options, type, index}, setQuestion] = useState({
     ...questions[0],
     index: 0,
   });
 
+  useEffect(() => {
+    if (answers) {
+      setAllergies(answers);
+    }
+  }, [answers]);
+
   /**
    * @desc adds and removes new questions to the questions array.
    */
 
   useEffect(() => {
-    if (answers && answers[dataKey] === true) {
+    if (allergies[dataKey] === true) {
       const newQuestion = extraQuestions.find(
         (question) => question.link === dataKey,
       );
@@ -41,14 +53,14 @@ const Allergies = ({navigation}) => {
       );
       setQuestions(newQuestions);
     }
-  }, [answers, question]);
+  }, [allergies, question]);
 
   /**
    * @desc handles the state (enabled or disabled) of the finish/next button
    */
 
   useEffect(() => {
-    const data = answers[dataKey];
+    const data = allergies[dataKey];
     setDisabled(data instanceof Array ? data.length === 0 : data === null);
   });
 
@@ -56,32 +68,18 @@ const Allergies = ({navigation}) => {
     setFinish(index === questions.length - 1);
   });
 
-  const dispatchUpdate = (update) => {
-    dispatch(
-      updateHealthHistory({
-        allergies: {
-          answers: {
-            ...answers,
-            [dataKey]: update,
-          },
-          completed: false,
-        },
-      }),
-    );
-  };
-
-  const handlePolarQuestion = (response) => {
-    dispatchUpdate(response);
+  const handleChange = (dataKey, value) => {
+    setAllergies({...allergies, [dataKey]: value});
   };
 
   const handleObjectiveQuestion = (title) => {
-    const data = answers[dataKey];
-
-    dispatchUpdate(
-      data.includes(title)
+    const data = allergies[dataKey];
+    setAllergies({
+      ...allergies,
+      [dataKey]: data.includes(title)
         ? data.filter((item) => item !== title)
         : [...data, title],
-    );
+    });
   };
 
   const handleNextPress = () => {
@@ -102,14 +100,15 @@ const Allergies = ({navigation}) => {
     navigation.goBack();
   };
 
-  const handleFinishPress = () => {
+  const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
+        uid: user.uid,
+        navigation,
         allergies: {
-          answers,
+          answers: allergies,
           completed: true,
         },
-        navigation,
       }),
     );
   };
@@ -121,14 +120,14 @@ const Allergies = ({navigation}) => {
       {switchCase({
         [types.polar]: (
           <PolarQuestion
-            value={answers[dataKey]}
-            onPress={handlePolarQuestion}
+            value={allergies[dataKey]}
+            onPress={(value) => handleChange(dataKey, value)}
           />
         ),
         [types.objective]: (
           <ObjectiveQuestion
             options={options}
-            value={answers[dataKey]}
+            value={allergies[dataKey]}
             onPress={handleObjectiveQuestion}
           />
         ),
@@ -141,7 +140,7 @@ const Allergies = ({navigation}) => {
           finish ? intl.en.allergies.finish : intl.en.allergies.next
         }
         disableRightButton={disabled}
-        onRightButotonPress={finish ? handleFinishPress : handleNextPress}
+        onRightButotonPress={finish ? handleSave : handleNextPress}
       />
     </Container>
   );

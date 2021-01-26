@@ -13,7 +13,7 @@ const initialState = {
   questionData: null,
   question: '',
 };
-const askReducer = (state = initialState, action) => {
+const ask = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECENT_EXPERTS_DATA_SUCCESS:
       return {
@@ -54,4 +54,4 @@ const askReducer = (state = initialState, action) => {
       };
   }
 };
-export default askReducer;
+export default ask;

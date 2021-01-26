@@ -391,7 +391,7 @@ class ChatBotScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoadingReducer.userData,
+  userData: state.authLoading.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

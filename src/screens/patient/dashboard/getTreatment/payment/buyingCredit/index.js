@@ -334,13 +334,13 @@ class BuyingCredit extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoadingReducer.userData,
-  amountOptions: state.paymentReducer.creditAmountOptions,
-  paymentMethods: state.paymentReducer.paymentMethods.filter(
+  userData: state.authLoading.userData,
+  amountOptions: state.payment.creditAmountOptions,
+  paymentMethods: state.payment.paymentMethods.filter(
     (method) => !method.isExpired,
   ),
-  isNativePaySupported: state.paymentReducer.isNativePaySupported,
-  orderData: state.paymentReducer.orderData,
+  isNativePaySupported: state.payment.isNativePaySupported,
+  orderData: state.payment.orderData,
 });
 
 const mapDispatchToProps = (dispatch) => ({

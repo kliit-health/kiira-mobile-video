@@ -1,13 +1,10 @@
 import React from 'react';
 import {Container, Header, TextButton} from '../../../../../../components';
 import {Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import intl from '../../../../../../utils/localization';
 import {screenNames} from '../../../../../../utils/constants';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../../../healthHistory/actions';
+import {updateHealthHistory} from '../../../../../../redux/actions';
 import styles from './styles';
 
 const initialState = {
@@ -19,20 +16,16 @@ const initialState = {
 
 const Birth = ({navigation}) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.data);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
-  const handleConfirm = () => {
-    dispatch(
-      updateHealthHistoryAsync({
-        pregnancyCurrent: initialState,
-      }),
-    );
-
+  const handleSave = () => {
     dispatch(
       updateHealthHistory({
+        uid: user.uid,
         pregnancyCurrent: initialState,
       }),
     );
@@ -47,7 +40,7 @@ const Birth = ({navigation}) => {
       <Header title={intl.en.birth.title} onBack={handleBackPress} />
       <Text style={styles.title}>{intl.en.birth.congratulations}</Text>
       <Text style={styles.description}>{intl.en.birth.help}</Text>
-      <TextButton styles={{root: styles.button}} onPress={handleConfirm}>
+      <TextButton styles={{root: styles.button}} onPress={handleSave}>
         {intl.en.loss.confirm}
       </TextButton>
     </Container>

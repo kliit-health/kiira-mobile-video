@@ -25,11 +25,9 @@ import {
 } from './components';
 
 const ExpertSchedule = (props) => {
-  const expertData = useSelector(
-    (state) => state.expertProfileReducer.expertData,
-  );
+  const expertData = useSelector((state) => state.expertProfile.expertData);
 
-  const appointmentData = useSelector((state) => state.expertScheduleReducer);
+  const appointmentData = useSelector((state) => state.expertSchedule);
 
   const today = moment(new Date()).format('YYYY-MM-DD');
   const current = generateDateInfo(today);

@@ -7,7 +7,7 @@ const initialState = {
   loginFailure: null,
 };
 
-const loginReducer = (state = initialState, action) => {
+const login = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_FIREBASE_API_HIT_FAILURE:
       return {
@@ -26,4 +26,4 @@ const loginReducer = (state = initialState, action) => {
   }
 };
 
-export default loginReducer;
+export default login;

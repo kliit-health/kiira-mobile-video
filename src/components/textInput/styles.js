@@ -2,7 +2,8 @@ import {StyleSheet} from 'react-native';
 import {colors, text} from '../../utils/constants';
 
 export default StyleSheet.create({
-  root: {
+  root: {},
+  touchable: {
     borderBottomWidth: 0.3,
     borderColor: colors.lightGrey,
     flexDirection: 'row',
@@ -33,7 +34,7 @@ export default StyleSheet.create({
 
 export const modifiers = {
   outlined: {
-    root: {
+    touchable: {
       borderWidth: 1,
       borderBottomWidth: 1,
       borderColor: colors.gray,

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, Header, TextButton} from '../../../../../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {model} from './model';
 import {DatePicker} from './components';
-import {updateHealthHistory, updateHealthHistoryAsync} from '../../actions';
+import {updateHealthHistory} from '../../../../../../redux/actions';
 import intl from '../../../../../../utils/localization';
 import styles from './styles';
 
@@ -11,29 +11,37 @@ const {placeholder, dataKey, title} = model;
 
 const DueDate = ({navigation}) => {
   const dispatch = useDispatch();
-  const {answers} = useSelector(
-    (state) => state.healthHistory.pregnancyCurrent,
+  const [data, setData] = useState({
+    dueDate: '',
+  });
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.pregnancyCurrent.answers,
   );
+
+  useEffect(() => {
+    if (answers) {
+      setData(answers);
+    }
+  }, [answers]);
+
+  const handleChange = (dataKey, value) => {
+    setData({...data, [dataKey]: value});
+  };
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
-  const handlePicker = (date) => {
-    dispatch(
-      updateHealthHistory({
-        pregnancyCurrent: {
-          answers: {...answers, [dataKey]: date},
-        },
-      }),
-    );
-  };
-
   const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
-        pregnancyCurrent: {answers, completed: true},
+      updateHealthHistory({
+        uid: user.uid,
         navigation,
+        pregnancyCurrent: {
+          answers: data,
+          completed: true,
+        },
       }),
     );
   };
@@ -44,11 +52,11 @@ const DueDate = ({navigation}) => {
       <DatePicker
         placeholder={placeholder}
         title={title}
-        onSave={handlePicker}
-        value={answers[dataKey]}
+        onSave={(date) => handleChange('dueDate', date)}
+        value={data[dataKey]}
       />
       <TextButton
-        disabled={!answers[dataKey]}
+        disabled={!data[dataKey]}
         styles={{root: styles.button}}
         onPress={handleSave}>
         {intl.en.insurance.save}

@@ -9,10 +9,7 @@ import {
 } from '../../../../../components';
 import model from './model';
 import intl from '../../../../../utils/localization';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../../healthHistory/actions';
+import {updateHealthHistory} from '../../../../../redux/actions';
 import styles from './styles';
 
 const {question, options, dataKey} = model;
@@ -37,7 +34,7 @@ const Insurance = ({navigation}) => {
 
   const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
         insurance: {answers, completed: true},
         navigation,
       }),

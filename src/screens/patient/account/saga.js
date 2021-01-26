@@ -17,7 +17,7 @@ function* signout({data}) {
   const {navigation, isLoaderShow} = data;
   try {
     const state = yield select();
-    const userData = state.authLoadingReducer.userData;
+    const userData = state.authLoading.userData;
     if (isLoaderShow) {
       yield put(showApiLoader(Lang.apiLoader.loadingText));
     }

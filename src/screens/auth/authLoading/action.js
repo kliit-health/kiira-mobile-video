@@ -3,8 +3,6 @@ import {
   SET_FCM_TOKEN,
   SET_APP_STATE,
   SET_APP_SCREEN,
-  GET_LICENSES,
-  SET_LICENSES,
 } from '../../../redux/types';
 
 export const setUserData = (data) => ({
@@ -24,14 +22,5 @@ export const setAppState = (data) => ({
 
 export const setAppScreen = (data) => ({
   type: SET_APP_SCREEN,
-  data,
-});
-
-export const getLicenses = () => ({
-  type: GET_LICENSES,
-});
-
-export const setLicenses = (data) => ({
-  type: SET_LICENSES,
   data,
 });

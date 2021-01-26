@@ -5,11 +5,11 @@ import {View, Text, ScrollView, StatusBar} from 'react-native';
 import intl from '../../../utils/localization';
 import {ProfileCard} from './sections';
 import {list} from './model';
-import {signOut} from '../action';
+import {signOut} from '../../patient/account/action';
 import styles, {modifiers} from './styles';
 
 const ExpertAccount = ({navigation}) => {
-  const details = useSelector((state) => state.authLoadingReducer.userData);
+  const details = useSelector((state) => state.authLoading.userData);
   const dispatch = useDispatch();
 
   const handleNavigation = (destination) => {

@@ -15,13 +15,11 @@ const BookVisit = (props) => {
   const [applyPayment, setApplyPayment] = useState(false);
   const [booked, setBooked] = useState(false);
   const [price, setPrice] = useState('');
-  const expertData = useSelector(
-    (state) => state.expertProfileReducer.expertData,
-  );
+  const expertData = useSelector((state) => state.expertProfile.expertData);
 
-  const visitData = useSelector((state) => state.expertScheduleReducer);
-  const userData = useSelector((state) => state.userDetails.data);
-  const bookVisit = useSelector((state) => state.bookVisitReducer);
+  const visitData = useSelector((state) => state.expertSchedule);
+  const userData = useSelector((state) => state.user.data);
+  const bookVisit = useSelector((state) => state.bookVisit);
 
   const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;
 

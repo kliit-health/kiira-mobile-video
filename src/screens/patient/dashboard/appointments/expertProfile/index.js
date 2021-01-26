@@ -19,9 +19,7 @@ import FastImage from 'react-native-fast-image';
 
 const lang = Language['en'];
 const ExpertProfile = (props) => {
-  const expertDetails = useSelector(
-    (state) => state.expertProfileReducer.expertData,
-  );
+  const expertDetails = useSelector((state) => state.expertProfile.expertData);
 
   const dispatch = useDispatch();
 

@@ -28,7 +28,7 @@ const CancelModal = ({visit, setVisible, visible}) => {
           <Image
             resizeMode="contain"
             style={styles.modalImage}
-            source={require('../../../../assets/logo.png')}
+            source={require('../../../../../assets/logo.png')}
             activeOpacity={0.7}
           />
           <Text style={styles.modalText}>

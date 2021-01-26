@@ -13,7 +13,7 @@ const initialState = {
   orderData: null,
 };
 
-const paymentReducer = (state = initialState, action) => {
+const payment = (state = initialState, action) => {
   switch (action.type) {
     case SET_CREDIT_AMOUNT_OPTIONS:
       return {
@@ -45,4 +45,4 @@ const paymentReducer = (state = initialState, action) => {
   }
 };
 
-export default paymentReducer;
+export default payment;

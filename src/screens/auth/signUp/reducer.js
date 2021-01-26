@@ -1,5 +1,6 @@
 const initialState = {};
-const signupReducer = (state = initialState, action) => {
+
+const signup = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
@@ -8,4 +9,4 @@ const signupReducer = (state = initialState, action) => {
   }
 };
 
-export default signupReducer;
+export default signup;

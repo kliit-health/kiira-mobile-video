@@ -5,7 +5,7 @@ const initialState = {
   details: {},
 };
 
-const visitReducer = (state = initialState, {type, data}) => {
+const visit = (state = initialState, {type, data}) => {
   switch (type) {
     case SET_VISIT:
       return {
@@ -24,4 +24,4 @@ const visitReducer = (state = initialState, {type, data}) => {
   }
 };
 
-export default visitReducer;
+export default visit;

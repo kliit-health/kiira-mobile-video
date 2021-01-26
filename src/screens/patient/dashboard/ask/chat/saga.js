@@ -40,7 +40,6 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
-import {getExpertsDetailsAsync} from '../../careSquad/actions';
 import Constant from '../../../../../utils/constants';
 import {clearQuestionValue} from '../../ask/action';
 import moment from 'moment';
@@ -56,7 +55,7 @@ function* setQuestion({data, dispatch}) {
   try {
     yield put(showApiLoader(Lang.apiLoader.loadingText));
     const state = yield select();
-    const userData = state.authLoadingReducer.userData;
+    const userData = state.authLoading.userData;
     const {userInfo, expertInfo, question} = data;
     const setQuestionParams = {
       question,
@@ -98,25 +97,25 @@ function* setQuestion({data, dispatch}) {
         }),
       );
 
-      let paramsUpdateCredits;
+      // let paramsUpdateCredits;
 
-      if (userData.questions > 0) {
-        paramsUpdateCredits = {
-          uid: userData.uid,
-          updatedData: {
-            questions: userData.questions - 1,
-          },
-        };
-      } else {
-        paramsUpdateCredits = {
-          uid: userData.uid,
-          updatedData: {
-            credits: userData.credits - Constant.App.questionCreditValue,
-          },
-        };
-      }
+      // if (userData.questions > 0) {
+      //   paramsUpdateCredits = {
+      //     uid: userData.uid,
+      //     updatedData: {
+      //       questions: userData.questions - 1,
+      //     },
+      //   };
+      // } else {
+      //   paramsUpdateCredits = {
+      //     uid: userData.uid,
+      //     updatedData: {
+      //       credits: userData.credits - Constant.App.questionCreditValue,
+      //     },
+      //   };
+      // }
 
-      yield updateStatus(paramsUpdateCredits);
+      // yield updateStatus(paramsUpdateCredits);
 
       const user = firebase.auth().currentUser;
 
@@ -202,7 +201,7 @@ function* sendMessageToUser({data}) {
         messageParams.image = downloadURL;
         const state = yield select();
         const expertStatusData = state.chat.expertStatusData;
-        const userData = state.authLoadingReducer.userData;
+        const userData = state.authLoading.userData;
         const questionData = Object.assign({}, state.chat.questionData);
         displayConsole('questionData', questionData);
         var unreadCount = questionData.unreadCount
@@ -248,7 +247,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
-      const userData = state.authLoadingReducer.userData;
+      const userData = state.authLoader.userData;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
         ? questionData.expertUnreadCount

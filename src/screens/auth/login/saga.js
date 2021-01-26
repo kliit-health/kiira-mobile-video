@@ -14,8 +14,8 @@ import {showOrHideModal} from '../../../components/customModal/action';
 import Constant from '../../../utils/constants';
 import {loginFailure} from './action';
 import {signoutApihit} from '../../patient/account/action';
-import {setUserData, getLicenses} from '../authLoading/action';
-import {getTerms} from '../../common/termsAndConditions/action';
+import {setUserData} from '../authLoading/action';
+import {getTermsAndConditions} from '../../../redux/actions';
 
 let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -23,7 +23,7 @@ let delayTime = 100;
 function* loginFirebase({data}) {
   try {
     const state = yield select();
-    const fcmToken = state.authLoadingReducer.fcmToken;
+    const fcmToken = state.authLoading.fcmToken;
     const {params, navigation} = data;
     yield put(showApiLoader(Lang.apiLoader.loadingText));
     const response = yield loginInWithFirebase(params);
@@ -45,8 +45,7 @@ function* loginFirebase({data}) {
           },
         };
         yield updateStatus(updateStatusParams);
-        // yield put(getLicenses());
-        // yield put(getTerms());
+        yield put(getTermsAndConditions());
         if (userData && userData.role === 'User' && !userData.firstLogin) {
           yield put(setUserData(userData));
           if (userData.agreeToTerms) {

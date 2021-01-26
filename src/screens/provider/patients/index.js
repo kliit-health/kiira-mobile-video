@@ -5,19 +5,19 @@ import styles, {modifiers} from './style';
 import {getPatientsList} from './action';
 import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
-import {generateDateInfo} from '../../utils/helper';
+import {generateDateInfo} from '../../../utils/helper';
 import moment from 'moment';
 import _ from 'lodash';
-import {Header, SearchBar, Container} from '../../components';
+import {Header, SearchBar, Container} from '../../../components';
 
-import intl from '../../utils/localization';
+import intl from '../../../utils/localization';
 
 const Patients = (props) => {
   const {navigation} = props;
   const dispatch = useDispatch();
 
-  const userData = useSelector((state) => state.authLoadingReducer.userData);
-  const visitData = useSelector((state) => state.expertPatientsReducer.history);
+  const userData = useSelector((state) => state.authLoading.userData);
+  const visitData = useSelector((state) => state.expertPatients.history);
   const [visits, setVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchVisits, setSearchVisits] = useState([]);

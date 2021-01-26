@@ -1,19 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import Image from 'react-native-fast-image';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Header, Container} from '../../../components';
 import inlt from '../../../utils/localization';
-import {getTerms} from './action';
 import styles from './styles';
 
 const TermsConditions = ({navigation}) => {
-  const sections = useSelector((state) => state.termsReducer.legal.sections);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTerms());
-  }, []);
+  const sections = useSelector(
+    (state) => state.termsAndConditions.data.sections,
+  );
 
   const handleOnBackPress = () => {
     navigation.goBack();

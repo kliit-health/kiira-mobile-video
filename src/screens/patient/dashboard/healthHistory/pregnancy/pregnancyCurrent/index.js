@@ -17,8 +17,8 @@ import styles from './styles';
 const formatDate = (date) => moment(date).format('ll');
 
 const PregnancyCurrent = ({navigation}) => {
-  const {dueDate} = useSelector(
-    (state) => state.healthHistory.pregnancyCurrent.answers,
+  const answers = useSelector(
+    (state) => state.healthHistory.data.pregnancyCurrent.answers,
   );
 
   const handleAddPregnancy = () => {
@@ -32,9 +32,11 @@ const PregnancyCurrent = ({navigation}) => {
   return (
     <Container unformatted>
       <Header title={intl.en.pregnancyCurrent.title} onBack={handleBackPress} />
-      {dueDate ? (
+      {answers.dueDate ? (
         <Fragment>
-          <Text style={styles.date}>{`Due ${formatDate(dueDate)}`}</Text>
+          <Text style={styles.date}>{`Due ${formatDate(
+            answers.dueDate,
+          )}`}</Text>
           {model.map(({title, destination}) => (
             <View key={title}>
               <ListItem

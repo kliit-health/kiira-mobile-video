@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {model, types} from './model';
 import {DatePicker, Picker} from './components';
 import {isNumber} from 'lodash';
-import {updateHealthHistoryAsync} from '../../../healthHistory/actions';
+import {updateHealthHistory} from '../../../../../../redux/actions';
 import intl from '../../../../../../utils/localization';
 import styles from './styles';
 
@@ -21,75 +21,63 @@ const AddChild = ({navigation}) => {
   const destination = navigation.getParam('destination');
 
   const dispatch = useDispatch();
-
-  const [details, setDetails] = useState({
+  const [data, setData] = useState({
     name: '',
     dateOfBirth: '',
     sex: '',
   });
 
-  const {children} = useSelector(
-    (state) => state.healthHistory.children.answers,
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.children.answers,
   );
 
   useDidMount(() => {
     if (isNumber(index)) {
-      setDetails(children[index]);
+      setData(answers.children[index]);
     }
   });
 
-  const handleTextInput = (name) => {
-    setDetails({
-      ...details,
-      name,
-    });
-  };
-
-  const handleDatePicker = (dateOfBirth) => {
-    setDetails({
-      ...details,
-      dateOfBirth,
-    });
-  };
-
-  const handlePicker = (sex) => {
-    setDetails({
-      ...details,
-      sex,
-    });
-  };
-
-  const handleSave = () => {
-    dispatch(
-      updateHealthHistoryAsync({
-        children: {
-          answers: {
-            children: isNumber(index)
-              ? children.map((child, position) =>
-                  position === index ? details : child,
-                )
-              : [...children, {...details}],
-          },
-          completed: true,
-        },
-      }),
-    );
-    destination ? navigation.popToTop() : navigation.goBack();
+  const handleChange = (dataKey, value) => {
+    setData({...data, [dataKey]: value});
   };
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
-  const handleDelete = () => {
+  const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
+        uid: user.uid,
         children: {
+          completed: true,
           answers: {
-            children: children.filter((_, position) => position !== index),
+            children: isNumber(index)
+              ? answers.children.map((child, position) =>
+                  position === index ? data : child,
+                )
+              : [...answers.children, {...data}],
           },
         },
+      }),
+    );
+    destination ? navigation.popToTop() : navigation.goBack();
+  };
+
+  const handleDelete = () => {
+    dispatch(
+      updateHealthHistory({
+        uid: user.uid,
         navigation,
+        children: {
+          completed: true,
+          answers: {
+            children: answers.children.filter(
+              (_, position) => position !== index,
+            ),
+          },
+        },
       }),
     );
   };
@@ -102,16 +90,16 @@ const AddChild = ({navigation}) => {
           [types.textInput]: (
             <TextInput
               key={title}
-              value={details[dataKey]}
+              value={data[dataKey]}
               placeholder={title}
-              onChange={handleTextInput}
+              onChange={(value) => handleChange(dataKey, value)}
             />
           ),
           [types.picker]: (
             <Picker
               key={title}
-              value={details[dataKey]}
-              onSave={handlePicker}
+              value={data[dataKey]}
+              onSave={(value) => handleChange(dataKey, value)}
               data={options}
               title={title}
               placeholder={placeholder}
@@ -120,10 +108,10 @@ const AddChild = ({navigation}) => {
           [types.datePicker]: (
             <DatePicker
               key={title}
-              value={details[dataKey]}
+              value={data[dataKey]}
               title={title}
               placeholder={placeholder}
-              onSave={handleDatePicker}
+              onSave={(value) => handleChange(dataKey, value)}
             />
           ),
         })(undefined)(type),
@@ -135,9 +123,7 @@ const AddChild = ({navigation}) => {
           </TextButton>
         )}
         <TextButton
-          disabled={Object.entries(details).some(
-            ([_, value]) => value == false,
-          )}
+          disabled={Object.entries(data).some(([_, value]) => value == false)}
           styles={{root: styles.button}}
           onPress={handleSave}>
           {intl.en.addChild.save}

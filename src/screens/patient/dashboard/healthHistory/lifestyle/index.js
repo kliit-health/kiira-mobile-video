@@ -6,15 +6,26 @@ import {switchCase} from '../../../../../utils/functions';
 import {initialQuestions, extraQuestions, types} from './model';
 import {useSelector, useDispatch} from 'react-redux';
 import {PolarQuestion, ObjectiveQuestion, PickerQuestion} from './components';
-import {updateHealthHistory, updateHealthHistoryAsync} from '../actions';
+import {updateHealthHistory} from '../../../../../redux/actions';
 import styles from './styles';
 
 const Lifestyle = ({navigation}) => {
   const dispatch = useDispatch();
-  const answers = useSelector((state) => state.healthHistory.lifestyle.answers);
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.lifestyle.answers,
+  );
   const [questions, setQuestions] = useState(initialQuestions);
   const [finish, setFinish] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  const [lifestyle, setLifestyle] = useState({
+    sexuallyActive: '',
+    partnersGender: [],
+    malePartners: '',
+    femalePartners: '',
+    otherPartners: '',
+  });
 
   const [
     {dataKey, question, options, type, index, extra},
@@ -24,25 +35,31 @@ const Lifestyle = ({navigation}) => {
     index: 0,
   });
 
+  useEffect(() => {
+    if (answers) {
+      setLifestyle(answers);
+    }
+  }, [answers]);
+
   /**
    * @desc adds and removes new questions to the questions array.
    */
 
   useEffect(() => {
     if (dataKey === 'partnersGender') {
-      const newQuestions = answers[dataKey].map((item) =>
+      const newQuestions = lifestyle[dataKey].map((item) =>
         extraQuestions.find((question) => question.link === item),
       );
       setQuestions(initialQuestions.concat(newQuestions));
     }
-  }, [answers, question]);
+  }, [lifestyle, question]);
 
   /**
    * @desc handles the state (enabled or disabled) of the finish/next button
    */
 
   useEffect(() => {
-    const data = answers[dataKey];
+    const data = lifestyle[dataKey];
     setDisabled(data instanceof Array ? data.length === 0 : data === null);
   });
 
@@ -53,40 +70,22 @@ const Lifestyle = ({navigation}) => {
   useEffect(() => {
     setFinish(
       index === questions.length - 1 ||
-        (dataKey === 'sexuallyActive' && answers[dataKey] === false),
+        (dataKey === 'sexuallyActive' && lifestyle[dataKey] === false),
     );
   });
 
-  const dispatchUpdate = (update) => {
-    dispatch(
-      updateHealthHistory({
-        lifestyle: {
-          answers: {
-            ...answers,
-            [dataKey]: update,
-          },
-          completed: false,
-        },
-      }),
-    );
-  };
-
-  const handlePolarQuestion = (response) => {
-    dispatchUpdate(response);
+  const handleChange = (dataKey, value) => {
+    setLifestyle({...lifestyle, [dataKey]: value});
   };
 
   const handleObjectiveQuestion = (title) => {
-    const data = answers[dataKey];
-
-    dispatchUpdate(
-      data.includes(title)
+    const data = lifestyle[dataKey];
+    setLifestyle({
+      ...lifestyle,
+      [dataKey]: data.includes(title)
         ? data.filter((item) => item !== title)
         : [...data, title],
-    );
-  };
-
-  const handlePickerQuestion = (response) => {
-    dispatchUpdate(response);
+    });
   };
 
   const handleNextPress = () => {
@@ -107,14 +106,15 @@ const Lifestyle = ({navigation}) => {
     navigation.goBack();
   };
 
-  const handleFinishPress = () => {
+  const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
+      updateHealthHistory({
+        uid: user.uid,
+        navigation,
         lifestyle: {
-          answers,
+          answers: lifestyle,
           completed: true,
         },
-        navigation,
       }),
     );
   };
@@ -126,21 +126,21 @@ const Lifestyle = ({navigation}) => {
       {switchCase({
         [types.polar]: (
           <PolarQuestion
-            value={answers[dataKey]}
-            onPress={handlePolarQuestion}
+            value={lifestyle[dataKey]}
+            onPress={(value) => handleChange(dataKey, value)}
           />
         ),
         [types.objective]: (
           <ObjectiveQuestion
             options={options}
-            value={answers[dataKey]}
+            value={lifestyle[dataKey]}
             onPress={handleObjectiveQuestion}
           />
         ),
         [types.picker]: (
           <PickerQuestion
-            value={answers[dataKey]}
-            onSave={handlePickerQuestion}
+            value={lifestyle[dataKey]}
+            onSave={(value) => handleChange(dataKey, value)}
             data={options}
             placeholder={extra}
             title={extra}
@@ -155,7 +155,7 @@ const Lifestyle = ({navigation}) => {
           finish ? intl.en.lifestyle.finish : intl.en.lifestyle.next
         }
         disableRightButton={disabled}
-        onRightButotonPress={finish ? handleFinishPress : handleNextPress}
+        onRightButotonPress={finish ? handleSave : handleNextPress}
       />
     </Container>
   );

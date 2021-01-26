@@ -1,5 +1,6 @@
 const initialState = {};
-const accountExpertReducer = (state = initialState, action) => {
+
+const accountExpert = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
@@ -7,4 +8,4 @@ const accountExpertReducer = (state = initialState, action) => {
       };
   }
 };
-export default accountExpertReducer;
+export default accountExpert;

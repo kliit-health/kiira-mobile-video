@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {switchCase} from '../../../../../utils/functions';
 import intl from '../../../../../utils/localization';
@@ -11,70 +11,70 @@ import {
   TextButton,
 } from '../../../../../components';
 import {Picker, DatePicker} from './components';
-import {
-  updateHealthHistory,
-  updateHealthHistoryAsync,
-} from '../../healthHistory/actions';
+import {updateHealthHistory} from '../../../../../redux/actions';
 import styles from './styles';
 
 const BasicInfo = ({navigation}) => {
   const dispatch = useDispatch();
-  const {answers} = useSelector((state) => state.healthHistory.basicInfo);
 
-  const dispatchUpdate = (dataKey, data) => {
-    dispatch(
-      updateHealthHistory({
-        basicInfo: {
-          answers: {...answers, [dataKey]: data},
-        },
-      }),
-    );
+  const [data, setData] = useState({
+    gender: '',
+    dateOfBirth: '',
+    height: '',
+    weight: '',
+  });
+
+  const user = useSelector((state) => state.user.data);
+  const answers = useSelector(
+    (state) => state.healthHistory.data.basicInfo.answers,
+  );
+
+  useEffect(() => {
+    if (answers) {
+      setData(answers);
+    }
+  }, [answers]);
+
+  const handleChange = (dataKey, value) => {
+    setData({...data, [dataKey]: value});
   };
 
-  const handleTextInputChange = (dataKey, data) => {
-    dispatchUpdate(dataKey, data);
-  };
-
-  const handlePickerSave = (dataKey, data) => {
-    dispatchUpdate(dataKey, data);
-  };
-
-  const handleDatePickerSave = (dataKey, data) => {
-    dispatchUpdate(dataKey, data);
-  };
-
-  const handleOnBackPress = () => {
+  const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleSave = () => {
     dispatch(
-      updateHealthHistoryAsync({
-        basicInfo: {answers, completed: true},
+      updateHealthHistory({
+        uid: user.uid,
         navigation,
+        basicInfo: {
+          answers: data,
+          completed: true,
+        },
       }),
     );
   };
 
   return (
     <Container>
-      <Header title={intl.en.basicInfo.title} onBack={handleOnBackPress} />
+      <Header title={intl.en.basicInfo.title} onBack={handleBackPress} />
       {model.map(({type, dataKey, title, placeholder}) =>
         switchCase({
           [types.textInput]: (
             <TextInput
               key={dataKey}
-              customStyles={{fontSize: 15}}
-              defaultValue={answers[dataKey]}
+              styles={{fontSize: 15}}
+              defaultValue={data[dataKey]}
               placeholder={title}
-              onChange={(value) => handleTextInputChange(dataKey, value)}
+              onChange={(value) => handleChange(dataKey, value)}
             />
           ),
           [types.picker]: (
             <Picker
               key={dataKey}
-              value={answers[dataKey]}
-              onSave={(value) => handlePickerSave(dataKey, value)}
+              value={data[dataKey]}
+              onSave={(value) => handleChange(dataKey, value)}
               data={units[dataKey]}
               title={title}
               placeholder={placeholder}
@@ -83,10 +83,10 @@ const BasicInfo = ({navigation}) => {
           [types.datePicker]: (
             <DatePicker
               key={dataKey}
-              value={answers[dataKey]}
+              value={data[dataKey]}
               title={title}
               placeholder={placeholder}
-              onSave={(value) => handleDatePickerSave(dataKey, value)}
+              onSave={(value) => handleChange(dataKey, value)}
             />
           ),
         })(undefined)(type),
@@ -94,7 +94,7 @@ const BasicInfo = ({navigation}) => {
       <TextButton
         styles={{root: styles.button}}
         onPress={handleSave}
-        disabled={Object.values(answers).every((answer) => !answer)}>
+        disabled={Object.values(data).every((answer) => !answer)}>
         {intl.en.basicInfo.save}
       </TextButton>
     </Container>

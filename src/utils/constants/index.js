@@ -411,6 +411,7 @@ export default {
       Visit: 'Visit',
       Welcome: 'Welcome',
       expertChat: 'ChatExpert',
+      requestVisit: 'RequestVisit',
     },
 
     stack: {
@@ -564,15 +565,18 @@ export const icons = {
   applePayIcon: require('../../../assets/apple_pay.png'),
   backIcon: require('../../../assets/back.png'),
   basket: require('../../../assets/basket.png'),
+  bandAid: require('../../../assets/bandaid.png'),
   camera: require('../../../assets/camera_grey.png'),
   cameraWhiteImg: require('../../../assets/camera_white.png'),
   cardIcon: require('../../../assets/card.png'),
+  chat: require('../../../assets/chat.png'),
   checkBoxIcon: require('../../../assets/uncheck.png'),
   checkBoxSelectedIcon: require('../../../assets/check.png'),
   checkGreenIcon: require('../../../assets/check_green.png'),
   checkGreyIcon: require('../../../assets/check_grey.png'),
   creditCard: require('../../../assets/credit_card.png'),
   cross: require('../../../assets/cross.png'),
+  clipboard: require('../../../assets/clipboard.png'),
   downArrow: require('../../../assets/down_arrow.png'),
   filterIcon: require('../../../assets/filter.png'),
   greyDownArrow: require('../../../assets/grey_down_arrow.png'),
@@ -591,9 +595,12 @@ export const icons = {
   radioCheckBlueIcon: require('../../../assets/check_blue.png'),
   radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
   readMsgIcon: require('../../../assets/read_msg_icon.png'),
+  reminders: require('../../../assets/reminders.png'),
   rightChevronIcon: require('../../../assets/right_chevron.png'),
   send: require('../../../assets/send.png'),
   shareIcon: require('../../../assets/share.png'),
+  sos: require('../../../assets/sos.png'),
+  squad: require('../../../assets/squad.png'),
   tutorialImageOneLarge: require('../../../assets/Onboarding-1.jpg'),
   tutorialImageTwoLarge: require('../../../assets/Onboarding-2.jpg'),
   tutorialImageThreeLarge: require('../../../assets/Onboarding-3.jpg'),
@@ -604,6 +611,7 @@ export const icons = {
   tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
   unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
   xCloseIcon: require('../../../assets/xclose.png'),
+  kiiraLogo: require('../../../assets/logo.png'),
 };
 
 export const screenNames = {
@@ -672,7 +680,7 @@ export const screenNames = {
   selectExpert: 'SelectExpert',
   expertSchedule: 'ExpertSchedule',
   bottomTab: 'BottomTab',
-  settings: 'Settings',
+  settings: 'Setting',
   termsAndConditions: 'TermsConditions',
   privacyPolicies: 'PrivacyPolicy',
   help: 'Help',
@@ -684,6 +692,14 @@ export const screenNames = {
   expertChat: 'ChatExpert',
   visitSummary: 'VisitSummary',
   visit: 'Visit',
+  careSquad: 'CareSquad',
+  chatExpert: 'ChatExpert',
+  healthHistory: 'HealthHistory',
+  appointments: 'Appointments',
+  sos: 'SOS',
+  ask: 'Ask',
+  addChild: 'AddChild',
+  treatmentBot: 'TreatmentBot',
 };
 
 export const units = {
@@ -1777,26 +1793,4 @@ export const collections = {
   healthHistory: 'healthHistory',
   careSquad: 'careSquad',
   appointments: 'appointments',
-};
-
-export const reduxScreenPaths = {
-  account: '../../screens/patient/account',
-  auth: '../../screens/auth',
-  appointments: '../screens/patient/dashboard/appointments',
-  dashboard: '../../screens/patient/dashboard',
-  getTreatment: '../../screens/patient/dashboard/getTreatment',
-  healthHistory: '../../screens/patient/dashboard/healthHistory',
-  patient: '../../screens/patient',
-  provider: '../../screens/provider',
-};
-
-export const navigationScreenPaths = {
-  account: '../screens/patient/account',
-  auth: '../screens/auth',
-  appointments: '../screens/patient/dashboard/appointments',
-  dashboard: '../screens/patient/dashboard',
-  getTreatment: '../screens/patient/dashboard/getTreatment',
-  healthHistory: '../screens/patient/dashboard/healthHistory',
-  patient: '../screens/patient',
-  provider: '../screens/provider',
 };

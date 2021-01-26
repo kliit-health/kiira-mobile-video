@@ -1,5 +1,6 @@
 const initialState = {};
-const addNewProfileReducer = (state = initialState, action) => {
+
+const addNewProfile = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
@@ -8,4 +9,4 @@ const addNewProfileReducer = (state = initialState, action) => {
   }
 };
 
-export default addNewProfileReducer;
+export default addNewProfile;

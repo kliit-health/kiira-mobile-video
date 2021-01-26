@@ -1,6 +1,6 @@
 import {SEND_VERIFICATION_EMAIL} from '../../../redux/types';
 
-const verifyReducer = (state = {}, action) => {
+const verify = (state = {}, action) => {
   switch (action.type) {
     case SEND_VERIFICATION_EMAIL:
       return {
@@ -14,4 +14,4 @@ const verifyReducer = (state = {}, action) => {
   }
 };
 
-export default verifyReducer;
+export default verify;

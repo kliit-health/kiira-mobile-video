@@ -1,45 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
-import CustomButton from '../../../components/customButton';
+import React, {useState} from 'react';
+import {View, Text} from 'react-native';
+import CustomButton from '../../../../components/customButton';
 import CancelModal from './cancelModal';
 import styles from '../style';
-import {useDispatch} from 'react-redux';
-import {cancelAppointment} from '../action';
-import {getUserData} from '../../../utils/firebase';
-import Constant from '../../../utils/constants';
 
-const Visit = ({visit, date, navigation}) => {
-  const dispatch = useDispatch();
+const Visit = ({visit, date}) => {
   let [visible, setVisible] = useState(false);
-  // const [patientInfo, setPatientInfo] = useState(null);
-  const patient = {
-    uid: visit.uid,
-    id: visit.id,
-    expert: visit.expert,
-  };
-
-  // useEffect(() => {
-  //   try {
-  //     const obj = {
-  //       tableName: Constant.App.firebaseTableNames.users,
-  //       uid: patient.uid,
-  //     };
-  //     getUserData(
-  //       obj,
-  //       (querySnapshot) => {
-  //         const data = querySnapshot.data();
-  //         setPatientInfo(data);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       },
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-  //   return () => setPatientInfo(null);
-  // }, []);
 
   return (
     <View style={{alignSelf: 'center'}}>

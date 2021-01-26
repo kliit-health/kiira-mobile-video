@@ -23,7 +23,7 @@ const initialState = {
   },
 };
 
-const expertScheduleReducer = (state = initialState, action) => {
+const expertSchedule = (state = initialState, action) => {
   switch (action.type) {
     case NEEDS_PRESCRIPTION:
       return {
@@ -71,4 +71,4 @@ const expertScheduleReducer = (state = initialState, action) => {
   }
 };
 
-export default expertScheduleReducer;
+export default expertSchedule;

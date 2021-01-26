@@ -6,7 +6,7 @@ import {
 const initialState = {
   expertData: null,
 };
-const expertProfileReducer = (state = initialState, action) => {
+const expertProfile = (state = initialState, action) => {
   switch (action.type) {
     case GET_EXPERTS_DETAIL_DATA_SUCCESS:
       return {
@@ -25,4 +25,4 @@ const expertProfileReducer = (state = initialState, action) => {
   }
 };
 
-export default expertProfileReducer;
+export default expertProfile;

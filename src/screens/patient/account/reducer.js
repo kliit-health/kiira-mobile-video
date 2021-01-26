@@ -1,6 +1,6 @@
-const initialState = {
-};
-const accountReducer = (state = initialState, action) => {
+const initialState = {};
+
+const account = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
@@ -8,4 +8,4 @@ const accountReducer = (state = initialState, action) => {
       };
   }
 };
-export default accountReducer;
+export default account;

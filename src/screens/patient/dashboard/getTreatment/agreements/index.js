@@ -3,16 +3,16 @@ import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {Modal, TextButton, Header, Container} from '../../../../../components';
 import Logo from '../../../../../svgs/penguin.svg';
-import {setUserDetails} from '../../../../../redux/actions';
+import {updateUser} from '../../../../../redux/actions';
 import styles, {modifiers} from './styles';
 
 const Agreements = ({
   agreements,
   loading,
   error,
-  userDetails,
+  user,
   acceptedTerms,
-  setUserDetails,
+  updateUser,
   navigation,
   currentRoute,
 }) => {
@@ -43,8 +43,8 @@ const Agreements = ({
           title: agreement.title,
           updatedAt: Date.now(),
         }));
-      setUserDetails({
-        uid: userDetails.uid,
+      updateUser({
+        uid: user.uid,
         consentAgreements,
       });
     }
@@ -95,20 +95,20 @@ const Agreements = ({
   );
 };
 
-const getTreatmentConsentStatus = (userDetails) =>
-  userDetails.hasOwnProperty('consentAgreements');
+const getTreatmentConsentStatus = (user) =>
+  user.hasOwnProperty('consentAgreements');
 
-const mapStateToProps = ({agreements, userDetails, navigator}) => ({
+const mapStateToProps = ({agreements, user, navigator}) => ({
   agreements: agreements.data,
   loading: agreements.loading,
   error: agreements.error,
-  acceptedTerms: getTreatmentConsentStatus(userDetails.data),
-  userDetails: userDetails.data,
+  acceptedTerms: getTreatmentConsentStatus(user.data),
+  user: user.data,
   currentRoute: navigator.currentRoute,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setUserDetails: (details) => dispatch(setUserDetails(details)),
+  updateUser: (details) => dispatch(updateUser(details)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Agreements);
