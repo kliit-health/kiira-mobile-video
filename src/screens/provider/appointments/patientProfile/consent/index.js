@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Header, Container, ListItem} from '../../../../../components';
-import intl from '../../../../../utils/localization';
 import {screenNames} from '../../../../../utils/constants';
 import moment from 'moment';
 import styles from './styles';
 
 const ConsentAgreements = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
   const consentAgreements = useSelector(
     (state) => state.medicalHistory.data.consentAgreements,
   );
@@ -19,7 +19,7 @@ const ConsentAgreements = ({navigation}) => {
   return (
     <Container unformatted themed>
       <Header
-        title={intl.en.consent.title}
+        title={lang.consent.title}
         onBack={() => navigation.goBack()}
         themed
       />
@@ -34,9 +34,9 @@ const ConsentAgreements = ({navigation}) => {
                   {title}
                 </Text>
                 <Text style={styles.subtitle}>
-                  {`${intl.en.consent.acceptanceDate}: ${moment(
-                    updatedAt,
-                  ).format('MM/DD/YYYY')}`}
+                  {`${lang.consent.acceptanceDate}: ${moment(updatedAt).format(
+                    'MM/DD/YYYY',
+                  )}`}
                 </Text>
               </View>
             </ListItem>

@@ -8,7 +8,6 @@ import {
   TOGGLE_USER_STATUS,
   STOP_OBSERVER_CHAT,
 } from '../../../../../redux/types';
-import Language from '../../../../../utils/localization';
 import {
   sendMessage,
   loadMessages,
@@ -44,16 +43,16 @@ import Constant from '../../../../../utils/constants';
 import {clearQuestionValue} from '../../ask/action';
 import moment from 'moment';
 
-let Lang = Language['en'],
-  loadMessagesObserver,
-  checkStatusObserver,
-  checkQuestionStatusObserver;
+let loadMessagesObserver;
+let checkStatusObserver;
+let checkQuestionStatusObserver;
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100;
 
 function* setQuestion({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const state = yield select();
     const userData = state.authLoading.userData;
     const {userInfo, expertInfo, question} = data;
@@ -177,23 +176,24 @@ function* setQuestion({data, dispatch}) {
           showOrHideModal(
             responseSaveQuestion.message
               ? responseSaveQuestion.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* sendMessageToUser({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {messageParams, imageParams, id, lastMessage, questionId} = data;
     displayConsole('sendMessageToUser call data', data);
     if (imageParams) {
-      yield put(showApiLoader(Lang.apiLoader.loadingText));
+      yield put(showApiLoader(lang.apiLoader.loadingText));
       yield delay(delayTime);
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
@@ -240,7 +240,7 @@ function* sendMessageToUser({data}) {
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -286,7 +286,7 @@ function* sendMessageToUser({data}) {
 }
 function* loadMessagesOfUser({data, dispatch}) {
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     let isFirstTime = true;
     loadMessagesObserver = yield loadMessages(
       data,
@@ -331,7 +331,7 @@ function* loadMessagesOfUser({data, dispatch}) {
   } catch (error) {
     displayConsole('loadMessagesOfUser  error ', error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
@@ -385,7 +385,7 @@ function* checkExpertStatus({data, dispatch}) {
     }
   } catch (error) {
     displayConsole('checkExpertStatus  error ', error);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
@@ -420,7 +420,7 @@ function* checkQuestStatus({data, dispatch}) {
     );
   } catch (error) {
     displayConsole('checkQuestStatus  error ', error);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

@@ -3,7 +3,6 @@ import {Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {switchCase, insertAtIndex} from '../../../../../utils/functions';
 import {Container, Header, FooterNavigation} from '../../../../../components';
-import intl from '../../../../../utils/localization';
 import {initialQuestions, extraQuestions, types} from './model';
 import {PolarQuestion, ObjectiveQuestion} from './components';
 import {updateHealthHistory} from '../../../../../redux/actions';
@@ -12,6 +11,7 @@ import styles from './styles';
 const Allergies = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
+  const lang = useSelector((state) => state.language);
   const answers = useSelector(
     (state) => state.healthHistory.data.allergies.answers,
   );
@@ -115,7 +115,7 @@ const Allergies = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.allergies.title} onBack={handleBackPress} />
+      <Header title={lang.allergies.title} onBack={handleBackPress} />
       <Text style={styles.question}>{question}</Text>
       {switchCase({
         [types.polar]: (
@@ -133,12 +133,10 @@ const Allergies = ({navigation}) => {
         ),
       })(undefined)(type)}
       <FooterNavigation
-        leftButtonTitle={intl.en.allergies.previous}
+        leftButtonTitle={lang.allergies.previous}
         hideLeftButton={index === 0}
         onLeftButtonPress={handlePreviousPress}
-        rightButtonTitle={
-          finish ? intl.en.allergies.finish : intl.en.allergies.next
-        }
+        rightButtonTitle={finish ? lang.allergies.finish : lang.allergies.next}
         disableRightButton={disabled}
         onRightButotonPress={finish ? handleSave : handleNextPress}
       />

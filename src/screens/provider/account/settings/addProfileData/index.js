@@ -13,7 +13,6 @@ import CustomText from '../../../../../components/customText';
 import styles from './style';
 import Constant from '../../../../../utils/constants';
 import CustomInputText from '../../../../../components/customInputText';
-import Language from '../../../../../utils/localization';
 import CustomButton from '../../../../../components/customButton';
 import ImagePicker from 'react-native-image-picker';
 import {displayConsole} from '../../../../../utils/helper';
@@ -24,12 +23,12 @@ import DatePicker from '../../../../../components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Avatar} from 'react-native-elements';
 
-let lang = Language.en;
 const states = Constant.App.Modal.states;
 
 class AddProfileData extends PureComponent {
   constructor(props) {
     super(props);
+    const {lang} = props;
     this.state = {
       firstName: '',
       lastName: '',
@@ -143,6 +142,7 @@ class AddProfileData extends PureComponent {
   }
 
   renderTitleView() {
+    const {lang} = this.props;
     return (
       <View style={styles.titleContainer}>
         <CustomText style={styles.titleTextStyle}>
@@ -159,6 +159,7 @@ class AddProfileData extends PureComponent {
       showSelectStateModal,
       selectedState,
     } = this.state;
+    const {lang} = this.props;
     const {staticImages} = Constant.App;
 
     return (
@@ -231,6 +232,7 @@ class AddProfileData extends PureComponent {
   renderPronounsView() {
     const {staticImages} = Constant.App;
     const {pronounsArr} = this.state;
+    const {lang} = this.props;
 
     return (
       <View style={styles.pronounsParentContainerStyle}>
@@ -292,7 +294,7 @@ class AddProfileData extends PureComponent {
   }
 
   renderButtonView() {
-    const {uploadUserData, showHideErrorModal, navigation} = this.props;
+    const {uploadUserData, showHideErrorModal, navigation, lang} = this.props;
     const {
       firstName,
       lastName,
@@ -370,6 +372,8 @@ class AddProfileData extends PureComponent {
   }
 
   renderTermsConditionsView() {
+    const {lang} = this.props;
+
     return (
       <View style={styles.termsConditionsTextContainerStyle}>
         <CustomText style={styles.termsConditionsTextStyle}>
@@ -439,7 +443,9 @@ class AddProfileData extends PureComponent {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  lang: state.language,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   showHideErrorModal: (value) => dispatch(showOrHideModal(value)),

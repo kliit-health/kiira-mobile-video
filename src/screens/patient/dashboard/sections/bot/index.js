@@ -1,13 +1,15 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {Text, View} from 'react-native';
 import {TextButton} from '../../../../../components';
 import Image from 'react-native-fast-image';
 import {icons, screenNames} from '../../../../../utils/constants';
-import intl from '../../../../../utils/localization';
 
 import styles from './styles';
 
 export default ({onRequestAssistence, onRejectAssistence}) => {
+  const lang = useSelector((state) => state.language);
+
   const handleRequestAssistence = () => {
     onRequestAssistence(screenNames.treatmentBot);
   };
@@ -20,18 +22,18 @@ export default ({onRequestAssistence, onRejectAssistence}) => {
         source={icons.kiiraLogo}
       />
       <View style={styles.bot.contentContainer}>
-        <Text style={styles.bot.messageText}>{intl.en.dashboard.kiira}</Text>
+        <Text style={styles.bot.messageText}>{lang.dashboard.kiira}</Text>
         <View style={styles.bot.messageContainer}>
-          <Text style={styles.bot.messageText}>{intl.en.dashboard.bot}</Text>
+          <Text style={styles.bot.messageText}>{lang.dashboard.bot}</Text>
         </View>
         <TextButton
           onPress={onRejectAssistence}
           styles={styles.button}
           outlined>
-          {intl.en.dashboard.notFeelingSick}
+          {lang.dashboard.notFeelingSick}
         </TextButton>
         <TextButton onPress={handleRequestAssistence} outlined>
-          {intl.en.dashboard.nowMention}
+          {lang.dashboard.nowMention}
         </TextButton>
       </View>
     </View>

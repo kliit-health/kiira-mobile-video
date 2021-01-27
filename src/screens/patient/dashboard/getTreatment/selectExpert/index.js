@@ -3,7 +3,6 @@ import {View, Text, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Header, TextButton, Container} from '../../../../../components';
 import {screenNames} from '../../../../../utils/constants';
-import intl from '../../../../../utils/localization';
 import {List} from './sections';
 import styles from './style';
 
@@ -11,6 +10,7 @@ const SelectExpert = ({navigation}) => {
   const [availableExperts, setAvailableExperts] = useState([]);
   const experts = useSelector((state) => state.experts.data);
   const userProfile = useSelector((state) => state.user.data.profileInfo);
+  const lang = useSelector((state) => state.language);
 
   useEffect(() => {
     if (experts.length && userProfile) {
@@ -34,7 +34,7 @@ const SelectExpert = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header title={intl.en.requestVisit.title} onBack={handleBackPress} />
+      <Header title={lang.requestVisit.title} onBack={handleBackPress} />
       {availableExperts && availableExperts.length ? (
         <List onCardPress={handleCardPress} data={availableExperts} />
       ) : (
@@ -57,7 +57,7 @@ const SelectExpert = ({navigation}) => {
             onPress={() => {
               navigation.navigate(screenNames.bottomTab);
             }}>
-            {intl.en.requestVisit.goHome}
+            {lang.requestVisit.goHome}
           </TextButton>
         </View>
       )}

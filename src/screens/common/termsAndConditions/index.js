@@ -3,10 +3,10 @@ import {View, ScrollView, Text} from 'react-native';
 import Image from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
 import {Header, Container} from '../../../components';
-import inlt from '../../../utils/localization';
 import styles from './styles';
 
 const TermsConditions = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
   const sections = useSelector(
     (state) => state.termsAndConditions.data.sections,
   );
@@ -19,7 +19,7 @@ const TermsConditions = ({navigation}) => {
     <Container unformatted>
       <Header
         onBack={handleOnBackPress}
-        title={inlt.en.termsAndConditions.title}
+        title={lang.termsAndConditions.title}
       />
       <ScrollView
         keyboardShouldPersistTaps="handled"

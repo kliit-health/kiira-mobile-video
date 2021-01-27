@@ -2,7 +2,6 @@ import React from 'react';
 import {Container, TextButton} from '../../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import {ScrollView, StatusBar} from 'react-native';
-import intl from '../../../utils/localization';
 import {Profile, List, Plan} from './sections';
 import {signOut} from './action';
 import {modifiers} from './styles';
@@ -12,6 +11,7 @@ const Account = ({navigation}) => {
 
   const subscription = useSelector((state) => state.subscription);
   const user = useSelector((state) => state.user.data);
+  const lang = useSelector((state) => state.language);
 
   const handleNavigation = (destination) => {
     navigation.navigate(destination);
@@ -31,7 +31,7 @@ const Account = ({navigation}) => {
         )}
         <List onItemPress={handleNavigation} />
         <TextButton onPress={handleSignOut} styles={modifiers.button} link>
-          {intl.en.account.logout}
+          {lang.account.logout}
         </TextButton>
       </ScrollView>
     </Container>

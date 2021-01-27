@@ -10,7 +10,6 @@ import {
 import {connect} from 'react-redux';
 import CustomText from '../../../../components/customText';
 import styles from './style';
-import language from '../../../../utils/localization';
 import Constant from '../../../../utils/constants';
 import InputText from '../../../../components/customInputText/simpleInputText';
 import CustomButton from '../../../../components/customButton';
@@ -25,7 +24,6 @@ import firebase from 'react-native-firebase';
 import {getuser} from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
-const lang = language.en;
 class Ask extends PureComponent {
   constructor(props) {
     super(props);
@@ -135,8 +133,8 @@ class Ask extends PureComponent {
   }
 
   renderHeadingProfileView() {
-    const {user, questionData} = this.props;
-    const {firstName, lastName, profileImageUrl} = user.profileInfo;
+    const {user, questionData, lang} = this.props;
+    const {firstName, profileImageUrl} = user.profileInfo;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.headingProfileImageParentContainer}>
@@ -180,7 +178,7 @@ class Ask extends PureComponent {
   }
 
   renderInputTextView() {
-    const {question} = this.props;
+    const {question, lang} = this.props;
     const {questionText} = this.state;
     return (
       <View style={styles.inputTextContainerStyle}>
@@ -203,7 +201,7 @@ class Ask extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation, question, user, showHideErrorModal} = this.props;
+    const {navigation, question, user, showHideErrorModal, lang} = this.props;
     return (
       <CustomButton
         disabled={question ? false : true}
@@ -223,7 +221,7 @@ class Ask extends PureComponent {
 
   renderRecentExpertView() {
     const {staticImages} = Constant.App;
-    const {navigation, recentExpertData} = this.props;
+    const {navigation, recentExpertData, lang} = this.props;
 
     return (
       <View style={styles.recentExpertParentContainerStyle}>
@@ -323,7 +321,7 @@ class Ask extends PureComponent {
   }
 
   renderPreviousQuestionView() {
-    const {navigation, previousQuestionData, experts} = this.props;
+    const {navigation, previousQuestionData, experts, lang} = this.props;
     return (
       <View style={styles.myPrevQuestionParentContainerStyle}>
         <CustomText style={styles.myPrevQuestionTitleTextStyle}>
@@ -465,6 +463,7 @@ class Ask extends PureComponent {
   }
 
   renderEmptyCreditView() {
+    const {lang} = this.props;
     return (
       <View style={styles.emptyCreditsContainerStyle}>
         <CustomText style={styles.emptyCreditsTextStyle}>
@@ -519,6 +518,7 @@ const mapStateToProps = (state) => ({
   questionData: state.ask.questionData,
   question: state.ask.question,
   experts: state.experts.data,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

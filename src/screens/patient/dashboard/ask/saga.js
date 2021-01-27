@@ -1,5 +1,4 @@
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {hideApiLoader} from '../../../../components/customLoader/action';
 import {
   getRecentExpertsData,
@@ -18,7 +17,6 @@ import {displayConsole} from '../../../../utils/helper';
 import firebase from 'react-native-firebase';
 import Constant from '../../../../utils/constants';
 
-let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100;
 
@@ -28,6 +26,7 @@ function* updateNewKeyToUserTable({id, data}) {
 }
 
 function* getQuestions({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     const {expertsParams, questionParams, previousQuestionParams} = data;
     const user = yield firebase.auth().currentUser;
@@ -55,7 +54,7 @@ function* getQuestions({data, dispatch}) {
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
-            showOrHideModal(message ? message : Lang.errorMessage.serverError),
+            showOrHideModal(message ? message : lang.errorMessage.serverError),
           );
         }
       },
@@ -69,11 +68,12 @@ function* getQuestions({data, dispatch}) {
     console.log('ASK ERROR', error);
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
+  const lang = yield select((state) => state.language);
   try {
     yield getRecentExpertsData(
       expertsParams,
@@ -92,7 +92,7 @@ function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
-            showOrHideModal(message ? message : Lang.errorMessage.serverError),
+            showOrHideModal(message ? message : lang.errorMessage.serverError),
           );
         }
       },
@@ -105,11 +105,12 @@ function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
   } catch (error) {
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getPreviousQuestions(previousQuestionParams, dispatch) {
+  const lang = yield select((state) => state.language);
   try {
     yield getQuestionsData(
       previousQuestionParams,
@@ -124,7 +125,7 @@ function* getPreviousQuestions(previousQuestionParams, dispatch) {
         dispatch(hideApiLoader());
         if (code && code !== 'firestore/permission-denied') {
           dispatch(
-            showOrHideModal(message ? message : Lang.errorMessage.serverError),
+            showOrHideModal(message ? message : lang.errorMessage.serverError),
           );
         }
       },
@@ -132,7 +133,7 @@ function* getPreviousQuestions(previousQuestionParams, dispatch) {
   } catch (error) {
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 export default function* askSaga() {

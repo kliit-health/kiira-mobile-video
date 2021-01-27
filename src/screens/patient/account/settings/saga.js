@@ -1,6 +1,5 @@
 import {UPDATE_USER_DETAIL_DATA} from '../../../../redux/types';
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -17,12 +16,11 @@ import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
 import {getUser} from '../../../../redux/actions';
 
-let Lang = Language['en'];
-
 function* updateUserData({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {userParams, imageParams, navigation} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
 
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
@@ -66,7 +64,7 @@ function* updateUserData({data}) {
             showOrHideModal(
               response.message
                 ? response.message
-                : Lang.errorMessage.serverError,
+                : lang.errorMessage.serverError,
             ),
           );
         }
@@ -76,7 +74,7 @@ function* updateUserData({data}) {
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -115,14 +113,14 @@ function* updateUserData({data}) {
       } else {
         yield put(
           showOrHideModal(
-            response.message ? response.message : Lang.errorMessage.serverError,
+            response.message ? response.message : lang.errorMessage.serverError,
           ),
         );
       }
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

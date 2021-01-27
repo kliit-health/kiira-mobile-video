@@ -9,13 +9,13 @@ import {getAppointmentsList} from './action';
 import Appointment from './components/appointment';
 import {generateDateInfo} from '../../../../utils/helper';
 import moment from 'moment';
-import intl from '../../../../utils/localization';
 
 const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.authLoading.userData);
   const visitData = useSelector((state) => state.appointments);
+  const lang = useSelector((state) => state.language);
   const [visits, setVisits] = useState([]);
 
   useEffect(() => {
@@ -83,11 +83,11 @@ const Appointments = ({navigation}) => {
             resizeMode="contain"
             source={require('../../../../../assets/bell.png')}
           />
-          <Text style={styles.title}>{intl.en.appointments.noVisits}</Text>
+          <Text style={styles.title}>{lang.appointments.noVisits}</Text>
           <TextButton
             styles={modifiers.button}
             onPress={() => handleNavigation(screenNames.requestVisit)}>
-            {intl.en.appointments.scheduleAppointment}
+            {lang.appointments.scheduleAppointment}
           </TextButton>
         </Container>
       )}

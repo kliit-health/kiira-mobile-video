@@ -3,11 +3,11 @@ import {View, ScrollView, Text} from 'react-native';
 import Image from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
 import {Header, Container} from '../../../components';
-import inlt from '../../../utils/localization';
 import styles from './styles';
 
 const PrivacyPolicy = ({navigation}) => {
   const sections = useSelector((state) => state.privacyPolicy.data.sections);
+  const lang = useSelector((state) => state.language);
 
   const handleOnBackPress = () => {
     navigation.goBack();
@@ -15,7 +15,7 @@ const PrivacyPolicy = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header onBack={handleOnBackPress} title={inlt.en.privacyPolicy.title} />
+      <Header onBack={handleOnBackPress} title={lang.privacyPolicy.title} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>

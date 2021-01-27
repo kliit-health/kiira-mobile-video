@@ -61,6 +61,7 @@ class ChatBotScreen extends Component {
           prepaid: 0,
           insurance: insurance.value,
           plan: plan.value.trim(),
+          lang: 'en',
         },
         navigation,
       };

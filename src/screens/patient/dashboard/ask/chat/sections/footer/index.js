@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 import Image from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
+import {useSelector} from 'react-redux';
 import {icons, colors} from '../../../../../../../utils/constants';
-import intl from '../../../../../../../utils/localization';
 import styles from './styles';
 
 const Footer = ({
@@ -23,6 +22,8 @@ const Footer = ({
   onSendPress,
   resolved,
 }) => {
+  const lang = useSelector((state) => state.language);
+
   const insets = useSafeAreaInsets();
   const headerHeight = 50;
 
@@ -35,7 +36,7 @@ const Footer = ({
   return (
     <Fragment>
       {resolved ? (
-        <Text style={styles.resolvedText}>{intl.en.chat.resolved}</Text>
+        <Text style={styles.resolvedText}>{lang.chat.resolved}</Text>
       ) : (
         <KeyboardAvoidingView
           behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
@@ -76,7 +77,7 @@ const Footer = ({
                   multiline={true}
                   autoCapitalize="sentences"
                   onChangeText={onChangeText}
-                  placeholder={intl.en.chat.enterMessage}
+                  placeholder={lang.chat.enterMessage}
                   value={message}
                   style={styles.messageInput}
                   placeholderTextColor={colors.lightGrey}

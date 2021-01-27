@@ -9,7 +9,6 @@ import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import plus from '../../../../../../svgs/plus.svg';
-import intl from '../../../../../../utils/localization';
 import {screenNames} from '../../../../../../utils/constants';
 import {model} from './model';
 import styles from './styles';
@@ -17,6 +16,7 @@ import styles from './styles';
 const formatDate = (date) => moment(date).format('ll');
 
 const PregnancyCurrent = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
   const answers = useSelector(
     (state) => state.healthHistory.data.pregnancyCurrent.answers,
   );
@@ -31,7 +31,7 @@ const PregnancyCurrent = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header title={intl.en.pregnancyCurrent.title} onBack={handleBackPress} />
+      <Header title={lang.pregnancyCurrent.title} onBack={handleBackPress} />
       {answers.dueDate ? (
         <Fragment>
           <Text style={styles.date}>{`Due ${formatDate(
@@ -50,7 +50,7 @@ const PregnancyCurrent = ({navigation}) => {
       ) : (
         <View style={styles.mainContainer}>
           <TextButton icon={plus} onPress={handleAddPregnancy} secondary>
-            {intl.en.pregnancyCurrent.addPregnancy}
+            {lang.pregnancyCurrent.addPregnancy}
           </TextButton>
         </View>
       )}

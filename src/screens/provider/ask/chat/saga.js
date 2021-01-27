@@ -1,5 +1,4 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
 import {
   sendMessage,
   loadMessages,
@@ -34,7 +33,7 @@ import {
   RESOLVE_QUESTION,
   STOP_OBSERVER_CHAT,
 } from '../../../../redux/types';
-let Lang = Language['en'];
+
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100,
   loadMessagesObserver,
@@ -42,10 +41,11 @@ let delayTime = 100,
   checkQuestionStatusObserver;
 
 function* sendMessageToUser({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {messageParams, imageParams, id, lastMessage, questionId} = data;
     if (imageParams) {
-      yield put(showApiLoader(Lang.apiLoader.loadingText));
+      yield put(showApiLoader(lang.apiLoader.loadingText));
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
         const {downloadURL} = responseImage.data;
@@ -87,7 +87,7 @@ function* sendMessageToUser({data}) {
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -130,8 +130,9 @@ function* sendMessageToUser({data}) {
   }
 }
 function* loadMessagesOfExpert({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     let isFirstTime = true;
     loadMessagesObserver = yield loadMessages(
       data,
@@ -176,11 +177,12 @@ function* loadMessagesOfExpert({data, dispatch}) {
   } catch (error) {
     displayConsole('loadMessagesOfExpert  error ', error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* checkUserStatus({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     displayConsole('data', data);
     const {userInfo, questionData} = data;
@@ -217,11 +219,12 @@ function* checkUserStatus({data, dispatch}) {
   } catch (error) {
     displayConsole('checkUserStatus  error ', error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* checkQuestStatus({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     displayConsole('data', data);
     const {questionData} = data;
@@ -252,7 +255,7 @@ function* checkQuestStatus({data, dispatch}) {
     );
   } catch (error) {
     displayConsole('checkQuestStatus  error ', error);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
@@ -291,14 +294,14 @@ function* resolveQuestion({data}) {
         showOrHideModal(
           responseResolvedQuestion.message
             ? responseResolvedQuestion.message
-            : Lang.errorMessage.serverError,
+            : lang.errorMessage.serverError,
         ),
       );
     }
   } catch (error) {
     displayConsole('setExpertRating  error ', error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

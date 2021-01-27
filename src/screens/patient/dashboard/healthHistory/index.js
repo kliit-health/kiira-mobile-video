@@ -2,11 +2,11 @@ import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {useSelector, shallowEqual} from 'react-redux';
 import {Header, ListItem, Container} from '../../../../components';
-import intl from '../../../../utils/localization';
 import model from './model';
 import styles from './styles';
 
 const HealthHistory = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
   const healthHistory = useSelector(
     (state) => state.healthHistory.data,
     shallowEqual,
@@ -15,7 +15,7 @@ const HealthHistory = ({navigation}) => {
   return (
     <Container unformatted>
       <Header
-        title={intl.en.healthHistory.title}
+        title={lang.healthHistory.title}
         onBack={() => navigation.goBack()}
       />
       <FlatList

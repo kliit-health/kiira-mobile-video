@@ -5,15 +5,15 @@ import {useDidMount} from '../../../utils/hooks';
 import * as actions from '../../../redux/actions';
 import {Container} from '../../../components';
 import {Bot, Items, Intro} from './sections';
-import intl from '../../../utils/localization';
 import styles from './styles';
+import i18n from '../../../i18n';
 
 const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();
-
   const user = useSelector((state) => state.user.data);
   const subscription = useSelector((state) => state.subscription.data);
   const licenses = useSelector((state) => state.licenses.data.current);
+  const lang = useSelector((state) => state.language);
 
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [chatEnabled, setChatEnabled] = useState(false);
@@ -94,11 +94,15 @@ const Dashboard = ({navigation}) => {
     }
   }, [user]);
 
+  useEffect(() => {
+    dispatch(actions.setUserLanguage(i18n[user.profileInfo.lang]));
+  }, []);
+
   const handleNavigation = (destination, features) => {
     if (features === 'video' && !videoEnabled) {
       dispatch(
         actions.showMessage({
-          message: intl.en.dashboard.serviceUnavailable,
+          message: lang.dashboard.serviceUnavailable,
         }),
       );
       return;
@@ -107,7 +111,7 @@ const Dashboard = ({navigation}) => {
     if (features === 'chat' && !chatEnabled) {
       dispatch(
         actions.showMessage({
-          message: intl.en.dashboard.chatNotAvailable,
+          message: lang.dashboard.chatNotAvailable,
         }),
       );
       return;
@@ -119,7 +123,7 @@ const Dashboard = ({navigation}) => {
   const handleRejectAssistance = () =>
     dispatch(
       actions.showMessage({
-        message: intl.en.dashboard.great,
+        message: lang.dashboard.great,
       }),
     );
 

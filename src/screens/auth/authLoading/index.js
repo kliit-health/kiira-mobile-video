@@ -88,6 +88,7 @@ class AuthLoadingScreen extends Component {
           },
         };
         updateStatus(updateStatusParams);
+
         getUserData(
           obj,
           (querySnapshot) => {

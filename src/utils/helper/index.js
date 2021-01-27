@@ -1,4 +1,5 @@
 import moment from 'moment';
+import store from '../../redux/store';
 
 export const displayConsole = (key, value) => {
   console.log(`---------${key}-------`, value ? value : '');
@@ -82,3 +83,5 @@ export const convertCamelCase = (str) => {
   const converted = strArr.map(capitalizeFirstLetter);
   return converted.join(' ');
 };
+
+export const getReduxState = () => store().getState();

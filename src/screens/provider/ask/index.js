@@ -13,8 +13,6 @@ import {
   getUser,
 } from '../../../redux/actions';
 import {ActiveQuestions, ResolvedQuestions} from './components';
-import intl from '../../../utils/localization';
-
 import styles, {modifiers} from './styles';
 
 const AskExpert = ({navigation}) => {
@@ -23,6 +21,7 @@ const AskExpert = ({navigation}) => {
   const [searching, setSearching] = useState(false);
   const [value, setValue] = useState('');
 
+  const lang = useSelector((state) => state.language);
   const expertDetails = useSelector((state) => state.authLoading.userData);
   const activeQuestions = useSelector((state) => state.askExpert.active);
   const resolvedQuestions = useSelector((state) => state.askExpert.resolved);
@@ -83,11 +82,11 @@ const AskExpert = ({navigation}) => {
   return (
     <Container themed unformatted>
       <StatusBar barStyle="light-content" translucent={true} />
-      <Header themed title={intl.en.expertChats.title} />
+      <Header themed title={lang.expertChats.title} />
       <SearchBar
         styles={modifiers.searchBar}
         onChange={handleSearch}
-        placeholder={intl.en.expertChats.searchName}
+        placeholder={lang.expertChats.searchName}
       />
       <View style={styles.buttonsContainer}>
         <TextButton
@@ -95,7 +94,7 @@ const AskExpert = ({navigation}) => {
           disabled={active}
           activeOpacity={1}
           onPress={toggleActive}>
-          {intl.en.expertChats.active}
+          {lang.expertChats.active}
         </TextButton>
         <TextButton
           outlined
@@ -103,7 +102,7 @@ const AskExpert = ({navigation}) => {
           disabled={!active}
           activeOpacity={1}
           onPress={toggleActive}>
-          {intl.en.expertChats.resolved}
+          {lang.expertChats.resolved}
         </TextButton>
       </View>
       <ActiveQuestions

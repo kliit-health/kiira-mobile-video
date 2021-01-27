@@ -1,21 +1,23 @@
-import intl from '../../../utils/localization';
 import {screenNames} from '../../../utils/constants';
+import {getReduxState} from '../../../utils/helper';
+
+const {language} = getReduxState();
 
 export const list = [
   {
-    title: intl.en.expertAccount.settings,
+    title: language.expertAccount.settings,
     destination: screenNames.expertSettings,
   },
   {
-    title: intl.en.expertAccount.updateAvailability,
+    title: language.expertAccount.updateAvailability,
     destination: screenNames.updateAvailability,
   },
   {
-    title: intl.en.expertAccount.termsAndConditions,
+    title: language.expertAccount.termsAndConditions,
     destination: screenNames.termsAndConditions,
   },
   {
-    title: intl.en.expertAccount.privacyPolicies,
+    title: language.expertAccount.privacyPolicies,
     destination: screenNames.privacyPolicies,
   },
 ];

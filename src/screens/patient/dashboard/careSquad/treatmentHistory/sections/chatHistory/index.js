@@ -3,11 +3,11 @@ import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, FlatList} from 'react-native';
 import moment from 'moment';
 import {colors, screenNames} from '../../../../../../../utils/constants';
-import intl from '../../../../../../../utils/localization';
 import {ListItem} from '../../../../../../../components';
 import {styles, itemStyles, fallbackStyles, itemModifiers} from './styles';
 
 const ChatHistory = ({navigation, expertDetails}) => {
+  const lang = useSelector((state) => state.language);
   const {questions} = useSelector(
     (state) => state.treatmentHistory.chatHistory,
     shallowEqual,
@@ -67,9 +67,7 @@ const ChatHistoryItem = ({
           ...itemStyles.status,
           color: isResolved ? colors.green : colors.orange,
         }}>
-        {isResolved
-          ? intl.en.chatHistory.resolved
-          : intl.en.chatHistory.unresolved}
+        {isResolved ? lang.chatHistory.resolved : lang.chatHistory.unresolved}
       </Text>
     </View>
   </ListItem>
@@ -77,7 +75,7 @@ const ChatHistoryItem = ({
 
 const Fallback = () => (
   <View style={fallbackStyles.container}>
-    <Text style={fallbackStyles.description}>{intl.en.chatHistory.empty}</Text>
+    <Text style={fallbackStyles.description}>{lang.chatHistory.empty}</Text>
   </View>
 );
 

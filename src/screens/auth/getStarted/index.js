@@ -4,13 +4,13 @@ import {useSelector} from 'react-redux';
 import CustomText from '../../../components/customText';
 import styles from './style';
 import Constant from '../../../utils/constants';
-import Language from '../../../utils/localization';
 import CustomButton from '../../../components/customButton';
 
-let lang = Language['en'];
 const GetStarted = (props) => {
   const {navigation} = props;
   const {staticImages} = Constant.App;
+
+  const lang = useSelector((state) => state.language);
   const userData = useSelector((state) => state.authLoading.userData);
 
   const renderLogoView = () => {

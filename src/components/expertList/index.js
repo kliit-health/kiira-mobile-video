@@ -1,14 +1,15 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {View, TouchableOpacity, FlatList, Platform, Image} from 'react-native';
 import {withNavigation} from 'react-navigation';
 import CustomText from '../../components/customText';
 import styles from './style';
 import Constant from '../../utils/constants';
-import Language from '../../utils/localization';
 
-const ExpertList = ({navigation, getFirst, experts}) => {
-  let Lang = Language['en'];
+const ExpertList = ({navigation, experts}) => {
   const {staticImages} = Constant.App;
+
+  const lang = useSelector((state) => state.language);
 
   return (
     <FlatList
@@ -73,7 +74,7 @@ const ExpertList = ({navigation, getFirst, experts}) => {
                   </View>
 
                   <CustomText style={styles.expertPrescriberTextStyle}>
-                    {Lang.expertProfile.prescriber}
+                    {lang.expertProfile.prescriber}
                   </CustomText>
                 </View>
                 <View style={styles.firstAvaliableContainer}></View>

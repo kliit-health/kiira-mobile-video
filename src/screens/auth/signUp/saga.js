@@ -1,6 +1,5 @@
-import {put, takeLatest} from 'redux-saga/effects';
+import {put, takeLatest, select} from 'redux-saga/effects';
 import {CREATE_USER} from '../../../redux/types';
-import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -16,11 +15,11 @@ import {showOrHideModal} from '../../../components/customModal/action';
 import Constant from '../../../utils/constants';
 import {StackActions, NavigationActions} from 'react-navigation';
 
-let Lang = Language.en;
 function* signUp({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {params, navigation, referalCode} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const newUser = yield createUser(params);
     const {uid} = newUser;
     if (uid) {
@@ -57,19 +56,19 @@ function* signUp({data}) {
                   showOrHideModal(
                     response.message
                       ? response.message
-                      : Lang.errorMessage.serverError,
+                      : lang.errorMessage.serverError,
                   ),
                 );
               }
             } else {
               yield deleteUser();
               yield put(hideApiLoader());
-              yield put(showOrHideModal(Lang.errorMessage.invalidreferalCode));
+              yield put(showOrHideModal(lang.errorMessage.invalidreferalCode));
             }
           } else {
             yield deleteUser();
             yield put(hideApiLoader());
-            yield put(showOrHideModal(Lang.errorMessage.invalidreferalCode));
+            yield put(showOrHideModal(lang.errorMessage.invalidreferalCode));
           }
         } else {
           yield deleteUser();
@@ -78,7 +77,7 @@ function* signUp({data}) {
             showOrHideModal(
               referrerData.message
                 ? referrerData.message
-                : Lang.errorMessage.serverError,
+                : lang.errorMessage.serverError,
             ),
           );
         }
@@ -98,13 +97,13 @@ function* signUp({data}) {
       yield put(hideApiLoader());
       yield put(
         showOrHideModal(
-          newUser.message ? newUser.message : Lang.errorMessage.serverError,
+          newUser.message ? newUser.message : lang.errorMessage.serverError,
         ),
       );
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

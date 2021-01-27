@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Header, TextButton} from '../../../../../../components';
 import {Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import intl from '../../../../../../utils/localization';
+
 import {screenNames} from '../../../../../../utils/constants';
 import {updateHealthHistory} from '../../../../../../redux/actions';
 import styles from './styles';
@@ -16,6 +16,7 @@ const initialState = {
 
 const Birth = ({navigation}) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
 
   const handleBackPress = () => {
@@ -37,11 +38,11 @@ const Birth = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.birth.title} onBack={handleBackPress} />
-      <Text style={styles.title}>{intl.en.birth.congratulations}</Text>
-      <Text style={styles.description}>{intl.en.birth.help}</Text>
+      <Header title={lang.birth.title} onBack={handleBackPress} />
+      <Text style={styles.title}>{lang.birth.congratulations}</Text>
+      <Text style={styles.description}>{lang.birth.help}</Text>
       <TextButton styles={{root: styles.button}} onPress={handleSave}>
-        {intl.en.loss.confirm}
+        {lang.loss.confirm}
       </TextButton>
     </Container>
   );

@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {model} from './model';
 import {DatePicker} from './components';
 import {updateHealthHistory} from '../../../../../../redux/actions';
-import intl from '../../../../../../utils/localization';
 import styles from './styles';
 
 const {placeholder, dataKey, title} = model;
@@ -14,6 +13,7 @@ const DueDate = ({navigation}) => {
   const [data, setData] = useState({
     dueDate: '',
   });
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.pregnancyCurrent.answers,
@@ -48,7 +48,7 @@ const DueDate = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.dueDate.title} onBack={handleBackPress} />
+      <Header title={lang.dueDate.title} onBack={handleBackPress} />
       <DatePicker
         placeholder={placeholder}
         title={title}
@@ -59,7 +59,7 @@ const DueDate = ({navigation}) => {
         disabled={!data[dataKey]}
         styles={{root: styles.button}}
         onPress={handleSave}>
-        {intl.en.insurance.save}
+        {lang.insurance.save}
       </TextButton>
     </Container>
   );

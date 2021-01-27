@@ -1,16 +1,18 @@
-import intl from '../../../../../utils/localization';
+import {getReduxState} from '../../../../../utils/helper';
+
+const {language} = getReduxState();
 
 export const cardDetails = [
   {
-    title: intl.en.expertAccount.born,
+    title: language.expertAccount.born,
     dataKey: 'dob',
   },
   {
-    title: intl.en.expertAccount.pronouns,
+    title: language.expertAccount.pronouns,
     dataKey: 'pronouns',
   },
   {
-    title: intl.en.expertAccount.location,
+    title: language.expertAccount.location,
     dataKey: 'state',
     secondaryKey: 'code',
   },

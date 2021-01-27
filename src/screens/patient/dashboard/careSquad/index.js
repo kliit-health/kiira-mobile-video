@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Header, SearchBar} from '../../../../components';
 import {useSelector, useDispatch} from 'react-redux';
-import intl from '../../../../utils/localization';
 import {screenNames} from '../../../../utils/constants';
 import {updateFavoriteExperts} from '../../../../redux/actions';
 import {getChatHistoryAsync} from './treatmentHistory/actions';
@@ -19,6 +18,7 @@ const CareSquad = ({navigation}) => {
   const experts = useSelector((state) => state.experts.data);
   const favorites = useSelector((state) => state.favoriteExperts.data);
   const currentRoute = useSelector((state) => state.navigator.currentRoute);
+  const lang = useSelector((state) => state.language);
 
   useEffect(() => {
     dispatch(getChatHistoryAsync());
@@ -92,7 +92,7 @@ const CareSquad = ({navigation}) => {
   return (
     <Container unformatted>
       <Header
-        title={intl.en.careSquad.title}
+        title={lang.careSquad.title}
         onBack={handleBackPress}
         onEditPress={handleEditPress}
         editState={deleteMode}
@@ -104,10 +104,7 @@ const CareSquad = ({navigation}) => {
         data={getFavoriteExperts(favorites, experts)}
         deleteMode={deleteMode}
       />
-      <SearchBar
-        onChange={handleSearch}
-        placeholder={intl.en.careSquad.search}
-      />
+      <SearchBar onChange={handleSearch} placeholder={lang.careSquad.search} />
       <List
         onCardPress={handleCardPress}
         onAddPress={handleAddPress}

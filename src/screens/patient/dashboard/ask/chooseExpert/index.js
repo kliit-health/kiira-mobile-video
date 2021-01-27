@@ -14,13 +14,10 @@ import styles from './style';
 import CustomText from '../../../../../components/customText';
 import Constant from '../../../../../utils/constants';
 import {Rating} from 'react-native-elements';
-import Language from '../../../../../utils/localization';
 import CustomButton from '../../../../../components/customButton';
 import InputText from '../../../../../components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {updateQuestion} from '../../ask/action';
-
-const lang = Language['en'];
 class ChooseExpert extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +65,7 @@ class ChooseExpert extends Component {
 
   renderExpertInfoView() {
     const {staticImages} = Constant.App;
-    const {navigation, expertData} = this.props;
+    const {navigation, expertData, lang} = this.props;
     const chatEnabled = expertData.filter((expert) => expert.chatEnabled);
 
     return (
@@ -161,7 +158,7 @@ class ChooseExpert extends Component {
   }
 
   renderHeaderView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
@@ -190,7 +187,7 @@ class ChooseExpert extends Component {
   }
 
   renderQuestionView() {
-    const {question} = this.props;
+    const {question, lang} = this.props;
     return (
       <View style={styles.questionParentContainer}>
         <CustomText style={styles.questionTitleTextStyle}>
@@ -214,7 +211,7 @@ class ChooseExpert extends Component {
 
   renderEditQuestionModal() {
     const {showEditQuestionModal, question} = this.state;
-    const {setQuestionText} = this.props;
+    const {setQuestionText, lang} = this.props;
     return (
       <Modal
         animationType="fade"
@@ -274,7 +271,7 @@ class ChooseExpert extends Component {
   renderFilterModal() {
     const {showFilterModal, genderItemsArr} = this.state;
     const {staticImages} = Constant.App;
-    const {professionData, languagesData, getExperts} = this.props;
+    const {professionData, languagesData, getExperts, lang} = this.props;
     return (
       <Modal
         animationType="fade"
@@ -501,6 +498,7 @@ const mapStateToProps = (state) => ({
   question: state.ask.question,
   professionData: state.chooseExpert.professionData,
   languagesData: state.chooseExpert.languagesData,
+  lang: state.languages,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,21 +1,23 @@
-import intl from '../../../../../utils/localization';
 import {screenNames} from '../../../../../utils/constants';
+import {getReduxState} from '../../../../../utils/helper';
+
+const {language} = getReduxState();
 
 export default [
   {
-    title: intl.en.account.settings,
+    title: language.account.settings,
     destination: screenNames.settings,
   },
   {
-    title: intl.en.account.termsAndConditions,
+    title: language.account.termsAndConditions,
     destination: screenNames.termsAndConditions,
   },
   {
-    title: intl.en.account.privacyPolicies,
+    title: language.account.privacyPolicies,
     destination: screenNames.privacyPolicies,
   },
   {
-    title: intl.en.account.help,
+    title: language.account.help,
     destination: screenNames.help,
   },
 ];

@@ -5,19 +5,19 @@ import CustomText from '../../../components/customText';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
-import Language from '../../../utils/localization';
 import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {forgotPasswordApiHit, resertForgotPasswordState} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {isEmail} from '../../../utils/helper';
 
-let lang = Language['en'];
 const ForgotPassword = (props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const {navigation} = props;
   const {staticImages} = Constant.App;
+
+  const lang = useSelector((state) => state.language);
   const forgotPasswordSuccess = useSelector(
     (state) => state.forgotPassword.forgotPasswordSuccess,
   );

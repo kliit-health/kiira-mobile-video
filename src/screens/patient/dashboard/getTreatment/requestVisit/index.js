@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import reasonsForVisit from '../../../../../utils/constants/requestVisit';
 import {ListItem} from '../../../../../components';
@@ -8,10 +8,10 @@ import {reasonForVisit} from '../expertSchedule/action';
 import {Header, Container} from '../../../../../components';
 import Agreements from '../agreements';
 import {screenNames} from '../../../../../utils/constants';
-import intl from '../../../../../utils/localization';
 
 const RequestVisit = ({navigation}) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language);
 
   const handleNavigation = (title) => {
     dispatch(reasonForVisit(title));
@@ -25,7 +25,7 @@ const RequestVisit = ({navigation}) => {
   return (
     <Container unformatted>
       <Agreements navigation={navigation} />
-      <Header title={intl.en.getTreatment.title} onBack={handleBackPress} />
+      <Header title={lang.getTreatment.title} onBack={handleBackPress} />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={reasonsForVisit}

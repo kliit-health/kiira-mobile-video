@@ -1,6 +1,5 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {UPLOAD_USER_DETAIL_DATA} from '../../../../../redux/types';
-import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -18,15 +17,14 @@ import {StackActions, NavigationActions} from 'react-navigation';
 import firebase from 'react-native-firebase';
 import {setUserData} from '../../../../auth/authLoading/action';
 
-let Lang = Language.en;
-
 // TODO: Refactor this function in order to clean code and remove redundant code
 function* uploadUserData({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     const {userParams, navigation, imageParams} = data;
     const state = yield select();
     const fcmToken = state.authLoading.fcmToken;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
       displayConsole('responseImage', responseImage);
@@ -81,7 +79,7 @@ function* uploadUserData({data, dispatch}) {
             showOrHideModal(
               response.message
                 ? response.message
-                : Lang.errorMessage.serverError,
+                : lang.errorMessage.serverError,
             ),
           );
         }
@@ -91,7 +89,7 @@ function* uploadUserData({data, dispatch}) {
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -141,14 +139,14 @@ function* uploadUserData({data, dispatch}) {
       } else {
         dispatch(
           showOrHideModal(
-            response.message ? response.message : Lang.errorMessage.serverError,
+            response.message ? response.message : lang.errorMessage.serverError,
           ),
         );
       }
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

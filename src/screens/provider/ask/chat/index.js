@@ -11,7 +11,6 @@ import {
 import FastImage from 'react-native-fast-image';
 import {connect} from 'react-redux';
 import styles from './style';
-import Language from '../../../../utils/localization';
 import CustomText from '../../../../components/customText';
 import Constant from '../../../../utils/constants';
 import ImagePicker from 'react-native-image-picker';
@@ -33,7 +32,6 @@ import moment from 'moment';
 import CustomButton from '../../../../components/customButton';
 import {stopObserverChat} from './action';
 
-const lang = Language.en;
 let key;
 class ChatExpert extends React.PureComponent {
   constructor(props) {
@@ -277,6 +275,7 @@ class ChatExpert extends React.PureComponent {
   renderFooterView() {
     const {staticImages} = Constant.App;
     const {message, imageUri} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.chatInputParentContainer}>
         {imageUri ? (
@@ -361,6 +360,7 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderResolvedFooterView() {
+    const {lang} = this.props;
     return (
       <View style={styles.resolvedParentContainer}>
         <CustomText style={styles.resovledTextStyle}>
@@ -402,7 +402,7 @@ class ChatExpert extends React.PureComponent {
 
   renderActionModal() {
     const {showActionModal} = this.state;
-    const {questionData, resolve, navigation} = this.props;
+    const {questionData, resolve, navigation, lang} = this.props;
     return (
       <Modal
         animationType="fade"
@@ -476,6 +476,7 @@ const mapStateToProps = (state) => ({
   questionData: state.chatExpert.questionData,
   userStatusData: state.chatExpert.userStatusData,
   isActive: state.authLoading.isActive,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -55,7 +55,6 @@ import HealthHistory from '../screens/patient/dashboard/healthHistory';
 import HomeScreen from '../screens/patient/dashboard/appointments/videoVisit/HomeScreen/HomeScreen';
 import GetTreatment from '../screens/patient/dashboard/getTreatment';
 import Help from '../screens/common/help';
-// import Insurance from '../screens/insurance';
 import Learn from '../screens/patient/learn';
 import Lifestyle from '../screens/patient/dashboard/healthHistory/lifestyle';
 import Loss from '../screens/patient/dashboard/healthHistory/pregnancy/loss';
@@ -80,7 +79,6 @@ import Pregnancy from '../screens/patient/dashboard/healthHistory/pregnancy';
 import PregnancyHistory from '../screens/patient/dashboard/healthHistory/pregnancy/pregnancyHistory';
 import PregnancyHistoryExpert from '../screens/provider/appointments/patientProfile/pregnancy';
 import PreviousVisits from '../screens/provider/appointments/patientProfile/previousVisits';
-import PreviousAppointmentsNotes from '../screens/patient/dashboard/healthHistory/previousAppointmentsNotes';
 import PrivacyPolicy from '../screens/common/privacyPolicy';
 import Rating from '../screens/patient/dashboard/appointments/videoVisit/rating';
 import Recap from '../screens/provider/appointments/patientProfile/recap';
@@ -514,7 +512,6 @@ const MainAppStack = createStackNavigator(
     ExpertSchedule: {screen: ExpertSchedule},
     HealthHistory: {screen: HealthHistory},
     Help: {screen: Help},
-    // Insurance: {screen: Insurance},
     Learn: {screen: Learn},
     Lifestyle: {screen: Lifestyle},
     Loss: {screen: Loss},
@@ -526,7 +523,6 @@ const MainAppStack = createStackNavigator(
     PayPalApproval: {screen: PayPalApproval},
     PregnancyAndChildren: {screen: Pregnancy},
     PregnancyCurrent: {screen: CurrentPregnancy},
-    PreviousAppointmentsNotes: {screen: PreviousAppointmentsNotes},
     PregnancyHistory: {screen: PregnancyHistory},
     PrivacyPolicy: {screen: PrivacyPolicy},
     ReferFriend: {screen: ReferFriend},

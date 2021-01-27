@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {
   StatusBar,
   View,
@@ -9,7 +10,6 @@ import {
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
-import Language from '../../../utils/localization';
 import Carousel from 'react-native-banner-carousel';
 
 const largeDisplay = Dimensions.get('window').height > 800;
@@ -41,9 +41,9 @@ let banner = [
   },
 ];
 
-let lang = Language['en'];
 const Tutorial = (props) => {
   const {navigation} = props;
+  const lang = useSelector((state) => state.language);
 
   const renderSliderView = () => {
     return (

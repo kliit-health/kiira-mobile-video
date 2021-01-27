@@ -22,7 +22,6 @@ import {
   sendVisitRecap,
 } from '../../../../utils/firebase';
 import * as actions from '../../../../redux/actions';
-import intl from '../../../../utils/localization';
 import {clearMedicalHistory} from './actions';
 
 function* getPatientDetails({data}) {
@@ -100,6 +99,7 @@ function* updatePatientDetails({data}) {
 }
 
 function* lockVisit(data) {
+  const lang = yield select((state) => state.language);
   try {
     const update = yield call(saveAndLock, data);
     yield call(sendVisitRecap, data);
@@ -113,7 +113,7 @@ function* lockVisit(data) {
     data.navigation.navigate('ExpertAppointments');
   } catch (error) {
     yield put(
-      actions.showMessage({message: intl.en.expertAppointments.lockError}),
+      actions.showMessage({message: lang.expertAppointments.lockError}),
     );
     console.error(error);
   }

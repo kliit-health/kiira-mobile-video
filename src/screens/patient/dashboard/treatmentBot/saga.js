@@ -1,6 +1,5 @@
 import {UPDATE_NEW_USER_DETAIL_DATA} from '../../redux/types';
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -12,11 +11,10 @@ import {displayConsole} from '../../../../utils/helper';
 import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
 
-let Lang = Language['en'];
-
 function* updateNewUserData({data}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const {userParams, navigation} = data;
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
@@ -52,13 +50,13 @@ function* updateNewUserData({data}) {
     } else {
       yield put(
         showOrHideModal(
-          response.message ? response.message : Lang.errorMessage.serverError,
+          response.message ? response.message : lang.errorMessage.serverError,
         ),
       );
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

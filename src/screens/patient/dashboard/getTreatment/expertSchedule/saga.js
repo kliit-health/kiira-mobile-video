@@ -5,8 +5,7 @@ import {
   GET_APPOINTMENTS_FOR_TODAY,
 } from '../../../../../redux/types';
 
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -20,23 +19,23 @@ import {
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {setTimes, setAppointmentDates} from './action';
 
-let Lang = Language['en'];
-
 function* getExperts({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {expertsParams} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     yield getDataFromTable(expertsParams);
     yield put(hideApiLoader());
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getAppointmentsForToday({data}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentsForTodayAsync(data);
     yield put(setTimes(response));
     yield put(hideApiLoader());
@@ -44,33 +43,35 @@ function* getAppointmentsForToday({data}) {
   } catch (error) {
     console.log(error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getAppointmentsByDay({data}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentsByDayAsync(data);
     yield put(setTimes(response));
     yield put(hideApiLoader());
     return;
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getAppointmentDates({data}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentDatesAsync(data);
     yield put(setAppointmentDates(response));
     yield put(hideApiLoader());
     return;
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

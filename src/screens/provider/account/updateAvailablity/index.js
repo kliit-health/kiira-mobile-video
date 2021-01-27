@@ -3,14 +3,12 @@ import {View, TouchableOpacity, Platform, ScrollView, Text} from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../../components/customText';
-import Language from '../../../../utils/localization';
 import Constant from '../../../../utils/constants';
 import CustomInputText from '../../../../components/customInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {updateExpertDataToFirebase} from './action';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
-let lang = Language['en'];
 class UpdateAvailablity extends PureComponent {
   constructor(props) {
     super(props);
@@ -22,12 +20,7 @@ class UpdateAvailablity extends PureComponent {
   }
 
   renderHeaderView() {
-    const {
-      userData,
-      navigation,
-      showHideErrorModal,
-      updateUserData,
-    } = this.props;
+    const {userData, navigation, lang, updateUserData} = this.props;
     const {clinicInfo, hours} = this.state;
     return (
       <View style={styles.headerStyle}>
@@ -140,6 +133,7 @@ class UpdateAvailablity extends PureComponent {
 
 const mapStateToProps = (state) => ({
   userData: state.authLoading.userData,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,4 @@
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -15,10 +14,11 @@ import {GET_EXPERTS_DATA} from '../../../../../redux/types';
 import Constant from '../../../../../utils/constants';
 import {displayConsole} from '../../../../../utils/helper';
 
-let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 var refExpertData;
+
 function* getExperts(data, dispatch) {
+  const lang = yield select((state) => state.language);
   try {
     const {expertsParams, filterParams, isProfessionLangaugesDataLoaded} = data;
     console.log('data ', data);
@@ -118,7 +118,7 @@ function* getExperts(data, dispatch) {
             dispatch(hideApiLoader());
           }
           dispatch(
-            showOrHideModal(message ? message : Lang.errorMessage.serverError),
+            showOrHideModal(message ? message : lang.errorMessage.serverError),
           );
         }
         displayConsole(
@@ -130,14 +130,15 @@ function* getExperts(data, dispatch) {
     yield delay(500);
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getProfessions({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     const {expertsParams, isProfessionLangaugesDataLoaded} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     yield delay(500);
     if (expertsParams && !isProfessionLangaugesDataLoaded) {
       const params = {
@@ -157,11 +158,12 @@ function* getProfessions({data, dispatch}) {
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getLanguages(data, dispatch) {
+  const lang = yield select((state) => state.language);
   try {
     const params = {
       tableName: Constant.App.firebaseTableNames.languages,
@@ -179,7 +181,7 @@ function* getLanguages(data, dispatch) {
     yield delay(500);
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

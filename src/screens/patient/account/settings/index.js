@@ -11,7 +11,6 @@ import {
 import {connect} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../../components/customText';
-import Language from '../../../../utils/localization';
 import Constant from '../../../../utils/constants';
 import {Avatar} from 'react-native-elements';
 import CustomInputText from '../../../../components/customInputText';
@@ -22,11 +21,10 @@ import ImagePicker from 'react-native-image-picker';
 import {updateUserDataToFirebase} from './action';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
-let lang = Language['en'];
 class Setting extends PureComponent {
   constructor(props) {
     super(props);
-    const {userData} = this.props;
+    const {userData, lang} = this.props;
     this.state = {
       firstName: userData.profileInfo.firstName,
       lastName: userData.profileInfo.lastName,
@@ -101,6 +99,7 @@ class Setting extends PureComponent {
       showHideErrorModal,
       updateUserData,
       userData,
+      lang,
     } = this.props;
     const {
       firstName,
@@ -245,6 +244,7 @@ class Setting extends PureComponent {
   renderProfileImageView() {
     const {staticImages} = Constant.App;
     const {imageSrc} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.profileImgViewStyle}>
         <Avatar
@@ -290,6 +290,7 @@ class Setting extends PureComponent {
       insurance,
       plan,
     } = this.state;
+    const {lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.inputTextParentContainerStyle}>
@@ -415,6 +416,7 @@ class Setting extends PureComponent {
   renderPronounsView() {
     const {staticImages} = Constant.App;
     const {pronounsArr} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.pronounsParentContainerStyle}>
         <CustomText style={styles.pronounsTitleTextStyle}>
@@ -455,7 +457,7 @@ class Setting extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     return (
       <TouchableOpacity
         style={styles.btnContainerStyle}
@@ -527,6 +529,7 @@ class Setting extends PureComponent {
 
 const mapStateToProps = (state) => ({
   userData: state.authLoading.userData,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({
