@@ -95,8 +95,10 @@ const Dashboard = ({navigation}) => {
   }, [user]);
 
   useEffect(() => {
-    dispatch(actions.setUserLanguage(i18n[user.profileInfo.lang]));
-  }, []);
+    if (user.profileInfo.lang !== 'en') {
+      dispatch(actions.setUserLanguage(i18n[user.profileInfo.lang]));
+    }
+  }, [user]);
 
   const handleNavigation = (destination, features) => {
     if (features === 'video' && !videoEnabled) {
