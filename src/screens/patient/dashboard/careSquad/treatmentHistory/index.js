@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Container,
   Header,
@@ -9,7 +9,6 @@ import {
   Ratings,
 } from '../../../../../components';
 import {Prescriber} from '../../../../../components/icons';
-import intl from '../../../../../utils/localization';
 import styles, {modifiers} from './styles';
 import {calculateRating} from '../../../../../utils/functions';
 import {ChatHistory, VideoHistory} from './sections';
@@ -18,6 +17,8 @@ import {getMedicalHistory} from '../../../../../redux/actions';
 import {useDidMount} from '../../../../../utils/hooks';
 
 const TreatmentHistory = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
+
   const dispatch = useDispatch();
   const expertDetails = navigation.getParam('details');
 
@@ -68,14 +69,14 @@ const TreatmentHistory = ({navigation}) => {
           activeOpacity={1}
           onPress={handleChatHistoryPress}
           disabled={activeSection === 'chat'}>
-          {intl.en.treatmentHistory.chatHistory}
+          {lang.treatmentHistory.chatHistory}
         </TextButton>
         <View style={styles.divider} />
         <TextButton
           activeOpacity={1}
           onPress={handleVideoHistoryPress}
           disabled={activeSection === 'video'}>
-          {intl.en.treatmentHistory.videoHistory}
+          {lang.treatmentHistory.videoHistory}
         </TextButton>
       </View>
       {activeSection === 'video' ? (

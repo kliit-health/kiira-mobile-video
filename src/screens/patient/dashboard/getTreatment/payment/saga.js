@@ -1,10 +1,9 @@
-import {put, takeLatest, call} from 'redux-saga/effects';
+import {put, takeLatest, call, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
 import {updateUser} from '../../../../../redux/actions';
-import Language from '../../../../../utils/localization';
 import {
   CREATE_PAYMENT_CARD,
   GET_CREDIT_AMOUNT_OPTIONS,
@@ -45,8 +44,6 @@ import {deviceSupportsNativePay} from '../../../../../utils/payment';
 import Constant from '../../../../../utils/constants';
 import firebase from 'react-native-firebase';
 
-let Lang = Language.en;
-
 function* checkNativePaySupport() {
   const isSupported = yield call(deviceSupportsNativePay);
   yield put(setNativePaySupport(isSupported));
@@ -60,14 +57,15 @@ function* getCreditAmounts() {
 }
 
 function* createPayment({data}) {
+  const lang = yield select((state) => state.language);
   const {navigation, params} = data;
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  yield put(showApiLoader(lang.apiLoader.loadingText));
   try {
     const response = yield call(addNewPaymentCard, params);
     yield getPaymentMethods();
     yield put(hideApiLoader());
     if (response.ok) {
-      yield put(showOrHideModal(Lang.successMessages.cardAddedSuccessfully));
+      yield put(showOrHideModal(lang.successMessages.cardAddedSuccessfully));
       navigation.goBack();
     } else {
       var errorMessage = '';
@@ -85,19 +83,20 @@ function* createPayment({data}) {
           errorMessage = 'Invalid action';
           break;
         default:
-          errorMessage = Lang.errorMessage.serverError;
+          errorMessage = lang.errorMessage.serverError;
           break;
       }
       yield put(showOrHideModal(errorMessage));
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* getPaymentMethods() {
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  const lang = yield select((state) => state.language);
+  yield put(showApiLoader(lang.apiLoader.loadingText));
 
   yield checkNativePaySupport();
 
@@ -109,11 +108,12 @@ function* getPaymentMethods() {
     cards = cards.filter((card) => card !== null);
     yield put(setPaymentMethods(cards));
   } else {
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* handlePayResponse(response, credits, navigation) {
+  const lang = yield select((state) => state.language);
   if (response.ok) {
     const user = firebase.auth().currentUser;
     yield put({type: SET_PREPAID});
@@ -126,7 +126,7 @@ function* handlePayResponse(response, credits, navigation) {
       const userData = yield getDataFromTable(obj);
       yield put(setData(userData));
       yield put(updateUser(userData));
-      yield put(showOrHideModal(Lang.successMessages.visitAddedSuccessfully));
+      yield put(showOrHideModal(lang.successMessages.visitAddedSuccessfully));
       if (navigation === undefined) {
         NavigationService.goBack();
       } else {
@@ -136,12 +136,13 @@ function* handlePayResponse(response, credits, navigation) {
   }
 
   if (!response.ok) {
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* buyCredits({payload: {cardID, credits, amount}}) {
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  const lang = yield select((state) => state.language);
+  yield put(showApiLoader(lang.apiLoader.loadingText));
   let response = yield call(payAmount, cardID, amount);
   yield put(hideApiLoader());
 
@@ -149,7 +150,8 @@ function* buyCredits({payload: {cardID, credits, amount}}) {
 }
 
 function* buyCreditsWithToken({payload: {tokenID, credits, amount}}) {
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  const lang = yield select((state) => state.language);
+  yield put(showApiLoader(lang.apiLoader.loadingText));
   let response = yield call(payAmountWithToken, tokenID, amount);
   yield put(hideApiLoader());
   console.log('RESPONSE BUY WITH TOKEN', response);
@@ -157,12 +159,13 @@ function* buyCreditsWithToken({payload: {tokenID, credits, amount}}) {
 }
 
 function* buyCreditsWithPayPal({payload: {credits, amount, navigation}}) {
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  const lang = yield select((state) => state.language);
+  yield put(showApiLoader(lang.apiLoader.loadingText));
   let response = yield call(getPayPalAccessToken);
   yield put(hideApiLoader());
   if (response.ok) {
     let accessToken = response.data.data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     let paypalResponse = yield call(
       createPayPalOrder,
       accessToken,
@@ -173,19 +176,20 @@ function* buyCreditsWithPayPal({payload: {credits, amount, navigation}}) {
     yield put(setOrderData(paypalResponse));
     navigation.navigate(Constant.App.screenNames.PayPalApproval);
   } else {
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
 function* capturePayPalPayment({
   payload: {capturePaymentURL, credits, navigation},
 }) {
-  yield put(showApiLoader(Lang.apiLoader.loadingText));
+  const lang = yield select((state) => state.language);
+  yield put(showApiLoader(lang.apiLoader.loadingText));
   let tokenResponse = yield call(getPayPalAccessToken);
   yield put(hideApiLoader());
   if (tokenResponse.ok) {
     let accessToken = tokenResponse.data.data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     let response = yield call(
       capturePayPalPaymentAPI,
       accessToken,
@@ -197,10 +201,10 @@ function* capturePayPalPayment({
     if (response.ok) {
       // yield handlePayResponse({ ok: true }, credits);
     } else {
-      // yield put(showOrHideModal(Lang.errorMessage.serverError));
+      // yield put(showOrHideModal(lang.errorMessage.serverError));
     }
   } else {
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

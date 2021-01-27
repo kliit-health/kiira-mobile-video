@@ -11,12 +11,10 @@ import {
 import {connect} from 'react-redux';
 import styles from './style';
 import CustomText from '../../../../../components/customText';
-import Language from '../../../../../utils/localization';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import Constant from '../../../../../utils/constants';
 import CustomButton from '../../../../../components/customButton';
 
-let lang = Language.en;
 class ReferFriend extends PureComponent {
   constructor(props) {
     super(props);
@@ -54,7 +52,7 @@ class ReferFriend extends PureComponent {
     }
   };
   renderHeaderView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.titleContainerStyle}>
@@ -77,6 +75,7 @@ class ReferFriend extends PureComponent {
   }
 
   renderSubHeaderView() {
+    const {lang} = this.props;
     return (
       <View style={styles.subTitleContainerStyle}>
         <CustomText style={styles.subTitleTextBoldStyle}>
@@ -96,7 +95,7 @@ class ReferFriend extends PureComponent {
   };
 
   renderYourReferralTitleView() {
-    const {userData} = this.props;
+    const {userData, lang} = this.props;
     return (
       <View style={styles.referalCodeTitleContainerStyle}>
         <CustomText style={styles.referalCodeTitleTextBoldStyle}>
@@ -118,7 +117,7 @@ class ReferFriend extends PureComponent {
   }
 
   render() {
-    const {navigation, userData} = this.props;
+    const {userData, lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       userData && (
@@ -173,6 +172,7 @@ class ReferFriend extends PureComponent {
 
 const mapStateToProps = (state) => ({
   userData: state.authLoading.userData,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

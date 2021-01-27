@@ -3,12 +3,12 @@ import {ModalConfirm, TextButton} from '../../../../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
 import {View, Text} from 'react-native';
-import intl from '../../../../../utils/localization';
 import {cancelSubscription, showMessage} from '../../../../../redux/actions';
 import styles from './styles';
 
 export default ({subscription, user}) => {
   const plan = useSelector((state) => state.plan.data);
+  const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
 
   const [visible, setVisible] = useState(false);
@@ -24,7 +24,7 @@ export default ({subscription, user}) => {
   };
 
   const handleChangePlan = () => {
-    dispatch(showMessage({message: intl.en.account.emailUs}));
+    dispatch(showMessage({message: lang.account.emailUs}));
   };
 
   const handleCancel = () => {
@@ -38,27 +38,27 @@ export default ({subscription, user}) => {
       {plan.title && <Text style={styles.planTitle}>{plan.title}</Text>}
       {subscription.data.canceled && (
         <Text style={styles.canceledMessage}>
-          {intl.en.account.planCanceled}
+          {lang.account.planCanceled}
           {formatDate(subscription.data.currentPeriodEnd)}
         </Text>
       )}
       {subscription.cancel.loading && (
-        <Text style={styles.canceledMessage}>{intl.en.account.canceling}</Text>
+        <Text style={styles.canceledMessage}>{lang.account.canceling}</Text>
       )}
       <View style={styles.actionsContainer}>
         <TextButton onPress={handleChangePlan}>
-          {intl.en.account.changePlan}
+          {lang.account.changePlan}
         </TextButton>
         <View style={styles.divider} />
         <TextButton
           onPress={handleCancel}
           outlined
           disabled={subscription.data.canceled}>
-          {intl.en.account.cancelPlan}
+          {lang.account.cancelPlan}
         </TextButton>
       </View>
       <ModalConfirm
-        message={intl.en.account.cancelConfirm}
+        message={lang.account.cancelConfirm}
         visible={visible}
         onConfirm={handleConfirm}
         onCancel={handleCancel}

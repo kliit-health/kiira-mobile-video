@@ -1,39 +1,41 @@
-import intl from '../../../../../utils/localization';
 import {screenNames, icons} from '../../../../../utils/constants';
+import {getReduxState} from '../../../../../utils/helper';
+
+const {language} = getReduxState();
 
 export default [
   {
-    title: intl.en.dashboard.getTreatment,
+    title: language.dashboard.getTreatment,
     destination: screenNames.requestVisit,
     icon: icons.bandAid,
     features: 'video',
   },
   {
-    title: intl.en.dashboard.mySquad,
+    title: language.dashboard.mySquad,
     destination: screenNames.careSquad,
     icon: icons.squad,
     features: '',
   },
   {
-    title: intl.en.dashboard.chatExpert,
+    title: language.dashboard.chatExpert,
     destination: screenNames.ask,
     icon: icons.chat,
     features: 'chat',
   },
   {
-    title: intl.en.dashboard.myHistory,
+    title: language.dashboard.myHistory,
     destination: screenNames.healthHistory,
     icon: icons.clipboard,
     features: '',
   },
   {
-    title: intl.en.dashboard.reminders,
+    title: language.dashboard.reminders,
     destination: screenNames.appointments,
     icon: icons.reminders,
     features: 'video',
   },
   {
-    title: intl.en.dashboard.sos,
+    title: language.dashboard.sos,
     destination: screenNames.sos,
     icon: icons.sos,
     features: '',

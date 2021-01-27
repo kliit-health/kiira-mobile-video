@@ -1,6 +1,5 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {LOGIN_FIREBASE_USER} from '../../../redux/types';
-import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -17,15 +16,15 @@ import {signoutApihit} from '../../patient/account/action';
 import {setUserData} from '../authLoading/action';
 import {getTermsAndConditions} from '../../../redux/actions';
 
-let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-let delayTime = 100;
+
 function* loginFirebase({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const state = yield select();
     const fcmToken = state.authLoading.fcmToken;
     const {params, navigation} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield loginInWithFirebase(params);
     yield delay(500);
     yield put(hideApiLoader());
@@ -65,7 +64,7 @@ function* loginFirebase({data}) {
             isLoaderShow: false,
           };
           yield put(signoutApihit(payload));
-          yield put(showOrHideModal(Lang.errorMessage.userNotExist));
+          yield put(showOrHideModal(lang.errorMessage.userNotExist));
         }
       } else {
         if (userData && userData.role === 'Expert') {
@@ -87,20 +86,20 @@ function* loginFirebase({data}) {
             isLoaderShow: false,
           };
           yield put(signoutApihit(payload));
-          yield put(showOrHideModal(Lang.errorMessage.userNotExist));
+          yield put(showOrHideModal(lang.errorMessage.userNotExist));
         }
       }
     } else {
       yield put(
         showOrHideModal(
-          response.message ? response.message : Lang.errorMessage.serverError,
+          response.message ? response.message : lang.errorMessage.serverError,
         ),
       );
       yield put(loginFailure());
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

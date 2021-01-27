@@ -12,7 +12,6 @@ import model from './model';
 import styles, {modifiers} from './styles';
 import {updatePatientDetails} from '../actions';
 import moment from 'moment';
-import intl from '../../../../../utils/localization';
 
 const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,6 +24,7 @@ const PersonalInformation = ({navigation}) => {
   });
 
   const [picker, setPicker] = useState(false);
+  const lang = useSelector((state) => state.language);
   const uid = useSelector((state) => state.user.data.uid);
   const data = useSelector(
     (state) => state.medicalHistory.data.personalInformation,
@@ -64,7 +64,7 @@ const PersonalInformation = ({navigation}) => {
   return (
     <Container themed>
       <Header
-        title={intl.en.personalInformation.title}
+        title={lang.personalInformation.title}
         onBack={() => navigation.goBack()}
         themed
       />
@@ -90,7 +90,7 @@ const PersonalInformation = ({navigation}) => {
           styles={modifiers.saveButton}
           disabled={!updates}
           onPress={handleSave}>
-          {intl.en.personalInformation.save}
+          {lang.personalInformation.save}
         </TextButton>
       </View>
       <ModalDatePicker

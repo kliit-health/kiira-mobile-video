@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {bool, func} from 'prop-types';
 import {Modal, Header, TextButton} from '../../components';
 import {useDidMount} from '../../utils/hooks';
-import intl from '../../utils/localization';
 import {PlanCard} from './sections';
 import {getPlans, updatePlan} from '../../redux/actions';
 import styles, {modifiers} from './styles';
@@ -46,7 +45,7 @@ const ChangePlan = ({
       <Header
         styles={modifiers.header}
         onClose={handleClose}
-        title={intl.en.changePlan.title}
+        title={language.changePlan.title}
       />
       <View style={styles.body}>
         {loading ? (
@@ -63,7 +62,7 @@ const ChangePlan = ({
               />
             ))}
             <TextButton onPress={handlePlanChange} styles={modifiers.button}>
-              {intl.en.changePlan.confirm}
+              {language.changePlan.confirm}
             </TextButton>
           </View>
         )}
@@ -84,11 +83,12 @@ ChangePlan.defaultProps = {
   loading: false,
 };
 
-const mapStateToProps = ({plans, plan, subscription}) => ({
+const mapStateToProps = ({plans, plan, subscription, language}) => ({
   plans: plans.data,
   loading: plans.loading,
   plan: plan.data,
   subscription: subscription.data,
+  language: language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

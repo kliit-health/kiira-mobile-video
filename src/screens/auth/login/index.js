@@ -11,15 +11,14 @@ import CustomText from '../../../components/customText';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
-import Language from '../../../utils/localization';
 import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {isEmail} from '../../../utils/helper';
 import {loginApi, resetLoginState} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-let lang = Language['en'];
 const Login = (props) => {
+  const lang = useSelector((state) => state.language);
   const loginFailure = useSelector((state) => state.login.loginFailure);
   const dispatch = useDispatch();
   const {navigation} = props;

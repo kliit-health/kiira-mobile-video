@@ -1,18 +1,13 @@
 import React from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CustomButton from '../../../../../../components/customButton';
 import CustomText from '../../../../../../components/customText';
 import {Rating} from 'react-native-elements';
-import Language from '../../../../../../utils/localization';
-import Constant from '../../../../../../utils/constants';
 import styles from '../style';
 import {getAppointmentsByDay, setAppointmentTime} from '../action';
 import moment from 'moment';
-
-const lang = Language['en'];
-const {staticImages} = Constant.App;
 
 const ExpertInfo = ({
   expertData,
@@ -26,6 +21,7 @@ const ExpertInfo = ({
   setDay,
   setTime,
 }) => {
+  const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const {calendarID, appointments} = appointmentData;
 

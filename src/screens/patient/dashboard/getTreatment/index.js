@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import {
   Container,
   Header,
@@ -11,7 +12,6 @@ import {
 import Arrow from '../../../../svgs/arrow.svg';
 import Phone from '../../../../svgs/phone.svg';
 import {Prescriber} from '../../../../components/icons';
-import intl from '../../../../utils/localization';
 import {
   addHashtag,
   formatLanguages,
@@ -21,6 +21,8 @@ import {screenNames} from '../../../../utils/constants';
 import styles, {modifiers} from './styles';
 
 const GetTreatment = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
+
   const details = navigation.getParam('details');
   const navigator = navigation.getParam('navigator');
 
@@ -63,11 +65,11 @@ const GetTreatment = ({navigation}) => {
       {navigator ? (
         <View style={styles.buttonsContainer}>
           <TextButton onPress={handleOnHistoryPress} outlined>
-            {intl.en.getTreatment.seeHistory}
+            {lang.getTreatment.seeHistory}
           </TextButton>
           <View style={styles.divider} />
           <TextButton onPress={handleOnBookPress}>
-            {intl.en.getTreatment.bookVisit}
+            {lang.getTreatment.bookVisit}
           </TextButton>
         </View>
       ) : (
@@ -98,15 +100,11 @@ const GetTreatment = ({navigation}) => {
             <Phone />
           </Linking>
         </View>
-        <Text style={styles.sectionTitle}>{intl.en.getTreatment.about}</Text>
+        <Text style={styles.sectionTitle}>{lang.getTreatment.about}</Text>
         <Text style={{...styles.sectionText, paddingBottom: 10}}>{bio}</Text>
-        <Text style={styles.sectionTitle}>
-          {intl.en.getTreatment.languages}
-        </Text>
+        <Text style={styles.sectionTitle}>{lang.getTreatment.languages}</Text>
         <Text style={styles.sectionText}>{formatLanguages(languages)}</Text>
-        <Text style={styles.sectionTitle}>
-          {intl.en.getTreatment.specialties}
-        </Text>
+        <Text style={styles.sectionTitle}>{lang.getTreatment.specialties}</Text>
         <Text style={styles.sectionText}>{specialities}</Text>
       </ScrollView>
     </Container>

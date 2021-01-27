@@ -22,6 +22,7 @@ import experts from './experts';
 import favoriteExperts from './favoriteExperts';
 import forgotPassword from '../../screens/auth/forgotPassword/reducer';
 import healthHistory from './healthHistory';
+import language from './language';
 import licenses from './licenses';
 import loader from '../../components/customLoader/reducer';
 import login from '../../screens/auth/login/reducer';
@@ -71,6 +72,7 @@ export default combineReducers({
   favoriteExperts,
   forgotPassword,
   healthHistory,
+  language,
   licenses,
   loader,
   login,

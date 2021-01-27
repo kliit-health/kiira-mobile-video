@@ -6,23 +6,22 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
-import Language from '../../../utils/localization';
 import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {isEmail} from '../../../utils/helper';
 import {sendVerification} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-let lang = Language['en'];
 const Verify = (props) => {
   const dispatch = useDispatch();
   const {navigation} = props;
   const {staticImages} = Constant.App;
   const [email, setEmail] = useState('');
+  const lang = useSelector((state) => state.language);
 
   const renderInputTextView = () => {
     return (

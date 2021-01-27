@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {switchCase} from '../../../../../utils/functions';
-import intl from '../../../../../utils/localization';
 import {units} from '../../../../../utils/constants';
 import {model, types} from './model';
 import {
@@ -24,6 +23,7 @@ const BasicInfo = ({navigation}) => {
     weight: '',
   });
 
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.basicInfo.answers,
@@ -58,7 +58,7 @@ const BasicInfo = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.basicInfo.title} onBack={handleBackPress} />
+      <Header title={lang.basicInfo.title} onBack={handleBackPress} />
       {model.map(({type, dataKey, title, placeholder}) =>
         switchCase({
           [types.textInput]: (
@@ -95,7 +95,7 @@ const BasicInfo = ({navigation}) => {
         styles={{root: styles.button}}
         onPress={handleSave}
         disabled={Object.values(data).every((answer) => !answer)}>
-        {intl.en.basicInfo.save}
+        {lang.basicInfo.save}
       </TextButton>
     </Container>
   );

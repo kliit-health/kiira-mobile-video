@@ -10,7 +10,6 @@ import {
 import {connect} from 'react-redux';
 import styles from './styles';
 import CustomText from '../../../../components/customText';
-import Language from '../../../../utils/localization';
 import Constant from '../../../../utils/constants';
 import {Avatar} from 'react-native-elements';
 import CustomInputText from '../../../../components/customInputText';
@@ -20,11 +19,10 @@ import ImagePicker from 'react-native-image-picker';
 import {updateExpertDataToFirebase} from './actions';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
-let lang = Language['en'];
 class SettingsExpert extends PureComponent {
   constructor(props) {
     super(props);
-    const {userData} = this.props;
+    const {userData, lang} = this.props;
     this.state = {
       bio: userData.profileInfo.bio,
       clinicInfo: userData.clinicInfo,
@@ -101,6 +99,7 @@ class SettingsExpert extends PureComponent {
       showHideErrorModal,
       updateUserData,
       userData,
+      lang,
     } = this.props;
     const {
       bio,
@@ -252,6 +251,7 @@ class SettingsExpert extends PureComponent {
   renderProfileImageView() {
     const {staticImages} = Constant.App;
     const {imageSrc} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.profileImgViewStyle}>
         <Avatar
@@ -295,6 +295,7 @@ class SettingsExpert extends PureComponent {
       license,
       location,
     } = this.state;
+    const {lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.inputTextParentContainerStyle}>
@@ -402,6 +403,7 @@ class SettingsExpert extends PureComponent {
   renderPronounsView() {
     const {staticImages} = Constant.App;
     const {pronounsArr} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.pronounsParentContainerStyle}>
         <CustomText style={styles.pronounsTitleTextStyle}>
@@ -442,7 +444,7 @@ class SettingsExpert extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     return (
       <TouchableOpacity
         style={styles.btnContainerStyle}
@@ -495,6 +497,7 @@ class SettingsExpert extends PureComponent {
 
 const mapStateToProps = (state) => ({
   userData: state.user.data,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

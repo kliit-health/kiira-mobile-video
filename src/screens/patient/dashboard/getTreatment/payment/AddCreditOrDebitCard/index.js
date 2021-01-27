@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import Language from '../../../../../../utils/localization';
 import CustomText from '../../../../../../components/customText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {connect} from 'react-redux';
@@ -16,7 +15,6 @@ import CustomInputText from '../../../../../../components/customInputText';
 import CustomButton from '../../../../../../components/customButton';
 import {createPaymentCard} from '../action';
 
-let lang = Language.en;
 class AddCreditOrDebitCard extends PureComponent {
   constructor(props) {
     super(props);
@@ -29,7 +27,7 @@ class AddCreditOrDebitCard extends PureComponent {
     };
   }
   renderHeaderView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
@@ -59,6 +57,7 @@ class AddCreditOrDebitCard extends PureComponent {
       expireDate,
     } = this.state;
 
+    const {lang} = this.props;
     return (
       <View style={styles.parentContainerStyle}>
         <View style={styles.inputTextMargin}>
@@ -188,6 +187,7 @@ class AddCreditOrDebitCard extends PureComponent {
   }
   renderFooter() {
     const {staticImages} = Constant.App;
+    const {lang} = this.props;
     return (
       <View style={styles.parentContainerStyle}>
         <Image
@@ -218,8 +218,15 @@ class AddCreditOrDebitCard extends PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  lang: state.language,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   paymentCard: (value) => dispatch(createPaymentCard(value)),
 });
 
-export default connect(null, mapDispatchToProps)(AddCreditOrDebitCard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddCreditOrDebitCard);

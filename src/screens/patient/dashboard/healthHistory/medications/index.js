@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Keyboard} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import intl from '../../../../../utils/localization';
 import {model} from './model';
 import {
   Container,
@@ -14,6 +13,7 @@ import styles from './styles';
 
 const Medications = ({navigation}) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.medications.answers,
@@ -53,7 +53,7 @@ const Medications = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.medications.title} onBack={handleOnBackPress} />
+      <Header title={lang.medications.title} onBack={handleOnBackPress} />
       {model.map(({dataKey, placeholder}) => (
         <TextInput
           styles={styles.input}
@@ -66,7 +66,7 @@ const Medications = ({navigation}) => {
         />
       ))}
       <TextButton styles={styles.button} onPress={handleSave}>
-        {intl.en.medications.save}
+        {lang.medications.save}
       </TextButton>
     </Container>
   );

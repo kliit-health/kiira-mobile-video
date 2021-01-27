@@ -1,45 +1,37 @@
 import {screenNames} from '../../../../utils/constants';
-import intl from '../../../../utils/localization';
+import {getReduxState} from '../../../../utils/helper';
+
+const {language} = getReduxState();
 
 export default [
   {
-    title: intl.en.healthHistory.basicInfo,
+    title: language.healthHistory.basicInfo,
     destination: screenNames.BasicInfo,
     dataKey: 'basicInfo',
   },
   {
-    title: intl.en.healthHistory.pregnancy,
+    title: language.healthHistory.pregnancy,
     destination: screenNames.PregnancyAndChildren,
     dataKey: 'pregnancyHistory',
   },
   {
-    title: intl.en.healthHistory.lifestyle,
+    title: language.healthHistory.lifestyle,
     destination: screenNames.LifeStyle,
     dataKey: 'lifestyle',
   },
   {
-    title: intl.en.healthHistory.allergies,
+    title: language.healthHistory.allergies,
     destination: screenNames.Allergies,
     dataKey: 'allergies',
   },
   {
-    title: intl.en.healthHistory.medications,
+    title: language.healthHistory.medications,
     destination: screenNames.Medications,
     dataKey: 'medications',
   },
   {
-    title: intl.en.healthHistory.medicalHistory,
+    title: language.healthHistory.medicalHistory,
     destination: screenNames.MedicalHistory,
     dataKey: 'medicalHistory',
   },
-  // {
-  //   title: intl.en.healthHistory.insurance,
-  //   destination: screenNames.Insurance,
-  //   dataKey: 'insurance',
-  // },
-  //   {
-  //     title: intl.en.healthHistory.notes,
-  //     destination: screenNames.PreviousAppointmentsNotes,
-  //     dataKey: '',
-  //   },
 ];

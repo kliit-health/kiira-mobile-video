@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import {TimeDisplay} from '../../../../components';
-import intl from '../../../../utils/localization';
 import {updateMedicalHistoryExpert} from '../patientProfile/actions';
 import {getUserData} from '../../../../utils/firebase';
 import Constant from '../../../../utils/constants';
@@ -11,6 +10,7 @@ import styles from './styles';
 
 const Visit = (props) => {
   const {firstName, lastName, reason, time, onPress, visit} = props;
+  const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const [patientInfo, setPatientInfo] = useState(null);
 
@@ -59,13 +59,13 @@ const Visit = (props) => {
       <View style={styles.outerContainer}>
         <View>
           <Text style={styles.title}>
-            {intl.en.expertAppointments.patientName}
+            {lang.expertAppointments.patientName}
           </Text>
           <Text style={styles.subtitle}>{`${firstName} ${lastName}`}</Text>
         </View>
         <View style={styles.innerContainer}>
           <Text numberOfLines={1} style={styles.title}>
-            {intl.en.expertAppointments.subject}
+            {lang.expertAppointments.subject}
           </Text>
           <Text numberOfLines={1} style={styles.subtitle}>
             {reason}

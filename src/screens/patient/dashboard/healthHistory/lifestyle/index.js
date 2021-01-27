@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Text} from 'react-native';
-import intl from '../../../../../utils/localization';
 import {Header, Container, FooterNavigation} from '../../../../../components';
 import {switchCase} from '../../../../../utils/functions';
 import {initialQuestions, extraQuestions, types} from './model';
@@ -11,6 +10,7 @@ import styles from './styles';
 
 const Lifestyle = ({navigation}) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.lifestyle.answers,
@@ -121,7 +121,7 @@ const Lifestyle = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.lifestyle.title} onBack={handleBackPress} />
+      <Header title={lang.lifestyle.title} onBack={handleBackPress} />
       <Text style={styles.question}>{question}</Text>
       {switchCase({
         [types.polar]: (
@@ -148,12 +148,10 @@ const Lifestyle = ({navigation}) => {
         ),
       })(undefined)(type)}
       <FooterNavigation
-        leftButtonTitle={intl.en.lifestyle.previous}
+        leftButtonTitle={lang.lifestyle.previous}
         hideLeftButton={index === 0}
         onLeftButtonPress={handlePreviousPress}
-        rightButtonTitle={
-          finish ? intl.en.lifestyle.finish : intl.en.lifestyle.next
-        }
+        rightButtonTitle={finish ? lang.lifestyle.finish : lang.lifestyle.next}
         disableRightButton={disabled}
         onRightButotonPress={finish ? handleSave : handleNextPress}
       />

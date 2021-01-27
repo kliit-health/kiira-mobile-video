@@ -1,6 +1,5 @@
-import {put, takeEvery} from 'redux-saga/effects';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {CHANGE_PASSWORD} from '../../../../../redux/types';
-import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -9,14 +8,14 @@ import {changePassword, reAunthenticate} from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {displayConsole} from '../../../../../utils/helper';
 
-let Lang = Language['en'];
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 function* changeUserPassword({data}) {
+  const lang = yield select((state) => state.language);
   try {
-    // const { params, this_ } = data;
     const {params, navigation} = data;
     displayConsole('data', data);
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const responseReAunthenticate = yield reAunthenticate(
       params.currentPassword,
     );
@@ -28,12 +27,8 @@ function* changeUserPassword({data}) {
       yield put(hideApiLoader());
       yield delay(500);
       if (responseChangePassword.success) {
-        // this_.setState({
-        //     currentPassword: '',
-        //     newPassword: '',
-        // });
         yield put(
-          showOrHideModal(Lang.changePassword.passwordUpdateSuccessfullyMsg),
+          showOrHideModal(lang.changePassword.passwordUpdateSuccessfullyMsg),
         );
         navigation.goBack();
       } else {
@@ -41,7 +36,7 @@ function* changeUserPassword({data}) {
           showOrHideModal(
             responseChangePassword.message
               ? responseChangePassword.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -53,7 +48,7 @@ function* changeUserPassword({data}) {
         showOrHideModal(
           responseReAunthenticate.message
             ? responseReAunthenticate.message
-            : Lang.errorMessage.serverError,
+            : lang.errorMessage.serverError,
         ),
       );
     }
@@ -61,7 +56,7 @@ function* changeUserPassword({data}) {
     yield delay(500);
     yield put(hideApiLoader());
     yield delay(500);
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

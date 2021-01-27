@@ -9,7 +9,6 @@ import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import plus from '../../../../../../svgs/plus.svg';
-import intl from '../../../../../../utils/localization';
 import {screenNames} from '../../../../../../utils/constants';
 import styles from './styles';
 
@@ -21,6 +20,7 @@ const formatDate = (date) => {
 };
 
 const Children = ({navigation}) => {
+  const lang = useSelector((state) => state.language);
   const answers = useSelector(
     (state) => state.healthHistory.data.children.answers,
   );
@@ -39,7 +39,7 @@ const Children = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header title={intl.en.children.title} onBack={handleBackPress} />
+      <Header title={lang.children.title} onBack={handleBackPress} />
       {answers.children.length > 0 ? (
         <View style={styles.mainContainer}>
           {answers.children.map((child, index) => (
@@ -54,13 +54,13 @@ const Children = ({navigation}) => {
             </ListItem>
           ))}
           <TextButton styles={{root: styles.button}} onPress={handleAddChild}>
-            {intl.en.children.addChild}
+            {lang.children.addChild}
           </TextButton>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
           <TextButton icon={plus} onPress={handleAddChild} secondary>
-            {intl.en.children.addChild}
+            {lang.children.addChild}
           </TextButton>
         </View>
       )}

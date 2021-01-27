@@ -10,12 +10,11 @@ import moment from 'moment';
 import _ from 'lodash';
 import {Header, SearchBar, Container} from '../../../components';
 
-import intl from '../../../utils/localization';
-
 const Patients = (props) => {
   const {navigation} = props;
   const dispatch = useDispatch();
 
+  const lang = useSelector((state) => state.language);
   const userData = useSelector((state) => state.authLoading.userData);
   const visitData = useSelector((state) => state.expertPatients.history);
   const [visits, setVisits] = useState([]);
@@ -69,7 +68,7 @@ const Patients = (props) => {
   return (
     <Container unformatted styles={modifiers.container} themed>
       <StatusBar barStyle="light-content" translucent={true} />
-      <Header title={intl.en.expertAppointments.future} themed />
+      <Header title={lang.expertAppointments.future} themed />
       <SearchBar
         onChange={handleSearch}
         value={searchTerm}

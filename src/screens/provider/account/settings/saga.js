@@ -1,6 +1,5 @@
 import {UPDATE_EXPERT_DETAIL_DATA} from '../../../../redux/types';
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -17,12 +16,11 @@ import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
 import {getUser} from '../../../../redux/actions';
 
-let Lang = Language['en'];
-
 function* updateExpertData({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {userParams, imageParams, navigation} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
@@ -65,23 +63,21 @@ function* updateExpertData({data}) {
           yield put(getUser());
           navigation.goBack();
         } else {
-          console.log('RESPONSE 1', response);
           yield put(
             showOrHideModal(
               response.message
                 ? response.message
-                : Lang.errorMessage.serverError,
+                : lang.errorMessage.serverError,
             ),
           );
         }
       } else {
         yield put(hideApiLoader());
-        console.log('RESPONSE 2', response);
         yield put(
           showOrHideModal(
             responseImage.message
               ? responseImage.message
-              : Lang.errorMessage.serverError,
+              : lang.errorMessage.serverError,
           ),
         );
       }
@@ -124,17 +120,16 @@ function* updateExpertData({data}) {
         yield put(getUser());
         navigation.goBack();
       } else {
-        console.log('RESPONSE 3', response);
         yield put(
           showOrHideModal(
-            response.message ? response.message : Lang.errorMessage.serverError,
+            response.message ? response.message : lang.errorMessage.serverError,
           ),
         );
       }
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 export default function* settingExpertSaga() {

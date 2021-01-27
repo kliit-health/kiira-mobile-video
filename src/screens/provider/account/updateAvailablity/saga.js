@@ -1,5 +1,4 @@
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../utils/localization';
+import {put, takeEvery, selector} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -11,12 +10,11 @@ import firebase from 'react-native-firebase';
 import {setUserData} from '../../../auth/authLoading/action';
 import {UPDATE_EXPERT_HOURS_DATA} from '../../../../redux/types';
 
-let Lang = Language['en'];
-
 function* updateExpertData({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {userParams, navigation} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
 
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
@@ -47,13 +45,13 @@ function* updateExpertData({data}) {
     } else {
       yield put(
         showOrHideModal(
-          response.message ? response.message : Lang.errorMessage.serverError,
+          response.message ? response.message : lang.errorMessage.serverError,
         ),
       );
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

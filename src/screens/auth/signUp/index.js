@@ -12,15 +12,12 @@ import CustomText from '../../../components/customText';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
-import Language from '../../../utils/localization';
 import CustomButton from '../../../components/customButton';
 import {isEmail, hasSpecialCharactors} from '../../../utils/helper';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {createUser} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import _ from 'lodash';
-
-let lang = Language.en;
 
 class SignUp extends PureComponent {
   constructor(props) {
@@ -39,6 +36,7 @@ class SignUp extends PureComponent {
 
   renderInputTextView() {
     const {email, password, showPassword} = this.state;
+    const {lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.inputTextParentContainerStyle}>
@@ -100,6 +98,7 @@ class SignUp extends PureComponent {
   }
 
   renderTermsConditionsView() {
+    const {lang} = this.props;
     return (
       <View style={styles.termsConditionsTextContainerStyle}>
         <CustomText style={styles.termsConditionsTextStyle}>
@@ -157,6 +156,7 @@ class SignUp extends PureComponent {
   }
 
   renderTitleView() {
+    const {lang} = this.props;
     return (
       <View style={styles.titleContainer}>
         <CustomText style={styles.titleTextStyle}>
@@ -172,6 +172,7 @@ class SignUp extends PureComponent {
   renderPasswordValidationView() {
     const {staticImages} = Constant.App;
     const {isPasswordContainsSevenChar, isPasswordHasSpecialChar} = this.state;
+    const {lang} = this.props;
     return (
       <View>
         <View style={styles.passwordValidationContainerStyle}>
@@ -209,6 +210,7 @@ class SignUp extends PureComponent {
   onSignUp = () => {
     const {navigation, showHideErrorModal, signUp} = this.props;
     const {email, password, referalCode} = this.state;
+    const {lang} = this.props;
     if (!email.trim()) {
       showHideErrorModal(lang.signUp.EmptyEmailMsg);
     } else if (!isEmail(email.trim())) {
@@ -233,6 +235,7 @@ class SignUp extends PureComponent {
   };
 
   renderButtonView() {
+    const {lang} = this.props;
     return (
       <CustomButton
         buttonStyle={styles.buttonContainerStyle}
@@ -244,6 +247,7 @@ class SignUp extends PureComponent {
   }
 
   renderDescriptionView() {
+    const {lang} = this.props;
     return (
       <CustomText style={styles.descriptionTextStyle}>
         {lang.signUp.description}
@@ -253,6 +257,7 @@ class SignUp extends PureComponent {
 
   renderReferralSceretCodeView() {
     const {referalCode} = this.state;
+    const {lang} = this.props;
     return (
       <View style={styles.inputTextParentContainerStyle}>
         <View style={styles.referalCodeInputTextContainerStyle}>
@@ -301,9 +306,13 @@ class SignUp extends PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  lang: state.language,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
   signUp: (value) => dispatch(createUser(value, dispatch)),
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

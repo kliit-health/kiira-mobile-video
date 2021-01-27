@@ -7,7 +7,6 @@ import {
   Platform,
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import Language from '../../../../../../utils/localization';
 import CustomText from '../../../../../../components/customText';
 import {connect} from 'react-redux';
 import styles from './style';
@@ -17,7 +16,6 @@ import {
   PaymentMethodsTypes,
 } from '../../../../../../utils/helper/payment';
 
-let lang = Language.en;
 class PaymentMethods extends PureComponent {
   constructor(props) {
     super(props);
@@ -31,7 +29,7 @@ class PaymentMethods extends PureComponent {
   }
 
   renderHeaderView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     const {staticImages} = Constant.App;
     return (
       <View style={styles.headerStyle}>
@@ -95,6 +93,8 @@ class PaymentMethods extends PureComponent {
   };
 
   renderMyPaymentMethodsView() {
+    const {lang} = this.props;
+
     const paymentMethods = [
       ...defaultPaymentMethods(this.props.isNativePaySupported),
       ...this.props.paymentMethods.map((method) => ({
@@ -116,7 +116,7 @@ class PaymentMethods extends PureComponent {
   }
 
   renderAddPaymentMethodView() {
-    const {navigation} = this.props;
+    const {navigation, lang} = this.props;
     const {staticImages} = Constant.App;
 
     return (
@@ -162,6 +162,7 @@ class PaymentMethods extends PureComponent {
 const mapStateToProps = (state) => ({
   paymentMethods: state.payment.paymentMethods,
   isNativePaySupported: state.payment.isNativePaySupported,
+  lang: state.language,
 });
 
 export default connect(mapStateToProps)(PaymentMethods);

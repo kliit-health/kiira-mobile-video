@@ -1,5 +1,4 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import Language from '../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -11,15 +10,14 @@ import {logout, updateStatus} from '../../../utils/firebase';
 import Constant from '../../../utils/constants';
 import {clearAskState} from '../dashboard/ask/action';
 
-let Lang = Language['en'];
-
 function* signout({data}) {
   const {navigation, isLoaderShow} = data;
+  const lang = yield select((state) => state.language);
   try {
     const state = yield select();
     const userData = state.authLoading.userData;
     if (isLoaderShow) {
-      yield put(showApiLoader(Lang.apiLoader.loadingText));
+      yield put(showApiLoader(lang.apiLoader.loadingText));
     }
     const updateStatusParams = {
       uid: userData.uid,
@@ -43,7 +41,7 @@ function* signout({data}) {
     } else {
       yield put(
         showOrHideModal(
-          response.message ? response.message : Lang.errorMessage.serverError,
+          response.message ? response.message : lang.errorMessage.serverError,
         ),
       );
     }
@@ -55,7 +53,7 @@ function* signout({data}) {
     if (navigation) {
       navigation.navigate(Constant.App.stack.AuthStack);
     }
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 export default function* accountSaga() {

@@ -1,45 +1,47 @@
-import intl from '../../../utils/localization';
+import {getReduxState} from '../../../utils/helper';
+
+const {language} = getReduxState();
 
 const baseUrl = 'https://www.kiira.io/category';
 
 const list = [
   {
-    title: intl.en.learn.sexualHealth,
+    title: language.learn.sexualHealth,
     url: `${baseUrl}/sexual-health`,
     image: require('../../../../assets/sexual-health.jpg'),
   },
   {
-    title: intl.en.learn.mentalHealth,
+    title: language.learn.mentalHealth,
     url: `${baseUrl}/mental-health`,
     image: require('../../../../assets/mental-health.jpg'),
   },
   {
-    title: intl.en.learn.obstetrics,
+    title: language.learn.obstetrics,
     url: `${baseUrl}/obstetrics`,
     image: require('../../../../assets/obstetrics.jpg'),
   },
   {
-    title: intl.en.learn.gynecology,
+    title: language.learn.gynecology,
     url: `${baseUrl}/gynecology`,
     image: require('../../../../assets/gynecology.jpeg'),
   },
   {
-    title: intl.en.learn.breastHealth,
+    title: language.learn.breastHealth,
     url: `${baseUrl}/breast-health`,
     image: require('../../../../assets/breast-health.jpeg'),
   },
   {
-    title: intl.en.learn.wellness,
+    title: language.learn.wellness,
     url: `${baseUrl}/wellness`,
     image: require('../../../../assets/wellness.jpg'),
   },
   {
-    title: intl.en.learn.newsAndNoteworthy,
+    title: language.learn.newsAndNoteworthy,
     url: `${baseUrl}/news-and-noteworthy`,
     image: require('../../../../assets/news-and-noteworthy.jpg'),
   },
   {
-    title: intl.en.learn.prevention,
+    title: language.learn.prevention,
     url: `${baseUrl}/prevention`,
     image: require('../../../../assets/prevention.jpg'),
   },

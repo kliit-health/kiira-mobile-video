@@ -5,7 +5,6 @@ import styles, {PaymentDropdownDimensions} from './style';
 import Constant from '../../../../../../utils/constants';
 import CustomText from '../../../../../../components/customText';
 import {IconButton} from '../../../../../../components';
-import Language from '../../../../../../utils/localization';
 import FlyingLabelIcon from '../../../../../../components/FlyingLabelIcon';
 import CustomButton from '../../../../../../components/customButton';
 import ModalDropdown from '../../../../../../components/modalDropdown';
@@ -23,16 +22,13 @@ import {
 import {payWithNativeModule} from '../../../../../../utils/payment';
 import {showOrHideModal} from '../../../../../../components/customModal/action';
 
-const lang = Language.en;
-
-const AddPaymentMethod = {
-  type: PaymentMethodsTypes.addPaymentMethod,
-  title: lang.buyingCredits.addPaymentMethod,
-};
-
 class BuyingCredit extends PureComponent {
   constructor(props) {
     super(props);
+    const AddPaymentMethod = {
+      type: PaymentMethodsTypes.addPaymentMethod,
+      title: props.lang.buyingCredits.addPaymentMethod,
+    };
     this.state = {
       amountOptionIndex: 0,
       paymentMethodOption: AddPaymentMethod,
@@ -40,11 +36,11 @@ class BuyingCredit extends PureComponent {
     props.getCreditAmountOptions();
     props.getPaymentMethods();
 
-    this.creditsUnit = lang.askUser.credits.toLowerCase();
+    this.creditsUnit = props.lang.askUser.credits.toLowerCase();
   }
 
   render() {
-    const {navigation, userData} = this.props;
+    const {navigation, lang} = this.props;
 
     return (
       <View style={styles.topContainer}>
@@ -147,6 +143,7 @@ class BuyingCredit extends PureComponent {
 
   payUsingApplePay = async (credits, amount) => {
     const response = await payWithNativeModule(credits, amount);
+    const {buyCreditsWithToken, showAlert, lang} = this.props;
 
     // User has no credit cards or user cancelled the operation
     if (response === null) {
@@ -155,9 +152,9 @@ class BuyingCredit extends PureComponent {
 
     if (response.ok) {
       const cardTokenID = response.token.tokenId;
-      this.props.buyCreditsWithToken(cardTokenID, credits, amount);
+      buyCreditsWithToken(cardTokenID, credits, amount);
     } else {
-      this.props.showAlert(lang.errorMessage.serverError);
+      showAlert(lang.errorMessage.serverError);
     }
   };
 
@@ -169,7 +166,7 @@ class BuyingCredit extends PureComponent {
         ...method,
         type: PaymentMethodsTypes.card,
       })),
-      AddPaymentMethod,
+      this.AddPaymentMethod,
     ];
 
     const {
@@ -247,6 +244,7 @@ class BuyingCredit extends PureComponent {
   };
 
   renderAddPaymentMethodCell = () => {
+    const {lang} = this.props;
     return (
       <View style={styles.addPaymentMethodCell}>
         <Image
@@ -319,6 +317,7 @@ class BuyingCredit extends PureComponent {
   }
 
   get currentTotalTitle() {
+    const {lang} = this.props;
     const amount = this.currentTotal;
     return `${lang.buyingCredits.totalTitle}: $${amount}`;
   }
@@ -341,6 +340,7 @@ const mapStateToProps = (state) => ({
   ),
   isNativePaySupported: state.payment.isNativePaySupported,
   orderData: state.payment.orderData,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

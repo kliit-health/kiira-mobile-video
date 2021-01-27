@@ -8,7 +8,6 @@ import {
   RadioGroup,
 } from '../../../../../../components';
 import {model} from './model';
-import intl from '../../../../../../utils/localization';
 import {updateHealthHistory} from '../../../../../../redux/actions';
 import styles, {modifiers} from './styles';
 
@@ -23,6 +22,7 @@ const PregnancyHistory = ({navigation}) => {
     miscarriages: null,
   });
 
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.pregnancyHistory.answers,
@@ -57,7 +57,7 @@ const PregnancyHistory = ({navigation}) => {
 
   return (
     <Container unformatted>
-      <Header title={intl.en.pregnancyHistory.title} onBack={handleBackPress} />
+      <Header title={lang.pregnancyHistory.title} onBack={handleBackPress} />
       <ScrollView contentContainerStyle={styles.container}>
         {model.map(({question, dataKey, options}) => (
           <View style={styles.questionContainer} key={dataKey}>
@@ -76,7 +76,7 @@ const PregnancyHistory = ({navigation}) => {
           disabled={Object.values(data).some((answer) => !answer)}
           styles={modifiers.button}
           onPress={handleSave}>
-          {intl.en.insurance.save}
+          {lang.insurance.save}
         </TextButton>
       </ScrollView>
     </Container>

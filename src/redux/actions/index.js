@@ -13,3 +13,4 @@ export {getExperts} from './experts';
 export {getResolvedQuestion, getUnresolvedQuestions} from './questions';
 export {getFavoriteExperts, updateFavoriteExperts} from './favoriteExperts';
 export {showMessage, hideMessage} from './messaging';
+export {setUserLanguage} from './language';

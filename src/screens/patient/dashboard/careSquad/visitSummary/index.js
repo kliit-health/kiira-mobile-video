@@ -3,7 +3,6 @@ import {View, ScrollView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import {Header, Container} from '../../../../../components';
-import intl from '../../../../../utils/localization';
 import styles from './styles';
 
 const initialState = {
@@ -28,6 +27,7 @@ const VisitSummary = ({navigation}) => {
   const {id} = navigation.state.params;
   const [summary, setSummary] = useState(initialState);
   const data = useSelector((state) => state.clientMedicalHistory.data);
+  const lang = useSelector((state) => state.language);
 
   useEffect(() => {
     const {appointment, summary, plan} = data.find(
@@ -66,7 +66,7 @@ const VisitSummary = ({navigation}) => {
     provider,
     locked,
     title,
-  } = intl.en.visitSummary;
+  } = lang.visitSummary;
 
   const {patient, visit, expert} = summary;
 

@@ -1,7 +1,6 @@
 import {GET_EXPERTS_DETAIL_DATA} from '../../../../../redux/types';
 
-import {put, takeEvery} from 'redux-saga/effects';
-import Language from '../../../../../utils/localization';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -10,12 +9,11 @@ import {getDataFromTable} from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {getExpertsDataSuccess} from './action';
 
-let Lang = Language['en'];
-
 function* getExperts({data}) {
+  const lang = yield select((state) => state.language);
   try {
     const {expertsParams} = data;
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getDataFromTable(expertsParams);
     yield put(hideApiLoader());
     if (response) {
@@ -25,13 +23,13 @@ function* getExperts({data}) {
         showOrHideModal(
           responseImage.message
             ? responseImage.message
-            : Lang.errorMessage.serverError,
+            : lang.errorMessage.serverError,
         ),
       );
     }
   } catch (error) {
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 

@@ -10,7 +10,6 @@ import {getAppointmentsList} from './action';
 import Visit from './components/visit';
 import {generateDateInfo, getDateRange} from '../../../utils/helper';
 import {clearMedicalHistory} from './patientProfile/actions';
-import intl from '../../../utils/localization';
 import {screenNames} from '../../../utils/constants';
 import moment from 'moment';
 import _ from 'lodash';
@@ -18,6 +17,7 @@ import styles, {modifiers} from './styles';
 
 const ExpertAppointments = ({navigation}) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language);
   const uid = useSelector((state) => state.authLoading.userData.uid);
   const visitData = useSelector((state) => state.expertAppointments.history);
 
@@ -109,7 +109,7 @@ const ExpertAppointments = ({navigation}) => {
   return (
     <Container unformatted styles={modifiers.container} themed>
       <StatusBar barStyle="light-content" translucent={true} />
-      <Header title={intl.en.expertAppointments.title} themed />
+      <Header title={lang.expertAppointments.title} themed />
       <SearchBar
         styles={modifiers.searchBar}
         onChange={handleSearch}
@@ -196,7 +196,7 @@ const ExpertAppointments = ({navigation}) => {
           />
         ) : (
           <Text style={styles.title}>
-            {intl.en.expertAppointments.noVisitsToday}
+            {lang.expertAppointments.noVisitsToday}
           </Text>
         )}
       </ScrollView>

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {Text, ScrollView, ActivityIndicator, View} from 'react-native';
 import {Header, Container} from '../../../../../components';
 import {firebaseSingleFetch} from '../../../../../utils/firebase';
-import intl from '../../../../../utils/localization';
 import {colors} from '../../../../../utils/constants';
 import styles from './styles';
 
@@ -10,6 +10,7 @@ const AgreementDetails = ({navigation}) => {
   const id = navigation.state.params.id;
 
   const [details, setDetails] = useState(undefined);
+  const lang = useSelector((state) => state.language);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +22,7 @@ const AgreementDetails = ({navigation}) => {
   return (
     <Container unformatted themed>
       <Header
-        title={intl.en.agreementDetails.title}
+        title={lang.agreementDetails.title}
         onBack={() => navigation.goBack()}
         themed
       />

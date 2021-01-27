@@ -1,15 +1,15 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {View, Image, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import CustomText from '../../../../../../components/customText';
-import Language from '../../../../../../utils/localization';
 import {Rating} from 'react-native-elements';
 import moment from 'moment';
 import styles from '../styles';
 
-let lang = Language['en'];
-
 const ExpertInfo = ({visit}) => {
+  const lang = useSelector((state) => state.language);
+
   return (
     <View style={{marginTop: 10}}>
       <View style={styles.expertInfoParentContainerStyle}>

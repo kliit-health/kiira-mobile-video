@@ -13,7 +13,6 @@ import {model, types} from './model';
 import {DatePicker, Picker} from './components';
 import {isNumber} from 'lodash';
 import {updateHealthHistory} from '../../../../../../redux/actions';
-import intl from '../../../../../../utils/localization';
 import styles from './styles';
 
 const AddChild = ({navigation}) => {
@@ -27,6 +26,7 @@ const AddChild = ({navigation}) => {
     sex: '',
   });
 
+  const lang = useSelector((state) => state.language);
   const user = useSelector((state) => state.user.data);
   const answers = useSelector(
     (state) => state.healthHistory.data.children.answers,
@@ -84,7 +84,7 @@ const AddChild = ({navigation}) => {
 
   return (
     <Container>
-      <Header title={intl.en.addChild.title} onBack={handleBackPress} />
+      <Header title={lang.addChild.title} onBack={handleBackPress} />
       {model.map(({type, dataKey, title, placeholder, options}) =>
         switchCase({
           [types.textInput]: (
@@ -119,14 +119,14 @@ const AddChild = ({navigation}) => {
       <View style={styles.navigation}>
         {isNumber(index) && (
           <TextButton outlined onPress={handleDelete}>
-            {intl.en.addChild.delete}
+            {lang.addChild.delete}
           </TextButton>
         )}
         <TextButton
           disabled={Object.entries(data).some(([_, value]) => value == false)}
           styles={{root: styles.button}}
           onPress={handleSave}>
-          {intl.en.addChild.save}
+          {lang.addChild.save}
         </TextButton>
       </View>
     </Container>

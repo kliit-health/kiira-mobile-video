@@ -2,7 +2,6 @@ import React, {Fragment, useState} from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, SectionList} from 'react-native';
 import moment from 'moment';
-import intl from '../../../../../../../utils/localization';
 import {screenNames} from '../../../../../../../utils/constants';
 import {ListItem, TextButton, Modal} from '../../../../../../../components';
 import {getSections, formatTime} from './helpers';
@@ -19,6 +18,7 @@ import {
 
 const VideoHistory = ({navigation, expertDetails}) => {
   const [visible, setVisible] = useState(false);
+  const lang = useSelector((state) => state.language);
   const {visits} = useSelector(
     (state) => state.treatmentHistory.videoHistory,
     shallowEqual,
@@ -93,12 +93,10 @@ const ItemFuture = (props) => {
     <View style={{...itemFutureStyles.root, marginTop: index === 0 ? 10 : 0}}>
       <View style={itemFutureStyles.headerContainer}>
         <Text style={itemFutureStyles.title}>
-          {`${intl.en.videoHistory.videoWith} ${firstName} ${lastName}`}
+          {`${videoHistory.videoWith} ${firstName} ${lastName}`}
         </Text>
         <View style={itemFutureStyles.subtitleContainer}>
-          <Text style={itemFutureStyles.subject}>
-            {intl.en.videoHistory.subject}
-          </Text>
+          <Text style={itemFutureStyles.subject}>{videoHistory.subject}</Text>
           <Text style={itemFutureStyles.subtitle}>{reason}</Text>
         </View>
       </View>
@@ -111,7 +109,7 @@ const ItemFuture = (props) => {
         ))}
       </View>
       <TextButton onPress={handlePress} outlined styles={itemModifiers.button}>
-        {intl.en.videoHistory.viewDetails}
+        {videoHistory.viewDetails}
       </TextButton>
     </View>
   );
@@ -130,14 +128,12 @@ const ItemPast = (props) => {
     <ListItem onPress={handlePress} styles={itemModifiers.list}>
       <View>
         <View style={itemPastStyles.subtitleContainer}>
-          <Text style={itemPastStyles.subject}>
-            {intl.en.videoHistory.subject}
-          </Text>
+          <Text style={itemPastStyles.subject}>{videoHistory.subject}</Text>
           <Text style={itemPastStyles.subtitle}>{reason}</Text>
         </View>
         <View style={itemPastStyles.subtitleContainer}>
           <Text style={itemPastStyles.subject}>
-            {intl.en.videoHistory.visitId}
+            {lang.videoHistory.visitId}
           </Text>
           <Text style={itemPastStyles.subtitle}>{id}</Text>
         </View>
@@ -161,7 +157,7 @@ const SectionSeparator = ({title}) => (
 
 const Fallback = () => (
   <View style={fallbackStyles.container}>
-    <Text style={fallbackStyles.description}>{intl.en.videoHistory.empty}</Text>
+    <Text style={fallbackStyles.description}>{lang.videoHistory.empty}</Text>
   </View>
 );
 
@@ -175,7 +171,7 @@ const ModalMessage = ({onClose, ...rest}) => (
     {...rest}>
     <View style={messageStyles.card}>
       <Text style={messageStyles.messageText}>
-        {intl.en.videoHistory.afterVisit}
+        {lang.videoHistory.afterVisit}
       </Text>
     </View>
   </Modal>

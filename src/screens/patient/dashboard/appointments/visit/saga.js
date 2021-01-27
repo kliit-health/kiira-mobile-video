@@ -1,7 +1,6 @@
-import {put, takeEvery} from 'redux-saga/effects';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {GET_LOGIN, SET_LOGIN} from '../../../../../redux/types';
 import {NavigationService} from '../../../../../navigation';
-import Language from '../../../../../utils/localization';
 import {
   showApiLoader,
   hideApiLoader,
@@ -9,11 +8,10 @@ import {
 import {getCometChatDetailsAsync} from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 
-let Lang = Language['en'];
-
 function* getCometChatDetails({data: {destination, visit}}) {
+  const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const details = yield getCometChatDetailsAsync(visit);
     yield put({type: SET_LOGIN, data: details});
     yield put(hideApiLoader());
@@ -21,7 +19,7 @@ function* getCometChatDetails({data: {destination, visit}}) {
   } catch (error) {
     console.log(error);
     yield put(hideApiLoader());
-    yield put(showOrHideModal(Lang.errorMessage.serverError));
+    yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
 
