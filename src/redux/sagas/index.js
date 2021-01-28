@@ -23,7 +23,7 @@ import healthHistory from './healthHistory';
 import licenses from './licenses';
 import login from '../../screens/auth/login/saga';
 import messaging from './messaging';
-import newUser from '../../screens/auth/newUser/saga';
+import newUser from '../../screens/auth/chatBot/saga';
 import patientDetails from '../../screens/provider/appointments/patientProfile/saga';
 import payment from '../../screens/patient/dashboard/getTreatment/payment/saga';
 import plan from './plan';

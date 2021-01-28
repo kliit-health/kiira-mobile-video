@@ -20,18 +20,16 @@ export default ({profileInfo}) => {
           <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
         </View>
         <View style={styles.groupContainer}>
-          {cardDetails.map(({dataKey, title, secondaryKey}) => {
-            return (
-              <View key={dataKey} style={styles.itemContainer}>
-                <Text style={styles.itemTitle}>{title}</Text>
-                <Text style={styles.itemValue}>
-                  {secondaryKey
-                    ? profileInfo[dataKey][secondaryKey]
-                    : profileInfo[dataKey]}
-                </Text>
-              </View>
-            );
-          })}
+          {cardDetails.map(({dataKey, title, secondaryKey}) => (
+            <View key={dataKey} style={styles.itemContainer}>
+              <Text style={styles.itemTitle}>{title}</Text>
+              <Text style={styles.itemValue}>
+                {secondaryKey
+                  ? profileInfo[dataKey][secondaryKey]
+                  : profileInfo[dataKey]}
+              </Text>
+            </View>
+          ))}
         </View>
       </View>
     </View>

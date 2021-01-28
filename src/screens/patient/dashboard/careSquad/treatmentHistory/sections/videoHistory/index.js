@@ -18,7 +18,6 @@ import {
 
 const VideoHistory = ({navigation, expertDetails}) => {
   const [visible, setVisible] = useState(false);
-  const lang = useSelector((state) => state.language);
   const {visits} = useSelector(
     (state) => state.treatmentHistory.videoHistory,
     shallowEqual,
@@ -155,24 +154,32 @@ const SectionSeparator = ({title}) => (
   </View>
 );
 
-const Fallback = () => (
-  <View style={fallbackStyles.container}>
-    <Text style={fallbackStyles.description}>{lang.videoHistory.empty}</Text>
-  </View>
-);
+const Fallback = () => {
+  const lang = useSelector((state) => state.language);
+
+  return (
+    <View style={fallbackStyles.container}>
+      <Text style={fallbackStyles.description}>{lang.videoHistory.empty}</Text>
+    </View>
+  );
+};
+
+const ModalMessage = ({onClose, ...rest}) => {
+  const lang = useSelector((state) => state.language);
+
+  return (
+    <Modal
+      animationIn="fadeInUp"
+      animationOut="fadeOutDown"
+      styles={messageModifiers}
+      {...rest}>
+      <View style={messageStyles.card}>
+        <Text style={messageStyles.messageText}>
+          {lang.videoHistory.afterVisit}
+        </Text>
+      </View>
+    </Modal>
+  );
+};
 
 export default VideoHistory;
-
-const ModalMessage = ({onClose, ...rest}) => (
-  <Modal
-    animationIn="fadeInUp"
-    animationOut="fadeOutDown"
-    styles={messageModifiers}
-    {...rest}>
-    <View style={messageStyles.card}>
-      <Text style={messageStyles.messageText}>
-        {lang.videoHistory.afterVisit}
-      </Text>
-    </View>
-  </Modal>
-);
