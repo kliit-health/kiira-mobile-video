@@ -7,7 +7,8 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [SET_LANGUAGE]: (state, {data}) => {
-    return {...state, ...data};
-  },
+  [SET_LANGUAGE]: (state, {data}) => ({
+    ...state,
+    ...data,
+  }),
 });

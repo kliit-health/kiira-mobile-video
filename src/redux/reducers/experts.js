@@ -1,4 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
+import merge from 'deepmerge';
+import models from '../models';
 import {
   GET_EXPERTS_FULFILLED,
   GET_EXPERTS_PENDING,
@@ -15,10 +17,11 @@ export default createReducer(initialState, {
   [GET_EXPERTS_PENDING]: (state) => {
     state.loading = true;
   },
-  [GET_EXPERTS_FULFILLED]: (_, {data}) => ({
-    ...initialState,
-    data,
-  }),
+  [GET_EXPERTS_FULFILLED]: (state, {data}) => {
+    state.loading = false;
+    state.error = null;
+    state.data = data.map((expert) => merge(models.expert, expert));
+  },
   [GET_EXPERTS_REJECTED]: (state, {data}) => {
     state.loading = false;
     state.error = {

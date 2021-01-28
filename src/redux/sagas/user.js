@@ -9,7 +9,11 @@ import {
   UPDATE_USER_FULFILLED,
 } from '../types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {firebaseSingleFetch, updateUserData, auth} from '../../utils/firebase';
+import {
+  firebaseSingleFetch,
+  firebaseSingleUpdate,
+  auth,
+} from '../../utils/firebase';
 
 function* getUser() {
   const uid = auth.currentUser.uid;
@@ -30,7 +34,7 @@ function* getUser() {
 function* updateUser({data: {uid, ...rest}}) {
   try {
     yield put({type: UPDATE_USER_PENDING});
-    yield updateUserData({...rest}, uid);
+    yield firebaseSingleUpdate(uid, 'users', {...rest});
 
     yield put({
       type: UPDATE_USER_FULFILLED,
