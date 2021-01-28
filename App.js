@@ -14,10 +14,9 @@ import {
   setAppState,
   setAppScreen,
 } from './src/screens/auth/authLoading/action';
-import {signOut} from './src/screens/patient/account/action';
+import {timeOut} from './src/redux/actions/user';
 import FastImage from 'react-native-fast-image';
-// import BackgroundTask from 'react-native-background-task';
-// import BackgroundTimerMain from 'react-native-background-timer';
+import BackgroundService from 'react-native-background-actions';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
@@ -124,7 +123,7 @@ class App extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
     // firebase.auth().signOut();
     BackHandler.removeEventListener(
       'hardwareBackPress',
@@ -132,25 +131,47 @@ class App extends PureComponent {
     );
   }
 
-  _handleAppStateChange = (nextAppState) => {
-    const {setState, signOut} = this.props;
+  // _handleAppStateChange = (nextAppState) => {
+  //   const {setState, signOut} = this.props;
 
+  //   if (nextAppState !== 'active') {
+  //     // BackgroundTask.define(() => {
+  //     //   setState(false);
+  //     //   const payload = {
+  //     //     navigation: this.navigator._navigation,
+  //     //     isLoaderShow: false,
+  //     //   };
+  //     //   signOut(payload);
+  //     //   Alert.alert(
+  //     //     'Log Out',
+  //     //     'For your security, you have been logged out.',
+  //     //     [{text: 'OK', onPress: () => {}}],
+  //     //     {cancelable: false},
+  //     //   );
+  //     //   BackgroundTask.finish();
+  //     // });
+  //   }
+  // };
+
+  _handleAppStateChange = async (nextAppState) => {
     if (nextAppState !== 'active') {
-      // BackgroundTask.define(() => {
-      //   setState(false);
-      //   const payload = {
-      //     navigation: this.navigator._navigation,
-      //     isLoaderShow: false,
-      //   };
-      //   signOut(payload);
-      //   Alert.alert(
-      //     'Log Out',
-      //     'For your security, you have been logged out.',
-      //     [{text: 'OK', onPress: () => {}}],
-      //     {cancelable: false},
-      //   );
-      //   BackgroundTask.finish();
-      // });
+      const options = {
+        taskName: 'Kiira Logout Timer',
+        taskTitle: 'Kiira Logout Timer',
+        taskDesc: 'Kiira Logout Timer',
+        taskIcon: {
+          name: 'ic_launcher',
+          type: 'mipmap',
+        },
+      };
+
+      await BackgroundService.start(() => {
+        setTimeout(() => {
+          this.props.timeOut();
+        }, 10000);
+      }, options);
+
+      await BackgroundService.stop();
     }
   };
 
@@ -267,7 +288,7 @@ const mapDispatchToProps = (dispatch) => ({
   hideErrorModal: () => dispatch(showOrHideModal()),
   setToken: (value) => dispatch(setFcmToken(value)),
   setState: (value) => dispatch(setAppState(value)),
-  signOut: (value) => dispatch(signOut(value)),
+  timeOut: () => dispatch(timeOut()),
   setScreen: (value) => dispatch(setAppScreen(value)),
   setCurrentRoute: (value) => dispatch(setCurrentRoute(value)),
   setPreviousRoute: (value) => dispatch(setPreviousRoute(value)),

@@ -35,6 +35,8 @@ export const RESET_LOGIN_STATE = 'RESET_LOGIN_STATE';
 
 // Account Types
 export const SIGN_OUT_API_HIT = 'SIGN_OUT_API_HIT';
+export const TIME_OUT = 'TIME_OUT';
+export const CLEAR_TIME_OUT = 'CLEAR_TIME_OUT';
 
 // Ask Types
 export const CLEAR_ASK_STATE = 'CLEAR_ASK_STATE';
