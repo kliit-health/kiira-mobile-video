@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {ScrollView} from 'react-native';
+import BackgroundService from 'react-native-background-actions';
 import {useDidMount} from '../../../utils/hooks';
 import * as actions from '../../../redux/actions';
 import {Container} from '../../../components';
@@ -28,6 +29,12 @@ const Dashboard = ({navigation}) => {
 
     if (timedOut) {
       dispatch(signOut(payload));
+    }
+  }, [timedOut]);
+
+  useEffect(() => {
+    if (BackgroundService.isRunning()) {
+      BackgroundService.stop();
     }
   });
 

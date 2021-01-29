@@ -38,7 +38,12 @@ class AuthLoadingScreen extends Component {
   }
 
   async getToken() {
-    const {setData, userData, setToken, navigation} = this.props;
+    const {setData, userData, setToken, navigation, currentUser} = this.props;
+    if (currentUser.timedOut) {
+      firebase.auth().signOut();
+      navigation.navigate(Constant.App.stack.AuthStack);
+    }
+
     if (!userData) {
       let token = await AsyncStorage.getItem('fcmToken');
       if (!token) {
@@ -72,8 +77,18 @@ class AuthLoadingScreen extends Component {
   }
 
   initNavigation(token) {
-    const {navigation, setData, userData} = this.props;
+    const {navigation, setData, userData, currentUser} = this.props;
     const user = firebase.auth().currentUser;
+
+    if (currentUser.timedOut) {
+      firebase.auth().signOut();
+      navigation.navigate(Constant.App.stack.AuthStack);
+      SplashScreen.close({
+        animationType: SplashScreen.animationType.scale,
+        duration: 3000,
+        delay: 500,
+      });
+    }
 
     if (user && user.uid) {
       try {
@@ -218,6 +233,7 @@ class AuthLoadingScreen extends Component {
 const mapStateToProps = (state) => ({
   userData: state.authLoading.userData,
   fcmToken: state.authLoading.fcmToken,
+  currentUser: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

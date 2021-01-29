@@ -1,5 +1,12 @@
 import React, {PureComponent} from 'react';
-import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
+import {
+  View,
+  Alert,
+  BackHandler,
+  AppState,
+  LogBox,
+  Linking,
+} from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigation';
 import {Messaging} from './src/services';
@@ -36,7 +43,8 @@ class App extends PureComponent {
       'hardwareBackPress',
       this.handleBackButtonClick,
     );
-    // BackgroundTask.schedule();
+
+    Linking.addEventListener('url', (evt) => console.log(evt));
     AppState.addEventListener('change', this._handleAppStateChange);
     FastImage.preload([
       {
@@ -124,41 +132,21 @@ class App extends PureComponent {
   }
 
   async componentWillUnmount() {
-    // firebase.auth().signOut();
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,
     );
   }
 
-  // _handleAppStateChange = (nextAppState) => {
-  //   const {setState, signOut} = this.props;
-
-  //   if (nextAppState !== 'active') {
-  //     // BackgroundTask.define(() => {
-  //     //   setState(false);
-  //     //   const payload = {
-  //     //     navigation: this.navigator._navigation,
-  //     //     isLoaderShow: false,
-  //     //   };
-  //     //   signOut(payload);
-  //     //   Alert.alert(
-  //     //     'Log Out',
-  //     //     'For your security, you have been logged out.',
-  //     //     [{text: 'OK', onPress: () => {}}],
-  //     //     {cancelable: false},
-  //     //   );
-  //     //   BackgroundTask.finish();
-  //     // });
-  //   }
-  // };
-
   _handleAppStateChange = async (nextAppState) => {
+    const user = firebase.auth().currentUser;
+    console.log('CURRENT USER', user);
     if (nextAppState !== 'active') {
       const options = {
         taskName: 'Kiira Logout Timer',
         taskTitle: 'Kiira Logout Timer',
-        taskDesc: 'Kiira Logout Timer',
+        taskDesc: 'You will be logged out after 20 minutes of activity',
+        linkingURI: 'kiira://home',
         taskIcon: {
           name: 'ic_launcher',
           type: 'mipmap',
@@ -166,12 +154,15 @@ class App extends PureComponent {
       };
 
       await BackgroundService.start(() => {
-        setTimeout(() => {
-          this.props.timeOut();
+        setTimeout(async () => {
+          await this.props.timeOut();
+          BackgroundService.stop();
         }, 10000);
       }, options);
-
-      await BackgroundService.stop();
+    } else if (nextAppState === 'active') {
+      if (BackgroundService.isRunning()) {
+        BackgroundService.stop();
+      }
     }
   };
 

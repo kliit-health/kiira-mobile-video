@@ -47,10 +47,6 @@ const Tutorial = (props) => {
   const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(clearTimeOut());
-  });
-
   const renderSliderView = () => {
     return (
       <View style={styles.sliderViewStyle}>
