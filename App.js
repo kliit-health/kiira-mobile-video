@@ -6,6 +6,7 @@ import {
   AppState,
   LogBox,
   Linking,
+  Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigation';
@@ -27,6 +28,7 @@ import BackgroundService from 'react-native-background-actions';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
+import {signOut} from './src/screens/patient/account/action';
 
 class App extends PureComponent {
   constructor(props) {
@@ -44,7 +46,6 @@ class App extends PureComponent {
       this.handleBackButtonClick,
     );
 
-    Linking.addEventListener('url', (evt) => console.log(evt));
     AppState.addEventListener('change', this._handleAppStateChange);
     FastImage.preload([
       {
@@ -139,29 +140,21 @@ class App extends PureComponent {
   }
 
   _handleAppStateChange = async (nextAppState) => {
-    const user = firebase.auth().currentUser;
-    console.log('CURRENT USER', user);
+    const {signOut} = this.props;
     if (nextAppState !== 'active') {
-      const options = {
-        taskName: 'Kiira Logout Timer',
-        taskTitle: 'Kiira Logout Timer',
-        taskDesc: 'You will be logged out after 20 minutes of activity',
-        linkingURI: 'kiira://home',
-        taskIcon: {
-          name: 'ic_launcher',
-          type: 'mipmap',
-        },
-      };
-
-      await BackgroundService.start(() => {
-        setTimeout(async () => {
-          await this.props.timeOut();
-          BackgroundService.stop();
-        }, 10000);
-      }, options);
-    } else if (nextAppState === 'active') {
-      if (BackgroundService.isRunning()) {
-        BackgroundService.stop();
+      if (Platform.OS === 'ios') {
+        await BackgroundService.start(() => {
+          setTimeout(async () => {
+            await this.props.timeOut();
+            await BackgroundService.stop();
+          }, 10000);
+        });
+      } else {
+        const payload = {
+          navigation: NavigationService,
+          isLoaderShow: false,
+        };
+        signOut(payload);
       }
     }
   };
@@ -283,6 +276,7 @@ const mapDispatchToProps = (dispatch) => ({
   setScreen: (value) => dispatch(setAppScreen(value)),
   setCurrentRoute: (value) => dispatch(setCurrentRoute(value)),
   setPreviousRoute: (value) => dispatch(setPreviousRoute(value)),
+  signOut: (data) => dispatch(signOut(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

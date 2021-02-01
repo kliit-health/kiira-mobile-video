@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {ModalConfirm, TextButton} from '../../../../../components';
 import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
-import {View, Text} from 'react-native';
-import {cancelSubscription, showMessage} from '../../../../../redux/actions';
+import {View, Text, Linking} from 'react-native';
+import {cancelSubscription} from '../../../../../redux/actions';
 import styles from './styles';
 
 export default ({subscription, user}) => {
@@ -24,7 +24,7 @@ export default ({subscription, user}) => {
   };
 
   const handleChangePlan = () => {
-    dispatch(showMessage({message: lang.account.emailUs}));
+    Linking.openURL('mailto:support@kiira.io?subject=Kiira Plan Change');
   };
 
   const handleCancel = () => {

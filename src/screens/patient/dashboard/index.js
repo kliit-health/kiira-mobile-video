@@ -32,12 +32,6 @@ const Dashboard = ({navigation}) => {
     }
   }, [timedOut]);
 
-  useEffect(() => {
-    if (BackgroundService.isRunning()) {
-      BackgroundService.stop();
-    }
-  });
-
   useDidMount(() => {
     dispatch(actions.getAgreements());
   });
