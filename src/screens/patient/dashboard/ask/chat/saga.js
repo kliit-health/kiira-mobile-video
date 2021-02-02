@@ -284,7 +284,9 @@ function* sendMessageToUser({data}) {
     yield put(chatMessageError());
   }
 }
+
 function* loadMessagesOfUser({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     let isFirstTime = true;
@@ -390,6 +392,7 @@ function* checkExpertStatus({data, dispatch}) {
 }
 
 function* checkQuestStatus({data, dispatch}) {
+  const lang = yield select((state) => state.language);
   try {
     displayConsole('data', data);
     const {questionData} = data;

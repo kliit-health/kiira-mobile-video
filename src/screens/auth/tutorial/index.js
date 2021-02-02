@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   StatusBar,
@@ -10,7 +10,7 @@ import {
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
-import Carousel from 'react-native-banner-carousel';
+import Carousel from '../../../components/carousel';
 import {clearTimeOut} from '../../../redux/actions/user';
 
 const largeDisplay = Dimensions.get('window').height > 800;
@@ -52,7 +52,6 @@ const Tutorial = (props) => {
       <View style={styles.sliderViewStyle}>
         <StatusBar hidden />
         <Carousel
-          useNativeDriver
           autoplay
           autoplayTimeout={5000}
           loop

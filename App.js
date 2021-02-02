@@ -5,7 +5,6 @@ import {
   BackHandler,
   AppState,
   LogBox,
-  Linking,
   Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
@@ -29,6 +28,7 @@ import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 import {signOut} from './src/screens/patient/account/action';
+import Constants from './src/utils/constants';
 
 class App extends PureComponent {
   constructor(props) {
@@ -147,7 +147,7 @@ class App extends PureComponent {
           setTimeout(async () => {
             await this.props.timeOut();
             await BackgroundService.stop();
-          }, 10000);
+          }, Constants.App.logoutInterval);
         });
       } else {
         const payload = {

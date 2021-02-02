@@ -50,7 +50,7 @@ const Avatar = ({
     const layout = event.nativeEvent.layout;
     onLayout(layout);
   };
-
+  console.log(source);
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
       <View onLayout={handleLayout} style={styles.root}>
@@ -59,7 +59,7 @@ const Avatar = ({
           source={{uri: source}}
           fallback={true}
           resizeMode={resizeMode}
-          defaultSource={require('../../../assets/profile_img_placeholder.png')}
+          // defaultSource={require('../../../assets/profile_img_placeholder.png')}
         />
         <View style={styles.status} />
         {deleteMode && (

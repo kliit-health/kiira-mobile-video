@@ -63,7 +63,7 @@ Container.propTypes = {
     root: object,
     container: object,
   }),
-  barStyle: oneOf('dark-content', 'dark-content', 'default'),
+  barStyle: oneOf(['dark-content', 'dark-content', 'default']),
 };
 
 Container.defaultProps = {
