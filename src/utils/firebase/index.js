@@ -1879,3 +1879,15 @@ export const cancelSubscription = ({subscriptionId, userId}) =>
       }
     })(),
   );
+
+export async function getOrganizationInfo(user) {
+  try {
+    const document = firestore
+      .collection('organizations')
+      .doc(user.organizationId);
+    const organization = await document.get();
+    return organization.data();
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -5,9 +5,6 @@ export const styles = StyleSheet.create({
   flatList: {
     flex: 1,
   },
-  flatListContent: {
-    flex: 1,
-  },
 });
 
 export const itemStyles = StyleSheet.create({

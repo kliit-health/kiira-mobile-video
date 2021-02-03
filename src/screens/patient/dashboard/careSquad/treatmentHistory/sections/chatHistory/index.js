@@ -22,7 +22,7 @@ const ChatHistory = ({navigation, expertDetails}) => {
   return (
     <FlatList
       style={styles.flatList}
-      contentContainerStyle={styles.flatListContent}
+      showsVerticalScrollIndicator={false}
       data={questions.filter(
         (question) => question.expertInfo.uid === expertDetails.uid,
       )}
@@ -47,6 +47,7 @@ const ChatHistoryItem = ({
   isResolved,
   onPress,
 }) => {
+  const lang = useSelector((state) => state.language);
   return (
     <ListItem styles={itemModifiers.list} onPress={onPress}>
       <View style={itemStyles.messagesContainer}>
@@ -76,7 +77,6 @@ const ChatHistoryItem = ({
 
 const Fallback = () => {
   const lang = useSelector((state) => state.language);
-
   return (
     <View style={fallbackStyles.container}>
       <Text style={fallbackStyles.description}>{lang.chatHistory.empty}</Text>

@@ -99,6 +99,8 @@ const Dashboard = ({navigation}) => {
   useEffect(() => {
     if (licenses.includes(user.profileInfo.state.code)) {
       setVideoEnabled(true);
+    } else {
+      setVideoEnabled(false);
     }
   }, [user, licenses]);
 

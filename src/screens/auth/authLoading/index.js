@@ -38,12 +38,7 @@ class AuthLoadingScreen extends Component {
   }
 
   async getToken() {
-    const {setData, userData, setToken, navigation, currentUser} = this.props;
-    if (currentUser.timedOut) {
-      firebase.auth().signOut();
-      navigation.navigate(Constant.App.stack.AuthStack);
-    }
-
+    const {setData, userData, setToken, navigation} = this.props;
     if (!userData) {
       let token = await AsyncStorage.getItem('fcmToken');
       if (!token) {

@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, SectionList} from 'react-native';
 import moment from 'moment';
-import {screenNames} from '../../../../../../../utils/constants';
+import {screenNames, videoHistory} from '../../../../../../../utils/constants';
 import {ListItem, TextButton, Modal} from '../../../../../../../components';
 import {getSections, formatTime} from './helpers';
 import {
@@ -43,7 +43,11 @@ const VideoHistory = ({navigation, expertDetails}) => {
   const handleClose = () => {
     setVisible(false);
   };
-
+  console.log(
+    getSections(
+      visits.filter((visit) => visit.expert.uid === expertDetails.uid),
+    ),
+  );
   return (
     <Fragment>
       <SectionList
@@ -92,7 +96,7 @@ const ItemFuture = (props) => {
     <View style={{...itemFutureStyles.root, marginTop: index === 0 ? 10 : 0}}>
       <View style={itemFutureStyles.headerContainer}>
         <Text style={itemFutureStyles.title}>
-          {`${videoHistory.videoWith} ${firstName} ${lastName}`}
+          {`${videoHistory.visitWith}${firstName} ${lastName}`}
         </Text>
         <View style={itemFutureStyles.subtitleContainer}>
           <Text style={itemFutureStyles.subject}>{videoHistory.subject}</Text>
@@ -115,6 +119,7 @@ const ItemFuture = (props) => {
 };
 
 const ItemPast = (props) => {
+  const lang = useSelector((state) => state.language);
   const {reason, time, id, onPress} = props;
 
   const handlePress = () => {

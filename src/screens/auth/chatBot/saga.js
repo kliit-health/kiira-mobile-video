@@ -21,24 +21,26 @@ function* updateNewUserData({data}) {
     const {userParams, navigation} = data;
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
-      credits: userParams.credits,
       prepaid: userParams.prepaid,
       uid: user.uid,
       role: 'User',
-      isActive: false,
-      firstLogin: false,
+      isActive: true,
+      firstLogin: true,
       signUpDate: userParams.signUpDate,
+      plan: userParams.plan,
+      fcmToken: userParams.fcmToken,
       profileInfo: {
         profileImageUrl: defaultImage,
         firstName: userParams.firstName,
         lastName: userParams.lastName,
         dob: userParams.dob,
         pronouns: userParams.pronouns,
-        isActive: false,
         state: userParams.state,
         sexuality: userParams.sexuality,
         insurance: userParams.insurance,
-        plan: userParams.plan,
+        zipcode: userParams.zipcode,
+        enrollment: userParams.enrollment,
+        income: userParams.income,
         lang: 'en',
       },
     };

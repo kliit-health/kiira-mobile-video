@@ -34,7 +34,7 @@ const Welcome = (props) => {
           buttonStyle={styles.buttonContainerStyle}
           textStyle={styles.buttonTextStyle}
           onPress={() => {
-            navigation.navigate(Constant.App.screenNames.AddProfileData, {
+            navigation.navigate(Constant.App.screenNames.ChatBot, {
               userData,
             });
           }}

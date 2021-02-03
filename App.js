@@ -140,21 +140,19 @@ class App extends PureComponent {
   }
 
   _handleAppStateChange = async (nextAppState) => {
-    const {signOut} = this.props;
+    const {timeOut} = this.props;
     if (nextAppState !== 'active') {
       if (Platform.OS === 'ios') {
         await BackgroundService.start(() => {
           setTimeout(async () => {
-            await this.props.timeOut();
+            await timeOut();
             await BackgroundService.stop();
           }, Constants.App.logoutInterval);
         });
       } else {
-        const payload = {
-          navigation: NavigationService,
-          isLoaderShow: false,
-        };
-        signOut(payload);
+        if (BackgroundService.isRunning()) {
+          BackgroundService.stop();
+        }
       }
     }
   };
