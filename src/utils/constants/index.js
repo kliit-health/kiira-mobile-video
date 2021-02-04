@@ -98,6 +98,17 @@ export default {
         {value: 'Male', code: 'M'},
         {value: 'Female', code: 'F'},
       ],
+      income: [
+        {value: '0 - 35,000', code: '0 - 35,000'},
+        {value: '35,001 - 60,000', code: '35,001 - 60,000'},
+        {value: '60,001 - 80,000', code: '60,001 - 80,000'},
+        {value: '80,001 - 100,000', code: '80,001 - 100,000'},
+        {value: '100,000 - 125,000', code: '100,000 - 125,000'},
+        {value: '125,001 - 150,000', code: '125,001 - 150,000'},
+        {value: '150,001 - 175,000', code: '150,001 - 175,000'},
+        {value: '175,001 - 200,000', code: '175,001 - 200,000'},
+        {value: '200,000+', code: '200,000+'},
+      ],
       states: [
         {
           value: 'Alabama',
@@ -356,7 +367,6 @@ export default {
     screenNames: {
       AddChild: 'AddChild',
       AddCreditOrDebitCard: 'AddCreditOrDebitCard',
-      AddProfileData: 'AddProfileData',
       Allergies: 'Allergies',
       Appointments: 'Appointments',
       AskUser: 'Ask',
@@ -370,6 +380,7 @@ export default {
       ChangePassword: 'ChangePassword',
       ChangePasswordExpert: 'ChangePasswordExpert',
       Chat: 'Chat',
+      ChatBot: 'ChatBot',
       ChatExpert: 'ChatExpert',
       Children: 'Children',
       ChooseExpert: 'ChooseExpert',
@@ -1793,4 +1804,10 @@ export const collections = {
   healthHistory: 'healthHistory',
   careSquad: 'careSquad',
   appointments: 'appointments',
+};
+
+export const videoHistory = {
+  subject: 'Subject: ',
+  visitWith: 'Visit With: ',
+  viewDetails: 'View Details',
 };

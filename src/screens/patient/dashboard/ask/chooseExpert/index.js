@@ -498,7 +498,7 @@ const mapStateToProps = (state) => ({
   question: state.ask.question,
   professionData: state.chooseExpert.professionData,
   languagesData: state.chooseExpert.languagesData,
-  lang: state.languages,
+  lang: state.language,
 });
 
 const mapDispatchToProps = (dispatch) => ({

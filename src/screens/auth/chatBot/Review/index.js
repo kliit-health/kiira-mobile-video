@@ -25,6 +25,9 @@ const Review = (props) => {
       sexuality,
       insurance,
       plan,
+      zipcode,
+      income,
+      enrollment,
     } = steps;
     setState({
       first_name,
@@ -36,6 +39,9 @@ const Review = (props) => {
       sexuality: sexuality.value,
       insurance,
       plan,
+      zipcode,
+      income: income.value,
+      enrollment,
     });
   }, []);
 
@@ -47,7 +53,10 @@ const Review = (props) => {
     gender,
     insurance,
     plan,
+    zipcode,
+    enrollment,
   } = currentState;
+  console.log('CURRENT STATE', currentState);
   let state =
     props.steps['update-state'] && props.steps['update-state'].value
       ? props.steps['update-state'].value
@@ -56,6 +65,10 @@ const Review = (props) => {
     props.steps['update-sexuality'] && props.steps['update-sexuality'].value
       ? props.steps['update-sexuality'].value
       : props.steps.sexuality.value;
+  let income =
+    props.steps['update-income'] && props.steps['update-income'].value
+      ? props.steps['update-income'].value
+      : props.steps.income.value;
 
   return (
     <View style={style.container}>
@@ -118,12 +131,39 @@ const Review = (props) => {
           )}
         </View>
 
-        <View>
-          <Text style={{...style.category, alignSelf: 'center'}}>Plan:</Text>
+        <View style={{width: 100}}>
+          <Text style={style.category}>Plan:</Text>
           {typeof plan === null || !plan ? (
             <Text> </Text>
           ) : (
             <Text style={style.plan}>{plan.value || ''}</Text>
+          )}
+        </View>
+
+        <View style={{width: 100}}>
+          <Text style={style.category}>Zip Code:</Text>
+          {typeof zipcode === null || !zipcode ? (
+            <Text> </Text>
+          ) : (
+            <Text style={style.plan}>{zipcode.value || ''}</Text>
+          )}
+        </View>
+
+        <View style={{width: 100}}>
+          <Text style={style.category}>Enrollment:</Text>
+          {typeof enrollment === null || !enrollment ? (
+            <Text> </Text>
+          ) : (
+            <Text style={style.plan}>{enrollment.value || ''}</Text>
+          )}
+        </View>
+
+        <View>
+          <Text style={style.category}>Household Income:</Text>
+          {typeof income === null || !income ? (
+            <Text> </Text>
+          ) : (
+            <Text style={style.plan}>{income.value || ''}</Text>
           )}
         </View>
       </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   StatusBar,
   View,
@@ -10,7 +10,8 @@ import {
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
-import Carousel from 'react-native-banner-carousel';
+import Carousel from '../../../components/carousel';
+import {clearTimeOut} from '../../../redux/actions/user';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -44,13 +45,13 @@ let banner = [
 const Tutorial = (props) => {
   const {navigation} = props;
   const lang = useSelector((state) => state.language);
+  const dispatch = useDispatch();
 
   const renderSliderView = () => {
     return (
       <View style={styles.sliderViewStyle}>
         <StatusBar hidden />
         <Carousel
-          useNativeDriver
           autoplay
           autoplayTimeout={5000}
           loop
@@ -86,7 +87,10 @@ const Tutorial = (props) => {
           text={lang.tutorial.login}
           textStyle={styles.loginButtonTextStyle}
           buttonStyle={styles.loginButtonStyle}
-          onPress={() => navigation.navigate(Constant.App.screenNames.Login)}
+          onPress={() => {
+            dispatch(clearTimeOut());
+            navigation.navigate(Constant.App.screenNames.Login);
+          }}
         />
       </View>
     );

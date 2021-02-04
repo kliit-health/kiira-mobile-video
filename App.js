@@ -1,5 +1,12 @@
 import React, {PureComponent} from 'react';
-import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
+import {
+  View,
+  Alert,
+  BackHandler,
+  AppState,
+  LogBox,
+  Platform,
+} from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigation';
 import {Messaging} from './src/services';
@@ -14,13 +21,14 @@ import {
   setAppState,
   setAppScreen,
 } from './src/screens/auth/authLoading/action';
-import {signOut} from './src/screens/patient/account/action';
+import {timeOut} from './src/redux/actions/user';
 import FastImage from 'react-native-fast-image';
-// import BackgroundTask from 'react-native-background-task';
-// import BackgroundTimerMain from 'react-native-background-timer';
+import BackgroundService from 'react-native-background-actions';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
+import {signOut} from './src/screens/patient/account/action';
+import Constants from './src/utils/constants';
 
 class App extends PureComponent {
   constructor(props) {
@@ -37,7 +45,7 @@ class App extends PureComponent {
       'hardwareBackPress',
       this.handleBackButtonClick,
     );
-    // BackgroundTask.schedule();
+
     AppState.addEventListener('change', this._handleAppStateChange);
     FastImage.preload([
       {
@@ -124,33 +132,28 @@ class App extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    // firebase.auth().signOut();
+  async componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,
     );
   }
 
-  _handleAppStateChange = (nextAppState) => {
-    const {setState, signOut} = this.props;
-
+  _handleAppStateChange = async (nextAppState) => {
+    const {timeOut} = this.props;
     if (nextAppState !== 'active') {
-      // BackgroundTask.define(() => {
-      //   setState(false);
-      //   const payload = {
-      //     navigation: this.navigator._navigation,
-      //     isLoaderShow: false,
-      //   };
-      //   signOut(payload);
-      //   Alert.alert(
-      //     'Log Out',
-      //     'For your security, you have been logged out.',
-      //     [{text: 'OK', onPress: () => {}}],
-      //     {cancelable: false},
-      //   );
-      //   BackgroundTask.finish();
-      // });
+      if (Platform.OS === 'ios') {
+        await BackgroundService.start(() => {
+          setTimeout(async () => {
+            await timeOut();
+            await BackgroundService.stop();
+          }, Constants.App.logoutInterval);
+        });
+      } else {
+        if (BackgroundService.isRunning()) {
+          BackgroundService.stop();
+        }
+      }
     }
   };
 
@@ -267,10 +270,11 @@ const mapDispatchToProps = (dispatch) => ({
   hideErrorModal: () => dispatch(showOrHideModal()),
   setToken: (value) => dispatch(setFcmToken(value)),
   setState: (value) => dispatch(setAppState(value)),
-  signOut: (value) => dispatch(signOut(value)),
+  timeOut: () => dispatch(timeOut()),
   setScreen: (value) => dispatch(setAppScreen(value)),
   setCurrentRoute: (value) => dispatch(setCurrentRoute(value)),
   setPreviousRoute: (value) => dispatch(setPreviousRoute(value)),
+  signOut: (data) => dispatch(signOut(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

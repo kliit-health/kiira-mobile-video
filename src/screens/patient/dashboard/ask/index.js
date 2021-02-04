@@ -21,7 +21,7 @@ import {Header} from '../../../../components';
 import FastImage from 'react-native-fast-image';
 import {setuser} from './action';
 import firebase from 'react-native-firebase';
-import {getuser} from '../../../../utils/firebase';
+import {getUserData} from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
 class Ask extends PureComponent {
@@ -56,7 +56,7 @@ class Ask extends PureComponent {
             tableName: Constant.App.firebaseTableNames.users,
             uid: user.uid,
           };
-          getuser(
+          getUserData(
             obj,
             (querySnapshot) => {
               const data = querySnapshot.data();
@@ -395,16 +395,14 @@ class Ask extends PureComponent {
   }
 
   renderAskedQuestionView() {
-    const {questionData, navigation, experts} = this.props;
-    const {staticImages} = Constant.App;
+    const {questionData, navigation, experts, lang} = this.props;
+
     return (
       <TouchableOpacity
         onPress={() => {
           const expertDetails = experts.find(
             (expert) => expert.uid === questionData.expertInfo.uid,
           );
-
-          console.log({expertDetails});
           navigation.navigate(Constant.App.screenNames.Chat, {
             questionData,
             expertDetails,

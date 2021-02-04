@@ -31,6 +31,12 @@ export default {
         code: '',
         value: '',
       },
+      income: {
+        code: '',
+        value: '',
+      },
+      zipcode: '',
+      enrollment: '',
     },
     subscription: {
       id: '',

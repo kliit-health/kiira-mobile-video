@@ -1,22 +1,36 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {ScrollView} from 'react-native';
+import BackgroundService from 'react-native-background-actions';
 import {useDidMount} from '../../../utils/hooks';
 import * as actions from '../../../redux/actions';
 import {Container} from '../../../components';
 import {Bot, Items, Intro} from './sections';
 import styles from './styles';
 import i18n from '../../../i18n';
+import {signOut} from '../account/action';
 
 const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
+  const timedOut = useSelector((state) => state.user.timedOut);
   const subscription = useSelector((state) => state.subscription.data);
   const licenses = useSelector((state) => state.licenses.data.current);
   const lang = useSelector((state) => state.language);
 
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [chatEnabled, setChatEnabled] = useState(false);
+
+  useEffect(() => {
+    const payload = {
+      navigation,
+      isLoaderShow: false,
+    };
+
+    if (timedOut) {
+      dispatch(signOut(payload));
+    }
+  }, [timedOut]);
 
   useDidMount(() => {
     dispatch(actions.getAgreements());
@@ -85,6 +99,8 @@ const Dashboard = ({navigation}) => {
   useEffect(() => {
     if (licenses.includes(user.profileInfo.state.code)) {
       setVideoEnabled(true);
+    } else {
+      setVideoEnabled(false);
     }
   }, [user, licenses]);
 

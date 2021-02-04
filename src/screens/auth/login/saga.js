@@ -55,6 +55,7 @@ function* loginFirebase({data}) {
             });
           }
         } else if (userData && userData.firstLogin) {
+          yield put(setUserData(userData));
           navigation.navigate(Constant.App.screenNames.Welcome, {
             userData,
           });

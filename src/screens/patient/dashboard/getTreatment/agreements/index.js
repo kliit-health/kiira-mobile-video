@@ -95,8 +95,7 @@ const Agreements = ({
   );
 };
 
-const getTreatmentConsentStatus = (user) =>
-  user.hasOwnProperty('consentAgreements');
+const getTreatmentConsentStatus = (user) => user.consentAgreements.length;
 
 const mapStateToProps = ({agreements, user, navigator}) => ({
   agreements: agreements.data,

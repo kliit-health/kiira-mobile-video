@@ -15,7 +15,7 @@ const style = StyleSheet.create({
   },
 
   plan: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
     flexWrap: 'wrap',
     fontFamily: Constant.App.fontFamily.proximaNovaSemiBold,
     color: '#509AEC',

@@ -128,7 +128,7 @@ const TransparentStyle = {
 
 const AuthStack = createStackNavigator(
   {
-    AddProfileData: {screen: ChatBot},
+    ChatBot: {screen: ChatBot},
     ForgotPassword: {screen: ForgotPassword},
     Tutorial: {screen: Tutorial},
     GetStarted: {screen: GetStarted},
