@@ -1,2 +1,1 @@
-export default function* accountExpertSaga() {
-}
+export default function* accountExpertSaga() {}

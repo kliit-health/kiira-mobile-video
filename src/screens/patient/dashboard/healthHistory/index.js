@@ -1,49 +1,14 @@
 import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {useSelector, shallowEqual} from 'react-redux';
+import {get} from 'lodash';
 import {Header, ListItem, Container} from '../../../../components';
-import {screenNames} from '../../../../utils/constants';
+import model from './model';
 import styles from './styles';
 
 const HealthHistory = ({navigation}) => {
-  const language = useSelector((state) => state.language);
-  const healthHistory = useSelector(
-    (state) => state.healthHistory.data,
-    shallowEqual,
-  );
-
-  const model = [
-    {
-      title: language.healthHistory.basicInfo,
-      destination: screenNames.BasicInfo,
-      dataKey: 'basicInfo',
-    },
-    {
-      title: language.healthHistory.pregnancy,
-      destination: screenNames.PregnancyAndChildren,
-      dataKey: 'pregnancyHistory',
-    },
-    {
-      title: language.healthHistory.lifestyle,
-      destination: screenNames.LifeStyle,
-      dataKey: 'lifestyle',
-    },
-    {
-      title: language.healthHistory.allergies,
-      destination: screenNames.Allergies,
-      dataKey: 'allergies',
-    },
-    {
-      title: language.healthHistory.medications,
-      destination: screenNames.Medications,
-      dataKey: 'medications',
-    },
-    {
-      title: language.healthHistory.medicalHistory,
-      destination: screenNames.MedicalHistory,
-      dataKey: 'medicalHistory',
-    },
-  ];
+  const language = useSelector((state) => state.language, shallowEqual);
+  const healthHistory = useSelector((state) => state.healthHistory.data);
 
   return (
     <Container unformatted>
@@ -62,7 +27,7 @@ const HealthHistory = ({navigation}) => {
             displayChevron
             onPress={() => navigation.navigate(destination)}>
             <View>
-              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.title}>{get(language, title)}</Text>
               <Text style={styles.subtitle}>
                 {healthHistory[dataKey] && healthHistory[dataKey].completed
                   ? 'Provided'

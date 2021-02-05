@@ -29,11 +29,11 @@
 		4D4942B581FC4B3682D62CF8 /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 82B44588CDB04FB5A9E455E8 /* Poppins-Medium.otf */; };
 		52BA90676545481D956CDB61 /* AvenirLTStd-Roman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 602CA6E22F424550B1E692FB /* AvenirLTStd-Roman.otf */; };
 		534216696B5C4EBDA5ADB066 /* AvenirLTStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 74F8A321A79C424DAD2B4F05 /* AvenirLTStd-Book.otf */; };
+		5F47E3452B2DE34302B50CBC /* libPods-kiira.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9FF522293C3EB9F923EEEEF /* libPods-kiira.a */; };
 		5FC7A37B14BB42659A79BE1B /* Avenir-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90D19B98B00B44DD9C7AA954 /* Avenir-Medium.ttf */; };
 		6FF38DB1564C4F15981D6DCD /* Poppins-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B15CBF31B54A4AE5AD6EA508 /* Poppins-Italic.otf */; };
 		933C199B24B3D40E0044C9FE /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 933C199A24B3D40E0044C9FE /* splash.png */; };
 		973D81CE28AD47B69D2C4588 /* Avenir-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8974EA67EBF4D7DAAB0FB21 /* Avenir-Book.ttf */; };
-		A44E7B93E814F14AEBFD5F3D /* libPods-kiira.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F63E3FB03D67391A91EFA8 /* libPods-kiira.a */; };
 		A5CDB462E219426AADEFB9C3 /* Poppins-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F9E7946994A54FFEBADF2F03 /* Poppins-ThinItalic.otf */; };
 		AB7BDA1BB6A64BB8B20F856A /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C71DC7E330AA4D13969A9DF9 /* Poppins-SemiBold.otf */; };
 		B42F090E4662493AAFD1220D /* Poppins-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D03850FD6BFD45168077209D /* Poppins-Thin.otf */; };
@@ -57,7 +57,6 @@
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* kiiraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kiiraTests.m; sourceTree = "<group>"; };
-		01986C3B90E725DE2B32F95A /* Pods-kiira.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.release.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.release.xcconfig"; sourceTree = "<group>"; };
 		04ED0551BE054BF890556FCF /* Poppins-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.otf"; path = "../assets/fonts/Poppins-Regular.otf"; sourceTree = "<group>"; };
 		06086FF2230C00A200994F22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0613C35423446A83004A4B8D /* kiira.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = kiira.entitlements; path = kiira/kiira.entitlements; sourceTree = "<group>"; };
@@ -65,7 +64,9 @@
 		0673137922FAB91D0060C566 /* RCTSplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTSplashScreen.m; sourceTree = "<group>"; };
 		0673137A22FAB91D0060C566 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RCTSplashScreen.xcodeproj; sourceTree = "<group>"; };
 		06B9BF7822FC1FC8006E8D89 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		09219FCF9F4957E6BD7BF109 /* Pods-kiira.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.debug.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.debug.xcconfig"; sourceTree = "<group>"; };
 		0C5B5BB8EB1340F7ADE3F036 /* Poppins-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.otf"; path = "../assets/fonts/Poppins-BoldItalic.otf"; sourceTree = "<group>"; };
+		0D610F97E1C8870F408A2C43 /* Pods-kiira.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.release.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.release.xcconfig"; sourceTree = "<group>"; };
 		0E2BB7F7DAAE4F3BB77CD717 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* kiira.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kiira.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = kiira/AppDelegate.h; sourceTree = "<group>"; };
@@ -100,7 +101,6 @@
 		A74CDC66C22E4C858CDEB29C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		B15CBF31B54A4AE5AD6EA508 /* Poppins-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.otf"; path = "../assets/fonts/Poppins-Italic.otf"; sourceTree = "<group>"; };
 		C264C275E86249DA9C63BC98 /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.otf"; path = "../assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
-		C2BB5ED476519320F900BF0F /* Pods-kiira.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.debug.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.debug.xcconfig"; sourceTree = "<group>"; };
 		C71B8AEA0C434924A9DD4B20 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		C71DC7E330AA4D13969A9DF9 /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.otf"; path = "../assets/fonts/Poppins-SemiBold.otf"; sourceTree = "<group>"; };
 		CA5490853EDA497B88269DE0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -114,8 +114,8 @@
 		E8EA671E245A256200800AFD /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F7F63E3FB03D67391A91EFA8 /* libPods-kiira.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kiira.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E7946994A54FFEBADF2F03 /* Poppins-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.otf"; path = "../assets/fonts/Poppins-ThinItalic.otf"; sourceTree = "<group>"; };
+		F9FF522293C3EB9F923EEEEF /* libPods-kiira.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kiira.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD85A4E5A1A94B0A9B16B0C1 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A44E7B93E814F14AEBFD5F3D /* libPods-kiira.a in Frameworks */,
+				5F47E3452B2DE34302B50CBC /* libPods-kiira.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +205,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				F7F63E3FB03D67391A91EFA8 /* libPods-kiira.a */,
+				F9FF522293C3EB9F923EEEEF /* libPods-kiira.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -213,8 +213,8 @@
 		6C7C20B7E6BB211CA0B92EEC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C2BB5ED476519320F900BF0F /* Pods-kiira.debug.xcconfig */,
-				01986C3B90E725DE2B32F95A /* Pods-kiira.release.xcconfig */,
+				09219FCF9F4957E6BD7BF109 /* Pods-kiira.debug.xcconfig */,
+				0D610F97E1C8870F408A2C43 /* Pods-kiira.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -307,14 +307,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "kiira" */;
 			buildPhases = (
-				B54AFF5BE907D4D6F21AA45D /* [CP] Check Pods Manifest.lock */,
+				0E3CD3E6B869A44EE75C1DFF /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1EAE633D717B97AB525E8AF9 /* [CP] Embed Pods Frameworks */,
-				1B193410F977180582C9A0BD /* [CP] Copy Pods Resources */,
+				E077A4919EF807B65DE1D419 /* [CP] Embed Pods Frameworks */,
+				D176EEDEBB82D3287227B455 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -434,7 +434,29 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1B193410F977180582C9A0BD /* [CP] Copy Pods Resources */ = {
+		0E3CD3E6B869A44EE75C1DFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kiira-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D176EEDEBB82D3287227B455 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -488,7 +510,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kiira/Pods-kiira-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1EAE633D717B97AB525E8AF9 /* [CP] Embed Pods Frameworks */ = {
+		E077A4919EF807B65DE1D419 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -506,28 +528,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kiira/Pods-kiira-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B54AFF5BE907D4D6F21AA45D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-kiira-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -567,7 +567,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2BB5ED476519320F900BF0F /* Pods-kiira.debug.xcconfig */;
+			baseConfigurationReference = 09219FCF9F4957E6BD7BF109 /* Pods-kiira.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = kiira/kiira.entitlements;
@@ -620,7 +620,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01986C3B90E725DE2B32F95A /* Pods-kiira.release.xcconfig */;
+			baseConfigurationReference = 0D610F97E1C8870F408A2C43 /* Pods-kiira.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = kiira/kiira.entitlements;
