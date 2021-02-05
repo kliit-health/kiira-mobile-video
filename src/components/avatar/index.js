@@ -56,7 +56,7 @@ const Avatar = ({
       <View onLayout={handleLayout} style={styles.root}>
         <FastImage
           style={styles.image}
-          source={{uri: source}}
+          source={{uri: source ? source : null}}
           fallback={true}
           resizeMode={resizeMode}
           defaultSource={require('../../../assets/profile_img_placeholder.png')}

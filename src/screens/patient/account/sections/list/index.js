@@ -13,11 +13,11 @@ export default ({onItemPress}) => {
     <View>
       {model.map(({title, destination}) => (
         <ListItem
-          key={get(language, title)}
+          key={title}
           id={destination}
           onPress={onItemPress}
           displayChevron>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{get(language, title)}</Text>
         </ListItem>
       ))}
     </View>
