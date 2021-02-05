@@ -3,7 +3,7 @@ import {colors} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
-    backgroundColor: colors.offWhite,
+    backgroundColor: colors.white,
     flex: 1,
   },
   safeAreaTop: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {shape, node, object, string, func, bool} from 'prop-types';
+import {shape, node, object, string, func, bool, any} from 'prop-types';
 import {TouchableOpacity, Text, TextInput as Input} from 'react-native';
 import {mergeStyles} from '../../utils/functions';
 import {colors} from '../../utils/constants';
@@ -96,7 +96,7 @@ TextInput.propTypes = {
   onPress: func,
   onChange: func,
   children: node,
-  value: string,
+  value: any,
   chevron: bool,
   placeholder: string,
   multiline: bool,

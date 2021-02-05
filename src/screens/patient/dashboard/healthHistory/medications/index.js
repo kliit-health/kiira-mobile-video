@@ -56,6 +56,7 @@ const Medications = ({navigation}) => {
       <Header title={lang.medications.title} onBack={handleOnBackPress} />
       {model.map(({dataKey, placeholder}) => (
         <TextInput
+          key={dataKey}
           styles={styles.input}
           defaultValue={medications[dataKey]}
           placeholder={placeholder}

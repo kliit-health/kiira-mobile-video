@@ -13,10 +13,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     height: metrices.DEVICE_HEIGHT * 0.15,
     marginBottom: 20,
+    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   containerStyle: {
     flex: 1,
+    backgroundColor: Constant.App.whiteColor,
   },
 
   loginButtonStyle: {

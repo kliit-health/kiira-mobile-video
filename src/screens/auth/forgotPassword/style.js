@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: getStatusBarHeight(),
+    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   subTitleTextStyle: {

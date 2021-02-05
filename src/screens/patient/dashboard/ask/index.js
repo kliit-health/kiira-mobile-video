@@ -328,7 +328,7 @@ class Ask extends PureComponent {
           {lang.askUser.myPreviousQuestions}
         </CustomText>
         <FlatList
-          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
           keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
           data={previousQuestionData}
@@ -483,7 +483,7 @@ class Ask extends PureComponent {
     return (
       <View style={styles.container}>
         <Header title="" onBack={() => navigation.goBack()} />
-        <ScrollView
+        <View
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>
           {this.renderHeadingProfileView()}
@@ -503,7 +503,7 @@ class Ask extends PureComponent {
             previousQuestionData.length > 0 &&
             this.renderPreviousQuestionView()}
           {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </ScrollView>
+        </View>
       </View>
     );
   }
