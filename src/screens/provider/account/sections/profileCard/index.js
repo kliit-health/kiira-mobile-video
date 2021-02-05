@@ -1,7 +1,6 @@
 import React from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text} from 'react-native';
-import {useSelector} from 'react-redux';
 import {Avatar} from '../../../../../components';
 import {get} from 'lodash';
 import model from './model';

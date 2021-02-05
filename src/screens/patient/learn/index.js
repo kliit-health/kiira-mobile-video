@@ -4,6 +4,7 @@ import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import {Container, Header} from '../../../components';
 import {get} from 'lodash';
 import Image from 'react-native-fast-image';
+import model from './model';
 import styles, {modifiers} from './styles';
 import {screenNames} from '../../../utils/constants';
 
@@ -30,7 +31,7 @@ const Learn = ({navigation}) => {
         </View>
         <FlatList
           scrollEnabled={false}
-          data={list}
+          data={model.list}
           numColumns={2}
           contentContainerStyle={styles.listContainer}
           keyExtractor={(item) => item.title}

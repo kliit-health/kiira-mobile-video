@@ -3,6 +3,7 @@ import {useSelector, shallowEqual} from 'react-redux';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {get} from 'lodash';
 import Image from 'react-native-fast-image';
+import model from './model';
 import styles from './styles';
 
 export default ({onPress}) => {
