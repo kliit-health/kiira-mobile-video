@@ -21,14 +21,13 @@ import {
   setAppState,
   setAppScreen,
 } from './src/screens/auth/authLoading/action';
-import {timeOut} from './src/redux/actions/user';
+import {signOut} from './src/screens/patient/account/action';
+import Constant from './src/utils/constants';
 import FastImage from 'react-native-fast-image';
 import BackgroundService from 'react-native-background-actions';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
-import {signOut} from './src/screens/patient/account/action';
-import Constants from './src/utils/constants';
 
 class App extends PureComponent {
   constructor(props) {
@@ -108,6 +107,10 @@ class App extends PureComponent {
         uri:
           'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf',
       },
+      {
+        uri:
+          'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2FDSC_0894%20-%20Version%202%20-%20Dena%20Kranzberg.JPG?alt=media&token=5049977f-c070-4e74-acff-3c90b555ff5e',
+      },
     ]);
   }
 
@@ -140,19 +143,42 @@ class App extends PureComponent {
   }
 
   _handleAppStateChange = async (nextAppState) => {
-    const {timeOut} = this.props;
-    if (nextAppState !== 'active') {
+    const {signOut} = this.props;
+
+    if (nextAppState === 'active') {
       if (Platform.OS === 'ios') {
-        await BackgroundService.start(() => {
-          setTimeout(async () => {
-            await timeOut();
-            await BackgroundService.stop();
-          }, Constants.App.logoutInterval);
-        });
-      } else {
-        if (BackgroundService.isRunning()) {
-          BackgroundService.stop();
-        }
+        clearTimeout(this.timer);
+        await BackgroundService.stop(this.BgService);
+      }
+    }
+
+    if (nextAppState === 'background') {
+      if (Platform.OS === 'ios') {
+        const options = {
+          taskName: 'Time Out',
+        };
+
+        this.BgService = await BackgroundService.start(() => {
+          this.timer = setTimeout(async () => {
+            const payload = {
+              navigation: this.navigator._navigation,
+              isLoaderShow: false,
+            };
+            await signOut(payload);
+            Alert.alert(
+              'Log Out',
+              'For your security, you have been logged out due to inactivity.',
+              [{text: 'OK', onPress: () => {}}],
+              {cancelable: false},
+            );
+          }, Constant.App.logoutInterval);
+        }, options);
+      } else if (Platform.OS === 'android') {
+        const payload = {
+          navigation: NavigationService,
+          isLoaderShow: false,
+        };
+        signOut(payload);
       }
     }
   };

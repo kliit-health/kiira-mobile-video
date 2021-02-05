@@ -13,8 +13,6 @@ import com.reactnativecomponent.splashscreen.RCTSplashScreen;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import android.content.pm.ActivityInfo;
 
-import java.io.File;
-
 public class MainActivity extends ReactActivity {
 
     /**
@@ -82,4 +80,3 @@ public class MainActivity extends ReactActivity {
         return dir.delete();
     }
 }
-

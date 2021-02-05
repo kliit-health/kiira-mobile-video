@@ -1,11 +1,28 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {useSelector} from 'react-redux';
 import {Avatar} from '../../../../../components';
-import {cardDetails} from './model';
 import styles, {modifiers} from './styles';
 
 const ProfileCard = ({profileInfo}) => {
   const {firstName, lastName, profileImageUrl} = profileInfo;
+  const language = useSelector((state) => state.language);
+
+  const cardDetails = [
+    {
+      title: language.expertAccount.born,
+      dataKey: 'dob',
+    },
+    {
+      title: language.expertAccount.pronouns,
+      dataKey: 'pronouns',
+    },
+    {
+      title: language.expertAccount.location,
+      dataKey: 'state',
+      secondaryKey: 'code',
+    },
+  ];
 
   return (
     <View style={styles.root}>
