@@ -2,20 +2,53 @@ import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {useSelector, shallowEqual} from 'react-redux';
 import {Header, ListItem, Container} from '../../../../components';
-import model from './model';
+import {screenNames} from '../../../../utils/constants';
 import styles from './styles';
 
 const HealthHistory = ({navigation}) => {
-  const lang = useSelector((state) => state.language);
+  const language = useSelector((state) => state.language);
   const healthHistory = useSelector(
     (state) => state.healthHistory.data,
     shallowEqual,
   );
 
+  const model = [
+    {
+      title: language.healthHistory.basicInfo,
+      destination: screenNames.BasicInfo,
+      dataKey: 'basicInfo',
+    },
+    {
+      title: language.healthHistory.pregnancy,
+      destination: screenNames.PregnancyAndChildren,
+      dataKey: 'pregnancyHistory',
+    },
+    {
+      title: language.healthHistory.lifestyle,
+      destination: screenNames.LifeStyle,
+      dataKey: 'lifestyle',
+    },
+    {
+      title: language.healthHistory.allergies,
+      destination: screenNames.Allergies,
+      dataKey: 'allergies',
+    },
+    {
+      title: language.healthHistory.medications,
+      destination: screenNames.Medications,
+      dataKey: 'medications',
+    },
+    {
+      title: language.healthHistory.medicalHistory,
+      destination: screenNames.MedicalHistory,
+      dataKey: 'medicalHistory',
+    },
+  ];
+
   return (
     <Container unformatted>
       <Header
-        title={lang.healthHistory.title}
+        title={language.healthHistory.title}
         onBack={() => navigation.goBack()}
       />
       <FlatList

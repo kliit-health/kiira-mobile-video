@@ -4,7 +4,6 @@ import {
   hideApiLoader,
 } from '../../../components/customLoader/action';
 import {showOrHideModal} from '../../../components/customModal/action';
-import {displayConsole} from '../../../utils/helper';
 import {SIGN_OUT_API_HIT} from '../../../redux/types';
 import {logout, updateStatus} from '../../../utils/firebase';
 import Constant from '../../../utils/constants';
@@ -29,7 +28,6 @@ function* signout({data}) {
     };
     yield updateStatus(updateStatusParams);
     const response = yield logout(userData);
-    displayConsole('response', response);
     if (isLoaderShow) {
       yield put(hideApiLoader());
     }
@@ -38,7 +36,6 @@ function* signout({data}) {
         yield put(clearAskState());
         yield put(timeOut());
         navigation.navigate(Constant.App.stack.AuthStack);
-        displayConsole('response.success', response.success);
       }
     } else {
       yield put(
@@ -48,7 +45,7 @@ function* signout({data}) {
       );
     }
   } catch (error) {
-    displayConsole('error', error);
+    console.log('error', error);
     if (isLoaderShow) {
       yield put(hideApiLoader());
     }
