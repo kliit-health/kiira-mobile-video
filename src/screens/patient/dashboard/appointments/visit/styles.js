@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 35,
     flexDirection: 'column',
+    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   expertIsPrescriber: {

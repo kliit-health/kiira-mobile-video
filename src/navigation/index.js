@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator,
-  createBottomTabNavigator,
-} from 'react-navigation';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import {Image, View} from 'react-native';
 
@@ -115,9 +112,9 @@ let tabIconSize = 25;
 const screenNames = Constant.App.screenNames;
 
 const TransparentStyle = {
-  transparentCard: true,
   cardStyle: {
     opacity: 1,
+    backgroundColor: 'transparent',
   },
   transitionConfig: () => ({
     containerStyle: {

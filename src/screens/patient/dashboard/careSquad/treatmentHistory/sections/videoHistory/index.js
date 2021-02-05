@@ -43,11 +43,7 @@ const VideoHistory = ({navigation, expertDetails}) => {
   const handleClose = () => {
     setVisible(false);
   };
-  console.log(
-    getSections(
-      visits.filter((visit) => visit.expert.uid === expertDetails.uid),
-    ),
-  );
+
   return (
     <Fragment>
       <SectionList

@@ -88,6 +88,7 @@ const RadioGroup = ({
     <View style={styles.root}>
       {data.map((item, index) => (
         <RadioButton
+          key={item + index}
           label={typeof item === 'object' ? item.label : item}
           selected={compare(item, selected)}
           onPress={() => handlePress(item, index)}

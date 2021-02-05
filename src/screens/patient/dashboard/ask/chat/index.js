@@ -16,6 +16,7 @@ import {
 import moment from 'moment';
 import {Container, Header, RatingModal} from '../../../../../components';
 import {MessageList, Footer} from './sections';
+import {screenNames} from '../../../../../utils/constants';
 class Chat extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -215,7 +216,7 @@ class Chat extends React.PureComponent {
 
   handleBackPress = () => {
     const {navigation} = this.props;
-    navigation.goBack();
+    navigation.navigate(screenNames.AskUser);
   };
 
   handlePickerCancel = () => {

@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginTop: 35,
+    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   creditTextStyle: {
@@ -244,7 +245,8 @@ const styles = StyleSheet.create({
     paddingBottom: metrics.DEVICE_HEIGHT * 0.05,
     width: metrics.DEVICE_WIDTH,
     flexDirection: 'column',
-    backgroundColor: Constant.App.colors.greyBgAsk,
+    height: metrics.DEVICE_HEIGHT * 0.5,
+    backgroundColor: Constant.App.colors.white,
   },
 
   myPrevQuestionTitleTextStyle: {

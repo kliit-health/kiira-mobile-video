@@ -55,6 +55,7 @@ const MedicalHistory = ({navigation}) => {
       <Header title={lang.medicalHistory.title} onBack={handleOnBackPress} />
       {model.map(({dataKey, placeholder}) => (
         <TextInput
+          key={dataKey}
           styles={styles.input}
           defaultValue={medicalHistory[dataKey]}
           placeholder={placeholder}
