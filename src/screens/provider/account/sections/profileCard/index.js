@@ -1,28 +1,15 @@
 import React from 'react';
+import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Avatar} from '../../../../../components';
+import {get} from 'lodash';
+import model from './model';
 import styles, {modifiers} from './styles';
 
 const ProfileCard = ({profileInfo}) => {
   const {firstName, lastName, profileImageUrl} = profileInfo;
-  const language = useSelector((state) => state.language);
-
-  const cardDetails = [
-    {
-      title: language.expertAccount.born,
-      dataKey: 'dob',
-    },
-    {
-      title: language.expertAccount.pronouns,
-      dataKey: 'pronouns',
-    },
-    {
-      title: language.expertAccount.location,
-      dataKey: 'state',
-      secondaryKey: 'code',
-    },
-  ];
+  const language = useSelector((state) => state.language, shallowEqual);
 
   return (
     <View style={styles.root}>
@@ -31,10 +18,10 @@ const ProfileCard = ({profileInfo}) => {
         <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
       </View>
       <View style={styles.groupContainer}>
-        {cardDetails.map(({dataKey, title, secondaryKey}) => {
+        {model.map(({dataKey, title, secondaryKey}) => {
           return (
             <View key={dataKey} style={styles.itemContainer}>
-              <Text style={styles.itemTitle}>{title}</Text>
+              <Text style={styles.itemTitle}>{get(language, title)}</Text>
               <Text style={styles.itemValue}>
                 {secondaryKey
                   ? profileInfo[dataKey][secondaryKey]

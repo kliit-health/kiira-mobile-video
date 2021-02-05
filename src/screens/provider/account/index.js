@@ -1,14 +1,15 @@
 import React from 'react';
 import {Container, ListItem, TextButton} from '../../../components';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
-import {screenNames} from '../../../utils/constants';
+import {get} from 'lodash';
 import {ProfileCard} from './sections';
+import model from './model';
 import {signOut} from '../../patient/account/action';
 import styles, {modifiers} from './styles';
 
 const ExpertAccount = ({navigation}) => {
-  const language = useSelector((state) => state.language);
+  const language = useSelector((state) => state.language, shallowEqual);
   const details = useSelector((state) => state.authLoading.userData);
   const dispatch = useDispatch();
 
@@ -20,25 +21,6 @@ const ExpertAccount = ({navigation}) => {
     dispatch(signOut({navigation}));
   };
 
-  const list = [
-    {
-      title: language.expertAccount.settings,
-      destination: screenNames.expertSettings,
-    },
-    {
-      title: language.expertAccount.updateAvailability,
-      destination: screenNames.updateAvailability,
-    },
-    {
-      title: language.expertAccount.termsAndConditions,
-      destination: screenNames.termsAndConditions,
-    },
-    {
-      title: language.expertAccount.privacyPolicies,
-      destination: screenNames.privacyPolicies,
-    },
-  ];
-
   return (
     <Container styles={modifiers.container} themed unformatted>
       <StatusBar barStyle="light-content" translucent={true} />
@@ -48,13 +30,13 @@ const ExpertAccount = ({navigation}) => {
           <ProfileCard {...details} />
         </View>
         <View>
-          {list.map(({title, destination}) => (
+          {model.map(({title, destination}) => (
             <ListItem
               key={title}
               id={destination}
               onPress={handleNavigation}
               displayChevron>
-              <Text style={styles.itemTitle}>{title}</Text>
+              <Text style={styles.itemTitle}>{get(language, title)}</Text>
             </ListItem>
           ))}
         </View>

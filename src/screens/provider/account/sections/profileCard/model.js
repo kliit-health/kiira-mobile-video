@@ -1,18 +1,14 @@
-import {getReduxState} from '../../../../../utils/helper';
-
-const {language} = getReduxState();
-
-export const cardDetails = [
+export default [
   {
-    title: language.expertAccount.born,
+    title: `expertAccount.born`,
     dataKey: 'dob',
   },
   {
-    title: language.expertAccount.pronouns,
+    title: `expertAccount.pronouns`,
     dataKey: 'pronouns',
   },
   {
-    title: language.expertAccount.location,
+    title: `expertAccount.location`,
     dataKey: 'state',
     secondaryKey: 'code',
   },
