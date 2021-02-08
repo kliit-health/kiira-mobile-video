@@ -16,7 +16,6 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../components/customLoader/action';
-
 import {showOrHideModal} from '../../../../components/customModal/action';
 
 function* getAppointments({data}) {
@@ -27,15 +26,6 @@ function* getAppointments({data}) {
     if (appointments) yield put({type: FETCH_APPOINTMENTS, data: appointments});
 
     yield put(hideApiLoader());
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function* updateAppointment({data: {uid, navigation, ...rest}}) {
-  try {
-    yield appointment({...rest}, uid);
-    yield put({type: UPDATE_HEALTH_HISTORY, data: {...rest}});
   } catch (error) {
     console.error(error);
   }

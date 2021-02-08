@@ -1,36 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
-import {connect} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {screenNames} from '../../../../../utils/constants';
 import {Modal, TextButton, Header, Container} from '../../../../../components';
 import Logo from '../../../../../svgs/penguin.svg';
 import {updateUser} from '../../../../../redux/actions';
 import styles, {modifiers} from './styles';
 
-const Agreements = ({
-  agreements,
-  loading,
-  error,
-  user,
-  acceptedTerms,
-  updateUser,
-  navigation,
-  currentRoute,
-}) => {
-  const initialState = {
+const Agreements = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const [visible, setVisible] = useState(false);
+  const [agreement, setAgreement] = useState({
     title: '',
     description: '',
     action: 'Agree',
-  };
+  });
 
-  const [agreement, setAgreement] = useState(initialState);
-  const [visible, setVisible] = useState(false);
+  const user = useSelector((state) => state.user.data);
+  const currentRoute = useSelector((state) => state.navigator.currentRoute);
+  const agreements = useSelector((state) => state.agreements.data);
+  const loading = useSelector((state) => state.agreements.loading);
+  const error = useSelector((state) => state.agreements.error);
 
   useEffect(() => {
-    if (currentRoute === 'RequestVisit') {
-      setVisible(!acceptedTerms);
+    if (currentRoute === screenNames.requestVisit) {
+      const agreed = user.consentAgreements.length > 0;
+      setVisible(!agreed);
       setAgreement(agreements[0]);
     }
-  }, [acceptedTerms, agreements, currentRoute]);
+  }, [currentRoute, user]);
 
   const handleAction = (action) => {
     if (agreement.index < agreements.length - 1) {
@@ -43,10 +42,13 @@ const Agreements = ({
           title: agreement.title,
           updatedAt: Date.now(),
         }));
-      updateUser({
-        uid: user.uid,
-        consentAgreements,
-      });
+
+      dispatch(
+        updateUser({
+          uid: user.uid,
+          consentAgreements,
+        }),
+      );
     }
   };
 
@@ -95,19 +97,4 @@ const Agreements = ({
   );
 };
 
-const getTreatmentConsentStatus = (user) => user.consentAgreements.length;
-
-const mapStateToProps = ({agreements, user, navigator}) => ({
-  agreements: agreements.data,
-  loading: agreements.loading,
-  error: agreements.error,
-  acceptedTerms: getTreatmentConsentStatus(user.data),
-  user: user.data,
-  currentRoute: navigator.currentRoute,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  updateUser: (details) => dispatch(updateUser(details)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Agreements);
+export default Agreements;

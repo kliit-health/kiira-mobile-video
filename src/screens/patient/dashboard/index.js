@@ -12,24 +12,12 @@ import {signOut} from '../account/action';
 const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const timedOut = useSelector((state) => state.user.timedOut);
   const subscription = useSelector((state) => state.subscription.data);
   const licenses = useSelector((state) => state.licenses.data.current);
   const lang = useSelector((state) => state.language);
 
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [chatEnabled, setChatEnabled] = useState(false);
-
-  useEffect(() => {
-    const payload = {
-      navigation,
-      isLoaderShow: false,
-    };
-
-    if (timedOut) {
-      dispatch(signOut(payload));
-    }
-  }, [timedOut]);
 
   useDidMount(() => {
     dispatch(actions.getAgreements());
@@ -96,18 +84,15 @@ const Dashboard = ({navigation}) => {
   }, [user]);
 
   useEffect(() => {
-    if (licenses.includes(user.profileInfo.state.code)) {
-      setVideoEnabled(true);
-    } else {
-      setVideoEnabled(false);
-    }
-  }, [user, licenses]);
+    const includesState = licenses.includes(user.profileInfo.state.code);
+    setVideoEnabled(includesState);
+  });
 
   useEffect(() => {
     if (user.chats === 'Unlimited') {
       setChatEnabled(true);
     }
-  }, [user]);
+  });
 
   useEffect(() => {
     if (user.profileInfo.lang !== 'en') {
