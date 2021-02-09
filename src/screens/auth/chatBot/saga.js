@@ -19,15 +19,14 @@ function* updateNewUserData({data}) {
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const {userParams, navigation} = data;
+
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
       prepaid: userParams.prepaid,
       uid: user.uid,
       role: 'User',
-      isActive: true,
       firstLogin: true,
       signUpDate: userParams.signUpDate,
-      plan: userParams.plan,
       fcmToken: userParams.fcmToken,
       profileInfo: {
         profileImageUrl: defaultImage,
@@ -38,12 +37,17 @@ function* updateNewUserData({data}) {
         state: userParams.state,
         sexuality: userParams.sexuality,
         insurance: userParams.insurance,
-        zipcode: userParams.zipcode,
-        enrollment: userParams.enrollment,
-        income: userParams.income,
+        plan: userParams.plan,
+        ...(userParams.zipcode && {zipcode: userParams.zipcode}),
+        ...(userParams.enrollment && {enrollment: userParams.enrollment}),
+        ...(userParams.income && {income: userParams.income}),
+        ...(userParams.homeSecure && {homeSecure: userParams.homeSecure}),
+        ...(userParams.foodSecure && {foodSecure: userParams.foodSecure}),
         lang: 'en',
+        phoneNumber: userParams.phoneNumber,
       },
     };
+
     const response = yield addUserData(userRegistrationParams);
     displayConsole('response', response);
     yield put(hideApiLoader());

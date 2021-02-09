@@ -38,6 +38,7 @@ class ChatBotScreen extends Component {
 
   handleSubmit = (userInfo) => {
     const {navigation, updateUserData, userData} = this.props;
+
     const {
       first_name,
       last_name,
@@ -51,6 +52,8 @@ class ChatBotScreen extends Component {
       zipcode,
       income,
       enrollment,
+      housingSecure,
+      foodSecure,
     } = userInfo;
 
     if (!first_name.value.trim()) {
@@ -81,15 +84,19 @@ class ChatBotScreen extends Component {
           insurance: insurance.value,
           plan: plan.value.trim(),
           lang: 'en',
-          zipcode: zipcode ? zipcode.value : '',
-          income: userInfo['update-income']
-            ? userInfo['update-income'].value
-            : income.value,
-          enrollment: enrollment ? enrollment.value : '',
+          phoneNumber: userData.profileInfo.phoneNumber,
+          ...(zipcode && {zipcode: zipcode.value}),
+          ...(income && {
+            income: userInfo['update-income']
+              ? userInfo['update-income']
+              : income.value,
+          }),
+          ...(enrollment && {enrollment: enrollment.value}),
+          ...(housingSecure && {homeSecure: housingSecure}),
+          ...(foodSecure && {foodSecure: foodSecure}),
         },
         navigation,
       };
-
       updateUserData(payloadData);
     }
   };
@@ -196,7 +203,7 @@ class ChatBotScreen extends Component {
         },
         {
           id: '23',
-          message: 'What is your sexuality?',
+          message: 'How do you sexually identify?',
           trigger: '24',
         },
         {
@@ -293,7 +300,7 @@ class ChatBotScreen extends Component {
         },
         {
           id: 'review',
-          component: <Review />,
+          component: <Review custom={false} />,
           trigger: 'update',
         },
         {
@@ -410,7 +417,7 @@ class ChatBotScreen extends Component {
         {
           id: 'intro',
           message:
-            "Hi, I'm Kiira BOT BEEP BEEP, your personal health assistant. I'm here to help you navigate your health. \n \n Let's get to know each other shall we?",
+            "Hi, I'm Kiira, your personal health assistant. I'm here to help you navigate your health. \n \n Let's get to know each other shall we?",
           trigger: '0',
         },
         {
@@ -616,7 +623,9 @@ class ChatBotScreen extends Component {
         },
         {
           id: 'income',
-          component: <ChatModal data={Constant.App.Modal.income} trigger="9" />,
+          component: (
+            <ChatModal data={Constant.App.Modal.income} trigger="31" />
+          ),
         },
         {
           id: '22',
@@ -629,13 +638,37 @@ class ChatBotScreen extends Component {
           trigger: '20',
         },
         {
+          id: '31',
+          message: 'Is your housing situation secure?',
+          trigger: 'housingSecure',
+        },
+        {
+          id: 'housingSecure',
+          options: [
+            {value: true, label: 'Yes', trigger: '32'},
+            {value: false, label: 'No', trigger: '32'},
+          ],
+        },
+        {
+          id: '32',
+          message: 'Do you have regular access to food?',
+          trigger: 'foodSecure',
+        },
+        {
+          id: 'foodSecure',
+          options: [
+            {value: true, label: 'Yes', trigger: '9'},
+            {value: false, label: 'No', trigger: '9'},
+          ],
+        },
+        {
           id: '9',
           message: 'Great! Check out your summary',
           trigger: 'review',
         },
         {
           id: 'review',
-          component: <Review />,
+          component: <Review custom={true} />,
           trigger: 'update',
         },
         {
@@ -700,6 +733,16 @@ class ChatBotScreen extends Component {
               value: 'income',
               label: 'Income',
               trigger: 'update-income',
+            },
+            {
+              value: 'foodSecure',
+              label: 'FoodS ecure',
+              trigger: 'update-food-secure',
+            },
+            {
+              value: 'housingSecure',
+              label: 'Housing Secure',
+              trigger: 'update-housing-secure',
             },
           ],
         },
@@ -772,6 +815,16 @@ class ChatBotScreen extends Component {
           component: <ChatModal data={Constant.App.Modal.income} trigger="9" />,
         },
         {
+          id: 'update-housing-secure',
+          update: 'housingSecure',
+          trigger: '9',
+        },
+        {
+          id: 'update-food-secure',
+          update: 'foodSecure',
+          trigger: '9',
+        },
+        {
           id: 'end-message',
           message: 'Thanks and welcome to Kiira!',
           end: true,
@@ -786,7 +839,11 @@ class ChatBotScreen extends Component {
             this.handleSubmit(steps);
           }}
           headerComponent={<Header />}
-          steps={organization.name.length ? steps.custom : steps.normal}
+          steps={
+            organization && organization.name.includes('Redwood')
+              ? steps.custom
+              : steps.normal
+          }
         />
       ) : null;
     }
