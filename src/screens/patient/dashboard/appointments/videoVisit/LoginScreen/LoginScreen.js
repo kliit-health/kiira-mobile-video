@@ -4,20 +4,9 @@ import {Header} from '../../../../../../components';
 import {CometChat} from '@cometchat-pro/react-native-chat';
 import {connect} from 'react-redux';
 import {ActivityIndicator} from 'react-native-paper';
-import {decode, encode} from 'base-64';
 import styles from './styles';
 import {generateCometChatUser} from '../../../../../../utils/helper';
 import {createCometChatUser} from '../../../../../../utils/firebase';
-
-if (!global.btoa) {
-  global.btoa = encode;
-}
-
-if (!global.atob) {
-  global.atob = decode;
-}
-
-this.DOMParser = require('xmldom').DOMParser;
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -42,32 +31,9 @@ class LoginScreen extends Component {
       .build();
     const {appId} = this.state;
 
-    CometChat.init(appId, appSettings).then(
-      () => {
-        CometChat.addConnectionListener(
-          'XMPPConnectionListener',
-          new CometChat.ConnectionListener({
-            onConnected: () => {
-              console.log('ConnectionListener => On Connected');
-            },
-            inConnecting: () => {
-              console.log('ConnectionListener => In connecting');
-            },
-            onDisconnected: () => {
-              console.log('ConnectionListener => On Disconnected');
-            },
-          }),
-        );
-        CometChat.getLoggedinUser().then((user) => {
-          if (user !== null) {
-            this.props.navigation.navigate('Home');
-          }
-        });
-      },
-      (error) => {
-        console.log('Initialization failed with error:', error);
-      },
-    );
+    CometChat.init(appId, appSettings).catch((error) => {
+      console.log('Initialization failed with error:', error);
+    });
   }
 
   buttonPressed() {

@@ -13,10 +13,10 @@ class MainCallScreen extends Component {
         console.log('OngoingCallListener: User joined call:', user.getUid());
       },
       onUserLeft: (user) => {
-        console.log('OngoingCallListener: User left call:', user.getUid());
+        console.log('OngoingCallListener: Expert left call:', user.getUid());
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by User', call);
+            console.log('Called Ended by Expert', call);
             this.props.navigation.navigate('VisitEnd');
           },
           (err) => {
@@ -28,13 +28,13 @@ class MainCallScreen extends Component {
 
       onCallEnded: (call) => {
         console.log(
-          'OngoingCallListener: Call ended listener',
+          'OngoingCallListener: Call ended Patient',
           call.getSessionId(),
         );
 
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by User', call);
+            console.log('Called Ended by Patient', call);
             this.props.navigation.navigate('VisitEnd');
           },
           (err) => {
@@ -102,24 +102,7 @@ class MainCallScreen extends Component {
   }
 
   gotoChat() {
-    if (this.acceptedFrom === 'Home') {
-      this.props.navigation.navigate('Home');
-    } else {
-      if (this.entityType === 'user') {
-        this.props.navigation.navigate('Chat', {
-          uid: this.entity.uid,
-          username: this.entity.name,
-          status: this.entity.status,
-          avatar: this.entity.avatar ? this.entity.avatar : 'user',
-        });
-      } else {
-        this.props.navigation.navigate('Group', {
-          uid: this.entity.guid,
-          username: this.entity.name,
-          avatar: this.entity.avatar ? this.entity.avatar : 'group',
-        });
-      }
-    }
+    this.props.navigation.navigate('Home');
   }
 
   render() {

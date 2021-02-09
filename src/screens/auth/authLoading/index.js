@@ -40,17 +40,9 @@ class AuthLoadingScreen extends Component {
   async getToken() {
     const {setData, userData, setToken, navigation} = this.props;
     if (!userData) {
-      let token = await AsyncStorage.getItem('fcmToken');
-      if (!token) {
-        token = await firebase.messaging().getToken();
-        if (token) {
-          // user has a device token
-          setToken(token);
-          await AsyncStorage.setItem('fcmToken', token);
-        }
-      } else {
-        await setToken(token);
-      }
+      let token = await firebase.messaging().getToken();
+      setToken(token);
+      await AsyncStorage.setItem('fcmToken', token);
       this.initNavigation(token);
     } else {
       if (userData && userData.profileInfo) {
@@ -60,8 +52,6 @@ class AuthLoadingScreen extends Component {
         } else {
           navigation.navigate(Constant.App.stack.AppStack);
         }
-      } else {
-        navigation.navigate(Constant.App.screenNames.AddProfileData);
       }
       SplashScreen.close({
         animationType: SplashScreen.animationType.scale,
@@ -72,18 +62,8 @@ class AuthLoadingScreen extends Component {
   }
 
   initNavigation(token) {
-    const {navigation, setData, userData, currentUser} = this.props;
+    const {navigation, setData, userData} = this.props;
     const user = firebase.auth().currentUser;
-
-    if (currentUser.timedOut) {
-      firebase.auth().signOut();
-      navigation.navigate(Constant.App.stack.AuthStack);
-      SplashScreen.close({
-        animationType: SplashScreen.animationType.scale,
-        duration: 3000,
-        delay: 500,
-      });
-    }
 
     if (user && user.uid) {
       try {
@@ -228,7 +208,6 @@ class AuthLoadingScreen extends Component {
 const mapStateToProps = (state) => ({
   userData: state.authLoading.userData,
   fcmToken: state.authLoading.fcmToken,
-  currentUser: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

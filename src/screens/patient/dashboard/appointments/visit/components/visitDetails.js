@@ -14,12 +14,12 @@ const VisitDetails = ({visit}) => {
     typeof visit.time === 'number'
       ? moment.unix(visit.time).format('MM/DD/YYYY')
       : moment(visit.time).format('YYYY-MM-DD');
-  let daysUntilVisit = Math.abs(
-    moment.duration(today.diff(appointment)).asDays(),
-  );
+  // let daysUntilVisit = Math.abs(
+  //   moment.duration(today.diff(appointment)).asDays(),
+  // );
 
   // To test video after booking
-  // let daysUntilVisit = 0;
+  let daysUntilVisit = 0;
 
   return (
     <View style={{alignSelf: 'center'}}>
