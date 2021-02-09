@@ -5,24 +5,18 @@ import {
   GET_USER_PENDING,
   GET_USER_FULFILLED,
   GET_USER_REJECTED,
-  TIME_OUT,
   UPDATE_USER_PENDING,
   UPDATE_USER_REJECTED,
   UPDATE_USER_FULFILLED,
-  CLEAR_TIME_OUT,
 } from '../types';
 
 const initialState = {
   data: models.user,
-  timedOut: false,
   loading: false,
   error: null,
 };
 
 export default createReducer((state = initialState), {
-  [CLEAR_TIME_OUT]: (state) => {
-    state.timedOut = false;
-  },
   [GET_USER_PENDING]: (state) => {
     state.loading = true;
   },
@@ -38,16 +32,13 @@ export default createReducer((state = initialState), {
       details: data,
     };
   },
-  [TIME_OUT]: (state) => {
-    state.timedOut = true;
-  },
   [UPDATE_USER_PENDING]: (state) => {
     state.loading = true;
   },
   [UPDATE_USER_FULFILLED]: (state, {data}) => {
     state.loading = false;
     state.error = null;
-    state.data = merge(models.user, data);
+    state.data = merge(state.data, data);
   },
   [UPDATE_USER_REJECTED]: (state, {data}) => {
     state.loading = false;

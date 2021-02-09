@@ -11,7 +11,6 @@ import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
 import Carousel from '../../../components/carousel';
-import {clearTimeOut} from '../../../redux/actions/user';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -88,7 +87,6 @@ const Tutorial = (props) => {
           textStyle={styles.loginButtonTextStyle}
           buttonStyle={styles.loginButtonStyle}
           onPress={() => {
-            dispatch(clearTimeOut());
             navigation.navigate(Constant.App.screenNames.Login);
           }}
         />

@@ -17,7 +17,6 @@ function* getLicenses() {
     });
   } catch (error) {
     yield put({type: GET_LICENSES_REJECTED, data: error});
-    console.error(error);
   }
 }
 

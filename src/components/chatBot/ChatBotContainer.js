@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 const ChatBotContainer = styled.View`
   background-color: #f5f8fb;
