@@ -269,6 +269,8 @@ export async function makeAppointment({data}) {
       prepaid,
       insurance,
       plan,
+      organizationId,
+      complete,
     } = data;
 
     let response;
@@ -317,6 +319,8 @@ export async function makeAppointment({data}) {
             comet: userName,
             insurance,
             plan,
+            organizationId,
+            complete,
           };
         })
         .catch((error) => {

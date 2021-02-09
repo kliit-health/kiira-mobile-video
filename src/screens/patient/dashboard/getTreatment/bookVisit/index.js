@@ -42,6 +42,8 @@ const BookVisit = (props) => {
     prepaid: bookVisit.prepaid,
     insurance: userData.profileInfo.insurance,
     plan: userData.profileInfo.plan,
+    orangizationId: userData.organizationId,
+    complete: false,
     expert: {
       firstName: expertData.profileInfo.firstName,
       lastName: expertData.profileInfo.lastName,
