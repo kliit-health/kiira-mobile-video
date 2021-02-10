@@ -34,6 +34,7 @@ function* updateNewUserData({data}) {
         lastName: userParams.lastName,
         dob: userParams.dob,
         pronouns: userParams.pronouns,
+        gender: userParams.gender,
         state: userParams.state,
         sexuality: userParams.sexuality,
         insurance: userParams.insurance,

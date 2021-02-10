@@ -736,7 +736,7 @@ class ChatBotScreen extends Component {
             },
             {
               value: 'foodSecure',
-              label: 'FoodS ecure',
+              label: 'Food Secure',
               trigger: 'update-food-secure',
             },
             {

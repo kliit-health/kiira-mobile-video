@@ -13,10 +13,10 @@ class MainCallScreen extends Component {
         console.log('OngoingCallListener: User joined call:', user.getUid());
       },
       onUserLeft: (user) => {
-        console.log('OngoingCallListener: Expert left call:', user.getUid());
+        console.log('OngoingCallListener: User left call:', user.getUid());
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by Expert', call);
+            console.log('Called Ended by User', call);
             this.props.navigation.navigate('VisitEnd');
           },
           (err) => {
@@ -28,13 +28,13 @@ class MainCallScreen extends Component {
 
       onCallEnded: (call) => {
         console.log(
-          'OngoingCallListener: Call ended Patient',
+          'OngoingCallListener: Call ended listener',
           call.getSessionId(),
         );
 
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by Patient', call);
+            console.log('Called Ended by User', call);
             this.props.navigation.navigate('VisitEnd');
           },
           (err) => {
@@ -85,11 +85,13 @@ class MainCallScreen extends Component {
                 },
                 (error) => {
                   console.log('Logout failed with exception:', {error});
+                  this.props.navigation.navigate('Appointments');
                 },
               );
             },
             (error) => {
               console.log('Call rejection failed with error:', error);
+              this.props.navigation.navigate('Appointments');
             },
           );
         },

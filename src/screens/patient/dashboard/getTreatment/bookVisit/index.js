@@ -18,7 +18,7 @@ const BookVisit = (props) => {
   const expertData = useSelector((state) => state.expertProfile.expertData);
 
   const visitData = useSelector((state) => state.expertSchedule);
-  const userData = useSelector((state) => state.user.data);
+  const userData = useSelector((state) => state.authLoading.userData);
   const bookVisit = useSelector((state) => state.bookVisit);
 
   const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;

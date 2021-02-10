@@ -219,6 +219,7 @@ class CallingScreen extends Component {
       },
       (error) => {
         console.log('Call rejection failed with error', error);
+        this.gotoChat();
       },
     );
   }

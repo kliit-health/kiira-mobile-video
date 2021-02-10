@@ -10,7 +10,7 @@ import {
 import {connect} from 'react-redux';
 import CustomText from '../../../../components/customText';
 import styles from './style';
-import Constant from '../../../../utils/constants';
+import Constant, {screenNames} from '../../../../utils/constants';
 import InputText from '../../../../components/customInputText/simpleInputText';
 import CustomButton from '../../../../components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -482,7 +482,10 @@ class Ask extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Header title="" onBack={() => navigation.goBack()} />
+        <Header
+          title=""
+          onBack={() => navigation.navigate(screenNames.BottomTab)}
+        />
         <View
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>

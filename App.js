@@ -173,12 +173,6 @@ class App extends PureComponent {
             );
           }, Constant.App.logoutInterval);
         }, options);
-      } else if (Platform.OS === 'android') {
-        const payload = {
-          navigation: NavigationService,
-          isLoaderShow: false,
-        };
-        signOut(payload);
       }
     }
   };

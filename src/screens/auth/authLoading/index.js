@@ -41,7 +41,7 @@ class AuthLoadingScreen extends Component {
     const {setData, userData, setToken, navigation} = this.props;
     if (!userData) {
       let token = await firebase.messaging().getToken();
-      setToken(token);
+      await setToken(token);
       await AsyncStorage.setItem('fcmToken', token);
       this.initNavigation(token);
     } else {
@@ -52,6 +52,8 @@ class AuthLoadingScreen extends Component {
         } else {
           navigation.navigate(Constant.App.stack.AppStack);
         }
+      } else {
+        navigation.navigate(Constant.App.screenNames.AddProfileData);
       }
       SplashScreen.close({
         animationType: SplashScreen.animationType.scale,

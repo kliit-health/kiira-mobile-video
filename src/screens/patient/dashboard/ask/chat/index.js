@@ -216,7 +216,7 @@ class Chat extends React.PureComponent {
 
   handleBackPress = () => {
     const {navigation} = this.props;
-    navigation.navigate(screenNames.AskUser);
+    navigation.goBack();
   };
 
   handlePickerCancel = () => {
@@ -253,7 +253,11 @@ class Chat extends React.PureComponent {
 
     return (
       <Container unformatted>
-        <Header title={fullName} onBack={() => this.handleBackPress()} />
+        <Header
+          title={fullName}
+          onBack={() => this.handleBackPress()}
+          onClose={() => navigation.navigate(screenNames.BottomTab)}
+        />
 
         <MessageList messages={this.props.messages} />
         <Footer

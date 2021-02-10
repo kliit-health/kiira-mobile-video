@@ -14,20 +14,12 @@ class ExpertMainCallScreen extends Component {
         console.log('OngoingCallListener: User joined call:', user.getUid());
       },
       onUserLeft: (user) => {
-        console.log('OngoingCallListener: User left call:', user.getUid());
+        console.log('OngoingCallListener: Patient left call:', user.getUid());
 
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by User', call);
-            CometChat.logout().then(
-              () => {
-                console.log('Logout completed successfully');
-                this.props.navigation.navigate('ExpertAppointments');
-              },
-              (error) => {
-                console.log('Logout failed with exception:', {error});
-              },
-            );
+            console.log('Called Ended by Patient', call);
+            this.props.navigation.navigate('ExpertHomeScreen');
           },
           (err) => {
             console.log('Error ending call', err);
@@ -42,17 +34,8 @@ class ExpertMainCallScreen extends Component {
 
         CometChat.endCall(this.sessionId).then(
           (call) => {
-            console.log('Called Ended by User', call);
-            CometChat.logout().then(
-              () => {
-                console.log('Logout completed successfully');
-                this.props.navigation.navigate('ExpertAppointments');
-              },
-              (error) => {
-                console.log('Logout failed with exception:', {error});
-                this.props.navigation.navigate('ExpertAppointments');
-              },
-            );
+            console.log('Called Ended by Expert', call);
+            this.props.navigation.navigate('ExpertHomeScreen');
           },
           (err) => {
             console.log('Error ending call', err);

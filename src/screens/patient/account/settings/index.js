@@ -7,6 +7,7 @@ import {
   ScrollView,
   PermissionsAndroid,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
@@ -476,6 +477,7 @@ class Setting extends PureComponent {
 
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" translucent={true} />
         {this.renderHeaderView()}
         <ScrollView
           keyboardShouldPersistTaps="handled"

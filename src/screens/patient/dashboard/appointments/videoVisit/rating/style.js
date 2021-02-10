@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 35,
     borderColor: Constant.App.colors.whiteColor,
     borderTopWidth: 30,
+    backgroundColor: Constant.App.colors.whiteColor,
+    height: metrics.DEVICE_HEIGHT,
   },
 
   ratingStar: {

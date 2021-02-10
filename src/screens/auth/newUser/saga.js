@@ -13,6 +13,7 @@ const defaultImage =
 
 function* agreeToTerms(data) {
   const lang = yield select((state) => state.language);
+  const {fcmToken} = yield select((state) => state.authLoading);
   try {
     const {navigation} = data.payload;
     const {userData} = navigation.state.params;
@@ -32,6 +33,7 @@ function* agreeToTerms(data) {
       foodSecure,
       phoneNumber,
       plan,
+      gender,
     } = userData.profileInfo;
 
     const userRegistrationParams = {
@@ -42,7 +44,7 @@ function* agreeToTerms(data) {
       role: 'User',
       prepaid: userData.prepaid,
       firstLogin: false,
-      fcmToken: userData.fcmToken,
+      fcmToken,
       profileInfo: {
         profileImageUrl: defaultImage,
         firstName,
@@ -55,6 +57,7 @@ function* agreeToTerms(data) {
         plan,
         lang: 'en',
         phoneNumber,
+        gender,
         ...(zipcode && {zipcode}),
         ...(enrollment && {enrollment}),
         ...(income && {income}),
