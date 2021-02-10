@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {ScrollView} from 'react-native';
+import {ScrollView, StatusBar} from 'react-native';
 import {useDidMount} from '../../../utils/hooks';
 import * as actions from '../../../redux/actions';
 import {Container} from '../../../components';
@@ -130,7 +130,7 @@ const Dashboard = ({navigation}) => {
     );
 
   return (
-    <Container styles={styles.container} unformatted>
+    <Container styles={styles.container} barStyle={'dark-content'} unformatted>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Intro
           displayName={user.profileInfo.firstName}

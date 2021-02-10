@@ -97,6 +97,7 @@ class HomeScreen extends Component {
       (error) => {
         //Logout failed with exception
         console.log('Logout failed with exception:', {error});
+        this.props.navigation.navigate('Appointments');
       },
     );
   };

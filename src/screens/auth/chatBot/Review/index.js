@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import style from './style';
 import PropTypes from 'prop-types';
@@ -10,11 +10,14 @@ const Review = (props) => {
     pronouns: '',
     gender: '',
     dob: '',
+    zipcode: '',
+    income: '',
+    enrollment: '',
   });
 
-  useEffect(() => {
-    const {steps} = props;
+  const {steps, custom} = props;
 
+  useEffect(() => {
     const {
       first_name,
       last_name,
@@ -28,6 +31,8 @@ const Review = (props) => {
       zipcode,
       income,
       enrollment,
+      housingSecure,
+      foodSecure,
     } = steps;
     setState({
       first_name,
@@ -39,9 +44,11 @@ const Review = (props) => {
       sexuality: sexuality.value,
       insurance,
       plan,
-      zipcode,
-      income: income.value,
-      enrollment,
+      zipcode: zipcode ? zipcode : '',
+      income: income && income.value ? income.value : '',
+      enrollment: enrollment ? enrollment : '',
+      housingSecure,
+      foodSecure,
     });
   }, []);
 
@@ -55,8 +62,10 @@ const Review = (props) => {
     plan,
     zipcode,
     enrollment,
+    housingSecure,
+    foodSecure,
   } = currentState;
-  console.log('CURRENT STATE', currentState);
+
   let state =
     props.steps['update-state'] && props.steps['update-state'].value
       ? props.steps['update-state'].value
@@ -65,10 +74,13 @@ const Review = (props) => {
     props.steps['update-sexuality'] && props.steps['update-sexuality'].value
       ? props.steps['update-sexuality'].value
       : props.steps.sexuality.value;
-  let income =
-    props.steps['update-income'] && props.steps['update-income'].value
-      ? props.steps['update-income'].value
-      : props.steps.income.value;
+  let income;
+  if (props.steps.income) {
+    income =
+      props.steps['update-income'] && props.steps['update-income'].value
+        ? props.steps['update-income'].value
+        : props.steps.income.value;
+  }
 
   return (
     <View style={style.container}>
@@ -140,32 +152,54 @@ const Review = (props) => {
           )}
         </View>
 
-        <View style={{width: 100}}>
-          <Text style={style.category}>Zip Code:</Text>
-          {typeof zipcode === null || !zipcode ? (
-            <Text> </Text>
-          ) : (
-            <Text style={style.plan}>{zipcode.value || ''}</Text>
-          )}
-        </View>
+        {custom && (
+          <Fragment>
+            <View style={{width: 100}}>
+              <Text style={style.category}>Zip Code:</Text>
+              {typeof zipcode === null || !zipcode ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{zipcode.value || ''}</Text>
+              )}
+            </View>
 
-        <View style={{width: 100}}>
-          <Text style={style.category}>Enrollment:</Text>
-          {typeof enrollment === null || !enrollment ? (
-            <Text> </Text>
-          ) : (
-            <Text style={style.plan}>{enrollment.value || ''}</Text>
-          )}
-        </View>
+            <View style={{width: 100}}>
+              <Text style={style.category}>Home Secure:</Text>
+              {typeof housingSecure === null || !housingSecure ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{housingSecure.message || ''}</Text>
+              )}
+            </View>
 
-        <View>
-          <Text style={style.category}>Household Income:</Text>
-          {typeof income === null || !income ? (
-            <Text> </Text>
-          ) : (
-            <Text style={style.plan}>{income.value || ''}</Text>
-          )}
-        </View>
+            <View>
+              <Text style={style.category}>Food Secure:</Text>
+              {typeof foodSecure === null || !foodSecure ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{foodSecure.message || ''}</Text>
+              )}
+            </View>
+
+            <View style={{width: 100}}>
+              <Text style={style.category}>Enrollment:</Text>
+              {typeof enrollment === null || !enrollment ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{enrollment.value || ''}</Text>
+              )}
+            </View>
+
+            <View>
+              <Text style={style.category}>Household Income:</Text>
+              {typeof income === null || !income ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{income.value || ''}</Text>
+              )}
+            </View>
+          </Fragment>
+        )}
       </View>
     </View>
   );

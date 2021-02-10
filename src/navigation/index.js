@@ -33,16 +33,13 @@ import CurrentPregnancy from '../screens/patient/dashboard/healthHistory/pregnan
 import Dashboard from '../screens/patient/dashboard';
 import DueDate from '../screens/patient/dashboard/healthHistory/pregnancy/dueDate';
 import ExpertAppointments from '../screens/provider/appointments';
-import ExpertBlockedUsers from '../screens/provider/appointments/videoVisit/BlockedUsers';
 import ExpertCallingScreen from '../screens/provider/appointments/videoVisit/CallingScreen';
 import ExpertMainCallScreen from '../screens/provider/appointments/videoVisit/MainCallScreen';
 import ExpertChatScreen from '../screens/provider/appointments/videoVisit/ChatScreen/ChatScreen';
 import ExpertHomeScreen from '../screens/provider/appointments/videoVisit/HomeScreen/HomeScreen';
-import ExpertImageViewer from '../screens/provider/appointments/videoVisit/ImageViewer';
 import ExpertProfile from '../screens/patient/dashboard/appointments/expertProfile';
 import ExpertSchedule from '../screens/patient/dashboard/getTreatment/expertSchedule';
 import ExpertLoginScreen from '../screens/provider/appointments/videoVisit/LoginScreen/LoginScreen';
-import ExpertVideoPlayer from '../screens/provider/appointments/videoVisit/VideoPlayer';
 import ExpertVisit from '../screens/provider/appointments/visit';
 import FamilyHistory from '../screens/provider/appointments/patientProfile/family';
 import ForgotPassword from '../screens/auth/forgotPassword';
@@ -95,7 +92,6 @@ import TermsConditions from '../screens/common/termsAndConditions';
 import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
 import Verify from '../screens/auth/verify';
-import VideoPlayer from '../screens/patient/dashboard/appointments/videoVisit/VideoPlayer';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
 import Welcome from '../screens/auth/welcome';
@@ -446,14 +442,11 @@ const AppStackExpert = createStackNavigator(
     Consent: {screen: Consent},
     ChangePasswordExpert: {screen: ChangePasswordExpert},
     ChatExpert: {screen: ChatExpert},
-    ExpertBlockedUsers: {screen: ExpertBlockedUsers},
     ExpertCallingScreen: {screen: ExpertCallingScreen},
     ExpertChatScreen: {screen: ExpertChatScreen},
     ExpertMainCallScreen: {screen: ExpertMainCallScreen},
     ExpertHomeScreen: {screen: ExpertHomeScreen},
-    ExpertImageViewer: {screen: ExpertImageViewer},
     ExpertLoginScreen: {screen: ExpertLoginScreen},
-    ExpertVideoPlayer: {screen: ExpertVideoPlayer},
     ExpertVisit: {screen: ExpertVisit},
     FamilyHistory: {screen: FamilyHistory},
     GynHistory: {screen: GynHistory},
@@ -544,7 +537,6 @@ const VideoStack = createStackNavigator(
   {
     VideoLogin: {screen: LoginScreen},
     Home: {screen: HomeScreen},
-    Video: {screen: VideoPlayer},
     MainCallScreen: {screen: MainCallScreen},
     CallingScreen: {screen: CallingScreen},
     RatingScreen: {screen: Rating},

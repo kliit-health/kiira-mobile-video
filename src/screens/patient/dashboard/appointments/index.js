@@ -23,9 +23,13 @@ const Appointments = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    let filtered = visitData.history.filter((visit) =>
-      moment(visit.time).isSameOrAfter(new Date()),
-    );
+    let filtered = visitData.history.filter((visit) => {
+      let appointment = moment(visit.time);
+      let now = moment(new Date());
+      if (appointment.diff(now, 'hours') >= -1) {
+        return visit;
+      }
+    });
 
     filtered = filtered.sort((a, b) => {
       return (

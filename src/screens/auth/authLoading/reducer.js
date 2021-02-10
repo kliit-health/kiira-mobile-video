@@ -26,7 +26,6 @@ const authLoading = (state = initialState, action) => {
       return {
         ...state,
         fcmToken: action.data,
-        userData: {...state.userData, fcmToken: action.data},
       };
     case SET_APP_STATE:
       return {

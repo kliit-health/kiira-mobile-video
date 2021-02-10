@@ -49,10 +49,10 @@ class ExpertCallingScreen extends Component {
           that.startCall();
         },
         onOutgoingCallRejected(call) {
-          this.props.navigation.navigate('ExpertAppointments');
+          this.props.navigation.navigate('ExpertHomeScreen');
         },
         onIncomingCallCancelled(call) {
-          this.props.navigation.navigate('ExpertAppointments');
+          this.props.navigation.navigate('ExpertHomeScreen');
         },
       }),
     );
@@ -65,24 +65,7 @@ class ExpertCallingScreen extends Component {
   };
 
   gotoChat() {
-    if (this.acceptedFrom === 'Home') {
-      this.props.navigation.navigate('Home');
-    } else {
-      if (this.entityType === 'user') {
-        this.props.navigation.navigate('Chat', {
-          uid: this.entity.uid,
-          username: this.entity.name,
-          status: this.entity.status,
-          avatar: this.entity.avatar ? this.entity.avatar : 'user',
-        });
-      } else {
-        this.props.navigation.navigate('Group', {
-          uid: this.entity.uid,
-          username: this.entity.name,
-          avatar: this.entity.avatar ? this.entity.avatar : 'group',
-        });
-      }
-    }
+    this.props.navigation.navigate('ExpertHomeScreen');
   }
 
   renderIncomingCallScreen() {

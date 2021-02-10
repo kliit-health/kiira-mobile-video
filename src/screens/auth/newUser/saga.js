@@ -13,33 +13,56 @@ const defaultImage =
 
 function* agreeToTerms(data) {
   const lang = yield select((state) => state.language);
+  const {fcmToken} = yield select((state) => state.authLoading);
   try {
     const {navigation} = data.payload;
     const {userData} = navigation.state.params;
+
+    const {
+      firstName,
+      lastName,
+      dob,
+      pronouns,
+      state,
+      sexuality,
+      insurance,
+      income,
+      enrollment,
+      zipcode,
+      homeSecure,
+      foodSecure,
+      phoneNumber,
+      plan,
+      gender,
+    } = userData.profileInfo;
+
     const userRegistrationParams = {
       agreeToTerms: true,
       displayName: userData.displayName,
       email: userData.email,
       uid: userData.uid,
       role: 'User',
-      isActive: true,
       prepaid: userData.prepaid,
       firstLogin: false,
-      fcmToken: userData.fcmToken,
+      fcmToken,
       profileInfo: {
         profileImageUrl: defaultImage,
-        firstName: userData.profileInfo.firstName,
-        lastName: userData.profileInfo.lastName,
-        dob: userData.profileInfo.dob,
-        pronouns: userData.profileInfo.pronouns,
-        state: userData.profileInfo.state,
-        sexuality: userData.profileInfo.sexuality,
-        insurance: userData.profileInfo.insurance,
-        plan: userData.plan,
-        income: userData.profileInfo.income,
-        zipcode: userData.profileInfo.zipcode,
-        enrollment: userData.profileInfo.enrollment,
+        firstName,
+        lastName,
+        dob,
+        pronouns,
+        state,
+        sexuality,
+        insurance,
+        plan,
         lang: 'en',
+        phoneNumber,
+        gender,
+        ...(zipcode && {zipcode}),
+        ...(enrollment && {enrollment}),
+        ...(income && {income}),
+        ...(homeSecure && {homeSecure: homeSecure.value}),
+        ...(foodSecure && {foodSecure: foodSecure.value}),
       },
     };
     yield addUserData(userRegistrationParams);

@@ -1,12 +1,19 @@
-import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {
   StatusBar,
   View,
   ImageBackground,
   ScrollView,
   Dimensions,
+  Platform,
 } from 'react-native';
+import {
+  requestMultiple,
+  checkMultiple,
+  PERMISSIONS,
+  RESULTS,
+} from 'react-native-permissions';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
@@ -44,7 +51,40 @@ let banner = [
 const Tutorial = (props) => {
   const {navigation} = props;
   const lang = useSelector((state) => state.language);
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      checkMultiple([
+        PERMISSIONS.ANDROID.CAMERA,
+        PERMISSIONS.ANDROID.RECORD_AUDIO,
+        PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+      ])
+        .then((statuses) => {
+          for (var key in statuses) {
+            if (statuses.hasOwnProperty(key)) {
+              switch (statuses[key]) {
+                case RESULTS.UNAVAILABLE:
+                  break;
+                case RESULTS.DENIED:
+                  requestMultiple([
+                    PERMISSIONS.ANDROID.CAMERA,
+                    PERMISSIONS.ANDROID.RECORD_AUDIO,
+                    PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+                  ]).then((result) => {});
+                  break;
+                case RESULTS.GRANTED:
+                  break;
+                case RESULTS.BLOCKED:
+                  break;
+              }
+            }
+          }
+        })
+        .catch((error) => {
+          console.log('The permission error', error);
+        });
+    }
+  }, []);
 
   const renderSliderView = () => {
     return (
