@@ -1,4 +1,4 @@
-import {SET_VISIT, SET_LOGIN} from '../../../../../redux/types';
+import {SET_VISIT} from '../../../../../redux/types';
 
 const initialState = {
   visit: {},
@@ -11,11 +11,6 @@ const visit = (state = initialState, {type, data}) => {
       return {
         ...state,
         visit: data,
-      };
-    case SET_LOGIN:
-      return {
-        ...state,
-        details: data,
       };
     default:
       return {

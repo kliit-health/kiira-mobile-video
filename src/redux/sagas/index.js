@@ -38,9 +38,9 @@ import subscription from './subscription';
 import verification from '../../screens/auth/verify/saga';
 import termsAndConditions from './termsAndConditions';
 import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/saga';
+import twillio from './twillio';
 import user from './user';
 import updateExpert from '../../screens/provider/account/updateAvailablity/saga';
-import visit from '../../screens/patient/dashboard/appointments/visit/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -81,10 +81,10 @@ export default function* rootSaga() {
     signup(),
     subscription(),
     termsAndConditions(),
+    twillio(),
     verification(),
     treatmentHistory(),
     updateExpert(),
     user(),
-    visit(),
   ]);
 }

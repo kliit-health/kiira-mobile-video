@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     shadowRadius: 10, //IOS
     elevation: 2, // Android
     margin: 15,
+    marginBottom: smallScreen ? 25 : 15,
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 1,
     fontFamily: Constant.App.fontFamily.bodyRegular,

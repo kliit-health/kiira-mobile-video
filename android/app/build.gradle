@@ -132,8 +132,8 @@ android {
         applicationId "com.kiira"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 47
-        versionName '1.2.4'
+        versionCode 48
+        versionName '1.2.5'
         multiDexEnabled true
     }
     splits {
@@ -209,7 +209,7 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
-
+    compile project(':react-native-twilio-video-webrtc')
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation "com.google.firebase:firebase-storage:17.0.0"

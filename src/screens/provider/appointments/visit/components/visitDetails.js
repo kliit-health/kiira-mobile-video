@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Image, Text} from 'react-native';
+import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import CustomButton from '../../../../../components/customButton';
+import {setVisit} from '../../../../patient/dashboard/appointments/visit/actions';
 import styles from '../styles';
-import {useDispatch} from 'react-redux';
 import {withNavigation} from 'react-navigation';
 import CancelModal from './cancelModal';
-import {getLogin} from '../../../../patient/dashboard/appointments/visit/actions';
 
-const VisitDetails = ({navigation, visit, ...props}) => {
+const VisitDetails = ({navigation, visit}) => {
   const dispatch = useDispatch();
   let today = moment().startOf('day');
   let appointment = moment(visit.time).format('YYYY-MM-DD');
@@ -17,6 +17,10 @@ const VisitDetails = ({navigation, visit, ...props}) => {
   );
 
   let [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    dispatch(setVisit(visit));
+  });
 
   return (
     <View style={{alignSelf: 'center'}}>
@@ -40,9 +44,7 @@ const VisitDetails = ({navigation, visit, ...props}) => {
         <CustomButton
           buttonStyle={styles.buttonStyle}
           textStyle={styles.buttonText}
-          onPress={() =>
-            dispatch(getLogin({destination: 'ExpertLoginScreen', visit}))
-          }
+          onPress={() => navigation.navigate('ExpertTwillioLogin', {visit})}
           text="Start Visit"
         />
         <CustomButton

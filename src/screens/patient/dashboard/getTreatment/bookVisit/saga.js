@@ -4,7 +4,6 @@ import {
   getDataFromTable,
   makeAppointment,
   updateCredits,
-  createCometChatUser,
 } from '../../../../../utils/firebase';
 import {
   showApiLoader,
@@ -35,7 +34,6 @@ function* setAppointment(data) {
     };
 
     const userData = yield getDataFromTable(obj);
-    yield createCometChatUser(userData);
 
     yield put(setUserData(userData));
   } catch (error) {

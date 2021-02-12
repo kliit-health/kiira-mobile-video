@@ -736,16 +736,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@cometchat-pro/react-native-calls@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@cometchat-pro/react-native-calls/-/react-native-calls-1.0.7.tgz#fce146fed2dc79222449bf358178105e6a800fef"
-  integrity sha512-/Ydgedck3F+hnZMTy7sNrLlIJZrR7VKkXlngtmHeMq3+r4ClHdQJap0Cw7lyfG1kIj6qRJLC9Ge6Ohk0NMtXIg==
-
-"@cometchat-pro/react-native-chat@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@cometchat-pro/react-native-chat/-/react-native-chat-2.1.7.tgz#55410ac0e1ecdf3f8198671ec2a982655c65e0af"
-  integrity sha512-4C8t29gW391hpCBOT0X8wLnFb3W+nyD4XTkMrvz5NKKznUmsOLY+J0nH6/9Ve3uBAgGm4V1WwMGi5mehtVSVgA==
-
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -6778,6 +6768,11 @@ react-native-background-actions@^2.5.2:
   resolved "https://registry.yarnpkg.com/react-native-background-actions/-/react-native-background-actions-2.5.2.tgz#bc6f886cff5a0067dcc7353019f6e072a7d22e05"
   integrity sha512-LP6OfjIabtNXtPw0AUL0rrqFoZAx+YDOEa7eY8AsRIQrBUYuQRNZhc7cvqtE+VXge4F1dFdeSLrt17/lVky5fA==
 
+react-native-background-timer@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-2.4.1.tgz#a3bc1cafa8c1e3aeefd0611de120298b67978a0f"
+  integrity sha512-TE4Kiy7jUyv+hugxDxitzu38sW1NqjCk4uE5IgU2WevLv7sZacaBc6PZKOShNRPGirLl1NWkaG3LDEkdb9Um5g==
+
 react-native-cached-image@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/react-native-cached-image/-/react-native-cached-image-1.4.3.tgz#0942e2cd078284a1f0438de8dfe17f2b36a89752"
@@ -7005,6 +7000,12 @@ react-native-tab-view@^2.15.2:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"
   integrity sha512-2hxLkBnZtEKFDyfvNO5EUywhy3f/EiLOBO8SWqKj4BMBTO0QwnybaPE5MVF00Fhz+VA4+h/iI40Dkrrtq70dGg==
+
+"react-native-twilio-video-webrtc@https://github.com/blackuy/react-native-twilio-video-webrtc":
+  version "2.0.0"
+  resolved "https://github.com/blackuy/react-native-twilio-video-webrtc#d0f6e29f057318814f8aa81e7fdc15c6b034d016"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-vector-icons@^6.6.0:
   version "6.7.0"

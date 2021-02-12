@@ -63,7 +63,8 @@ function* setExpertRating({data}) {
   } catch (error) {
     console.error(error);
   }
-  navigation.navigate(Constant.App.stack.AppStack);
+
+  navigation.navigate('BottomTab');
 }
 
 export default function* appointmentsSaga() {

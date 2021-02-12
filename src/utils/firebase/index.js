@@ -269,7 +269,6 @@ export async function makeAppointment({data}) {
       prepaid,
       insurance,
       plan,
-      organizationId,
       complete,
     } = data;
 
@@ -277,13 +276,6 @@ export async function makeAppointment({data}) {
     let noPrescription = 'I do not need a prescription,';
     let yesPrescription = 'I need a prescription,';
     let reasonForVisit = `and would like to talk about ${reason}`;
-
-    let userName =
-      firstName.toLowerCase() +
-      '_' +
-      lastName.toLowerCase() +
-      '_' +
-      uid.substr(-5).toLowerCase();
 
     let notes = prescription
       ? `${yesPrescription} ${reasonForVisit}`
@@ -316,10 +308,8 @@ export async function makeAppointment({data}) {
             expert,
             locked: false,
             prepaid,
-            comet: userName,
             insurance,
             plan,
-            organizationId,
             complete,
           };
         })
@@ -1746,6 +1736,7 @@ async function lockPaitentRecord({uid, id}) {
   appointmentList.history.map((item) => {
     if (item.id === id) {
       item.locked = true;
+      item.complete = true;
       return item;
     }
     return item;
@@ -1762,6 +1753,7 @@ async function lockExpertRecord({uid, id, expert}) {
   appointmentList.history[uid].map((item) => {
     if (item.id === id) {
       item.locked = true;
+      item.complete = true;
       return item;
     }
     return item;
@@ -1810,34 +1802,6 @@ export async function setVideoVisitRating(data) {
     {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
     {merge: true},
   );
-}
-
-export async function createCometChatUser(user) {
-  try {
-    const options = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    };
-    await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/createCometChatUser`,
-      options,
-    ).then((res) => res);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-export async function getCometChatDetailsAsync() {
-  try {
-    const details = await functions.httpsCallable('getCometChatCredentials')();
-    return details;
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 export async function sendVisitRecap({payload}) {
@@ -1893,5 +1857,16 @@ export async function getOrganizationInfo(user) {
     return organization.data();
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function authorizeVideo(uid) {
+  try {
+    const token = await functions.httpsCallable('videoSessionJoin')({
+      userName: uid,
+    });
+    return token;
+  } catch (error) {
+    console.log(error);
   }
 }
