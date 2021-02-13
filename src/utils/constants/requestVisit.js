@@ -21,7 +21,7 @@ export default [
     title: 'Sex Therapy',
   },
   {
-    title: 'Therapy',
+    title: 'Talk Therapy',
   },
   {
     title: 'Sexually Transmitted Infections',

@@ -27,7 +27,7 @@ class BuyingCredit extends PureComponent {
     super(props);
     const AddPaymentMethod = {
       type: PaymentMethodsTypes.addPaymentMethod,
-      title: props.lang.buyingCredits.addPaymentMethod,
+      title: 'Add Payment Method',
     };
     this.state = {
       amountOptionIndex: 0,
@@ -130,14 +130,20 @@ class BuyingCredit extends PureComponent {
     if (credits <= 0) {
       return;
     }
-    if (paymentMethod.type === PaymentMethodsTypes.card) {
-      this.props.buyCredits(paymentMethod.id, credits, amount);
-    } else if (paymentMethod.type === PaymentMethodsTypes.applePay) {
-      await this.payUsingApplePay(credits, amount);
-    } else if (paymentMethod.type === PaymentMethodsTypes.payPal) {
-      this.props.buyCreditsUsingPayPal(credits, amount, this.props.navigation);
-    } else {
-      this.props.showAlert(Language.en.buyingCredits.selectPaymentMethod);
+    if (paymentMethod && paymentMethod.type) {
+      if (paymentMethod.type === PaymentMethodsTypes.card) {
+        this.props.buyCredits(paymentMethod.id, credits, amount);
+      } else if (paymentMethod.type === PaymentMethodsTypes.applePay) {
+        await this.payUsingApplePay(credits, amount);
+      } else if (paymentMethod.type === PaymentMethodsTypes.payPal) {
+        this.props.buyCreditsUsingPayPal(
+          credits,
+          amount,
+          this.props.navigation,
+        );
+      } else {
+        this.props.showAlert(Language.en.buyingCredits.selectPaymentMethod);
+      }
     }
   };
 
@@ -166,7 +172,10 @@ class BuyingCredit extends PureComponent {
         ...method,
         type: PaymentMethodsTypes.card,
       })),
-      this.AddPaymentMethod,
+      {
+        type: 'AddPaymentMethod',
+        title: 'Add Payment Method',
+      },
     ];
 
     const {
@@ -211,16 +220,18 @@ class BuyingCredit extends PureComponent {
   };
 
   renderPaymentDropdownCell = (option, _, isSelected) => {
-    if (option.type === PaymentMethodsTypes.addPaymentMethod) {
-      return this.renderAddPaymentMethodCell();
-    } else if (option.type === PaymentMethodsTypes.payPal) {
-      return this.renderPayPalCell(option.title);
-    } else if (option.type === PaymentMethodsTypes.applePay) {
-      return this.renderApplePayCell(option.title);
-    } else if (option.type === PaymentMethodsTypes.card) {
-      return this.renderPaymentMethodCell(option, isSelected);
-    } else {
-      return null;
+    if (option && option.type) {
+      if (option.type === PaymentMethodsTypes.addPaymentMethod) {
+        return this.renderAddPaymentMethodCell();
+      } else if (option.type === PaymentMethodsTypes.payPal) {
+        return this.renderPayPalCell(option.title);
+      } else if (option.type === PaymentMethodsTypes.applePay) {
+        return this.renderApplePayCell(option.title);
+      } else if (option.type === PaymentMethodsTypes.card) {
+        return this.renderPaymentMethodCell(option, isSelected);
+      } else {
+        return null;
+      }
     }
   };
 

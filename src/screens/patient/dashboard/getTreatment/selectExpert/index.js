@@ -10,6 +10,7 @@ const SelectExpert = ({navigation}) => {
   const [availableExperts, setAvailableExperts] = useState([]);
   const experts = useSelector((state) => state.experts.data);
   const userProfile = useSelector((state) => state.user.data.profileInfo);
+  const visit = useSelector((state) => state.expertSchedule);
   const lang = useSelector((state) => state.language);
 
   useEffect(() => {
@@ -22,7 +23,18 @@ const SelectExpert = ({navigation}) => {
       const videoEnabledExperts = stateAvailableExperts.filter(
         ({videoEnabled}) => videoEnabled,
       );
-      setAvailableExperts(videoEnabledExperts);
+      const filteredExperts = videoEnabledExperts.filter(
+        ({
+          profileInfo: {
+            profession: {specialities},
+          },
+        }) => {
+          return specialities.some((specialty) =>
+            specialty.includes(visit.reason),
+          );
+        },
+      );
+      setAvailableExperts(filteredExperts);
     }
   }, [experts]);
 
@@ -51,7 +63,7 @@ const SelectExpert = ({navigation}) => {
           />
           <Text style={styles.title}>No Providers found</Text>
           <Text style={styles.subtitle}>
-            We'll notifiy you when providers are available in your state
+            We'll notifiy you when providers are available in your area
           </Text>
           <TextButton
             onPress={() => {

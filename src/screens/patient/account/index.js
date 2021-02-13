@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, TextButton} from '../../../components';
 import {useSelector, useDispatch} from 'react-redux';
-import {ScrollView, StatusBar} from 'react-native';
+import {ScrollView} from 'react-native';
 import {Profile, List, Plan} from './sections';
 import {signOut} from './action';
 import {modifiers} from './styles';
@@ -22,8 +22,11 @@ const Account = ({navigation}) => {
   };
 
   return (
-    <Container styles={modifiers.container} themed unformatted>
-      <StatusBar barStyle="light-content" translucent={true} />
+    <Container
+      styles={modifiers.container}
+      barStyle="light-content"
+      themed
+      unformatted>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Profile {...user} />
         {!!subscription.data.id && (

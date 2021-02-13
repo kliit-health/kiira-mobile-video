@@ -51,7 +51,7 @@ const GetTreatment = ({navigation}) => {
   };
 
   return (
-    <Container styles={modifiers.container} unformatted>
+    <Container styles={modifiers.container} barStyle="dark-content" unformatted>
       <Header styles={modifiers.header} onBack={handleOnBackPress} />
       <View style={styles.profileContainer}>
         <Avatar border source={profileImageUrl} />

@@ -152,7 +152,7 @@ class AddCreditOrDebitCard extends PureComponent {
     );
   }
   renderButtonView() {
-    const {paymentCard, navigation} = this.props;
+    const {paymentCard, navigation, lang} = this.props;
     const {
       firstName,
       lastName,
