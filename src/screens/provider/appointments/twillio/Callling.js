@@ -149,7 +149,7 @@ const ExpertTwillioCalling = ({navigation}) => {
               style={styles.icon}
               name="camera-reverse"
               color="#4F8EF7"
-              size={35}
+              size={smallScreen ? 15 : 35}
             />
             <Text style={{textAlign: 'center'}}>Flip</Text>
           </TouchableOpacity>
