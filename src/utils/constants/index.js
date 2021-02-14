@@ -373,11 +373,11 @@ export default {
       ],
     },
 
-    privacyPolicyurl: 'https://www.kliit.com/privacy-policy',
+    privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
     questionCreditValue: 10,
     rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
     referalCredits: 10,
-    termsAndConditionsUrl: 'https://www.kliit.com/terms-and-conditions',
+    termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
 
     screenNames: {
       AddChild: 'AddChild',
