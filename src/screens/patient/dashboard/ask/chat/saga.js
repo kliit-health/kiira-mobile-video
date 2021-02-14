@@ -247,7 +247,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
-      const userData = state.authLoader.userData;
+      const userData = state.authLoading.userData;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
         ? questionData.expertUnreadCount
@@ -282,6 +282,7 @@ function* sendMessageToUser({data}) {
   } catch (error) {
     yield put(hideApiLoader());
     yield put(chatMessageError());
+    console.error(error);
   }
 }
 

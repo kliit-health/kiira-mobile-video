@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
   },
   messageInput: {
     flex: 1,
-    color: colors.blue,
     fontSize: text.size.regular,
     fontFamily: text.fontFamily.poppinsMedium,
     paddingBottom: 3,

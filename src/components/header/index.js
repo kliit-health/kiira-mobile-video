@@ -1,5 +1,5 @@
 import React from 'react';
-import {shape, object, func, string, node, bool, oneOf} from 'prop-types';
+import {shape, object, func, string, node, bool} from 'prop-types';
 import IconButton from '../iconButton';
 import TextButton from '../textButton';
 import {View, Text} from 'react-native';

@@ -34,6 +34,7 @@ function* agreeToTerms(data) {
       phoneNumber,
       plan,
       gender,
+      ethnicity,
     } = userData.profileInfo;
 
     const userRegistrationParams = {
@@ -63,6 +64,7 @@ function* agreeToTerms(data) {
         ...(income && {income}),
         ...(homeSecure && {homeSecure: homeSecure.value}),
         ...(foodSecure && {foodSecure: foodSecure.value}),
+        ...(ethnicity && {ethnicity}),
       },
     };
     yield addUserData(userRegistrationParams);

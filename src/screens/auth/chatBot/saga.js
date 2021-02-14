@@ -44,6 +44,7 @@ function* updateNewUserData({data}) {
         ...(userParams.income && {income: userParams.income}),
         ...(userParams.homeSecure && {homeSecure: userParams.homeSecure}),
         ...(userParams.foodSecure && {foodSecure: userParams.foodSecure}),
+        ...(userParams.ethnicity && {ethnicity: userParams.ethnicity}),
         lang: 'en',
         phoneNumber: userParams.phoneNumber,
       },

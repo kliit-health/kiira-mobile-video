@@ -54,6 +54,7 @@ class ChatBotScreen extends Component {
       enrollment,
       housingSecure,
       foodSecure,
+      ethnicity,
     } = userInfo;
 
     if (!first_name.value.trim()) {
@@ -94,6 +95,7 @@ class ChatBotScreen extends Component {
           ...(enrollment && {enrollment: enrollment.value}),
           ...(housingSecure && {homeSecure: housingSecure}),
           ...(foodSecure && {foodSecure: foodSecure}),
+          ...(ethnicity && {ethnicity: ethnicity.value}),
         },
         navigation,
       };
@@ -586,7 +588,7 @@ class ChatBotScreen extends Component {
         },
         {
           id: '27',
-          message: 'What is your zipcode',
+          message: 'What is your zipcode?',
           trigger: 'zipcode',
         },
         {
@@ -657,9 +659,28 @@ class ChatBotScreen extends Component {
         {
           id: 'foodSecure',
           options: [
-            {value: true, label: 'Yes', trigger: '9'},
-            {value: false, label: 'No', trigger: '9'},
+            {value: true, label: 'Yes', trigger: '33'},
+            {value: false, label: 'No', trigger: '33'},
           ],
+        },
+        {
+          id: '33',
+          message: 'What is your Race / Ethnicity?',
+          trigger: '34',
+        },
+        {
+          id: '34',
+          options: [
+            {
+              value: 'ethnicity',
+              label: 'Race / Ethnicity',
+              trigger: 'ethnicity',
+            },
+          ],
+        },
+        {
+          id: 'ethnicity',
+          component: <ChatModal data={Constant.App.Modal.race} trigger="9" />,
         },
         {
           id: '9',
@@ -744,6 +765,11 @@ class ChatBotScreen extends Component {
               label: 'Housing Secure',
               trigger: 'update-housing-secure',
             },
+            {
+              value: 'ethnicity',
+              label: 'Race / Ethnicity',
+              trigger: 'update-ethnicity',
+            },
           ],
         },
         {
@@ -823,6 +849,11 @@ class ChatBotScreen extends Component {
           id: 'update-food-secure',
           update: 'foodSecure',
           trigger: '9',
+        },
+        {
+          id: 'update-ethnicity',
+          update: 'ethnicity',
+          component: <ChatModal data={Constant.App.Modal.race} trigger="9" />,
         },
         {
           id: 'end-message',

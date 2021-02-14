@@ -356,6 +356,21 @@ export default {
         {value: 'Straight', code: 'Straight'},
         {value: 'Queer', code: 'Queer'},
       ],
+      race: [
+        {value: 'Hispanic or Latino', code: 'Hispanic or Latino'},
+        {
+          value: 'American Indian or Alaskan Native',
+          code: 'American Indian or Alaskan Native',
+        },
+        {
+          value: 'Native Hawaiian or Other Pacific Islander',
+          code: 'Native Hawaiian or Other Pacific Islander',
+        },
+        {value: 'Black or African American', code: 'Black or African American'},
+        {value: 'White', code: 'White'},
+        {value: 'Two or more', code: 'Two or more'},
+        {value: 'Prefer not to say', code: 'Prefer not to say'},
+      ],
     },
 
     privacyPolicyurl: 'https://www.kliit.com/privacy-policy',
