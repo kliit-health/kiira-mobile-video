@@ -101,7 +101,7 @@ class ModalDropdown extends Component {
     };
   }
 
-  componentDidUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     let {buttonText, selectedIndex} = this.state;
     const {defaultIndex, defaultValue, options} = nextProps;
     buttonText = this._nextValue == null ? buttonText : this._nextValue;
@@ -330,6 +330,7 @@ class ModalDropdown extends Component {
       dropdownTextHighlightStyle,
       accessible,
     } = this.props;
+
     const {selectedIndex} = this.state;
     const key = `row_${rowID}`;
     const highlighted = rowID == selectedIndex;

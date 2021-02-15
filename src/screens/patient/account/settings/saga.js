@@ -29,21 +29,25 @@ function* updateUserData({data}) {
         const user = firebase.auth().currentUser;
         const {downloadURL} = responseImage.data;
         const userRegistrationParams = {
-          credits: userParams.credits,
           uid: user.uid,
-          role: 'User',
-          isActive: false,
           profileInfo: {
             profileImageUrl: downloadURL ? downloadURL : '',
             firstName: userParams.firstName,
             lastName: userParams.lastName,
             dob: userParams.dob,
             pronouns: userParams.pronouns,
-            isActive: false,
             state: userParams.state,
             sexuality: userParams.sexuality,
             insurance: userParams.insurance,
             plan: userParams.plan,
+            ...(userParams.zipcode && {zipcode: userParams.zipcode}),
+            ...(userParams.enrollment && {enrollment: userParams.enrollment}),
+            ...(userParams.income && {income: userParams.income}),
+            ...(userParams.homeSecure && {homeSecure: userParams.homeSecure}),
+            ...(userParams.foodSecure && {foodSecure: userParams.foodSecure}),
+            ...(userParams.ethnicity && {ethnicity: userParams.ethnicity}),
+            lang: 'en',
+            phoneNumber: userParams.phoneNumber,
           },
         };
 
@@ -82,23 +86,28 @@ function* updateUserData({data}) {
       const user = firebase.auth().currentUser;
       const userRegistrationParams = {
         uid: user.uid,
-        role: 'User',
-        isActive: false,
         profileInfo: {
           profileImageUrl: userParams.profileImageUrl,
           firstName: userParams.firstName,
           lastName: userParams.lastName,
           dob: userParams.dob,
           pronouns: userParams.pronouns,
-          isActive: false,
           state: userParams.state,
           sexuality: userParams.sexuality,
           insurance: userParams.insurance,
           plan: userParams.plan,
+          ...(userParams.zipcode && {zipcode: userParams.zipcode}),
+          ...(userParams.enrollment && {enrollment: userParams.enrollment}),
+          ...(userParams.income && {income: userParams.income}),
+          ...(userParams.homeSecure && {homeSecure: userParams.homeSecure}),
+          ...(userParams.foodSecure && {foodSecure: userParams.foodSecure}),
+          ...(userParams.ethnicity && {ethnicity: userParams.ethnicity}),
+          lang: 'en',
+          phoneNumber: userParams.phoneNumber,
         },
       };
+
       const response = yield addUserData(userRegistrationParams);
-      displayConsole('response', response);
       yield put(hideApiLoader());
       if (response.success) {
         navigation.goBack();

@@ -33,6 +33,7 @@ const Review = (props) => {
       enrollment,
       housingSecure,
       foodSecure,
+      ethnicity,
     } = steps;
     setState({
       first_name,
@@ -49,6 +50,7 @@ const Review = (props) => {
       enrollment: enrollment ? enrollment : '',
       housingSecure,
       foodSecure,
+      ethnicity: ethnicity && ethnicity.value ? ethnicity.value : '',
     });
   }, []);
 
@@ -80,6 +82,13 @@ const Review = (props) => {
       props.steps['update-income'] && props.steps['update-income'].value
         ? props.steps['update-income'].value
         : props.steps.income.value;
+  }
+  let ethnicity;
+  if (props.steps.ethnicity) {
+    ethnicity =
+      props.steps['update-ethnicity'] && props.steps['update-ethnicity'].value
+        ? props.steps['update-ethnicity'].value
+        : props.steps.ethnicity.value;
   }
 
   return (
@@ -196,6 +205,15 @@ const Review = (props) => {
                 <Text> </Text>
               ) : (
                 <Text style={style.plan}>{income.value || ''}</Text>
+              )}
+            </View>
+
+            <View>
+              <Text style={style.category}>Race / Ethnicity:</Text>
+              {typeof ethnicity === null || !ethnicity ? (
+                <Text> </Text>
+              ) : (
+                <Text style={style.plan}>{ethnicity.value || ''}</Text>
               )}
             </View>
           </Fragment>

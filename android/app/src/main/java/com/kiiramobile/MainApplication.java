@@ -27,6 +27,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
+import com.twiliorn.library.TwilioPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -50,7 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNFirebaseMessagingPackage());
       packages.add(new RNFirebaseRemoteConfigPackage());
       packages.add(new RNFirebaseFunctionsPackage());
-      
+      packages.add(new TwilioPackage());
       return packages;
     }
 

@@ -1,12 +1,5 @@
 import React, {PureComponent} from 'react';
-import {
-  View,
-  Alert,
-  BackHandler,
-  AppState,
-  LogBox,
-  Platform,
-} from 'react-native';
+import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
 import {connect} from 'react-redux';
 import AppNavigator from './src/navigation';
 import {Messaging} from './src/services';
@@ -24,7 +17,7 @@ import {
 import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import FastImage from 'react-native-fast-image';
-import BackgroundService from 'react-native-background-actions';
+import BackgroundTimer from 'react-native-background-timer';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
@@ -142,38 +135,37 @@ class App extends PureComponent {
     );
   }
 
-  _handleAppStateChange = async (nextAppState) => {
-    const {signOut} = this.props;
+  _handleAppStateChange = (nextAppState) => {
+    const {setState, signOut} = this.props;
 
     if (nextAppState === 'active') {
-      if (Platform.OS === 'ios') {
+      setState(true);
+      if (this.timer) {
         clearTimeout(this.timer);
-        await BackgroundService.stop(this.BgService);
       }
-    }
+      if (this.timeoutId) {
+        BackgroundTimer.clearTimeout(this.timeoutId);
+      }
+    } else {
+      setState(false);
 
-    if (nextAppState === 'background') {
-      if (Platform.OS === 'ios') {
-        const options = {
-          taskName: 'Time Out',
+      if (this.timeoutId) {
+        BackgroundTimer.clearTimeout(this.timeoutId);
+      }
+
+      this.timeoutId = BackgroundTimer.setTimeout(() => {
+        const payload = {
+          navigation: this.navigator._navigation,
+          isLoaderShow: false,
         };
-
-        this.BgService = await BackgroundService.start(() => {
-          this.timer = setTimeout(async () => {
-            const payload = {
-              navigation: this.navigator._navigation,
-              isLoaderShow: false,
-            };
-            await signOut(payload);
-            Alert.alert(
-              'Log Out',
-              'For your security, you have been logged out due to inactivity.',
-              [{text: 'OK', onPress: () => {}}],
-              {cancelable: false},
-            );
-          }, Constant.App.logoutInterval);
-        }, options);
-      }
+        signOut(payload);
+        Alert.alert(
+          'Log Out',
+          'For your security, you have been logged out due to inactivity.',
+          [{text: 'OK', onPress: () => {}}],
+          {cancelable: false},
+        );
+      }, Constant.App.logoutInterval);
     }
   };
 

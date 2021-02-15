@@ -31,7 +31,6 @@ class Setting extends PureComponent {
       lastName: userData.profileInfo.lastName,
       imageSrc: userData.profileInfo.profileImageUrl,
       email: userData.profileInfo.email,
-      credits: userData.credits,
       imageUri: '',
       filepath: '',
       file: '',
@@ -45,6 +44,14 @@ class Setting extends PureComponent {
       sexuality: Constant.App.Modal.sexuality,
       insurance: userData.profileInfo.insurance,
       plan: userData.profileInfo.plan,
+      zipcode: userData.profileInfo.zipcode,
+      enrollment: userData.profileInfo.enrollment,
+      income: userData.profileInfo.income,
+      homeSecure: userData.profileInfo.homeSecure,
+      foodSecure: userData.profileInfo.foodSecure,
+      ethnicity: userData.profileInfo.ethnicity,
+      lang: 'en',
+      phoneNumber: userData.profileInfo.phoneNumber,
       pronounsArr: [
         {
           title: lang.addProfileData.sheHer,
@@ -115,6 +122,13 @@ class Setting extends PureComponent {
       selectedSexuality,
       insurance,
       plan,
+      zipcode,
+      enrollment,
+      income,
+      homeSecure,
+      foodSecure,
+      ethnicity,
+      phoneNumber,
     } = this.state;
     return (
       <View style={styles.headerStyle}>
@@ -155,6 +169,14 @@ class Setting extends PureComponent {
                   sexuality: selectedSexuality,
                   insurance,
                   plan,
+                  zipcode,
+                  enrollment,
+                  income,
+                  homeSecure,
+                  foodSecure,
+                  ethnicity,
+                  phoneNumber,
+                  lang: 'en',
                 },
                 navigation,
               };

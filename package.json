@@ -14,8 +14,6 @@
     "show-ios": "xcrun simctl list devices"
   },
   "dependencies": {
-    "@cometchat-pro/react-native-calls": "^1.0.7",
-    "@cometchat-pro/react-native-chat": "^2.1.7",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.0.1",
@@ -43,6 +41,7 @@
     "react-native-animated-loader": "^0.0.8",
     "react-native-auto-height-image": "^1.1.1",
     "react-native-background-actions": "^2.5.2",
+    "react-native-background-timer": "^2.4.1",
     "react-native-cached-image": "^1.4.3",
     "react-native-document-picker": "^3.5.4",
     "react-native-elements": "^2.2.1",
@@ -69,6 +68,7 @@
     "react-native-screens": "^2.17.1",
     "react-native-smart-splash-screen": "^2.3.5",
     "react-native-svg": "^12.1.0",
+    "react-native-twilio-video-webrtc": "https://github.com/blackuy/react-native-twilio-video-webrtc",
     "react-native-vector-icons": "^6.6.0",
     "react-native-video": "^5.1.0-alpha8",
     "react-native-webview": "^8.2.1",

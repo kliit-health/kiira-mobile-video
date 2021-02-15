@@ -44,6 +44,7 @@ import toast from '../../components/customToast/reducer';
 import verify from '../../screens/auth/verify/reducer';
 import navigator from './navigator';
 import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/reducer';
+import twillio from './twillio';
 import user from './user';
 import updateExpert from '../../screens/provider/account/updateAvailablity/reducer';
 import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
@@ -92,6 +93,7 @@ export default combineReducers({
   subscription,
   termsAndConditions,
   treatmentHistory,
+  twillio,
   toast,
   updateExpert,
   user,

@@ -16,7 +16,7 @@ const Learn = ({navigation}) => {
   };
 
   return (
-    <Container unformatted styles={modifiers.container}>
+    <Container unformatted barStyle="dark-content" styles={modifiers.container}>
       <Header title={language.learn.title} />
       <ScrollView>
         <View style={styles.bannerContainer}>

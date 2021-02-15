@@ -19,7 +19,6 @@ import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
 import BuyingCredit from '../screens/patient/dashboard/getTreatment/payment/buyingCredit';
-import CallingScreen from '../screens/patient/dashboard/appointments/videoVisit/CallingScreen';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
 import ChangePasswordExpert from '../screens/provider/account/settings/changePassword';
@@ -33,28 +32,22 @@ import CurrentPregnancy from '../screens/patient/dashboard/healthHistory/pregnan
 import Dashboard from '../screens/patient/dashboard';
 import DueDate from '../screens/patient/dashboard/healthHistory/pregnancy/dueDate';
 import ExpertAppointments from '../screens/provider/appointments';
-import ExpertCallingScreen from '../screens/provider/appointments/videoVisit/CallingScreen';
-import ExpertMainCallScreen from '../screens/provider/appointments/videoVisit/MainCallScreen';
-import ExpertChatScreen from '../screens/provider/appointments/videoVisit/ChatScreen/ChatScreen';
-import ExpertHomeScreen from '../screens/provider/appointments/videoVisit/HomeScreen/HomeScreen';
 import ExpertProfile from '../screens/patient/dashboard/appointments/expertProfile';
 import ExpertSchedule from '../screens/patient/dashboard/getTreatment/expertSchedule';
-import ExpertLoginScreen from '../screens/provider/appointments/videoVisit/LoginScreen/LoginScreen';
+import ExpertTwillioLogin from '../screens/provider/appointments/twillio/Login';
+import ExpertTwillioCalling from '../screens/provider/appointments/twillio/Callling';
 import ExpertVisit from '../screens/provider/appointments/visit';
 import FamilyHistory from '../screens/provider/appointments/patientProfile/family';
 import ForgotPassword from '../screens/auth/forgotPassword';
 import GetStarted from '../screens/auth/getStarted';
 import GynHistory from '../screens/provider/appointments/patientProfile/gyn';
 import HealthHistory from '../screens/patient/dashboard/healthHistory';
-import HomeScreen from '../screens/patient/dashboard/appointments/videoVisit/HomeScreen/HomeScreen';
 import GetTreatment from '../screens/patient/dashboard/getTreatment';
 import Help from '../screens/common/help';
 import Learn from '../screens/patient/learn';
 import Lifestyle from '../screens/patient/dashboard/healthHistory/lifestyle';
 import Loss from '../screens/patient/dashboard/healthHistory/pregnancy/loss';
 import Login from '../screens/auth/login';
-import LoginScreen from '../screens/patient/dashboard/appointments/videoVisit/LoginScreen/LoginScreen';
-import MainCallScreen from '../screens/patient/dashboard/appointments/videoVisit/MainCallScreen';
 import Medications from '../screens/patient/dashboard/healthHistory/medications';
 import MedicationsHistory from '../screens/provider/appointments/patientProfile/medications';
 import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
@@ -74,7 +67,7 @@ import PregnancyHistory from '../screens/patient/dashboard/healthHistory/pregnan
 import PregnancyHistoryExpert from '../screens/provider/appointments/patientProfile/pregnancy';
 import PreviousVisits from '../screens/provider/appointments/patientProfile/previousVisits';
 import PrivacyPolicy from '../screens/common/privacyPolicy';
-import Rating from '../screens/patient/dashboard/appointments/videoVisit/rating';
+import VideoRating from '../screens/patient/dashboard/appointments/twillio/rating';
 import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
@@ -96,10 +89,12 @@ import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
 import Welcome from '../screens/auth/welcome';
 import TreatmentHistory from '../screens/patient/dashboard/careSquad/treatmentHistory';
+import TwillioLogin from '../screens/patient/dashboard/appointments/twillio/Login';
+import TwillioCalling from '../screens/patient/dashboard/appointments/twillio/Callling';
 import PersonalInformation from '../screens/provider/appointments/patientProfile/personalInformation';
 import AgreementDetails from '../screens/provider/appointments/patientProfile/agreementDetails';
 import WebView from '../screens/patient/learn/webView';
-import VisitEnd from '../screens/patient/dashboard/appointments/videoVisit/visitEnd';
+import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 
 import Constant from '../utils/constants';
@@ -442,11 +437,8 @@ const AppStackExpert = createStackNavigator(
     Consent: {screen: Consent},
     ChangePasswordExpert: {screen: ChangePasswordExpert},
     ChatExpert: {screen: ChatExpert},
-    ExpertCallingScreen: {screen: ExpertCallingScreen},
-    ExpertChatScreen: {screen: ExpertChatScreen},
-    ExpertMainCallScreen: {screen: ExpertMainCallScreen},
-    ExpertHomeScreen: {screen: ExpertHomeScreen},
-    ExpertLoginScreen: {screen: ExpertLoginScreen},
+    ExpertTwillioLogin: {screen: ExpertTwillioLogin},
+    ExpertTwillioCalling: {screen: ExpertTwillioCalling},
     ExpertVisit: {screen: ExpertVisit},
     FamilyHistory: {screen: FamilyHistory},
     GynHistory: {screen: GynHistory},
@@ -526,6 +518,10 @@ const MainAppStack = createStackNavigator(
     Visit: {screen: Visit},
     WebView: {screen: WebView},
     VisitSummary: {screen: VisitSummary},
+    VideoRating: {screen: VideoRating},
+    TwillioLogin: {screen: TwillioLogin},
+    TwillioCalling: {screen: TwillioCalling},
+    VisitEnd: {screen: VisitEnd},
   },
   {
     headerMode: 'none',
@@ -533,19 +529,18 @@ const MainAppStack = createStackNavigator(
   },
 );
 
-const VideoStack = createStackNavigator(
-  {
-    VideoLogin: {screen: LoginScreen},
-    Home: {screen: HomeScreen},
-    MainCallScreen: {screen: MainCallScreen},
-    CallingScreen: {screen: CallingScreen},
-    RatingScreen: {screen: Rating},
-    VisitEnd: {screen: VisitEnd},
-  },
-  {
-    initialRouteName: 'VideoLogin',
-  },
-);
+// const VideoStack = createStackNavigator(
+//   {
+//     TwillioLogin: {screen: TwillioLogin},
+//     TwillioCalling: {screen: TwillioCalling},
+//     VideoRating: {screen: VideoRating},
+//     VisitEnd: {screen: VisitEnd},
+//   },
+//   {
+//     headerMode: 'none',
+//     initialRouteName: 'TwillioLogin',
+//   },
+// );
 
 const AppStack = createStackNavigator(
   {
@@ -566,7 +561,7 @@ const AppNavigator = createSwitchNavigator(
     App: AppStack,
     AppExpert: AppStackExpert,
     AuthLoading: AuthLoadingScreen,
-    Video: VideoStack,
+    // Video: VideoStack,
   },
   {
     initialRouteName: 'AuthLoading',

@@ -1,4 +1,7 @@
 import {Platform} from 'react-native';
+import Language from '../../i18n/index';
+
+const lang = Language.en;
 
 export const parseCardInfo = (info) => {
   const {exp_month, exp_year, last4, id} = info;
@@ -24,17 +27,17 @@ export const PaymentMethodsTypes = {
 const NativePaymentMethod = Platform.select({
   android: {
     type: PaymentMethodsTypes.googlePay,
-    title: 'G Pay',
+    title: lang.buyingCredits.googlePayTitle,
   },
   ios: {
     type: PaymentMethodsTypes.applePay,
-    title: 'Apple Pay',
+    title: lang.buyingCredits.applePayTitle,
   },
 });
 
 const PayPalPaymentMethod = {
   type: PaymentMethodsTypes.payPal,
-  title: 'Pay Pal',
+  title: lang.buyingCredits.payPalTitle,
 };
 
 export const defaultPaymentMethods = (isNativePaySupported = false) => {
