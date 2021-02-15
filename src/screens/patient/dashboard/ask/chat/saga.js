@@ -344,7 +344,7 @@ function* setExpertRating({
   try {
     yield updateQuestion({isRated: true}, questionId);
     yield updateUserData({userRating}, uid);
-    yield getExpertsDetailsAsync();
+    // yield getExpertsDetailsAsync();
   } catch (error) {
     console.error(error);
   }

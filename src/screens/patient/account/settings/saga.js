@@ -29,6 +29,7 @@ function* updateUserData({data}) {
         const user = firebase.auth().currentUser;
         const {downloadURL} = responseImage.data;
         const userRegistrationParams = {
+          uid: user.uid,
           profileInfo: {
             profileImageUrl: downloadURL ? downloadURL : '',
             firstName: userParams.firstName,
@@ -84,6 +85,7 @@ function* updateUserData({data}) {
     } else {
       const user = firebase.auth().currentUser;
       const userRegistrationParams = {
+        uid: user.uid,
         profileInfo: {
           profileImageUrl: userParams.profileImageUrl,
           firstName: userParams.firstName,
@@ -104,8 +106,8 @@ function* updateUserData({data}) {
           phoneNumber: userParams.phoneNumber,
         },
       };
+
       const response = yield addUserData(userRegistrationParams);
-      displayConsole('response', response);
       yield put(hideApiLoader());
       if (response.success) {
         navigation.goBack();

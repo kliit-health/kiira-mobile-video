@@ -244,7 +244,7 @@ class Chat extends React.PureComponent {
   };
 
   render() {
-    const {navigation} = this.props;
+    const {navigation, questionId} = this.props;
     const {questionData, expertDetails} = navigation.state.params;
     const {imageUri, showRatingModal} = this.state;
     const {profileInfo} = expertDetails;
@@ -277,7 +277,7 @@ class Chat extends React.PureComponent {
           onSubmit={(rating) =>
             this.handleRatingSubmit({
               rating: rating * 2,
-              questionId: questionData ? questionData.questionId : null,
+              questionId,
               expertDetails,
             })
           }
