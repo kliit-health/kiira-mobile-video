@@ -122,6 +122,13 @@ class Setting extends PureComponent {
       selectedSexuality,
       insurance,
       plan,
+      zipcode,
+      enrollment,
+      income,
+      homeSecure,
+      foodSecure,
+      ethnicity,
+      phoneNumber,
     } = this.state;
     return (
       <View style={styles.headerStyle}>
@@ -162,6 +169,14 @@ class Setting extends PureComponent {
                   sexuality: selectedSexuality,
                   insurance,
                   plan,
+                  zipcode,
+                  enrollment,
+                  income,
+                  homeSecure,
+                  foodSecure,
+                  ethnicity,
+                  phoneNumber,
+                  lang: 'en',
                 },
                 navigation,
               };
