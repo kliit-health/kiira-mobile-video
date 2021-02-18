@@ -37,8 +37,9 @@ export const setAppointmentDates = (data) => ({
   data,
 });
 
-export const needsPrescription = () => ({
+export const needsPrescription = (data) => ({
   type: NEEDS_PRESCRIPTION,
+  data,
 });
 
 export const reasonForVisit = (data) => ({

@@ -31,6 +31,7 @@ const ListItem = (props) => {
     onCardPress,
     onAddPress,
     disabled,
+    isPrescriber,
   } = props;
   const {
     firstName,
@@ -59,7 +60,8 @@ const ListItem = (props) => {
       tags={specialities.slice(0, 3)}
       avatar={profileImageUrl}
       online={isOnline}
-      onPress={handleCardPress}>
+      onPress={handleCardPress}
+      prescriber={isPrescriber}>
       <IconButton disabled={disabled} onPress={() => handleAddPress(props)}>
         <Plus color={disabled ? gray : blue} />
       </IconButton>

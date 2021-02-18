@@ -38,12 +38,13 @@ class Setting extends PureComponent {
       showSelectStateModal: false,
       showSelectSexualityModal: false,
       dob: userData.profileInfo.dob,
+      gender: userData.profileInfo.gender,
       selectedState: userData.profileInfo.state,
       selectedSexuality: userData.profileInfo.sexuality,
       states: Constant.App.Modal.states,
       sexuality: Constant.App.Modal.sexuality,
       insurance: userData.profileInfo.insurance,
-      plan: userData.profileInfo.plan,
+      insurancePlan: userData.profileInfo.insurancePlan,
       zipcode: userData.profileInfo.zipcode,
       enrollment: userData.profileInfo.enrollment,
       income: userData.profileInfo.income,
@@ -121,7 +122,7 @@ class Setting extends PureComponent {
       selectedState,
       selectedSexuality,
       insurance,
-      plan,
+      insurancePlan,
       zipcode,
       enrollment,
       income,
@@ -129,6 +130,7 @@ class Setting extends PureComponent {
       foodSecure,
       ethnicity,
       phoneNumber,
+      gender,
     } = this.state;
     return (
       <View style={styles.headerStyle}>
@@ -168,7 +170,7 @@ class Setting extends PureComponent {
                   state: selectedState,
                   sexuality: selectedSexuality,
                   insurance,
-                  plan,
+                  insurancePlan,
                   zipcode,
                   enrollment,
                   income,
@@ -177,6 +179,7 @@ class Setting extends PureComponent {
                   ethnicity,
                   phoneNumber,
                   lang: 'en',
+                  gender,
                 },
                 navigation,
               };
@@ -311,7 +314,7 @@ class Setting extends PureComponent {
       selectedState,
       selectedSexuality,
       insurance,
-      plan,
+      insurancePlan,
     } = this.state;
     const {lang} = this.props;
     const {staticImages} = Constant.App;
@@ -366,11 +369,11 @@ class Setting extends PureComponent {
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({plan: value})}
+              onChangeText={(value) => this.setState({insurancePlan: value})}
               placeholder={lang.addProfileData.plan}
-              value={plan}
+              value={insurancePlan}
               style={
-                plan
+                insurancePlan
                   ? styles.inputTypeStyle
                   : [styles.inputTypeStyle, {fontWeight: '100'}]
               }

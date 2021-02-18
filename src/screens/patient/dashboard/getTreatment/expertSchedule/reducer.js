@@ -28,7 +28,7 @@ const expertSchedule = (state = initialState, action) => {
     case NEEDS_PRESCRIPTION:
       return {
         ...state,
-        prescription: true,
+        prescription: action.data,
       };
     case REASON_FOR_VISIT:
       return {

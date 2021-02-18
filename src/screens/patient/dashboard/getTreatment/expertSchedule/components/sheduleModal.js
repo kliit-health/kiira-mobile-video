@@ -76,7 +76,7 @@ const SheduleModal = ({
             </CustomText>
             {showShedule && !appointmentData.dates ? (
               <ActivityIndicator size="large" color="#008AFC" />
-            ) : (
+            ) : appointmentData.dates.length ? (
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
@@ -139,6 +139,14 @@ const SheduleModal = ({
                 }}
                 keyExtractor={(item, index) => index.toString()}
               />
+            ) : (
+              <CustomText
+                style={
+                  (styles.firstAvaliable,
+                  {alignSelf: 'center', marginVertical: 5})
+                }>
+                No Availibility
+              </CustomText>
             )}
 
             <CustomText style={styles.firstAvaliable}>
@@ -153,8 +161,7 @@ const SheduleModal = ({
                 flexWrap: 'wrap',
                 justifyContent: 'space-evenly',
               }}>
-              {showShedule &&
-                appointmentData.appointments.future &&
+              {showShedule && appointmentData.appointments.future.length ? (
                 appointmentData.appointments.future.map((item, i) => {
                   const selected = selectedTime === i;
 
@@ -179,7 +186,16 @@ const SheduleModal = ({
                       text={moment(item.time).format('h:mm a')}
                     />
                   );
-                })}
+                })
+              ) : (
+                <CustomText
+                  style={
+                    (styles.firstAvaliable,
+                    {alignSelf: 'center', marginVertical: 15})
+                  }>
+                  No Availibility
+                </CustomText>
+              )}
             </ScrollView>
           </View>
         </Fragment>

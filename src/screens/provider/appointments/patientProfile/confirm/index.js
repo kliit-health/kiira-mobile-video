@@ -52,7 +52,6 @@ const Confirm = ({navigation}) => {
               style={styles.lockButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                console.log(navigation);
                 dispatch(lockVisit(payload, navigation));
               }}>
               <Text style={styles.textStyle}>Lock</Text>

@@ -19,19 +19,23 @@ const NeedsPresciption = (props) => {
       <View style={styles.container}>
         <TextButton
           onPress={() => {
-            dispatch(needsPrescription());
+            dispatch(needsPrescription(true));
             navigation.navigate(screenNames.selectExpert);
           }}>
           {lang.needsPrescription.yes}
         </TextButton>
         <TextButton
-          onPress={() => navigation.navigate(screenNames.selectExpert)}
+          onPress={() => {
+            dispatch(needsPrescription(false));
+            navigation.navigate(screenNames.selectExpert);
+          }}
           styles={modifiers.button}>
           {lang.needsPrescription.no}
         </TextButton>
         <TextButton
           outlined
           onPress={() => {
+            dispatch(needsPrescription(false));
             navigation.navigate(screenNames.selectExpert);
           }}>
           {lang.needsPrescription.notSure}

@@ -68,11 +68,21 @@ class ChatBotScreen extends Component {
     } else {
       const payloadData = {
         userParams: {
+          ...(userData.address && {address: userData.address}),
+          chats: userData.chats,
+          ...(userData.customer && {customer: userData.customer}),
+          displayName: userData.displayName,
+          email: userData.email,
           fcmToken: userData.fcmToken,
+          invitationDate: userData.invitationDate,
+          invitationDate: userData.invitationDate,
+          invitationId: userData.invitationId,
+          organizationId: userData.organizationId,
           firstName: first_name.value.trim(),
           lastName: last_name.value.trim(),
           dob: dob.value ? dob.value : '',
           gender: gender.value.trim(),
+          ...(userData.plan && {plan: userData.plan}),
           pronouns: pronouns.value,
           state: userInfo['update-state']
             ? userInfo['update-state'].value
@@ -81,9 +91,12 @@ class ChatBotScreen extends Component {
           sexuality: userInfo['update-sexuality']
             ? userInfo['update-sexuality'].value
             : sexuality.value,
+          ...(userData.subscription && {
+            subscription: {...userData.subscription},
+          }),
           prepaid: 0,
           insurance: insurance.value,
-          plan: plan.value.trim(),
+          insurancePlan: plan.value.trim(),
           lang: 'en',
           phoneNumber: userData.profileInfo.phoneNumber,
           ...(zipcode && {zipcode: zipcode.value}),
@@ -96,6 +109,7 @@ class ChatBotScreen extends Component {
           ...(housingSecure && {homeSecure: housingSecure}),
           ...(foodSecure && {foodSecure: foodSecure}),
           ...(ethnicity && {ethnicity: ethnicity.value}),
+          visits: userData.visits,
         },
         navigation,
       };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
@@ -46,14 +46,18 @@ const ExpertInfo = ({
                 <CustomText style={styles.expertProfessionTextStyle}>
                   {expertData.profileInfo.profession.shortName}
                 </CustomText>
-                <Image
-                  style={styles.expertPrescriberImage}
-                  source={require('../../../../../../../assets/rx.png')}
-                  resizeMode="contain"
-                />
-                <CustomText style={styles.expertPrescriberTextStyle}>
-                  {lang.expertProfile.prescriber}
-                </CustomText>
+                {expertData.isPrescriber && (
+                  <Fragment>
+                    <Image
+                      style={styles.expertPrescriberImage}
+                      source={require('../../../../../../../assets/rx.png')}
+                      resizeMode="contain"
+                    />
+                    <CustomText style={styles.expertPrescriberTextStyle}>
+                      {lang.expertProfile.prescriber}
+                    </CustomText>
+                  </Fragment>
+                )}
               </View>
               <View style={styles.expertIsPrescriber}>
                 <Rating

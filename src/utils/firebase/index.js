@@ -1720,7 +1720,10 @@ export async function saveAndLock({payload}) {
     lockPaitentRecord(visit);
     lockExpertRecord(visit);
     saveMedicalHistory(payload, visit);
-    const update = {...appointment, visit: {...visit, locked: true}};
+    const update = {
+      ...appointment,
+      visit: {...visit, locked: true, complete: true},
+    };
     return update;
   } catch (error) {
     console.log(error);

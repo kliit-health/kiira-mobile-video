@@ -86,7 +86,6 @@ export default {
       email: '',
       firstName: '',
       gender: '',
-      isActive: '',
       languages: [],
       lastName: '',
       profileImageUrl: '',

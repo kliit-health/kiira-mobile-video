@@ -32,20 +32,25 @@ function* agreeToTerms(data) {
       homeSecure,
       foodSecure,
       phoneNumber,
-      plan,
+      insurancePlan,
       gender,
       ethnicity,
     } = userData.profileInfo;
 
     const userRegistrationParams = {
+      ...(userData.address && {address: userData.address}),
       agreeToTerms: true,
+      chats: userData.chats,
+      ...(userData.customer && {address: userData.customer}),
       displayName: userData.displayName,
       email: userData.email,
-      uid: userData.uid,
-      role: 'User',
-      prepaid: userData.prepaid,
       firstLogin: false,
+      ...(userData.invitationDate && {invitationDate: userData.invitationDate}),
+      ...(userData.invitationId && {invitationId: userData.invitationId}),
+      ...(userData.invitationDate && {invitationDate: userData.invitationDate}),
       fcmToken,
+      ...(userData.plan && {plan: userData.plan}),
+      prepaid: userData.prepaid,
       profileInfo: {
         profileImageUrl: defaultImage,
         firstName,
@@ -55,7 +60,7 @@ function* agreeToTerms(data) {
         state,
         sexuality,
         insurance,
-        plan,
+        insurancePlan,
         lang: 'en',
         phoneNumber,
         gender,
@@ -66,6 +71,11 @@ function* agreeToTerms(data) {
         ...(foodSecure && {foodSecure: foodSecure.value}),
         ...(ethnicity && {ethnicity}),
       },
+      ...(userData.subscription && {subscription: {...userData.subscription}}),
+      role: 'User',
+      uid: userData.uid,
+      updatedAt: new Date(),
+      visits: userData.visits,
     };
     yield addUserData(userRegistrationParams);
     yield put(showApiLoader(lang.apiLoader.loadingText));

@@ -22,7 +22,7 @@ const TreatmentHistory = ({navigation}) => {
   const dispatch = useDispatch();
   const expertDetails = navigation.getParam('details');
 
-  const {rating, profileInfo} = expertDetails;
+  const {rating, profileInfo, isPrescriber} = expertDetails;
   const {firstName, lastName, profileImageUrl, profession} = profileInfo;
   const {fullName} = profession;
 
@@ -60,7 +60,7 @@ const TreatmentHistory = ({navigation}) => {
         <View style={styles.detailsContainer}>
           <Text style={styles.nameText}>{`${firstName} ${lastName}`}</Text>
           <Text style={styles.titleText}>{fullName}</Text>
-          <Prescriber />
+          {isPrescriber && <Prescriber />}
         </View>
         <Ratings styles={modifiers.ratings} value={calculateRating(rating)} />
       </View>
