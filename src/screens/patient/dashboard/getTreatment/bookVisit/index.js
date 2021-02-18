@@ -43,6 +43,7 @@ const BookVisit = (props) => {
     insurance: userData.profileInfo.insurance,
     plan: userData.profileInfo.plan,
     complete: false,
+    profile: userData.profileInfo.profileImageUrl,
     expert: {
       firstName: expertData.profileInfo.firstName,
       lastName: expertData.profileInfo.lastName,

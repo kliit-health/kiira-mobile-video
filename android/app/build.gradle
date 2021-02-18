@@ -132,8 +132,8 @@ android {
         applicationId "com.kiira"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 50
-        versionName '1.2.7'
+        versionCode 51
+        versionName '1.2.8'
         multiDexEnabled true
     }
     splits {

@@ -15,6 +15,7 @@ import moment from 'moment';
 
 const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
+  const {uid} = navigation.state.params;
   const [updates, setUpdates] = useState({
     fullName: '',
     gender: '',
@@ -25,7 +26,7 @@ const PersonalInformation = ({navigation}) => {
 
   const [picker, setPicker] = useState(false);
   const lang = useSelector((state) => state.language);
-  const uid = useSelector((state) => state.user.data.uid);
+
   const data = useSelector(
     (state) => state.medicalHistory.data.personalInformation,
   );

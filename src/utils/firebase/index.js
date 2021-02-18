@@ -270,6 +270,7 @@ export async function makeAppointment({data}) {
       insurance,
       plan,
       complete,
+      profile,
     } = data;
 
     let response;
@@ -311,6 +312,7 @@ export async function makeAppointment({data}) {
             insurance,
             plan,
             complete,
+            profile,
           };
         })
         .catch((error) => {

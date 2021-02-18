@@ -589,7 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = kiira/kiira.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = P8NZSAW4X8;
 				HEADER_SEARCH_PATHS = (
@@ -620,7 +620,7 @@
 				INFOPLIST_FILE = kiira/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -642,7 +642,7 @@
 				CODE_SIGN_ENTITLEMENTS = kiira/kiira.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = P8NZSAW4X8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -672,7 +672,7 @@
 				INFOPLIST_FILE = kiira/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.2.8;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

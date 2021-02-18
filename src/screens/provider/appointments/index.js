@@ -88,7 +88,7 @@ const ExpertAppointments = ({navigation}) => {
   const handleVisitPress = (details) => {
     navigation.navigate(screenNames.patientProfile, {
       expert: details.expert,
-      visit: details,
+      visit: details.visit,
       patient: {
         uid: details.uid,
       },

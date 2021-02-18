@@ -19,7 +19,7 @@ const Recap = (props) => {
   const {
     navigation: {
       state: {
-        params: {item, short, title},
+        params: {item, short, title, visit},
       },
     },
   } = props;
@@ -29,7 +29,6 @@ const Recap = (props) => {
     allergies,
     medications,
     family,
-    appointment: {visit},
     gyn,
     surgical,
     pmh,

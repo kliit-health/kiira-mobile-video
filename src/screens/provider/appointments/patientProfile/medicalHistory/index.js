@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, ScrollView, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
+import {withNavigation} from 'react-navigation';
 import ExpertHeader from '../../../../../components/expertHeader';
 import PatientCard from '../components/patientCard';
 import Section from '../components/section';
@@ -8,10 +9,8 @@ import sections from './model';
 import styles from './style';
 
 const MedicalHistory = ({navigation}) => {
+  const {visit, patientInfo} = navigation.state.params;
   const medicalHistory = useSelector((state) => state.medicalHistory);
-  const {
-    appointment: {visit, patientInfo},
-  } = medicalHistory;
 
   return (
     <View style={styles.container}>
@@ -24,6 +23,7 @@ const MedicalHistory = ({navigation}) => {
             keyExtractor={(section) => section.title}
             renderItem={({item}) => (
               <Section
+                visit={visit}
                 navigation={navigation}
                 title={item.title}
                 image={item.image}
@@ -40,4 +40,4 @@ const MedicalHistory = ({navigation}) => {
   );
 };
 
-export default MedicalHistory;
+export default withNavigation(MedicalHistory);
