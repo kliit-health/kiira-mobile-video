@@ -11,6 +11,7 @@ var childPadding = parentPadding + childPaddingValue * 2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Constant.App.colors.whiteColor,
   },
 
   input: {

@@ -53,8 +53,7 @@ class Chat extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {isActive, questionValue} = this.props;
-    this.initStatus(isActive);
+    const {questionValue} = this.props;
 
     if (questionValue && questionValue.isResolved && !questionValue.isRated) {
       setTimeout(() => {
@@ -113,8 +112,8 @@ class Chat extends React.PureComponent {
 
   componentWillUnmount() {
     const {clearState, stopObervers} = this.props;
-    clearState();
     this.initStatus(false);
+    clearState();
     stopObervers();
   }
 

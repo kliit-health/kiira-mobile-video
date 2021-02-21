@@ -35,12 +35,6 @@ function* signout({data}) {
         yield put(clearAskState());
         navigation.navigate(Constant.App.stack.AuthStack);
       }
-    } else {
-      yield put(
-        showOrHideModal(
-          response.message ? response.message : lang.errorMessage.serverError,
-        ),
-      );
     }
   } catch (error) {
     console.log('error', error);

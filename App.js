@@ -16,7 +16,6 @@ import {
 } from './src/screens/auth/authLoading/action';
 import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
-import FastImage from 'react-native-fast-image';
 import BackgroundTimer from 'react-native-background-timer';
 import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';

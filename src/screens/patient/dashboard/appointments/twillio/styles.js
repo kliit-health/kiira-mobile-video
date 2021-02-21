@@ -1,6 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 const dimensions = Dimensions.get('window');
-import metrics, {smallScreen} from '../../../../../utils/metrices';
+import metrics from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 
 const styles = StyleSheet.create({
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    width: smallScreen ? 70 : 80,
-    height: smallScreen ? 70 : 80,
+    width: 70,
+    height: 70,
     backgroundColor: 'white',
     borderRadius: 70,
     marginVertical: 10,
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
   localVideo: {
     position: 'absolute',
     right: 10,
-    bottom: dimensions.height * 0.15,
-    width: dimensions.width / 3.5,
-    height: dimensions.height / 5,
+    top: dimensions.height * 0.05,
+    width: dimensions.width / 5,
+    height: dimensions.height / 8,
   },
 
   optionsContainer: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   inputsContainer: {
-    marginTop: smallScreen ? 10 : 50,
+    marginTop: 10,
     flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

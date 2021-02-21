@@ -10,9 +10,7 @@ const styles = StyleSheet.create({
 
   buttonContainerStyle: {
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    height: metrices.DEVICE_HEIGHT * 0.15,
-    marginBottom: 20,
+    height: metrices.DEVICE_HEIGHT * 0.18,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 

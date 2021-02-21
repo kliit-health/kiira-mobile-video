@@ -20,9 +20,9 @@ const ActiveQuestions = ({data, navigation, visible}) => {
       style={styles.list.mainContainer}
       ListEmptyComponent={() => <Fallback />}
       showsVerticalScrollIndicator={false}
-      renderItem={({item, index}) => (
-        <ListItem {...item} onPress={handleItemPress} />
-      )}
+      renderItem={({item, index}) => {
+        return <ListItem {...item} onPress={handleItemPress} />;
+      }}
     />
   ) : (
     <View />
@@ -39,6 +39,19 @@ const ListItem = (props) => {
       onPress(props);
     }
   };
+
+  const convertModifiedTime = () => {
+    var dt = new Date(modifiedDate * 1000);
+    var hours = dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours();
+    var AmOrPm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12 || 12;
+    var minutes =
+      dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes();
+    var finalTime = hours + ':' + minutes + ' ' + AmOrPm;
+    return finalTime;
+  };
+
+  const time = convertModifiedTime(modifiedDate);
 
   return (
     <TouchableOpacity
@@ -59,7 +72,7 @@ const ListItem = (props) => {
           </Text>
         </View>
       </View>
-      <TimeDisplay time={moment(modifiedDate).format('hh:mm A')} />
+      <TimeDisplay time={time} />
     </TouchableOpacity>
   );
 };

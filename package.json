@@ -10,6 +10,7 @@
     "prettier": "prettier \"./**/*.js\" --write",
     "postinstall": "npx jetify && cd ios && pod install && npx react-native-fix-image",
     "ios-device": "react-native run-ios --device",
+    "ios-udid": "react-native run-ios --udid",
     "clean": "npx react-native-clean-project",
     "show-ios": "xcrun simctl list devices"
   },

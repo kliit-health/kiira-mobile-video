@@ -191,7 +191,6 @@ function* sendMessageToUser({data}) {
   const lang = yield select((state) => state.language);
   try {
     const {messageParams, imageParams, id, lastMessage, questionId} = data;
-    displayConsole('sendMessageToUser call data', data);
     if (imageParams) {
       yield put(showApiLoader(lang.apiLoader.loadingText));
       yield delay(delayTime);

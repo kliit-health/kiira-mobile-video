@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: Constant.App.colors.offWhiteColor,
-    marginTop: 35,
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingTop: 35,
   },
 
   creditButtonStyle: {

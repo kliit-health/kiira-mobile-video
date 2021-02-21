@@ -41,7 +41,7 @@ function* agreeToTerms(data) {
       ...(userData.address && {address: userData.address}),
       agreeToTerms: true,
       chats: userData.chats,
-      ...(userData.customer && {address: userData.customer}),
+      ...(userData.customer && {customer: userData.customer}),
       displayName: userData.displayName,
       email: userData.email,
       firstLogin: false,
@@ -77,6 +77,7 @@ function* agreeToTerms(data) {
       updatedAt: new Date(),
       visits: userData.visits,
     };
+
     yield addUserData(userRegistrationParams);
     yield put(showApiLoader(lang.apiLoader.loadingText));
     navigation.goBack();

@@ -22,7 +22,7 @@ const ExpertAccount = ({navigation}) => {
   };
 
   return (
-    <Container styles={modifiers.container} themed unformatted>
+    <Container themed unformatted>
       <StatusBar barStyle="light-content" translucent={true} />
       <ScrollView>
         <View style={styles.profileContainter}>

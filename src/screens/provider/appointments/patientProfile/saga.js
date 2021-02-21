@@ -12,6 +12,10 @@ import {
   GET_MEDICAL_HISTORY,
   SET_MEDICAL_HISTORY,
 } from '../../../../redux/types';
+import {
+  showApiLoader,
+  hideApiLoader,
+} from '../../../../components/customLoader/action';
 import moment from 'moment';
 import {put, takeEvery, select, call} from 'redux-saga/effects';
 import {
@@ -35,12 +39,14 @@ function* getPatientDetails({data}) {
     });
   } catch (error) {
     try {
-      const user = yield select((state) => state.user.data);
-      const {
-        uid,
-        profileInfo: {firstName, lastName, dob},
-      } = user;
+      const user = yield firebaseSingleFetch('users', data.uid);
 
+      const {
+        firstName,
+        lastName,
+        profileInfo: {dob},
+        uid,
+      } = user;
       yield put({
         type: UPDATE_PATIENT_DETAILS,
         data: {
@@ -101,6 +107,7 @@ function* updatePatientDetails({data}) {
 function* lockVisit(data) {
   const lang = yield select((state) => state.language);
   try {
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     const update = yield call(saveAndLock, data);
     yield call(sendVisitRecap, data);
     yield put(clearMedicalHistory());
@@ -110,8 +117,10 @@ function* lockVisit(data) {
         appointment: {...update},
       },
     });
+    yield put(hideApiLoader());
     data.navigation.navigate('ExpertAppointments');
   } catch (error) {
+    yield put(hideApiLoader());
     yield put(
       actions.showMessage({message: lang.expertAppointments.lockError}),
     );

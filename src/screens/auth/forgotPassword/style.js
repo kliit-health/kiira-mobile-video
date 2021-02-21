@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: getStatusBarHeight(),
     backgroundColor: Constant.App.colors.whiteColor,
+    borderRadius: 25,
+    overflow: 'hidden',
   },
 
   subTitleTextStyle: {

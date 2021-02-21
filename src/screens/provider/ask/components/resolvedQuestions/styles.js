@@ -49,7 +49,7 @@ export default {
   fallBack: StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.offWhite,
+      backgroundColor: colors.white,
       justifyContent: 'center',
       alignItems: 'center',
     },

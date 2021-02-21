@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: Constant.App.colors.offWhiteColor,
-    marginTop: getStatusBarHeight(),
+    backgroundColor: Constant.App.colors.whiteColor,
+    paddingTop: 35,
   },
 
   doneTextStyle: {

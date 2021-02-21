@@ -112,9 +112,9 @@ const ExpertTwillioCalling = ({navigation}) => {
               style={styles.icon}
               name="call"
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>End</Text>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>End</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{...styles.button, flexDirection: 'column'}}
@@ -123,9 +123,9 @@ const ExpertTwillioCalling = ({navigation}) => {
               style={styles.icon}
               name={callConfig.isAudioEnabled ? 'unmute' : 'mute'}
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>
               {callConfig.isAudioEnabled ? 'Mute' : 'Unmute'}
             </Text>
           </TouchableOpacity>
@@ -136,9 +136,9 @@ const ExpertTwillioCalling = ({navigation}) => {
               style={styles.icon}
               name={callConfig.isVideoEnabled ? 'video' : 'video-off'}
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>
               {callConfig.isVideoEnabled ? 'On' : 'Off'}
             </Text>
           </TouchableOpacity>
@@ -149,9 +149,9 @@ const ExpertTwillioCalling = ({navigation}) => {
               style={styles.icon}
               name="camera-reverse"
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>Flip</Text>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>Flip</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

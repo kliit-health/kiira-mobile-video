@@ -104,14 +104,13 @@ const screenNames = Constant.App.screenNames;
 
 const TransparentStyle = {
   cardStyle: {
-    opacity: 1,
-    backgroundColor: 'transparent',
+    // opacity: 1,
+    backgroundColor: '#fff',
   },
-  transitionConfig: () => ({
-    containerStyle: {
-      backgroundColor: 'transparent',
-    },
-  }),
+
+  containerStyle: {
+    backgroundColor: '#fff',
+  },
 };
 
 const AuthStack = createStackNavigator(
@@ -128,6 +127,7 @@ const AuthStack = createStackNavigator(
   {
     headerMode: 'none',
     initialRouteName: 'Tutorial',
+    ...TransparentStyle,
   },
 );
 
@@ -171,7 +171,7 @@ const BottomTab = createBottomTabNavigator(
         ),
       },
     },
-    Team: {
+    RequestVisit: {
       screen: RequestVisit,
       navigationOptions: {
         tabBarIcon: ({focused}) => (
@@ -529,19 +529,6 @@ const MainAppStack = createStackNavigator(
   },
 );
 
-// const VideoStack = createStackNavigator(
-//   {
-//     TwillioLogin: {screen: TwillioLogin},
-//     TwillioCalling: {screen: TwillioCalling},
-//     VideoRating: {screen: VideoRating},
-//     VisitEnd: {screen: VisitEnd},
-//   },
-//   {
-//     headerMode: 'none',
-//     initialRouteName: 'TwillioLogin',
-//   },
-// );
-
 const AppStack = createStackNavigator(
   {
     MainApp: MainAppStack,
@@ -561,11 +548,11 @@ const AppNavigator = createSwitchNavigator(
     App: AppStack,
     AppExpert: AppStackExpert,
     AuthLoading: AuthLoadingScreen,
-    // Video: VideoStack,
   },
   {
     initialRouteName: 'AuthLoading',
     headerMode: 'none',
+    ...TransparentStyle,
   },
 );
 

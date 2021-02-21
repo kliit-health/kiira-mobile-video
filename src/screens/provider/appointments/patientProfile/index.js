@@ -63,7 +63,7 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={appointment.visit.locked}
+            disabled={appointment && appointment.visit.locked}
             onPress={() => handleNavigation('MedicalHistoryExpert')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
@@ -74,7 +74,7 @@ const PatientProfile = ({navigation}) => {
               />
               <Text style={styles.info}>Medical History</Text>
               <View style={styles.check}>
-                {appointment.visit.locked && (
+                {appointment && appointment.visit.locked && (
                   <Image
                     resizeMode="contain"
                     containerStyle={{alignSelf: 'center'}}

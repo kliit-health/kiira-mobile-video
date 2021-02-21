@@ -17,7 +17,7 @@ const ConsentAgreements = ({navigation}) => {
   };
 
   return (
-    <Container unformatted themed>
+    <Container barStyle="light-content" unformatted themed>
       <Header
         title={lang.consent.title}
         onBack={() => navigation.goBack()}

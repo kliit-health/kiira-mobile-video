@@ -6,6 +6,7 @@ import {
   Platform,
   ScrollView,
   PermissionsAndroid,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './styles';
@@ -470,6 +471,7 @@ class SettingsExpert extends PureComponent {
     const {showSelectStateModal} = this.state;
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
         {this.renderHeaderView()}
         <ScrollView
           keyboardShouldPersistTaps="handled"

@@ -23,22 +23,24 @@ const Appointments = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    let filtered = visitData.history.filter((visit) => {
-      let appointment = moment(visit.time);
-      let now = moment(new Date());
-      if (appointment.diff(now, 'hours') >= -1) {
-        return visit;
-      }
-    });
+    if (visitData.history.length) {
+      let filtered = visitData.history.filter((visit) => {
+        let appointment = moment(visit.time);
+        let now = moment(new Date());
+        if (appointment.diff(now, 'hours') >= -1) {
+          return visit;
+        }
+      });
 
-    filtered = filtered.sort((a, b) => {
-      return (
-        parseInt(moment(a.time).format('x')) -
-        parseInt(moment(b.time).format('x'))
-      );
-    });
+      filtered = filtered.sort((a, b) => {
+        return (
+          parseInt(moment(a.time).format('x')) -
+          parseInt(moment(b.time).format('x'))
+        );
+      });
 
-    setVisits(filtered);
+      setVisits(filtered);
+    }
   }, [visitData]);
 
   const handleNavigation = (destination) => {
@@ -48,7 +50,7 @@ const Appointments = ({navigation}) => {
   const FallBack = () => <View></View>;
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Header
         title="Upcoming Visits"
         onBack={() => navigation.navigate('BottomTab')}
@@ -95,7 +97,7 @@ const Appointments = ({navigation}) => {
           </TextButton>
         </Container>
       )}
-    </View>
+    </Container>
   );
 };
 

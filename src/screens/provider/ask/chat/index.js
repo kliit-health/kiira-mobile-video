@@ -31,6 +31,7 @@ import {getChatItems} from './selectors';
 import moment from 'moment';
 import CustomButton from '../../../../components/customButton';
 import {stopObserverChat} from './action';
+import topics from './model';
 
 let key;
 class ChatExpert extends React.PureComponent {
@@ -66,15 +67,6 @@ class ChatExpert extends React.PureComponent {
       questionData,
     };
     toggleStatus(payloadToggleStatus);
-  }
-
-  componentDidUpdate() {
-    const {isActive} = this.props;
-    if (isActive) {
-      this.initStatus(true);
-    } else {
-      this.initStatus(false);
-    }
   }
 
   async componentDidMount() {
@@ -403,6 +395,23 @@ class ChatExpert extends React.PureComponent {
   renderActionModal() {
     const {showActionModal} = this.state;
     const {questionData, resolve, navigation, lang} = this.props;
+
+    const resolveQuestionByCategory = (topic) => {
+      this.setState({
+        showActionModal: false,
+      });
+      const questionRef = Object.assign({}, questionData);
+      questionRef.isResolved = true;
+      questionRef.resolvedDate = moment().unix();
+      questionRef.isRated = false;
+      questionRef.category = topic;
+      const payloadData = {
+        resolveQuestionParams: questionRef,
+        navigation,
+      };
+      resolve(payloadData);
+    };
+
     return (
       <Modal
         animationType="fade"
@@ -412,28 +421,20 @@ class ChatExpert extends React.PureComponent {
         <View style={styles.actionModalParentContainerStyle}>
           <View style={styles.actionModalInnerContainerStyle}>
             <CustomText style={styles.actionModalTitleTextStyle}>
-              {lang.chat.action}
+              {'Resolve question by topic:'}
             </CustomText>
-            <View style={styles.actionModalLineSeperator} />
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({
-                  showActionModal: false,
-                });
-                const questionRef = Object.assign({}, questionData);
-                questionRef.isResolved = true;
-                questionRef.resolvedDate = moment().unix();
-                questionRef.isRated = false;
-                const payloadData = {
-                  resolveQuestionParams: questionRef,
-                  navigation,
-                };
-                resolve(payloadData);
-              }}>
-              <CustomText style={styles.actionModalBlueTextStyle}>
-                {lang.chat.resolveQuestion}
-              </CustomText>
-            </TouchableOpacity>
+            {topics.map(({title}) => (
+              // <View key={title} style={styles.actionModalLineSeperator}>
+              <TouchableOpacity
+                onPress={() => {
+                  resolveQuestionByCategory(title);
+                }}>
+                <CustomText style={styles.actionModalBlueTextStyle}>
+                  {title}
+                </CustomText>
+              </TouchableOpacity>
+              // </View>
+            ))}
           </View>
           <CustomButton
             buttonStyle={styles.actionModalOkBtnErrorContainerStyle}

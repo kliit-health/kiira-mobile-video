@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   parentContainerStyle: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 35,
+    paddingTop: 35,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.whiteColor,
   },

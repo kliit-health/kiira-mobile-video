@@ -34,12 +34,12 @@ const GYN = ({gyn}) => {
       />
 
       <Text style={styles.subheading}>STI/STD</Text>
-      {Object.keys(gyn.sti).map((key) => {
+      {Object.keys(gyn.sti).map((item, index) => {
         return (
           <CheckItem
-            key={key}
-            checked={gyn.sti[key]}
-            title={convertCamelCase(key)}
+            key={'STI' + index}
+            checked={gyn.sti[item]}
+            title={convertCamelCase(item)}
           />
         );
       })}

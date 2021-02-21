@@ -357,6 +357,8 @@ export default {
         {value: 'Queer', code: 'Queer'},
       ],
       race: [
+        {value: 'Arab', code: 'Arab'},
+        {value: 'Asian', code: 'Asian'},
         {value: 'Hispanic or Latino', code: 'Hispanic or Latino'},
         {
           value: 'American Indian or Alaskan Native',
