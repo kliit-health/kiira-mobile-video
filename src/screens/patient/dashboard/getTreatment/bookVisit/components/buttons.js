@@ -38,7 +38,7 @@ const Buttons = ({
         buttonStyle={styles.noContainerStyle}
         textStyle={styles.noTextStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.BottomTab);
+          navigation.navigate('Home');
         }}
         text="Go Home"
       />

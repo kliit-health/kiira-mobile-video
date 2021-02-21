@@ -53,7 +53,7 @@ const Appointments = ({navigation}) => {
     <Container>
       <Header
         title="Upcoming Visits"
-        onBack={() => navigation.navigate('BottomTab')}
+        onBack={() => navigation.navigate('Home')}
       />
       {visits.length > 0 ? (
         <Fragment>
@@ -70,7 +70,7 @@ const Appointments = ({navigation}) => {
               return (
                 <ErrorBoundary
                   FallbackComponent={FallBack}
-                  onError={() => navigation.navigate('BottomTab')}>
+                  onError={() => navigation.navigate('Home')}>
                   <Appointment
                     visit={item}
                     date={date}

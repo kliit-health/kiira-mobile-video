@@ -20,12 +20,13 @@ const ExpertAppointments = ({navigation}) => {
   const lang = useSelector((state) => state.language);
   const uid = useSelector((state) => state.authLoading.userData.uid);
   const visitData = useSelector((state) => state.expertAppointments.history);
+  const screens = useSelector((state) => state.navigator);
 
   const [visits, setVisits] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [dates, setDates] = useState([]);
   const [search, setSearch] = useState(visits);
-
+  const fromConfirm = screens.previousRoute === 'Confirm';
   useEffect(() => {
     dispatch(clearMedicalHistory());
   }, []);
@@ -46,6 +47,23 @@ const ExpertAppointments = ({navigation}) => {
     setDates(dateRange);
     setSelectedDate(dateRange[3]);
   }, []);
+
+  useEffect(() => {
+    dispatch(
+      getAppointmentsList({
+        uid,
+      }),
+    );
+
+    const dateRange = getDateRange(
+      moment(new Date()).subtract(3, 'days'),
+      moment().add(30, 'days'),
+      'YYYY-MM-DD',
+    ).reverse();
+
+    setDates(dateRange);
+    setSelectedDate(dateRange[3]);
+  }, [fromConfirm]);
 
   useEffect(() => {
     dispatch(

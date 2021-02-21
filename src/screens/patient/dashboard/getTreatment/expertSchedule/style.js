@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
   },
 
   parentContainerStyle: {
-    marginTop: 35,
-    backgroundColor: Constant.App.colors.greyBgAsk,
+    paddingTop: 35,
+    backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'column',
   },
 
