@@ -142,6 +142,16 @@ class AuthLoadingScreen extends Component {
     }
   }
 
+  displayNotification(title, body) {
+    // we display notification in alert box with title and body
+    Alert.alert(
+      title,
+      body,
+      [{text: 'Ok', onPress: () => console.log('ok pressed')}],
+      {cancelable: false},
+    );
+  }
+
   async createNotificationListeners() {
     /*
      * Triggered when a particular notification has been received in foreground
@@ -155,7 +165,12 @@ class AuthLoadingScreen extends Component {
             .setNotificationId(notification.notificationId)
             .setTitle(notification.title)
             .setBody(notification.body)
-            .setSound('bell.mp3');
+            .setSound('default');
+        }
+        if (Platform.OS === 'android') {
+          notification.android
+            .setChannelId(CHANNEL_ID)
+            .android.setSmallIcon('app_icon');
         }
         firebase.notifications().displayNotification(notification);
       });

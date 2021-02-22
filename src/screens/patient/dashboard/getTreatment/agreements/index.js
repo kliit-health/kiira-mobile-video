@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
-import {connect, useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {screenNames} from '../../../../../utils/constants';
 import {Modal, TextButton, Header, Container} from '../../../../../components';
 import Logo from '../../../../../svgs/penguin.svg';

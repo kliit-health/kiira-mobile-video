@@ -22,13 +22,26 @@ function* updateNewUserData({data}) {
 
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
-      prepaid: userParams.prepaid,
-      uid: user.uid,
-      role: 'User',
+      ...(userParams.address && {address: userParams.address}),
+      agreeToTerms: false,
+      chats: userParams.chats,
+      ...(userParams.customer && {customer: userParams.customer}),
+      displayName: user.displayName,
+      email: userParams.email,
       firstLogin: true,
+      ...(userParams.invitationDate && {
+        invitationDate: userParams.invitationDate,
+      }),
+      ...(userParams.invitationId && {invitationId: userParams.invitationId}),
+      ...(userParams.invitationDate && {
+        invitationDate: userParams.invitationDate,
+      }),
       signUpDate: userParams.signUpDate,
       fcmToken: userParams.fcmToken,
+      ...(userParams.plan && {plan: userParams.plan}),
+      prepaid: userParams.prepaid,
       profileInfo: {
+        email: userParams.email,
         profileImageUrl: defaultImage,
         firstName: userParams.firstName,
         lastName: userParams.lastName,
@@ -38,7 +51,7 @@ function* updateNewUserData({data}) {
         state: userParams.state,
         sexuality: userParams.sexuality,
         insurance: userParams.insurance,
-        plan: userParams.plan,
+        insurancePlan: userParams.insurancePlan,
         ...(userParams.zipcode && {zipcode: userParams.zipcode}),
         ...(userParams.enrollment && {enrollment: userParams.enrollment}),
         ...(userParams.income && {income: userParams.income}),
@@ -48,6 +61,13 @@ function* updateNewUserData({data}) {
         lang: 'en',
         phoneNumber: userParams.phoneNumber,
       },
+      ...(userParams.subscription && {
+        subscription: {...userParams.subscription},
+      }),
+      role: 'User',
+      uid: user.uid,
+      updatedAt: userParams.signUpDate,
+      visits: userParams.visits,
     };
 
     const response = yield addUserData(userRegistrationParams);
@@ -71,6 +91,7 @@ function* updateNewUserData({data}) {
       );
     }
   } catch (error) {
+    console.error(error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }

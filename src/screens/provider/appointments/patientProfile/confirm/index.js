@@ -10,11 +10,17 @@ import {withNavigation} from 'react-navigation';
 const Confirm = ({navigation}) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
+  const {visit} = navigation.state.params;
   const medicalHistory = useSelector((state) => state.medicalHistory);
 
   const fakeNavigation = {
     state: {
-      params: {item: medicalHistory, short: false, title: 'Confirm and Lock'},
+      params: {
+        item: medicalHistory,
+        short: false,
+        title: 'Confirm and Lock',
+        visit,
+      },
     },
   };
 
@@ -52,7 +58,6 @@ const Confirm = ({navigation}) => {
               style={styles.lockButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                console.log(navigation);
                 dispatch(lockVisit(payload, navigation));
               }}>
               <Text style={styles.textStyle}>Lock</Text>

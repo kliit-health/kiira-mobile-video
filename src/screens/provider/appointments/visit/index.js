@@ -1,18 +1,15 @@
 import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {View, ScrollView} from 'react-native';
+import {withNavigation} from 'react-navigation';
 import {ExpertHeader} from '../../../../components';
 import {PatientDetails, VisitDetails} from './components';
 import {getExpertsData} from '../../../patient/dashboard/getTreatment/expertSchedule/action';
 import Constant from '../../../../utils/constants';
 
-const ExpertVisit = () => {
+const ExpertVisit = ({navigation}) => {
   const dispatch = useDispatch();
-
-  const medicalHistory = useSelector((state) => state.medicalHistory);
-  const {
-    appointment: {visit, patientInfo},
-  } = medicalHistory;
+  const {visit, patientInfo} = navigation.state.params;
 
   const params = {
     expertsParams: {
@@ -40,4 +37,4 @@ const ExpertVisit = () => {
   );
 };
 
-export default ExpertVisit;
+export default withNavigation(ExpertVisit);

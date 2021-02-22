@@ -8,7 +8,7 @@ import {
 const initialState = {
   userData: null,
   fcmToken: null,
-  isActive: true,
+  isActive: false,
   appScreen: {
     currentScreen: '',
     prevScreen: '',

@@ -13,6 +13,7 @@ const CareSquad = ({navigation}) => {
   const [deleteMode, setDeleteMode] = useState(false);
   const [isSearching, setSearching] = useState(false);
   const [searchData, setSearchData] = useState([]);
+  const [availbleExperts, setAvailableExperts] = useState([]);
 
   const user = useSelector((state) => state.user.data);
   const experts = useSelector((state) => state.experts.data);
@@ -23,6 +24,20 @@ const CareSquad = ({navigation}) => {
   useEffect(() => {
     dispatch(getChatHistoryAsync());
   }, []);
+
+  useEffect(() => {
+    if (experts.length && user) {
+      const {
+        profileInfo: {state},
+      } = user;
+      const stateAvailableExperts = experts.filter(({profileInfo}) => {
+        const supportedStates = profileInfo.license.states;
+        return supportedStates.some(({code}) => code === state.code);
+      });
+
+      setAvailableExperts(stateAvailableExperts);
+    }
+  }, [experts]);
 
   useEffect(() => {
     setDeleteMode(false);
@@ -47,7 +62,7 @@ const CareSquad = ({navigation}) => {
   const handleSearch = (value) => {
     const searching = Boolean(value);
     setSearching(searching);
-    const searchResult = filterObjectArray(experts, value);
+    const searchResult = filterObjectArray(availbleExperts, value);
     setSearchData(searchResult);
   };
 
@@ -108,7 +123,7 @@ const CareSquad = ({navigation}) => {
       <List
         onCardPress={handleCardPress}
         onAddPress={handleAddPress}
-        data={isSearching ? searchData : experts}
+        data={isSearching ? searchData : availbleExperts}
         disabledItems={getFavoriteExperts(favorites, experts)}
       />
     </Container>

@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    height: 200,
     paddingBottom: 20,
   },
 

@@ -6,6 +6,7 @@ import {
   Platform,
   ScrollView,
   PermissionsAndroid,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './styles';
@@ -25,8 +26,8 @@ class SettingsExpert extends PureComponent {
     const {userData, lang} = this.props;
     this.state = {
       bio: userData.profileInfo.bio,
+      city: userData.profileInfo.city,
       clinicInfo: userData.clinicInfo,
-      credits: userData.credits,
       dob: userData.profileInfo.dob,
       email: userData.profileInfo.email,
       filepath: '',
@@ -35,9 +36,11 @@ class SettingsExpert extends PureComponent {
       gender: userData.profileInfo.gender,
       imageSrc: userData.profileInfo.profileImageUrl,
       imageUri: '',
+      languages: userData.profileInfo.languages,
       lastName: userData.profileInfo.lastName,
-      license: userData.profileInfo.state.code,
+      license: userData.profileInfo.license,
       location: userData.clinicInfo.name,
+      profession: userData.profileInfo.profession,
       profileInfo: userData.profileInfo,
       selectedState: userData.profileInfo.state,
       showIosDateModal: false,
@@ -103,6 +106,7 @@ class SettingsExpert extends PureComponent {
     } = this.props;
     const {
       bio,
+      city,
       clinicInfo,
       credits,
       dob,
@@ -112,9 +116,11 @@ class SettingsExpert extends PureComponent {
       firstName,
       gender,
       imageUri,
+      languages,
       lastName,
       license,
       location,
+      profession,
       profileInfo,
       pronounsArr,
       selectedState,
@@ -162,6 +168,9 @@ class SettingsExpert extends PureComponent {
                   location,
                   clinicInfo,
                   profileInfo,
+                  city,
+                  languages,
+                  profession,
                 },
                 navigation,
               };
@@ -462,6 +471,7 @@ class SettingsExpert extends PureComponent {
     const {showSelectStateModal} = this.state;
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="dark-content" />
         {this.renderHeaderView()}
         <ScrollView
           keyboardShouldPersistTaps="handled"

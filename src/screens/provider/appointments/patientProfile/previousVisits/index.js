@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {View, Text, Pressable, FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {withNavigation} from 'react-navigation';
 import PatientCard from '../components/patientCard';
 import {useSelector, useDispatch} from 'react-redux';
 import ExpertHeader from '../../../../../components/expertHeader';
@@ -10,19 +11,14 @@ import moment from 'moment';
 import styles from './style';
 
 const PreviousVisits = ({navigation}) => {
+  const {visit, patientInfo} = navigation.state.params;
   const dispatch = useDispatch();
   const medicalHistory = useSelector((state) => state.medicalHistory);
 
-  const {
-    appointment: {
-      patientInfo: {uid},
-      visit,
-    },
-    history,
-  } = medicalHistory;
+  const {history} = medicalHistory;
 
   useEffect(() => {
-    dispatch(getMedicalHistory(uid));
+    dispatch(getMedicalHistory(visit.uid));
   }, []);
 
   const Visit = ({item}) => {
@@ -77,10 +73,7 @@ const PreviousVisits = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ExpertHeader title="Previous Visits" />
-      <PatientCard
-        visit={visit}
-        patientInfo={medicalHistory.appointment.patientInfo}
-      />
+      <PatientCard visit={visit} patientInfo={patientInfo} />
       {history.length ? (
         <FlatList
           data={history}
@@ -94,4 +87,4 @@ const PreviousVisits = ({navigation}) => {
   );
 };
 
-export default PreviousVisits;
+export default withNavigation(PreviousVisits);

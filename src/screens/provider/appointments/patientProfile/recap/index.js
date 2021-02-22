@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react';
 import ExpertHeader from '../../../../../components/expertHeader';
 import {ScrollView, View} from 'react-native';
-import VisitInfo from './components/visitInfo';
 import Pregnancy from './components/pregnancy';
 import GYN from './components/gyn';
 import PMH from './components/pmh';
@@ -29,12 +28,10 @@ const Recap = (props) => {
     allergies,
     medications,
     family,
-    appointment: {visit},
     gyn,
     surgical,
     pmh,
     summary,
-    lockTime,
     pregnancy,
     plan,
     physical,
@@ -44,7 +41,6 @@ const Recap = (props) => {
     <View style={styles.container}>
       <ExpertHeader title={title} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.document}>
-        <VisitInfo visit={visit} lockTime={lockTime} />
         <Plan plan={plan} />
         <Summary summary={summary} />
         {!short && (

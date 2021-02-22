@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {withNavigation} from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import styles from '../styles';
 
-const PatientDetails = ({visit, patientInfo}) => {
-  const {
-    profileInfo: {firstName, lastName, pronouns},
-  } = patientInfo;
+const PatientDetails = ({navigation}) => {
+  const {visit} = navigation.state.params;
+  const {firstName, lastName, profile} = visit;
 
   return (
     <View style={styles.expertInfoParentContainerStyle}>
@@ -15,14 +15,14 @@ const PatientDetails = ({visit, patientInfo}) => {
         <FastImage
           style={styles.expertImage}
           resizeMode="cover"
-          source={{uri: patientInfo.profileInfo.profileImageUrl}}
+          source={{uri: profile}}
           activeOpacity={0.7}
         />
         <View>
           <View style={styles.myRecentExpertContainerStyle}>
             <View style={styles.expertName}>
               <Text style={styles.expertNameTextStyle}>
-                {`${firstName} ${lastName} (${pronouns})`}
+                {`${firstName} ${lastName}`}
               </Text>
             </View>
             <View style={styles.expertProfession}>
@@ -47,4 +47,4 @@ const PatientDetails = ({visit, patientInfo}) => {
   );
 };
 
-export default PatientDetails;
+export default withNavigation(PatientDetails);

@@ -12,7 +12,7 @@ const PatientCard = ({visit, patientInfo}) => {
         containerStyle={{alignSelf: 'center'}}
         style={styles.profileImage}
         source={{
-          uri: patientInfo ? patientInfo.profileInfo.profileImageUrl : '',
+          uri: patientInfo ? visit.profile : '',
         }}
         activeOpacity={0.7}
       />

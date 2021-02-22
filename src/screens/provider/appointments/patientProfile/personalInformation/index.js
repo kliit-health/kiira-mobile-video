@@ -15,23 +15,17 @@ import moment from 'moment';
 
 const PersonalInformation = ({navigation}) => {
   const dispatch = useDispatch();
+  const {uid, visit} = navigation.state.params;
   const [updates, setUpdates] = useState({
-    fullName: '',
-    gender: '',
-    dateOfBirth: '',
-    phoneNumber: '',
+    fullName: `${visit.firstName} ${visit.lastName}`,
+    gender: visit.gender,
+    dateOfBirth: visit.dob,
+    phoneNumber: visit.phoneNumber,
     primaryCarePhysician: '',
   });
 
   const [picker, setPicker] = useState(false);
   const lang = useSelector((state) => state.language);
-  const uid = useSelector((state) => state.user.data.uid);
-  const data = useSelector(
-    (state) => state.medicalHistory.data.personalInformation,
-  );
-  useEffect(() => {
-    setUpdates(data);
-  }, [data]);
 
   const handleDatePress = () => {
     setPicker(true);
@@ -62,7 +56,7 @@ const PersonalInformation = ({navigation}) => {
   };
 
   return (
-    <Container themed>
+    <Container barStyle="light-content" themed>
       <Header
         title={lang.personalInformation.title}
         onBack={() => navigation.goBack()}

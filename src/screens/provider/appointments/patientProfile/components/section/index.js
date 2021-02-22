@@ -3,15 +3,24 @@ import {Pressable, View, Image, Text} from 'react-native';
 import styles from './style';
 import Constant from '../../../../../../utils/constants';
 
-const Section = ({title, image, complete, screen, navigation, data, lock}) => {
+const Section = ({
+  title,
+  image,
+  complete,
+  screen,
+  navigation,
+  data,
+  lock,
+  visit,
+}) => {
   const {staticImages} = Constant.App;
 
   return (
     <Pressable
       onPress={() =>
         lock
-          ? navigation.navigate(screen, {item: {...data}})
-          : navigation.navigate(screen)
+          ? navigation.navigate(screen, {item: {...data}, visit})
+          : navigation.navigate(screen, {visit})
       }>
       <View style={styles.container}>
         <Image

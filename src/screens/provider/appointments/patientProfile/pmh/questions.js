@@ -44,7 +44,7 @@ export const questions = [
     key: 'rareDisease',
   },
   {
-    question: 'Has anyone in patients family been diagnosed with cancer?',
+    question: 'Has patient been diagnosed with cancer?',
     textPrompt: 'Please Type cancer details.',
     key: 'cancer',
   },

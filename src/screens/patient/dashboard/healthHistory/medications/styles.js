@@ -18,6 +18,8 @@ export default {
       flex: 1,
       backgroundColor: colors.white,
       borderRadius: 10,
+      borderWidth: 2,
+      borderColor: 'black',
     },
     touchable: {
       flex: 1,

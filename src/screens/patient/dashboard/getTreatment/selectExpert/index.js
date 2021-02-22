@@ -34,7 +34,15 @@ const SelectExpert = ({navigation}) => {
           );
         },
       );
-      setAvailableExperts(filteredExperts);
+
+      if (visit.prescription) {
+        const prescriberFilter = filteredExperts.filter(
+          ({isPrescriber}) => visit.prescription && isPrescriber,
+        );
+        setAvailableExperts(prescriberFilter);
+      } else {
+        setAvailableExperts(filteredExperts);
+      }
     }
   }, [experts]);
 

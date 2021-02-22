@@ -136,19 +136,6 @@ export async function sendEmailVerification(obj) {
   }
 }
 
-export async function sendEmailSummary(obj) {
-  try {
-    const {email} = obj.params;
-    await functions.httpsCallable('sendMailNotificationOnMedicalRecordSave')(
-      email,
-    );
-    return {ok: true, data: null};
-  } catch (err) {
-    let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
-  }
-}
-
 export function uploadImage(obj, success, error) {
   try {
     const result = firebase
@@ -270,6 +257,12 @@ export async function makeAppointment({data}) {
       insurance,
       plan,
       complete,
+      profile,
+      pronouns,
+      dob,
+      phoneNumber,
+      gender,
+      organizationId,
     } = data;
 
     let response;
@@ -311,6 +304,12 @@ export async function makeAppointment({data}) {
             insurance,
             plan,
             complete,
+            profile,
+            pronouns,
+            dob,
+            phoneNumber,
+            gender,
+            organizationId,
           };
         })
         .catch((error) => {
@@ -1720,7 +1719,10 @@ export async function saveAndLock({payload}) {
     lockPaitentRecord(visit);
     lockExpertRecord(visit);
     saveMedicalHistory(payload, visit);
-    const update = {...appointment, visit: {...visit, locked: true}};
+    const update = {
+      ...appointment,
+      visit: {...visit, locked: true, complete: true},
+    };
     return update;
   } catch (error) {
     console.log(error);

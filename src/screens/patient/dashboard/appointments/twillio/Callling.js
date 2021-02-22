@@ -1,6 +1,13 @@
 import 'react-native-gesture-handler';
 import React, {useRef, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {smallScreen} from '../../../../../utils/metrices';
 import {setCallConfig} from '../../../../../redux/actions/twillio';
@@ -70,6 +77,7 @@ const VideoCallScreen = ({navigation}) => {
 
   return (
     <View style={styles.callContainer}>
+      <StatusBar hidden />
       {(callConfig.status === 'connected' ||
         callConfig.status === 'connecting') && (
         <View style={styles.callWrapper}>
@@ -95,9 +103,9 @@ const VideoCallScreen = ({navigation}) => {
               style={styles.icon}
               name="call"
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>End</Text>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>End</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{...styles.button, flexDirection: 'column'}}
@@ -106,9 +114,9 @@ const VideoCallScreen = ({navigation}) => {
               style={styles.icon}
               name={callConfig.isAudioEnabled ? 'unmute' : 'mute'}
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>
               {callConfig.isAudioEnabled ? 'Mute' : 'Unmute'}
             </Text>
           </TouchableOpacity>
@@ -119,9 +127,9 @@ const VideoCallScreen = ({navigation}) => {
               style={styles.icon}
               name={callConfig.isVideoEnabled ? 'video' : 'video-off'}
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>
               {callConfig.isVideoEnabled ? 'On' : 'Off'}
             </Text>
           </TouchableOpacity>
@@ -132,9 +140,9 @@ const VideoCallScreen = ({navigation}) => {
               style={styles.icon}
               name="camera-reverse"
               color="#4F8EF7"
-              size={smallScreen ? 15 : 35}
+              size={smallScreen ? 15 : 20}
             />
-            <Text style={{textAlign: 'center'}}>Flip</Text>
+            <Text style={{fontSize: 12, textAlign: 'center'}}>Flip</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>

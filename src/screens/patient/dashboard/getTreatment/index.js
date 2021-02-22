@@ -26,7 +26,7 @@ const GetTreatment = ({navigation}) => {
   const details = navigation.getParam('details');
   const navigator = navigation.getParam('navigator');
 
-  const {rating, profileInfo, clinicInfo} = details;
+  const {rating, profileInfo, clinicInfo, isPrescriber} = details;
   const {
     firstName,
     lastName,
@@ -58,7 +58,7 @@ const GetTreatment = ({navigation}) => {
         <View style={styles.detailsContainer}>
           <Text style={styles.nameText}>{`${firstName} ${lastName}`}</Text>
           <Text style={styles.titleText}>{fullName}</Text>
-          <Prescriber />
+          {isPrescriber && <Prescriber />}
         </View>
         <Ratings styles={modifiers.ratings} value={calculateRating(rating)} />
       </View>
@@ -91,14 +91,16 @@ const GetTreatment = ({navigation}) => {
       <ScrollView contentContainerStyle={styles.detailsContentContainer}>
         <View style={styles.contactContainer}>
           <Linking
-            title={`${city}, ${state.value} ${state.code}, ${zipcode}`}
+            title={`${city}, ${state.code}, ${zipcode}`}
             subtitle={name}
             styles={modifiers.linking}>
             <Arrow />
           </Linking>
-          <Linking title={phoneNumber} phoneNumber={phoneNumber}>
-            <Phone />
-          </Linking>
+          {phoneNumber.length > 1 && (
+            <Linking title={phoneNumber} phoneNumber={phoneNumber}>
+              <Phone />
+            </Linking>
+          )}
         </View>
         <Text style={styles.sectionTitle}>{lang.getTreatment.about}</Text>
         <Text style={{...styles.sectionText, paddingBottom: 10}}>{bio}</Text>

@@ -117,7 +117,6 @@ function* sendMessageToUser({data}) {
           userUnreadCount: unreadCount,
         },
       };
-      displayConsole('inside sendMessageToUser', state);
       yield sendMessage(params);
       questionData.userUnreadCount = unreadCount;
       const dataResponse = {

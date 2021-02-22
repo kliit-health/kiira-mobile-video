@@ -20,6 +20,18 @@ const BookVisit = (props) => {
   const visitData = useSelector((state) => state.expertSchedule);
   const userData = useSelector((state) => state.authLoading.userData);
   const bookVisit = useSelector((state) => state.bookVisit);
+  const {
+    firstName,
+    lastName,
+    profileImageUrl,
+    pronouns,
+    phoneNumber,
+    dob,
+    gender,
+    insurance,
+    plan,
+  } = userData.profileInfo;
+  const {email, uid, organizationId} = userData;
 
   const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;
 
@@ -30,19 +42,25 @@ const BookVisit = (props) => {
   }, []);
 
   const appointmentDetails = {
-    firstName: userData.profileInfo.firstName,
-    lastName: userData.profileInfo.lastName,
-    email: userData.email,
+    firstName,
+    lastName,
+    email,
     calendarID: visitData.calendarID,
     time: visitData.time,
     reason: visitData.reason,
     prescription: visitData.prescription,
     navigation,
-    uid: userData.uid,
+    uid,
     prepaid: bookVisit.prepaid,
-    insurance: userData.profileInfo.insurance,
-    plan: userData.profileInfo.plan,
+    insurance,
+    plan,
     complete: false,
+    profile: profileImageUrl,
+    pronouns,
+    phoneNumber,
+    dob,
+    gender,
+    organizationId,
     expert: {
       firstName: expertData.profileInfo.firstName,
       lastName: expertData.profileInfo.lastName,

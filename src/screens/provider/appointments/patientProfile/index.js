@@ -18,7 +18,7 @@ import {withNavigation} from 'react-navigation';
 import styles from './style';
 
 const PatientProfile = ({navigation}) => {
-  const {expert, visit, patient} = navigation.state.params;
+  const {visit, patient} = navigation.state.params;
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
   const patientInfo = useSelector((state) => state.user.data);
@@ -38,6 +38,8 @@ const PatientProfile = ({navigation}) => {
 
   const handleNavigation = (destination) => {
     navigation.push(destination, {
+      visit: visit,
+      patientInfo,
       uid: patient.uid,
     });
   };
@@ -61,14 +63,8 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={appointment.visit.locked}
-            onPress={() =>
-              navigation.navigate('MedicalHistoryExpert', {
-                uid: expert.uid,
-                visit,
-                patientInfo,
-              })
-            }>
+            disabled={appointment && appointment.visit.locked}
+            onPress={() => handleNavigation('MedicalHistoryExpert')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}
@@ -78,7 +74,7 @@ const PatientProfile = ({navigation}) => {
               />
               <Text style={styles.info}>Medical History</Text>
               <View style={styles.check}>
-                {appointment.visit.locked && (
+                {appointment && appointment.visit.locked && (
                   <Image
                     resizeMode="contain"
                     containerStyle={{alignSelf: 'center'}}
@@ -90,8 +86,7 @@ const PatientProfile = ({navigation}) => {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('PreviousVisits')}>
+          <TouchableOpacity onPress={() => handleNavigation('PreviousVisits')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 containerStyle={{alignSelf: 'center'}}

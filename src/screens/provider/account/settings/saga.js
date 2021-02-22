@@ -27,26 +27,27 @@ function* updateExpertData({data}) {
         const user = firebase.auth().currentUser;
         const {downloadURL} = responseImage.data;
         const userRegistrationParams = {
-          credits: userParams.credits,
           uid: user.uid,
           role: 'Expert',
-          isActive: false,
           clinicInfo: {
             ...userParams.clinicInfo,
             name: userParams.location,
             license: userParams.license,
           },
           profileInfo: {
-            ...userParams.profileInfo,
             bio: userParams.bio,
-            profileImageUrl: downloadURL ? downloadURL : '',
-            firstName: userParams.firstName,
-            lastName: userParams.lastName,
+            city: userParams.city,
             dob: userParams.dob,
-            pronouns: userParams.pronouns,
-            isActive: false,
-            state: userParams.state,
+            email: userParams.email,
+            firstName: userParams.firstName,
             gender: userParams.gender,
+            languages: userParams.languages,
+            lastName: userParams.lastName,
+            license: userParams.license,
+            profession: userParams.profession,
+            profileImageUrl: downloadURL ? downloadURL : '',
+            pronouns: userParams.pronouns,
+            state: userParams.state,
           },
         };
 
@@ -84,25 +85,26 @@ function* updateExpertData({data}) {
     } else {
       const user = firebase.auth().currentUser;
       const userRegistrationParams = {
-        credits: userParams.credits,
         uid: user.uid,
         role: 'Expert',
-        isActive: true,
         clinicInfo: {
           ...userParams.clinicInfo,
           name: userParams.location,
           license: userParams.license,
         },
         profileInfo: {
-          ...userParams.profileInfo,
           bio: userParams.bio,
-          profileImageUrl: userParams.profileImageUrl || '',
-          firstName: userParams.firstName,
-          lastName: userParams.lastName,
-          email: userParams.email,
+          city: userParams.city,
           dob: userParams.dob,
+          email: userParams.email,
+          firstName: userParams.firstName,
+          gender: userParams.gender,
+          languages: userParams.languages,
+          lastName: userParams.lastName,
+          license: userParams.license,
+          profession: userParams.profession,
+          profileImageUrl: userParams.profileImageUrl || '',
           pronouns: userParams.pronouns,
-          isActive: false,
           state: userParams.state,
         },
       };
@@ -114,8 +116,8 @@ function* updateExpertData({data}) {
           tableName: Constant.App.firebaseTableNames.users,
           uid: user.uid,
         };
+
         const userData = yield getDataFromTable(obj);
-        displayConsole('userData', userData);
         yield put(setUserData(userData));
         yield put(getUser());
         navigation.goBack();

@@ -1,4 +1,4 @@
-import {put, takeEvery, selector} from 'redux-saga/effects';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
@@ -18,10 +18,8 @@ function* updateExpertData({data}) {
 
     const user = firebase.auth().currentUser;
     const userRegistrationParams = {
-      credits: userParams.credits,
       uid: user.uid,
       role: 'Expert',
-      isActive: true,
       clinicInfo: {
         ...userParams.clinicInfo,
         hours: userParams.hours,

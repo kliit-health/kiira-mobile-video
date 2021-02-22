@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {ScrollView, StatusBar} from 'react-native';
+import {ScrollView} from 'react-native';
 import {useDidMount} from '../../../utils/hooks';
 import * as actions from '../../../redux/actions';
 import {Container} from '../../../components';
 import {Bot, Items, Intro} from './sections';
 import styles from './styles';
 import i18n from '../../../i18n';
-import {signOut} from '../account/action';
+
 
 const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();

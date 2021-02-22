@@ -10,7 +10,7 @@ import {showOrHideModal} from '../../../components/customModal/action';
 function* sendVerificationEmail({data}) {
   const lang = yield select((state) => state.language);
   try {
-    yield put(showApiLoader(Lang.apiLoader.loadingText));
+    yield put(showApiLoader(lang.apiLoader.loadingText));
     yield call(sendEmailVerification, data);
     yield put(hideApiLoader());
     yield put(showOrHideModal('Check your email'));
