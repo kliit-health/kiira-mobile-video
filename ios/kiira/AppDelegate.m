@@ -1,16 +1,11 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
-#import "RNFirebaseNotifications.h"
-#import "RNFirebaseMessaging.h"
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "RCTSplashScreen.h" //import interface
-#import <AppCenterReactNative.h>
-#import <AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNativeCrashes.h>
 
-@import Firebase;
+// @import Firebase;
 
 
 // #if DEBUG
@@ -41,9 +36,10 @@
   //   InitializeFlipper(application);
   // #endif
 
-  [FIRApp configure];
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
-  [RNFirebaseNotifications configure];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"kiira"
@@ -58,16 +54,13 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [AppCenterReactNative register];
-  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
-  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   return YES;
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-  [[FIRApp defaultApp] deleteApp:^(BOOL success) { }];
-}
+// - (void)applicationWillTerminate:(UIApplication *)application
+// {
+//   [[FIRApp defaultApp] deleteApp:^(BOOL success) { }];
+// }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

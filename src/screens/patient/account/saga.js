@@ -21,7 +21,6 @@ function* signout({data}) {
     const updateStatusParams = {
       uid: userData.uid,
       updatedData: {
-        fcmToken: '',
         isOnline: false,
       },
     };

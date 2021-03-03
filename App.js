@@ -8,7 +8,7 @@ import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
 import {getBottomSpace} from './src/components/iPhoneXHelper';
-import firebase from 'react-native-firebase';
+// import app from '@react-native-firebase/app';
 import {
   setFcmToken,
   setAppState,
@@ -24,7 +24,6 @@ import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    firebase.app();
     this.state = {
       appState: AppState.currentState,
     };

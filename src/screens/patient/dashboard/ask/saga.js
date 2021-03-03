@@ -14,8 +14,8 @@ import {
 } from './action';
 import {GET_QUESTION_DATA, UPDATE_USER_DATA} from '../../../../redux/types';
 import {displayConsole} from '../../../../utils/helper';
-import firebase from 'react-native-firebase';
-import Constant from '../../../../utils/constants';
+import auth from '@react-native-firebase/auth';
+import {tables} from '../../../../utils/constants';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100;
@@ -29,10 +29,10 @@ function* getQuestions({data, dispatch}) {
   const lang = yield select((state) => state.language);
   try {
     const {expertsParams, questionParams, previousQuestionParams} = data;
-    const user = yield firebase.auth().currentUser;
+    const user = auth().currentUser;
     const {uid} = user;
     const obj = {
-      tableName: Constant.App.firebaseTableNames.users,
+      tableName: tables.users,
       uid,
     };
     const userData = yield getDataFromTable(obj);

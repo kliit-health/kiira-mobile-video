@@ -11,10 +11,9 @@ import {
   makeid,
 } from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
-import Constant from '../../../../../utils/constants';
-import {displayConsole} from '../../../../../utils/helper';
+import {tables} from '../../../../../utils/constants';
 import {StackActions, NavigationActions} from 'react-navigation';
-import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 import {setUserData} from '../../../../auth/authLoading/action';
 
 // TODO: Refactor this function in order to clean code and remove redundant code
@@ -27,14 +26,14 @@ function* uploadUserData({data, dispatch}) {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
-      displayConsole('responseImage', responseImage);
+
       if (responseImage.success) {
         const {downloadURL} = responseImage.data;
 
-        const user = firebase.auth().currentUser;
+        const user = auth().currentUser;
         var initialCredits = Constant.App.credits;
         const obj = {
-          tableName: Constant.App.firebaseTableNames.users,
+          tableName: tables.users,
           uid: user.uid,
         };
         const userData = yield getDataFromTable(obj);
@@ -93,10 +92,10 @@ function* uploadUserData({data, dispatch}) {
         );
       }
     } else {
-      const user = firebase.auth().currentUser;
+      const user = auth().currentUser;
       var initialCredits = Constant.App.credits;
       const obj = {
-        tableName: Constant.App.firebaseTableNames.users,
+        tableName: tables.users,
         uid: user.uid,
       };
       const userData = yield getDataFromTable(obj);

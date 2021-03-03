@@ -550,7 +550,7 @@ const AppNavigator = createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
   },
   {
-    initialRouteName: 'AuthLoading',
+    initialRouteName: 'Auth',
     headerMode: 'none',
     ...TransparentStyle,
   },

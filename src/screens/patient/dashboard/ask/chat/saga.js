@@ -22,7 +22,7 @@ import {
   checkQuestionStatus,
   getUserData,
 } from '../../../../../utils/firebase';
-import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 import {
   chatMessageSuccess,
   chatMessageError,
@@ -39,7 +39,7 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
-import Constant from '../../../../../utils/constants';
+import {tables} from '../../../../../utils/constants';
 import {clearQuestionValue} from '../../ask/action';
 import moment from 'moment';
 
@@ -96,32 +96,12 @@ function* setQuestion({data, dispatch}) {
         }),
       );
 
-      // let paramsUpdateCredits;
-
-      // if (userData.questions > 0) {
-      //   paramsUpdateCredits = {
-      //     uid: userData.uid,
-      //     updatedData: {
-      //       questions: userData.questions - 1,
-      //     },
-      //   };
-      // } else {
-      //   paramsUpdateCredits = {
-      //     uid: userData.uid,
-      //     updatedData: {
-      //       credits: userData.credits - Constant.App.questionCreditValue,
-      //     },
-      //   };
-      // }
-
-      // yield updateStatus(paramsUpdateCredits);
-
-      const user = firebase.auth().currentUser;
+      const user = auth().currentUser;
 
       if (user && user.uid) {
         try {
           const obj = {
-            tableName: Constant.App.firebaseTableNames.users,
+            tableName: tables.users,
             uid: user.uid,
           };
           getUserData(

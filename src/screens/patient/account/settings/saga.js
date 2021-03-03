@@ -10,9 +10,8 @@ import {
   getDataFromTable,
 } from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
-import Constant from '../../../../utils/constants';
-import {displayConsole} from '../../../../utils/helper';
-import firebase from 'react-native-firebase';
+import {tables} from '../../../../utils/constants';
+import auth from '@react-native-firebase/auth';
 import {setUserData} from '../../../auth/authLoading/action';
 import {getUser} from '../../../../redux/actions';
 
@@ -26,7 +25,7 @@ function* updateUserData({data}) {
       const responseImage = yield uploadImage(imageParams);
 
       if (responseImage.success) {
-        const user = firebase.auth().currentUser;
+        const user = auth().currentUser;
         const {downloadURL} = responseImage.data;
         const userRegistrationParams = {
           uid: user.uid,
@@ -57,7 +56,7 @@ function* updateUserData({data}) {
         yield put(hideApiLoader());
         if (response.success) {
           const obj = {
-            tableName: Constant.App.firebaseTableNames.users,
+            tableName: tables.users,
             uid: user.uid,
           };
           const userData = yield getDataFromTable(obj);
@@ -84,7 +83,7 @@ function* updateUserData({data}) {
         );
       }
     } else {
-      const user = firebase.auth().currentUser;
+      const user = auth().currentUser;
       const userRegistrationParams = {
         uid: user.uid,
         profileInfo: {
@@ -114,11 +113,10 @@ function* updateUserData({data}) {
       if (response.success) {
         navigation.goBack();
         const obj = {
-          tableName: Constant.App.firebaseTableNames.users,
+          tableName: tables.users,
           uid: user.uid,
         };
         const userData = yield getDataFromTable(obj);
-        displayConsole('userData', userData);
         yield put(setUserData(userData));
         yield put(getUser());
       } else {

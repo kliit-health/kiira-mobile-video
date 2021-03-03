@@ -5,8 +5,8 @@ import {
 } from '../../../../components/customLoader/action';
 import {addUserData, getDataFromTable} from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
-import Constant from '../../../../utils/constants';
-import firebase from 'react-native-firebase';
+import {tables} from '../../../../utils/constants';
+import auth from '@react-native-firebase/auth';
 import {setUserData} from '../../../auth/authLoading/action';
 import {UPDATE_EXPERT_HOURS_DATA} from '../../../../redux/types';
 
@@ -16,7 +16,7 @@ function* updateExpertData({data}) {
     const {userParams, navigation} = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
 
-    const user = firebase.auth().currentUser;
+    const user = auth().currentUser;
     const userRegistrationParams = {
       uid: user.uid,
       role: 'Expert',
@@ -35,7 +35,7 @@ function* updateExpertData({data}) {
     if (response.success) {
       navigation.goBack();
       const obj = {
-        tableName: Constant.App.firebaseTableNames.users,
+        tableName: tables.users,
         uid: user.uid,
       };
       const userData = yield getDataFromTable(obj);

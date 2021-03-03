@@ -1,63 +1,63 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import metrices from '../../../utils/metrices';
-import Constant from '../../../utils/constants';
+import Constant, {text, colors} from '../../../utils/constants';
 
 const styles = StyleSheet.create({
   bannerImageStyle: {
-    height: metrices.DEVICE_HEIGHT * 0.91,
-    width: Dimensions.get('window').width,
+    height: metrices.height * 0.91,
+    width: metrices.width,
   },
 
   buttonContainerStyle: {
     alignItems: 'center',
-    height: metrices.DEVICE_HEIGHT * 0.18,
-    backgroundColor: Constant.App.colors.whiteColor,
+    height: metrices.height * 0.18,
+    backgroundColor: colors.white,
   },
 
   containerStyle: {
     flex: 1,
-    backgroundColor: Constant.App.whiteColor,
+    backgroundColor: colors.white,
   },
 
   loginButtonStyle: {
     padding: 10,
-    width: metrices.DEVICE_WIDTH * 0.75,
+    width: metrices.width * 0.75,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Constant.App.colors.whiteColor,
-    borderColor: Constant.App.colors.blueColor,
+    backgroundColor: colors.white,
+    borderColor: colors.blue,
     borderWidth: 1,
   },
 
   loginButtonTextStyle: {
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontSize: Constant.App.textSize.Normal,
-    color: Constant.App.colors.blueColor,
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.normal,
+    color: colors.blue,
     textAlign: 'center',
   },
 
   sliderViewStyle: {
-    height: metrices.DEVICE_HEIGHT * 0.85,
-    width: metrices.DEVICE_WIDTH,
+    height: metrices.height * 0.85,
+    width: metrices.width,
   },
 
   verifyButtonStyle: {
     margin: 12,
     padding: 10,
-    width: metrices.DEVICE_WIDTH * 0.75,
+    width: metrices.width * 0.75,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Constant.App.colors.blueColor,
-    borderColor: Constant.App.colors.blueColor,
+    backgroundColor: colors.blue,
+    borderColor: colors.blue,
     borderWidth: 1,
   },
 
   verifyButtonTextStyle: {
-    fontFamily: Constant.App.fontFamily.bodyRegular,
-    fontSize: Constant.App.textSize.Normal,
-    color: Constant.App.colors.whiteColor,
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.normal,
+    color: colors.white,
     textAlign: 'center',
   },
 });

@@ -1,5 +1,4 @@
 import {put, takeEvery} from 'redux-saga/effects';
-import firebase from 'react-native-firebase';
 import {
   GET_FAVORITE_EXPERTS,
   GET_FAVORITE_EXPERTS_PENDING,

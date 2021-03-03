@@ -1828,3 +1828,12 @@ export const videoHistory = {
   visitWith: 'Visit With: ',
   viewDetails: 'View Details',
 };
+
+export const tables = {
+  users: 'users',
+  questions: 'questions',
+  questionList: 'questionList',
+  professions: 'professions',
+  languages: 'languages',
+  messages: 'messagesNew',
+};

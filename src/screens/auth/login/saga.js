@@ -1,5 +1,6 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {LOGIN_FIREBASE_USER} from '../../../redux/types';
+import messaging from '@react-native-firebase/messaging';
 import {
   showApiLoader,
   hideApiLoader,
@@ -13,34 +14,59 @@ import {showOrHideModal} from '../../../components/customModal/action';
 import Constant from '../../../utils/constants';
 import {loginFailure} from './action';
 import {signoutApihit} from '../../patient/account/action';
-import {setUserData} from '../authLoading/action';
+import {setUserData, setFcmToken} from '../authLoading/action';
 import {getTermsAndConditions} from '../../../redux/actions';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+//TODO: Refactor Login
 
 function* loginFirebase({data}) {
   const lang = yield select((state) => state.language);
   try {
     const state = yield select();
-    const fcmToken = state.authLoading.fcmToken;
+    let token;
     const {params, navigation} = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield loginInWithFirebase(params);
+    const enabled = yield messaging().hasPermission();
+    if (enabled) {
+      token = yield messaging().getToken();
+      yield put(setFcmToken(token));
+      yield AsyncStorage.setItem('fcmToken', token);
+      console.log('ENABLED', token);
+    } else {
+      try {
+        yield messaging().requestPermission();
+        token = yield messaging().getToken();
+        yield put(setFcmToken(token));
+        yield AsyncStorage.setItem('fcmToken', token);
+        console.log('NEEDS PERMISSION', token);
+      } catch (error) {
+        // User has rejected permissions
+        console.log('permission rejected');
+        navigation.navigate('Auth');
+      }
+    }
     yield delay(500);
     yield put(hideApiLoader());
     yield delay(500);
     const {uid} = response;
+    const fcmToken = state.authLoading.fcmToken;
+    console.log('FCM TOKEN', fcmToken);
     if (uid) {
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
         uid,
       };
       const userData = yield getDataFromTable(obj);
+      console.log('USER DATA', userData);
       if (userData && userData.role === 'User') {
         const updateStatusParams = {
           uid: userData.uid,
           updatedData: {
-            fcmToken,
+            fcmToken: token,
           },
         };
         yield updateStatus(updateStatusParams);

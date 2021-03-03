@@ -9,18 +9,11 @@ const IS_ANDROID = Platform.OS === 'android';
 const {height, width} = Dimensions.get('window');
 
 export default {
-  DEVICE_HEIGHT: IS_ANDROID
+  height: IS_ANDROID
     ? height - StatusBar.currentHeight
     : height - getStatusBarHeight(),
-  DEVICE_WIDTH: width,
+  width: width,
   BOTTOM_SAVE_AREA: getBottomSpace(),
 };
 
 export const smallScreen = width <= 400 && height <= 666;
-
-export const metrices = {
-  device: {
-    width,
-    height,
-  },
-};

@@ -14,6 +14,7 @@ import {
   PERMISSIONS,
   RESULTS,
 } from 'react-native-permissions';
+import SplashScreen from 'react-native-smart-splash-screen';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
@@ -84,6 +85,11 @@ const Tutorial = (props) => {
           console.log('The permission error', error);
         });
     }
+    SplashScreen.close({
+      animationType: SplashScreen.animationType.scale,
+      duration: 3000,
+      delay: 500,
+    });
   }, []);
 
   const renderSliderView = () => {

@@ -8,7 +8,7 @@ import {addUserData, getDataFromTable} from '../../../utils/firebase';
 import {showOrHideModal} from '../../../components/customModal/action';
 import Constant from '../../../utils/constants';
 import {displayConsole} from '../../../utils/helper';
-import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 import {setUserData} from '../authLoading/action';
 
 const defaultImage =
@@ -20,7 +20,7 @@ function* updateNewUserData({data}) {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const {userParams, navigation} = data;
 
-    const user = firebase.auth().currentUser;
+    const user = auth().currentUser;
     const userRegistrationParams = {
       ...(userParams.address && {address: userParams.address}),
       agreeToTerms: false,
