@@ -2,9 +2,9 @@ import {StyleSheet} from 'react-native';
 import metrics from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
-let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
+let titlePaddingValue = metrics.width * 0.05;
 
 const styles = StyleSheet.create({
   backContainerStyle: {
@@ -23,20 +23,20 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   bioTextStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.02,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
   bioTextStyleBold: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.02,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
 
   bioTitleTextStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
   },
 
   btnContainerStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    marginTop: metrics.height * 0.02,
+    width: metrics.width - parentPadding,
     padding: 12,
     backgroundColor: Constant.App.colors.blueColor,
     borderRadius: 20,
@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   expertNameTextBoldStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontWeight: '500',
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
 
   expertInfoProfessionTextStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Small,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   expertProfessionLoctionBoldStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     color: Constant.App.colors.greyColorText,
     fontSize: Constant.App.textSize.Small,
     fontWeight: '200',
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     padding: parentPaddingValue,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   parentContainerStyle: {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
     padding: titlePaddingValue,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     borderBottomColor: Constant.App.colors.borderColorFilterModal,
     borderBottomWidth: 4,
     alignItems: 'center',

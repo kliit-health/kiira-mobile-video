@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../../utils/constants';
 import metrics from '../../../../../utils/metrices';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
+let parentPaddingValue = metrics.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
 const styles = StyleSheet.create({
   parentContainer: {
@@ -104,14 +104,14 @@ const styles = StyleSheet.create({
   },
   chatInputParentContainer: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     padding: parentPaddingValue,
     backgroundColor: Constant.App.colors.whiteColor,
     borderTopWidth: 1,
     borderTopColor: Constant.App.colors.greyBgAsk,
   },
   imageParentContainerStyle: {
-    width: metrics.DEVICE_WIDTH * 0.75,
+    width: metrics.width * 0.75,
     borderRadius: 15,
     flexDirection: 'row',
     paddingLeft: 10,
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
   },
   chatInputContainer: {
     flexDirection: 'row',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
   textContainerStyle: {
     flexDirection: 'row',
     marginLeft: 2,
-    width: metrics.DEVICE_WIDTH - parentPadding - 30,
+    width: metrics.width - parentPadding - 30,
     borderColor: Constant.App.colors.greyBgAsk,
     borderWidth: 2,
     borderRadius: 5,
@@ -155,14 +155,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width:
-      metrics.DEVICE_WIDTH -
+      metrics.width -
       parentPadding -
       30 -
-      (metrics.DEVICE_WIDTH - parentPadding - 30 - 10 - 44),
+      (metrics.width - parentPadding - 30 - 10 - 44),
   },
   textInputStyle: {
     padding: 5,
-    width: metrics.DEVICE_WIDTH - parentPadding - 30 - 10 - 44,
+    width: metrics.width - parentPadding - 30 - 10 - 44,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   resolvedParentContainer: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     padding: parentPaddingValue,
   },
   resovledTextStyle: {
@@ -198,11 +198,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 10,
     marginRight: 10,
-    width: metrics.DEVICE_WIDTH - 20,
+    width: metrics.width - 20,
     backgroundColor: Constant.App.colors.whiteColor,
   },
   actionModalTitleTextStyle: {
-    width: metrics.DEVICE_WIDTH - 20,
+    width: metrics.width - 20,
     color: Constant.App.colors.lightGrey,
     textAlign: 'center',
     fontSize: Constant.App.textSize.Normal,
@@ -211,11 +211,11 @@ const styles = StyleSheet.create({
   },
   actionModalLineSeperator: {
     backgroundColor: Constant.App.colors.greyBgAsk,
-    width: metrics.DEVICE_WIDTH - 20,
+    width: metrics.width - 20,
     height: 1,
   },
   actionModalBlueTextStyle: {
-    width: metrics.DEVICE_WIDTH - 20,
+    width: metrics.width - 20,
     color: Constant.App.colors.blueColor,
     textAlign: 'center',
     padding: 12,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
   actionModalOkBtnErrorContainerStyle: {
-    width: metrics.DEVICE_WIDTH - 20,
+    width: metrics.width - 20,
     padding: 10,
     backgroundColor: Constant.App.colors.whiteColor,
     marginTop: 10,

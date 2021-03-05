@@ -20,29 +20,28 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-//TODO: Refactor Login
+//TODO: Refactor Login Saga
 
 function* loginFirebase({data}) {
   const lang = yield select((state) => state.language);
   try {
-    const state = yield select();
     let token;
     const {params, navigation} = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield loginInWithFirebase(params);
     const enabled = yield messaging().hasPermission();
+    const check = yield messaging().isDeviceRegisteredForRemoteMessages;
+
     if (enabled) {
       token = yield messaging().getToken();
       yield put(setFcmToken(token));
       yield AsyncStorage.setItem('fcmToken', token);
-      console.log('ENABLED', token);
     } else {
       try {
         yield messaging().requestPermission();
         token = yield messaging().getToken();
         yield put(setFcmToken(token));
         yield AsyncStorage.setItem('fcmToken', token);
-        console.log('NEEDS PERMISSION', token);
       } catch (error) {
         // User has rejected permissions
         console.log('permission rejected');
@@ -53,8 +52,7 @@ function* loginFirebase({data}) {
     yield put(hideApiLoader());
     yield delay(500);
     const {uid} = response;
-    const fcmToken = state.authLoading.fcmToken;
-    console.log('FCM TOKEN', fcmToken);
+
     if (uid) {
       const obj = {
         tableName: Constant.App.firebaseTableNames.users,
@@ -98,7 +96,7 @@ function* loginFirebase({data}) {
           const updateStatusParams = {
             uid: userData.uid,
             updatedData: {
-              fcmToken,
+              fcmToken: token,
             },
           };
           yield updateStatus(updateStatusParams);
@@ -117,6 +115,7 @@ function* loginFirebase({data}) {
         }
       }
     } else {
+      console.log('FAILURE', response);
       yield put(
         showOrHideModal(
           response.message ? response.message : lang.errorMessage.serverError,
@@ -125,6 +124,7 @@ function* loginFirebase({data}) {
       yield put(loginFailure());
     }
   } catch (error) {
+    console.log('ERROR', error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }

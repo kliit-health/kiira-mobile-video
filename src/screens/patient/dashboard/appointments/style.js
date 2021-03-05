@@ -3,10 +3,10 @@ import Constant from '../../../../utils/constants';
 import metrics, {smallScreen} from '../../../../utils/metrices';
 import {text} from '../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   creditButtonStyle: {
     marginLeft: -9,
     marginTop: 14,
-    width: metrics.DEVICE_WIDTH * 0.49,
+    width: metrics.width * 0.49,
     height: 44,
     borderRadius: 22,
     backgroundColor: Constant.App.colors.whiteColor,
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
   },
 
   logoutParentContainerStyle: {
-    marginTop: metrics.DEVICE_WIDTH * 0.1,
-    marginBottom: metrics.DEVICE_WIDTH * 0.1,
+    marginTop: metrics.width * 0.1,
+    marginBottom: metrics.width * 0.1,
   },
 
   logoutTextStyle: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     color: Constant.App.colors.redColorLogout,
     fontSize: Constant.App.textSize.xLarge,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   myRecentExpertContainerStyle: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   profileInfoParentContainerStyle: {
     flexDirection: 'column',
     alignSelf: 'center',
-    width: metrics.DEVICE_WIDTH - AVATAR_SIZE - parentPadding,
+    width: metrics.width - AVATAR_SIZE - parentPadding,
   },
 
   titleTextStyle: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
 
   expertNameTextStyle: {
     flex: 1,
-    marginTop: metrics.DEVICE_HEIGHT * 0.025,
+    marginTop: metrics.height * 0.025,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -231,9 +231,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 1,
   },
@@ -249,9 +249,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.03,
+    marginTop: metrics.height * 0.03,
   },
 
   yesTextStyle: {

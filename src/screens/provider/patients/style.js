@@ -2,10 +2,10 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 1,
   },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   visitContainer: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
     height: 225,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS

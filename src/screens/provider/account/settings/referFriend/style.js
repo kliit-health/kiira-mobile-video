@@ -3,9 +3,9 @@ import Constant from '../../../../../utils/constants';
 import metrics from '../../../../../utils/metrices';
 import {getStatusBarHeight} from '../../../../../components/iPhoneXHelper';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.08;
+let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
-let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
+let titlePaddingValue = metrics.width * 0.05;
 
 const styles = StyleSheet.create({
   backContainerStyle: {
@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
   },
 
   btnContainerStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.05,
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    padding: metrics.DEVICE_HEIGHT * 0.02,
+    marginTop: metrics.height * 0.05,
+    width: metrics.width - parentPadding,
+    padding: metrics.height * 0.02,
     backgroundColor: Constant.App.colors.blueColor,
     borderRadius: 20,
   },
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   itemsParentContainerStyle: {
-    marginTop: metrics.DEVICE_WIDTH * 0.05,
+    marginTop: metrics.width * 0.05,
     backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'row',
     paddingLeft: parentPaddingValue,
@@ -72,15 +72,15 @@ const styles = StyleSheet.create({
   referalCodeTitleContainerStyle: {
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    paddingTop: metrics.DEVICE_WIDTH * 0.05,
-    paddingBottom: metrics.DEVICE_WIDTH * 0.05,
+    paddingTop: metrics.width * 0.05,
+    paddingBottom: metrics.width * 0.05,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   referalCodeTitleTextBoldStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
   },
 
   referalCodeTextStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    marginTop: metrics.height * 0.02,
     backgroundColor: Constant.App.colors.whiteColor,
     padding: parentPaddingValue,
     borderRadius: 10,
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
     padding: titlePaddingValue,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     borderBottomColor: Constant.App.colors.borderColorFilterModal,
     borderBottomWidth: 4,
     alignItems: 'center',
@@ -113,16 +113,16 @@ const styles = StyleSheet.create({
   subTitleContainerStyle: {
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    paddingTop: metrics.DEVICE_WIDTH * 0.05,
-    paddingBottom: metrics.DEVICE_WIDTH * 0.05,
+    paddingTop: metrics.width * 0.05,
+    paddingBottom: metrics.width * 0.05,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
   subTitleTextBoldStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
   },
 
   subTitleTextRegularStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.01,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,

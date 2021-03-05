@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Platform,
+  Linking,
 } from 'react-native';
 import {
   requestMultiple,
@@ -19,6 +20,7 @@ import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
 import Carousel from '../../../components/carousel';
+import VersionCheck from 'react-native-version-check';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -89,6 +91,15 @@ const Tutorial = (props) => {
       animationType: SplashScreen.animationType.scale,
       duration: 3000,
       delay: 500,
+    });
+  }, []);
+
+  useEffect(() => {
+    VersionCheck.needUpdate().then(async (res) => {
+      console.log(res.isNeeded); // true
+      if (res.isNeeded) {
+        Linking.openURL(res.storeUrl); // open store if update is needed.
+      }
     });
   }, []);
 

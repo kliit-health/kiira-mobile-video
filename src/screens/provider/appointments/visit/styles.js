@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import metrics, {smallScreen} from '../../../../utils/metrices';
 import Constant from '../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.5,
+    width: metrics.width * 0.5,
     height: 42,
     backgroundColor: Constant.App.colors.whiteColor,
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderBottomWidth: 1,
     borderColor: Constant.App.colors.greyColorText,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   dateText: {
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    marginVertical: metrics.DEVICE_HEIGHT * 0.01,
+    marginVertical: metrics.height * 0.01,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     fontWeight: '700',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: -70,
     marginTop: 20,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   expertProfessionTextStyle: {
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   myRecentExpertContainerStyle: {
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     marginTop: 10,
   },
 
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
 
   reason: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.005,
+    marginTop: metrics.height * 0.005,
     marginLeft: 110,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     marginTop: 10,
   },
 
@@ -231,13 +231,13 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.whiteColor,
     borderColor: Constant.App.colors.blackColor,
     borderWidth: 1,
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
   },
 
   visitDetailsParentContainer: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
     height: 300,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,

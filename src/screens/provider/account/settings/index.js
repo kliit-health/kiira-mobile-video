@@ -458,7 +458,7 @@ class SettingsExpert extends PureComponent {
       <TouchableOpacity
         style={styles.btnContainerStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ChangePassword);
+          navigation.navigate(Constant.App.screenNames.ChangePasswordExpert);
         }}>
         <CustomText style={styles.btnTextStyle}>
           {lang.setting.changePassword}

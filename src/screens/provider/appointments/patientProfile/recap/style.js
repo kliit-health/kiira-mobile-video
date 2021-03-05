@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
   document: {
     flex: 1,
-    width: metrices.DEVICE_WIDTH * 0.9,
+    width: metrices.width * 0.9,
     alignSelf: 'center',
   },
 

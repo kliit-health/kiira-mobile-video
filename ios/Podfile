@@ -6,7 +6,7 @@ platform :ios, '11.0'
 target 'kiira' do
   config = use_native_modules!
 
-  # App Permissions
+  # App
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "../node_modules/react-native-permissions/ios/Camera.podspec"
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"

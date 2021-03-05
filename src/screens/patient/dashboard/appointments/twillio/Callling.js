@@ -16,6 +16,7 @@ import {
   TwilioVideoParticipantView,
   TwilioVideo,
 } from 'react-native-twilio-video-webrtc';
+import KeepAwake from 'react-native-keep-awake';
 
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -190,6 +191,7 @@ const VideoCallScreen = ({navigation}) => {
           setVideoTracks(videoTracksLocal);
         }}
       />
+      <KeepAwake />
     </View>
   );
 };

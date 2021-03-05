@@ -2,7 +2,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
-import config from '@react-native-firebase/remote-config';
+import remoteConfig from '@react-native-firebase/remote-config';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections} from '../constants';
@@ -126,7 +126,7 @@ export function getPlanDetails(planDetails) {
 export async function sendEmailVerification(obj) {
   try {
     const {email} = obj.params;
-    await functions.httpsCallable('sendActivationLink')(email);
+    await functions().httpsCallable('sendActivationLink')(email);
     return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
@@ -702,7 +702,7 @@ export function logout() {
 
 export async function resetPassword(email) {
   try {
-    await functions.httpsCallable('sendPasswordResetEmail')(email);
+    await functions().httpsCallable('sendPasswordResetEmail')(email);
     return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
@@ -1413,10 +1413,14 @@ export function getFiltersDataWithCondition(obj) {
 
 export async function getCreditAmountsData() {
   try {
-    await config().fetch(0);
-    await config().activateFetched();
-    const snapshot = await config().getValue('credit_amounts');
-    return snapshot ? snapshot.val() : null;
+    let price = await remoteConfig()
+      .fetchAndActivate()
+      .then(() => {
+        const result = remoteConfig().getValue('credit_amounts');
+        return result.asString();
+      });
+    console.log('PRICE RESULT', price);
+    return price;
   } catch (error) {
     return null;
   }
@@ -1426,7 +1430,7 @@ export async function addNewPaymentCard(obj) {
   try {
     const {card_number, exp_month, exp_year, cvc} = obj;
 
-    await functions.httpsCallable('apiPaymentsAddCard')({
+    await functions().httpsCallable('apiPaymentsAddCard')({
       card_number: card_number,
       exp_month: exp_month,
       exp_year: exp_year,
@@ -1442,7 +1446,7 @@ export async function addNewPaymentCard(obj) {
 
 export async function getPaymentMethods() {
   try {
-    const response = await functions.httpsCallable('apiPaymentsListCards')();
+    const response = await functions().httpsCallable('apiPaymentsListCards')();
     if (response.data.data) {
       return {
         ok: true,
@@ -1464,7 +1468,7 @@ export async function getPaymentMethods() {
 export async function payAmount(cardID, amount) {
   try {
     const amountInCents = Number(amount) * 100;
-    const response = await functions.httpsCallable('apiPaymentsPayAmount')({
+    const response = await functions().httpsCallable('apiPaymentsPayAmount')({
       card_id: cardID,
       amount: amountInCents,
     });
@@ -1478,7 +1482,7 @@ export async function payAmount(cardID, amount) {
 export async function payAmountWithToken(tokenID, amount) {
   try {
     const amountInCents = Number(amount) * 100;
-    const response = await functions.httpsCallable(
+    const response = await functions().httpsCallable(
       'apiPaymentsPayAmountApplePay',
     )({
       token_id: tokenID,
@@ -1507,7 +1511,7 @@ export async function updateCredits(visits, {data}) {
 
 export async function getPayPalAccessToken() {
   try {
-    const response = await functions.httpsCallable(
+    const response = await functions().httpsCallable(
       'apiPaymentsGetPaypalAccesstoken',
     )();
     return {ok: true, data: response};
@@ -1750,9 +1754,9 @@ export async function setVideoVisitRating(data) {
 
 export async function sendVisitRecap({payload}) {
   try {
-    await functions.httpsCallable('sendMailNotificationOnMedicalRecordCreate')(
-      payload,
-    );
+    await functions().httpsCallable(
+      'sendMailNotificationOnMedicalRecordCreate',
+    )(payload);
   } catch (error) {
     console.log(error);
   }
@@ -1761,7 +1765,7 @@ export async function sendVisitRecap({payload}) {
 export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
   new Promise((resolve, reject) =>
     (async function () {
-      const updateSubscriptionPlan = functions.httpsCallable(
+      const updateSubscriptionPlan = functions().httpsCallable(
         'changeSubscriptionPlan',
       );
       try {
@@ -1779,7 +1783,9 @@ export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
 export const cancelSubscription = ({subscriptionId, userId}) =>
   new Promise((resolve, reject) =>
     (async function () {
-      const cancelSubscription = functions.httpsCallable('cancelSubscription');
+      const cancelSubscription = functions().httpsCallable(
+        'cancelSubscription',
+      );
       try {
         const response = await cancelSubscription({
           subscriptionId,
@@ -1806,7 +1812,7 @@ export async function getOrganizationInfo(user) {
 
 export async function authorizeVideo(uid) {
   try {
-    const token = await functions.httpsCallable('videoSessionJoin')({
+    const token = await functions().httpsCallable('videoSessionJoin')({
       userName: uid,
     });
     return token;

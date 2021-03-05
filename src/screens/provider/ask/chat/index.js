@@ -291,8 +291,8 @@ class ChatExpert extends React.PureComponent {
             <View style={styles.imageContainerStyle}>
               <Image
                 style={{
-                  height: metrices.DEVICE_WIDTH - 100,
-                  width: metrices.DEVICE_WIDTH * 0.65,
+                  height: metrices.width - 100,
+                  width: metrices.width * 0.65,
                   resizeMode: 'cover',
                 }}
                 source={{

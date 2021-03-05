@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import metrics, {smallScreen} from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 
 const styles = StyleSheet.create({
   dateContainer: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: Constant.App.colors.greyColorText,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   dateText: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   expertName: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
   expertNameTextStyle: {
     flex: 1,
-    marginTop: metrics.DEVICE_HEIGHT * 0.025,
+    marginTop: metrics.height * 0.025,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: parentPaddingValue * 0.5,
     backgroundColor: Constant.App.colors.whiteColor,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   informationContainer: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.7,
+    width: metrics.width * 0.7,
     height: 42,
     backgroundColor: Constant.App.colors.whiteColor,
   },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.7,
+    width: metrics.width * 0.7,
     height: 42,
     backgroundColor: Constant.App.colors.whiteColor,
   },
@@ -181,13 +181,13 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.whiteColor,
     borderColor: Constant.App.colors.blackColor,
     borderWidth: 1,
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
   },
 
   visitDetailsParentContainer: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
     height: 300,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,

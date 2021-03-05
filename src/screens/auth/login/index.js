@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
+import {View, ScrollView, Image, TouchableOpacity, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import CustomText from '../../../components/customText';
 import styles from './style';
@@ -15,7 +9,7 @@ import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {isEmail} from '../../../utils/helper';
 import {loginApi, resetLoginState} from './action';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import VersionCheck from 'react-native-version-check';
 
 const Login = (props) => {
   const lang = useSelector((state) => state.language);
@@ -109,6 +103,10 @@ const Login = (props) => {
           source={staticImages.loginLogoImage2}
           style={styles.logo2Style}
         />
+        <Text
+          style={{
+            alignSelf: 'center',
+          }}>{`v ${VersionCheck.getCurrentVersion()}`}</Text>
       </View>
     );
   };

@@ -3,16 +3,16 @@ import {getStatusBarHeight} from '../../../../../components/iPhoneXHelper';
 import metrics from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.08;
+let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 
-let parentPaddingValueFilterModal = metrics.DEVICE_WIDTH * 0.05;
+let parentPaddingValueFilterModal = metrics.width * 0.05;
 let parentPaddingFilterModal = parentPaddingValueFilterModal * 2;
 
 const styles = StyleSheet.create({
   cancelBtnEditQuestionModalContainerStyle: {
-    width: (metrics.DEVICE_WIDTH - 100) * 0.48,
+    width: (metrics.width - 100) * 0.48,
     padding: 10,
     backgroundColor: Constant.App.colors.grayColor,
     borderRadius: 10,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 
   editQuestionModalButtonContainerStyle: {
     flexDirection: 'row',
-    width: metrics.DEVICE_WIDTH - 100,
+    width: metrics.width - 100,
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 15,
@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
   },
 
   editQuestionModalInputTextContainerStyle: {
-    width: metrics.DEVICE_WIDTH - 100,
-    paddingBottom: Platform.OS === 'ios' ? metrics.DEVICE_HEIGHT * 0.01 : 0,
+    width: metrics.width - 100,
+    paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
   },
 
   editQuestionModalInputTypeStyle: {
     color: Constant.App.colors.blackColor,
-    width: metrics.DEVICE_WIDTH - 100,
+    width: metrics.width - 100,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 
   expertInfoContainerStyle: {
     marginLeft: 10,
-    width: metrics.DEVICE_WIDTH - parentPadding - 105,
+    width: metrics.width - parentPadding - 105,
     flexDirection: 'column',
   },
 
@@ -100,16 +100,16 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    paddingTop: metrics.DEVICE_WIDTH * 0.03,
-    paddingBottom: metrics.DEVICE_WIDTH * 0.03,
+    paddingTop: metrics.width * 0.03,
+    paddingBottom: metrics.width * 0.03,
     flexDirection: 'row',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
   expertInfoProfessionTextStyle: {
     marginTop: 2,
-    width: metrics.DEVICE_WIDTH - parentPadding - 105,
+    width: metrics.width - parentPadding - 105,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Small,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
 
   expertNameTextBoldStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding - 105,
+    width: metrics.width - parentPadding - 105,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontWeight: '500',
@@ -126,13 +126,13 @@ const styles = StyleSheet.create({
 
   expertsParentContainerStyle: {
     marginTop: 5,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     flexDirection: 'column',
   },
 
   expertProfessionLoctionBoldStyle: {
     marginTop: 2,
-    width: metrics.DEVICE_WIDTH - parentPadding - 105,
+    width: metrics.width - parentPadding - 105,
     color: Constant.App.colors.greyColorText,
     fontSize: Constant.App.textSize.Small,
     fontWeight: '200',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     margin: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
+    width: metrics.width - parentPaddingFilterModal,
     borderBottomColor: Constant.App.colors.grayColor,
     borderBottomWidth: 1,
   },
@@ -168,24 +168,24 @@ const styles = StyleSheet.create({
   },
 
   filterModalItemContainerStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
-    width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
+    marginTop: metrics.height * 0.02,
+    width: metrics.width - parentPaddingFilterModal,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   filterModalItemParentContainerStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
-    width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
+    marginTop: metrics.height * 0.01,
+    width: metrics.width - parentPaddingFilterModal,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   filterModalItemChecboxIconStyle: {
-    height: metrics.DEVICE_WIDTH * 0.05,
-    width: metrics.DEVICE_WIDTH * 0.05,
+    height: metrics.width * 0.05,
+    width: metrics.width * 0.05,
   },
 
   filterModalItemTextStyle: {
@@ -194,10 +194,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width:
-      metrics.DEVICE_WIDTH -
-      parentPaddingFilterModal -
-      metrics.DEVICE_WIDTH * 0.05,
+    width: metrics.width - parentPaddingFilterModal - metrics.width * 0.05,
   },
 
   filterModalLangParentContainerStyle: {
@@ -206,7 +203,7 @@ const styles = StyleSheet.create({
     marginBottom: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
+    width: metrics.width - parentPaddingFilterModal,
   },
 
   filterModalLangTitleTextStyle: {
@@ -219,8 +216,8 @@ const styles = StyleSheet.create({
   filterModalParentContainerStyle: {
     marginTop: getStatusBarHeight(),
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
-    height: metrics.DEVICE_HEIGHT,
+    width: metrics.width,
+    height: metrics.height,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
@@ -230,7 +227,7 @@ const styles = StyleSheet.create({
     marginBottom: parentPaddingValueFilterModal,
     paddingBottom: parentPaddingValueFilterModal,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPaddingFilterModal,
+    width: metrics.width - parentPaddingFilterModal,
     borderBottomColor: Constant.App.colors.grayColor,
     borderBottomWidth: 1,
   },
@@ -245,7 +242,7 @@ const styles = StyleSheet.create({
   filterModalTitleContainerStyle: {
     padding: parentPaddingValueFilterModal,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     borderBottomColor: Constant.App.colors.borderColorFilterModal,
     borderBottomWidth: 4,
     alignItems: 'center',
@@ -268,7 +265,7 @@ const styles = StyleSheet.create({
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
     paddingTop: parentPaddingValue,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
@@ -292,7 +289,7 @@ const styles = StyleSheet.create({
     paddingLeft: parentPaddingValue + childPaddingValue,
     paddingRight: parentPaddingValue + childPaddingValue,
     paddingBottom: childPaddingValue,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     backgroundColor: Constant.App.colors.whiteColor,
   },
 
@@ -305,7 +302,7 @@ const styles = StyleSheet.create({
 
   questionTextStyle: {
     paddingRight: parentPaddingValue,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     fontSize: Constant.App.textSize.Large,
     color: Constant.App.colors.blackColor,
     fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -318,7 +315,7 @@ const styles = StyleSheet.create({
   },
 
   saveBtnEditQuestionModalContainerStyle: {
-    width: (metrics.DEVICE_WIDTH - 100) * 0.48,
+    width: (metrics.width - 100) * 0.48,
     padding: 10,
     backgroundColor: Constant.App.colors.blueColor,
     borderRadius: 10,

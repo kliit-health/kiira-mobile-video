@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 25,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH * 0.65,
+    width: metrices.width * 0.65,
     backgroundColor: Constant.App.colors.blueColor,
     height: 50,
-    marginVertical: metrices.DEVICE_HEIGHT * 0.03,
+    marginVertical: metrices.height * 0.03,
   },
 
   buttonTextStyle: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 5,
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
     marginTop: 50,
     height: 420,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.xxLarge,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.Medium,
     padding: 20,
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   warning: {
     alignSelf: 'center',
     backgroundColor: 'white',
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     borderRadius: 25,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   section: {
     alignSelf: 'center',
     backgroundColor: 'white',
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     borderRadius: 25,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
     shadowOffset: {height: 13, width: 1}, // IOS

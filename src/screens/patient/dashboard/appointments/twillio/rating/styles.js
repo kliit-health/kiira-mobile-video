@@ -2,10 +2,10 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../../../utils/constants';
 import metrics, {smallScreen} from '../../../../../../utils/metrices';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderColor: Constant.App.colors.whiteColor,
     borderTopWidth: 30,
     backgroundColor: Constant.App.colors.whiteColor,
-    height: metrics.DEVICE_HEIGHT,
+    height: metrics.height,
   },
 
   ratingStar: {
@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.03,
+    marginTop: metrics.height * 0.03,
   },
 
   yesTextStyle: {

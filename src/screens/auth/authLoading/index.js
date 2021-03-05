@@ -143,71 +143,71 @@ class AuthLoadingScreen extends Component {
     }
   }
 
-  // displayNotification(title, body) {
-  //   // we display notification in alert box with title and body
-  //   Alert.alert(
-  //     title,
-  //     body,
-  //     [{text: 'Ok', onPress: () => console.log('ok pressed')}],
-  //     {cancelable: false},
-  //   );
-  // }
+  displayNotification(title, body) {
+    // we display notification in alert box with title and body
+    Alert.alert(
+      title,
+      body,
+      [{text: 'Ok', onPress: () => console.log('ok pressed')}],
+      {cancelable: false},
+    );
+  }
 
-  // async createNotificationListeners() {
-  //   /*
-  //    * Triggered when a particular notification has been received in foreground
-  //    * */
-  //   this.notificationListener = firebase
-  //     .notifications()
-  //     .onNotification((notification) => {
-  //       console.log('Notification IOS', notification);
-  //       if (Platform.OS === 'ios') {
-  //         notification
-  //           .setNotificationId(notification.notificationId)
-  //           .setTitle(notification.title)
-  //           .setBody(notification.body)
-  //           .setSound('default');
-  //       }
-  //       if (Platform.OS === 'android') {
-  //         notification.android
-  //           .setChannelId(CHANNEL_ID)
-  //           .android.setSmallIcon('app_icon');
-  //       }
-  //       firebase.notifications().displayNotification(notification);
-  //     });
+  async createNotificationListeners() {
+    /*
+     * Triggered when a particular notification has been received in foreground
+     * */
+    this.notificationListener = firebase
+      .notifications()
+      .onNotification((notification) => {
+        console.log('Notification IOS', notification);
+        if (Platform.OS === 'ios') {
+          notification
+            .setNotificationId(notification.notificationId)
+            .setTitle(notification.title)
+            .setBody(notification.body)
+            .setSound('default');
+        }
+        if (Platform.OS === 'android') {
+          notification.android
+            .setChannelId(CHANNEL_ID)
+            .android.setSmallIcon('app_icon');
+        }
+        firebase.notifications().displayNotification(notification);
+      });
 
-  //   /*
-  //    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-  //    * */
-  //   this.notificationOpenedListener = firebase
-  //     .notifications()
-  //     .onNotificationOpened((notificationOpen) => {
-  //       console.log('inside onNotificationOpened');
-  //       const {title, body} = notificationOpen.notification;
-  //     });
+    /*
+     * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+     * */
+    this.notificationOpenedListener = firebase
+      .notifications()
+      .onNotificationOpened((notificationOpen) => {
+        console.log('inside onNotificationOpened');
+        const {title, body} = notificationOpen.notification;
+      });
 
-  //   /*
-  //    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-  //    * */
-  //   const notificationOpen = await firebase
-  //     .notifications()
-  //     .getInitialNotification();
-  //   if (notificationOpen) {
-  //     console.log('inside notificationOpen');
-  //     const {title, body} = notificationOpen.notification;
-  //     console.log('title', title);
-  //     console.log('body', body);
-  //     // this.showAlert(title, body);
-  //   }
-  //   /*
-  //    * Triggered for data only payload in foreground
-  //    * */
-  //   this.messageListener = firebase.messaging().onMessage((message) => {
-  //     console.log('inside onMessage');
-  //     //process data message
-  //     console.log(JSON.stringify(message));
-  //   });
-  // }
+    /*
+     * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+     * */
+    const notificationOpen = await firebase
+      .notifications()
+      .getInitialNotification();
+    if (notificationOpen) {
+      console.log('inside notificationOpen');
+      const {title, body} = notificationOpen.notification;
+      console.log('title', title);
+      console.log('body', body);
+      // this.showAlert(title, body);
+    }
+    /*
+     * Triggered for data only payload in foreground
+     * */
+    this.messageListener = firebase.messaging().onMessage((message) => {
+      console.log('inside onMessage');
+      //process data message
+      console.log(JSON.stringify(message));
+    });
+  }
 
   componentWillUnmount() {
     // this.notificationListener();

@@ -2,10 +2,10 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../utils/constants';
 import metrices from '../../../utils/metrices';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrices.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrices.width * 0.03;
 let childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
@@ -13,8 +13,8 @@ export const AVATAR_SIZE = 111;
 const style = StyleSheet.create({
   logoStyle: {
     alignSelf: 'center',
-    height: metrices.DEVICE_WIDTH * 0.15,
-    width: metrices.DEVICE_WIDTH * 0.32,
+    height: metrices.width * 0.15,
+    width: metrices.width * 0.32,
     marginTop: 30,
   },
 
@@ -22,9 +22,9 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH - childPadding,
+    width: metrices.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    marginTop: metrices.height * 0.03,
   },
 
   buttonTextStyle: {
@@ -50,7 +50,7 @@ const style = StyleSheet.create({
   creditButtonStyle: {
     marginLeft: -9,
     marginTop: 14,
-    width: metrices.DEVICE_WIDTH * 0.49,
+    width: metrices.width * 0.49,
     height: 44,
     borderRadius: 22,
     backgroundColor: Constant.App.colors.whiteColor,
@@ -118,8 +118,8 @@ const style = StyleSheet.create({
   },
 
   logoutParentContainerStyle: {
-    marginTop: metrices.DEVICE_WIDTH * 0.1,
-    marginBottom: metrices.DEVICE_WIDTH * 0.1,
+    marginTop: metrices.width * 0.1,
+    marginBottom: metrices.width * 0.1,
   },
 
   logoutTextStyle: {
@@ -127,7 +127,7 @@ const style = StyleSheet.create({
     paddingTop: 10,
     color: Constant.App.colors.redColorLogout,
     fontSize: Constant.App.textSize.xLarge,
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
@@ -145,7 +145,7 @@ const style = StyleSheet.create({
   profileInfoParentContainerStyle: {
     flexDirection: 'column',
     alignSelf: 'center',
-    width: metrices.DEVICE_WIDTH - AVATAR_SIZE - parentPadding,
+    width: metrices.width - AVATAR_SIZE - parentPadding,
   },
 
   titleTextStyle: {

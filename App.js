@@ -1,19 +1,15 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {View, Alert, BackHandler, AppState, LogBox} from 'react-native';
-import {connect} from 'react-redux';
 import AppNavigator from './src/navigation';
 import {Messaging} from './src/services';
 import {showOrHideModal} from './src/components/customModal/action';
+import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
-import {getBottomSpace} from './src/components/iPhoneXHelper';
-// import app from '@react-native-firebase/app';
-import {
-  setFcmToken,
-  setAppState,
-  setAppScreen,
-} from './src/screens/auth/authLoading/action';
+import messaging from '@react-native-firebase/messaging';
+import {setAppState, setAppScreen} from './src/screens/auth/authLoading/action';
 import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
@@ -21,26 +17,23 @@ import {updateStatus} from './src/utils/firebase';
 import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 
-class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      appState: AppState.currentState,
-    };
-  }
+const App = () => {
+  const dispatch = useDispatch();
+  let navigator = useRef();
 
-  async componentDidMount() {
+  const spinner = useSelector((state) => state.loader);
+  const toast = useSelector((state) => state.toast);
+  const {showModalError, errorMessage} = useSelector((state) => state.modal);
+  const {userData, isActive} = useSelector((state) => state.authLoading);
+
+  useEffect(() => {
     LogBox.ignoreAllLogs();
-    BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.handleBackButtonClick,
-    );
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
 
-    AppState.addEventListener('change', this._handleAppStateChange);
-  }
+    AppState.addEventListener('change', _handleAppStateChange);
+  }, []);
 
-  componentDidUpdate() {
-    const {isActive, userData} = this.props;
+  useEffect(() => {
     if (isActive && userData && userData.uid && !userData.isOnline) {
       const updateStatusParams = {
         uid: userData.uid,
@@ -58,39 +51,64 @@ class App extends PureComponent {
       };
       updateStatus(updateStatusParams);
     }
-  }
+  });
 
-  async componentWillUnmount() {
-    BackHandler.removeEventListener(
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    return BackHandler.removeEventListener(
       'hardwareBackPress',
-      this.handleBackButtonClick,
+      handleBackButtonClick,
     );
-  }
+  });
 
-  _handleAppStateChange = (nextAppState) => {
-    const {setState, signOut} = this.props;
+  useEffect(() => {
+    (async () => {
+      const enabled = await messaging().hasPermission();
+      if (enabled) {
+        messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+          console.log('Message handled in the background!', remoteMessage);
+        });
+      } else {
+        try {
+          await messaging().requestPermission();
+          messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+            console.log('Message handled in the background!', remoteMessage);
+          });
+        } catch (error) {
+          console.log('permission rejected');
+        }
+      }
+    })();
+  }, []);
+
+  const _handleAppStateChange = (nextAppState) => {
+    let timeoutId;
 
     if (nextAppState === 'active') {
-      setState(true);
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      if (this.timeoutId) {
-        BackgroundTimer.clearTimeout(this.timeoutId);
+      dispatch(setAppState(true));
+      if (timeoutId) {
+        BackgroundTimer.clearTimeout(timeoutId);
       }
     } else {
-      setState(false);
+      dispatch(setAppState(false));
 
-      if (this.timeoutId) {
-        BackgroundTimer.clearTimeout(this.timeoutId);
+      if (timeoutId) {
+        BackgroundTimer.clearTimeout(timeoutId);
       }
 
-      this.timeoutId = BackgroundTimer.setTimeout(() => {
+      timeoutId = BackgroundTimer.setTimeout(() => {
         const payload = {
-          navigation: this.navigator._navigation,
+          navigation: navigator._navigation,
           isLoaderShow: false,
         };
-        signOut(payload);
+        dispatch(signOut(payload));
         Alert.alert(
           'Log Out',
           'For your security, you have been logged out due to inactivity.',
@@ -101,7 +119,7 @@ class App extends PureComponent {
     }
   };
 
-  handleBackButtonClick() {
+  const handleBackButtonClick = () => {
     setTimeout(() => {
       Alert.alert(
         'Exit App',
@@ -124,101 +142,62 @@ class App extends PureComponent {
       );
     }, 400);
     return true;
-  }
+  };
 
-  getCurrentRouteName(navigationState) {
-    if (!navigationState) {
-      return null;
-    }
+  const getCurrentRouteName = (navigationState) => {
+    if (!navigationState) return null;
+
     const route = navigationState.routes[navigationState.index];
     if (route.routes) {
-      return this.getCurrentRouteName(route);
+      return getCurrentRouteName(route);
     }
+
     return route.routeName;
-  }
+  };
 
-  render() {
-    const {
-      spinnerState,
-      errorMessage,
-      hideErrorModal,
-      showModalError,
-      toastState,
-      setScreen,
-      setCurrentRoute,
-      setPreviousRoute,
-    } = this.props;
-
-    return (
-      <View
-        style={{
-          flex: 1,
-          marginBottom: getBottomSpace(),
-        }}>
-        <AppNavigator
-          ref={(nav) => {
-            this.navigator = nav;
-            NavigationService.navigator = nav;
-          }}
-          onNavigationStateChange={(prevState, currentState) => {
-            const currentScreen = this.getCurrentRouteName(currentState);
-            const prevScreen = this.getCurrentRouteName(prevState);
-            const obj = {
-              currentScreen,
-              prevScreen,
-            };
-            setScreen(obj);
-            setCurrentRoute(currentScreen);
-            setPreviousRoute(prevScreen);
-          }}
+  return (
+    <View style={{flex: 1}}>
+      <AppNavigator
+        ref={(nav) => {
+          navigator = nav;
+          NavigationService.navigator = nav;
+        }}
+        onNavigationStateChange={(prevState, currentState) => {
+          const currentScreen = getCurrentRouteName(currentState);
+          const prevScreen = getCurrentRouteName(prevState);
+          const obj = {
+            currentScreen,
+            prevScreen,
+          };
+          dispatch(setAppScreen(obj));
+          dispatch(setCurrentRoute(currentScreen));
+          dispatch(setPreviousRoute(prevScreen));
+        }}
+      />
+      <Messaging />
+      <Conditional if={showModalError}>
+        <CustomModal
+          onPressErrorButtonOk={() => dispatch(showOrHideModal())}
+          showLoader={showModalError}
+          errorMsg={errorMessage}
         />
-        <Messaging />
-        {showModalError ? (
-          <CustomModal
-            onPressErrorButtonOk={() => hideErrorModal()}
-            showLoader={showModalError}
-            errorMsg={errorMessage}
-          />
-        ) : null}
+      </Conditional>
+      <Conditional if={spinner.showLoader}>
+        <CustomLoader
+          showLoader={spinner.showLoader}
+          textMsg={spinner.textMessage}
+        />
+      </Conditional>
+      <Conditional if={toast.showToast}>
+        <CustomToast
+          showToast={toast.showToast}
+          textMsg={toast.textMessage}
+          dispatch={toast.dispatch}
+          delay={toast.delay}
+        />
+      </Conditional>
+    </View>
+  );
+};
 
-        {spinnerState.showLoader ? (
-          <CustomLoader
-            showLoader={spinnerState.showLoader}
-            textMsg={spinnerState.textMessage}
-          />
-        ) : null}
-
-        {toastState.showToast ? (
-          <CustomToast
-            showToast={toastState.showToast}
-            textMsg={toastState.textMessage}
-            dispatch={toastState.dispatch}
-            delay={toastState.delay}
-          />
-        ) : null}
-      </View>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  spinnerState: state.loader,
-  toastState: state.toast,
-  showModalError: state.modal.showModalError,
-  errorMessage: state.modal.errorMessage,
-  userData: state.authLoading.userData,
-  isActive: state.authLoading.isActive,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  hideErrorModal: () => dispatch(showOrHideModal()),
-  setToken: (value) => dispatch(setFcmToken(value)),
-  setState: (value) => dispatch(setAppState(value)),
-  timeOut: () => dispatch(timeOut()),
-  setScreen: (value) => dispatch(setAppScreen(value)),
-  setCurrentRoute: (value) => dispatch(setCurrentRoute(value)),
-  setPreviousRoute: (value) => dispatch(setPreviousRoute(value)),
-  signOut: (data) => dispatch(signOut(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

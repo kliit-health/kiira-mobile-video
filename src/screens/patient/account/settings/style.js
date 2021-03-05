@@ -3,7 +3,7 @@ import Constant from '../../../../utils/constants';
 import metrices from '../../../../utils/metrices';
 import {getStatusBarHeight} from '../../../../components/iPhoneXHelper';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.05;
+let parentPaddingValue = metrices.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: metrices.DEVICE_WIDTH - parentPadding,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    width: metrices.width - parentPadding,
+    marginTop: metrices.height * 0.03,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
-    paddingBottom: metrices.DEVICE_HEIGHT * 0.01,
+    paddingBottom: metrices.height * 0.01,
   },
 
   birthDayTextStyle: {
@@ -24,19 +24,19 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
     alignSelf: 'center',
-    width: metrices.DEVICE_WIDTH - parentPadding,
+    width: metrices.width - parentPadding,
   },
 
   btnContainerStyle: {
-    marginTop: metrices.DEVICE_HEIGHT * 0.02,
-    marginBottom: metrices.DEVICE_HEIGHT * 0.02,
+    marginTop: metrices.height * 0.02,
+    marginBottom: metrices.height * 0.02,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
     borderTopColor: Constant.App.colors.lightGrey,
     borderTopWidth: 0.5,
     padding: 10,
     backgroundColor: Constant.App.colors.whiteColor,
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
   },
 
   btnTextStyle: {
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   },
 
   dropDownIconStyle: {
-    height: metrices.DEVICE_WIDTH * 0.04,
-    width: metrices.DEVICE_WIDTH * 0.04,
+    height: metrices.width * 0.04,
+    width: metrices.width * 0.04,
   },
 
   headerStyle: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   inputTextParentContainerStyle: {
     backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'column',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
   },
@@ -108,16 +108,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: metrices.DEVICE_WIDTH - parentPadding,
-    marginTop: metrices.DEVICE_HEIGHT * 0.01,
+    width: metrices.width - parentPadding,
+    marginTop: metrices.height * 0.01,
   },
 
   inputTextFirstNameContainerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: (metrices.DEVICE_WIDTH - parentPadding) * 0.47,
-    paddingBottom: Platform.OS === 'ios' ? metrices.DEVICE_HEIGHT * 0.01 : 0,
+    width: (metrices.width - parentPadding) * 0.47,
+    paddingBottom: Platform.OS === 'ios' ? metrices.height * 0.01 : 0,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
   },
@@ -127,26 +127,26 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: (metrices.DEVICE_WIDTH - parentPadding) * 0.47,
+    width: (metrices.width - parentPadding) * 0.47,
   },
 
   profileImgViewStyle: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     padding: parentPaddingValue,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
   },
 
   pronounsParentContainerStyle: {
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     backgroundColor: Constant.App.colors.whiteColor,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    paddingTop: metrices.DEVICE_HEIGHT * 0.03,
-    paddingBottom: metrices.DEVICE_HEIGHT * 0.03,
+    paddingTop: metrices.height * 0.03,
+    paddingBottom: metrices.height * 0.03,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -159,12 +159,12 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrices.DEVICE_WIDTH - parentPadding,
+    width: metrices.width - parentPadding,
   },
 
   pronounsContainerStyle: {
-    marginTop: metrices.DEVICE_HEIGHT * 0.02,
-    width: metrices.DEVICE_WIDTH - parentPadding,
+    marginTop: metrices.height * 0.02,
+    width: metrices.width - parentPadding,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -176,23 +176,23 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrices.DEVICE_WIDTH - parentPadding - metrices.DEVICE_WIDTH * 0.05,
+    width: metrices.width - parentPadding - metrices.width * 0.05,
   },
 
   pronounsChecboxIconStyle: {
-    height: metrices.DEVICE_WIDTH * 0.05,
-    width: metrices.DEVICE_WIDTH * 0.05,
+    height: metrices.width * 0.05,
+    width: metrices.width * 0.05,
   },
 
   stateDropDownContainerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: metrices.DEVICE_WIDTH - parentPadding,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    width: metrices.width - parentPadding,
+    marginTop: metrices.height * 0.03,
     borderBottomColor: Constant.App.colors.lightGrey,
     borderBottomWidth: 0.5,
-    paddingBottom: metrices.DEVICE_HEIGHT * 0.01,
+    paddingBottom: metrices.height * 0.01,
   },
 
   stateDropDownTextStyle: {
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
     alignSelf: 'center',
-    width: metrices.DEVICE_WIDTH - parentPadding - metrices.DEVICE_WIDTH * 0.05,
+    width: metrices.width - parentPadding - metrices.width * 0.05,
   },
 
   titleTextStyle: {

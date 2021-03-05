@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../../../utils/constants';
 import metrices from '../../../../../../utils/metrices';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.08;
+let parentPaddingValue = metrices.width * 0.08;
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   parentContainerStyle: {
     backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'column',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
   },
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   paymentMethodContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     height: 42,
   },
 

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
