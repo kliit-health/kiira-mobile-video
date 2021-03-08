@@ -38,7 +38,7 @@ class SettingsExpert extends PureComponent {
       imageUri: '',
       languages: userData.profileInfo.languages,
       lastName: userData.profileInfo.lastName,
-      license: userData.profileInfo.license,
+      license: userData.clinicInfo.license,
       location: userData.clinicInfo.name,
       profession: userData.profileInfo.profession,
       profileInfo: userData.profileInfo,
@@ -195,6 +195,7 @@ class SettingsExpert extends PureComponent {
                   filename,
                 };
               }
+
               updateUserData(payloadData);
             }
           }}>

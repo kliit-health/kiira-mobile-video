@@ -52,6 +52,7 @@ function* cancelAppointment(data) {
     yield put({type: FETCH_APPOINTMENTS, data: appointments});
     yield put(hideApiLoader());
   } catch (error) {
+    yield put(hideApiLoader());
     console.error(error);
   }
 }

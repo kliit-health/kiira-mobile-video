@@ -170,7 +170,7 @@ class ReferFriend extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   lang: state.language,
 });
 

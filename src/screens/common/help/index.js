@@ -7,7 +7,7 @@ import {screenNames} from '../../../utils/constants';
 import styles, {modifiers} from './styles';
 
 const Help = ({navigation}) => {
-  const {appScreen} = useSelector((state) => state.authLoading);
+  // const {appScreen} = useSelector((state) => state.authLoading);
   const lang = useSelector((state) => state.language);
 
   const handleBack = () => {
@@ -15,14 +15,14 @@ const Help = ({navigation}) => {
   };
 
   const handleAsk = () => {
-    if (appScreen && appScreen.currentScreen === screenNames.Help) {
-      Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
-      setTimeout(() => {
-        navigation.navigate(
-          appScreen.prevScreen ? appScreen.prevScreen : screenNames.Help,
-        );
-      }, 200);
-    }
+    // if (appScreen && appScreen.currentScreen === screenNames.Help) {
+    Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
+    setTimeout(() => {
+      navigation.navigate(
+        appScreen.prevScreen ? appScreen.prevScreen : screenNames.Help,
+      );
+    }, 200);
+    // }
   };
 
   return (

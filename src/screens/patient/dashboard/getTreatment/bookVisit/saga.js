@@ -1,17 +1,12 @@
 import {MAKE_APPOINTMENT} from '../../../../../redux/types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {
-  getDataFromTable,
-  makeAppointment,
-  updateCredits,
-} from '../../../../../utils/firebase';
+import {makeAppointment, updateCredits} from '../../../../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
-import {setUserData} from '../../../../auth/authLoading/action';
-import Constant from '../../../../../utils/constants';
 import {NavigationService} from '../../../../../navigation';
+import {getUser} from '../../../../../redux/actions';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 
 function* setAppointment(data) {
@@ -28,14 +23,7 @@ function* setAppointment(data) {
     }
 
     yield updateCredits(-1, data);
-    const obj = {
-      tableName: Constant.App.firebaseTableNames.users,
-      uid: data.data.uid,
-    };
-
-    const userData = yield getDataFromTable(obj);
-
-    yield put(setUserData(userData));
+    yield put(getUser());
   } catch (error) {
     console.error(error);
   }

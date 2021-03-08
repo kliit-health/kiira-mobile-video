@@ -274,13 +274,6 @@ export default {
       'Spanish A password reset message sent to your email address. Please click the link in that message to reset your password.',
   },
 
-  getStarted: {
-    title: 'Spanish Welcome to the Kiira app, ',
-    content:
-      "Spanish Now it's as easy as a text message to get your sexual and reproductive health questions answered by our experts. Got a question? Ask away\n\nThank you for joining kiira",
-    btnText: 'Spanish Get Started',
-  },
-
   lifestyle: {
     title: 'Spanish Lifestyle',
     finish: 'Spanish Finish',

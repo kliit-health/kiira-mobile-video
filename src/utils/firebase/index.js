@@ -331,15 +331,18 @@ export async function makeAppointment({data}) {
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
-      if (expertPrev.data().history[uid]) {
+      if (expertPrev.exists) {
         await expertDocument.set(
           {history: {[uid]: [...expertPrev.data().history[uid], response]}},
           {merge: true},
         );
       } else {
-        await expertDocument.set({
-          history: {...expertPrev.data().history, [uid]: [response]},
-        });
+        await firestore()
+          .collection('appointments')
+          .doc(expert.uid)
+          .set({
+            history: {[uid]: [response]},
+          });
       }
 
       return;
@@ -677,20 +680,9 @@ export function logout() {
           return data;
         },
         (error) => {
-          let data = {};
-          const {message, code} = error;
-          displayConsole('error message', message);
-          displayConsole('error code', code);
-          if (code === 'auth/no-current-user') {
-            data = {
-              success: true,
-            };
-          } else {
-            data = {
-              success: false,
-              message,
-            };
-          }
+          const data = {
+            success: true,
+          };
           return data;
         },
       );
@@ -1419,7 +1411,7 @@ export async function getCreditAmountsData() {
         const result = remoteConfig().getValue('credit_amounts');
         return result.asString();
       });
-    console.log('PRICE RESULT', price);
+
     return price;
   } catch (error) {
     return null;
@@ -1663,9 +1655,9 @@ export async function saveAndLock({payload}) {
   const {visit} = appointment;
 
   try {
-    lockPaitentRecord(visit);
-    lockExpertRecord(visit);
-    saveMedicalHistory(payload, visit);
+    await lockPaitentRecord(visit);
+    await lockExpertRecord(visit);
+    await saveMedicalHistory(payload, visit);
     const update = {
       ...appointment,
       visit: {...visit, locked: true, complete: true},

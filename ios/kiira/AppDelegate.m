@@ -12,6 +12,7 @@
 {
   if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
+    [FIRMessaging messaging].autoInitEnabled = YES;
   }
 
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];

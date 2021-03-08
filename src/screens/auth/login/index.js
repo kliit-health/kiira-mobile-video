@@ -3,13 +3,12 @@ import {View, ScrollView, Image, TouchableOpacity, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import CustomText from '../../../components/customText';
 import styles from './style';
-import Constant from '../../../utils/constants';
+import Constant, {app} from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
 import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {isEmail} from '../../../utils/helper';
 import {loginApi, resetLoginState} from './action';
-import VersionCheck from 'react-native-version-check';
 
 const Login = (props) => {
   const lang = useSelector((state) => state.language);
@@ -20,6 +19,10 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    dispatch(resetLoginState());
+  }, []);
 
   useEffect(() => {
     if (loginFailure) {
@@ -103,10 +106,7 @@ const Login = (props) => {
           source={staticImages.loginLogoImage2}
           style={styles.logo2Style}
         />
-        <Text
-          style={{
-            alignSelf: 'center',
-          }}>{`v ${VersionCheck.getCurrentVersion()}`}</Text>
+        <Text style={styles.version}>{app.version}</Text>
       </View>
     );
   };

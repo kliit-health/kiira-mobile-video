@@ -52,7 +52,7 @@ function* sendMessageToUser({data}) {
         messageParams.image = downloadURL;
         const state = yield select();
         const userStatusData = state.chatExpert.userStatusData;
-        const userData = state.authLoading.userData;
+        const userData = state.user.data;
         const questionData = Object.assign({}, state.chatExpert.questionData);
         var unreadCount = questionData.userUnreadCount
           ? questionData.userUnreadCount
@@ -94,7 +94,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const userStatusData = state.chatExpert.userStatusData;
-      const userData = state.authLoading.userData;
+      const userData = state.user.data;
       const questionData = Object.assign({}, state.chatExpert.questionData);
       var unreadCount = questionData.userUnreadCount
         ? questionData.userUnreadCount

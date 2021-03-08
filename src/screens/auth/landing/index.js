@@ -96,7 +96,6 @@ const Tutorial = (props) => {
 
   useEffect(() => {
     VersionCheck.needUpdate().then(async (res) => {
-      console.log(res.isNeeded); // true
       if (res.isNeeded) {
         Linking.openURL(res.storeUrl); // open store if update is needed.
       }

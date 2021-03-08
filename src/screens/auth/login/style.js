@@ -110,6 +110,10 @@ const styles = StyleSheet.create({
     width: metrics.width * 0.05,
     marginTop: metrics.height * 0.02,
   },
+
+  version: {
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

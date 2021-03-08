@@ -470,13 +470,13 @@ class ChatExpert extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   messages: state.chatExpert.messages,
   messageId: state.chatExpert.messageId,
   questionId: state.chatExpert.questionId,
   questionData: state.chatExpert.questionData,
   userStatusData: state.chatExpert.userStatusData,
-  isActive: state.authLoading.isActive,
+  isActive: state.user.data.isActive,
   lang: state.language,
 });
 

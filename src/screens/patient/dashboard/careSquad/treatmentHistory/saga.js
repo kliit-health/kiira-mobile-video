@@ -5,15 +5,12 @@ import {
   GET_VIDEO_HISTORY,
   GET_VIDEO_HISTORY_ASYNC,
 } from '../../../../../redux/types';
+import auth from '@react-native-firebase/auth';
 import {collections} from '../../../../../utils/constants';
-import {
-  auth,
-  firebaseFetch,
-  getAppointments,
-} from '../../../../../utils/firebase';
+import {firebaseFetch, getAppointments} from '../../../../../utils/firebase';
 
 function* getChatHistoryAsync() {
-  const uid = auth.currentUser.uid;
+  const uid = auth().currentUser.uid;
   const condition = [{key: 'uid', operator: '==', value: uid}];
 
   try {
@@ -28,7 +25,7 @@ function* getChatHistoryAsync() {
 }
 
 function* getVideoHistoryAsync() {
-  const uid = auth.currentUser.uid;
+  const uid = auth().currentUser.uid;
 
   try {
     const appointments = yield getAppointments(uid);

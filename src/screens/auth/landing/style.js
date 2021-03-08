@@ -1,16 +1,16 @@
 import {StyleSheet} from 'react-native';
-import metrices from '../../../utils/metrices';
+import metrics from '../../../utils/metrices';
 import Constant, {text, colors} from '../../../utils/constants';
 
 const styles = StyleSheet.create({
   bannerImageStyle: {
-    height: metrices.height * 0.91,
-    width: metrices.width,
+    height: metrics.height * 0.91,
+    width: metrics.width,
   },
 
   buttonContainerStyle: {
     alignItems: 'center',
-    height: metrices.height * 0.18,
+    height: metrics.height * 0.18,
     backgroundColor: colors.white,
   },
 
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
   loginButtonStyle: {
     padding: 10,
-    width: metrices.width * 0.75,
+    width: metrics.width * 0.75,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
   },
 
   sliderViewStyle: {
-    height: metrices.height * 0.85,
-    width: metrices.width,
+    height: metrics.height * 0.85,
+    width: metrics.width,
   },
 
   verifyButtonStyle: {
     margin: 12,
     padding: 10,
-    width: metrices.width * 0.75,
+    width: metrics.width * 0.75,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',

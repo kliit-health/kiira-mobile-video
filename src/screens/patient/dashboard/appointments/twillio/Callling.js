@@ -157,7 +157,6 @@ const VideoCallScreen = ({navigation}) => {
           dispatch(setCallConfig({...callConfig, status: 'connected'}));
         }}
         onRoomDidDisconnect={() => {
-          // dispatch(setCallConfig({...initialState}));
           navigation.navigate('VisitEnd');
         }}
         onRoomDidFailToConnect={(error) => {
@@ -184,8 +183,6 @@ const VideoCallScreen = ({navigation}) => {
           }
         }}
         onParticipantRemovedVideoTrack={({participant, track}) => {
-          console.log('onParticipantRemovedVideoTrack: ', participant, track);
-
           const videoTracksLocal = videoTracks;
           videoTracksLocal.delete(track.trackSid);
           setVideoTracks(videoTracksLocal);

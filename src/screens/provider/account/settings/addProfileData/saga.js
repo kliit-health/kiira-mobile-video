@@ -4,84 +4,49 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
-import {
-  addUserData,
-  uploadImage,
-  getDataFromTable,
-  makeid,
-} from '../../../../../utils/firebase';
+import {uploadImage} from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
-import Constant, {tables} from '../../../../../utils/constants';
-import {displayConsole} from '../../../../../utils/helper';
-import {StackActions, NavigationActions} from 'react-navigation';
-import auth from '@react-native-firebase/auth';
-import {setUserData} from '../../../../auth/authLoading/action';
+import storage from '@react-native-firebase/storage';
+import {getUser, updateUser} from '../../../../../redux/actions';
 
 // TODO: Refactor this function in order to clean code and remove redundant code
 function* uploadUserData({data, dispatch}) {
   const lang = yield select((state) => state.language);
+  const user = yield select((state) => state.user.data);
   try {
     const {userParams, navigation, imageParams} = data;
-    const state = yield select();
-    const fcmToken = state.authLoading.fcmToken;
+
     yield put(showApiLoader(lang.apiLoader.loadingText));
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
-      displayConsole('responseImage', responseImage);
-      if (responseImage.success) {
-        const {downloadURL} = responseImage.data;
 
-        const user = auth().currentUser;
-        var initialCredits = Constant.App.credits;
-        const obj = {
-          tableName: tables.users,
-          uid: user.uid,
-        };
-        const userData = yield getDataFromTable(obj);
-        if (userData && userData.referedCode) {
-          initialCredits = Constant.App.referalCredits;
-        }
-        const userRegistrationParams = {
-          credits: initialCredits,
-          uid: user.uid,
-          role: 'User',
-          isActive: false,
-          referalCode: yield makeid(),
+      if (responseImage.success) {
+        const {name} = responseImage.data.metadata;
+        const url = yield storage().ref(name).getDownloadURL();
+
+        const userInfo = {
+          ...user,
           profileInfo: {
-            profileImageUrl: downloadURL,
-            firstName: userParams.firstName,
-            lastName: userParams.lastName,
+            // bio: userParams.bio,
+            city: user.profileInfo.city,
             dob: userParams.dob,
+            email: user.email,
+            firstName: userParams.firstName,
+            gender: user.profileInfo.gender,
+            languages: user.profileInfo.languages,
+            lastName: userParams.lastName,
+            license: user.profileInfo.license,
+            profession: user.profileInfo.profession,
+            profileImageUrl: url ? url : '',
             pronouns: userParams.pronouns,
             state: userParams.state,
-            email: user.email,
           },
-          fcmToken,
         };
 
-        const response = yield addUserData(userRegistrationParams);
+        yield updateUser({uid: user.uid, ...userInfo});
+        yield getUser();
         yield put(hideApiLoader());
-        if (response.success) {
-          const updatedUserData = yield getDataFromTable(obj);
-          yield put(setUserData(updatedUserData));
-          const resetAction = StackActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({
-                routeName: Constant.App.screenNames.GetStarted,
-              }),
-            ],
-          });
-          navigation.dispatch(resetAction);
-        } else {
-          dispatch(
-            showOrHideModal(
-              response.message
-                ? response.message
-                : lang.errorMessage.serverError,
-            ),
-          );
-        }
+        navigation.goBack();
       } else {
         yield put(hideApiLoader());
         dispatch(
@@ -93,54 +58,31 @@ function* uploadUserData({data, dispatch}) {
         );
       }
     } else {
-      const user = auth().currentUser;
-      var initialCredits = Constant.App.credits;
-      const obj = {
-        tableName: tables.users,
-        uid: user.uid,
-      };
-      const userData = yield getDataFromTable(obj);
-      if (userData && userData.referedCode) {
-        initialCredits = Constant.App.referalCredits;
-      }
-      const userRegistrationParams = {
-        credits: initialCredits,
-        uid: user.uid,
-        role: 'User',
-        isActive: false,
-        referalCode: yield makeid(),
+      const userInfo = {
+        ...user,
         profileInfo: {
-          profileImageUrl: '',
-          firstName: userParams.firstName,
-          lastName: userParams.lastName,
+          // bio: userParams.bio,
+          city: user.profileInfo.city,
           dob: userParams.dob,
+          email: user.email,
+          firstName: userParams.firstName,
+          gender: user.profileInfo.gender,
+          languages: user.profileInfo.languages,
+          lastName: userParams.lastName,
+          license: user.profileInfo.license,
+          profession: user.profileInfo.profession,
+          profileImageUrl: user.profileInfo.profileImageUrl,
           pronouns: userParams.pronouns,
           state: userParams.state,
-          email: user.email,
         },
-        fcmToken,
       };
-      const response = yield addUserData(userRegistrationParams);
+
+      yield updateUser({uid: user.uid, ...userInfo});
       yield put(hideApiLoader());
-      if (response.success) {
-        const updatedUserData = yield getDataFromTable(obj);
-        yield put(setUserData(updatedUserData));
-        const resetAction = StackActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({
-              routeName: Constant.App.screenNames.GetStarted,
-            }),
-          ],
-        });
-        navigation.dispatch(resetAction);
-      } else {
-        dispatch(
-          showOrHideModal(
-            response.message ? response.message : lang.errorMessage.serverError,
-          ),
-        );
-      }
+
+      yield getUser();
+      yield put(hideApiLoader());
+      navigation.goBack();
     }
   } catch (error) {
     yield put(hideApiLoader());

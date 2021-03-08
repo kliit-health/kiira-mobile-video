@@ -11,12 +11,6 @@ export const HIDE_API_LOADER = 'HIDE_API_LOADER';
 export const SHOW_TOAST = 'SHOW_TOAST';
 export const HIDE_TOAST = 'HIDE_TOAST';
 
-// Authloading action types
-export const SET_USER_DATA = 'SET_USER_DATA';
-export const SET_FCM_TOKEN = 'SET_FCM_TOKEN';
-export const SET_APP_STATE = 'SET_APP_STATE';
-export const SET_APP_SCREEN = 'SET_APP_SCREEN';
-
 // Forgot Password Types
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';

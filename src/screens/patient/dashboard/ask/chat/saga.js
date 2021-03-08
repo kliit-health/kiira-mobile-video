@@ -32,7 +32,7 @@ import {
   checkExpertStatusSuccess,
   checkQuestionStatusSuccess,
 } from './action';
-import {setUserData} from '../../../../auth/authLoading/action';
+import {getUser, updateUser} from '../../../../../redux/actions';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {displayConsole} from '../../../../../utils/helper';
 import {
@@ -54,7 +54,7 @@ function* setQuestion({data, dispatch}) {
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const state = yield select();
-    const userData = state.authLoading.userData;
+    const userData = state.user.data;
     const {userInfo, expertInfo, question} = data;
     const setQuestionParams = {
       question,
@@ -100,22 +100,23 @@ function* setQuestion({data, dispatch}) {
 
       if (user && user.uid) {
         try {
-          const obj = {
-            tableName: tables.users,
-            uid: user.uid,
-          };
-          getUserData(
-            obj,
-            (querySnapshot) => {
-              const data = querySnapshot.data();
-              setUserData(data);
-            },
-            (error) => {
-              const {message, code} = error;
-              displayConsole('message', message);
-              displayConsole('code', code);
-            },
-          );
+          yield put(getUser());
+          // const obj = {
+          //   tableName: tables.users,
+          //   uid: user.uid,
+          // };
+          // getUserData(
+          //   obj,
+          //   (querySnapshot) => {
+          //     const data = querySnapshot.data();
+          //     setUserData(data);
+          //   },
+          //   (error) => {
+          //     const {message, code} = error;
+          //     displayConsole('message', message);
+          //     displayConsole('code', code);
+          //   },
+          // );
         } catch (error) {
           displayConsole('getUserData  error ', error);
         }
@@ -124,7 +125,6 @@ function* setQuestion({data, dispatch}) {
         const sendMessageParams = {
           id: responseSaveQuestion.data.messageId,
           messageParams: {
-            // text: questionEncrypted,
             text: question,
             type: 'User',
             createdAt: moment().unix(),
@@ -180,7 +180,7 @@ function* sendMessageToUser({data}) {
         messageParams.image = downloadURL;
         const state = yield select();
         const expertStatusData = state.chat.expertStatusData;
-        const userData = state.authLoading.userData;
+        const userData = state.user.data;
         const questionData = Object.assign({}, state.chat.questionData);
         displayConsole('questionData', questionData);
         var unreadCount = questionData.unreadCount
@@ -226,7 +226,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
-      const userData = state.authLoading.userData;
+      const userData = state.user.data;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
         ? questionData.expertUnreadCount

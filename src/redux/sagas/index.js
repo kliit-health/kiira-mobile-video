@@ -33,7 +33,6 @@ import questions from './questions';
 import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/saga';
 import setting from '../../screens/patient/account/settings/saga';
 import settingExpert from '../../screens/provider/account/settings/saga';
-import signup from '../../screens/auth/signUp/saga';
 import subscription from './subscription';
 import verification from '../../screens/auth/verify/saga';
 import termsAndConditions from './termsAndConditions';
@@ -78,7 +77,6 @@ export default function* rootSaga() {
     reschedule(),
     settingExpert(),
     setting(),
-    signup(),
     subscription(),
     termsAndConditions(),
     twillio(),

@@ -108,7 +108,11 @@ class ChatBotScreen extends Component {
           ...(enrollment && {enrollment: enrollment.value}),
           ...(housingSecure && {homeSecure: housingSecure}),
           ...(foodSecure && {foodSecure: foodSecure}),
-          ...(ethnicity && {ethnicity: ethnicity.value}),
+          ...(ethnicity && {
+            ethnicity: userInfo['update-ethnicity']
+              ? userInfo['update-ethnicity']
+              : ethnicity.value,
+          }),
           visits: userData.visits,
         },
         navigation,
@@ -122,8 +126,7 @@ class ChatBotScreen extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
-    const {userData} = navigation.state.params;
+    const {userData} = this.props;
     const {organization, loadingOrg} = this.state;
 
     const steps = {
@@ -896,7 +899,7 @@ class ChatBotScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({

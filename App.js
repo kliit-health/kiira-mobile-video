@@ -9,22 +9,18 @@ import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
 import messaging from '@react-native-firebase/messaging';
-import {setAppState, setAppScreen} from './src/screens/auth/authLoading/action';
 import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
-import {updateStatus} from './src/utils/firebase';
-import {NavigationService} from './src/navigation';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 
 const App = () => {
   const dispatch = useDispatch();
-  let navigator = useRef();
+  let navigationRef = useRef();
 
   const spinner = useSelector((state) => state.loader);
   const toast = useSelector((state) => state.toast);
   const {showModalError, errorMessage} = useSelector((state) => state.modal);
-  const {userData, isActive} = useSelector((state) => state.authLoading);
 
   useEffect(() => {
     LogBox.ignoreAllLogs();
@@ -33,33 +29,13 @@ const App = () => {
     AppState.addEventListener('change', _handleAppStateChange);
   }, []);
 
-  useEffect(() => {
-    if (isActive && userData && userData.uid && !userData.isOnline) {
-      const updateStatusParams = {
-        uid: userData.uid,
-        updatedData: {
-          isOnline: isActive,
-        },
-      };
-      updateStatus(updateStatusParams);
-    } else if (!isActive && userData && userData.uid) {
-      const updateStatusParams = {
-        uid: userData.uid,
-        updatedData: {
-          isOnline: isActive,
-        },
-      };
-      updateStatus(updateStatusParams);
-    }
-  });
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+  //     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  //   });
 
-  useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   useEffect(() => {
     return BackHandler.removeEventListener(
@@ -68,44 +44,41 @@ const App = () => {
     );
   });
 
-  useEffect(() => {
-    (async () => {
-      const enabled = await messaging().hasPermission();
-      if (enabled) {
-        messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-          console.log('Message handled in the background!', remoteMessage);
-        });
-      } else {
-        try {
-          await messaging().requestPermission();
-          messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-            console.log('Message handled in the background!', remoteMessage);
-          });
-        } catch (error) {
-          console.log('permission rejected');
-        }
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const enabled = await messaging().hasPermission();
+  //     if (enabled) {
+  //       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  //         console.log('Message handled in the background!', remoteMessage);
+  //       });
+  //     } else {
+  //       try {
+  //         await messaging().requestPermission();
+  //         messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  //           console.log('Message handled in the background!', remoteMessage);
+  //         });
+  //       } catch (error) {
+  //         console.log('permission rejected');
+  //       }
+  //     }
+  //   })();
+  // }, []);
 
   const _handleAppStateChange = (nextAppState) => {
     let timeoutId;
 
     if (nextAppState === 'active') {
-      dispatch(setAppState(true));
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
     } else {
-      dispatch(setAppState(false));
-
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
 
       timeoutId = BackgroundTimer.setTimeout(() => {
         const payload = {
-          navigation: navigator._navigation,
+          navigation: navigationRef.current._navigation,
           isLoaderShow: false,
         };
         dispatch(signOut(payload));
@@ -158,18 +131,11 @@ const App = () => {
   return (
     <View style={{flex: 1}}>
       <AppNavigator
-        ref={(nav) => {
-          navigator = nav;
-          NavigationService.navigator = nav;
-        }}
+        ref={navigationRef}
         onNavigationStateChange={(prevState, currentState) => {
           const currentScreen = getCurrentRouteName(currentState);
           const prevScreen = getCurrentRouteName(prevState);
-          const obj = {
-            currentScreen,
-            prevScreen,
-          };
-          dispatch(setAppScreen(obj));
+
           dispatch(setCurrentRoute(currentScreen));
           dispatch(setPreviousRoute(prevScreen));
         }}

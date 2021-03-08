@@ -1,3 +1,5 @@
+import VersionCheck from 'react-native-version-check';
+
 export default {
   App: {
     Api: {
@@ -92,7 +94,7 @@ export default {
 
     helpUrl: 'http://www.kiira.io',
     learnTabUrl: 'https://medium.com/get-kiira',
-    logoutInterval: 1000 * 20 * 60,
+    logoutInterval: 1000 * 40 * 60,
     Modal: {
       gender: [
         {value: 'Male', code: 'M'},
@@ -406,7 +408,6 @@ export default {
       ExpertProfile: 'ExpertProfile',
       ExpertSchedule: 'ExpertSchedule',
       ForgotPassword: 'ForgotPassword',
-      GetStarted: 'GetStarted',
       HealthHistory: 'HealthHistory',
       Help: 'Help',
       Insurance: 'Insurance',
@@ -446,7 +447,6 @@ export default {
       AuthStack: 'Auth',
       AppStack: 'App',
       AppStackExpert: 'AppExpert',
-      AuthLoading: 'AuthLoading',
     },
 
     staticImages: {
@@ -666,7 +666,6 @@ export const screenNames = {
   DueDate: 'DueDate',
   ExpertProfile: 'ExpertProfile',
   ForgotPassword: 'ForgotPassword',
-  GetStarted: 'GetStarted',
   HealthHistory: 'HealthHistory',
   Help: 'Help',
   Home: 'Home',
@@ -1836,4 +1835,9 @@ export const tables = {
   professions: 'professions',
   languages: 'languages',
   messages: 'messagesNew',
+};
+
+export const app = {
+  version: `v ${VersionCheck.getCurrentVersion()}`,
+  name: 'Kiira',
 };

@@ -14,7 +14,6 @@ import {firebaseSingleFetch, firebaseSingleUpdate} from '../../utils/firebase';
 
 function* getUser() {
   const uid = auth().currentUser.uid;
-
   try {
     yield put({type: GET_USER_PENDING});
     const user = yield firebaseSingleFetch('users', uid);

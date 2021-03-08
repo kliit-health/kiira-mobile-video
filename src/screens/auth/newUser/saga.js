@@ -1,6 +1,7 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {AGREE_TO_TERMS} from '../../../redux/types';
-import {addUserData} from '../../../utils/firebase';
+import {updateUser} from '../../../redux/actions';
+import {makeid} from '../../../utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
@@ -13,10 +14,10 @@ const defaultImage =
 
 function* agreeToTerms(data) {
   const lang = yield select((state) => state.language);
-  const {fcmToken} = yield select((state) => state.authLoading);
+  const userData = yield select((state) => state.user.data);
+  const fcmToken = userData.fcmToken;
   try {
     const {navigation} = data.payload;
-    const {userData} = navigation.state.params;
 
     const {
       firstName,
@@ -37,7 +38,7 @@ function* agreeToTerms(data) {
       ethnicity,
     } = userData.profileInfo;
 
-    const userRegistrationParams = {
+    const userInfo = {
       ...(userData.address && {address: userData.address}),
       agreeToTerms: true,
       chats: userData.chats,
@@ -72,13 +73,14 @@ function* agreeToTerms(data) {
         ...(ethnicity && {ethnicity}),
       },
       ...(userData.subscription && {subscription: {...userData.subscription}}),
+      referalCode: yield makeid(),
       role: 'User',
       uid: userData.uid,
       updatedAt: new Date(),
       visits: userData.visits,
     };
 
-    yield addUserData(userRegistrationParams);
+    yield put(updateUser({uid: userData.uid, ...userInfo}));
     yield put(showApiLoader(lang.apiLoader.loadingText));
     navigation.goBack();
     yield put(hideApiLoader());

@@ -14,7 +14,7 @@ function* signout({data}) {
   const lang = yield select((state) => state.language);
   try {
     const state = yield select();
-    const userData = state.authLoading.userData;
+    const userData = state.user.data;
     if (isLoaderShow) {
       yield put(showApiLoader(lang.apiLoader.loadingText));
     }

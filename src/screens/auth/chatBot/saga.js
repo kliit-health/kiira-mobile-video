@@ -4,24 +4,21 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../components/customLoader/action';
-import {addUserData, getDataFromTable} from '../../../utils/firebase';
 import {showOrHideModal} from '../../../components/customModal/action';
 import Constant from '../../../utils/constants';
-import {displayConsole} from '../../../utils/helper';
-import auth from '@react-native-firebase/auth';
-import {setUserData} from '../authLoading/action';
+import {updateUser} from '../../../redux/actions/user';
 
 const defaultImage =
   'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf';
 
 function* updateNewUserData({data}) {
   const lang = yield select((state) => state.language);
+  const user = yield select((state) => state.user.data);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const {userParams, navigation} = data;
 
-    const user = auth().currentUser;
-    const userRegistrationParams = {
+    const userInfo = {
       ...(userParams.address && {address: userParams.address}),
       agreeToTerms: false,
       chats: userParams.chats,
@@ -70,30 +67,15 @@ function* updateNewUserData({data}) {
       visits: userParams.visits,
     };
 
-    const response = yield addUserData(userRegistrationParams);
-    displayConsole('response', response);
+    yield put(updateUser({uid: user.uid, ...userInfo}));
     yield put(hideApiLoader());
-    if (response.success) {
-      const obj = {
-        tableName: Constant.App.firebaseTableNames.users,
-        uid: user.uid,
-      };
-      const userData = yield getDataFromTable(obj);
-      yield put(setUserData(userData));
-      navigation.navigate(Constant.App.screenNames.NewUser, {
-        userData,
-      });
-    } else {
-      yield put(
-        showOrHideModal(
-          response.message ? response.message : lang.errorMessage.serverError,
-        ),
-      );
-    }
+
+    navigation.navigate(Constant.App.screenNames.NewUser);
   } catch (error) {
     console.error(error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));
+    navigation.navigate(Constant.App.stack.AuthStack);
   }
 }
 

@@ -4,19 +4,14 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../components/customLoader/action';
-import {
-  addUserData,
-  uploadImage,
-  getDataFromTable,
-} from '../../../../utils/firebase';
+import {uploadImage} from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
-import {tables} from '../../../../utils/constants';
-import auth from '@react-native-firebase/auth';
-import {setUserData} from '../../../auth/authLoading/action';
-import {getUser} from '../../../../redux/actions';
+import {getUser, updateUser} from '../../../../redux/actions';
+import storage from '@react-native-firebase/storage';
 
 function* updateUserData({data}) {
   const lang = yield select((state) => state.language);
+  const user = yield select((state) => state.user.data);
   try {
     const {userParams, imageParams, navigation} = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
@@ -25,12 +20,13 @@ function* updateUserData({data}) {
       const responseImage = yield uploadImage(imageParams);
 
       if (responseImage.success) {
-        const user = auth().currentUser;
-        const {downloadURL} = responseImage.data;
-        const userRegistrationParams = {
-          uid: user.uid,
+        const {name} = responseImage.data.metadata;
+        const url = yield storage().ref(name).getDownloadURL();
+
+        const userUpdate = {
+          ...user,
           profileInfo: {
-            profileImageUrl: downloadURL ? downloadURL : '',
+            profileImageUrl: url ? url : '',
             firstName: userParams.firstName,
             lastName: userParams.lastName,
             dob: userParams.dob,
@@ -51,27 +47,10 @@ function* updateUserData({data}) {
           },
         };
 
-        const response = yield addUserData(userRegistrationParams);
-
+        yield put(updateUser({uid: user.uid, ...userUpdate}));
+        yield put(getUser());
         yield put(hideApiLoader());
-        if (response.success) {
-          const obj = {
-            tableName: tables.users,
-            uid: user.uid,
-          };
-          const userData = yield getDataFromTable(obj);
-          yield put(setUserData(userData));
-          yield put(getUser());
-          navigation.goBack();
-        } else {
-          yield put(
-            showOrHideModal(
-              response.message
-                ? response.message
-                : lang.errorMessage.serverError,
-            ),
-          );
-        }
+        navigation.goBack();
       } else {
         yield put(hideApiLoader());
         yield put(
@@ -83,9 +62,8 @@ function* updateUserData({data}) {
         );
       }
     } else {
-      const user = auth().currentUser;
-      const userRegistrationParams = {
-        uid: user.uid,
+      const userUpdate = {
+        ...user,
         profileInfo: {
           profileImageUrl: userParams.profileImageUrl,
           firstName: userParams.firstName,
@@ -108,26 +86,13 @@ function* updateUserData({data}) {
         },
       };
 
-      const response = yield addUserData(userRegistrationParams);
+      yield put(updateUser({uid: user.uid, ...userUpdate}));
+      yield put(getUser());
       yield put(hideApiLoader());
-      if (response.success) {
-        navigation.goBack();
-        const obj = {
-          tableName: tables.users,
-          uid: user.uid,
-        };
-        const userData = yield getDataFromTable(obj);
-        yield put(setUserData(userData));
-        yield put(getUser());
-      } else {
-        yield put(
-          showOrHideModal(
-            response.message ? response.message : lang.errorMessage.serverError,
-          ),
-        );
-      }
+      navigation.goBack();
     }
   } catch (error) {
+    console.log(error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }

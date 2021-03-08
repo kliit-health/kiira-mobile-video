@@ -32,7 +32,7 @@ import styles from './styles';
 const TwillioLogin = ({navigation}) => {
   const dispatch = useDispatch();
   const callConfig = useSelector((state) => state.twillio);
-  const {profileInfo} = useSelector((state) => state.authLoading.userData);
+  const {profileInfo} = useSelector((state) => state.user.data);
   const {visit} = useSelector((state) => state.visit);
   const [loaderVisible, setLoaderVisible] = useState(false);
   const isExpert = true;

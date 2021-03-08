@@ -340,12 +340,12 @@ export default createReducer(initialState, {
     state.loading = true;
   },
   [UPDATE_PATIENT_DETAILS_REJECTED]: (_, {data: details}) => ({
-    ...initialState,
+    ...state,
     error: 'Failed to update details.',
     details,
   }),
   [UPDATE_PATIENT_DETAILS_FULFILLED]: (state, {data: {updates, dataKey}}) => ({
-    ...initialState,
+    ...state,
     data: {
       ...state.data,
       [dataKey]: isArray(updates)
@@ -368,7 +368,7 @@ export default createReducer(initialState, {
   [CLEAR_MEDICAL_HISTORY]: (state) => {
     const {appointment} = state;
     return {
-      ...state,
+      ...initialState,
       ...appointment,
     };
   },
