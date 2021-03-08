@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingVertical: 60,
     backgroundColor: Constant.App.colors.blueColor,
     borderBottomLeftRadius: 30,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
     fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
+    marginLeft: metrices.width * 0.15,
   },
 
   icon: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
 
   profileContainer: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     position: 'relative',
     top: -30,
-    left: metrices.DEVICE_WIDTH * 0.1,
+    left: metrices.width * 0.1,
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
     padding: 10,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.Large,
     padding: 20,
   },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.xxLarge,
     fontWeight: 'bold',
     textAlign: 'center',

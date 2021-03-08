@@ -344,7 +344,7 @@ class BuyingCredit extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   amountOptions: state.payment.creditAmountOptions,
   paymentMethods: state.payment.paymentMethods.filter(
     (method) => !method.isExpired,

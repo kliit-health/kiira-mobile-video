@@ -18,7 +18,7 @@ import styles, {modifiers} from './styles';
 const ExpertAppointments = ({navigation}) => {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.language);
-  const uid = useSelector((state) => state.authLoading.userData.uid);
+  const uid = useSelector((state) => state.user.data.uid);
   const visitData = useSelector((state) => state.expertAppointments.history);
   const screens = useSelector((state) => state.navigator);
 
@@ -39,13 +39,13 @@ const ExpertAppointments = ({navigation}) => {
     );
 
     const dateRange = getDateRange(
-      moment(new Date()).subtract(3, 'days'),
+      moment(new Date()).subtract(10, 'days'),
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
 
     setDates(dateRange);
-    setSelectedDate(dateRange[3]);
+    setSelectedDate(dateRange[10]);
   }, []);
 
   useEffect(() => {
@@ -56,13 +56,13 @@ const ExpertAppointments = ({navigation}) => {
     );
 
     const dateRange = getDateRange(
-      moment(new Date()).subtract(3, 'days'),
+      moment(new Date()).subtract(10, 'days'),
       moment().add(30, 'days'),
       'YYYY-MM-DD',
     ).reverse();
 
     setDates(dateRange);
-    setSelectedDate(dateRange[3]);
+    setSelectedDate(dateRange[10]);
   }, [fromConfirm]);
 
   useEffect(() => {
@@ -75,28 +75,19 @@ const ExpertAppointments = ({navigation}) => {
 
   useEffect(() => {
     let record = _.flatten(visitData);
-    if (record.length > 1 && selectedDate) {
-      let filtered = record.filter((visit) => {
-        let appointment = moment(visit.time);
-        let now = moment(new Date());
-        if (appointment.diff(now, 'hours') >= -1) {
-          return visit;
-        }
-      });
-
-      filtered = filtered.sort((a, b) => {
+    if (record.length > 0 && selectedDate) {
+      let filtered = record.sort((a, b) => {
         return (
           parseInt(moment(a.time).format('x')) -
           parseInt(moment(b.time).format('x'))
         );
       });
 
-      let current = filtered.filter((visit) => {
+      filtered = filtered.filter((visit) => {
         return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
       });
-
-      setVisits([...current]);
-      setSearch([...current]);
+      setVisits([...filtered]);
+      setSearch([...filtered]);
     } else {
       setVisits([...record]);
       setSearch([...record]);
@@ -140,6 +131,13 @@ const ExpertAppointments = ({navigation}) => {
       <ScrollView style={styles.container}>
         <FlatList
           showsHorizontalScrollIndicator={false}
+          initialScrollIndex={12}
+          getItemLayout={(data, index) => ({
+            length: 1400,
+            offset: 40 * index,
+            index,
+          })}
+          onScrollToIndexFailed={0}
           keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
           data={dates}

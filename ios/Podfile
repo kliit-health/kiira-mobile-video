@@ -6,7 +6,7 @@ platform :ios, '11.0'
 target 'kiira' do
   config = use_native_modules!
 
-  # Comet Chat
+  # App
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "../node_modules/react-native-permissions/ios/Camera.podspec"
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
@@ -15,15 +15,6 @@ target 'kiira' do
 
   # Twilio
   pod 'react-native-twilio-video-webrtc', path: '../node_modules/react-native-twilio-video-webrtc'
-
-  #FireBase
-  pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
-  pod 'Firebase/RemoteConfig'
-  pod 'Firebase/Functions'
 
   use_react_native!(:path => config["reactNativePath"])
 

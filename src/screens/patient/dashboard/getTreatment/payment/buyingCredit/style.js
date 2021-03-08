@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    height: metrics.DEVICE_HEIGHT * 0.9,
+    height: metrics.height * 0.9,
     borderTopLeftRadius: 19,
     borderTopRightRadius: 19,
     backgroundColor: Constant.App.colors.whiteColor,

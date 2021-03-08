@@ -14,7 +14,6 @@ import AllergiesHistory from '../screens/provider/appointments/patientProfile/al
 import Appointments from '../screens/patient/dashboard/appointments';
 import Ask from '../screens/patient/dashboard/ask';
 import AskExpert from '../screens/provider/ask';
-import AuthLoadingScreen from '../screens/auth/authLoading';
 import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
@@ -39,7 +38,6 @@ import ExpertTwillioCalling from '../screens/provider/appointments/twillio/Calll
 import ExpertVisit from '../screens/provider/appointments/visit';
 import FamilyHistory from '../screens/provider/appointments/patientProfile/family';
 import ForgotPassword from '../screens/auth/forgotPassword';
-import GetStarted from '../screens/auth/getStarted';
 import GynHistory from '../screens/provider/appointments/patientProfile/gyn';
 import HealthHistory from '../screens/patient/dashboard/healthHistory';
 import GetTreatment from '../screens/patient/dashboard/getTreatment';
@@ -72,7 +70,6 @@ import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
 import RequestVisit from '../screens/patient/dashboard/getTreatment/requestVisit';
-import SignUp from '../screens/auth/signUp';
 import SelectExpert from '../screens/patient/dashboard/getTreatment/selectExpert';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
@@ -80,7 +77,7 @@ import SocialHistory from '../screens/provider/appointments/patientProfile/socia
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
 import SOS from '../screens/patient/dashboard/sos';
-import Tutorial from '../screens/auth/tutorial';
+import Landing from '../screens/auth/landing';
 import TermsConditions from '../screens/common/termsAndConditions';
 import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
@@ -117,16 +114,14 @@ const AuthStack = createStackNavigator(
   {
     ChatBot: {screen: ChatBot},
     ForgotPassword: {screen: ForgotPassword},
-    Tutorial: {screen: Tutorial},
-    GetStarted: {screen: GetStarted},
+    Landing: {screen: Landing},
     Login: {screen: Login},
-    SignUp: {screen: SignUp},
     Verify: {screen: Verify},
     Welcome: {screen: Welcome},
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Tutorial',
+    initialRouteName: 'Landing',
     ...TransparentStyle,
   },
 );
@@ -547,10 +542,9 @@ const AppNavigator = createSwitchNavigator(
     Auth: AuthStack,
     App: AppStack,
     AppExpert: AppStackExpert,
-    AuthLoading: AuthLoadingScreen,
   },
   {
-    initialRouteName: 'AuthLoading',
+    initialRouteName: 'Auth',
     headerMode: 'none',
     ...TransparentStyle,
   },

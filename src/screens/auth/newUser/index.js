@@ -11,7 +11,7 @@ const NewUser = (props) => {
   const {staticImages} = Constant.App;
   const {navigation} = props;
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.authLoading.userData);
+  const userData = useSelector((state) => state.user.data);
   const [agreeArr, setAgreeArr] = useState([
     {
       title: 'I agree to the terms of service',

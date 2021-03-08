@@ -5,10 +5,11 @@ import {
   GET_CLIENT_MEDICAL_HISTORY_REJECTED,
 } from '../types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {firebaseSingleFetch, auth} from '../../utils/firebase';
+import auth from '@react-native-firebase/auth';
+import {firebaseSingleFetch} from '../../utils/firebase';
 
 function* getMedicalHistory() {
-  const uid = auth.currentUser.uid;
+  const uid = auth().currentUser.uid;
   try {
     yield put({type: GET_CLIENT_MEDICAL_HISTORY_PENDING});
     const medicalHistory = yield firebaseSingleFetch('medicalHistory', uid);

@@ -2,11 +2,11 @@ import {StyleSheet} from 'react-native';
 import metrics, {smallScreen} from '../../../../../utils/metrices';
 import Constant from '../../../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
-let titlePaddingValue = metrics.DEVICE_WIDTH * 0.05;
+let titlePaddingValue = metrics.width * 0.05;
 
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -21,20 +21,20 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   bioTextStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.02,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
   bioTextStyleBold: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.02,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   bioTitleTextStyle: {
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.xLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    marginVertical: metrics.height * 0.015,
     elevation: 3,
   },
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     backgroundColor: Constant.App.colors.blueColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    marginVertical: metrics.height * 0.015,
     elevation: 3,
   },
 
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.26,
+    width: metrics.width * 0.26,
     height: 40,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
   },
 
   dateTimeSelectedSlotContainerStyle: {
@@ -111,10 +111,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.26,
+    width: metrics.width * 0.26,
     height: 40,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
   },
 
   dateTimeSlotTextStyle: {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
 
   expertDetailsCard: {
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   expertIsOffline: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   },
 
   expertNameTextStyle: {
-    marginTop: metrics.DEVICE_HEIGHT * 0.025,
+    marginTop: metrics.height * 0.025,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     paddingTop: parentPaddingValue * 0.2,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   expertInfoProfessionTextStyle: {
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     padding: parentPaddingValue,
     flexDirection: 'column',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     marginBottom: 70,
   },
 
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
     padding: titlePaddingValue,
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     marginLeft: -70,
     marginTop: 20,
 
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   noAvailability: {
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: -70,
     marginTop: 10,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   myRecentExpertContainerStyle: {
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.5,
+    width: metrics.width * 0.5,
     height: 40,
     backgroundColor: Constant.App.colors.whiteColor,
     marginBottom: 60,
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.5,
+    width: metrics.width * 0.5,
     height: 40,
     backgroundColor: Constant.App.colors.blueColor,
     marginBottom: 60,
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     padding: 60,
     backgroundColor: 'white',
     borderRadius: 12,
@@ -352,13 +352,13 @@ const styles = StyleSheet.create({
 
   showSheduleContainer: {
     flexDirection: 'column',
-    height: metrics.DEVICE_HEIGHT,
+    height: metrics.height,
     justifyContent: 'flex-end',
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     padding: smallScreen ? 5 : 20,
     backgroundColor: 'white',
     borderRadius: 12,
@@ -375,10 +375,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH * 0.26,
+    width: metrics.width * 0.26,
     height: 40,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    marginTop: metrics.height * 0.02,
     marginRight: 15,
   },
 

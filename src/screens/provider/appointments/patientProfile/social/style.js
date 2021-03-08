@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 5,
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
     marginTop: 50,
     height: 200,
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH * 0.3,
+    width: metrices.width * 0.3,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    marginTop: metrices.height * 0.03,
   },
 
   nextButtonTextStyle: {
@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH * 0.3,
+    width: metrices.width * 0.3,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    marginTop: metrices.height * 0.03,
   },
 
   prevButtonTextStyle: {

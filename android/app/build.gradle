@@ -132,8 +132,8 @@ android {
         applicationId "com.kiira"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 52
-        versionName '1.2.9'
+        versionCode 53
+        versionName '1.2.10'
         multiDexEnabled true
     }
     splits {
@@ -208,18 +208,14 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
-
+    compile (project(':tipsi-stripe')) {
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.google.firebase'
+}
+    compile project(':react-native-smart-splashscreen')
     compile project(':react-native-twilio-video-webrtc')
-    implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.android.gms:play-services-base:16.1.0"
-    implementation "com.google.firebase:firebase-storage:17.0.0"
-    implementation "com.google.firebase:firebase-auth:17.0.0"
-    implementation "com.google.firebase:firebase-firestore:19.0.2"
-    implementation "com.google.firebase:firebase-database:17.0.0"
-    implementation "com.google.firebase:firebase-messaging:18.0.0"
-    implementation "com.google.firebase:firebase-config:17.0.0"
-    implementation "com.google.firebase:firebase-functions:17.0.0"
-    // implementation project(path: ':react-native-background-timer')
+    implementation project(path: ':react-native-background-timer')
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermes-engine/android/";
       debugImplementation files(hermesPath + "hermes-debug.aar")

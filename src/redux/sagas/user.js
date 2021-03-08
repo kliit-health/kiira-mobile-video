@@ -9,15 +9,11 @@ import {
   UPDATE_USER_FULFILLED,
 } from '../types';
 import {put, takeEvery} from 'redux-saga/effects';
-import {
-  firebaseSingleFetch,
-  firebaseSingleUpdate,
-  auth,
-} from '../../utils/firebase';
+import auth from '@react-native-firebase/auth';
+import {firebaseSingleFetch, firebaseSingleUpdate} from '../../utils/firebase';
 
 function* getUser() {
-  const uid = auth.currentUser.uid;
-
+  const uid = auth().currentUser.uid;
   try {
     yield put({type: GET_USER_PENDING});
     const user = yield firebaseSingleFetch('users', uid);

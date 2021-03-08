@@ -3,10 +3,10 @@ import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
 import {text, colors} from '../../../utils/constants';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 export const AVATAR_SIZE = 111;
@@ -23,13 +23,13 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Constant.App.colors.offWhiteColor,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
   },
 
   creditButtonStyle: {
     marginLeft: -9,
     marginTop: 14,
-    width: metrics.DEVICE_WIDTH * 0.49,
+    width: metrics.width * 0.49,
     height: 44,
     borderRadius: 22,
     backgroundColor: Constant.App.colors.whiteColor,
@@ -82,8 +82,8 @@ export default StyleSheet.create({
   },
 
   logoutParentContainerStyle: {
-    marginTop: metrics.DEVICE_WIDTH * 0.1,
-    marginBottom: metrics.DEVICE_WIDTH * 0.1,
+    marginTop: metrics.width * 0.1,
+    marginBottom: metrics.width * 0.1,
   },
 
   logoutTextStyle: {
@@ -91,7 +91,7 @@ export default StyleSheet.create({
     paddingTop: 10,
     color: Constant.App.colors.redColorLogout,
     fontSize: Constant.App.textSize.xLarge,
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     fontFamily: Constant.App.fontFamily.bodyRegular,
   },
 
@@ -105,7 +105,7 @@ export default StyleSheet.create({
   myRecentExpertContainerStyle: {
     alignItems: 'flex-start',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.95,
+    width: metrics.width * 0.95,
     height: 425,
     borderRadius: 15,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
@@ -134,9 +134,9 @@ export default StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
     borderColor: Constant.App.colors.blueColor,
     borderWidth: 1,
   },
@@ -152,9 +152,9 @@ export default StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.03,
+    marginTop: metrics.height * 0.03,
   },
 
   yesTextStyle: {
@@ -226,7 +226,7 @@ export default StyleSheet.create({
     backgroundColor: Constant.App.colors.blueColor,
     justifyContent: 'center',
     alignItems: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     // height: 200,
     borderRadius: 50,
     overflow: 'hidden',
@@ -250,7 +250,7 @@ export default StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     backgroundColor: Constant.App.colors.whiteColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    marginVertical: metrics.height * 0.015,
     elevation: 3,
   },
 
@@ -261,7 +261,7 @@ export default StyleSheet.create({
     borderRadius: 50,
     padding: 8,
     backgroundColor: Constant.App.colors.blueColor,
-    marginVertical: metrics.DEVICE_HEIGHT * 0.015,
+    marginVertical: metrics.height * 0.015,
     elevation: 3,
   },
 
@@ -280,7 +280,7 @@ export default StyleSheet.create({
   },
 
   header: {
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     alignItems: 'center',
     paddingVertical: 40,
     backgroundColor: Constant.App.colors.blueColor,
@@ -309,7 +309,7 @@ export default StyleSheet.create({
 
   searchBar: {
     alignSelf: 'center',
-    width: metrics.DEVICE_WIDTH * 0.75,
+    width: metrics.width * 0.75,
     backgroundColor: Constant.App.colors.greyBgAsk,
     margin: 5,
     backgroundColor: 'transparent',
@@ -332,7 +332,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: Constant.App.colors.whiteColor,
     alignSelf: 'center',
-    width: metrics.DEVICE_WIDTH * 0.9,
+    width: metrics.width * 0.9,
     overflow: 'visible',
     borderRadius: 20,
     shadowColor: 'rgba(0,0,0, .4)', // IOS
@@ -348,7 +348,7 @@ export default StyleSheet.create({
     backgroundColor: Constant.App.colors.whiteColor,
     alignSelf: 'center',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.9,
+    width: metrics.width * 0.9,
     overflow: 'visible',
     marginVertical: 40,
     marginHorizontal: 20,
@@ -356,7 +356,7 @@ export default StyleSheet.create({
 
   userInfo: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH * 0.9,
+    width: metrics.width * 0.9,
     marginLeft: 10,
     marginRight: 10,
     justifyContent: 'center',

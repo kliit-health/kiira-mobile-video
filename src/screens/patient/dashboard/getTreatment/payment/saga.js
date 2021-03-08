@@ -41,8 +41,8 @@ import {showOrHideModal} from '../../../../../components/customModal/action';
 import {parseCardInfo} from '../../../../../utils/helper/payment';
 import {NavigationService} from '../../../../../navigation';
 import {deviceSupportsNativePay} from '../../../../../utils/payment';
-import Constant from '../../../../../utils/constants';
-import firebase from 'react-native-firebase';
+import Constant, {tables} from '../../../../../utils/constants';
+import auth from '@react-native-firebase/auth';
 
 function* checkNativePaySupport() {
   const isSupported = yield call(deviceSupportsNativePay);
@@ -115,12 +115,12 @@ function* getPaymentMethods() {
 function* handlePayResponse(response, credits, navigation) {
   const lang = yield select((state) => state.language);
   if (response.ok) {
-    const user = firebase.auth().currentUser;
+    const user = auth().currentUser;
     yield put({type: SET_PREPAID});
     yield call(updateCredits, credits, {data: {uid: user.uid, prepaid: true}});
     if (response.ok) {
       const obj = {
-        tableName: Constant.App.firebaseTableNames.users,
+        tableName: tables.users,
         uid: user.uid,
       };
       const userData = yield getDataFromTable(obj);

@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, ListItem, TextButton} from '../../../components';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
+import VersionCheck from 'react-native-version-check';
 import {get} from 'lodash';
 import {ProfileCard} from './sections';
 import model from './model';
@@ -10,7 +11,7 @@ import styles, {modifiers} from './styles';
 
 const ExpertAccount = ({navigation}) => {
   const language = useSelector((state) => state.language, shallowEqual);
-  const details = useSelector((state) => state.authLoading.userData);
+  const details = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
   const handleNavigation = (destination) => {
@@ -40,6 +41,10 @@ const ExpertAccount = ({navigation}) => {
             </ListItem>
           ))}
         </View>
+        <Text
+          style={{
+            alignSelf: 'center',
+          }}>{`v ${VersionCheck.getCurrentVersion()}`}</Text>
         <View style={styles.logoutContainer}>
           <TextButton onPress={handleSignOut} styles={modifiers.button} link>
             {language.expertAccount.logout}

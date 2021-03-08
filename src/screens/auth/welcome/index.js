@@ -1,13 +1,15 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
+import {useSelector} from 'react-redux';
+import {withNavigation} from 'react-navigation';
 import Constant from '../../../utils/constants';
 import styles from './styles';
 import CustomButton from '../../../components/customButton';
 
-const Welcome = (props) => {
+const Welcome = ({navigation}) => {
   const {staticImages} = Constant.App;
-  const {navigation} = props;
-  const {userData} = props.navigation.state.params;
+
+  const userData = useSelector((state) => state.user.data);
 
   return (
     <View style={styles.container}>
@@ -23,20 +25,16 @@ const Welcome = (props) => {
         <View style={styles.imageContainer}>
           <Image
             source={require('../../../../assets/kiira_penguin_b.png')}
-            style={{
-              height: 400,
-            }}
+            style={styles.image}
             resizeMode="contain"
           />
         </View>
 
         <CustomButton
-          buttonStyle={styles.buttonContainerStyle}
-          textStyle={styles.buttonTextStyle}
+          buttonStyle={styles.buttonContainer}
+          textStyle={styles.buttonText}
           onPress={() => {
-            navigation.navigate(Constant.App.screenNames.ChatBot, {
-              userData,
-            });
+            navigation.navigate(Constant.App.screenNames.ChatBot);
           }}
           text="Get Started"
         />
@@ -45,4 +43,4 @@ const Welcome = (props) => {
   );
 };
 
-export default Welcome;
+export default withNavigation(Welcome);

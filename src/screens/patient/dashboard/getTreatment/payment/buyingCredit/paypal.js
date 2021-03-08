@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
   approvalUrl: state.payment.orderData.approvalUrl,
   captureURL: state.payment.orderData.capturePaymentURL,
   credits: state.payment.orderData.credits,
-  userData: state.authLoading.userData,
+  userData: state.user.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({

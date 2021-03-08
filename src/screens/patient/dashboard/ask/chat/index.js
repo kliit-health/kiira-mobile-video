@@ -288,13 +288,13 @@ class Chat extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   question: state.ask.question,
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   messages: state.chat.messages,
   messageId: state.chat.messageId,
   questionId: state.chat.questionId,
   questionValue: state.chat.questionData,
   expertStatusData: state.chat.expertStatusData,
-  isActive: state.authLoading.isActive,
+  isActive: state.user.data.isActive,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

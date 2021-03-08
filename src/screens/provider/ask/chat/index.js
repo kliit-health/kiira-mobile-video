@@ -291,8 +291,8 @@ class ChatExpert extends React.PureComponent {
             <View style={styles.imageContainerStyle}>
               <Image
                 style={{
-                  height: metrices.DEVICE_WIDTH - 100,
-                  width: metrices.DEVICE_WIDTH * 0.65,
+                  height: metrices.width - 100,
+                  width: metrices.width * 0.65,
                   resizeMode: 'cover',
                 }}
                 source={{
@@ -470,13 +470,13 @@ class ChatExpert extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   messages: state.chatExpert.messages,
   messageId: state.chatExpert.messageId,
   questionId: state.chatExpert.questionId,
   questionData: state.chatExpert.questionData,
   userStatusData: state.chatExpert.userStatusData,
-  isActive: state.authLoading.isActive,
+  isActive: state.user.data.isActive,
   lang: state.language,
 });
 

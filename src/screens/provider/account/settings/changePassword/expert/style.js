@@ -3,7 +3,7 @@ import Constant from '../../../../../../utils/constants';
 import metrics from '../../../../../../utils/metrices';
 import {getStatusBarHeight} from '../../../../../../components/iPhoneXHelper';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.1,
+    marginTop: metrics.height * 0.1,
   },
 
   buttonTextStyle: {
@@ -51,19 +51,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    paddingBottom: Platform.OS === 'ios' ? metrics.DEVICE_HEIGHT * 0.01 : 0,
-    marginTop: metrics.DEVICE_HEIGHT * 0.05,
+    width: metrics.width - parentPadding,
+    paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
+    marginTop: metrics.height * 0.05,
     borderBottomColor: Constant.App.colors.blackColor,
     borderBottomWidth: 0.5,
   },
 
   inputTextParentContainerStyle: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    marginTop: metrics.height * 0.02,
   },
 
   inputTypePasswordStyle: {
@@ -71,23 +71,23 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrics.DEVICE_WIDTH - parentPadding - metrics.DEVICE_WIDTH * 0.05,
+    width: metrics.width - parentPadding - metrics.width * 0.05,
   },
 
   passwordHideShowIconStyle: {
-    height: metrics.DEVICE_WIDTH * 0.05,
-    width: metrics.DEVICE_WIDTH * 0.05,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    height: metrics.width * 0.05,
+    width: metrics.width * 0.05,
+    marginTop: metrics.height * 0.02,
   },
 
   passwordValidationContainerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    marginTop: metrics.height * 0.01,
   },
 
   passwordValidationTextStyle: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrics.DEVICE_WIDTH - parentPadding - 15,
+    width: metrics.width - parentPadding - 15,
   },
 
   passwordValidChecboxIconStyle: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     textAlign: 'center',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerBold,

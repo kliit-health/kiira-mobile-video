@@ -43,15 +43,27 @@ class AddProfileData extends PureComponent {
       pronounsArr: [
         {
           title: lang.addProfileData.sheHer,
-          selected: false,
+          selected:
+            userData.profileInfo.pronouns &&
+            userData.profileInfo.pronouns === lang.addProfileData.sheHer
+              ? true
+              : false,
         },
         {
           title: lang.addProfileData.heHim,
-          selected: false,
+          selected:
+            userData.profileInfo.pronouns &&
+            userData.profileInfo.pronouns === lang.addProfileData.heHim
+              ? true
+              : false,
         },
         {
           title: lang.addProfileData.theyThem,
-          selected: false,
+          selected:
+            userData.profileInfo.pronouns &&
+            userData.profileInfo.pronouns === lang.addProfileData.theyThem
+              ? true
+              : false,
         },
       ],
       selectedState: null,

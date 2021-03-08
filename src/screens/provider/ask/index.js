@@ -22,7 +22,7 @@ const AskExpert = ({navigation}) => {
   const [value, setValue] = useState('');
 
   const lang = useSelector((state) => state.language);
-  const expertDetails = useSelector((state) => state.authLoading.userData);
+  const expertDetails = useSelector((state) => state.user.data);
   const activeQuestions = useSelector((state) => state.askExpert.active);
   const resolvedQuestions = useSelector((state) => state.askExpert.resolved);
   const activeSearchResult = useSelector(

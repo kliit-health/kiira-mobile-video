@@ -7,7 +7,7 @@ import {
 import {put, takeEvery} from 'redux-saga/effects';
 import {firebaseSingleFetch} from '../../utils/firebase';
 
-function* getTermsAndConditions({data}) {
+function* getTermsAndConditions() {
   try {
     yield put({type: GET_TERMS_AND_CONDITIONS_PENDING});
     const termsAndConditions = yield firebaseSingleFetch('legal', 'terms');

@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Platform,
+  Linking,
 } from 'react-native';
 import {
   requestMultiple,
@@ -14,10 +15,12 @@ import {
   PERMISSIONS,
   RESULTS,
 } from 'react-native-permissions';
+import SplashScreen from 'react-native-smart-splash-screen';
 import styles from './style';
 import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
 import Carousel from '../../../components/carousel';
+import VersionCheck from 'react-native-version-check';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -84,6 +87,19 @@ const Tutorial = (props) => {
           console.log('The permission error', error);
         });
     }
+    SplashScreen.close({
+      animationType: SplashScreen.animationType.scale,
+      duration: 3000,
+      delay: 500,
+    });
+  }, []);
+
+  useEffect(() => {
+    VersionCheck.needUpdate().then(async (res) => {
+      if (res.isNeeded) {
+        Linking.openURL(res.storeUrl); // open store if update is needed.
+      }
+    });
   }, []);
 
   const renderSliderView = () => {

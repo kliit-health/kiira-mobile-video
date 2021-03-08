@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../../../../utils/constants';
 import metrics from '../../../../../../../utils/metrices';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.05;
+let parentPaddingValue = metrics.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   chatInputParentContainer: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH,
+    width: metrics.width,
     padding: parentPaddingValue,
     backgroundColor: Constant.App.colors.whiteColor,
     borderTopWidth: 1,
@@ -94,10 +94,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width:
-      metrics.DEVICE_WIDTH -
+      metrics.width -
       parentPadding -
       30 -
-      (metrics.DEVICE_WIDTH - parentPadding - 30 - 10 - 44),
+      (metrics.width - parentPadding - 30 - 10 - 44),
   },
 });
 

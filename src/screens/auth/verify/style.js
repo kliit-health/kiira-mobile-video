@@ -3,16 +3,16 @@ import Constant from '../../../utils/constants';
 import metrics from '../../../utils/metrices';
 import {getStatusBarHeight} from '../../../components/iPhoneXHelper';
 
-let parentPaddingValue = metrics.DEVICE_WIDTH * 0.08;
+let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
-let childPaddingValue = metrics.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrics.width * 0.03;
 let childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
   backIconStyle: {
-    margin: metrics.DEVICE_HEIGHT * 0.02,
-    height: metrics.DEVICE_WIDTH * 0.05,
-    width: metrics.DEVICE_WIDTH * 0.05,
+    margin: metrics.height * 0.02,
+    height: metrics.width * 0.05,
+    width: metrics.width * 0.05,
     alignSelf: 'flex-end',
   },
 
@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
 
   forgotPasswordTextStyle: {
     textAlign: 'center',
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    marginTop: metrics.height * 0.02,
     color: Constant.App.colors.blueColor,
     fontSize: Constant.App.textSize.Medium,
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     paddingLeft: childPaddingValue,
     paddingRight: childPaddingValue,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    marginBottom: metrics.DEVICE_HEIGHT * 0.02,
+    marginBottom: metrics.height * 0.02,
   },
 
   inputTextParentContainerStyle: {
     flexDirection: 'column',
-    width: metrics.DEVICE_WIDTH - parentPadding,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    width: metrics.width - parentPadding,
+    marginTop: metrics.height * 0.01,
     paddingLeft: childPaddingValue,
     paddingRight: childPaddingValue,
   },
@@ -44,36 +44,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: metrics.DEVICE_WIDTH - childPadding,
-    paddingBottom: Platform.OS === 'ios' ? metrics.DEVICE_HEIGHT * 0.01 : 0,
-    marginTop: metrics.DEVICE_HEIGHT * 0.01,
+    width: metrics.width - childPadding,
+    paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
+    marginTop: metrics.height * 0.01,
     borderBottomColor: Constant.App.colors.blackColor,
     borderBottomWidth: 0.5,
   },
 
   inputTypeStyle: {
     color: Constant.App.colors.blackColor,
-    width: metrics.DEVICE_WIDTH - parentPadding,
+    width: metrics.width - parentPadding,
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
   },
 
   inputTypePasswordStyle: {
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Normal,
     textAlign: 'left',
-    width: metrics.DEVICE_WIDTH - childPadding - metrics.DEVICE_WIDTH * 0.05,
+    width: metrics.width - childPadding - metrics.width * 0.05,
   },
 
   loginButtonContainerStyle: {
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrics.DEVICE_WIDTH - childPadding,
+    width: metrics.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrics.DEVICE_HEIGHT * 0.05,
+    marginTop: metrics.height * 0.05,
   },
 
   loginButtonTextStyle: {
@@ -85,14 +85,14 @@ const styles = StyleSheet.create({
 
   logoStyle: {
     alignSelf: 'center',
-    height: metrics.DEVICE_WIDTH * 0.2,
-    width: metrics.DEVICE_WIDTH * 0.2,
+    height: metrics.width * 0.2,
+    width: metrics.width * 0.2,
   },
 
   logo2Style: {
     alignSelf: 'center',
-    height: metrics.DEVICE_WIDTH * 0.35,
-    width: metrics.DEVICE_WIDTH * 0.35,
+    height: metrics.width * 0.35,
+    width: metrics.width * 0.35,
   },
 
   parentContainerStyle: {
@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
   },
 
   passwordHideShowIconStyle: {
-    height: metrics.DEVICE_WIDTH * 0.05,
-    width: metrics.DEVICE_WIDTH * 0.05,
-    marginTop: metrics.DEVICE_HEIGHT * 0.02,
+    height: metrics.width * 0.05,
+    width: metrics.width * 0.05,
+    marginTop: metrics.height * 0.02,
   },
 });
 

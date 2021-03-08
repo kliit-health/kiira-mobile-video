@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 25,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     backgroundColor: Constant.App.colors.blueColor,
     height: 50,
   },
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingVertical: 60,
     backgroundColor: Constant.App.colors.blueColor,
     borderBottomLeftRadius: 30,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.xxLarge,
     fontFamily: Constant.App.fontFamily.headerBold,
     fontWeight: '500',
-    marginLeft: metrices.DEVICE_WIDTH * 0.15,
+    marginLeft: metrices.width * 0.15,
   },
 
   lockButton: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.Large,
     padding: 20,
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    width: metrices.DEVICE_WIDTH * 0.85,
+    width: metrices.width * 0.85,
     fontSize: textSize.xxLarge,
     fontWeight: 'bold',
     textAlign: 'center',

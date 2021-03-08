@@ -15,7 +15,7 @@ const Patients = (props) => {
   const dispatch = useDispatch();
 
   const lang = useSelector((state) => state.language);
-  const userData = useSelector((state) => state.authLoading.userData);
+  const userData = useSelector((state) => state.user.data);
   const visitData = useSelector((state) => state.expertPatients.history);
   const [visits, setVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');

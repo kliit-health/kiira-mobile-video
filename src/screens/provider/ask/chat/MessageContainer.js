@@ -50,8 +50,8 @@ class MessageContainer extends React.PureComponent {
               {item.image ? (
                 <Image
                   style={{
-                    height: metrices.DEVICE_WIDTH - 100,
-                    width: metrices.DEVICE_WIDTH - 100,
+                    height: metrices.width - 100,
+                    width: metrices.width - 100,
                     resizeMode: 'cover',
                   }}
                   source={{
@@ -96,8 +96,8 @@ class MessageContainer extends React.PureComponent {
             {item.image ? (
               <Image
                 style={{
-                  height: metrices.DEVICE_WIDTH - 100,
-                  width: metrices.DEVICE_WIDTH - 100,
+                  height: metrices.width - 100,
+                  width: metrices.width - 100,
                   resizeMode: 'cover',
                 }}
                 source={{
@@ -172,8 +172,8 @@ class MessageContainer extends React.PureComponent {
               {item.image ? (
                 <Image
                   style={{
-                    height: metrices.DEVICE_WIDTH - 100,
-                    width: metrices.DEVICE_WIDTH - 100,
+                    height: metrices.width - 100,
+                    width: metrices.width - 100,
                     resizeMode: 'cover',
                   }}
                   source={{
@@ -221,8 +221,8 @@ class MessageContainer extends React.PureComponent {
             {item.image ? (
               <Image
                 style={{
-                  height: metrices.DEVICE_WIDTH - 100,
-                  width: metrices.DEVICE_WIDTH - 100,
+                  height: metrices.width - 100,
+                  width: metrices.width - 100,
                   resizeMode: 'cover',
                 }}
                 source={{

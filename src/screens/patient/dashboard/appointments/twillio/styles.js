@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   textlayout: {
     alignSelf: 'center',
     backgroundColor: 'white',
-    width: metrics.DEVICE_WIDTH * 0.85,
+    width: metrics.width * 0.85,
     height: 200,
     borderRadius: 25,
     shadowColor: 'rgba(0,0,0, .4)', // IOS

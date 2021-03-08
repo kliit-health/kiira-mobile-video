@@ -7,7 +7,6 @@ import addNewProfile from '../../screens/auth/chatBot/reducer';
 import appointments from '../../screens/patient/dashboard/appointments/reducer';
 import ask from '../../screens/patient/dashboard/ask/reducer';
 import askExpert from '../../screens/provider/ask/reducer';
-import authLoading from '../../screens/auth/authLoading/reducer';
 import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
 import changePassword from '../../screens/patient/account/settings/changePassword/reducer';
 import chat from '../../screens/patient/dashboard/ask/chat/reducer';
@@ -29,6 +28,7 @@ import login from '../../screens/auth/login/reducer';
 import medicalHistory from '../../screens/provider/appointments/patientProfile/reducer';
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';
+import newUser from '../../screens/auth/newUser/reducer';
 import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
 import plan from './plan';
 import plans from './plans';
@@ -37,7 +37,6 @@ import questions from './questions';
 import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/reducer';
 import settings from '../../screens/patient/account/settings/reducer';
 import settingsExpert from '../../screens/provider/account/settings/reducer';
-import signup from '../../screens/auth/signUp/reducer';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
 import toast from '../../components/customToast/reducer';
@@ -58,7 +57,6 @@ export default combineReducers({
   appointments,
   ask,
   askExpert,
-  authLoading,
   bookVisit,
   changePassword,
   chat,
@@ -81,6 +79,7 @@ export default combineReducers({
   messaging,
   modal,
   navigator,
+  newUser,
   payment,
   plan,
   plans,
@@ -89,7 +88,6 @@ export default combineReducers({
   reschedule,
   settings,
   settingsExpert,
-  signup,
   subscription,
   termsAndConditions,
   treatmentHistory,

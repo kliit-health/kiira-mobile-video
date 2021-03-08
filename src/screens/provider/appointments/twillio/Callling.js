@@ -9,6 +9,7 @@ import {
   TwilioVideoParticipantView,
   TwilioVideo,
 } from 'react-native-twilio-video-webrtc';
+import KeepAwake from 'react-native-keep-awake';
 
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -30,7 +31,6 @@ const ExpertTwillioCalling = ({navigation}) => {
   const dispatch = useDispatch();
   const callConfig = useSelector((state) => state.twillio);
   const [videoTracks, setVideoTracks] = useState(new Map());
-  const [showPreview, setShowPreview] = useState(true);
 
   useEffect(() => {
     twilioVideo.current.connect({
@@ -72,12 +72,6 @@ const ExpertTwillioCalling = ({navigation}) => {
 
   const _onFlipButtonPress = () => {
     twilioVideo.current.flipCamera();
-  };
-
-  const _onLocalViewPress = () => {
-    if (callConfig.status === 'connected') {
-      setShowPreview(!showPreview);
-    }
   };
 
   return (
@@ -155,21 +149,18 @@ const ExpertTwillioCalling = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <TouchableOpacity onPress={_onLocalViewPress}>
-        {showPreview && (
-          <TwilioVideoLocalView
-            enabled={callConfig.status === 'connected'}
-            style={styles.localVideo}
-          />
-        )}
-      </TouchableOpacity>
+
+      <TwilioVideoLocalView
+        enabled={callConfig.status === 'connected'}
+        style={styles.localVideo}
+      />
+
       <TwilioVideo
         ref={twilioVideo}
         onRoomDidConnect={() => {
           dispatch(setExpertCallConfig({...callConfig, status: 'connected'}));
         }}
         onRoomDidDisconnect={() => {
-          // dispatch(setExpertCallConfig({...initialState}));
           navigation.goBack();
         }}
         onRoomDidFailToConnect={(error) => {
@@ -179,7 +170,6 @@ const ExpertTwillioCalling = ({navigation}) => {
         }}
         onParticipantAddedVideoTrack={({participant, track}) => {
           if (track.enabled) {
-            console.log('onParticipantAddedVideoTrack: ', participant, track);
             setVideoTracks(
               new Map([
                 ...videoTracks,
@@ -195,12 +185,12 @@ const ExpertTwillioCalling = ({navigation}) => {
           }
         }}
         onParticipantRemovedVideoTrack={({participant, track}) => {
-          console.log('onParticipantRemovedVideoTrack: ', participant, track);
           const videoTracksLocal = videoTracks;
           videoTracksLocal.delete(track.trackSid);
           setVideoTracks(videoTracksLocal);
         }}
       />
+      <KeepAwake />
     </View>
   );
 };

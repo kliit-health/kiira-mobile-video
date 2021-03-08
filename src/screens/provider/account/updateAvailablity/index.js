@@ -45,7 +45,6 @@ class UpdateAvailablity extends PureComponent {
               },
               navigation,
             };
-
             updateUserData(payloadData);
           }}>
           <CustomText style={styles.doneTextStyle}>
@@ -132,7 +131,7 @@ class UpdateAvailablity extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.authLoading.userData,
+  userData: state.user.data,
   lang: state.language,
 });
 

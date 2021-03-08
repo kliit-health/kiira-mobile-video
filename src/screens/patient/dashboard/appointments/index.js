@@ -1,9 +1,10 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, FlatList, Text, Image} from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
 import {Container, Header, TextButton} from '../../../../components';
+import Conditional from '../../../../components/conditional';
 import {screenNames} from '../../../../utils/constants';
 import {getAppointmentsList} from './action';
 import Appointment from './components/appointment';
@@ -13,10 +14,10 @@ import moment from 'moment';
 const Appointments = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const userData = useSelector((state) => state.authLoading.userData);
+  const userData = useSelector((state) => state.user.data);
   const visitData = useSelector((state) => state.appointments);
   const lang = useSelector((state) => state.language);
-  const [visits, setVisits] = useState([]);
+  const [visits, setVisits] = useState(visitData);
 
   useEffect(() => {
     dispatch(getAppointmentsList({uid: userData.uid}));
@@ -40,6 +41,8 @@ const Appointments = ({navigation}) => {
       });
 
       setVisits(filtered);
+    } else {
+      setVisits([]);
     }
   }, [visitData]);
 
@@ -55,34 +58,29 @@ const Appointments = ({navigation}) => {
         title="Upcoming Visits"
         onBack={() => navigation.navigate('Home')}
       />
-      {visits.length > 0 ? (
-        <Fragment>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
-            keyboardShouldPersistTaps={
-              Platform.OS === 'ios' ? 'never' : 'always'
-            }
-            data={visits}
-            decelerationRate={'fast'}
-            renderItem={({item, index}) => {
-              const date = generateDateInfo(item.time);
-              return (
-                <ErrorBoundary
-                  FallbackComponent={FallBack}
-                  onError={() => navigation.navigate('Home')}>
-                  <Appointment
-                    visit={item}
-                    date={date}
-                    navigation={navigation}
-                  />
-                </ErrorBoundary>
-              );
-            }}
-            keyExtractor={(index) => `${index.id}`}
-          />
-        </Fragment>
-      ) : (
+
+      <Conditional if={visits.length > 0}>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
+          keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
+          data={visits}
+          decelerationRate={'fast'}
+          renderItem={({item, index}) => {
+            const date = generateDateInfo(item.time);
+            return (
+              <ErrorBoundary
+                FallbackComponent={FallBack}
+                onError={() => navigation.navigate('Home')}>
+                <Appointment visit={item} date={date} navigation={navigation} />
+              </ErrorBoundary>
+            );
+          }}
+          keyExtractor={(index) => `${index.id}`}
+        />
+      </Conditional>
+
+      <Conditional if={!visits.length}>
         <Container>
           <Image
             style={styles.image}
@@ -96,7 +94,7 @@ const Appointments = ({navigation}) => {
             {lang.appointments.scheduleAppointment}
           </TextButton>
         </Container>
-      )}
+      </Conditional>
     </Container>
   );
 };

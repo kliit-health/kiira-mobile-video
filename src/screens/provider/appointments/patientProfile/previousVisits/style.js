@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
   infoContainer: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
 
   profileContainer: {
     flexDirection: 'row',
-    width: metrices.DEVICE_WIDTH * 0.8,
+    width: metrices.width * 0.8,
     position: 'relative',
     top: -30,
-    left: metrices.DEVICE_WIDTH * 0.1,
+    left: metrices.width * 0.1,
     backgroundColor: Constant.App.colors.whiteColor,
     borderRadius: 20,
     padding: 10,

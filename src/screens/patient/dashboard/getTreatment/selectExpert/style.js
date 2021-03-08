@@ -3,10 +3,10 @@ import Constant from '../../../../../utils/constants';
 import metrices from '../../../../../utils/metrices';
 import {getStatusBarHeight} from '../../../../../components/iPhoneXHelper';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.1;
+let parentPaddingValue = metrices.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 
-let childPaddingValue = metrices.DEVICE_WIDTH * 0.03;
+let childPaddingValue = metrices.width * 0.03;
 var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     padding: Constant.App.dimensions.btnPaddingGlobal,
-    width: metrices.DEVICE_WIDTH - childPadding,
+    width: metrices.width - childPadding,
     backgroundColor: Constant.App.colors.blueColor,
-    marginTop: metrices.DEVICE_HEIGHT * 0.03,
+    marginTop: metrices.height * 0.03,
   },
 
   yesTextStyle: {

@@ -38,7 +38,7 @@ class SettingsExpert extends PureComponent {
       imageUri: '',
       languages: userData.profileInfo.languages,
       lastName: userData.profileInfo.lastName,
-      license: userData.profileInfo.license,
+      license: userData.clinicInfo.license,
       location: userData.clinicInfo.name,
       profession: userData.profileInfo.profession,
       profileInfo: userData.profileInfo,
@@ -195,6 +195,7 @@ class SettingsExpert extends PureComponent {
                   filename,
                 };
               }
+
               updateUserData(payloadData);
             }
           }}>
@@ -458,7 +459,7 @@ class SettingsExpert extends PureComponent {
       <TouchableOpacity
         style={styles.btnContainerStyle}
         onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ChangePassword);
+          navigation.navigate(Constant.App.screenNames.ChangePasswordExpert);
         }}>
         <CustomText style={styles.btnTextStyle}>
           {lang.setting.changePassword}

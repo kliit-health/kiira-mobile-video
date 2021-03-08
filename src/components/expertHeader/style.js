@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingVertical: 40,
     backgroundColor: Constant.App.colors.blueColor,
     borderBottomLeftRadius: 30,

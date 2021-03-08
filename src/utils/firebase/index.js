@@ -1,4 +1,8 @@
-import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import functions from '@react-native-firebase/functions';
+import storage from '@react-native-firebase/storage';
+import remoteConfig from '@react-native-firebase/remote-config';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections} from '../constants';
@@ -9,13 +13,9 @@ const bits = 1024;
 const exponent = '10001';
 const mySecretSalt = 'klit280391';
 
-export const firestore = firebase.firestore();
-export const auth = firebase.auth();
-export let functions = firebase.functions();
-
 export function getPlans(plan) {
   try {
-    let planRef = firebase.firestore().doc(`plans/${plan}`).get();
+    let planRef = firestore().doc(`plans/${plan}`).get();
     return planRef
       .then((doc) => {
         return doc.data();
@@ -32,8 +32,7 @@ export function getPlans(plan) {
 
 export function createUser(obj) {
   try {
-    return firebase
-      .auth()
+    return auth()
       .createUserWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
         const {user} = success;
@@ -53,8 +52,7 @@ export function createUser(obj) {
 
 export function loginInWithFirebase(obj) {
   try {
-    return firebase
-      .auth()
+    return auth()
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
         const {user} = success;
@@ -74,7 +72,7 @@ export function loginInWithFirebase(obj) {
 
 export function getPolicyFromFirebase() {
   try {
-    let policyRef = firebase.firestore().doc('legal/privacy').get();
+    let policyRef = firestore().doc('legal/privacy').get();
     return policyRef
       .then((doc) => {
         return doc.data();
@@ -91,8 +89,8 @@ export function getPolicyFromFirebase() {
 
 export function getTermsFromFirebase() {
   try {
-    const user = firebase.auth().currentUser;
-    let termsRef = firebase.firestore().doc('legal/terms').get();
+    const user = auth().currentUser;
+    let termsRef = firestore().doc('legal/terms').get();
     return termsRef
       .then((doc) => {
         return doc.data();
@@ -109,8 +107,8 @@ export function getTermsFromFirebase() {
 
 export function getPlanDetails(planDetails) {
   try {
-    const user = firebase.auth().currentUser;
-    let planRef = firebase.firestore().doc(`plans/${planDetails}`).get();
+    const user = auth().currentUser;
+    let planRef = firestore().doc(`plans/${planDetails}`).get();
     return planRef
       .then((doc) => {
         return doc.data();
@@ -128,7 +126,7 @@ export function getPlanDetails(planDetails) {
 export async function sendEmailVerification(obj) {
   try {
     const {email} = obj.params;
-    await functions.httpsCallable('sendActivationLink')(email);
+    await functions().httpsCallable('sendActivationLink')(email);
     return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
@@ -138,10 +136,7 @@ export async function sendEmailVerification(obj) {
 
 export function uploadImage(obj, success, error) {
   try {
-    const result = firebase
-      .storage()
-      .ref(`Kiira/${obj.filename}`)
-      .putFile(obj.file);
+    const result = storage().ref(`Kiira/${obj.filename}`).putFile(obj.file);
     return result
       .then((data) => {
         const obj = {
@@ -167,7 +162,7 @@ export function uploadImage(obj, success, error) {
 
 export async function getAppointmentsAsync(uid) {
   try {
-    const document = firebase.firestore().collection('appointments').doc(uid);
+    const document = firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
     return appointments.data();
   } catch (error) {
@@ -316,7 +311,7 @@ export async function makeAppointment({data}) {
           console.error(error);
         });
 
-      const document = firebase.firestore().collection('appointments').doc(uid);
+      const document = firestore().collection('appointments').doc(uid);
       const prev = await document.get();
 
       if (prev.exists) {
@@ -325,28 +320,29 @@ export async function makeAppointment({data}) {
           {merge: true},
         );
       } else {
-        await firebase
-          .firestore()
+        await firestore()
           .collection('appointments')
           .doc(uid)
           .set({history: [response]});
       }
 
-      const expertDocument = firebase
-        .firestore()
+      const expertDocument = firestore()
         .collection('appointments')
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
-      if (expertPrev.data().history[uid]) {
+      if (expertPrev.exists) {
         await expertDocument.set(
           {history: {[uid]: [...expertPrev.data().history[uid], response]}},
           {merge: true},
         );
       } else {
-        await expertDocument.set({
-          history: {...expertPrev.data().history, [uid]: [response]},
-        });
+        await firestore()
+          .collection('appointments')
+          .doc(expert.uid)
+          .set({
+            history: {[uid]: [response]},
+          });
       }
 
       return;
@@ -372,7 +368,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
           return res.body;
         }
 
-        const document = firestore.collection('appointments').doc(uid);
+        const document = firestore().collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
         appointments.history = appointments.history.filter(
@@ -384,7 +380,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
           {merge: true},
         );
 
-        const expertDocument = firestore
+        const expertDocument = firestore()
           .collection('appointments')
           .doc(expert.uid);
         const expertResponse = await expertDocument.get();
@@ -419,7 +415,7 @@ export async function changeAppointmentAsync({data}) {
         if (res.body.error) {
           return res.body;
         }
-        const document = firestore.collection('appointments').doc(uid);
+        const document = firestore().collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
         appointments.history = appointments.history.map((item) => {
@@ -431,7 +427,7 @@ export async function changeAppointmentAsync({data}) {
 
         await document.set({history: [...appointments.history]}, {merge: true});
 
-        const expertDocument = firestore
+        const expertDocument = firestore()
           .collection('appointments')
           .doc(expert.uid);
 
@@ -460,8 +456,7 @@ export async function changeAppointmentAsync({data}) {
 
 export function addUserData(obj) {
   try {
-    return firebase
-      .firestore()
+    return firestore()
       .collection('users')
       .where('uid', '==', obj.uid)
       .get()
@@ -471,8 +466,7 @@ export function addUserData(obj) {
           userData = element.data();
         });
         return userData
-          ? firebase
-              .firestore()
+          ? firestore()
               .collection('users')
               .doc(obj.uid)
               .update(obj)
@@ -494,8 +488,7 @@ export function addUserData(obj) {
                   return data;
                 },
               )
-          : firebase
-              .firestore()
+          : firestore()
               .collection('users')
               .doc(obj.uid)
               .set(obj)
@@ -539,7 +532,7 @@ export function addUserData(obj) {
 
 export function getUserData(obj, success, error) {
   try {
-    let userRef = firestore.doc(`${obj.tableName}/${obj.uid}`);
+    let userRef = firestore().doc(`${obj.tableName}/${obj.uid}`);
     return userRef.onSnapshot(success, error);
   } catch (error) {
     displayConsole('Crash error', error);
@@ -559,7 +552,7 @@ export async function getLicensesAsync() {
 
 export function getDataFromTable(obj) {
   try {
-    let userRef = firebase.firestore().doc(`${obj.tableName}/${obj.uid}`).get();
+    let userRef = firestore().doc(`${obj.tableName}/${obj.uid}`).get();
     return userRef
       .then((doc) => {
         return doc.data();
@@ -576,7 +569,7 @@ export function getDataFromTable(obj) {
 
 export function getCollectionData(obj) {
   try {
-    let userRef = firebase.firestore().collection(obj.tableName).get();
+    let userRef = firestore().collection(obj.tableName).get();
     return userRef
       .then((querySnapshot) => {
         const arr = [];
@@ -644,15 +637,13 @@ export function getQuestionsData(obj, success, error) {
   try {
     let ref;
     if (obj.value) {
-      ref = firebase
-        .firestore()
+      ref = firestore()
         .collection(obj.tableName)
         .where(obj.key, '==', obj.value)
         .where('isRated', '==', true)
         .where(obj.userConditionKey, '==', obj.uid);
     } else {
-      ref = firebase
-        .firestore()
+      ref = firestore()
         .collection(obj.tableName)
         .where('isRated', '==', false)
         .where(obj.userConditionKey, '==', obj.uid);
@@ -666,8 +657,7 @@ export function getQuestionsData(obj, success, error) {
 
 export function getExpertQuestionsData(obj, success, error) {
   try {
-    let ref = firebase
-      .firestore()
+    let ref = firestore()
       .collection(obj.tableName)
       .where(obj.key, '==', obj.value)
       .where(obj.userConditionKey, '==', obj.uid);
@@ -678,10 +668,9 @@ export function getExpertQuestionsData(obj, success, error) {
   }
 }
 
-export function logout(userData) {
+export function logout() {
   try {
-    return firebase
-      .auth()
+    return auth()
       .signOut()
       .then(
         function () {
@@ -691,20 +680,9 @@ export function logout(userData) {
           return data;
         },
         (error) => {
-          let data = {};
-          const {message, code} = error;
-          displayConsole('error message', message);
-          displayConsole('error code', code);
-          if (code === 'auth/no-current-user') {
-            data = {
-              success: true,
-            };
-          } else {
-            data = {
-              success: false,
-              message,
-            };
-          }
+          const data = {
+            success: true,
+          };
           return data;
         },
       );
@@ -716,7 +694,7 @@ export function logout(userData) {
 
 export async function resetPassword(email) {
   try {
-    await functions.httpsCallable('sendPasswordResetEmail')(email);
+    await functions().httpsCallable('sendPasswordResetEmail')(email);
     return {ok: true, data: null};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
@@ -726,7 +704,7 @@ export async function resetPassword(email) {
 
 export function getFilterDataWithCondition(obj) {
   try {
-    var db = firestore;
+    var db = firestore();
     let collection = db.collection(obj.tableName);
     collection = collection.where(obj.roleKey, '==', obj.roleValue);
     if (obj.genderKey && obj.genderValue) {
@@ -812,8 +790,8 @@ export function getFilterDataWithCondition(obj) {
 
 export function reAunthenticate(userProvidedPassword) {
   try {
-    const user = firebase.auth().currentUser;
-    const credential = firebase.auth.EmailAuthProvider.credential(
+    const user = auth().currentUser;
+    const credential = auth.EmailAuthProvider.credential(
       user.email,
       userProvidedPassword,
     );
@@ -844,7 +822,7 @@ export function reAunthenticate(userProvidedPassword) {
 
 export function changePassword(newPassword) {
   try {
-    var user = firebase.auth().currentUser;
+    var user = auth().currentUser;
     return user
       .updatePassword(newPassword)
       .then(function () {
@@ -885,8 +863,7 @@ export const decipher = (salt) => {
 };
 
 export function sendEncryptedKeyToFirebase() {
-  let Keyref = firebase
-    .firestore()
+  let Keyref = firestore()
     .collection('EncryptedKeys')
     .doc('EncryptedKeysDoc')
     .get();
@@ -905,8 +882,7 @@ export function sendEncryptedKeyToFirebase() {
       // Encrypt keys using cipher
       let myCipher = cipher(mySecretSalt);
       // Save Key to FireStore Db
-      firebase
-        .firestore()
+      firestore()
         .collection('EncryptedKeys')
         .doc('EncryptedKeysDoc')
         .set({
@@ -932,8 +908,7 @@ export function sendEncryptedKeyToFirebase() {
 }
 
 export const deleteEncryptedKeyCollection = () => {
-  firebase
-    .firestore()
+  firestore()
     .collection('EncryptedKeys')
     .get()
     .then(function (querySnapshot) {
@@ -946,8 +921,7 @@ export const deleteEncryptedKeyCollection = () => {
 
 export const sendMessage = (obj) => {
   try {
-    firebase
-      .firestore()
+    firestore()
       .collection(Constant.App.firebaseTableNames.messages)
       .doc(obj.id)
       .collection('chat')
@@ -960,8 +934,7 @@ export const sendMessage = (obj) => {
       userUnreadCount: userUnreadCount || 0,
       expertUnreadCount: expertUnreadCount || 0,
     };
-    firebase
-      .firestore()
+    firestore()
       .collection(Constant.App.firebaseTableNames.questions)
       .doc(obj.questionId)
       .update(updateData);
@@ -971,8 +944,7 @@ export const sendMessage = (obj) => {
 };
 
 export const loadMessages = (obj, success, error) => {
-  let ref = firebase
-    .firestore()
+  let ref = firestore()
     .collection(Constant.App.firebaseTableNames.messages)
     .doc(`${obj.id}`)
     .collection('chat')
@@ -981,13 +953,12 @@ export const loadMessages = (obj, success, error) => {
 };
 
 export const checkStatus = (obj, success, error) => {
-  let ref = firebase.firestore().collection('users').doc(`${obj.id}`);
+  let ref = firestore().collection('users').doc(`${obj.id}`);
   return ref.onSnapshot(success, error);
 };
 
 export const checkQuestionStatus = (obj, success, error) => {
-  let ref = firebase
-    .firestore()
+  let ref = firestore()
     .collection(Constant.App.firebaseTableNames.questions)
     .doc(`${obj.id}`);
   return ref.onSnapshot(success, error);
@@ -995,26 +966,15 @@ export const checkQuestionStatus = (obj, success, error) => {
 
 export function resolvedQuestion(obj) {
   try {
-    displayConsole(
-      '\n\n--------------**** resolvedQuestion Start ********-----------',
-    );
-    displayConsole('obj', obj);
-    return firebase
-      .firestore()
+    return firestore()
       .collection(Constant.App.firebaseTableNames.questions)
       .doc(`${obj.questionId}`)
       .set(obj)
       .then(
         function (success) {
-          displayConsole('success', true);
-          displayConsole('docref', success);
           const data = {
             success: true,
           };
-          displayConsole('data', data);
-          console.log(
-            '--------------**** resolvedQuestion End ********-----------\n\n',
-          );
           return data;
         },
         (error) => {
@@ -1025,10 +985,6 @@ export function resolvedQuestion(obj) {
             success: false,
             message: message,
           };
-          displayConsole('data', data);
-          displayConsole(
-            '--------------***** resolvedQuestion End *********-----------\n\n',
-          );
           return data;
         },
       );
@@ -1037,16 +993,12 @@ export function resolvedQuestion(obj) {
       success: false,
     };
     displayConsole('Crash error', error);
-    displayConsole(
-      '--------------**** resolvedQuestion End ********-----------\n\n',
-    );
     return data;
   }
 }
 
 export const updateRefrealcodeForAllUsers = (uid, data) => {
-  firebase
-    .firestore()
+  firestore()
     .collection('users')
     .doc(uid)
     .set(data, {merge: true})
@@ -1063,12 +1015,11 @@ export const updateRefrealcodeForAllUsers = (uid, data) => {
 };
 
 export const updateStatus = (obj) => {
-  firebase.firestore().collection('users').doc(obj.uid).update(obj.updatedData);
+  firestore().collection('users').doc(obj.uid).update(obj.updatedData);
 };
 
 export const updateUnreadCount = (obj) => {
-  firebase
-    .firestore()
+  firestore()
     .collection(Constant.App.firebaseTableNames.questions)
     .doc(obj.questionData.questionId)
     .update(obj.updateData);
@@ -1076,16 +1027,14 @@ export const updateUnreadCount = (obj) => {
 
 export function saveQuestion(obj) {
   try {
-    return firebase
-      .firestore()
+    return firestore()
       .collection(Constant.App.firebaseTableNames.questions)
       .add(obj)
       .then(
         function (success) {
           obj.messageId = `${success.id}${obj.userInfo.uid}${obj.expertInfo.uid}`;
           obj.questionId = success.id;
-          return firebase
-            .firestore()
+          return firestore()
             .collection(Constant.App.firebaseTableNames.questions)
             .doc(success.id)
             .set(obj)
@@ -1134,7 +1083,7 @@ export function saveQuestion(obj) {
 
 export async function updateQuestion(updates, questionId) {
   try {
-    const document = firestore
+    const document = firestore()
       .collection(collections.questions)
       .doc(questionId);
     await document.set({...updates}, {merge: true});
@@ -1146,9 +1095,8 @@ export async function updateQuestion(updates, questionId) {
 
 export function updateReadMessageStatus(obj) {
   try {
-    let batch = firestore.batch();
-    let questionDocRef = firebase
-      .firestore()
+    let batch = firestore().batch();
+    let questionDocRef = firestore()
       .collection(Constant.App.firebaseTableNames.messages)
       .doc(obj.id)
       .collection('chat')
@@ -1202,8 +1150,7 @@ export function makeid() {
 
 export function checkSecretKey(obj) {
   try {
-    let userRef = firebase
-      .firestore()
+    let userRef = firestore()
       .collection('userSecretKey')
       .where('secretKey', '==', obj.secretKey)
       .get();
@@ -1239,8 +1186,7 @@ export function checkSecretKey(obj) {
 
 export function checkReferedUserData(obj) {
   try {
-    let userRef = firebase
-      .firestore()
+    let userRef = firestore()
       .collection('users')
       .where('referalCode', '==', obj.referalCode)
       .get();
@@ -1276,9 +1222,8 @@ export function checkReferedUserData(obj) {
 
 export function setDataTesting() {
   try {
-    firebase.firestore().doc('userSecretKey/bc8uTx6LvbqkvhTrGVHY').get();
-    return firebase
-      .firestore()
+    firestore().doc('userSecretKey/bc8uTx6LvbqkvhTrGVHY').get();
+    return firestore()
       .collection('userSecretKey')
       .doc('bc8uTx6LvbqkvhTrGVHY')
       .update({secretKey: 'Admin123#'})
@@ -1311,8 +1256,7 @@ export function setDataTesting() {
 
 export function deleteUser() {
   try {
-    return firebase
-      .auth()
+    return auth()
       .currentUser.delete()
       .then(
         function () {
@@ -1331,7 +1275,7 @@ export function deleteUser() {
               success: true,
             };
           } else {
-            firebase.auth().signOut();
+            auth().signOut();
             data = {
               success: false,
               message,
@@ -1349,8 +1293,7 @@ export function deleteUser() {
 
 export function getRecentExpertsData(obj, success, error) {
   try {
-    let ref = firebase
-      .firestore()
+    let ref = firestore()
       .collection(obj.tableName)
       .where(obj.key, '==', obj.value);
     return ref.onSnapshot(success, error);
@@ -1361,7 +1304,7 @@ export function getRecentExpertsData(obj, success, error) {
 
 export function getExpertsData(obj, success, error) {
   try {
-    var db = firestore;
+    var db = firestore();
     let collection = db.collection(obj.tableName);
     collection = collection.where(obj.roleKey, '==', obj.roleValue);
     if (obj.genderKey && obj.genderValue) {
@@ -1375,7 +1318,7 @@ export function getExpertsData(obj, success, error) {
 
 export function getFiltersDataWithCondition(obj) {
   try {
-    var db = firestore;
+    var db = firestore();
     let collection = db.collection(obj.tableName);
     collection = collection.where(obj.roleKey, '==', obj.roleValue);
     if (obj.genderKey && obj.genderValue) {
@@ -1462,10 +1405,14 @@ export function getFiltersDataWithCondition(obj) {
 
 export async function getCreditAmountsData() {
   try {
-    await firebase.config().fetch(0);
-    await firebase.config().activateFetched();
-    const snapshot = await firebase.config().getValue('credit_amounts');
-    return snapshot ? snapshot.val() : null;
+    let price = await remoteConfig()
+      .fetchAndActivate()
+      .then(() => {
+        const result = remoteConfig().getValue('credit_amounts');
+        return result.asString();
+      });
+
+    return price;
   } catch (error) {
     return null;
   }
@@ -1475,7 +1422,7 @@ export async function addNewPaymentCard(obj) {
   try {
     const {card_number, exp_month, exp_year, cvc} = obj;
 
-    await functions.httpsCallable('apiPaymentsAddCard')({
+    await functions().httpsCallable('apiPaymentsAddCard')({
       card_number: card_number,
       exp_month: exp_month,
       exp_year: exp_year,
@@ -1491,7 +1438,7 @@ export async function addNewPaymentCard(obj) {
 
 export async function getPaymentMethods() {
   try {
-    const response = await functions.httpsCallable('apiPaymentsListCards')();
+    const response = await functions().httpsCallable('apiPaymentsListCards')();
     if (response.data.data) {
       return {
         ok: true,
@@ -1513,7 +1460,7 @@ export async function getPaymentMethods() {
 export async function payAmount(cardID, amount) {
   try {
     const amountInCents = Number(amount) * 100;
-    const response = await functions.httpsCallable('apiPaymentsPayAmount')({
+    const response = await functions().httpsCallable('apiPaymentsPayAmount')({
       card_id: cardID,
       amount: amountInCents,
     });
@@ -1527,7 +1474,7 @@ export async function payAmount(cardID, amount) {
 export async function payAmountWithToken(tokenID, amount) {
   try {
     const amountInCents = Number(amount) * 100;
-    const response = await functions.httpsCallable(
+    const response = await functions().httpsCallable(
       'apiPaymentsPayAmountApplePay',
     )({
       token_id: tokenID,
@@ -1542,20 +1489,12 @@ export async function payAmountWithToken(tokenID, amount) {
 
 export async function updateCredits(visits, {data}) {
   try {
-    const docData = await firebase
-      .firestore()
-      .collection('users')
-      .doc(data.uid)
-      .get();
+    const docData = await firestore().collection('users').doc(data.uid).get();
     const userData = docData.data();
     const paymentType = data.prepaid
       ? {prepaid: userData.prepaid + visits}
       : {visits: userData.visits + visits};
-    await firebase
-      .firestore()
-      .collection('users')
-      .doc(data.uid)
-      .update(paymentType);
+    await firestore().collection('users').doc(data.uid).update(paymentType);
     return {ok: true};
   } catch (err) {
     return {ok: false, status: 'internal'};
@@ -1564,7 +1503,7 @@ export async function updateCredits(visits, {data}) {
 
 export async function getPayPalAccessToken() {
   try {
-    const response = await functions.httpsCallable(
+    const response = await functions().httpsCallable(
       'apiPaymentsGetPaypalAccesstoken',
     )();
     return {ok: true, data: response};
@@ -1578,7 +1517,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
   new Promise((resolve, reject) =>
     (async function () {
       try {
-        let query = firestore.collection(collectionName);
+        let query = firestore().collection(collectionName);
         for (let condition of conditions) {
           const {key, operator, value} = condition;
           query = query.where(key, operator, value);
@@ -1597,7 +1536,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
 
 export async function addHealthHistory(data, uid) {
   try {
-    const document = firestore.collection('healthHistory').doc(uid);
+    const document = firestore().collection('healthHistory').doc(uid);
     await document.set(data, {merge: true});
     return;
   } catch (error) {
@@ -1607,7 +1546,7 @@ export async function addHealthHistory(data, uid) {
 
 export async function getHealthHistory(uid) {
   try {
-    const document = firestore.collection('healthHistory').doc(uid);
+    const document = firestore().collection('healthHistory').doc(uid);
     const healthHistory = await document.get();
     return healthHistory.data();
   } catch (error) {
@@ -1618,7 +1557,7 @@ export async function getHealthHistory(uid) {
 export async function getMedicalHistoryAsync(data) {
   const uid = data.payload;
   try {
-    const document = firestore.collection('medicalHistory').doc(uid);
+    const document = firestore().collection('medicalHistory').doc(uid);
     const medicalHistory = await document.get();
     return medicalHistory.data();
   } catch (error) {
@@ -1629,7 +1568,7 @@ export async function getMedicalHistoryAsync(data) {
 export const updateUserData = (updates, uid, merge = true) =>
   new Promise((resolve, reject) =>
     (async () => {
-      const user = firestore.collection('users').doc(uid);
+      const user = firestore().collection('users').doc(uid);
       try {
         await user.set(updates, {merge});
         resolve(updates);
@@ -1641,7 +1580,7 @@ export const updateUserData = (updates, uid, merge = true) =>
 
 export async function getAppointments(uid) {
   try {
-    const document = firestore.collection('appointments').doc(uid);
+    const document = firestore().collection('appointments').doc(uid);
     const appointments = await document.get();
     return appointments.data();
   } catch (error) {
@@ -1653,7 +1592,7 @@ export const firebaseSingleFetch = (collectionName, id) =>
   new Promise((resolve, reject) =>
     (async () => {
       try {
-        const document = await firestore
+        const document = await firestore()
           .collection(collectionName)
           .doc(id)
           .get();
@@ -1672,7 +1611,7 @@ export const firebaseSingleFetch = (collectionName, id) =>
 export const firebaseSingleUpdate = (id, collection, updates, merge = true) =>
   new Promise((resolve, reject) =>
     (async () => {
-      const user = firestore.collection(collection).doc(id);
+      const user = firestore().collection(collection).doc(id);
       try {
         await user.set(updates, {merge});
         resolve(updates);
@@ -1688,7 +1627,7 @@ export const firebaseRealTimeFetch = (
   onSucess,
   onError,
 ) => {
-  let query = firestore.collection(collectionName);
+  let query = firestore().collection(collectionName);
 
   for (let condition of conditions) {
     const {key, operator, value} = condition;
@@ -1716,9 +1655,9 @@ export async function saveAndLock({payload}) {
   const {visit} = appointment;
 
   try {
-    lockPaitentRecord(visit);
-    lockExpertRecord(visit);
-    saveMedicalHistory(payload, visit);
+    await lockPaitentRecord(visit);
+    await lockExpertRecord(visit);
+    await saveMedicalHistory(payload, visit);
     const update = {
       ...appointment,
       visit: {...visit, locked: true, complete: true},
@@ -1731,7 +1670,7 @@ export async function saveAndLock({payload}) {
 }
 
 async function lockPaitentRecord({uid, id}) {
-  const document = firestore.collection('appointments').doc(uid);
+  const document = firestore().collection('appointments').doc(uid);
   const appointments = await document.get();
   const appointmentList = appointments.data();
 
@@ -1748,7 +1687,7 @@ async function lockPaitentRecord({uid, id}) {
 }
 
 async function lockExpertRecord({uid, id, expert}) {
-  const document = firestore.collection('appointments').doc(expert.uid);
+  const document = firestore().collection('appointments').doc(expert.uid);
   const appointments = await document.get();
   const appointmentList = appointments.data();
 
@@ -1769,7 +1708,7 @@ async function saveMedicalHistory(payload, visit) {
   delete payload.error;
 
   try {
-    const document = firestore.collection('medicalHistory').doc(visit.uid);
+    const document = firestore().collection('medicalHistory').doc(visit.uid);
     const record = await document.get();
     const recordList = record.data();
 
@@ -1779,8 +1718,7 @@ async function saveMedicalHistory(payload, visit) {
         {merge: true},
       );
     } else {
-      await firebase
-        .firestore()
+      await firestore()
         .collection('medicalHistory')
         .doc(visit.uid)
         .set({history: [payload]});
@@ -1796,7 +1734,7 @@ export async function setVideoVisitRating(data) {
     rating,
     visit: {expert, uid},
   } = data;
-  const document = firestore.collection('users').doc(expert.uid);
+  const document = firestore().collection('users').doc(expert.uid);
   const expertDoc = await document.get();
   const expertData = expertDoc.data();
 
@@ -1808,9 +1746,9 @@ export async function setVideoVisitRating(data) {
 
 export async function sendVisitRecap({payload}) {
   try {
-    await functions.httpsCallable('sendMailNotificationOnMedicalRecordCreate')(
-      payload,
-    );
+    await functions().httpsCallable(
+      'sendMailNotificationOnMedicalRecordCreate',
+    )(payload);
   } catch (error) {
     console.log(error);
   }
@@ -1819,7 +1757,7 @@ export async function sendVisitRecap({payload}) {
 export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
   new Promise((resolve, reject) =>
     (async function () {
-      const updateSubscriptionPlan = functions.httpsCallable(
+      const updateSubscriptionPlan = functions().httpsCallable(
         'changeSubscriptionPlan',
       );
       try {
@@ -1837,7 +1775,9 @@ export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
 export const cancelSubscription = ({subscriptionId, userId}) =>
   new Promise((resolve, reject) =>
     (async function () {
-      const cancelSubscription = functions.httpsCallable('cancelSubscription');
+      const cancelSubscription = functions().httpsCallable(
+        'cancelSubscription',
+      );
       try {
         const response = await cancelSubscription({
           subscriptionId,
@@ -1852,7 +1792,7 @@ export const cancelSubscription = ({subscriptionId, userId}) =>
 
 export async function getOrganizationInfo(user) {
   try {
-    const document = firestore
+    const document = firestore()
       .collection('organizations')
       .doc(user.organizationId);
     const organization = await document.get();
@@ -1864,7 +1804,7 @@ export async function getOrganizationInfo(user) {
 
 export async function authorizeVideo(uid) {
   try {
-    const token = await functions.httpsCallable('videoSessionJoin')({
+    const token = await functions().httpsCallable('videoSessionJoin')({
       userName: uid,
     });
     return token;

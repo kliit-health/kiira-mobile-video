@@ -1,10 +1,11 @@
 import React from 'react';
 import {Container, TextButton} from '../../../components';
 import {useSelector, useDispatch} from 'react-redux';
-import {ScrollView} from 'react-native';
+import {ScrollView, Text} from 'react-native';
+import {app} from '../../../utils/constants';
 import {Profile, List, Plan} from './sections';
 import {signOut} from './action';
-import {modifiers} from './styles';
+import styles, {modifiers} from './styles';
 
 const Account = ({navigation}) => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Account = ({navigation}) => {
           <Plan subscription={subscription} user={user} />
         )}
         <List onItemPress={handleNavigation} />
+        <Text style={styles.version}>{app.version}</Text>
         <TextButton onPress={handleSignOut} styles={modifiers.button} link>
           {lang.account.logout}
         </TextButton>

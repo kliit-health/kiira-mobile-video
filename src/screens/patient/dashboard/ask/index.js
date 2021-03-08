@@ -20,7 +20,7 @@ import {withNavigation} from 'react-navigation';
 import {Header} from '../../../../components';
 import FastImage from 'react-native-fast-image';
 import {setuser} from './action';
-import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 import {getUserData} from '../../../../utils/firebase';
 import {showOrHideModal} from '../../../../components/customModal/action';
 
@@ -49,7 +49,7 @@ class Ask extends PureComponent {
 
     this.fetchData();
     this.focusListener = this.props.navigation.addListener('didFocus', () => {
-      var user = firebase.auth().currentUser;
+      var user = auth().currentUser;
       if (user && user.uid) {
         try {
           const obj = {

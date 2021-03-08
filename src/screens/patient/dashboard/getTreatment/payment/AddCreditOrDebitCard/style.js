@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import Constant from '../../../../../../utils/constants';
 import metrices from '../../../../../../utils/metrices';
 
-let parentPaddingValue = metrices.DEVICE_WIDTH * 0.05;
+let parentPaddingValue = metrices.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
 
 const styles = StyleSheet.create({
@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
   },
 
   expireDateWidh: {
-    width: (metrices.DEVICE_WIDTH - parentPadding) * 0.225,
+    width: (metrices.width - parentPadding) * 0.225,
     borderBottomWidth: 1,
     borderBottomColor: Constant.App.colors.pinkishGreyColor,
-    marginRight: (metrices.DEVICE_WIDTH - parentPadding) * 0.125,
+    marginRight: (metrices.width - parentPadding) * 0.125,
   },
 
   footerTextStyle: {
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
   inputTextContainerStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: metrices.DEVICE_WIDTH - parentPadding,
-    marginTop: metrices.DEVICE_HEIGHT * 0.01,
+    width: metrices.width - parentPadding,
+    marginTop: metrices.height * 0.01,
     marginLeft: 20,
     marginRight: 20,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: Constant.App.textSize.Normal,
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
-    width: (metrices.DEVICE_WIDTH - parentPadding) * 0.9,
+    width: (metrices.width - parentPadding) * 0.9,
     borderBottomWidth: 1,
     borderBottomColor: Constant.App.colors.pinkishGreyColor,
   },
@@ -95,14 +95,14 @@ const styles = StyleSheet.create({
   parentContainerStyle: {
     backgroundColor: Constant.App.colors.whiteColor,
     flexDirection: 'column',
-    width: metrices.DEVICE_WIDTH,
+    width: metrices.width,
     paddingLeft: parentPaddingValue,
     paddingRight: parentPaddingValue,
     marginTop: 20,
   },
 
   securityCodeWidth: {
-    width: (metrices.DEVICE_WIDTH - parentPadding) * 0.55,
+    width: (metrices.width - parentPadding) * 0.55,
     borderBottomWidth: 1,
     borderBottomColor: Constant.App.colors.pinkishGreyColor,
   },
