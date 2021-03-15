@@ -1822,6 +1822,25 @@ export const collections = {
   appointments: 'appointments',
 };
 
+export const urls = {
+  prod: {
+    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDay',
+    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonth',
+    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTime',
+    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMake',
+    appointmentCancel: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancel',
+    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChange'
+  },
+  dev: {
+    appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDay',
+    appointmentGetByMonth: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonth',
+    appointmentCheckTime: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTime',
+    appointmentMake: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMake',
+    appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancel',
+    appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChange'
+  }
+}
+
 export const videoHistory = {
   subject: 'Subject: ',
   visitWith: 'Visit With: ',

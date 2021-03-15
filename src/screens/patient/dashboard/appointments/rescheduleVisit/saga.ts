@@ -14,7 +14,6 @@ import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
-  getAppointmentsForTodayAsync,
   changeAppointmentAsync,
 } from '../../../../../utils/firebase';
 import {getAppointmentsList} from '../action';
@@ -38,7 +37,7 @@ function* getAppointmentsForToday({data}) {
   const lang = yield select((state) => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
-    const response = yield getAppointmentsForTodayAsync(data);
+    const response = yield getAppointmentsByDayAsync(data);
     yield put(setTimes(response));
     yield put(hideApiLoader());
     return;

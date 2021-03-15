@@ -12,6 +12,7 @@ import messaging from '@react-native-firebase/messaging';
 import {signOut} from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
+import {NavigationService} from './src/navigation/';
 import {setCurrentRoute, setPreviousRoute} from './src/redux/actions';
 
 const App = () => {
@@ -131,7 +132,10 @@ const App = () => {
   return (
     <View style={{flex: 1}}>
       <AppNavigator
-        ref={navigationRef}
+        ref={(nav) => {
+          navigationRef = nav;
+          NavigationService.navigator = nav;
+        }}
         onNavigationStateChange={(prevState, currentState) => {
           const currentScreen = getCurrentRouteName(currentState);
           const prevScreen = getCurrentRouteName(prevState);

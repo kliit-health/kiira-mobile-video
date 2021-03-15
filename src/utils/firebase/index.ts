@@ -5,13 +5,9 @@ import storage from '@react-native-firebase/storage';
 import remoteConfig from '@react-native-firebase/remote-config';
 import {displayConsole} from '../helper';
 import moment from 'moment';
-import Constant, {collections} from '../constants';
+import Constant, {collections, urls} from '../constants';
+
 var voucher_codes = require('voucher-code-generator');
-var RSAKey = require('react-native-rsa');
-var rsa = new RSAKey();
-const bits = 1024;
-const exponent = '10001';
-const mySecretSalt = 'klit280391';
 
 export function getPlans(plan) {
   try {
@@ -23,26 +19,6 @@ export function getPlans(plan) {
       .catch((e) => {
         displayConsole('e', e);
         return false;
-      });
-  } catch (error) {
-    displayConsole('Crash error', error);
-    return false;
-  }
-}
-
-export function createUser(obj) {
-  try {
-    return auth()
-      .createUserWithEmailAndPassword(obj.email, obj.password)
-      .then(function (success) {
-        const {user} = success;
-        return user;
-      })
-      .catch(function (error) {
-        const {message, code} = error;
-        displayConsole('error message', message);
-        displayConsole('error code', code);
-        return error;
       });
   } catch (error) {
     displayConsole('Crash error', error);
@@ -171,13 +147,28 @@ export async function getAppointmentsAsync(uid) {
 }
 
 export async function getAppointmentsByDayAsync(data) {
-  try {
-    const {calendarID, monthNumber, day, year} = data;
+  const {calendarID, date} = data;
 
+  let user = auth().currentUser;
+  let jwtToken = await user.getIdToken();
+   
+  var obj = {  
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + jwtToken
+    }),
+    body: JSON.stringify({
+      "data": {
+        calendarID,
+        date,
+      }
+    })
+  }
+
+  try {
     let response = {};
-    await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDay?calendarID=${calendarID}&date=${year}-${monthNumber}-${day}`,
-    )
+    await fetch(urls.dev.appointmentGetByDay , obj)
       .then((res) => res.json())
       .then((data) => (response.future = data));
     return response;
@@ -186,50 +177,57 @@ export async function getAppointmentsByDayAsync(data) {
   }
 }
 
-export async function getAppointmentsForTodayAsync(data) {
-  try {
-    const {calendarID} = data;
-    let today = new Date();
-    today = moment(today).format('YYYY-MM-DD');
-    let response = {};
-
-    await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDay?calendarID=${calendarID}&date=${today}`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        response.today = data;
-      });
-
-    return response;
-  } catch (error) {
-    return error;
-  }
-}
-
 export async function getAppointmentDatesAsync(data) {
   try {
+
+    let user = auth().currentUser;
+    let jwtToken = await user.getIdToken();
+   
     const {calendarID, monthNumber, addMonth, year} = data;
     const currentMonth = `${year}-${monthNumber}`;
 
+    var obj = {  
+      method: 'POST',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + jwtToken
+      }),
+      body: JSON.stringify({
+        "data": {
+          "appointmentTypeID": "16299344",
+          "calendarID": calendarID,
+          "month": currentMonth
+        }
+      })
+    }
+
     let response = [];
-    await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonth?calendarID=${calendarID}
-        &month=${currentMonth}&appointmentTypeID=16299344`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        response = [...response, ...data];
-      });
-    await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonth?calendarID=${calendarID}
-        &month=${addMonth}&appointmentTypeID=16299344`,
-    )
+    await fetch(urls.dev.appointmentGetByMonth, obj)
       .then((res) => res.json())
       .then((data) => {
         response = [...response, ...data];
       });
 
+      var obj = {  
+        method: 'POST',
+        headers: new Headers({
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + jwtToken
+        }),
+        body: JSON.stringify({
+          "data": {
+            "appointmentTypeID": "16299344",
+            "calendarID": calendarID,
+            "month": addMonth
+          }
+        })
+      }
+
+    await fetch(urls.dev.appointmentGetByMonth, obj)
+      .then((res) => res.json())
+      .then((data) => {
+        response = [...response, ...data];
+      });
     return response;
   } catch (error) {
     return error;
@@ -248,19 +246,8 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
-      prepaid,
-      insurance,
-      plan,
-      complete,
-      profile,
-      pronouns,
-      dob,
-      phoneNumber,
-      gender,
-      organizationId,
     } = data;
 
-    let response;
     let noPrescription = 'I do not need a prescription,';
     let yesPrescription = 'I need a prescription,';
     let reasonForVisit = `and would like to talk about ${reason}`;
@@ -269,8 +256,32 @@ export async function makeAppointment({data}) {
       ? `${yesPrescription} ${reasonForVisit}`
       : `${noPrescription} ${reasonForVisit}`;
 
-    let checkTime = await fetch(`https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTime?
-        &calendarID=${calendarID}&time=${time}`)
+    let user = auth().currentUser;
+    let jwtToken = await user.getIdToken();
+   
+    var obj = {  
+      method: 'POST',
+      headers: new Headers({
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + jwtToken
+      }),
+      body: JSON.stringify({
+        "data": {
+          "appointmentTypeID": "16299344",
+          "firstName": firstName,
+          "lastName": lastName,
+          "calendarID": calendarID,
+          "time": time,
+          "email": email,
+          "reason": reason,
+          "prescription": prescription,
+          "notes": notes
+        }
+      })
+    }
+
+    let response;
+    let checkTime = await fetch(urls.dev.appointmentCheckTime,obj)
       .then((res) => res.json())
       .then((data) => data)
       .catch((error) => {
@@ -278,42 +289,23 @@ export async function makeAppointment({data}) {
       });
 
     if (checkTime.valid) {
-      await fetch(`https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMake?
-    	&firstName=${firstName}&lastName=${lastName}&email=${email}
-    	&calendarID=${calendarID}&time=${time}&reason=${reason}&prescription=${prescription}&notes=${notes}`)
+      await fetch(urls.dev.appointmentMake, obj)
         .then((res) => res.json())
-        .then((data) => {
+        .then((res) => {
           response = {
-            firstName,
-            lastName,
-            email,
-            calendarID,
-            time,
-            reason,
-            prescription,
-            uid,
-            id: data.body.id,
+            ...data,
             expert,
+            id: res.body.id,
             locked: false,
-            prepaid,
-            insurance,
-            plan,
-            complete,
-            profile,
-            pronouns,
-            dob,
-            phoneNumber,
-            gender,
-            organizationId,
           };
         })
         .catch((error) => {
           console.error(error);
         });
-
+      
       const document = firestore().collection('appointments').doc(uid);
       const prev = await document.get();
-
+        console.log(response);
       if (prev.exists) {
         await document.set(
           {history: [...prev.data().history, response]},
@@ -331,9 +323,10 @@ export async function makeAppointment({data}) {
         .doc(expert.uid);
 
       const expertPrev = await expertDocument.get();
+
       if (expertPrev.exists) {
         await expertDocument.set(
-          {history: {[uid]: [...expertPrev.data().history[uid], response]}},
+          {history: {[uid]: [response]}},
           {merge: true},
         );
       } else {
@@ -344,21 +337,34 @@ export async function makeAppointment({data}) {
             history: {[uid]: [response]},
           });
       }
-
       return;
     }
-    return {availible: false};
+    
   } catch (error) {
-    displayConsole(error);
-    return error;
+    console.error(error);
+    return {availible: false};
   }
 }
 
 export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
+  let user = auth().currentUser;
+  let jwtToken = await user.getIdToken();
+   
+  var obj = {  
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + jwtToken
+    }),
+    body: JSON.stringify({
+      "data": {
+        "id": id
+      }
+    })
+  }
+
   try {
-    return await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancel?&id=${id}`,
-    )
+    return await fetch(urls.dev.appointmentCancel, obj)
       .then((res) => {
         let response = res.json();
         return response;
@@ -405,11 +411,25 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
 
 export async function changeAppointmentAsync({data}) {
   const {id, time, uid, expert} = data;
+  let user = auth().currentUser;
+  let jwtToken = await user.getIdToken();
+   
+  var obj = {  
+    method: 'POST',
+    headers: new Headers({
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + jwtToken
+    }),
+    body: JSON.stringify({
+      "data": {
+        "id": id,
+        "time": time
+      }
+    })
+  }
 
   try {
-    return await fetch(
-      `https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChange?&id=${id}&time=${time}`,
-    )
+    return await fetch(urls.dev.appointmentChange, obj)
       .then((res) => res.json())
       .then(async (res) => {
         if (res.body.error) {
@@ -451,82 +471,6 @@ export async function changeAppointmentAsync({data}) {
       });
   } catch (error) {
     return error;
-  }
-}
-
-export function addUserData(obj) {
-  try {
-    return firestore()
-      .collection('users')
-      .where('uid', '==', obj.uid)
-      .get()
-      .then((querySnapshot) => {
-        var userData;
-        querySnapshot.docs.forEach((element) => {
-          userData = element.data();
-        });
-        return userData
-          ? firestore()
-              .collection('users')
-              .doc(obj.uid)
-              .update(obj)
-              .then(
-                function () {
-                  const data = {
-                    success: true,
-                  };
-                  return data;
-                },
-                (error) => {
-                  const {message, code} = error;
-                  displayConsole('error message', message);
-                  displayConsole('error code', code);
-                  const data = {
-                    success: false,
-                    message: message,
-                  };
-                  return data;
-                },
-              )
-          : firestore()
-              .collection('users')
-              .doc(obj.uid)
-              .set(obj)
-              .then(
-                function () {
-                  const data = {
-                    success: true,
-                  };
-                  return data;
-                },
-                (error) => {
-                  const {message, code} = error;
-                  displayConsole('error message', message);
-                  displayConsole('error code', code);
-                  const data = {
-                    success: false,
-                    message: message,
-                  };
-                  return data;
-                },
-              );
-      })
-      .catch((error) => {
-        const {message, code} = error;
-        displayConsole('error message', message);
-        displayConsole('error code', code);
-        const data = {
-          success: false,
-          message: message,
-        };
-        return data;
-      });
-  } catch (error) {
-    const data = {
-      success: false,
-    };
-    displayConsole('Crash error', error);
-    return data;
   }
 }
 
@@ -600,8 +544,7 @@ export function getCollectionData(obj) {
 
 export function getCollectionDataWithCondition(obj) {
   try {
-    let userRef = firebase
-      .firestore()
+    let userRef = firestore()
       .collection(obj.tableName)
       .where(obj.key, '==', obj.value)
       .get();
@@ -838,86 +781,6 @@ export function changePassword(newPassword) {
     return false;
   }
 }
-
-export const cipher = (salt) => {
-  let textToChars = (text) => text.split('').map((c) => c.charCodeAt(0));
-  let byteHex = (n) => ('0' + Number(n).toString(16)).substr(-2);
-  let applySaltToChar = (code) =>
-    textToChars(salt).reduce((a, b) => a ^ b, code);
-
-  return (text) =>
-    text.split('').map(textToChars).map(applySaltToChar).map(byteHex).join('');
-};
-
-export const decipher = (salt) => {
-  let textToChars = (text) => text.split('').map((c) => c.charCodeAt(0));
-  let applySaltToChar = (code) =>
-    textToChars(salt).reduce((a, b) => a ^ b, code);
-  return (encoded) =>
-    encoded
-      .match(/.{1,2}/g)
-      .map((hex) => parseInt(hex, 16))
-      .map(applySaltToChar)
-      .map((charCode) => String.fromCharCode(charCode))
-      .join('');
-};
-
-export function sendEncryptedKeyToFirebase() {
-  let Keyref = firestore()
-    .collection('EncryptedKeys')
-    .doc('EncryptedKeysDoc')
-    .get();
-  return Keyref.then((doc) => {
-    if (doc.exists) {
-      let myDecipher = decipher(mySecretSalt);
-      return JSON.parse(myDecipher(doc._data.salt.key));
-    } else {
-      rsa.generate(bits, exponent);
-      const publicKey = rsa.getPublicString();
-      const privateKey = rsa.getPrivateString();
-      const keys = {
-        publicKey: JSON.stringify(publicKey),
-        privateKey: JSON.stringify(privateKey),
-      };
-      // Encrypt keys using cipher
-      let myCipher = cipher(mySecretSalt);
-      // Save Key to FireStore Db
-      firestore()
-        .collection('EncryptedKeys')
-        .doc('EncryptedKeysDoc')
-        .set({
-          salt: {
-            key: myCipher(JSON.stringify(keys)),
-          },
-        })
-        .then(
-          function () {
-            return JSON.parse(JSON.stringify(keys));
-          },
-          (error) => {
-            const {message, code} = error;
-            displayConsole('message', message);
-            displayConsole('code', code);
-          },
-        );
-    }
-  }).catch((e) => {
-    displayConsole('e', e);
-    return false;
-  });
-}
-
-export const deleteEncryptedKeyCollection = () => {
-  firestore()
-    .collection('EncryptedKeys')
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        displayConsole('deleteCollection doc', doc);
-        doc.ref.delete();
-      });
-    });
-};
 
 export const sendMessage = (obj) => {
   try {

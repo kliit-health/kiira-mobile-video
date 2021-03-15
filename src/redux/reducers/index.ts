@@ -48,7 +48,7 @@ import user from './user';
 import updateExpert from '../../screens/provider/account/updateAvailablity/reducer';
 import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
 
-export default combineReducers({
+export const rootReducer = combineReducers({
   account,
   agreeToTerms,
   addProfile,
@@ -98,3 +98,5 @@ export default combineReducers({
   verify,
   visit,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

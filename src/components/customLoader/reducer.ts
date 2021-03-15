@@ -2,7 +2,6 @@ import { SHOW_API_LOADER, HIDE_API_LOADER } from '../../redux/types';
 
 const initialState = {
   showLoader: false,
-  textMessage: 'Loading...',
 };
 
 const loaderReducer = (state = initialState, action) => {
