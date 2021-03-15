@@ -21,6 +21,8 @@ import Constant from '../../../utils/constants';
 import CustomButton from '../../../components/customButton';
 import Carousel from '../../../components/carousel';
 import VersionCheck from 'react-native-version-check';
+import RNExitApp from 'react-native-exit-app';
+import JailMonkey from 'jail-monkey';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -51,7 +53,7 @@ let banner = [
   },
 ];
 
-const Tutorial = (props) => {
+const Landing = (props) => {
   const {navigation} = props;
   const lang = useSelector((state) => state.language);
 
@@ -101,6 +103,10 @@ const Tutorial = (props) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if(JailMonkey.trustFall()) RNExitApp.exitApp();
+  },[])
 
   const renderSliderView = () => {
     return (
@@ -162,4 +168,4 @@ const Tutorial = (props) => {
   );
 };
 
-export default Tutorial;
+export default Landing;

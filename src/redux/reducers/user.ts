@@ -10,6 +10,12 @@ import {
   UPDATE_USER_FULFILLED,
 } from '../types';
 
+interface UserState {
+  data: object,
+  loading: boolean,
+  error: null,
+}
+
 const initialState = {
   data: models.user,
   loading: false,

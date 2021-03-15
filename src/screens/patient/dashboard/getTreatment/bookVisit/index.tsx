@@ -49,7 +49,6 @@ const BookVisit = (props) => {
     time: visitData.time,
     reason: visitData.reason,
     prescription: visitData.prescription,
-    navigation,
     uid,
     prepaid: bookVisit.prepaid,
     insurance,

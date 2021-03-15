@@ -18,12 +18,12 @@ function* setAppointment(data) {
     if (appointment && !appointment.availible) {
       yield put(
         showOrHideModal('Appointment is unavailible please reschedule.'),
-      );
+      ); 
       NavigationService.goBack();
+    } else {
+      yield updateCredits(-1, data);
+      yield put(getUser());
     }
-
-    yield updateCredits(-1, data);
-    yield put(getUser());
   } catch (error) {
     console.error(error);
   }

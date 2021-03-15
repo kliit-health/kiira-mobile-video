@@ -4,7 +4,7 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '../../../../../components/customLoader/action';
-import {addUserData, uploadImage} from '../../../../../utils/firebase';
+import {uploadImage} from '../../../../../utils/firebase';
 import {showOrHideModal} from '../../../../../components/customModal/action';
 import {getUser, updateUser} from '../../../../../redux/actions';
 
@@ -91,18 +91,12 @@ function* uploadUserData({data, dispatch}) {
           email: user.email,
         },
       };
-      const response = yield addUserData(user.uid, userInfo);
+
+      yield updateUser({uid: user.uid, userInfo});
       yield put(hideApiLoader());
-      if (response.success) {
-        yield put(getUser());
-        navigation.goBack();
-      } else {
-        dispatch(
-          showOrHideModal(
-            response.message ? response.message : lang.errorMessage.serverError,
-          ),
-        );
-      }
+      yield put(getUser());
+      navigation.goBack();
+      
     }
   } catch (error) {
     yield put(hideApiLoader());

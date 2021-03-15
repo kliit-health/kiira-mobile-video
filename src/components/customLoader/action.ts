@@ -1,11 +1,9 @@
 import { SHOW_API_LOADER, HIDE_API_LOADER } from '../../redux/types';
 
-export const showApiLoader = data => ({
+export const showApiLoader = () => ({
   type: SHOW_API_LOADER,
-  data,
 });
 
-export const hideApiLoader = (data) => ({
+export const hideApiLoader = () => ({
   type: HIDE_API_LOADER,
-  data,
 });
