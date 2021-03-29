@@ -807,6 +807,7 @@ export const sendMessage = (obj) => {
 };
 
 export const loadMessages = (obj, success, error) => {
+
   let ref = firestore()
     .collection(Constant.App.firebaseTableNames.messages)
     .doc(`${obj.id}`)

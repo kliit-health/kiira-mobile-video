@@ -1832,12 +1832,12 @@ export const urls = {
     appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChange'
   },
   dev: {
-    appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDay',
-    appointmentGetByMonth: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonth',
-    appointmentCheckTime: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTime',
-    appointmentMake: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMake',
-    appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancel',
-    appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChange'
+    appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
+    appointmentGetByMonth: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
+    appointmentCheckTime: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
+    appointmentMake: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
+    appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
+    appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth'
   }
 }
 
