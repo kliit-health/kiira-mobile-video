@@ -340,7 +340,7 @@ class Carousel extends React.Component {
         },
         content,
       ),
-      this.renderIndicator({childrenNum, pageNum, loop, scrollValue}),
+      // this.renderIndicator({childrenNum, pageNum, loop, scrollValue}),
     );
   }
 }
