@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {
+  SafeAreaView,
   StatusBar,
   View,
   ImageBackground,
@@ -119,7 +120,7 @@ const Tutorial = (props) => {
             <View key={key}>
               <ImageBackground
                 style={styles.bannerImageStyle}
-                // resizeMode={"contain"}
+                resizeMethod={'auto'}
                 source={item.image}
               />
             </View>

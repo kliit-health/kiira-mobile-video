@@ -4,14 +4,17 @@ import Constant, {text, colors} from '../../../utils/constants';
 
 const styles = StyleSheet.create({
   bannerImageStyle: {
-    height: metrics.height * 0.91,
+    height: metrics.height,
     width: metrics.width,
   },
 
   buttonContainerStyle: {
-    alignItems: 'center',
-    height: metrics.height * 0.18,
-    backgroundColor: colors.white,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "flex-end",
+    // alignItems: 'center',
+    height: metrics.height * 0.08,
+    // backgroundColor: colors.white,
   },
 
   containerStyle: {
@@ -20,8 +23,8 @@ const styles = StyleSheet.create({
   },
 
   loginButtonStyle: {
-    padding: 10,
-    width: metrics.width * 0.75,
+    padding: 8,
+    width: metrics.width * 0.40,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
@@ -38,14 +41,14 @@ const styles = StyleSheet.create({
   },
 
   sliderViewStyle: {
-    height: metrics.height * 0.85,
+    height: metrics.height * 0.92,
     width: metrics.width,
   },
 
   verifyButtonStyle: {
-    margin: 12,
-    padding: 10,
-    width: metrics.width * 0.75,
+    // margin: 12,
+    padding: 8,
+    width: metrics.width * 0.40,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
