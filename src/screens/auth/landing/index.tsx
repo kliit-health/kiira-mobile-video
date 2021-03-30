@@ -97,13 +97,13 @@ const Landing = (props) => {
     });
   }, []);
 
-  useEffect(() => {
-    VersionCheck.needUpdate().then(async (res) => {
-      if (res.isNeeded) {
-        Linking.openURL(res.storeUrl); // open store if update is needed.
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   VersionCheck.needUpdate().then(async (res) => {
+  //     if (res.isNeeded) {
+  //       Linking.openURL(res.storeUrl); // open store if update is needed.
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     if(JailMonkey.trustFall()) RNExitApp.exitApp();

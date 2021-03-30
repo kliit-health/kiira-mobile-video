@@ -165,7 +165,6 @@ const Login = (props) => {
           {renderForgotPasswordView()}
         </View>
       </ScrollView>
-      {/* {Platform.OS === 'ios' && <KeyboardSpacer />} */}
     </View>
   );
 };

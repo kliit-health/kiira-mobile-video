@@ -16,7 +16,11 @@ target 'kiira' do
   # Twilio
   pod 'react-native-twilio-video-webrtc', path: '../node_modules/react-native-twilio-video-webrtc'
 
-  use_react_native!(:path => config["reactNativePath"])
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => true
+  )
 
 #   target 'kiiramobileTests' do
 #     inherit! :complete
@@ -40,4 +44,7 @@ target 'kiira' do
 #     inherit! :search_paths
 #     # Pods for testing
 #   end
+  post_install do |installer|
+    react_native_post_install(installer)
+  end
 end
