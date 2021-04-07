@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import Constant from '../../../../../../utils/constants';
-import metrices from '../../../../../../utils/metrices';
+import Constant from 'utils/constants';
+import metrices from 'utils/metrices';
 
 const styles = StyleSheet.create({
   name: {

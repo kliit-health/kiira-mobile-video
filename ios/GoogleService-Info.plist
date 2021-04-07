@@ -44,9 +44,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>900829613230-uovjbpgbp1dt9hr6mdhte4bgjob0emqa.apps.googleusercontent.com</string>
+	<string>900829613230-a7sbh9av3ctk3dl4m1igrap78o1nc2nc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.900829613230-uovjbpgbp1dt9hr6mdhte4bgjob0emqa</string>
+	<string>com.googleusercontent.apps.900829613230-a7sbh9av3ctk3dl4m1igrap78o1nc2nc</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBLNp1K2lMX5Kmp6CywgaDpooKbUQV8oes</string>
 	<key>GCM_SENDER_ID</key>
@@ -54,7 +54,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kilt</string>
+	<string>com.kiira</string>
 	<key>PROJECT_ID</key>
 	<string>kliit-health-dev</string>
 	<key>STORAGE_BUCKET</key>
@@ -70,7 +70,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:900829613230:ios:2a9bd2c494a6efe4ed313f</string>
+	<string>1:900829613230:ios:75ac855f35032ef3ed313f</string>
 	<key>DATABASE_URL</key>
 	<string>https://kliit-health-dev.firebaseio.com</string>
 </dict>

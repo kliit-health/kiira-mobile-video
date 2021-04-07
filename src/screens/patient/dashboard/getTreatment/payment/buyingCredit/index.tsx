@@ -2,12 +2,12 @@ import React, {PureComponent} from 'react';
 import {View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import styles, {PaymentDropdownDimensions} from './style';
-import Constant from '../../../../../../utils/constants';
-import CustomText from '../../../../../../components/customText';
-import {IconButton} from '../../../../../../components';
-import FlyingLabelIcon from '../../../../../../components/FlyingLabelIcon';
-import CustomButton from '../../../../../../components/customButton';
-import ModalDropdown from '../../../../../../components/modalDropdown';
+import Constant from 'utils/constants';
+import CustomText from 'components/customText';
+import {IconButton} from 'components';
+import FlyingLabelIcon from 'components/FlyingLabelIcon';
+import CustomButton from 'components/customButton';
+import ModalDropdown from 'components/modalDropdown';
 import {
   getCreditAmountsOptions,
   getPaymentMethods,
@@ -18,9 +18,9 @@ import {
 import {
   defaultPaymentMethods,
   PaymentMethodsTypes,
-} from '../../../../../../utils/helper/payment';
-import {payWithNativeModule} from '../../../../../../utils/payment';
-import {showOrHideModal} from '../../../../../../components/customModal/action';
+} from 'utils/helper/payment';
+import {payWithNativeModule} from 'utils/payment';
+import {showOrHideModal} from 'components/customModal/action';
 
 class BuyingCredit extends PureComponent {
 	public state: any;

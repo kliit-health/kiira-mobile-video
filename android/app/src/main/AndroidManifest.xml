@@ -34,6 +34,12 @@
         </intent-filter>
       </activity>
       <service android:name="com.asterinet.react.bgactions.RNBackgroundActionsTask" />
+      <meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@mipmap/notification" />
+      <meta-data
+        android:name="com.google.firebase.messaging.default_notification_color"
+        android:value="#008AFC" />
     </application>
 
 </manifest>

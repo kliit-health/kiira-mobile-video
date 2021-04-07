@@ -2,7 +2,7 @@ import {
   GET_EXPERTS_DETAIL_DATA_SUCCESS,
   GET_EXPERTS_DETAIL_DATA,
   CLEAR_EXPERT_PROFILE_STATE,
-} from '../../../redux/types';
+} from 'redux/types';
 
 export const getExpertsData = (data) => ({
   type: GET_EXPERTS_DETAIL_DATA,

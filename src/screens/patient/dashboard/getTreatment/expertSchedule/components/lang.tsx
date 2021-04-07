@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {View} from 'react-native';
-import CustomText from '../../../../../../components/customText';
+import CustomText from 'components/customText';
 import styles from '../style';
 
 const Languages = ({expertData}) => {

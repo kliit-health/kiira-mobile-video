@@ -1,12 +1,12 @@
 import React from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
-import {Container, Header} from '../../../components';
+import {Container, Header} from 'components';
 import {get} from 'lodash';
 import Image from 'react-native-fast-image';
 import model from './model';
 import styles, {modifiers} from './styles';
-import {screenNames} from '../../../utils/constants';
+import {screenNames} from 'utils/constants';
 
 const Learn = ({navigation}) => {
   const language = useSelector((state) => state.language, shallowEqual);

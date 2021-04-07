@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
-import CustomButton from '../../../../components/customButton';
+import CustomButton from 'components/customButton';
 import CancelModal from './cancelModal';
 import styles from '../style';
 

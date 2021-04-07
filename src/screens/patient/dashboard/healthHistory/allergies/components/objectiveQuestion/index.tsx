@@ -1,5 +1,5 @@
 import React from 'react';
-import {CheckBox} from '../../../../../../../components';
+import {CheckBox} from 'components';
 import {View} from 'react-native';
 import styles from './styles';
 

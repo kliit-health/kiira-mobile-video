@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, FlatList} from 'react-native';
 import {useSelector, shallowEqual} from 'react-redux';
 import {get} from 'lodash';
-import {Header, ListItem, Container} from '../../../../components';
+import {Header, ListItem, Container} from 'components';
 import model from './model';
 import styles from './styles';
 

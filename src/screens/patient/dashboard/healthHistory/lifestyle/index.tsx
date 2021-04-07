@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {Text} from 'react-native';
-import {Header, Container, FooterNavigation} from '../../../../../components';
-import {switchCase} from '../../../../../utils/functions';
+import {Header, Container, FooterNavigation} from 'components';
+import {switchCase} from 'utils/functions';
 import {initialQuestions, extraQuestions, types} from './model';
 import {useSelector, useDispatch} from 'react-redux';
 import {PolarQuestion, ObjectiveQuestion, PickerQuestion} from './components';
-import {updateHealthHistory} from '../../../../../redux/actions';
+import {updateHealthHistory} from 'redux/actions';
 import styles from './styles';
 
 const Lifestyle = ({navigation}) => {

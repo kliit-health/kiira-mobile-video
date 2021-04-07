@@ -3,7 +3,7 @@ import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text} from 'react-native';
 import {get} from 'lodash';
 import {cardDetails} from './model';
-import {Avatar} from '../../../../../components';
+import {Avatar} from 'components';
 import styles, {modifiers} from './styles';
 
 export default ({profileInfo}) => {

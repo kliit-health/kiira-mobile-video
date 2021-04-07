@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import metrics from '../../../utils/metrices';
-import Constant, {text, colors} from '../../../utils/constants';
+import metrics from 'utils/metrices';
+import Constant, {text, colors} from 'utils/constants';
 
 const styles = StyleSheet.create({
   bannerImageStyle: {

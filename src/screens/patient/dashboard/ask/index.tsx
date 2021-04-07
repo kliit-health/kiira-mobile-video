@@ -8,21 +8,21 @@ import {
   Image,
 } from 'react-native';
 import {connect} from 'react-redux';
-import CustomText from '../../../../components/customText';
+import CustomText from 'components/customText';
 import styles from './style';
-import Constant, {screenNames} from '../../../../utils/constants';
-import InputText from '../../../../components/customInputText/simpleInputText';
-import CustomButton from '../../../../components/customButton';
+import Constant, {screenNames} from 'utils/constants';
+import InputText from 'components/customInputText/simpleInputText';
+import CustomButton from 'components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {getQuestionData, updateQuestion} from './action';
 import moment from 'moment';
 import {withNavigation} from 'react-navigation';
-import {Header} from '../../../../components';
+import {Header} from 'components';
 import FastImage from 'react-native-fast-image';
 import {setuser} from './action';
 import auth from '@react-native-firebase/auth';
-import {getUserData} from '../../../../utils/firebase';
-import {showOrHideModal} from '../../../../components/customModal/action';
+import {getUserData} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
 
 class Ask extends PureComponent {
 	public state: any;

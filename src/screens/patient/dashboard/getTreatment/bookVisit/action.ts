@@ -5,7 +5,7 @@ import {
   MAKE_APPOINTMENT,
   SET_PREPAID,
   GET_APPOINTMENTS,
-} from '../../../../../redux/types';
+} from 'redux/types';
 
 export const getExpertsData = (data) => ({
   type: GET_EXPERTS_DETAIL_DATA,

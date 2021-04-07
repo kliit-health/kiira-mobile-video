@@ -2,7 +2,7 @@ import {
   GET_EXPERT_ACTIVE_QUESTIONS,
   GET_EXPERT_RESOLVED_QUESTIONS,
   SEARCH_EXPERT_QUESTIONS,
-} from '../../../redux/types';
+} from 'redux/types';
 
 export const getActiveQuestions = (data) => ({
   type: GET_EXPERT_ACTIVE_QUESTIONS,

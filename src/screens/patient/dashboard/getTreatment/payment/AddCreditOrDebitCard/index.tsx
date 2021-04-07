@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
-import CustomText from '../../../../../../components/customText';
+import CustomText from 'components/customText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {connect} from 'react-redux';
 import styles from './style';
-import Constant from '../../../../../../utils/constants';
-import CustomInputText from '../../../../../../components/customInputText';
-import CustomButton from '../../../../../../components/customButton';
+import Constant from 'utils/constants';
+import CustomInputText from 'components/customInputText';
+import CustomButton from 'components/customButton';
 import {createPaymentCard} from '../action';
 
 class AddCreditOrDebitCard extends PureComponent {

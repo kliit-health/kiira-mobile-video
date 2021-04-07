@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {
   setExpertCallConfig,
   getExpertCallToken,
-} from '../../../../redux/actions/twillio';
+} from 'redux/actions/twillio';
 import {
   View,
   Text,
@@ -14,8 +14,8 @@ import {
   Image,
 } from 'react-native';
 
-import Container from '../../../../components/container';
-import Header from '../../../../components/header';
+import Container from 'components/container';
+import Header from 'components/header';
 import {ActivityIndicator} from 'react-native-paper';
 
 import {

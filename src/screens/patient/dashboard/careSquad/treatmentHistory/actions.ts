@@ -1,7 +1,7 @@
 import {
   GET_CHAT_HISTORY_ASYNC,
   GET_VIDEO_HISTORY_ASYNC,
-} from '../../../../../redux/types';
+} from 'redux/types';
 
 export const getChatHistoryAsync = () => ({
   type: GET_CHAT_HISTORY_ASYNC,

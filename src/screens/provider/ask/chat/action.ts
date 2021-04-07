@@ -1,4 +1,4 @@
-import * as types from '../../../../redux/types';
+import * as types from 'redux/types';
 
 export const loadExpertMessages = (data, dispatch) => ({
   type: types.CHAT_MESSAGE_EXPERT_LOADING,

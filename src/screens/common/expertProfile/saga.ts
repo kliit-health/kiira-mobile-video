@@ -1,11 +1,11 @@
-import {GET_EXPERTS_DETAIL_DATA} from '../../../redux/types';
+import {GET_EXPERTS_DETAIL_DATA} from 'redux/types';
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../components/customLoader/action';
-import {getDataFromTable} from '../../../utils/firebase';
-import {showOrHideModal} from '../../../components/customModal/action';
+} from 'components/customLoader/action';
+import {getDataFromTable} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
 import {getExpertsDataSuccess} from './action';
 
 function* getExperts({data}) {

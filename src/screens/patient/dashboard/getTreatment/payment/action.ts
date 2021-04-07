@@ -11,7 +11,7 @@ import {
   SET_ORDER_DATA,
   CAPTURE_PAYMENT,
   SET_USER_DATA,
-} from '../../../../../redux/types';
+} from 'redux/types';
 
 export const createPaymentCard = (data) => ({
   type: CREATE_PAYMENT_CARD,

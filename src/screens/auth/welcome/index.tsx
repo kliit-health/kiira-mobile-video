@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Image, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {withNavigation} from 'react-navigation';
-import Constant from '../../../utils/constants';
+import Constant from 'utils/constants';
 import styles from './styles';
-import CustomButton from '../../../components/customButton';
+import CustomButton from 'components/customButton';
 
 const Welcome = ({navigation}) => {
   const {staticImages} = Constant.App;

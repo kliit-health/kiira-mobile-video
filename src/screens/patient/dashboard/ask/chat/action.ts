@@ -16,7 +16,7 @@ import {
   TOGGLE_USER_STATUS,
   CHECK_QUESTION_STATUS_SUCCESS,
   STOP_OBSERVER_CHAT,
-} from '../../../../../redux/types';
+} from 'redux/types';
 
 export const setQuestion = (data, dispatch) => ({
   type: SET_QUESTION,

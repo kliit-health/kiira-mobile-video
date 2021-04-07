@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
-import {TimeDisplay} from '../../../../components';
+import {TimeDisplay} from 'components';
 import {updateMedicalHistoryExpert} from '../patientProfile/actions';
-import {getUserData} from '../../../../utils/firebase';
-import Constant from '../../../../utils/constants';
+import {getUserData} from 'utils/firebase';
+import Constant from 'utils/constants';
 import styles from './styles';
 
 const Visit = (props) => {

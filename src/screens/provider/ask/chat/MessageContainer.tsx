@@ -4,9 +4,9 @@ import moment from 'moment';
 import HTML from 'react-native-render-html';
 import styles from './style';
 
-import CustomText from '../../../../components/customText';
-import Constant from '../../../../utils/constants';
-import metrices from '../../../../utils/metrices';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
+import metrices from 'utils/metrices';
 // var RSAKey = require('react-native-rsa');
 // var rsa = new RSAKey();
 class MessageContainer extends React.PureComponent {

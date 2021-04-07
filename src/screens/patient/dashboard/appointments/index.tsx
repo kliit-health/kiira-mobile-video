@@ -3,12 +3,12 @@ import {View, FlatList, Text, Image} from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
-import {Container, Header, TextButton} from '../../../../components';
-import Conditional from '../../../../components/conditional';
-import {screenNames} from '../../../../utils/constants';
+import {Container, Header, TextButton} from 'components';
+import Conditional from 'components/conditional';
+import {screenNames} from 'utils/constants';
 import {getAppointmentsList} from './action';
 import Appointment from './components/appointment';
-import {generateDateInfo} from '../../../../utils/helper';
+import {generateDateInfo} from 'utils/helper';
 import moment from 'moment';
 
 const Appointments = ({navigation}) => {

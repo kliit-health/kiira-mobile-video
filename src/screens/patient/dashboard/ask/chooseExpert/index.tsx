@@ -11,11 +11,11 @@ import {
 import FastImage from 'react-native-fast-image';
 import {getExpertsData, clearChooseExpertState} from './action';
 import styles from './style';
-import CustomText from '../../../../../components/customText';
-import Constant from '../../../../../utils/constants';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
 import {Rating} from 'react-native-elements';
-import CustomButton from '../../../../../components/customButton';
-import InputText from '../../../../../components/customInputText/simpleInputText';
+import CustomButton from 'components/customButton';
+import InputText from 'components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {updateQuestion} from '../../ask/action';
 class ChooseExpert extends Component {

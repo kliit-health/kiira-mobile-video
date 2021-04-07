@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import CustomButton from '../../../../../components/customButton';
-import ExpertHeader from '../../../../../components/expertHeader';
-import PolarButton from '../../../../../components/polarButton';
+import CustomButton from 'components/customButton';
+import ExpertHeader from 'components/expertHeader';
+import PolarButton from 'components/polarButton';
 import {CheckBox} from 'react-native-elements';
 import {questions} from './questions';
 import {updateMedicalHistoryExpert} from '../actions';

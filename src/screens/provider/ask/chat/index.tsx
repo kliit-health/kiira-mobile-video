@@ -11,13 +11,13 @@ import {
 import FastImage from 'react-native-fast-image';
 import {connect} from 'react-redux';
 import styles from './style';
-import CustomText from '../../../../components/customText';
-import Constant from '../../../../utils/constants';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
 import ImagePicker from 'react-native-image-picker';
-import InputText from '../../../../components/customInputText/simpleInputText';
+import InputText from 'components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import MessageContainer from './MessageContainer';
-import metrices from '../../../../utils/metrices';
+import metrices from 'utils/metrices';
 import {
   loadExpertMessages,
   sendMessageExpert,
@@ -29,7 +29,7 @@ import {
 } from './action';
 import {getChatItems} from './selectors';
 import moment from 'moment';
-import CustomButton from '../../../../components/customButton';
+import CustomButton from 'components/customButton';
 import {stopObserverChat} from './action';
 import topics from './model';
 

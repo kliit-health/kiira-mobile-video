@@ -2,7 +2,7 @@ import {
   FORGOT_PASSWORD,
   FORGOT_PASSWORD_SUCCESS,
   RESET_FORGOT_PASSWORD_STATE,
-} from '../../../redux/types';
+} from 'redux/types';
 
 export const forgotPasswordApiHit = (data) => ({
   type: FORGOT_PASSWORD,

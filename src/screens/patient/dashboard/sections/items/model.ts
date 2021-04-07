@@ -1,4 +1,4 @@
-import {screenNames, icons} from '../../../../../utils/constants';
+import {screenNames, icons} from 'utils/constants';
 
 export default [
   {

@@ -7,8 +7,8 @@ import {
   Header,
   TextInput,
   TextButton,
-} from '../../../../../components';
-import {updateHealthHistory} from '../../../../../redux/actions';
+} from 'components';
+import {updateHealthHistory} from 'redux/actions';
 import styles from './styles';
 
 const Medications = ({navigation}) => {

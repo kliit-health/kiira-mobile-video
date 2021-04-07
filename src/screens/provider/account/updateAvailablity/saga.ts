@@ -2,10 +2,10 @@ import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../components/customLoader/action';
-import {showOrHideModal} from '../../../../components/customModal/action';
-import {getUser, updateUser} from '../../../../redux/actions';
-import {UPDATE_EXPERT_HOURS_DATA} from '../../../../redux/types';
+} from 'components/customLoader/action';
+import {showOrHideModal} from 'components/customModal/action';
+import {getUser, updateUser} from 'redux/actions';
+import {UPDATE_EXPERT_HOURS_DATA} from 'redux/types';
 
 function* updateExpertData({data}) {
   const lang = yield select((state) => state.language);

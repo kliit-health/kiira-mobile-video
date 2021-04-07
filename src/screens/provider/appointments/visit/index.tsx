@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {View, ScrollView} from 'react-native';
 import {withNavigation} from 'react-navigation';
-import {ExpertHeader} from '../../../../components';
+import {ExpertHeader} from 'components';
 import {PatientDetails, VisitDetails} from './components';
 import {getExpertsData} from '../../../patient/dashboard/getTreatment/expertSchedule/action';
-import Constant from '../../../../utils/constants';
+import Constant from 'utils/constants';
 
 const ExpertVisit = ({navigation}) => {
   const dispatch = useDispatch();

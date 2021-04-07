@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {View, Text, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from '../style';
-import CustomText from '../../../../../../components/customText';
+import CustomText from 'components/customText';
 import {Rating} from 'react-native-elements';
 
 const ExpertInfo = ({expertData}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {ProfileCard} from '../../../../../../../components';
-import {calculateRating} from '../../../../../../../utils/functions';
+import {ProfileCard} from 'components';
+import {calculateRating} from 'utils/functions';
 import styles from './styles';
 
 const List = ({data, onCardPress}) => (

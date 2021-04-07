@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, TextButton} from '../../../components';
+import {Container, TextButton} from 'components';
 import {useSelector, useDispatch} from 'react-redux';
 import {ScrollView, Text} from 'react-native';
-import {app} from '../../../utils/constants';
+import {app} from 'utils/constants';
 import {Profile, List, Plan} from './sections';
 import {signOut} from './action';
 import styles, {modifiers} from './styles';

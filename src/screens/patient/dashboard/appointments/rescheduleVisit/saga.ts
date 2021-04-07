@@ -4,20 +4,20 @@ import {
   GET_APPOINTMENT_DATES,
   GET_APPOINTMENTS_FOR_TODAY,
   UPDATE_APPOINTMENT,
-} from '../../../../../redux/types';
+} from 'redux/types';
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../../components/customLoader/action';
+} from 'components/customLoader/action';
 import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
   changeAppointmentAsync,
-} from '../../../../../utils/firebase';
+} from 'utils/firebase';
 import {getAppointmentsList} from '../action';
-import {showOrHideModal} from '../../../../../components/customModal/action';
+import {showOrHideModal} from 'components/customModal/action';
 import {setTimes, setAppointmentDates} from './action';
 
 function* getExperts({data}) {

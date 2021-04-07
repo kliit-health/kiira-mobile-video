@@ -20,5 +20,11 @@
         "babel.config.js",
         "metro.config.js",
         "jest.config.js"
-    ]
+    ],
+    "paths": {
+        "redux_app/*": ["./src/redux/*"],
+        "utils/*": ["./src/utils/*"],
+        "i18n/*": ["./src/i18n/*"],
+        "components/*": ["./src/components/*"],
+    }
 }

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Text, ScrollView, ActivityIndicator, View} from 'react-native';
-import {Header, Container} from '../../../../../components';
-import {firebaseSingleFetch} from '../../../../../utils/firebase';
-import {colors} from '../../../../../utils/constants';
+import {Header, Container} from 'components';
+import {firebaseSingleFetch} from 'utils/firebase';
+import {colors} from 'utils/constants';
 import styles from './styles';
 
 const AgreementDetails = ({navigation}) => {

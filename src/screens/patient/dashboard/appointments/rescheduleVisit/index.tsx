@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, ScrollView} from 'react-native';
-import {Header} from '../../../../../components';
+import {Header} from 'components';
 import {
   getExpertsData,
   setCalendarID,
@@ -9,9 +9,9 @@ import {
   getAppointmentDates,
   getAppointmentsForToday,
 } from './action';
-import {generateDateInfo} from '../../../../../utils/helper';
+import {generateDateInfo} from 'utils/helper';
 import styles from './style';
-import Constant from '../../../../../utils/constants';
+import Constant from 'utils/constants';
 import moment from 'moment';
 import {
   ExpertInfo,

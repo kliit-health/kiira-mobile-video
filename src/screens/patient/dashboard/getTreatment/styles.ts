@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {text, colors} from '../../../../utils/constants';
+import {text, colors} from 'utils/constants';
 
 export default StyleSheet.create({
   profileContainer: {

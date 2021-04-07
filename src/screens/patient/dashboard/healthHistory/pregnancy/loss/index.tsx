@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, Header, TextButton} from '../../../../../../components';
+import {Container, Header, TextButton} from 'components';
 import {Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateHealthHistory} from '../../../../../../redux/actions';
+import {updateHealthHistory} from 'redux/actions';
 import styles from './styles';
 
 const initialState = {

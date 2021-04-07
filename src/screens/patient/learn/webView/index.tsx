@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {ActivityIndicator, View} from 'react-native';
-import {Header, Container} from '../../../../components';
+import {Header, Container} from 'components';
 import {WebView as ReactNativeWebView} from 'react-native-webview';
-import {mergeStyles} from '../../../../utils/functions';
+import {mergeStyles} from 'utils/functions';
 import defaultStyles, {modifiers} from './styles';
 
 const WebView = ({navigation}) => {

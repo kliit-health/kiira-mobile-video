@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import {getExpertsData, clearExpertProfileState} from './action';
 import styles from './style';
-import CustomText from '../../../../../components/customText';
-import Constant from '../../../../../utils/constants';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
 import {Rating} from 'react-native-elements';
-import CustomButton from '../../../../../components/customButton';
+import CustomButton from 'components/customButton';
 import FastImage from 'react-native-fast-image';
 
 const ExpertProfile = (props) => {

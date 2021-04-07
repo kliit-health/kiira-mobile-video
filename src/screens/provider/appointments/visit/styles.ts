@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import metrics, {smallScreen} from '../../../../utils/metrices';
-import Constant from '../../../../utils/constants';
+import metrics, {smallScreen} from 'utils/metrices';
+import Constant from 'utils/constants';
 
 let parentPaddingValue = metrics.width * 0.1;
 

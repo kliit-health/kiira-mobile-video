@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import {withNavigation} from 'react-navigation';
 import PatientCard from '../components/patientCard';
 import {useSelector, useDispatch} from 'react-redux';
-import ExpertHeader from '../../../../../components/expertHeader';
+import ExpertHeader from 'components/expertHeader';
 import {getMedicalHistory} from '../actions';
 import moment from 'moment';
 

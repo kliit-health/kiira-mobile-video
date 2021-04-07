@@ -1,12 +1,12 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {CHANGE_PASSWORD} from '../../../../../redux/types';
+import {CHANGE_PASSWORD} from 'redux/types';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../../components/customLoader/action';
-import {changePassword, reAunthenticate} from '../../../../../utils/firebase';
-import {showOrHideModal} from '../../../../../components/customModal/action';
-import {displayConsole} from '../../../../../utils/helper';
+} from 'components/customLoader/action';
+import {changePassword, reAunthenticate} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
+import {displayConsole} from 'utils/helper';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 function* changeUserPassword({data}) {

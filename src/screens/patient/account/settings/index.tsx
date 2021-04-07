@@ -11,16 +11,16 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
-import CustomText from '../../../../components/customText';
-import Constant from '../../../../utils/constants';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
 import {Avatar} from 'react-native-elements';
-import CustomInputText from '../../../../components/customInputText';
-import CustomSelectModal from '../../../../components/customselectModal';
-import DatePicker from '../../../../components/datePicker';
+import CustomInputText from 'components/customInputText';
+import CustomSelectModal from 'components/customselectModal';
+import DatePicker from 'components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
 import {updateUserDataToFirebase} from './action';
-import {showOrHideModal} from '../../../../components/customModal/action';
+import {showOrHideModal} from 'components/customModal/action';
 
 class Setting extends PureComponent {
 	public props: any;

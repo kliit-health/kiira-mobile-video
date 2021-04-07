@@ -5,9 +5,9 @@ import HTML from 'react-native-render-html';
 import styles from './styles';
 import Image from 'react-native-fast-image';
 
-import CustomText from '../../../../../../../components/customText';
-import Constant from '../../../../../../../utils/constants';
-import metrices from '../../../../../../../utils/metrices';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
+import metrices from 'utils/metrices';
 
 class MessageListItem extends React.PureComponent {
 	public props: any;

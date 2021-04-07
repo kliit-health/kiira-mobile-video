@@ -1,4 +1,4 @@
-import {FETCH_EXPERT_APPOINTMENTS} from '../../../redux/types';
+import {FETCH_EXPERT_APPOINTMENTS} from 'redux/types';
 
 const initialState = {
   history: [],

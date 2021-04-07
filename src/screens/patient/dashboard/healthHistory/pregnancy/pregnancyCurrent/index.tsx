@@ -4,12 +4,12 @@ import {
   Header,
   TextButton,
   ListItem,
-} from '../../../../../../components';
+} from 'components';
 import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import plus from '../../../../../../svgs/plus.svg';
-import {screenNames} from '../../../../../../utils/constants';
+import {screenNames} from 'utils/constants';
 import {model} from './model';
 import styles from './styles';
 

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { bool, func, string } from 'prop-types';
+import React from 'react';
+import { string } from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { mergeStyles } from '../../../../utils/functions';
+import { mergeStyles } from 'utils/functions';
 import defaultStyles, { modifiers } from './styles';
 
 const PlanCard = (props) => {

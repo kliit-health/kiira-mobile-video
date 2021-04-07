@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -7,7 +7,7 @@ import {
   TextInput,
   TextButton,
   ModalDatePicker,
-} from '../../../../../components';
+} from 'components';
 import model from './model';
 import styles, {modifiers} from './styles';
 import {updatePatientDetails} from '../actions';

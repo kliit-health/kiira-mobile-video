@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Image, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
-import CustomButton from '../../../../../components/customButton';
+import CustomButton from 'components/customButton';
 import {setVisit} from '../../../../patient/dashboard/appointments/visit/actions';
 import styles from '../styles';
 import {withNavigation} from 'react-navigation';

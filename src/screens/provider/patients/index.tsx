@@ -5,10 +5,10 @@ import styles, {modifiers} from './style';
 import {getPatientsList} from './action';
 import {withNavigation} from 'react-navigation';
 import Visit from './components/visit';
-import {generateDateInfo} from '../../../utils/helper';
+import {generateDateInfo} from 'utils/helper';
 import moment from 'moment';
 import _ from 'lodash';
-import {Header, SearchBar, Container} from '../../../components';
+import {Header, SearchBar, Container} from 'components';
 
 const Patients = (props) => {
   const {navigation} = props;

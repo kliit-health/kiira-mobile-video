@@ -2,17 +2,17 @@ import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../../components/customLoader/action';
-import {getCollectionData, getExpertsData} from '../../../../../utils/firebase';
-import {showOrHideModal} from '../../../../../components/customModal/action';
+} from 'components/customLoader/action';
+import {getCollectionData, getExpertsData} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
 import {
   getExpertsDataSuccess,
   getProfessionsDataSuccess,
   getLanguagesDataSuccess,
 } from './action';
-import {GET_EXPERTS_DATA} from '../../../../../redux/types';
-import Constant from '../../../../../utils/constants';
-import {displayConsole} from '../../../../../utils/helper';
+import {GET_EXPERTS_DATA} from 'redux/types';
+import Constant from 'utils/constants';
+import {displayConsole} from 'utils/helper';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 var refExpertData;

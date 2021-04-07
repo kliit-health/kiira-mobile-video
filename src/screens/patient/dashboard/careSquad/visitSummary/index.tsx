@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
-import {Header, Container} from '../../../../../components';
+import {Header, Container} from 'components';
 import styles from './styles';
 
 const initialState = {

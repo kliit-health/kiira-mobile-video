@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Header, SearchBar} from '../../../../components';
+import {Container, Header, SearchBar} from 'components';
+import NoProviders from 'components/noProviders';
+import Conditional from 'components/conditional';
 import {useSelector, useDispatch} from 'react-redux';
-import {screenNames} from '../../../../utils/constants';
-import {updateFavoriteExperts} from '../../../../redux/actions';
+import {screenNames} from 'utils/constants';
+import {updateFavoriteExperts} from 'redux/actions';
 import {getChatHistoryAsync} from './treatmentHistory/actions';
 import {List, Favorites} from './sections';
 import {modifiers} from './styles';
@@ -120,12 +122,17 @@ const CareSquad = ({navigation}) => {
         deleteMode={deleteMode}
       />
       <SearchBar onChange={handleSearch} placeholder={lang.careSquad.search} />
-      <List
-        onCardPress={handleCardPress}
-        onAddPress={handleAddPress}
-        data={isSearching ? searchData : availbleExperts}
-        disabledItems={getFavoriteExperts(favorites, experts)}
-      />
+      <Conditional if={availbleExperts.length}>
+        <List
+          onCardPress={handleCardPress}
+          onAddPress={handleAddPress}
+          data={isSearching ? searchData : availbleExperts}
+          disabledItems={getFavoriteExperts(favorites, experts)}
+        />
+      </Conditional>
+      <Conditional if={!availbleExperts.length}>
+        <NoProviders />
+      </Conditional>
     </Container>
   );
 };

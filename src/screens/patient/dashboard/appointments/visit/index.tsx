@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {View, ScrollView, SafeAreaView} from 'react-native';
-import {Header} from '../../../../../components';
+import {Header} from 'components';
 import {withNavigation} from 'react-navigation';
 import {ExpertInfo, VisitDetails} from './components';
 import {getExpertsData} from '../../getTreatment/expertSchedule/action';
 import {setVisit} from './actions';
 import ErrorBoundary from 'react-native-error-boundary';
-import Constant from '../../../../../utils/constants';
+import Constant from 'utils/constants';
 import styles from './styles';
 
 const Visit = (props) => {

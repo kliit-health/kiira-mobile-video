@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
-import Container from '../../../../../../components/container';
-import Header from '../../../../../../components/header';
+import Container from 'components/container';
+import Header from 'components/header';
 
 import styles from './styles';
 

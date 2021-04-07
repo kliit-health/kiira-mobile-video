@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Text, View} from 'react-native';
-import {Modal} from '../../components';
-import {hideMessage} from '../../redux/actions';
+import {Modal} from 'components';
+import {hideMessage} from 'redux/actions';
 import styles from './styles';
 
 export default () => {

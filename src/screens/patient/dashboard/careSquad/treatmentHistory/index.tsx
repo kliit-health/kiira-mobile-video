@@ -7,14 +7,14 @@ import {
   TextButton,
   Avatar,
   Ratings,
-} from '../../../../../components';
-import {Prescriber} from '../../../../../components/icons';
+} from 'components';
+import {Prescriber} from 'components/icons';
 import styles, {modifiers} from './styles';
-import {calculateRating} from '../../../../../utils/functions';
+import {calculateRating} from 'utils/functions';
 import {ChatHistory, VideoHistory} from './sections';
 import {getChatHistoryAsync, getVideoHistoryAsync} from './actions';
-import {getMedicalHistory} from '../../../../../redux/actions';
-import {useDidMount} from '../../../../../utils/hooks';
+import {getMedicalHistory} from 'redux/actions';
+import {useDidMount} from 'utils/hooks';
 
 const TreatmentHistory = ({navigation}) => {
   const lang = useSelector((state) => state.language);

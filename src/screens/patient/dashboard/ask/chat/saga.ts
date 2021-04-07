@@ -7,7 +7,7 @@ import {
   CHECK_EXPERT_STATUS,
   TOGGLE_USER_STATUS,
   STOP_OBSERVER_CHAT,
-} from '../../../../../redux/types';
+} from 'redux/types';
 import {
   sendMessage,
   loadMessages,
@@ -21,7 +21,7 @@ import {
   updateUnreadCount,
   checkQuestionStatus,
   getUserData,
-} from '../../../../../utils/firebase';
+} from 'utils/firebase';
 import auth from '@react-native-firebase/auth';
 import {
   chatMessageSuccess,
@@ -32,14 +32,14 @@ import {
   checkExpertStatusSuccess,
   checkQuestionStatusSuccess,
 } from './action';
-import {getUser, updateUser} from '../../../../../redux/actions';
-import {showOrHideModal} from '../../../../../components/customModal/action';
-import {displayConsole} from '../../../../../utils/helper';
+import {getUser, updateUser} from 'redux/actions';
+import {showOrHideModal} from 'components/customModal/action';
+import {displayConsole} from 'utils/helper';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../../components/customLoader/action';
-import {tables} from '../../../../../utils/constants';
+} from 'components/customLoader/action';
+import {tables} from 'utils/constants';
 import {clearQuestionValue} from '../../ask/action';
 import moment from 'moment';
 

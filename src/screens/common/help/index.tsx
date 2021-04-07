@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Linking, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Header, Container, TextButton} from '../../../components';
+import {Header, Container, TextButton} from 'components';
 import Image from 'react-native-fast-image';
-import {screenNames} from '../../../utils/constants';
+import {screenNames} from 'utils/constants';
 import styles, {modifiers} from './styles';
 
 const Help = ({navigation}) => {

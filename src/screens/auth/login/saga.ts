@@ -1,17 +1,17 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {LOGIN_FIREBASE_USER} from '../../../redux/types';
+import {LOGIN_FIREBASE_USER} from 'redux/types';
 import messaging from '@react-native-firebase/messaging';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../components/customLoader/action';
-import {loginInWithFirebase} from '../../../utils/firebase';
-import {showOrHideModal} from '../../../components/customModal/action';
-import Constant from '../../../utils/constants';
+} from 'components/customLoader/action';
+import {loginInWithFirebase} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
+import Constant from 'utils/constants';
 import {loginFailure} from './action';
 import {signoutApihit} from '../../patient/account/action';
-import {getUser, updateUser} from '../../../redux/actions/user';
-import {getTermsAndConditions} from '../../../redux/actions';
+import {getUser, updateUser} from 'redux/actions/user';
+import {getTermsAndConditions} from 'redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));

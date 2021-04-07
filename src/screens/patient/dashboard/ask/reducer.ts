@@ -5,7 +5,7 @@ import {
   UPDATE_QUESTION,
   CLEAR_ASK_STATE,
   CLEAR_QUESTION_VALUE,
-} from '../../../../redux/types';
+} from 'redux/types';
 
 const initialState = {
   recentExpertData: [],

@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
-import {hasSpecialCharactors} from '../../../../../utils/helper';
-import Constant from '../../../../../utils/constants';
-import CustomInputText from '../../../../../components/customInputText';
-import CustomText from '../../../../../components/customText';
-import CustomButton from '../../../../../components/customButton';
+import {hasSpecialCharactors} from 'utils/helper';
+import Constant from 'utils/constants';
+import CustomInputText from 'components/customInputText';
+import CustomText from 'components/customText';
+import CustomButton from 'components/customButton';
 import {changePassword} from './action';
-import {showOrHideModal} from '../../../../../components/customModal/action';
+import {showOrHideModal} from 'components/customModal/action';
 
 const ChangePassword = (props) => {
   const lang = useSelector((state) => state.language);

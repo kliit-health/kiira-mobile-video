@@ -1,9 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {Text, View} from 'react-native';
-import {TextButton} from '../../../../../components';
+import {TextButton} from 'components';
 import Image from 'react-native-fast-image';
-import {icons, screenNames} from '../../../../../utils/constants';
+import {icons, screenNames} from 'utils/constants';
 
 import styles from './styles';
 

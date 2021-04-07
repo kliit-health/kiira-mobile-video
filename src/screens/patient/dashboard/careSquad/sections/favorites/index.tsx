@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, View, Text} from 'react-native';
-import {Avatar} from '../../../../../../components';
+import {Avatar} from 'components';
 import styles from './styles';
 
 const Favorites = ({data, deleteMode, onItemPress}) => (

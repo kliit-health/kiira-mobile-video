@@ -1,7 +1,7 @@
 import {
   GET_EXPERT_APPOINTMENTS,
   EXPERT_CANCEL_APPOINTMENT,
-} from '../../../redux/types';
+} from 'redux/types';
 
 export const getAppointmentsList = (data) => ({
   type: GET_EXPERT_APPOINTMENTS,

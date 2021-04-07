@@ -8,11 +8,11 @@ import {
   Pressable,
 } from 'react-native';
 import Image from 'react-native-fast-image';
-import ExpertHeader from '../../../../components/expertHeader';
+import ExpertHeader from 'components/expertHeader';
 import PatientCard from './components/patientCard';
-import {screenNames} from '../../../../utils/constants';
+import {screenNames} from 'utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUser} from '../../../../redux/actions';
+import {getUser} from 'redux/actions';
 import {getPatientDetails} from './actions';
 import {withNavigation} from 'react-navigation';
 import styles from './style';

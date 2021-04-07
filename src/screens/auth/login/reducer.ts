@@ -1,7 +1,7 @@
 import {
   LOGIN_FIREBASE_API_HIT_FAILURE,
   RESET_LOGIN_STATE,
-} from '../../../redux/types';
+} from 'redux/types';
 
 const initialState = {
   loginFailure: null,

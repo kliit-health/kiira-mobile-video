@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import React, {useRef, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {smallScreen} from '../../../../utils/metrices';
-import {setExpertCallConfig} from '../../../../redux/actions/twillio';
+import {smallScreen} from 'utils/metrices';
+import {setExpertCallConfig} from 'redux/actions/twillio';
 import {
   TwilioVideoLocalView,
   TwilioVideoParticipantView,

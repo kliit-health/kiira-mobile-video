@@ -1,12 +1,12 @@
-import {UPDATE_USER_DETAIL_DATA} from '../../../../redux/types';
+import {UPDATE_USER_DETAIL_DATA} from 'redux/types';
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../../components/customLoader/action';
-import {uploadImage} from '../../../../utils/firebase';
-import {showOrHideModal} from '../../../../components/customModal/action';
-import {getUser, updateUser} from '../../../../redux/actions';
+} from 'components/customLoader/action';
+import {uploadImage} from 'utils/firebase';
+import {showOrHideModal} from 'components/customModal/action';
+import {getUser, updateUser} from 'redux/actions';
 import storage from '@react-native-firebase/storage';
 
 function* updateUserData({data}) {

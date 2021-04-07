@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import ChatBot from '../../../components/chatBot';
+import ChatBot from 'components/chatBot';
 import Review from './Review';
 import ChatModal from './chatModal';
 import Header from './Header';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {updateUserDataToFirebase} from './action';
-import Constant from '../../../utils/constants';
-import {showOrHideModal} from '../../../components/customModal/action';
-import {getOrganizationInfo} from '../../../utils/firebase';
+import Constant from 'utils/constants';
+import {showOrHideModal} from 'components/customModal/action';
+import {getOrganizationInfo} from 'utils/firebase';
 
 class ChatBotScreen extends Component {
 	public state: any;

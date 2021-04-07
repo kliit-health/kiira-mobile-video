@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {Text, View} from 'react-native';
-import {Avatar} from '../../../../../components';
+import {Avatar} from 'components';
 import styles from './styles';
 
 export default ({displayName, profileImageUrl}) => {

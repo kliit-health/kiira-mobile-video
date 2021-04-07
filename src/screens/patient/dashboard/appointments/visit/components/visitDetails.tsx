@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
 import moment from 'moment';
-import CustomButton from '../../../../../../components/customButton';
+import CustomButton from 'components/customButton';
 import styles from '../styles';
 import {withNavigation} from 'react-navigation';
 

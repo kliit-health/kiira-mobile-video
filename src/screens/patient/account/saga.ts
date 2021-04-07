@@ -2,11 +2,11 @@ import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from '../../../components/customLoader/action';
-import {showOrHideModal} from '../../../components/customModal/action';
-import {SIGN_OUT_API_HIT} from '../../../redux/types';
-import {logout, updateStatus} from '../../../utils/firebase';
-import Constant from '../../../utils/constants';
+} from 'components/customLoader/action';
+import {showOrHideModal} from 'components/customModal/action';
+import {SIGN_OUT_API_HIT} from 'redux/types';
+import {logout, updateStatus} from 'utils/firebase';
+import Constant from 'utils/constants';
 import {clearAskState} from '../dashboard/ask/action';
 
 function* signout({data}) {

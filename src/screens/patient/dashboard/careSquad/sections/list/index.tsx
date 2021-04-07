@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {colors} from '../../../../../../utils/constants';
-import {ProfileCard, IconButton} from '../../../../../../components';
-import {calculateRating} from '../../../../../../utils/functions';
+import {colors} from 'utils/constants';
+import {ProfileCard, IconButton} from 'components';
+import {calculateRating} from 'utils/functions';
 import Plus from '../../../../../../svgs/plus.svg';
 import styles from './styles';
 

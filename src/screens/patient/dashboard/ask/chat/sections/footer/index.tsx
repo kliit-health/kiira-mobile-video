@@ -10,7 +10,7 @@ import {
 import Image from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import {icons, colors} from '../../../../../../../utils/constants';
+import {icons, colors} from 'utils/constants';
 import styles from './styles';
 
 const Footer = ({

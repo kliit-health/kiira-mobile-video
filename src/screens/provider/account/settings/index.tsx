@@ -10,15 +10,15 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './styles';
-import CustomText from '../../../../components/customText';
-import Constant from '../../../../utils/constants';
+import CustomText from 'components/customText';
+import Constant from 'utils/constants';
 import {Avatar} from 'react-native-elements';
-import CustomInputText from '../../../../components/customInputText';
-import CustomSelectModal from '../../../../components/customselectModal';
+import CustomInputText from 'components/customInputText';
+import CustomSelectModal from 'components/customselectModal';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
 import {updateExpertDataToFirebase} from './actions';
-import {showOrHideModal} from '../../../../components/customModal/action';
+import {showOrHideModal} from 'components/customModal/action';
 
 class SettingsExpert extends PureComponent {
 	public props: any;

@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
-import CustomText from '../../../../../components/customText';
-import {showOrHideModal} from '../../../../../components/customModal/action';
-import Constant from '../../../../../utils/constants';
-import CustomButton from '../../../../../components/customButton';
+import CustomText from 'components/customText';
+import {showOrHideModal} from 'components/customModal/action';
+import Constant from 'utils/constants';
+import CustomButton from 'components/customButton';
 
 class ReferFriend extends PureComponent {
 	public props: any;

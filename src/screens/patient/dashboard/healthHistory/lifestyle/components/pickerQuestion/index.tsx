@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {ModalPicker, TextInput} from '../../../../../../../components';
+import {ModalPicker, TextInput} from 'components';
 
 export const PickerQuestion = ({data, value, onSave, placeholder, title}) => {
   const [visible, setVisible] = useState(false);

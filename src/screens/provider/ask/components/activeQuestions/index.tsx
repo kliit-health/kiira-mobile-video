@@ -1,10 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {FlatList} from 'react-native';
-import moment from 'moment';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {TimeDisplay} from '../../../../../components';
-import {screenNames} from '../../../../../utils/constants';
+import {TimeDisplay} from 'components';
+import {screenNames} from 'utils/constants';
 import styles from './styles';
 
 const ActiveQuestions = ({data, navigation, visible}) => {

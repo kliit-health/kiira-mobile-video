@@ -2,12 +2,12 @@ import React from 'react';
 import {FlatList, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
-import reasonsForVisit from '../../../../../utils/constants/requestVisit';
-import {ListItem} from '../../../../../components';
+import reasonsForVisit from 'utils/constants/requestVisit';
+import {ListItem} from 'components';
 import {reasonForVisit} from '../expertSchedule/action';
-import {Header, Container} from '../../../../../components';
+import {Header, Container} from 'components';
 import Agreements from '../agreements';
-import {screenNames} from '../../../../../utils/constants';
+import {screenNames} from 'utils/constants';
 
 const RequestVisit = ({navigation}) => {
   const dispatch = useDispatch();

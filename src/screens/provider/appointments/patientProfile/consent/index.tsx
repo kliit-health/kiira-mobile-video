@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Header, Container, ListItem} from '../../../../../components';
-import {screenNames} from '../../../../../utils/constants';
+import {Header, Container, ListItem} from 'components';
+import {screenNames} from 'utils/constants';
 import moment from 'moment';
 import styles from './styles';
 

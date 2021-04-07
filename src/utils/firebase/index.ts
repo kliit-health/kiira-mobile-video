@@ -1676,3 +1676,12 @@ export async function authorizeVideo(uid) {
     console.log(error);
   }
 }
+
+export async function sendAppointmentNotification(uid: String, time) {
+  try {
+    await functions().httpsCallable('sendPushNotificationAppointmentCreate')({uid, time});
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+}

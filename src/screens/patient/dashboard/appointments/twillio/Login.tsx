@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {
   setCallConfig,
   getCallToken,
-} from '../../../../../redux/actions/twillio';
+} from 'redux/actions/twillio';
 import {
   View,
   Text,
@@ -15,8 +15,8 @@ import {
   Image,
 } from 'react-native';
 
-import Header from '../../../../../components/header';
-import Container from '../../../../../components/container';
+import Header from 'components/header';
+import Container from 'components/container';
 import {ActivityIndicator} from 'react-native-paper';
 
 import {

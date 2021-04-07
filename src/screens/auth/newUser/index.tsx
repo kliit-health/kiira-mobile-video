@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles';
-import Constant from '../../../utils/constants';
-import CustomText from '../../../components/customText';
-import CustomButton from '../../../components/customButton';
+import Constant from 'utils/constants';
+import CustomText from 'components/customText';
+import CustomButton from 'components/customButton';
 import {agreeToTerms} from './actions';
 
 const NewUser = (props) => {

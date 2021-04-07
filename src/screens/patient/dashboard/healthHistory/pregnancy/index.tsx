@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {ScrollView, Text} from 'react-native';
-import {Header, ListItem, Container} from '../../../../../components';
+import {Header, ListItem, Container} from 'components';
 import model from './model';
 import styles from './styles';
 
