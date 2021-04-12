@@ -18,6 +18,9 @@ export default [
     title: 'Postpartum',
   },
   {
+    title: 'Mental Health',
+  },
+  {
     title: 'Sex Therapy',
   },
   {
