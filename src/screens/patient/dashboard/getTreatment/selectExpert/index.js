@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
-import {useSelector} from 'react-redux';
-import {Header, TextButton, Container} from '../../../../../components';
-import {screenNames} from '../../../../../utils/constants';
-import {List} from './sections';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import { Header, TextButton, Container } from '../../../../../components';
+import { screenNames } from '../../../../../utils/constants';
+import { List } from './sections';
 import styles from './style';
 
-const SelectExpert = ({navigation}) => {
+const SelectExpert = ({ navigation }) => {
   const [availableExperts, setAvailableExperts] = useState([]);
   const experts = useSelector((state) => state.experts.data);
   const userProfile = useSelector((state) => state.user.data.profileInfo);
@@ -16,17 +16,17 @@ const SelectExpert = ({navigation}) => {
   useEffect(() => {
     if (experts.length && userProfile) {
       const userState = userProfile.state.code;
-      const stateAvailableExperts = experts.filter(({profileInfo}) => {
+      const stateAvailableExperts = experts.filter(({ profileInfo }) => {
         const supportedStates = profileInfo.license.states;
-        return supportedStates.some(({code}) => code === userState);
+        return supportedStates.some(({ code }) => code === userState);
       });
       const videoEnabledExperts = stateAvailableExperts.filter(
-        ({videoEnabled}) => videoEnabled,
+        ({ videoEnabled }) => videoEnabled,
       );
       const filteredExperts = videoEnabledExperts.filter(
         ({
           profileInfo: {
-            profession: {specialities},
+            profession: { specialities },
           },
         }) => {
           return specialities.some((specialty) =>
@@ -37,7 +37,7 @@ const SelectExpert = ({navigation}) => {
 
       if (visit.prescription) {
         const prescriberFilter = filteredExperts.filter(
-          ({isPrescriber}) => visit.prescription && isPrescriber,
+          ({ isPrescriber }) => visit.prescription && isPrescriber,
         );
         setAvailableExperts(prescriberFilter);
       } else {
@@ -46,8 +46,8 @@ const SelectExpert = ({navigation}) => {
     }
   }, [experts]);
 
-  const handleCardPress = ({uid, calendarID}) => {
-    navigation.navigate(screenNames.expertSchedule, {uid, calendarID});
+  const handleCardPress = ({ uid, calendarID }) => {
+    navigation.navigate(screenNames.expertSchedule, { uid, calendarID });
   };
 
   const handleBackPress = () => navigation.goBack();
@@ -77,7 +77,7 @@ const SelectExpert = ({navigation}) => {
             onPress={() => {
               navigation.navigate(screenNames.bottomTab);
             }}>
-            {lang.requestVisit.goHome}
+            {lang.requestVisit.goBack}
           </TextButton>
         </View>
       )}
