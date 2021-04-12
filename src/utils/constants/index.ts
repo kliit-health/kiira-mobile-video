@@ -94,7 +94,7 @@ export default {
 
     helpUrl: 'http://www.kiira.io',
     learnTabUrl: 'https://medium.com/get-kiira',
-    logoutInterval: 1000 * 40 * 60,
+    logoutInterval: 1000 * 90 * 60,
     Modal: {
       gender: [
         {value: 'Male', code: 'M'},

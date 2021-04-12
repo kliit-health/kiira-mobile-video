@@ -23,6 +23,7 @@ export default {
   requestVisit: {
     title: 'Request a Visit',
     goHome: 'Go Home',
+    goBack: 'Go Back'
   },
   addCreditCardData: {
     cardNumber: 'Card number',

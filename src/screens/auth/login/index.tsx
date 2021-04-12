@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Image, TouchableOpacity, Text} from 'react-native';
+import { View, ScrollView, Image, TouchableOpacity, Text, Platform } from 'react-native';
+import KeyboardSpacer from "react-native-keyboard-spacer";
 import {useSelector, useDispatch} from 'react-redux';
 import CustomText from '../../../components/customText';
 import styles from './style';
@@ -37,6 +38,7 @@ const Login = (props) => {
         <View style={styles.inputTextContainerStyle}>
           <CustomInputText
             autoCapitalize="none"
+            autoCorrect={false}
             onChangeText={(value) => setEmail(value)}
             placeholder={lang.login.Email}
             value={email}
@@ -165,6 +167,7 @@ const Login = (props) => {
           {renderForgotPasswordView()}
         </View>
       </ScrollView>
+      {Platform.OS === 'ios' && <KeyboardSpacer />}
     </View>
   );
 };
