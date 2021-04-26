@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {
   View,
+  ScrollView,
   TouchableOpacity,
   FlatList,
   Platform,
@@ -560,7 +561,7 @@ class Ask extends PureComponent {
           title=""
           onBack={() => navigation.navigate(screenNames.BottomTab)}
         />
-        <View
+        <ScrollView
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>
           {this.renderHeadingProfileView()}
@@ -582,7 +583,7 @@ class Ask extends PureComponent {
             previousQuestionData.length > 0 &&
             this.renderPreviousQuestionView()}
           {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </View>
+        </ScrollView>
       </View>
     );
   }
