@@ -177,6 +177,7 @@ export default {
     videoChatText: 'video session(s) left this month',
     asking: 'Asking',
     buyMoreCredits: 'Buy More Credits',
+    selectTopic: 'Select Topic'
   },
 
   askExpert: {

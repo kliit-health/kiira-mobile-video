@@ -62,7 +62,6 @@ function* setQuestion({data, dispatch}) {
       modifiedDate: '',
       resolvedDate: '',
       createdAt: moment().unix(),
-      resolvedDate: '',
       expertInfo,
       userInfo,
       expertUnreadCount: 1,
@@ -70,6 +69,7 @@ function* setQuestion({data, dispatch}) {
       lastMessage: question,
       isRated: false,
       uid: userInfo.uid,
+      reason: state.ask.reason
     };
     const responseSaveQuestion = yield saveQuestion(setQuestionParams);
     if (responseSaveQuestion.success) {

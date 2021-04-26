@@ -31,7 +31,7 @@ import {getChatItems} from './selectors';
 import moment from 'moment';
 import CustomButton from 'components/customButton';
 import {stopObserverChat} from './action';
-import topics from './model';
+import {topics} from 'models';
 
 let key;
 class ChatExpert extends React.PureComponent {

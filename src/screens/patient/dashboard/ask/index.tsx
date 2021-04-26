@@ -1,11 +1,11 @@
-import React, {PureComponent, Fragment} from 'react';
+import React, {PureComponent} from 'react';
 import {
   View,
   TouchableOpacity,
-  ScrollView,
   FlatList,
   Platform,
   Image,
+  Modal
 } from 'react-native';
 import {connect} from 'react-redux';
 import CustomText from 'components/customText';
@@ -14,7 +14,7 @@ import Constant, {screenNames} from 'utils/constants';
 import InputText from 'components/customInputText/simpleInputText';
 import CustomButton from 'components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {getQuestionData, updateQuestion} from './action';
+import {getQuestionData, updateQuestion, setTopic} from './action';
 import moment from 'moment';
 import {withNavigation} from 'react-navigation';
 import {Header} from 'components';
@@ -23,27 +23,29 @@ import {setuser} from './action';
 import auth from '@react-native-firebase/auth';
 import {getUserData} from 'utils/firebase';
 import {showOrHideModal} from 'components/customModal/action';
+import {topics} from 'models';
 
 class Ask extends PureComponent {
 	public state: any;
 	public props: any;
 	public setState: any;
 	public focusListener: any;
-	public question: any;
+	public question: string;
 	public setQuestionText: any;
 	public getQuestion: any;
 	public user: any;
 	public questionData: any;
 	public lang: any;
-	public firstName: any;
+	public firstName: string;
 	public profileImageUrl: any;
 	public staticImages: any;
-	public questionText: any;
+	public questionText: string;
 	public navigation: any;
 	public showHideErrorModal: any;
 	public recentExpertData: any;
 	public previousQuestionData: any;
 	public experts: any;
+  public showActionModal: boolean;
 
   constructor(props) {
     super(props);
@@ -52,6 +54,7 @@ class Ask extends PureComponent {
       questions: this.props.user.questions,
       credits: this.props.user.credits,
       videoChat: 0,
+      showActionModal: false,
     };
   }
 
@@ -189,11 +192,11 @@ class Ask extends PureComponent {
 
   renderCreditView() {
     return (
-      <Fragment>
+      <>
         <CustomText style={styles.creditTextStyle}>
           {`Unlimited Questions per month`}
         </CustomText>
-      </Fragment>
+      </>
     );
   }
 
@@ -220,20 +223,27 @@ class Ask extends PureComponent {
     );
   }
 
-  renderButtonView() {
-    const {navigation, question, user, showHideErrorModal, lang} = this.props;
+  renderTopicButton() {
+    const {question,lang} = this.props;
     return (
       <CustomButton
         disabled={question ? false : true}
-        buttonStyle={styles.buttonContainerStyle}
+        buttonStyle={question ? styles.buttonContainerStyle : [styles.buttonContainerStyle, styles.disabled]}
         textStyle={styles.buttonTextStyle}
-        onPress={() => {
-          if (user.demo) {
-            showHideErrorModal('Currently unavailable');
-          } else {
-            navigation.navigate(Constant.App.screenNames.ChooseExpert);
-          }
-        }}
+        onPress={() => this.setState({ showActionModal: true})}
+        text={lang.askUser.selectTopic}
+      />
+    );
+  }
+
+  renderAskButton() {
+    const {navigation, reason, lang} = this.props;
+    return (
+      <CustomButton
+        disabled={reason ? false : true}
+        buttonStyle={reason ? styles.buttonContainerStyle : [styles.buttonContainerStyle, styles.disabled]}
+        textStyle={styles.buttonTextStyle}
+        onPress={() => navigation.navigate(Constant.App.screenNames.ChooseExpert)}
         text={lang.askUser.btnText}
       />
     );
@@ -491,13 +501,57 @@ class Ask extends PureComponent {
     );
   }
 
+  renderActionModal() {
+    const {showActionModal} = this.state;
+    const {lang, setTopic} = this.props;
+
+    return (
+      <Modal
+        animationType="fade"
+        onRequestClose={() => {}}
+        transparent
+        isVisible={showActionModal}>
+        <View style={styles.actionModalParentContainerStyle}>
+          <View style={styles.actionModalInnerContainerStyle}>
+            <CustomText style={styles.actionModalTitleTextStyle}>
+              {'Category:'}
+            </CustomText>
+            {topics.map(({title}) => (
+              <TouchableOpacity
+                key={title}
+                onPress={() => {
+                  setTopic(title);
+                  this.setState({ showActionModal: false })
+                }}>
+                <CustomText style={styles.actionModalBlueTextStyle}>
+                  {title}
+                </CustomText>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <CustomButton
+            buttonStyle={styles.actionModalOkBtnErrorContainerStyle}
+            textStyle={styles.actionModalOkBtnErrorTextStyle}
+            text={lang.chat.cancel}
+            onPress={() => {
+              this.setState({
+                showActionModal: false,
+              });
+            }}
+          />
+        </View>
+      </Modal>
+    );
+  }
+
   render() {
+    const {showActionModal} = this.state
+
     const {
       recentExpertData,
       previousQuestionData,
       questionData,
       navigation,
-      user,
     } = this.props;
 
     return (
@@ -514,14 +568,16 @@ class Ask extends PureComponent {
           {questionData
             ? this.renderAskedQuestionView()
             : this.renderInputTextView()}
-          {!questionData && this.renderButtonView()}
+          {showActionModal && this.renderActionModal()}
+          {!questionData && this.renderTopicButton()}
+          {!questionData && this.renderAskButton()}
           {!questionData &&
             this.state.credits === 0 &&
             this.state.questions === 0 &&
             this.renderEmptyCreditView()}
-          {/* {recentExpertData &&
+          {recentExpertData &&
             recentExpertData.length > 0 &&
-            this.renderRecentExpertView()} */}
+            this.renderRecentExpertView()}
           {previousQuestionData &&
             previousQuestionData.length > 0 &&
             this.renderPreviousQuestionView()}
@@ -534,6 +590,7 @@ class Ask extends PureComponent {
 
 const mapStateToProps = (state) => ({
   user: state.user.data,
+  reason: state.ask.reason,
   recentExpertData: state.ask.recentExpertData,
   previousQuestionData: state.questions.resolved.data,
   questionData: state.ask.questionData,
@@ -544,6 +601,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setData: (data) => dispatch(setuser(data)),
+  setTopic: (data) => dispatch(setTopic(data)),
   getQuestion: (value) => dispatch(getQuestionData(value, dispatch)),
   setQuestionText: (value) => dispatch(updateQuestion(value)),
   showHideErrorModal: (value) => dispatch(showOrHideModal(value)),

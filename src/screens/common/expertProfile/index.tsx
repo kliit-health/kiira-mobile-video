@@ -15,6 +15,7 @@ import Constant from 'utils/constants';
 import {Rating} from 'react-native-elements';
 import CustomButton from 'components/customButton';
 import FastImage from 'react-native-fast-image';
+import {clearTopic} from '../../patient/dashboard/ask/action';
 
 const ExpertProfile = (props) => {
   const lang = useSelector((state) => state.language);
@@ -148,10 +149,12 @@ const ExpertProfile = (props) => {
             buttonStyle={styles.btnContainerStyle}
             textStyle={styles.btnTextStyle}
             text={lang.expertProfile.btnText}
-            onPress={() =>
-              navigation.navigate(Constant.App.screenNames.Chat, {
-                expertDetails,
-              })
+            onPress={() => {
+                dispatch(clearTopic());
+                navigation.navigate(Constant.App.screenNames.Chat, {
+                  expertDetails,
+                })
+              }
             }
           />
         )}

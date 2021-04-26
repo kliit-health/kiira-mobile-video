@@ -21,12 +21,6 @@ function* getExperts(data, dispatch) {
   const lang = yield select((state) => state.language);
   try {
     const {expertsParams, filterParams, isProfessionLangaugesDataLoaded} = data;
-    console.log('data ', data);
-    console.log('dispatch ', dispatch);
-    console.log(
-      'isProfessionLangaugesDataLoaded ',
-      isProfessionLangaugesDataLoaded,
-    );
 
     if (refExpertData) {
       refExpertData();

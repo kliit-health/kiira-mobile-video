@@ -6,6 +6,67 @@ let parentPaddingValue = metrics.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
 
 const styles = StyleSheet.create({
+  actionModalBlueTextStyle: {
+    width: metrics.width - 20,
+    color: Constant.App.colors.blueColor,
+    textAlign: 'center',
+    padding: 12,
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+  },
+
+  actionModalInnerContainerStyle: {
+    borderRadius: 10,
+    flexWrap: 'wrap',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+    width: metrics.width - 20,
+    backgroundColor: Constant.App.colors.whiteColor,
+  },
+
+  actionModalLineSeperator: {
+    backgroundColor: Constant.App.colors.greyBgAsk,
+    width: metrics.width - 20,
+    height: 1,
+  },
+
+  actionModalParentContainerStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: 200,
+    paddingBottom: 20,
+  },
+
+  actionModalOkBtnErrorContainerStyle: {
+    width: metrics.width - 20,
+    padding: 10,
+    backgroundColor: Constant.App.colors.whiteColor,
+    marginTop: 10,
+    borderRadius: 10,
+  },
+
+  actionModalOkBtnErrorTextStyle: {
+    color: Constant.App.colors.blueColor,
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.headerBold,
+  },
+
+  actionModalTitleTextStyle: {
+    width: metrics.width - 20,
+    color: Constant.App.colors.lightGrey,
+    textAlign: 'center',
+    fontSize: Constant.App.textSize.Normal,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    padding: 12,
+  },
+
   askedQuestionContainerStyle: {
     marginTop: metrics.height * 0.03,
     padding: parentPaddingValue,
@@ -82,6 +143,10 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blueColorCreditText,
     fontSize: Constant.App.textSize.Large,
     fontFamily: Constant.App.fontFamily.headerRegular,
+  },
+
+  disabled: {
+    backgroundColor: Constant.App.colors.greyBgAsk
   },
 
   emptyCreditsContainerStyle: {

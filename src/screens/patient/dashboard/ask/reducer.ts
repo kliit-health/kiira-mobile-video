@@ -5,6 +5,7 @@ import {
   UPDATE_QUESTION,
   CLEAR_ASK_STATE,
   CLEAR_QUESTION_VALUE,
+  SET_QUESTION_TOPIC,
 } from 'redux/types';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   previousQuestionData: [],
   questionData: null,
   question: '',
+  reason: null
 };
 const ask = (state = initialState, action) => {
   switch (action.type) {
@@ -42,11 +44,17 @@ const ask = (state = initialState, action) => {
         previousQuestionData: [],
         questionData: null,
         question: '',
+        reason: null
       };
     case CLEAR_QUESTION_VALUE:
       return {
         ...state,
         question: '',
+      };
+    case SET_QUESTION_TOPIC:
+      return {
+        ...state,
+        reason: action.data
       };
     default:
       return {

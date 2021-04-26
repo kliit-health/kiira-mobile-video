@@ -22,9 +22,10 @@
         "jest.config.js"
     ],
     "paths": {
-        "redux_app/*": ["./src/redux/*"],
-        "utils/*": ["./src/utils/*"],
-        "i18n/*": ["./src/i18n/*"],
-        "components/*": ["./src/components/*"],
+        "redux_app": ["./src/redux/"],
+        "utils": ["./src/utils/"],
+        "i18n": ["./src/i18n/"],
+        "components": ["./src/components/"],
+        "models": ["./src/models"]
     }
 }

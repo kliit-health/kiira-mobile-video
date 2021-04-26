@@ -275,7 +275,8 @@ export async function makeAppointment({data}) {
           "email": email,
           "reason": reason,
           "prescription": prescription,
-          "notes": notes
+          "notes": notes,
+          
         }
       })
     }
@@ -294,6 +295,7 @@ export async function makeAppointment({data}) {
         .then((res) => {
           response = {
             ...data,
+            createdAt: moment().unix(),
             expert,
             id: res.body.id,
             locked: false,
