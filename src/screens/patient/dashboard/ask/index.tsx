@@ -253,7 +253,8 @@ class Ask extends PureComponent {
   renderRecentExpertView() {
     const {staticImages} = Constant.App;
     const {navigation, recentExpertData, lang} = this.props;
-
+    const chatEnabled = recentExpertData.filter((expert) => expert.data().chatEnabled);
+  
     return (
       <View style={styles.recentExpertParentContainerStyle}>
         <CustomText style={styles.myRecentExpertTitleTextStyle}>
@@ -263,7 +264,7 @@ class Ask extends PureComponent {
           showsHorizontalScrollIndicator={false}
           keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
-          data={recentExpertData}
+          data={chatEnabled}
           horizontal={true}
           renderItem={({item, index}) => {
             item = item.data();
