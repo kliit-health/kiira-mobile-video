@@ -13,6 +13,7 @@ import {signoutApihit} from '../../patient/account/action';
 import {getUser, updateUser} from 'redux/actions/user';
 import {getTermsAndConditions} from 'redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
+import * as Keychain from 'react-native-keychain';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -31,6 +32,12 @@ function* loginFirebase({data}) {
     const {uid} = response;
 
     if (uid) {
+      Keychain.setGenericPassword(params.email, params.password, {
+        service: 'kiira',
+        accessControl: 'BiometryAny' as any,
+        accessible: 'AccessibleWhenPasscodeSetThisDeviceOnly' as any
+      })
+
       yield put(getUser());
       const enabled = yield messaging().hasPermission();
       const check = yield messaging().isDeviceRegisteredForRemoteMessages;

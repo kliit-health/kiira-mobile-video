@@ -10,6 +10,7 @@ import CustomButton from '../../../components/customButton';
 import {showOrHideModal} from '../../../components/customModal/action';
 import {isEmail} from '../../../utils/helper';
 import {loginApi, resetLoginState} from './action';
+import * as Keychain from 'react-native-keychain';
 
 const Login = (props) => {
   const lang = useSelector((state) => state.language);
@@ -21,8 +22,27 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const BiometryTypes = {
+    TouchID: 'TouchID',
+    FaceID: 'FaceID',
+    Fingerprint: 'Fingerprint',
+  }
+
   useEffect(() => {
     dispatch(resetLoginState());
+
+    Keychain.getSupportedBiometryType().then(biometryType => {
+      switch (biometryType) {
+        case BiometryTypes.TouchID:
+          console.log("Touch ID is supported")
+        case BiometryTypes.FaceID:
+          console.log("Face ID is supported")
+        case BiometryTypes.Fingerprint:
+          console.log("Fingerprint is supported")
+        default:
+          console.log("Biometrics are not supported")
+      }
+    })
   }, []);
 
   useEffect(() => {
