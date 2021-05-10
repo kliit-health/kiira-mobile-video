@@ -70,6 +70,7 @@ import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
 import RequestVisit from '../screens/patient/dashboard/getTreatment/requestVisit';
+import SelectCareType from '../screens/patient/dashboard/getTreatment/selectCareType';
 import SelectExpert from '../screens/patient/dashboard/getTreatment/selectExpert';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
@@ -505,6 +506,7 @@ const MainAppStack = createStackNavigator(
     ReferFriend: {screen: ReferFriend},
     RescheduleVisit: {screen: RescheduleVisit},
     RequestVisit: {screen: RequestVisit},
+    SelectCareType: {screen: SelectCareType},
     SelectExpert: {screen: SelectExpert},
     Settings: {screen: Settings},
     SOS: {screen: SOS},

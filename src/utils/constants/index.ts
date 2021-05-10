@@ -430,6 +430,7 @@ export default {
       ReferFriend: 'ReferFriend',
       RescheduleVisit: 'RescheduleVisit',
       RequestVisit: 'RequestVisit',
+      SelectCareType: 'SelectCareType',
       Setting: 'Setting',
       SettingExpert: 'SettingExpert',
       SignUp: 'SignUp',

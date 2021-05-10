@@ -9,13 +9,14 @@ import {Header, Container} from 'components';
 import Agreements from '../agreements';
 import {screenNames} from 'utils/constants';
 
-const RequestVisit = ({navigation}) => {
+const SelectCareType = ({navigation}) => {
   const dispatch = useDispatch();
+  const {key} = navigation.state.params;
   const lang = useSelector((state) => state.language);
 
-  const handleNavigation = (title,key) => {
+  const handleNavigation = (title) => {
     dispatch(reasonForVisit(title));
-    navigation.navigate('SelectCareType', {key});
+    navigation.navigate(screenNames.NeedsPresciption);
   };
 
   const handleBackPress = () => {
@@ -28,13 +29,13 @@ const RequestVisit = ({navigation}) => {
       <Header title={lang.getTreatment.title} onBack={handleBackPress} />
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={treatment.categories}
+        data={treatment[key]}
         style={styles.list}
         keyExtractor={(index) => index.title}
-        renderItem={({item: {title, key}}) => (
+        renderItem={({item: {title}}) => (
           <ListItem
             key={title}
-            onPress={() => handleNavigation(title, key)}
+            onPress={() => handleNavigation(title)}
             displayChevron>
             <Text style={styles.listItemTitle}>{title}</Text>
           </ListItem>
@@ -44,4 +45,4 @@ const RequestVisit = ({navigation}) => {
   );
 };
 
-export default RequestVisit;
+export default SelectCareType;
