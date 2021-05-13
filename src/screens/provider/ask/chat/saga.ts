@@ -75,6 +75,7 @@ function* sendMessageToUser({data}) {
             userUnreadCount: unreadCount,
           },
         };
+        console.log("QUESTION PARAMS", params)
         yield put(hideApiLoader());
         yield sendMessage(params);
         questionData.userUnreadCount = unreadCount;
@@ -117,6 +118,7 @@ function* sendMessageToUser({data}) {
           userUnreadCount: unreadCount,
         },
       };
+      console.log("QUESTION PARAMS", params)
       yield sendMessage(params);
       questionData.userUnreadCount = unreadCount;
       const dataResponse = {

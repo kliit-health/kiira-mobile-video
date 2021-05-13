@@ -1,6 +1,7 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {LOGIN_FIREBASE_USER} from 'redux/types';
 import messaging from '@react-native-firebase/messaging';
+import auth from '@react-native-firebase/auth';
 import {
   showApiLoader,
   hideApiLoader,
@@ -17,14 +18,19 @@ import * as Keychain from 'react-native-keychain';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-//TODO: Refactor Login Saga
+interface Role {
+  subscriber: boolean;
+  student: boolean;
+  client: boolean;
+  admin: boolean;
+  expert: boolean;
+}
 
 function* loginFirebase({data}) {
   const lang = yield select((state) => state.language);
 
   try {
     let token;
-
     const {params, navigation} = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield loginInWithFirebase(params);
@@ -40,7 +46,7 @@ function* loginFirebase({data}) {
 
       yield put(getUser());
       const enabled = yield messaging().hasPermission();
-      const check = yield messaging().isDeviceRegisteredForRemoteMessages;
+
       yield delay(500);
       yield put(hideApiLoader());
       yield delay(500);
@@ -56,46 +62,26 @@ function* loginFirebase({data}) {
           yield put(updateUser({uid, fcmToken: token}));
           yield AsyncStorage.setItem('fcmToken', token);
         } catch (error) {
-          // User has rejected permissions
-          console.log('permission rejected');
           navigation.navigate('Auth');
         }
       }
 
       yield put(getTermsAndConditions());
+      const role: Role = yield auth().currentUser.getIdTokenResult().then((idTokenResult) => idTokenResult.claims.role);
       const userData = yield select((state) => state.user.data);
-
-      if (userData && userData.role === 'User') {
-        if (userData && userData.role === 'User' && !userData.firstLogin) {
-          if (userData.agreeToTerms) {
-            navigation.navigate(Constant.App.stack.AppStack);
-          } else {
-            yield navigation.navigate(Constant.App.stack.AuthStack);
-          }
-        } else if (userData && userData.firstLogin) {
-          navigation.navigate(Constant.App.screenNames.Welcome);
-        } else if (userData && (userData.role === 'Expert' || !userData.role)) {
-          yield put(loginFailure());
-          const payload = {
-            isLoaderShow: false,
-          };
-          yield put(signoutApihit(payload));
-          yield put(showOrHideModal(lang.errorMessage.userNotExist));
-        }
-      } else {
-        if (userData && userData.role === 'Expert') {
-          navigation.navigate(Constant.App.stack.AppStackExpert);
-        } else if (
-          !userData ||
-          (userData && (userData.role === 'User' || !userData.role))
-        ) {
-          yield put(loginFailure());
-          yield put(hideApiLoader());
-          yield put(showOrHideModal(lang.errorMessage.userNotExist));
-        }
-      }
+      navigation.navigate(Constant.App.stack.AppStackExpert);
+      // if (role.student || role.subscriber) {
+      //   if (!userData.firstLogin && userData.agreeToTerms) {
+      //       navigation.navigate(Constant.App.stack.AppStack);
+      //   } else if (userData.firstLogin) {
+      //     navigation.navigate(Constant.App.screenNames.Welcome);
+      //   } 
+      // } else {
+      //   if (role.expert) {
+      //     navigation.navigate(Constant.App.stack.AppStackExpert);
+      //   }
+      // }
     } else {
-      console.log('FAILURE', response);
       yield put(
         showOrHideModal(
           response.message ? response.message : lang.errorMessage.serverError,
@@ -105,7 +91,6 @@ function* loginFirebase({data}) {
       yield put(loginFailure());
     }
   } catch (error) {
-    console.log('ERROR', error);
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }

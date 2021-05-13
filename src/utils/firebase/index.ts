@@ -1432,6 +1432,7 @@ export async function getMedicalHistoryAsync(data) {
 }
 
 export const updateUserData = (updates, uid, merge = true) =>
+
   new Promise((resolve, reject) =>
     (async () => {
       const user = firestore().collection('users').doc(uid);

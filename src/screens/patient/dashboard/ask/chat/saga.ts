@@ -101,22 +101,6 @@ function* setQuestion({data, dispatch}) {
       if (user && user.uid) {
         try {
           yield put(getUser());
-          // const obj = {
-          //   tableName: tables.users,
-          //   uid: user.uid,
-          // };
-          // getUserData(
-          //   obj,
-          //   (querySnapshot) => {
-          //     const data = querySnapshot.data();
-          //     setUserData(data);
-          //   },
-          //   (error) => {
-          //     const {message, code} = error;
-          //     displayConsole('message', message);
-          //     displayConsole('code', code);
-          //   },
-          // );
         } catch (error) {
           displayConsole('getUserData  error ', error);
         }
@@ -206,6 +190,7 @@ function* sendMessageToUser({data}) {
             expertUnreadCount: unreadCount,
           },
         };
+        console.log("QUESTION PARAMS", params)
         yield put(hideApiLoader());
         yield sendMessage(params);
         questionData.expertUnreadCount = unreadCount;
@@ -250,6 +235,7 @@ function* sendMessageToUser({data}) {
           expertUnreadCount: unreadCount,
         },
       };
+      console.log("QUESTION PARAMS", params)
       yield sendMessage(params);
       questionData.expertUnreadCount = unreadCount;
       const dataResponse = {
