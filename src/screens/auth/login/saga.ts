@@ -10,7 +10,6 @@ import {loginInWithFirebase} from 'utils/firebase';
 import {showOrHideModal} from 'components/customModal/action';
 import Constant from 'utils/constants';
 import {loginFailure} from './action';
-import {signoutApihit} from '../../patient/account/action';
 import {getUser, updateUser} from 'redux/actions/user';
 import {getTermsAndConditions} from 'redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -18,13 +17,6 @@ import * as Keychain from 'react-native-keychain';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-interface Role {
-  subscriber: boolean;
-  student: boolean;
-  client: boolean;
-  admin: boolean;
-  expert: boolean;
-}
 
 function* loginFirebase({data}) {
   const lang = yield select((state) => state.language);
@@ -45,6 +37,7 @@ function* loginFirebase({data}) {
       })
 
       yield put(getUser());
+      
       const enabled = yield messaging().hasPermission();
 
       yield delay(500);
@@ -67,20 +60,22 @@ function* loginFirebase({data}) {
       }
 
       yield put(getTermsAndConditions());
-      const role: Role = yield auth().currentUser.getIdTokenResult().then((idTokenResult) => idTokenResult.claims.role);
       const userData = yield select((state) => state.user.data);
-      navigation.navigate(Constant.App.stack.AppStackExpert);
-      // if (role.student || role.subscriber) {
-      //   if (!userData.firstLogin && userData.agreeToTerms) {
-      //       navigation.navigate(Constant.App.stack.AppStack);
-      //   } else if (userData.firstLogin) {
-      //     navigation.navigate(Constant.App.screenNames.Welcome);
-      //   } 
-      // } else {
-      //   if (role.expert) {
-      //     navigation.navigate(Constant.App.stack.AppStackExpert);
-      //   }
-      // }
+
+      yield auth().currentUser.getIdTokenResult().then(async ({claims: {role}}) => {
+          if (role.student || role.subscriber) {
+            if (!userData.firstLogin && userData.agreeToTerms) {
+                navigation.navigate(Constant.App.stack.AppStack);
+            } else if (userData.firstLogin) {
+              navigation.navigate(Constant.App.screenNames.Welcome);
+            } 
+          } else {
+            if (role.expert) {
+              navigation.navigate(Constant.App.stack.AppStackExpert);
+            }
+          }      
+      });
+     
     } else {
       yield put(
         showOrHideModal(

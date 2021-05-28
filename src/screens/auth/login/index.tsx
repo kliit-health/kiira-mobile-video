@@ -22,28 +22,17 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [biometricType, setBiometricType] = useState('');
+  const [enableBiometrics, setEnableBiometrics] = useState(false)
 
-  const BiometryTypes = {
-    TouchID: 'TouchID',
-    FaceID: 'FaceID',
-    Fingerprint: 'Fingerprint',
-  }
+  useEffect(() => {
+    Keychain.getSupportedBiometryType().then(biometryType => {
+      setBiometricType(biometryType);     
+    })
+  },[])  
 
   useEffect(() => {
     dispatch(resetLoginState());
-
-    Keychain.getSupportedBiometryType().then(biometryType => {
-      switch (biometryType) {
-        case BiometryTypes.TouchID:
-          console.log("Touch ID is supported")
-        case BiometryTypes.FaceID:
-          console.log("Face ID is supported")
-        case BiometryTypes.Fingerprint:
-          console.log("Fingerprint is supported")
-        default:
-          console.log("Biometrics are not supported")
-      }
-    })
   }, []);
 
   useEffect(() => {
@@ -52,6 +41,44 @@ const Login = (props) => {
       dispatch(resetLoginState());
     }
   });
+
+  const loginWithBiometrics = () => {
+    Keychain.getGenericPassword({
+      service: 'kiira'
+    }).then((result: boolean | { service: string, username: string, password: string }) => {
+      
+      if (!result) {
+        console.log("Biometric authentication has failed");
+      }
+
+      if (typeof result !== 'boolean') {
+        if(result.username || result.password) {
+          const data = {
+            params: {
+              email: result.username,
+              password: result.password,
+            },
+            navigation,
+          };
+          dispatch(loginApi(data));
+        } else {
+          dispatch(showOrHideModal(lang.login.NoBiometrics));
+        }
+      }
+    }).catch( async (error) => {
+      if((await Keychain.getSupportedBiometryType()) === null) {
+        return;
+      }
+
+      if(error.message === 'The user name or passphrase you entered is not correct.') {
+        console.log("Wrong password")
+      }
+
+      if(error.message === 'User canceled the operation.') {
+        console.log("User cancel")
+      }
+    })
+  }
 
   const renderInputTextView = () => {
     return (
@@ -175,6 +202,25 @@ const Login = (props) => {
     );
   };
 
+  const renderBiometricLogin = () => {
+    return (
+      <TouchableOpacity
+        disabled={biometricType === ''}
+        onPress={loginWithBiometrics}
+      >
+        <Image
+              resizeMode="contain"
+              source={
+                biometricType === 'FaceID'
+                  ? staticImages.faceID
+                  : staticImages.fingerprint
+              }
+              style={styles.biometrics}
+            />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.parentContainerStyle}>
       <ScrollView
@@ -184,6 +230,7 @@ const Login = (props) => {
         <View style={styles.contentContainerStyle}>
           {renderLogoView()}
           {renderInputTextView()}
+          {renderBiometricLogin()}
           {renderButtonView()}
           {renderForgotPasswordView()}
         </View>

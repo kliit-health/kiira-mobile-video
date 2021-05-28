@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {useSelector} from 'react-redux';
 import {
   ScrollView,
   View,
@@ -40,7 +41,7 @@ const SheduleModal = ({
 }) => {
   const dispatch = useDispatch();
   const {uid} = navigation.state.params;
-
+  const {appointmentType: {appointmentType}} = appointmentData;
   return (
     <View
       style={
@@ -117,7 +118,7 @@ const SheduleModal = ({
                             : styles.dateTextStyle
                         }
                         onPress={() => {
-                          dispatch(getAppointmentsByDay({...item, calendarID}));
+                          dispatch(getAppointmentsByDay({...item, calendarID, appointmentType}));
                           setSelectedDate(item.date);
                           setTime(null);
                           setSelectedTime(null);

@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {View, ScrollView} from 'react-native';
 import {Header} from 'components';
-import {getCreditAmountsData} from 'utils/firebase';
 import styles from './style';
 
 import {ExpertInfo, VisitDetails, Buttons, PaymentModal} from './components';
@@ -14,9 +13,8 @@ const BookVisit = (props) => {
   const [applyCredit, setApplyCredit] = useState(false);
   const [applyPayment, setApplyPayment] = useState(false);
   const [booked, setBooked] = useState(false);
-  const [price, setPrice] = useState('');
-  const expertData = useSelector((state) => state.expertProfile.expertData);
 
+  const expertData = useSelector((state) => state.expertProfile.expertData);
   const visitData = useSelector((state) => state.expertSchedule);
   const userData = useSelector((state) => state.user.data);
   const bookVisit = useSelector((state) => state.bookVisit);
@@ -34,12 +32,6 @@ const BookVisit = (props) => {
   const {email, uid, organizationId} = userData;
 
   const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;
-
-  useEffect(() => {
-    getCreditAmountsData().then((pricing) =>
-      setPrice(JSON.parse(pricing)[0].amount),
-    );
-  }, []);
 
   const appointmentDetails = {
     firstName,
@@ -85,7 +77,6 @@ const BookVisit = (props) => {
     visitData,
     expertData,
     userData,
-    price,
     disableApplyCredit,
   };
 

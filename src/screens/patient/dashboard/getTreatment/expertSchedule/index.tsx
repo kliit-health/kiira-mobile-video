@@ -28,6 +28,7 @@ const ExpertSchedule = (props) => {
   const expertData = useSelector((state) => state.expertProfile.expertData);
 
   const appointmentData = useSelector((state) => state.expertSchedule);
+  const {appointmentType: {appointmentType}} = appointmentData;
 
   const today = moment(new Date()).format('YYYY-MM-DD');
   const current = generateDateInfo(today);
@@ -53,9 +54,9 @@ const ExpertSchedule = (props) => {
 
     dispatch(getExpertsData(obj));
     dispatch(setCalendarID(calendarID));
-    dispatch(getAppointmentsForToday({...current, calendarID}));
-    dispatch(getAppointmentsByDay({...current, calendarID}));
-    dispatch(getAppointmentDates({...current, calendarID, addMonth}));
+    dispatch(getAppointmentsForToday({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentsByDay({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentDates({...current, calendarID, addMonth, appointmentType}));
   }, []);
 
   const childProps = {

@@ -26,7 +26,8 @@ const payWithNativeModule = async (credits, amount) => {
     }
 
     amount = String(amount);
-    const token = await stripe.paymentRequestWithNativePay({}, [
+
+    const token = await stripe.paymentRequestWithNativePay({},[
       {
         label: `${credits} Credits`,
         amount,
@@ -37,11 +38,12 @@ const payWithNativeModule = async (credits, amount) => {
       },
     ]);
 
-    await stripe.completeNativePayRequest();
+    stripe.completeNativePayRequest();
 
     return {ok: true, token};
   } catch (err) {
     // TODO: Handle different error codes with user-friendly messages
+    stripe.cancelNativePayRequest();
     let status = err.code || 'internal';
     return status !== 'cancelled' ? {ok: false, status} : null;
   }

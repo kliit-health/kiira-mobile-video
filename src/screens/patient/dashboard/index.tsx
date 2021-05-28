@@ -7,7 +7,6 @@ import {Container} from 'components';
 import {Bot, Items, Intro} from './sections';
 import styles from './styles';
 import i18n from 'i18n';
-import * as Keychain from 'react-native-keychain';
 import DeviceInfo from 'react-native-device-info';
 
 
@@ -111,33 +110,6 @@ const Dashboard = ({navigation}) => {
       dispatch(actions.setUserLanguage(i18n[user.profileInfo.lang]));
     }
   }, [user]);
-
-  // useEffect(() => {
-  //   Keychain.getGenericPassword({
-  //     service: 'kiira'
-  //   }).then((result: boolean | { service: string, username: string, password: string }) => {
-  //     if (!result) {
-  //       console.log("Biometric authentication has failed");
-  //     }
-
-  //     if (typeof result !== 'boolean') {
-  //       console.log("Biometric authentication has passed")
-  //       console.log(result)
-  //     }
-  //   }).catch( async (error) => {
-  //     if((await Keychain.getSupportedBiometryType()) === null) {
-  //       return;
-  //     }
-
-  //     if(error.message === 'The user name or passphrase you entered is not correct.') {
-  //       console.log("Wrong password")
-  //     }
-
-  //     if(error.message === 'User canceled the operation.') {
-  //       console.log("User cancel")
-  //     }
-  //   })
-  // },[])
 
   const handleNavigation = (destination, features) => {
     if (features === 'video' && !videoEnabled) {

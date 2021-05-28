@@ -46,6 +46,23 @@ export function loginInWithFirebase(obj) {
   }
 }
 
+export function getDocumentFromCollection(path) {
+  try {
+    let documentRef = firestore().doc(path).get();
+    return documentRef
+      .then((doc) => {
+        return doc.data();
+      })
+      .catch((e) => {
+        displayConsole('e', e);
+        return false;
+      });
+  } catch (error) {
+    displayConsole('Crash error', error);
+    return false;
+  }
+}
+
 export function getPolicyFromFirebase() {
   try {
     let policyRef = firestore().doc('legal/privacy').get();
@@ -147,7 +164,8 @@ export async function getAppointmentsAsync(uid) {
 }
 
 export async function getAppointmentsByDayAsync(data) {
-  const {calendarID, date} = data;
+
+  const {calendarID, date, appointmentType} = data;
 
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
@@ -162,6 +180,7 @@ export async function getAppointmentsByDayAsync(data) {
       "data": {
         calendarID,
         date,
+        appointmentType
       }
     })
   }
@@ -246,6 +265,7 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
+      appointmentType
     } = data;
 
     let noPrescription = 'I do not need a prescription,';
@@ -267,7 +287,7 @@ export async function makeAppointment({data}) {
       }),
       body: JSON.stringify({
         "data": {
-          "appointmentTypeID": "16299344",
+          "appointmentTypeID": appointmentType,
           "firstName": firstName,
           "lastName": lastName,
           "calendarID": calendarID,
@@ -1120,43 +1140,6 @@ export function setDataTesting() {
   }
 }
 
-export function deleteUser() {
-  try {
-    return auth()
-      .currentUser.delete()
-      .then(
-        function () {
-          const data = {
-            success: true,
-          };
-          return data;
-        },
-        function (error) {
-          let data = {};
-          const {message, code} = error;
-          displayConsole('error message', message);
-          displayConsole('error code', code);
-          if (code === 'auth/no-current-user') {
-            data = {
-              success: true,
-            };
-          } else {
-            auth().signOut();
-            data = {
-              success: false,
-              message,
-            };
-          }
-
-          return data;
-        },
-      );
-  } catch (error) {
-    displayConsole('Crash error', error);
-    return false;
-  }
-}
-
 export function getRecentExpertsData(obj, success, error) {
   try {
     let ref = firestore()
@@ -1269,21 +1252,6 @@ export function getFiltersDataWithCondition(obj) {
   }
 }
 
-export async function getCreditAmountsData() {
-  try {
-    let price = await remoteConfig()
-      .fetchAndActivate()
-      .then(() => {
-        const result = remoteConfig().getValue('credit_amounts');
-        return result.asString();
-      });
-
-    return price;
-  } catch (error) {
-    return null;
-  }
-}
-
 export async function addNewPaymentCard(obj) {
   try {
     const {card_number, exp_month, exp_year, cvc} = obj;
@@ -1330,7 +1298,8 @@ export async function payAmount(cardID, amount) {
       card_id: cardID,
       amount: amountInCents,
     });
-    return {ok: response};
+
+    return {ok: response.data};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
     return {ok: false, status};
@@ -1684,6 +1653,14 @@ export async function sendAppointmentNotification(uid: String, time) {
   try {
     await functions().httpsCallable('sendPushNotificationAppointmentCreate')({uid, time});
     return;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addClaimsToUser(organizationId: string, uid: string, roles: object) {
+  try {
+    await functions().httpsCallable('addClaimsOnCall')({organizationId, uid, roles});
   } catch (error) {
     console.log(error);
   }

@@ -1,20 +1,17 @@
 import React from 'react';
 import {FlatList, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import styles from './style';
 import treatment from 'utils/constants/getTreatment';
 import {ListItem} from 'components';
-import {reasonForVisit} from '../expertSchedule/action';
 import {Header, Container} from 'components';
 import Agreements from '../agreements';
-import {screenNames} from 'utils/constants';
+
 
 const RequestVisit = ({navigation}) => {
-  const dispatch = useDispatch();
   const lang = useSelector((state) => state.language);
 
-  const handleNavigation = (title,key) => {
-    dispatch(reasonForVisit(title));
+  const handleNavigation = (key) => {
     navigation.navigate('SelectCareType', {key});
   };
 
@@ -34,7 +31,7 @@ const RequestVisit = ({navigation}) => {
         renderItem={({item: {title, key}}) => (
           <ListItem
             key={title}
-            onPress={() => handleNavigation(title, key)}
+            onPress={() => handleNavigation(key)}
             displayChevron>
             <Text style={styles.listItemTitle}>{title}</Text>
           </ListItem>

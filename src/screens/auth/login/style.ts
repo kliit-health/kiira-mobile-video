@@ -16,6 +16,13 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 
+  biometrics: {
+    alignSelf: 'center',
+    height: metrics.width * 0.10,
+    width: metrics.width * 0.10,
+    marginTop: metrics.height * 0.05,
+  },
+
   contentContainerStyle: {
     padding: parentPaddingValue,
   },
