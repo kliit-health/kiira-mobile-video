@@ -20,7 +20,7 @@ import {
   updateReadMessageStatus,
   updateUnreadCount,
   checkQuestionStatus,
-  getUserData,
+  sendChatUpdateNotification
 } from 'utils/firebase';
 import auth from '@react-native-firebase/auth';
 import {
@@ -165,12 +165,13 @@ function* sendMessageToUser({data}) {
         const state = yield select();
         const expertStatusData = state.chat.expertStatusData;
         const userData = state.user.data;
+        const toUserId = expertStatusData.toUserId;
         const questionData = Object.assign({}, state.chat.questionData);
-        displayConsole('questionData', questionData);
+
         var unreadCount = questionData.unreadCount
           ? questionData.unreadCount
           : 0;
-        displayConsole('unreadCount', unreadCount);
+
         if (
           expertStatusData &&
           expertStatusData.isActive &&
@@ -190,15 +191,16 @@ function* sendMessageToUser({data}) {
             expertUnreadCount: unreadCount,
           },
         };
-        console.log("QUESTION PARAMS", params)
+
         yield put(hideApiLoader());
         yield sendMessage(params);
         questionData.expertUnreadCount = unreadCount;
         const dataResponse = {
           questionData,
         };
-        displayConsole('dataResponse', dataResponse);
+
         yield put(chatMessageSuccess(dataResponse));
+        yield sendChatUpdateNotification({toUserId})
       } else {
         yield put(
           showOrHideModal(
@@ -211,6 +213,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
+      const toUserId = expertStatusData.toUserId;
       const userData = state.user.data;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
@@ -235,14 +238,15 @@ function* sendMessageToUser({data}) {
           expertUnreadCount: unreadCount,
         },
       };
-      console.log("QUESTION PARAMS", params)
+
       yield sendMessage(params);
       questionData.expertUnreadCount = unreadCount;
       const dataResponse = {
         questionData,
       };
-      displayConsole('dataResponse', dataResponse);
+
       yield put(chatMessageSuccess(dataResponse));
+      yield sendChatUpdateNotification({toUserId})
     }
   } catch (error) {
     yield put(hideApiLoader());

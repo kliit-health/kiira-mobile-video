@@ -76,7 +76,7 @@ function* agreeToTerms(data) {
       referalCode: yield makeid(),
       role: 'User',
       uid: userData.uid,
-      updatedAt: new Date(),
+      updatedAt: Date.now(),
       visits: userData.visits,
     };
 

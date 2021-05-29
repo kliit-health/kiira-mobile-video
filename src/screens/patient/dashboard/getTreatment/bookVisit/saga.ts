@@ -1,5 +1,5 @@
 import {MAKE_APPOINTMENT} from 'redux/types';
-import {put, takeEvery} from 'redux-saga/effects';
+import {put, takeEvery, select} from 'redux-saga/effects';
 import {makeAppointment, updateCredits} from 'utils/firebase';
 import {
   showApiLoader,
@@ -12,6 +12,7 @@ import { sendAppointmentNotification } from '../../../../../utils/firebase';
 
 function* setAppointment(data) {
   const {data: {time, expert: {uid}}} = data;
+  const {appointmentType: {credits}} = yield select((state) => state.expertSchedule);
   try {
     yield put(showApiLoader());
     let appointment = yield makeAppointment(data);
@@ -23,7 +24,7 @@ function* setAppointment(data) {
       ); 
       NavigationService.goBack();
     } else {
-      yield updateCredits(-1, data);
+      yield updateCredits(-credits, data);
       yield put(getUser());
       yield sendAppointmentNotification(uid, time);
     }

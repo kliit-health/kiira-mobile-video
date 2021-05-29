@@ -22,7 +22,6 @@ const Buttons = ({
   userData,
 }) => {
   const dispatch = useDispatch();
-
   const bookedButtons = () => (
     <Fragment>
       <CustomButton

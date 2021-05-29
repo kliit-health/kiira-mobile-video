@@ -25,6 +25,7 @@ import {
 const {staticImages} = Constant.App;
 
 const SheduleModal = ({
+  appointmentType,
   appointmentData,
   calendarID,
   setShowShedule,
@@ -118,7 +119,7 @@ const SheduleModal = ({
                             : styles.dateTextStyle
                         }
                         onPress={() => {
-                          dispatch(getAppointmentsByDay({...item, calendarID}));
+                          dispatch(getAppointmentsByDay({...item, calendarID, appointmentType}));
                           setSelectedDate(item.date);
                           setTime(null);
                           setSelectedTime(null);

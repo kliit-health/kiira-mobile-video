@@ -4,6 +4,7 @@ import {
   CANCEL_APPOINTMENT,
   RATE_VISIT,
 } from 'redux/types';
+import {getUser} from 'redux/actions';
 import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
@@ -32,7 +33,7 @@ function* getAppointments({data}) {
 
 function* cancelAppointment(data) {
   const {
-    data: {uid},
+    data: {uid, credits},
   } = data;
 
   try {
@@ -46,7 +47,9 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
-      yield updateCredits(1, data);
+      
+      yield updateCredits(credits, data);
+      yield put(getUser());
     }
     yield put({type: FETCH_APPOINTMENTS, data: appointments});
     yield put(hideApiLoader());

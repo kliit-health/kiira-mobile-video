@@ -23,7 +23,6 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [biometricType, setBiometricType] = useState('');
-  const [enableBiometrics, setEnableBiometrics] = useState(false)
 
   useEffect(() => {
     Keychain.getSupportedBiometryType().then(biometryType => {

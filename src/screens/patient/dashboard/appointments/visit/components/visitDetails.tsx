@@ -14,6 +14,7 @@ const VisitDetails = ({navigation, visit}) => {
   let daysUntilVisit = Math.abs(
     moment.duration(today.diff(appointment)).asDays(),
   );
+  const {appointmentType: {duration}} = visit;
 
   // To test video after booking
   // let daysUntilVisit = 0;
@@ -33,7 +34,7 @@ const VisitDetails = ({navigation, visit}) => {
               <Text style={styles.informationTitle}>
                 Location: Virtual Visit
               </Text>
-              <Text style={styles.informationTitle}>Duration: 30 Minutes</Text>
+              <Text style={styles.informationTitle}>{`Duration: ${duration} Minutes`}</Text>
               <Text style={styles.informationText}>
                 {`Your visit should be starting\n${
                   daysUntilVisit > 0

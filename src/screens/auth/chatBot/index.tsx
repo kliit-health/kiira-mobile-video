@@ -110,7 +110,7 @@ class ChatBotScreen extends Component {
           state: userInfo['update-state']
             ? userInfo['update-state'].value
             : state.value,
-          signUpDate: new Date(),
+          signUpDate: Date.now(),
           sexuality: userInfo['update-sexuality']
             ? userInfo['update-sexuality'].value
             : sexuality.value,

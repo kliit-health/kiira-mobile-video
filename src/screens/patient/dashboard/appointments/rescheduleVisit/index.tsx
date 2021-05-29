@@ -25,7 +25,7 @@ import {
 
 const RescheduleVisit = (props) => {
   const {navigation, visit} = props.navigation.state.params;
-  const {calendarID, expert, uid, id} = visit;
+  const {calendarID, expert, uid, id, appointmentType: {appointmentType}} = visit;
 
   const expertData = useSelector((state) => state.expertProfile.expertData);
 
@@ -56,6 +56,7 @@ const RescheduleVisit = (props) => {
   }, []);
 
   const childProps = {
+    appointmentType,
     appointmentData,
     calendarID,
     day,

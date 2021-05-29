@@ -24,6 +24,7 @@ const ExpertInfo = ({
   const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const {calendarID, appointments} = appointmentData;
+  const {appointmentType: {appointmentType}} = appointmentData;
 
   return (
     <View>
@@ -92,9 +93,6 @@ const ExpertInfo = ({
                           onPress={() => {
                             var date = generateDateInfo(item);
                             setShowShedule(!showShedule);
-                            dispatch(
-                              getAppointmentsByDay({...date, calendarID}),
-                            );
                             dispatch(setAppointmentTime(item.time));
                             setSelectedDate(today);
                             setSelectedTime(index);

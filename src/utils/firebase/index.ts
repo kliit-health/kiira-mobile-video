@@ -2,7 +2,6 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
-import remoteConfig from '@react-native-firebase/remote-config';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections, urls} from '../constants';
@@ -163,7 +162,7 @@ export async function getAppointmentsAsync(uid) {
   }
 }
 
-export async function getAppointmentsByDayAsync(data) {
+export async function getAppointmentsByDayAsync(data, isToday) {
 
   const {calendarID, date, appointmentType} = data;
 
@@ -189,7 +188,7 @@ export async function getAppointmentsByDayAsync(data) {
     let response = {};
     await fetch(urls.dev.appointmentGetByDay , obj)
       .then((res) => res.json())
-      .then((data) => (response.future = data));
+      .then((data) => (isToday ? response.today = data : response.future = data));
     return response;
   } catch (error) {
     return error;
@@ -278,7 +277,8 @@ export async function makeAppointment({data}) {
 
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
-   
+    const {appointmentTypeID} = appointmentType;
+
     var obj = {  
       method: 'POST',
       headers: new Headers({
@@ -287,7 +287,6 @@ export async function makeAppointment({data}) {
       }),
       body: JSON.stringify({
         "data": {
-          "appointmentTypeID": appointmentType,
           "firstName": firstName,
           "lastName": lastName,
           "calendarID": calendarID,
@@ -296,7 +295,7 @@ export async function makeAppointment({data}) {
           "reason": reason,
           "prescription": prescription,
           "notes": notes,
-          
+          "appointmentTypeID": appointmentTypeID,
         }
       })
     }
@@ -1652,6 +1651,15 @@ export async function authorizeVideo(uid) {
 export async function sendAppointmentNotification(uid: String, time) {
   try {
     await functions().httpsCallable('sendPushNotificationAppointmentCreate')({uid, time});
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function sendChatUpdateNotification(uid: String) {
+  try {
+    await functions().httpsCallable('sendPushNotificationChat')({uid});
     return;
   } catch (error) {
     console.log(error);

@@ -116,8 +116,8 @@ function* handlePayResponse(response, credits) {
       const userData = yield getDataFromTable(obj);
       
       yield put(setData(userData));
-      // yield put(updateUser(userData));
-      // yield put(showOrHideModal(lang.successMessages.visitAddedSuccessfully));
+      yield put(updateUser(userData));
+      yield put(showOrHideModal(lang.successMessages.visitAddedSuccessfully));
       
       NavigationService.goBack();
     }

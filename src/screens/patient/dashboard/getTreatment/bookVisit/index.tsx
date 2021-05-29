@@ -31,7 +31,7 @@ const BookVisit = (props) => {
   } = userData.profileInfo;
   const {email, uid, organizationId} = userData;
 
-  const disableApplyCredit = userData.visits === 0 && userData.prepaid === 0;
+  const disableApplyCredit = userData.visits + userData.prepaid < visitData.appointmentType.credits;
 
   const appointmentDetails = {
     firstName,
@@ -41,6 +41,7 @@ const BookVisit = (props) => {
     time: visitData.time,
     reason: visitData.reason,
     prescription: visitData.prescription,
+    appointmentType: visitData.appointmentType,
     uid,
     prepaid: bookVisit.prepaid,
     insurance,

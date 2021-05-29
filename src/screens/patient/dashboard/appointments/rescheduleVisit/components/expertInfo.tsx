@@ -88,9 +88,6 @@ const ExpertInfo = ({
                           onPress={() => {
                             var date = generateDateInfo(item);
                             setShowShedule(!showShedule);
-                            dispatch(
-                              getAppointmentsByDay({...date, calendarID}),
-                            );
                             dispatch(setAppointmentTime(item.time));
                             setSelectedDate(today);
                             setSelectedTime(index);
