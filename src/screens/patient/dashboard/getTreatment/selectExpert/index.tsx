@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Header, TextButton, Container} from 'components';
-import NoProviders from 'components/noProviders';
-import {screenNames} from 'utils/constants';
+import {Header, Container} from '~/components';
+import NoProviders from '~/components/noProviders';
+import {screenNames} from '~/utils/constants';
 import {List} from './sections';
 import styles from './style';
 
@@ -21,9 +20,11 @@ const SelectExpert = ({ navigation }) => {
         const supportedStates = profileInfo.license.states;
         return supportedStates.some(({ code }) => code === userState);
       });
+
       const videoEnabledExperts = stateAvailableExperts.filter(
         ({ videoEnabled }) => videoEnabled,
       );
+      
       const filteredExperts = videoEnabledExperts.filter(
         ({
           profileInfo: {

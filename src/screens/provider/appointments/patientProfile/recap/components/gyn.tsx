@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import CheckItem from './common/checkItem';
-import {convertCamelCase} from 'utils/helper';
+import {convertCamelCase} from '~/utils/helper';
 import {gynModel} from './models';
 
 import styles from '../style';

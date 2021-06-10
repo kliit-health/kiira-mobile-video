@@ -2,14 +2,14 @@ import {call, put, takeEvery, take, select} from 'redux-saga/effects';
 import {eventChannel, END} from 'redux-saga';
 import {orderBy} from 'lodash';
 import {firebaseRealTimeFetch} from '../../../utils/firebase';
-import {collections} from 'utils/constants';
+import {collections} from '~/utils/constants';
 import {
   GET_EXPERT_ACTIVE_QUESTIONS,
   GET_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
   GET_EXPERT_RESOLVED_QUESTIONS,
   GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
   SEARCH_EXPERT_QUESTIONS,
-} from 'redux/types';
+} from '~/redux/types';
 
 function getQuestions(collection, conditions) {
   return eventChannel((emit) => {

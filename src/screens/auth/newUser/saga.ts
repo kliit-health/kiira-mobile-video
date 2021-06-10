@@ -1,11 +1,11 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {AGREE_TO_TERMS} from 'redux/types';
-import {updateUser} from 'redux/actions';
-import {makeid} from 'utils/firebase';
+import {AGREE_TO_TERMS} from '~/redux/types';
+import {updateUser} from '~/redux/actions';
+import {makeid} from '~/utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
+} from '~/components/customLoader/action';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 

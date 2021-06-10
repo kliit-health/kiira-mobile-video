@@ -9,12 +9,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import CustomButton from 'components/customButton';
-import CustomText from 'components/customText';
+import CustomButton from '~/components/customButton';
+import CustomText from '~/components/customText';
 import styles from '../style';
 import moment from 'moment';
-import Constant from 'utils/constants';
-import {generateDateInfo} from 'utils/helper';
+import Constant from '~/utils/constants';
+import {generateDateInfo} from '~/utils/helper';
 import {
   setAppointmentDay,
   setAppointmentTime,

@@ -9,7 +9,7 @@ import {
   LOCK_VISIT,
   SET_MEDICAL_HISTORY,
   CLEAR_MEDICAL_HISTORY,
-} from 'redux/types';
+} from '~/redux/types';
 import {createReducer} from '@reduxjs/toolkit';
 import {isArray} from 'lodash';
 

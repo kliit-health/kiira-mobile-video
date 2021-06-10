@@ -1,12 +1,12 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {UPLOAD_USER_DETAIL_DATA} from 'redux/types';
+import {UPLOAD_USER_DETAIL_DATA} from '~/redux/types';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {uploadImage} from 'utils/firebase';
-import {showOrHideModal} from 'components/customModal/action';
-import {getUser, updateUser} from 'redux/actions';
+} from '~/components/customLoader/action';
+import {uploadImage} from '~/utils/firebase';
+import {showOrHideModal} from '~/components/customModal/action';
+import {getUser, updateUser} from '~/redux/actions';
 
 // TODO: Refactor this function in order to clean code and remove redundant code
 function* uploadUserData({data, dispatch}) {

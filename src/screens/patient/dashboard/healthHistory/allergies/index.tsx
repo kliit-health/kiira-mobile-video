@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {switchCase, insertAtIndex} from 'utils/functions';
-import {Container, Header, FooterNavigation} from 'components';
+import {switchCase, insertAtIndex} from '~/utils/functions';
+import {Container, Header, FooterNavigation} from '~/components';
 import {initialQuestions, extraQuestions, types} from './model';
 import {PolarQuestion, ObjectiveQuestion} from './components';
-import {updateHealthHistory} from 'redux/actions';
+import {updateHealthHistory} from '~/redux/actions';
 import styles from './styles';
 
 const Allergies = ({navigation}) => {

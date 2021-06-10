@@ -1,20 +1,20 @@
-import {MAKE_APPOINTMENT} from 'redux/types';
-import {put, takeEvery, select} from 'redux-saga/effects';
-import {makeAppointment, updateCredits} from 'utils/firebase';
+import {MAKE_APPOINTMENT} from '~/redux/types';
+import {put, takeEvery} from 'redux-saga/effects';
+import {makeAppointment, updateCredits} from '~/utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
+} from '~/components/customLoader/action';
 import {NavigationService} from '../../../../../navigation';
-import {getUser} from 'redux/actions';
-import {showOrHideModal} from 'components/customModal/action';
+import {getUser} from '~/redux/actions';
+import {showOrHideModal} from '~/components/customModal/action';
 import { sendAppointmentNotification } from '../../../../../utils/firebase';
 
 function* setAppointment(data) {
   const {data: {time, expert: {uid}}} = data;
-  const {appointmentType: {credits}} = yield select((state) => state.expertSchedule);
   try {
     yield put(showApiLoader());
+    
     let appointment = yield makeAppointment(data);
     yield put(hideApiLoader());
 
@@ -24,7 +24,7 @@ function* setAppointment(data) {
       ); 
       NavigationService.goBack();
     } else {
-      yield updateCredits(-credits, data);
+      yield updateCredits(-1, data);
       yield put(getUser());
       yield sendAppointmentNotification(uid, time);
     }

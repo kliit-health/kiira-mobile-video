@@ -2,12 +2,12 @@ import React, {PureComponent} from 'react';
 import {View, TouchableOpacity, Platform, ScrollView, Text} from 'react-native';
 import {connect} from 'react-redux';
 import styles from './style';
-import CustomText from 'components/customText';
-import Constant from 'utils/constants';
-import CustomInputText from 'components/customInputText';
+import CustomText from '~/components/customText';
+import Constant from '~/utils/constants';
+import CustomInputText from '~/components/customInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {updateExpertDataToFirebase} from './action';
-import {showOrHideModal} from 'components/customModal/action';
+import {showOrHideModal} from '~/components/customModal/action';
 
 class UpdateAvailablity extends PureComponent {
 	public props: any;

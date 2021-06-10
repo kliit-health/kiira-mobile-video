@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {FlatList, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
-import {ListItem, Conditional} from 'components';
+import {ListItem, Conditional} from '~/components';
 import {reasonForVisit} from '../expertSchedule/action';
-import {Header, Container} from 'components';
-import {screenNames} from 'utils/constants';
-import {getDocumentFromCollection} from 'utils/firebase';
+import {Header, Container} from '~/components';
+import {screenNames} from '~/utils/constants';
+import {getDocumentFromCollection} from '~/utils/firebase';
 
 const SelectCareType = ({navigation}) => {
   const dispatch = useDispatch();

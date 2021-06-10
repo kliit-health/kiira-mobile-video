@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Modal, Image} from 'react-native';
-import IconButton from 'components/iconButton';
-import CustomButton from 'components/customButton';
+import IconButton from '~/components/iconButton';
+import CustomButton from '~/components/customButton';
 import styles from '../style';
-import Constant from 'utils/constants';
-import {getPlans} from 'utils/firebase';
+import Constant from '~/utils/constants';
+import {getPlans} from '~/utils/firebase';
 
 const PaymentModal = ({
   modalVisible,

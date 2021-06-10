@@ -14,9 +14,9 @@ import {
   stopObserverChat,
 } from './action';
 import moment from 'moment';
-import {Container, Header, RatingModal} from 'components';
+import {Container, Header, RatingModal} from '~/components';
 import {MessageList, Footer} from './sections';
-import {screenNames} from 'utils/constants';
+import {screenNames} from '~/utils/constants';
 class Chat extends React.PureComponent {
 	public state: any;
 	public props: any;

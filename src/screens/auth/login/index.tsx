@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, ScrollView, Image, TouchableOpacity, Text } from 'react-native';
+import { Alert, View, ScrollView, Image, TouchableOpacity, Text } from 'react-native';
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import {useSelector, useDispatch} from 'react-redux';
 import CustomText from '../../../components/customText';
@@ -41,13 +41,19 @@ const Login = (props) => {
     }
   });
 
-  const loginWithBiometrics = () => {
+  const loginWithBiometrics = async () => {
     Keychain.getGenericPassword({
       service: 'kiira'
     }).then((result: boolean | { service: string, username: string, password: string }) => {
       
       if (!result) {
-        console.log("Biometric authentication has failed");
+        Alert.alert(
+          "Previous Login required",
+          "Login with Email and Password",
+          [
+            { text: "OK"}
+          ]
+        );
       }
 
       if (typeof result !== 'boolean') {

@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import CustomText from 'components/customText';
+import CustomText from '~/components/customText';
 import styles from './style';
-import Constant from 'utils/constants';
-import CustomInputText from 'components/customInputText';
-import CustomButton from 'components/customButton';
-import {showOrHideModal} from 'components/customModal/action';
+import Constant from '~/utils/constants';
+import CustomInputText from '~/components/customInputText';
+import CustomButton from '~/components/customButton';
+import {showOrHideModal} from '~/components/customModal/action';
 import {forgotPasswordApiHit, resertForgotPasswordState} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {isEmail} from 'utils/helper';
+import {isEmail} from '~/utils/helper';
 
 const ForgotPassword = (props) => {
   const dispatch = useDispatch();

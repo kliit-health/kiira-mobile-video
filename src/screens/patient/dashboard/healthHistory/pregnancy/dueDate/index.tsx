@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Header, TextButton} from 'components';
+import {Container, Header, TextButton} from '~/components';
 import {useDispatch, useSelector} from 'react-redux';
 import {model} from './model';
 import {DatePicker} from './components';
-import {updateHealthHistory} from 'redux/actions';
+import {updateHealthHistory} from '~/redux/actions';
 import styles from './styles';
 
 const {placeholder, dataKey, title} = model;

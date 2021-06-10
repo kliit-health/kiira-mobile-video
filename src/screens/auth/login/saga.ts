@@ -1,17 +1,17 @@
 import {put, takeEvery, select} from 'redux-saga/effects';
-import {LOGIN_FIREBASE_USER} from 'redux/types';
+import {LOGIN_FIREBASE_USER} from '~/redux/types';
 import messaging from '@react-native-firebase/messaging';
 import auth from '@react-native-firebase/auth';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {loginInWithFirebase} from 'utils/firebase';
-import {showOrHideModal} from 'components/customModal/action';
-import Constant from 'utils/constants';
+} from '~/components/customLoader/action';
+import {loginInWithFirebase} from '~/utils/firebase';
+import {showOrHideModal} from '~/components/customModal/action';
+import Constant from '~/utils/constants';
 import {loginFailure} from './action';
-import {getUser, updateUser} from 'redux/actions/user';
-import {getTermsAndConditions} from 'redux/actions';
+import {getUser, updateUser} from '~/redux/actions/user';
+import {getTermsAndConditions} from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
 
@@ -62,7 +62,7 @@ function* loginFirebase({data}) {
       yield put(getTermsAndConditions());
       const userData = yield select((state) => state.user.data);
 
-      yield auth().currentUser.getIdTokenResult().then(async ({claims: {role}}) => {
+      yield auth().currentUser.getIdTokenResult().then( ({claims: {role}}) => {
           if (role.student || role.subscriber) {
             if (!userData.firstLogin && userData.agreeToTerms) {
                 navigation.navigate(Constant.App.stack.AppStack);

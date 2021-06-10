@@ -9,17 +9,17 @@ import {
   Linking,
 } from 'react-native';
 import {connect} from 'react-redux';
-import CustomText from 'components/customText';
+import CustomText from '~/components/customText';
 import styles from './style';
-import Constant from 'utils/constants';
-import CustomInputText from 'components/customInputText';
-import CustomButton from 'components/customButton';
+import Constant from '~/utils/constants';
+import CustomInputText from '~/components/customInputText';
+import CustomButton from '~/components/customButton';
 import ImagePicker from 'react-native-image-picker';
-import {displayConsole} from 'utils/helper';
+import {displayConsole} from '~/utils/helper';
 import {uploadUserDataToFirebase} from './action';
-import {showOrHideModal} from 'components/customModal/action';
-import CustomSelectModal from 'components/customselectModal';
-import DatePicker from 'components/datePicker';
+import {showOrHideModal} from '~/components/customModal/action';
+import CustomSelectModal from '~/components/customselectModal';
+import DatePicker from '~/components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Avatar} from 'react-native-elements';
 

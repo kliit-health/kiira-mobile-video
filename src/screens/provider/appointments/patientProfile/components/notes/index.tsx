@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View, Pressable} from 'react-native';
 import {useDispatch} from 'react-redux';
-import CustomButton from 'components/customButton';
+import CustomButton from '~/components/customButton';
 import {updateMedicalHistoryExpert} from '../../../../actions';
 import styles from './style';
 

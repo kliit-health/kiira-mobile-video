@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ScrollView, Text} from 'react-native';
 import Image from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
-import {Header, Container} from 'components';
+import {Header, Container} from '~/components';
 import styles from './styles';
 
 const PrivacyPolicy = ({navigation}) => {

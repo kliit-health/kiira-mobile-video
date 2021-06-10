@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {View, ScrollView} from 'react-native';
-import {Header} from 'components';
+import {Header} from '~/components';
 import styles from './style';
 
 import {ExpertInfo, VisitDetails, Buttons, PaymentModal} from './components';

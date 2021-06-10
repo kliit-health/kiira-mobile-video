@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, ScrollView, TextInput, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import CustomButton from 'components/customButton';
-import ExpertHeader from 'components/expertHeader';
+import CustomButton from '~/components/customButton';
+import ExpertHeader from '~/components/expertHeader';
 import {updateMedicalHistoryExpert} from '../actions';
 
 import styles from './style';

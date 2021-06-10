@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {GET_CHAT_HISTORY, GET_VIDEO_HISTORY} from 'redux/types';
+import {GET_CHAT_HISTORY, GET_VIDEO_HISTORY} from '~/redux/types';
 import moment from 'moment';
 import {orderBy} from 'lodash';
 

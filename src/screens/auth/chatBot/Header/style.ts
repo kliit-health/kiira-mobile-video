@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import metrics from 'utils/metrices';
+import metrics from '~/utils/metrices';
 
 const style = StyleSheet.create({
   logoStyle: {

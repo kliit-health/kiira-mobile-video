@@ -7,14 +7,14 @@ import {
   Platform,
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import CustomText from 'components/customText';
+import CustomText from '~/components/customText';
 import {connect} from 'react-redux';
 import styles from './style';
-import Constant from 'utils/constants';
+import Constant from '~/utils/constants';
 import {
   defaultPaymentMethods,
   PaymentMethodsTypes,
-} from 'utils/helper/payment';
+} from '~/utils/helper/payment';
 
 class PaymentMethods extends PureComponent {
 	public state: any;

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Header, SearchBar} from 'components';
-import NoProviders from 'components/noProviders';
-import Conditional from 'components/conditional';
+import {Container, Header, SearchBar} from '~/components';
+import NoProviders from '~/components/noProviders';
+import Conditional from '~/components/conditional';
 import {useSelector, useDispatch} from 'react-redux';
-import {screenNames} from 'utils/constants';
-import {updateFavoriteExperts} from 'redux/actions';
+import {screenNames} from '~/utils/constants';
+import {updateFavoriteExperts} from '~/redux/actions';
 import {getChatHistoryAsync} from './treatmentHistory/actions';
 import {List, Favorites} from './sections';
 import {modifiers} from './styles';

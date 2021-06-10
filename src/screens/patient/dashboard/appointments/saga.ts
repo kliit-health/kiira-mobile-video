@@ -3,20 +3,20 @@ import {
   FETCH_APPOINTMENTS,
   CANCEL_APPOINTMENT,
   RATE_VISIT,
-} from 'redux/types';
-import {getUser} from 'redux/actions';
+} from '~/redux/types';
+import {getUser} from '~/redux/actions';
 import {put, takeEvery} from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
   updateCredits,
   setVideoVisitRating,
-} from 'utils/firebase';
+} from '~/utils/firebase';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {showOrHideModal} from 'components/customModal/action';
+} from '~/components/customLoader/action';
+import {showOrHideModal} from '~/components/customModal/action';
 
 function* getAppointments({data}) {
   try {

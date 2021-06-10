@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ScrollView, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import {withNavigation} from 'react-navigation';
-import ExpertHeader from 'components/expertHeader';
+import ExpertHeader from '~/components/expertHeader';
 import PatientCard from '../components/patientCard';
 import Section from '../components/section';
 import sections from './model';

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import Constant from 'utils/constants';
-import metrics from 'utils/metrices';
+import Constant from '~/utils/constants';
+import metrics from '~/utils/metrices';
 
 export const PaymentDropdownDimensions = {
   cellHeight: 42,

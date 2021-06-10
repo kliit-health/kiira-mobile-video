@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './style';
-import Constant from 'utils/constants';
-import CustomInputText from 'components/customInputText';
-import CustomButton from 'components/customButton';
-import {showOrHideModal} from 'components/customModal/action';
-import {isEmail} from 'utils/helper';
+import Constant from '~/utils/constants';
+import CustomInputText from '~/components/customInputText';
+import CustomButton from '~/components/customButton';
+import {showOrHideModal} from '~/components/customModal/action';
+import {isEmail} from '~/utils/helper';
 import {sendVerification} from './action';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 

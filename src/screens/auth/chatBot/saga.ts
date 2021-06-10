@@ -1,12 +1,12 @@
-import {UPDATE_NEW_USER_DETAIL_DATA} from 'redux/types';
+import {UPDATE_NEW_USER_DETAIL_DATA} from '~/redux/types';
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {showOrHideModal} from 'components/customModal/action';
-import Constant from 'utils/constants';
-import {updateUser} from 'redux/actions/user';
+} from '~/components/customLoader/action';
+import {showOrHideModal} from '~/components/customModal/action';
+import Constant from '~/utils/constants';
+import {updateUser} from '~/redux/actions/user';
 
 const defaultImage =
   'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf';

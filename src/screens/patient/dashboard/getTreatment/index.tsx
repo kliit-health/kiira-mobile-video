@@ -8,16 +8,16 @@ import {
   Avatar,
   Ratings,
   Linking,
-} from 'components';
+} from '~/components';
 import Arrow from '../../../../svgs/arrow.svg';
 import Phone from '../../../../svgs/phone.svg';
-import {Prescriber} from 'components/icons';
+import {Prescriber} from '~/components/icons';
 import {
   addHashtag,
   formatLanguages,
   calculateRating,
-} from 'utils/functions';
-import {screenNames} from 'utils/constants';
+} from '~/utils/functions';
+import {screenNames} from '~/utils/constants';
 import styles, {modifiers} from './styles';
 
 const GetTreatment = ({navigation}) => {

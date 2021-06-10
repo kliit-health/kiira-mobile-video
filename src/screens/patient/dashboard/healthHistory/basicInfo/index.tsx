@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {switchCase} from 'utils/functions';
-import {units} from 'utils/constants';
+import {switchCase} from '~/utils/functions';
+import {units} from '~/utils/constants';
 import {model, types} from './model';
 import {
   Container,
   Header,
   TextInput,
   TextButton,
-} from 'components';
+} from '~/components';
 import {Picker, DatePicker} from './components';
-import {updateHealthHistory} from 'redux/actions';
+import {updateHealthHistory} from '~/redux/actions';
 import styles from './styles';
 
 const BasicInfo = ({navigation}) => {

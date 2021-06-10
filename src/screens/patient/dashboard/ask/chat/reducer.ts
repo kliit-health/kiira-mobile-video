@@ -1,5 +1,5 @@
-import * as types from 'redux/types';
-import Constant from 'utils/constants';
+import * as types from '~/redux/types';
+import Constant from '~/utils/constants';
 
 const initialState = {
   sending: false,

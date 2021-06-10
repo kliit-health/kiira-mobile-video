@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {connect} from 'react-redux';
 import {bool, func} from 'prop-types';
-import {Modal, Header, TextButton} from 'components';
-import {useDidMount} from 'utils/hooks';
+import {Modal, Header, TextButton} from '~/components';
+import {useDidMount} from '~/utils/hooks';
 import {PlanCard} from './sections';
-import {getPlans, updatePlan} from 'redux/actions';
+import {getPlans, updatePlan} from '~/redux/actions';
 import styles, {modifiers} from './styles';
 
 const ChangePlan = ({

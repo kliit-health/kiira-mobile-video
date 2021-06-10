@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, SafeAreaView} from 'react-native';
-import {icons} from 'utils/constants';
-import {IconButton} from 'components';
+import {icons} from '~/utils/constants';
+import {IconButton} from '~/components';
 import styles from './styles';
 
 const Header = ({onClose}) => (

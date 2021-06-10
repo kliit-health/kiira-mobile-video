@@ -2,7 +2,7 @@ import {
   LOGIN_FIREBASE_USER,
   LOGIN_FIREBASE_API_HIT_FAILURE,
   RESET_LOGIN_STATE,
-} from 'redux/types';
+} from '~/redux/types';
 
 export const loginApi = (data, dispatch) => ({
   type: LOGIN_FIREBASE_USER,

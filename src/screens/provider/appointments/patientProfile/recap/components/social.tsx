@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import CheckItem from './common/checkItem';
 import {socialModel} from './models';
-import {convertCamelCase} from 'utils/helper';
+import {convertCamelCase} from '~/utils/helper';
 
 import styles from '../style';
 

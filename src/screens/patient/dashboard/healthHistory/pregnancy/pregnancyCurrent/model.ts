@@ -1,4 +1,4 @@
-import {screenNames} from 'utils/constants';
+import {screenNames} from '~/utils/constants';
 
 export const model = [
   {

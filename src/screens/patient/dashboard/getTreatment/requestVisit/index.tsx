@@ -2,9 +2,9 @@ import React from 'react';
 import {FlatList, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import styles from './style';
-import treatment from 'utils/constants/getTreatment';
-import {ListItem} from 'components';
-import {Header, Container} from 'components';
+import treatment from '~/utils/constants/getTreatment';
+import {ListItem} from '~/components';
+import {Header, Container} from '~/components';
 import Agreements from '../agreements';
 
 

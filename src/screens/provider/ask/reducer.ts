@@ -4,7 +4,7 @@ import {
   GET_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
   SEARCH_EXPERT_ACTIVE_QUESTIONS_FULFILLED,
   SEARCH_EXPERT_RESOLVED_QUESTIONS_FULFILLED,
-} from 'redux/types';
+} from '~/redux/types';
 
 const initialState = {
   active: [],

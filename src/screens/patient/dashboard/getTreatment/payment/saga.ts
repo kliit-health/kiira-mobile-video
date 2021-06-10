@@ -2,8 +2,8 @@ import {put, takeLatest, call, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {updateUser} from 'redux/actions';
+} from '~/components/customLoader/action';
+import {updateUser} from '~/redux/actions';
 import {
   CREATE_PAYMENT_CARD,
   GET_PAYMENT_METHODS,
@@ -12,7 +12,7 @@ import {
   BUY_CREDITS_WITH_PAYPAL,
   CAPTURE_PAYMENT,
   SET_PREPAID,
-} from 'redux/types';
+} from '~/redux/types';
 import {
   addNewPaymentCard,
   getPaymentMethods as getPaymentMethodsCloudFunction,
@@ -21,12 +21,12 @@ import {
   payAmountWithToken,
   getPayPalAccessToken,
   getDataFromTable,
-} from 'utils/firebase';
+} from '~/utils/firebase';
 
 import {
   createPayPalOrder,
   capturePayPalPaymentAPI,
-} from 'utils/webServices';
+} from '~/utils/webServices';
 import {
   setPaymentMethods,
   setNativePaySupport,
@@ -34,11 +34,11 @@ import {
   setData,
 } from './action';
 
-import {showOrHideModal} from 'components/customModal/action';
-import {parseCardInfo} from 'utils/helper/payment';
+import {showOrHideModal} from '~/components/customModal/action';
+import {parseCardInfo} from '~/utils/helper/payment';
 import {NavigationService} from '../../../../../navigation';
-import {deviceSupportsNativePay} from 'utils/payment';
-import Constant, {tables} from 'utils/constants';
+import {deviceSupportsNativePay} from '~/utils/payment';
+import Constant, {tables} from '~/utils/constants';
 import auth from '@react-native-firebase/auth';
 
 function* checkNativePaySupport() {

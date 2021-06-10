@@ -4,7 +4,7 @@ import {
   CLEAR_CHOOSE_EXPERT_STATE,
   GET_PROFESSIONS_DATA_SUCCESS,
   GET_LANGUAGES_DATA_SUCCESS,
-} from 'redux/types';
+} from '~/redux/types';
 
 export const getExpertsDataSuccess = (data) => ({
   type: GET_EXPERTS_DATA_SUCCESS,

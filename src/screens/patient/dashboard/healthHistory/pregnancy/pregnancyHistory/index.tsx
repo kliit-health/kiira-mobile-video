@@ -6,9 +6,9 @@ import {
   Header,
   TextButton,
   RadioGroup,
-} from 'components';
+} from '~/components';
 import {model} from './model';
-import {updateHealthHistory} from 'redux/actions';
+import {updateHealthHistory} from '~/redux/actions';
 import styles, {modifiers} from './styles';
 
 const PregnancyHistory = ({navigation}) => {

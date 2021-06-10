@@ -18,9 +18,9 @@ import {
 } from 'react-native-permissions';
 import SplashScreen from 'react-native-smart-splash-screen';
 import styles from './style';
-import Constant from 'utils/constants';
-import CustomButton from 'components/customButton';
-import Carousel from 'components/carousel';
+import Constant from '~/utils/constants';
+import CustomButton from '~/components/customButton';
+import Carousel from '~/components/carousel';
 import VersionCheck from 'react-native-version-check';
 import RNExitApp from 'react-native-exit-app';
 import JailMonkey from 'jail-monkey';

@@ -91,7 +91,6 @@ import TwillioLogin from '../screens/patient/dashboard/appointments/twillio/Logi
 import TwillioCalling from '../screens/patient/dashboard/appointments/twillio/Callling';
 import PersonalInformation from '../screens/provider/appointments/patientProfile/personalInformation';
 import AgreementDetails from '../screens/provider/appointments/patientProfile/agreementDetails';
-import WebView from '../screens/patient/learn/webView';
 import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 
@@ -513,7 +512,6 @@ const MainAppStack = createStackNavigator(
     TermsConditions: {screen: TermsConditions},
     TreatmentBot: {screen: TreatmentBot},
     Visit: {screen: Visit},
-    WebView: {screen: WebView},
     VisitSummary: {screen: VisitSummary},
     VideoRating: {screen: VideoRating},
     TwillioLogin: {screen: TwillioLogin},
