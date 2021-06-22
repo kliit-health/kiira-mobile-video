@@ -47,6 +47,7 @@ const VideoHistory = ({navigation, expertDetails}) => {
   return (
     <Fragment>
       <SectionList
+        showsVerticalScrollIndicator={false}
         style={listStyles.root}
         ListEmptyComponent={() => <Fallback />}
         keyExtractor={({visit}, index) => `${visit.id} ${index}`}
@@ -79,7 +80,7 @@ const VideoHistory = ({navigation, expertDetails}) => {
 };
 
 const ItemFuture = (props) => {
-  const {reason, time, expert, onPress, index} = props;
+  const {reason, time, expert, onPress, index, appointmentType: {duration}} = props;
   const {firstName, lastName} = expert;
 
   const handlePress = () => {
@@ -100,7 +101,7 @@ const ItemFuture = (props) => {
         </View>
       </View>
       <View style={itemFutureStyles.timeContainer}>
-        {formatTime(time).map(({primary, secondary}) => (
+        {formatTime(time,duration).map(({primary, secondary}) => (
           <View key={primary} style={itemFutureStyles.timeItem}>
             <Text style={itemFutureStyles.primaryText}>{primary}</Text>
             <Text style={itemFutureStyles.secondaryText}>{secondary}</Text>

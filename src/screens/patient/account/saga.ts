@@ -15,9 +15,9 @@ function* signout({data}) {
   try {
     const state = yield select();
     const userData = state.user.data;
-    if (isLoaderShow) {
-      yield put(showApiLoader(lang.apiLoader.loadingText));
-    }
+  
+    yield put(showApiLoader(lang.apiLoader.loadingText));
+    
     const updateStatusParams = {
       uid: userData.uid,
       updatedData: {
@@ -32,7 +32,9 @@ function* signout({data}) {
     
     yield put(clearAskState());
     yield logout(userData);
+    yield put(hideApiLoader());
     navigation.navigate(Constant.App.stack.AuthStack);
+
   } catch (error) {
     if (isLoaderShow) {
       yield put(hideApiLoader());

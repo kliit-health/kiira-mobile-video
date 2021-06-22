@@ -47,12 +47,13 @@ const RescheduleVisit = (props) => {
       },
     };
     let addMonth = moment(`${current.year}-${current.monthNumber}`);
-    addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+
     dispatch(getExpertsData(obj));
     dispatch(setCalendarID(calendarID));
-    dispatch(getAppointmentsForToday({...current, calendarID}));
-    dispatch(getAppointmentsByDay({...current, calendarID}));
-    dispatch(getAppointmentDates({...current, calendarID, addMonth}));
+    dispatch(getAppointmentsForToday({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentsByDay({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentDates({...current, calendarID, addMonth, appointmentType}));
   }, []);
 
   const childProps = {

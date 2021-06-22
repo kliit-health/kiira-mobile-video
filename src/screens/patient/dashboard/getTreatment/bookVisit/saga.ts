@@ -11,7 +11,8 @@ import {showOrHideModal} from '~/components/customModal/action';
 import { sendAppointmentNotification } from '../../../../../utils/firebase';
 
 function* setAppointment(data) {
-  const {data: {time, expert: {uid}}} = data;
+  const {data: {time, appointmentType: {credits},expert: {uid}}} = data;
+  
   try {
     yield put(showApiLoader());
     
@@ -24,7 +25,7 @@ function* setAppointment(data) {
       ); 
       NavigationService.goBack();
     } else {
-      yield updateCredits(-1, data);
+      yield updateCredits(-credits, data);
       yield put(getUser());
       yield sendAppointmentNotification(uid, time);
     }

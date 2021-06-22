@@ -179,7 +179,7 @@ export async function getAppointmentsByDayAsync(data, isToday) {
       "data": {
         calendarID,
         date,
-        appointmentType
+        appointmentTypeID: appointmentType
       }
     })
   }
@@ -197,11 +197,10 @@ export async function getAppointmentsByDayAsync(data, isToday) {
 
 export async function getAppointmentDatesAsync(data) {
   try {
-
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
    
-    const {calendarID, monthNumber, addMonth, year} = data;
+    const {calendarID, monthNumber, addMonth, year, appointmentType} = data;
     const currentMonth = `${year}-${monthNumber}`;
 
     var obj = {  
@@ -212,7 +211,7 @@ export async function getAppointmentDatesAsync(data) {
       }),
       body: JSON.stringify({
         "data": {
-          "appointmentTypeID": "16299344",
+          "appointmentTypeID": appointmentType,
           "calendarID": calendarID,
           "month": currentMonth
         }
@@ -234,7 +233,7 @@ export async function getAppointmentDatesAsync(data) {
         }),
         body: JSON.stringify({
           "data": {
-            "appointmentTypeID": "16299344",
+            "appointmentTypeID": appointmentType,
             "calendarID": calendarID,
             "month": addMonth
           }
@@ -326,7 +325,7 @@ export async function makeAppointment({data}) {
       
       const document = firestore().collection('appointments').doc(uid);
       const prev = await document.get();
-        console.log(response);
+
       if (prev.exists) {
         await document.set(
           {history: [...prev.data().history, response]},
@@ -347,7 +346,7 @@ export async function makeAppointment({data}) {
 
       if (expertPrev.exists) {
         await expertDocument.set(
-          {history: {[uid]: [response]}},
+          {history: {[uid]: [...expertPrev.data().history[uid], response]}},
           {merge: true},
         );
       } else {

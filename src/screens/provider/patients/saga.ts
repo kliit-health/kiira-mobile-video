@@ -43,9 +43,9 @@ function* getExpertPatients({data}) {
 
 function* cancelAppointment(data) {
   const {
-    data: {expert},
+    data: {expert, credits},
   } = data;
-  console.log(data);
+
   try {
     yield put(showApiLoader());
     const result = yield cancelAppointmentAsync(data);
@@ -58,8 +58,7 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
-      console.log('EXPERT CANCEL SUCCESSFUL');
-      yield updateCredits(1, data);
+      yield updateCredits(credits, data);
     }
 
     yield put({type: FETCH_PAITENT_APPOINTMENTS, data: allApponitments});

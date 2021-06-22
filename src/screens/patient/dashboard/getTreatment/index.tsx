@@ -8,6 +8,7 @@ import {
   Avatar,
   Ratings,
   Linking,
+  Conditional
 } from '~/components';
 import Arrow from '../../../../svgs/arrow.svg';
 import Phone from '../../../../svgs/phone.svg';
@@ -62,7 +63,7 @@ const GetTreatment = ({navigation}) => {
         </View>
         <Ratings styles={modifiers.ratings} value={calculateRating(rating)} />
       </View>
-      {navigator ? (
+      <Conditional if={navigator}>
         <View style={styles.buttonsContainer}>
           <TextButton onPress={handleOnHistoryPress} outlined>
             {lang.getTreatment.seeHistory}
@@ -72,9 +73,7 @@ const GetTreatment = ({navigation}) => {
             {lang.getTreatment.bookVisit}
           </TextButton>
         </View>
-      ) : (
-        <View></View>
-      )}
+      </Conditional>
       <View>
         <ScrollView
           horizontal
@@ -83,7 +82,7 @@ const GetTreatment = ({navigation}) => {
           contentContainerStyle={styles.tagsContentContainer}>
           {addHashtag(specialities).map((tag) => (
             <Text key={tag} style={styles.tagsText}>
-              {tag}
+              {tag + " "}
             </Text>
           ))}
         </ScrollView>
@@ -96,18 +95,20 @@ const GetTreatment = ({navigation}) => {
             styles={modifiers.linking}>
             <Arrow />
           </Linking>
-          {phoneNumber.length > 1 && (
+          <Conditional if={phoneNumber.length > 1}>
             <Linking title={phoneNumber} phoneNumber={phoneNumber}>
               <Phone />
             </Linking>
-          )}
+          </Conditional>
         </View>
         <Text style={styles.sectionTitle}>{lang.getTreatment.about}</Text>
         <Text style={{...styles.sectionText, paddingBottom: 10}}>{bio}</Text>
         <Text style={styles.sectionTitle}>{lang.getTreatment.languages}</Text>
         <Text style={styles.sectionText}>{formatLanguages(languages)}</Text>
         <Text style={styles.sectionTitle}>{lang.getTreatment.specialties}</Text>
-        <Text style={styles.sectionText}>{specialities}</Text>
+        {specialities.map(speciality => (
+          <Text key={speciality} style={styles.sectionText}>{speciality + " "}</Text>
+        ))}
       </ScrollView>
     </Container>
   );

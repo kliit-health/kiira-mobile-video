@@ -9,6 +9,7 @@ import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
 import messaging from '@react-native-firebase/messaging';
+import analytics from '@react-native-firebase/analytics';
 import { signOut } from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
@@ -148,9 +149,16 @@ const App = () => {
           navigationRef = nav;
           NavigationService.navigator = nav;
         }}
-        onNavigationStateChange={(prevState, currentState) => {
+        onNavigationStateChange={async (prevState, currentState) => {
           const currentScreen = getCurrentRouteName(currentState);
           const prevScreen = getCurrentRouteName(prevState);
+
+          if (prevScreen !== currentScreen) {
+            await analytics().logScreenView({
+              screen_name: currentScreen,
+              screen_class: currentScreen
+            });
+          }
 
           dispatch(setCurrentRoute(currentScreen));
           dispatch(setPreviousRoute(prevScreen));
