@@ -1,6 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import { Alert, View, ScrollView, Image, TouchableOpacity, Text } from 'react-native';
-import KeyboardSpacer from "react-native-keyboard-spacer";
+import {
+  Alert,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Text,
+  Platform,
+} from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {useSelector, useDispatch} from 'react-redux';
 import CustomText from '../../../components/customText';
 import styles from './style';
@@ -12,23 +20,21 @@ import {isEmail} from '../../../utils/helper';
 import {loginApi, resetLoginState} from './action';
 import * as Keychain from 'react-native-keychain';
 
-
-const Login = (props) => {
-  const lang = useSelector((state) => state.language);
-  const loginFailure = useSelector((state) => state.login.loginFailure);
+const Login = props => {
+  const lang = useSelector(state => state.language);
+  const loginFailure = useSelector(state => state.login.loginFailure);
   const dispatch = useDispatch();
   const {navigation} = props;
   const {staticImages} = Constant.App;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [biometricType, setBiometricType] = useState('');
 
   useEffect(() => {
     Keychain.getSupportedBiometryType().then(biometryType => {
-      setBiometricType(biometryType);     
-    })
-  },[])  
+      setBiometricType(biometryType);
+    });
+  }, []);
 
   useEffect(() => {
     dispatch(resetLoginState());
@@ -43,47 +49,55 @@ const Login = (props) => {
 
   const loginWithBiometrics = async () => {
     Keychain.getGenericPassword({
-      service: 'kiira'
-    }).then((result: boolean | { service: string, username: string, password: string }) => {
-      
-      if (!result) {
-        Alert.alert(
-          "Previous Login required",
-          "Login with Email and Password",
-          [
-            { text: "OK"}
-          ]
-        );
-      }
-
-      if (typeof result !== 'boolean') {
-        if(result.username || result.password) {
-          const data = {
-            params: {
-              email: result.username,
-              password: result.password,
-            },
-            navigation,
-          };
-          dispatch(loginApi(data));
-        } else {
-          dispatch(showOrHideModal(lang.login.NoBiometrics));
-        }
-      }
-    }).catch( async (error) => {
-      if((await Keychain.getSupportedBiometryType()) === null) {
-        return;
-      }
-
-      if(error.message === 'The user name or passphrase you entered is not correct.') {
-        console.log("Wrong password")
-      }
-
-      if(error.message === 'User canceled the operation.') {
-        console.log("User cancel")
-      }
+      service: 'kiira',
     })
-  }
+      .then(
+        (
+          result:
+            | boolean
+            | {service: string; username: string; password: string},
+        ) => {
+          if (!result) {
+            Alert.alert(
+              'Previous Login required',
+              'Login with Email and Password',
+              [{text: 'OK'}],
+            );
+          }
+
+          if (typeof result !== 'boolean') {
+            if (result.username || result.password) {
+              const data = {
+                params: {
+                  email: result.username,
+                  password: result.password,
+                },
+                navigation,
+              };
+              dispatch(loginApi(data));
+            } else {
+              dispatch(showOrHideModal(lang.login.NoBiometrics));
+            }
+          }
+        },
+      )
+      .catch(async error => {
+        if ((await Keychain.getSupportedBiometryType()) === null) {
+          return;
+        }
+
+        if (
+          error.message ===
+          'The user name or passphrase you entered is not correct.'
+        ) {
+          console.log('Wrong password');
+        }
+
+        if (error.message === 'User canceled the operation.') {
+          console.log('User cancel');
+        }
+      });
+  };
 
   const renderInputTextView = () => {
     return (
@@ -92,7 +106,7 @@ const Login = (props) => {
           <CustomInputText
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(value) => setEmail(value)}
+            onChangeText={value => setEmail(value)}
             placeholder={lang.login.Email}
             value={email}
             style={
@@ -106,10 +120,10 @@ const Login = (props) => {
         <View style={styles.inputTextContainerStyle}>
           <CustomInputText
             autoCapitalize="none"
-            onChangeText={(value) => setPassword(value)}
+            onChangeText={value => setPassword(value)}
             placeholder={lang.login.Password}
             value={password}
-            secureTextEntry={!showPassword}
+            secureTextEntry
             style={
               password
                 ? styles.inputTypePasswordStyle
@@ -117,17 +131,6 @@ const Login = (props) => {
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-            <Image
-              resizeMode="contain"
-              source={
-                showPassword
-                  ? staticImages.passwordVisibleIcon
-                  : staticImages.passwordInvisibleIcon
-              }
-              style={styles.passwordHideShowIconStyle}
-            />
-          </TouchableOpacity>
         </View>
       </View>
     );
@@ -211,17 +214,16 @@ const Login = (props) => {
     return (
       <TouchableOpacity
         disabled={biometricType === ''}
-        onPress={loginWithBiometrics}
-      >
+        onPress={loginWithBiometrics}>
         <Image
-              resizeMode="contain"
-              source={
-                biometricType === 'FaceID'
-                  ? staticImages.faceID
-                  : staticImages.fingerprint
-              }
-              style={styles.biometrics}
-            />
+          resizeMode="contain"
+          source={
+            biometricType === 'FaceID'
+              ? staticImages.faceID
+              : staticImages.fingerprint
+          }
+          style={styles.biometrics}
+        />
       </TouchableOpacity>
     );
   };
