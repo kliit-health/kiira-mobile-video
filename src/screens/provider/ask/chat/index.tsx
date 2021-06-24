@@ -35,31 +35,31 @@ import {topics} from '~/models';
 
 let key;
 class ChatExpert extends React.PureComponent {
-	public state: any;
-	public props: any;
-	public setState: any;
-	public flatList: any;
-	public navigation: any;
-	public toggleStatus: any;
-	public userData: any;
-	public questionData: any;
-	public loadUserMessages: any;
-	public setId: any;
-	public checkStatus: any;
-	public clearState: any;
-	public stopObervers: any;
-	public sendMessageUser: any;
-	public messageId: any;
-	public questionId: any;
-	public message: any;
-	public imageUri: any;
-	public filename: any;
-	public path: any;
-	public staticImages: any;
-	public lang: any;
-	public messages: any;
-	public showActionModal: any;
-	public resolve: any;
+  public state: any;
+  public props: any;
+  public setState: any;
+  public flatList: any;
+  public navigation: any;
+  public toggleStatus: any;
+  public userData: any;
+  public questionData: any;
+  public loadUserMessages: any;
+  public setId: any;
+  public checkStatus: any;
+  public clearState: any;
+  public stopObervers: any;
+  public sendMessageUser: any;
+  public messageId: any;
+  public questionId: any;
+  public message: any;
+  public imageUri: any;
+  public filename: any;
+  public path: any;
+  public staticImages: any;
+  public lang: any;
+  public messages: any;
+  public showActionModal: any;
+  public resolve: any;
 
   constructor(props) {
     super(props);
@@ -205,7 +205,7 @@ class ChatExpert extends React.PureComponent {
         path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
         console.log('You cancelled image picker');
       } else if (response.error) {
@@ -330,7 +330,7 @@ class ChatExpert extends React.PureComponent {
           </View>
         ) : null}
         <View style={styles.chatInputContainer}>
-          {Platform.OS === 'ios' && (
+          {/* {Platform.OS === 'ios' && (
             <TouchableOpacity
               style={styles.cameraContainerStyle}
               onPress={() => this.pickImage()}>
@@ -343,13 +343,13 @@ class ChatExpert extends React.PureComponent {
                 source={staticImages.cameraGreyIcon}
               />
             </TouchableOpacity>
-          )}
+          )} */}
           <View style={styles.textContainerStyle}>
             <InputText
               maxHeight={100}
               multiline={true}
               autoCapitalize="sentences"
-              onChangeText={(value) => {
+              onChangeText={value => {
                 this.setState({
                   message: value,
                 });
@@ -403,7 +403,7 @@ class ChatExpert extends React.PureComponent {
     const datamessage = getChatItems(messages);
     return (
       <FlatList
-        ref={(ref) => {
+        ref={ref => {
           this.flatList = ref;
         }}
         data={datamessage}
@@ -422,7 +422,7 @@ class ChatExpert extends React.PureComponent {
     const {showActionModal} = this.state;
     const {questionData, resolve, navigation, lang} = this.props;
 
-    const resolveQuestionByCategory = (topic) => {
+    const resolveQuestionByCategory = topic => {
       this.setState({
         showActionModal: false,
       });
@@ -495,7 +495,7 @@ class ChatExpert extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userData: state.user.data,
   messages: state.chatExpert.messages,
   messageId: state.chatExpert.messageId,
@@ -506,14 +506,14 @@ const mapStateToProps = (state) => ({
   lang: state.language,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadUserMessages: (value) => dispatch(loadExpertMessages(value, dispatch)),
-  sendMessageUser: (value) => dispatch(sendMessageExpert(value)),
-  setId: (value) => dispatch(setQuestionExpertData(value)),
+const mapDispatchToProps = dispatch => ({
+  loadUserMessages: value => dispatch(loadExpertMessages(value, dispatch)),
+  sendMessageUser: value => dispatch(sendMessageExpert(value)),
+  setId: value => dispatch(setQuestionExpertData(value)),
   clearState: () => dispatch(clearChatExpertState()),
-  checkStatus: (value) => dispatch(checkUserStatus(value, dispatch)),
-  toggleStatus: (value) => dispatch(toggleExpertStatus(value)),
-  resolve: (value) => dispatch(resolveQuestion(value)),
+  checkStatus: value => dispatch(checkUserStatus(value, dispatch)),
+  toggleStatus: value => dispatch(toggleExpertStatus(value)),
+  resolve: value => dispatch(resolveQuestion(value)),
   stopObervers: () => dispatch(stopObserverChat()),
 });
 
