@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {Text, View, Platform, Linking} from 'react-native';
-import {Header, Container, TextButton} from 'components';
+import {Header, Container, TextButton} from '~/components';
 import Image from 'react-native-fast-image';
 import styles from './styles';
 

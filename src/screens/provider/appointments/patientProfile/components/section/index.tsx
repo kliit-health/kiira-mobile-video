@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, View, Image, Text} from 'react-native';
 import styles from './style';
-import Constant from 'utils/constants';
+import Constant from '~/utils/constants';
 
 const Section = ({
   title,

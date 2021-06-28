@@ -2,10 +2,10 @@ import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {showOrHideModal} from 'components/customModal/action';
-import {FORGOT_PASSWORD} from 'redux/types';
-import {resetPassword} from 'utils/firebase';
+} from '~/components/customLoader/action';
+import {showOrHideModal} from '~/components/customModal/action';
+import {FORGOT_PASSWORD} from '~/redux/types';
+import {resetPassword} from '~/utils/firebase';
 import {forgotPasswordApiHitSuccess} from './action';
 
 function* forgotPassword({data}) {

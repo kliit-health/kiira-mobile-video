@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import PolarButton from 'components/polarButton';
+import PolarButton from '~/components/polarButton';
 import styles from './style';
 
 const PolarQuestion = ({progress}) => (

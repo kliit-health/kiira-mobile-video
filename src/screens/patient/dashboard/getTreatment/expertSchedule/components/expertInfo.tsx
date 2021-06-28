@@ -2,8 +2,8 @@ import React, {Fragment} from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
-import CustomButton from 'components/customButton';
-import CustomText from 'components/customText';
+import CustomButton from '~/components/customButton';
+import CustomText from '~/components/customText';
 import {Rating} from 'react-native-elements';
 import styles from '../style';
 import {getAppointmentsByDay, setAppointmentTime} from '../action';
@@ -24,6 +24,7 @@ const ExpertInfo = ({
   const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const {calendarID, appointments} = appointmentData;
+  const {appointmentType: {appointmentType}} = appointmentData;
 
   return (
     <View>
@@ -92,9 +93,6 @@ const ExpertInfo = ({
                           onPress={() => {
                             var date = generateDateInfo(item);
                             setShowShedule(!showShedule);
-                            dispatch(
-                              getAppointmentsByDay({...date, calendarID}),
-                            );
                             dispatch(setAppointmentTime(item.time));
                             setSelectedDate(today);
                             setSelectedTime(index);

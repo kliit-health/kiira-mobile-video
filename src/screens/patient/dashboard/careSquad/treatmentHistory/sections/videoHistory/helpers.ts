@@ -23,7 +23,7 @@ export const getSections = visits => {
 	return result;
 };
 
-export const formatTime = time => {
+export const formatTime = (time: number,duration: number) => {
 	const momentTime = moment.unix(time);
 	return [
 		{
@@ -35,7 +35,7 @@ export const formatTime = time => {
 			secondary: momentTime.format("a"),
 		},
 		{
-			primary: "30",
+			primary: duration,
 			secondary: "min",
 		},
 	];

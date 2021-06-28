@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {View, ScrollView} from 'react-native';
-import {Header} from 'components';
+import {Header} from '~/components';
 import {
   getExpertsData,
   setCalendarID,
@@ -9,9 +9,9 @@ import {
   getAppointmentDates,
   getAppointmentsForToday,
 } from './action';
-import {generateDateInfo} from 'utils/helper';
+import {generateDateInfo} from '~/utils/helper';
 import styles from './style';
-import Constant from 'utils/constants';
+import Constant from '~/utils/constants';
 import moment from 'moment';
 import {
   ExpertInfo,
@@ -25,7 +25,7 @@ import {
 
 const RescheduleVisit = (props) => {
   const {navigation, visit} = props.navigation.state.params;
-  const {calendarID, expert, uid, id} = visit;
+  const {calendarID, expert, uid, id, appointmentType: {appointmentType}} = visit;
 
   const expertData = useSelector((state) => state.expertProfile.expertData);
 
@@ -47,15 +47,17 @@ const RescheduleVisit = (props) => {
       },
     };
     let addMonth = moment(`${current.year}-${current.monthNumber}`);
-    addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+
     dispatch(getExpertsData(obj));
     dispatch(setCalendarID(calendarID));
-    dispatch(getAppointmentsForToday({...current, calendarID}));
-    dispatch(getAppointmentsByDay({...current, calendarID}));
-    dispatch(getAppointmentDates({...current, calendarID, addMonth}));
+    dispatch(getAppointmentsForToday({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentsByDay({...current, calendarID, appointmentType}));
+    dispatch(getAppointmentDates({...current, calendarID, addMonth, appointmentType}));
   }, []);
 
   const childProps = {
+    appointmentType,
     appointmentData,
     calendarID,
     day,

@@ -10,7 +10,7 @@ import {
   SET_APPOINTMENT_DATES,
   GET_APPOINTMENT_DATES,
   SET_TIMES,
-} from 'redux/types';
+} from '~/redux/types';
 
 export const getAppointmentsForToday = (data) => ({
   type: GET_APPOINTMENTS_FOR_TODAY,

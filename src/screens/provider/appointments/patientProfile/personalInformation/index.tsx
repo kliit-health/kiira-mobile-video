@@ -7,7 +7,7 @@ import {
   TextInput,
   TextButton,
   ModalDatePicker,
-} from 'components';
+} from '~/components';
 import model from './model';
 import styles, {modifiers} from './styles';
 import {updatePatientDetails} from '../actions';

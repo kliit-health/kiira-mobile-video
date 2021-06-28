@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {ProfileCard} from 'components';
-import {calculateRating} from 'utils/functions';
+import {ProfileCard} from '~/components';
+import {calculateRating} from '~/utils/functions';
 import styles from './styles';
 
 const List = ({data, onCardPress}) => (
@@ -37,7 +37,7 @@ const ListItem = (props) => {
       rating={calculateRating(rating)}
       tags={specialities.slice(0, 3)}
       avatar={profileImageUrl}
-      online={isOnline}
+      // online={isOnline}
       onPress={handleCardPress}
     />
   );

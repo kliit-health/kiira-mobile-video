@@ -4,11 +4,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles, {modifiers} from './style';
 import {getPatientsList} from './action';
 import {withNavigation} from 'react-navigation';
-import Visit from './components/visit';
-import {generateDateInfo} from 'utils/helper';
+import VisitCard from './components/visit';
+import {generateDateInfo} from '~/utils/helper';
 import moment from 'moment';
 import _ from 'lodash';
-import {Header, SearchBar, Container} from 'components';
+import {Header, SearchBar, Container} from '~/components';
+
 
 const Patients = (props) => {
   const {navigation} = props;
@@ -85,8 +86,9 @@ const Patients = (props) => {
             data={searchVisits}
             decelerationRate={'fast'}
             renderItem={({item, index}) => {
-              const date = generateDateInfo(item.time);
-              return <Visit visit={item} date={date} navigation={navigation} />;
+              const date: IDate = generateDateInfo(item.time);
+              const visit: Visit = item;
+              return <VisitCard visit={visit} date={date} navigation={navigation} />;
             }}
             keyExtractor={(index) => `${index.id}`}
           />

@@ -6,13 +6,13 @@ import {
   SET_APPOINTMENT_DATES,
   SET_CALENDAR_ID,
   SET_TIMES,
-} from 'redux/types';
+} from '~/redux/types';
 
 const initialState = {
   reason: null,
   prescription: false,
   calendarID: null,
-  appointmentTypeID: 16299344,
+  appointmentType: null,
   time: null,
   date: null,
   appointments: {
@@ -33,7 +33,8 @@ const expertSchedule = (state = initialState, action) => {
     case REASON_FOR_VISIT:
       return {
         ...state,
-        reason: action.data,
+        reason: action.data.title,
+        appointmentType: action.data.sessionType
       };
     case SET_APPOINTMENT_DATES:
       return {

@@ -1,4 +1,4 @@
-import {UPDATE_USER_DETAIL_DATA} from 'redux/types';
+import {UPDATE_USER_DETAIL_DATA} from '~/redux/types';
 
 export const updateUserDataToFirebase = (data) => {
   return {

@@ -4,15 +4,15 @@ import {
   Header,
   TextButton,
   TextInput,
-} from 'components';
-import {useDidMount} from 'utils/hooks';
+} from '~/components';
+import {useDidMount} from '~/utils/hooks';
 import {View} from 'react-native';
-import {switchCase} from 'utils/functions';
+import {switchCase} from '~/utils/functions';
 import {useDispatch, useSelector} from 'react-redux';
 import {model, types} from './model';
 import {DatePicker, Picker} from './components';
 import {isNumber} from 'lodash';
-import {updateHealthHistory} from 'redux/actions';
+import {updateHealthHistory} from '~/redux/actions';
 import styles from './styles';
 
 const AddChild = ({navigation}) => {

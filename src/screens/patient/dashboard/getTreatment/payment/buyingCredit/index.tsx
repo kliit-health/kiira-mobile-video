@@ -2,12 +2,12 @@ import React, {PureComponent} from 'react';
 import {View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import styles, {PaymentDropdownDimensions} from './style';
-import Constant from 'utils/constants';
-import CustomText from 'components/customText';
-import {IconButton} from 'components';
-import FlyingLabelIcon from 'components/FlyingLabelIcon';
-import CustomButton from 'components/customButton';
-import ModalDropdown from 'components/modalDropdown';
+import Constant from '~/utils/constants';
+import CustomText from '~/components/customText';
+import {IconButton} from '~/components';
+import FlyingLabelIcon from '~/components/FlyingLabelIcon';
+import CustomButton from '~/components/customButton';
+import ModalDropdown from '~/components/modalDropdown';
 import {
   getCreditAmountsOptions,
   getPaymentMethods,
@@ -18,13 +18,12 @@ import {
 import {
   defaultPaymentMethods,
   PaymentMethodsTypes,
-} from 'utils/helper/payment';
-import {payWithNativeModule} from 'utils/payment';
-import {showOrHideModal} from 'components/customModal/action';
+} from '~/utils/helper/payment';
+import {payWithNativeModule} from '~/utils/payment';
+import {showOrHideModal} from '~/components/customModal/action';
 
 class BuyingCredit extends PureComponent {
 	public state: any;
-	public creditsUnit: any;
 	public props: any;
 	public paymentMethodsDropdown: any;
 	public amountDropdown: any;
@@ -48,125 +47,43 @@ class BuyingCredit extends PureComponent {
     this.state = {
       amountOptionIndex: 0,
       paymentMethodOption: AddPaymentMethod,
+      visitData: this.props.visitData
     };
-    props.getCreditAmountOptions();
     props.getPaymentMethods();
-
-    this.creditsUnit = props.lang.askUser.credits.toLowerCase();
   }
-
-  render() {
-    const {navigation, lang} = this.props;
-
-    return (
-      <View style={styles.topContainer}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <IconButton
-              source={Constant.App.staticImages.xCloseIcon}
-              onPress={() => navigation.dismiss()}
-            />
-            <CustomText style={styles.title}>
-              {lang.buyingCredits.title}
-            </CustomText>
-          </View>
-          <View style={styles.optionsContainer}>
-            <FlyingLabelIcon
-              source={Constant.App.staticImages.penguin}
-              title={lang.buyingCredits.kiira}
-              label={this.currentAmountDisplayOption()}
-            />
-            {/* <FlyingLabelIcon
-              containerStyle={styles.amountContainer}
-              iconStyle={styles.amountIcon}
-              source={Constant.App.staticImages.basket}
-              title={lang.buyingCredits.amountTitle}
-              label={this.currentAmountDisplayOption()}
-              onPress={() => {
-                this.amountDropdown && this.amountDropdown.show();
-              }}
-            /> */}
-            <FlyingLabelIcon
-              containerStyle={styles.amountContainer}
-              source={Constant.App.staticImages.creditCard}
-              iconStyle={styles.creditCardIcon}
-              title={lang.buyingCredits.paymentTitle}
-              label={this.currentPaymentMethodTitle}
-              onPress={() => {
-                this.paymentMethodsDropdown &&
-                  this.paymentMethodsDropdown.show();
-              }}
-            />
-          </View>
-          <View style={styles.footerContainer}>
-            <CustomText style={styles.totalText}>
-              {this.currentTotalTitle}
-            </CustomText>
-            <CustomButton
-              onPress={() => this.buyCredits()}
-              text={lang.buyingCredits.buyCredits}
-              buttonStyle={styles.buyCreditsButton}
-              textStyle={styles.buyCreditsButtonText}
-            />
-          </View>
-        </View>
-        {this.renderAmountDropdown()}
-        {this.renderPaymentMethodsDropdown()}
-      </View>
-    );
-  }
-  renderAmountDropdown = () => {
-    return (
-      <View style={styles.amountDropdownContainer}>
-        <ModalDropdown
-          ref={(ref) => {
-            this.amountDropdown = ref;
-          }}
-          style={styles.amountDropdownButton}
-          dropdownStyle={styles.amountDropdown}
-          options={this.props.amountOptions}
-          defaultIndex={0}
-          defaultValue=""
-          showsVerticalScrollIndicator={false}
-          renderRow={this.renderAmountDropdownCell}
-          renderSeparator={() => null}
-          textStyle={{color: 'transparent'}}
-          onSelect={(index, _) => {
-            this.setState({amountOptionIndex: index});
-          }}
-        />
-      </View>
-    );
-  };
 
   buyCredits = async () => {
+    const {lang, visitData} = this.props;
+    const {appointmentType: {credits, price}} = visitData;
     const paymentMethod = this.state.paymentMethodOption;
-    const credits = this.currentCredits;
-    const amount = this.currentTotal;
-    if (credits <= 0) {
+    const sessions = credits;
+    const amount = price;
+  
+    if (sessions <= 0) {
       return;
     }
     if (paymentMethod && paymentMethod.type) {
       if (paymentMethod.type === PaymentMethodsTypes.card) {
-        this.props.buyCredits(paymentMethod.id, credits, amount);
+        this.props.buyCredits(paymentMethod.id, sessions, amount, true);
       } else if (paymentMethod.type === PaymentMethodsTypes.applePay) {
-        await this.payUsingApplePay(credits, amount);
+        await this.payUsingApplePay(sessions, amount);
       } else if (paymentMethod.type === PaymentMethodsTypes.payPal) {
         this.props.buyCreditsUsingPayPal(
-          credits,
+          sessions,
           amount,
           this.props.navigation,
         );
       } else {
-        this.props.showAlert(Language.en.buyingCredits.selectPaymentMethod);
+        this.props.showAlert(lang.en.buyingCredits.selectPaymentMethod);
       }
     }
   };
 
-  payUsingApplePay = async (credits, amount) => {
-    const response = await payWithNativeModule(credits, amount);
+  payUsingApplePay = async (sessions, amount) => {
+    const response = await payWithNativeModule(sessions, amount);
+    console.log(response)
     const {buyCreditsWithToken, showAlert, lang} = this.props;
-
+    
     // User has no credit cards or user cancelled the operation
     if (response === null) {
       return;
@@ -174,7 +91,7 @@ class BuyingCredit extends PureComponent {
 
     if (response.ok) {
       const cardTokenID = response.token.tokenId;
-      buyCreditsWithToken(cardTokenID, credits, amount);
+      buyCreditsWithToken(cardTokenID, sessions, amount);
     } else {
       showAlert(lang.errorMessage.serverError);
     }
@@ -310,45 +227,6 @@ class BuyingCredit extends PureComponent {
     );
   };
 
-  renderAmountDropdownCell = (option, _, isSelected) => {
-    const cellColor = isSelected
-      ? Constant.App.colors.paleLilac
-      : Constant.App.colors.whiteColor;
-
-    return (
-      <View style={{...styles.amountDropdownCell, backgroundColor: cellColor}}>
-        <CustomText style={styles.amountDropdownOption}>
-          {this.amountDropdownDisplayOption(option.credits)}
-        </CustomText>
-      </View>
-    );
-  };
-
-  amountDropdownDisplayOption = (credits) => `${credits} Video Visit`;
-
-  get currentCredits() {
-    const {amountOptions} = this.props;
-    const index = this.state.amountOptionIndex;
-    return amountOptions ? amountOptions[index].visit : 0;
-  }
-
-  currentAmountDisplayOption = () => {
-    const credits = this.currentCredits;
-    return this.amountDropdownDisplayOption(credits);
-  };
-
-  get currentTotal() {
-    const {amountOptions} = this.props;
-    const index = this.state.amountOptionIndex;
-    return amountOptions ? amountOptions[index].amount : 0;
-  }
-
-  get currentTotalTitle() {
-    const {lang} = this.props;
-    const amount = this.currentTotal;
-    return `${lang.buyingCredits.totalTitle}: $${amount}`;
-  }
-
   get currentPaymentMethodTitle() {
     const option = this.state.paymentMethodOption;
     if (option.type === PaymentMethodsTypes.card) {
@@ -356,6 +234,64 @@ class BuyingCredit extends PureComponent {
     } else {
       return option.title;
     }
+  }
+
+  render() {
+    const {navigation, lang, visitData} = this.props;
+    const {appointmentType: {duration, price, title}} = visitData;
+
+    return (
+      <View style={styles.topContainer}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <IconButton
+              source={Constant.App.staticImages.xCloseIcon}
+              onPress={() => navigation.dismiss()}
+            />
+            <CustomText style={styles.title}>
+              {lang.buyingCredits.title}
+            </CustomText>
+          </View>
+          <View style={styles.optionsContainer}>
+            <FlyingLabelIcon
+              source={Constant.App.staticImages.penguin}
+              title={lang.buyingCredits.kiira}
+              label={title}
+            />
+            <FlyingLabelIcon
+              containerStyle={styles.amountContainer}
+              iconStyle={styles.amountIcon}
+              source={Constant.App.staticImages.basket}
+              title={lang.buyingCredits.amountTitle}
+              label={`$${price} \t ${duration} minutes`}
+            />
+            <FlyingLabelIcon
+              containerStyle={styles.amountContainer}
+              source={Constant.App.staticImages.creditCard}
+              iconStyle={styles.creditCardIcon}
+              title={lang.buyingCredits.paymentTitle}
+              label={this.currentPaymentMethodTitle}
+              onPress={() => {
+                this.paymentMethodsDropdown &&
+                  this.paymentMethodsDropdown.show();
+              }}
+            />
+          </View>
+          <View style={styles.footerContainer}>
+            <CustomText style={styles.totalText}>
+              {`Total: $${price}`}
+            </CustomText>
+            <CustomButton
+              onPress={() => this.buyCredits()}
+              text={lang.buyingCredits.buyCredits}
+              buttonStyle={styles.buyCreditsButton}
+              textStyle={styles.buyCreditsButtonText}
+            />
+          </View>
+        </View>
+        {this.renderPaymentMethodsDropdown()}
+      </View>
+    );
   }
 }
 
@@ -368,6 +304,7 @@ const mapStateToProps = (state) => ({
   isNativePaySupported: state.payment.isNativePaySupported,
   orderData: state.payment.orderData,
   lang: state.language,
+  visitData: state.expertSchedule
 });
 
 const mapDispatchToProps = (dispatch) => ({

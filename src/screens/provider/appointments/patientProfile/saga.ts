@@ -11,11 +11,11 @@ import {
   LOCK_VISIT,
   GET_MEDICAL_HISTORY,
   SET_MEDICAL_HISTORY,
-} from 'redux/types';
+} from '~/redux/types';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
+} from '~/components/customLoader/action';
 import moment from 'moment';
 import {put, takeEvery, select, call} from 'redux-saga/effects';
 import {
@@ -24,8 +24,8 @@ import {
   saveAndLock,
   getMedicalHistoryAsync,
   sendVisitRecap,
-} from 'utils/firebase';
-import * as actions from 'redux/actions';
+} from '~/utils/firebase';
+import * as actions from '~/redux/actions';
 import {clearMedicalHistory} from './actions';
 
 function* getPatientDetails({data}) {

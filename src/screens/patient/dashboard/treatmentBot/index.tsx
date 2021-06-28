@@ -1,7 +1,7 @@
 import React from 'react';
-import ChatBot from 'components/chatBot';
+import ChatBot from '~/components/chatBot';
 import {Header} from './sections';
-import {screenNames} from 'utils/constants';
+import {screenNames} from '~/utils/constants';
 
 const TreatmentBotScreen = ({navigation}) => {
   const handleClose = () => {

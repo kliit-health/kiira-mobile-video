@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import CustomButton from 'components/customButton';
+import CustomButton from '~/components/customButton';
 import styles from '../style';
-import Constant from 'utils/constants';
+import Constant from '~/utils/constants';
 import {
   makeAppointment,
   prepaidAppointment,
@@ -22,7 +22,6 @@ const Buttons = ({
   userData,
 }) => {
   const dispatch = useDispatch();
-
   const bookedButtons = () => (
     <Fragment>
       <CustomButton

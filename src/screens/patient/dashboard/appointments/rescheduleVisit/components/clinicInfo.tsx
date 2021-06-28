@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {View, TouchableOpacity, Platform, Linking} from 'react-native';
-import CustomText from 'components/customText';
+import CustomText from '~/components/customText';
 import styles from '../style';
 
 const ClinicInfo = ({expertData}) => {

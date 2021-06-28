@@ -9,7 +9,7 @@ import {
   updateUnreadCount,
   checkQuestionStatus,
   resolvedQuestion,
-} from 'utils/firebase';
+} from '~/utils/firebase';
 import {
   loadExpertMessagesSuccess,
   loadExpertMessagesError,
@@ -18,12 +18,12 @@ import {
   checkUserStatusSuccess,
   checkQuestionExpertStatusSuccess,
 } from './action';
-import {showOrHideModal} from 'components/customModal/action';
-import {displayConsole} from 'utils/helper';
+import {showOrHideModal} from '~/components/customModal/action';
+import {displayConsole} from '~/utils/helper';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
+} from '~/components/customLoader/action';
 import Constant from '../../../../utils/constants';
 import {
   CHAT_MESSAGE_EXPERT_LOADING,
@@ -32,7 +32,7 @@ import {
   TOGGLE_EXPERT_STATUS,
   RESOLVE_QUESTION,
   STOP_OBSERVER_CHAT,
-} from 'redux/types';
+} from '~/redux/types';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 let delayTime = 100,
@@ -75,6 +75,7 @@ function* sendMessageToUser({data}) {
             userUnreadCount: unreadCount,
           },
         };
+        console.log("QUESTION PARAMS", params)
         yield put(hideApiLoader());
         yield sendMessage(params);
         questionData.userUnreadCount = unreadCount;
@@ -117,6 +118,7 @@ function* sendMessageToUser({data}) {
           userUnreadCount: unreadCount,
         },
       };
+      console.log("QUESTION PARAMS", params)
       yield sendMessage(params);
       questionData.userUnreadCount = unreadCount;
       const dataResponse = {
@@ -159,9 +161,8 @@ function* loadMessagesOfExpert({data, dispatch}) {
         );
       },
       (error) => {
-        const {message, code} = error;
-        displayConsole('message loadMessagesOfExpert', message);
-        displayConsole('code loadMessagesOfExpert', code);
+        const {message} = error;
+
         const data = {
           success: false,
           message: message,

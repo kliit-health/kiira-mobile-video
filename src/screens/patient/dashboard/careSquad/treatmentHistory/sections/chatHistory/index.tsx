@@ -2,8 +2,8 @@ import React, {memo} from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, FlatList} from 'react-native';
 import moment from 'moment';
-import {colors, screenNames} from 'utils/constants';
-import {ListItem} from 'components';
+import {colors, screenNames} from '~/utils/constants';
+import {ListItem} from '~/components';
 import {styles, itemStyles, fallbackStyles, itemModifiers} from './styles';
 
 const ChatHistory = ({navigation, expertDetails}) => {

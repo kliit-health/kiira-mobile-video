@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {ScrollView} from 'react-native';
-import {useDidMount} from 'utils/hooks';
-import * as actions from 'redux/actions';
-import {Container} from 'components';
+import {useDidMount} from '~/utils/hooks';
+import * as actions from '~/redux/actions';
+import {Container} from '~/components';
 import {Bot, Items, Intro} from './sections';
 import styles from './styles';
-import i18n from 'i18n';
+import i18n from '~/i18n';
+import DeviceInfo from 'react-native-device-info';
 
 
 const Dashboard = ({navigation}) => {
@@ -18,6 +19,16 @@ const Dashboard = ({navigation}) => {
 
   const [videoEnabled, setVideoEnabled] = useState(false);
   const [chatEnabled, setChatEnabled] = useState(false);
+
+  useDidMount(() => {
+    const device = {
+      manufacturer: DeviceInfo.getManufacturerSync(),
+      model: DeviceInfo.getModel(),
+      osVersion: DeviceInfo.getSystemVersion(),
+      appVersion: DeviceInfo.getVersion()
+    }
+    dispatch(actions.updateUser({device}));
+  })
 
   useDidMount(() => {
     dispatch(actions.getAgreements());

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import CustomModal from 'components/customselectModal';
+import CustomModal from '~/components/customselectModal';
 
 const ChatModal = (props) => {
   const {triggerNextStep, trigger, data} = props;

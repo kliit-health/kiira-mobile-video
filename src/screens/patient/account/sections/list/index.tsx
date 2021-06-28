@@ -3,7 +3,7 @@ import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text} from 'react-native';
 import {get} from 'lodash';
 import model from './model';
-import {ListItem} from 'components';
+import {ListItem} from '~/components';
 import styles from './styles';
 
 export default ({onItemPress}) => {

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {ScrollView, View, Text, StatusBar, Modal} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating, Rating} from 'react-native-elements';
-import CustomButton from 'components/customButton';
-import Constant from 'utils/constants';
+import CustomButton from '~/components/customButton';
+import Constant from '~/utils/constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {rateVisit} from '../../../appointments/action';
 

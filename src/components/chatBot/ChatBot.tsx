@@ -378,7 +378,7 @@ class ChatBot extends Component {
 
       if (nextStep.user) {
         this.setState({editable: true});
-        this.inputRef.focus();
+        Platform.OS === "ios" ? this.inputRef.focus() : setTimeout(() => this.inputRef.focus(), 50)
       } else {
         renderedSteps.push(nextStep);
         previousSteps.push(nextStep);

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {text} from 'utils/constants';
+import {text} from '~/utils/constants';
 
 export default StyleSheet.create({
   navigationContainer: {

@@ -23,6 +23,7 @@ export default StyleSheet.create({
     fontWeight: '500',
   },
   editButton: {
+    marginLeft: '42%',
     flex: 0,
   },
 });

@@ -9,12 +9,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import CustomButton from 'components/customButton';
-import CustomText from 'components/customText';
+import CustomButton from '~/components/customButton';
+import CustomText from '~/components/customText';
 import styles from '../style';
 import moment from 'moment';
-import Constant from 'utils/constants';
-import {generateDateInfo} from 'utils/helper';
+import Constant from '~/utils/constants';
+import {generateDateInfo} from '~/utils/helper';
 import {
   setAppointmentDay,
   setAppointmentTime,
@@ -25,6 +25,7 @@ import {
 const {staticImages} = Constant.App;
 
 const SheduleModal = ({
+  appointmentType,
   appointmentData,
   calendarID,
   setShowShedule,
@@ -118,7 +119,7 @@ const SheduleModal = ({
                             : styles.dateTextStyle
                         }
                         onPress={() => {
-                          dispatch(getAppointmentsByDay({...item, calendarID}));
+                          dispatch(getAppointmentsByDay({...item, calendarID, appointmentType}));
                           setSelectedDate(item.date);
                           setTime(null);
                           setSelectedTime(null);

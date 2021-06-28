@@ -3,19 +3,19 @@ import {
   GET_APPOINTMENTS_BY_DAY,
   GET_APPOINTMENT_DATES,
   GET_APPOINTMENTS_FOR_TODAY,
-} from 'redux/types';
+} from '~/redux/types';
 
 import {put, takeEvery, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
+} from '~/components/customLoader/action';
 import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
-} from 'utils/firebase';
-import {showOrHideModal} from 'components/customModal/action';
+} from '~/utils/firebase';
+import {showOrHideModal} from '~/components/customModal/action';
 import {setTimes, setAppointmentDates} from './action';
 
 function* getExperts({data}) {
@@ -35,7 +35,8 @@ function* getAppointmentsForToday({data}) {
   const lang = yield select((state) => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
-    const response = yield getAppointmentsByDayAsync(data);
+    const isToday = true
+    const response = yield getAppointmentsByDayAsync(data, isToday);
     yield put(setTimes(response));
     yield put(hideApiLoader());
     return;

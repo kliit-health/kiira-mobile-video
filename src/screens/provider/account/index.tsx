@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, ListItem, TextButton} from 'components';
+import {Container, ListItem, TextButton} from '~/components';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
 import VersionCheck from 'react-native-version-check';

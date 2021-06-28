@@ -2,7 +2,6 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
-import remoteConfig from '@react-native-firebase/remote-config';
 import {displayConsole} from '../helper';
 import moment from 'moment';
 import Constant, {collections, urls} from '../constants';
@@ -39,6 +38,23 @@ export function loginInWithFirebase(obj) {
         displayConsole('error message', message);
         displayConsole('error code', code);
         return error;
+      });
+  } catch (error) {
+    displayConsole('Crash error', error);
+    return false;
+  }
+}
+
+export function getDocumentFromCollection(path) {
+  try {
+    let documentRef = firestore().doc(path).get();
+    return documentRef
+      .then((doc) => {
+        return doc.data();
+      })
+      .catch((e) => {
+        displayConsole('e', e);
+        return false;
       });
   } catch (error) {
     displayConsole('Crash error', error);
@@ -146,8 +162,9 @@ export async function getAppointmentsAsync(uid) {
   }
 }
 
-export async function getAppointmentsByDayAsync(data) {
-  const {calendarID, date} = data;
+export async function getAppointmentsByDayAsync(data, isToday) {
+
+  const {calendarID, date, appointmentType} = data;
 
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
@@ -162,15 +179,16 @@ export async function getAppointmentsByDayAsync(data) {
       "data": {
         calendarID,
         date,
+        appointmentTypeID: appointmentType
       }
     })
   }
 
   try {
     let response = {};
-    await fetch(urls.prod.appointmentGetByDay , obj)
+    await fetch(urls.dev.appointmentGetByDay , obj)
       .then((res) => res.json())
-      .then((data) => (response.future = data));
+      .then((data) => (isToday ? response.today = data : response.future = data));
     return response;
   } catch (error) {
     return error;
@@ -179,11 +197,10 @@ export async function getAppointmentsByDayAsync(data) {
 
 export async function getAppointmentDatesAsync(data) {
   try {
-
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
    
-    const {calendarID, monthNumber, addMonth, year} = data;
+    const {calendarID, monthNumber, addMonth, year, appointmentType} = data;
     const currentMonth = `${year}-${monthNumber}`;
 
     var obj = {  
@@ -194,7 +211,7 @@ export async function getAppointmentDatesAsync(data) {
       }),
       body: JSON.stringify({
         "data": {
-          "appointmentTypeID": "16299344",
+          "appointmentTypeID": appointmentType,
           "calendarID": calendarID,
           "month": currentMonth
         }
@@ -202,7 +219,7 @@ export async function getAppointmentDatesAsync(data) {
     }
 
     let response = [];
-    await fetch(urls.prod.appointmentGetByMonth, obj)
+    await fetch(urls.dev.appointmentGetByMonth, obj)
       .then((res) => res.json())
       .then((data) => {
         response = [...response, ...data];
@@ -216,14 +233,14 @@ export async function getAppointmentDatesAsync(data) {
         }),
         body: JSON.stringify({
           "data": {
-            "appointmentTypeID": "16299344",
+            "appointmentTypeID": appointmentType,
             "calendarID": calendarID,
             "month": addMonth
           }
         })
       }
 
-    await fetch(urls.prod.appointmentGetByMonth, obj)
+    await fetch(urls.dev.appointmentGetByMonth, obj)
       .then((res) => res.json())
       .then((data) => {
         response = [...response, ...data];
@@ -246,6 +263,7 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
+      appointmentType
     } = data;
 
     let noPrescription = 'I do not need a prescription,';
@@ -258,7 +276,8 @@ export async function makeAppointment({data}) {
 
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
-   
+    const {appointmentTypeID} = appointmentType;
+
     var obj = {  
       method: 'POST',
       headers: new Headers({
@@ -267,7 +286,6 @@ export async function makeAppointment({data}) {
       }),
       body: JSON.stringify({
         "data": {
-          "appointmentTypeID": "16299344",
           "firstName": firstName,
           "lastName": lastName,
           "calendarID": calendarID,
@@ -276,13 +294,13 @@ export async function makeAppointment({data}) {
           "reason": reason,
           "prescription": prescription,
           "notes": notes,
-          
+          "appointmentTypeID": appointmentTypeID,
         }
       })
     }
 
     let response;
-    let checkTime = await fetch(urls.prod.appointmentCheckTime,obj)
+    let checkTime = await fetch(urls.dev.appointmentCheckTime,obj)
       .then((res) => res.json())
       .then((data) => data)
       .catch((error) => {
@@ -290,7 +308,7 @@ export async function makeAppointment({data}) {
       });
 
     if (checkTime.valid) {
-      await fetch(urls.prod.appointmentMake, obj)
+      await fetch(urls.dev.appointmentMake, obj)
         .then((res) => res.json())
         .then((res) => {
           response = {
@@ -307,7 +325,7 @@ export async function makeAppointment({data}) {
       
       const document = firestore().collection('appointments').doc(uid);
       const prev = await document.get();
-        console.log(response);
+
       if (prev.exists) {
         await document.set(
           {history: [...prev.data().history, response]},
@@ -328,7 +346,7 @@ export async function makeAppointment({data}) {
 
       if (expertPrev.exists) {
         await expertDocument.set(
-          {history: {[uid]: [response]}},
+          {history: {[uid]: [...expertPrev.data().history[uid], response]}},
           {merge: true},
         );
       } else {
@@ -366,7 +384,7 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
   }
 
   try {
-    return await fetch(urls.prod.appointmentCancel, obj)
+    return await fetch(urls.dev.appointmentCancel, obj)
       .then((res) => {
         let response = res.json();
         return response;
@@ -431,7 +449,7 @@ export async function changeAppointmentAsync({data}) {
   }
 
   try {
-    return await fetch(urls.prod.appointmentChange, obj)
+    return await fetch(urls.dev.appointmentChange, obj)
       .then((res) => res.json())
       .then(async (res) => {
         if (res.body.error) {
@@ -1120,43 +1138,6 @@ export function setDataTesting() {
   }
 }
 
-export function deleteUser() {
-  try {
-    return auth()
-      .currentUser.delete()
-      .then(
-        function () {
-          const data = {
-            success: true,
-          };
-          return data;
-        },
-        function (error) {
-          let data = {};
-          const {message, code} = error;
-          displayConsole('error message', message);
-          displayConsole('error code', code);
-          if (code === 'auth/no-current-user') {
-            data = {
-              success: true,
-            };
-          } else {
-            auth().signOut();
-            data = {
-              success: false,
-              message,
-            };
-          }
-
-          return data;
-        },
-      );
-  } catch (error) {
-    displayConsole('Crash error', error);
-    return false;
-  }
-}
-
 export function getRecentExpertsData(obj, success, error) {
   try {
     let ref = firestore()
@@ -1269,21 +1250,6 @@ export function getFiltersDataWithCondition(obj) {
   }
 }
 
-export async function getCreditAmountsData() {
-  try {
-    let price = await remoteConfig()
-      .fetchAndActivate()
-      .then(() => {
-        const result = remoteConfig().getValue('credit_amounts');
-        return result.asString();
-      });
-
-    return price;
-  } catch (error) {
-    return null;
-  }
-}
-
 export async function addNewPaymentCard(obj) {
   try {
     const {card_number, exp_month, exp_year, cvc} = obj;
@@ -1330,7 +1296,8 @@ export async function payAmount(cardID, amount) {
       card_id: cardID,
       amount: amountInCents,
     });
-    return {ok: response};
+
+    return {ok: response.data};
   } catch (err) {
     let status = err.status ? err.status : 'internal';
     return {ok: false, status};
@@ -1432,6 +1399,7 @@ export async function getMedicalHistoryAsync(data) {
 }
 
 export const updateUserData = (updates, uid, merge = true) =>
+
   new Promise((resolve, reject) =>
     (async () => {
       const user = firestore().collection('users').doc(uid);
@@ -1683,6 +1651,23 @@ export async function sendAppointmentNotification(uid: String, time) {
   try {
     await functions().httpsCallable('sendPushNotificationAppointmentCreate')({uid, time});
     return;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function sendChatUpdateNotification(uid: String) {
+  try {
+    await functions().httpsCallable('sendPushNotificationChat')({uid});
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addClaimsToUser(organizationId: string, uid: string, roles: object) {
+  try {
+    await functions().httpsCallable('addClaimsOnCall')({organizationId, uid, roles});
   } catch (error) {
     console.log(error);
   }

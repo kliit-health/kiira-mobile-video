@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {SearchBar, TextButton, Header, Container} from 'components';
+import {SearchBar, TextButton, Header, Container} from '~/components';
 import {
   getActiveQuestions,
   getResolvedQuestions,
@@ -11,7 +11,7 @@ import {
   getTermsAndConditions,
   getPrivacyPolicy,
   getUser,
-} from 'redux/actions';
+} from '~/redux/actions';
 import {ActiveQuestions, ResolvedQuestions} from './components';
 import styles, {modifiers} from './styles';
 

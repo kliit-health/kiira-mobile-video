@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, FlatList, Image, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import FastImage from 'react-native-fast-image';
-import CustomButton from 'components/customButton';
-import CustomText from 'components/customText';
+import CustomButton from '~/components/customButton';
+import CustomText from '~/components/customText';
 import {Rating} from 'react-native-elements';
 import styles from '../style';
 import {getAppointmentsByDay} from '../action';
@@ -88,9 +88,6 @@ const ExpertInfo = ({
                           onPress={() => {
                             var date = generateDateInfo(item);
                             setShowShedule(!showShedule);
-                            dispatch(
-                              getAppointmentsByDay({...date, calendarID}),
-                            );
                             dispatch(setAppointmentTime(item.time));
                             setSelectedDate(today);
                             setSelectedTime(index);

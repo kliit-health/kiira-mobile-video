@@ -1,6 +1,7 @@
 export {default as Avatar} from './avatar';
 export {default as Card} from './card';
 export {default as CheckBox} from './checkBox';
+export {default as Conditional} from './conditional';
 export {default as Container} from './container';
 export {default as CustomButton} from './customButton';
 export {default as ExpertHeader} from './expertHeader';

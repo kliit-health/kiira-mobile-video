@@ -13,6 +13,7 @@ const CancelModal = ({visit, setVisible, visible}) => {
     id: visit.id,
     expert: visit.expert,
     prepaid: visit.prepaid,
+    credits: visit.appointmentType.credits
   };
 
   return (
@@ -47,7 +48,6 @@ const CancelModal = ({visit, setVisible, visible}) => {
               onPress={() => {
                 dispatch(cancelAppointment(data));
                 setVisible(!visible);
-                // navigation.navigate('BottomTabExpert');
               }}>
               <Text style={styles.textStyle}>Confirm</Text>
             </Pressable>

@@ -10,7 +10,7 @@ import {
 import Image from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import {icons, colors} from 'utils/constants';
+import {icons, colors} from '~/utils/constants';
 import styles from './styles';
 
 const Footer = ({
@@ -22,7 +22,7 @@ const Footer = ({
   onSendPress,
   resolved,
 }) => {
-  const lang = useSelector((state) => state.language);
+  const lang = useSelector(state => state.language);
 
   const insets = useSafeAreaInsets();
   const headerHeight = 50;
@@ -59,7 +59,7 @@ const Footer = ({
               </View>
             ) : null}
             <View style={styles.inputContainer}>
-              {Platform.OS === 'ios' && (
+              {/* {Platform.OS === 'ios' && (
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.cameraContainer}
@@ -70,7 +70,7 @@ const Footer = ({
                     source={icons.camera}
                   />
                 </TouchableOpacity>
-              )}
+              )} */}
               <View style={styles.messageContainer}>
                 <TextInput
                   maxHeight={100}

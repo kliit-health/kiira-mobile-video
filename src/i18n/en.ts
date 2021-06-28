@@ -337,6 +337,7 @@ export default {
     InvalidEmailMsg: 'Enter a valid email address. For example abc@domain.com.',
     EmptyPasswordMsg: 'Password is a required field.',
     Verify: 'Get Activation Link',
+    NoBiometrics: 'Please login with email and password to enable.'
   },
 
   paymentMethods: {

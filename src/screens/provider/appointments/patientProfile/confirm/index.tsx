@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Modal, Text, Pressable} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import CustomButton from 'components/customButton';
+import CustomButton from '~/components/customButton';
 import Recap from '../recap';
 import styles from './style';
 import {lockVisit} from '../actions';

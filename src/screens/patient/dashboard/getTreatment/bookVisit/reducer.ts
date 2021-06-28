@@ -1,4 +1,4 @@
-import {SET_PREPAID} from 'redux/types';
+import {SET_PREPAID} from '~/redux/types';
 
 const initialState = {
   prepaid: false,

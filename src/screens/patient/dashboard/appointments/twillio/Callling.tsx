@@ -9,8 +9,8 @@ import {
   StatusBar,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {smallScreen} from 'utils/metrices';
-import {setCallConfig} from 'redux/actions/twillio';
+import {smallScreen} from '~/utils/metrices';
+import {setCallConfig} from '~/redux/actions/twillio';
 import {
   TwilioVideoLocalView,
   TwilioVideoParticipantView,

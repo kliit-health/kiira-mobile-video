@@ -2,58 +2,48 @@ import {put, takeLatest, call, select} from 'redux-saga/effects';
 import {
   showApiLoader,
   hideApiLoader,
-} from 'components/customLoader/action';
-import {updateUser} from 'redux/actions';
+} from '~/components/customLoader/action';
+import {updateUser} from '~/redux/actions';
 import {
   CREATE_PAYMENT_CARD,
-  GET_CREDIT_AMOUNT_OPTIONS,
   GET_PAYMENT_METHODS,
   BUY_CREDITS_WITH_CARD,
   BUY_CREDITS_WITH_TOKEN,
   BUY_CREDITS_WITH_PAYPAL,
   CAPTURE_PAYMENT,
   SET_PREPAID,
-} from 'redux/types';
+} from '~/redux/types';
 import {
   addNewPaymentCard,
-  getCreditAmountsData,
   getPaymentMethods as getPaymentMethodsCloudFunction,
   payAmount,
   updateCredits,
   payAmountWithToken,
   getPayPalAccessToken,
   getDataFromTable,
-} from 'utils/firebase';
+} from '~/utils/firebase';
 
 import {
   createPayPalOrder,
   capturePayPalPaymentAPI,
-} from 'utils/webServices';
+} from '~/utils/webServices';
 import {
-  setCreditAmountsOptions,
   setPaymentMethods,
   setNativePaySupport,
   setOrderData,
   setData,
 } from './action';
 
-import {showOrHideModal} from 'components/customModal/action';
-import {parseCardInfo} from 'utils/helper/payment';
+import {showOrHideModal} from '~/components/customModal/action';
+import {parseCardInfo} from '~/utils/helper/payment';
 import {NavigationService} from '../../../../../navigation';
-import {deviceSupportsNativePay} from 'utils/payment';
-import Constant, {tables} from 'utils/constants';
+import {deviceSupportsNativePay} from '~/utils/payment';
+import Constant, {tables} from '~/utils/constants';
 import auth from '@react-native-firebase/auth';
 
 function* checkNativePaySupport() {
   const isSupported = yield call(deviceSupportsNativePay);
   yield put(setNativePaySupport(isSupported));
-}
-function* getCreditAmounts() {
-  const creditAmountsString = yield call(getCreditAmountsData);
-  const creditAmounts = creditAmountsString
-    ? JSON.parse(creditAmountsString)
-    : null;
-  yield put(setCreditAmountsOptions(creditAmounts));
 }
 
 function* createPayment({data}) {
@@ -112,7 +102,7 @@ function* getPaymentMethods() {
   }
 }
 
-function* handlePayResponse(response, credits, navigation?) {
+function* handlePayResponse(response, credits) {
   const lang = yield select((state) => state.language);
   if (response.ok) {
     const user = auth().currentUser;
@@ -124,18 +114,17 @@ function* handlePayResponse(response, credits, navigation?) {
         uid: user.uid,
       };
       const userData = yield getDataFromTable(obj);
+      
       yield put(setData(userData));
       yield put(updateUser(userData));
       yield put(showOrHideModal(lang.successMessages.visitAddedSuccessfully));
-      if (navigation === undefined) {
-        NavigationService.goBack();
-      } else {
-        navigation.goBack();
-      }
+      
+      NavigationService.goBack();
     }
   }
 
   if (!response.ok) {
+    console.log()
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }
@@ -210,7 +199,6 @@ function* capturePayPalPayment({
 
 export default function* paymentSaga() {
   yield takeLatest(CREATE_PAYMENT_CARD, createPayment);
-  yield takeLatest(GET_CREDIT_AMOUNT_OPTIONS, getCreditAmounts);
   yield takeLatest(GET_PAYMENT_METHODS, getPaymentMethods);
   yield takeLatest(BUY_CREDITS_WITH_CARD, buyCredits);
   yield takeLatest(BUY_CREDITS_WITH_TOKEN, buyCreditsWithToken);

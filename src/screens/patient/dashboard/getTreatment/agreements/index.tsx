@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, ActivityIndicator, ScrollView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {screenNames} from 'utils/constants';
-import {Modal, TextButton, Header, Container} from 'components';
+import {screenNames} from '~/utils/constants';
+import {Modal, TextButton, Header, Container} from '~/components';
 import Logo from '../../../../../svgs/penguin.svg';
-import {updateUser} from 'redux/actions';
+import {updateUser} from '~/redux/actions';
 import styles, {modifiers} from './styles';
 
 const Agreements = ({navigation}) => {

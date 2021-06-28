@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import Constant, {text, colors} from 'utils/constants';
-import metrics from 'utils/metrices';
-import {getStatusBarHeight} from 'components/iPhoneXHelper';
+import Constant, {text, colors} from '~/utils/constants';
+import metrics from '~/utils/metrices';
+import {getStatusBarHeight} from '~/components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -14,6 +14,13 @@ const styles = StyleSheet.create({
     height: metrics.width * 0.05,
     width: metrics.width * 0.05,
     alignSelf: 'flex-end',
+  },
+
+  biometrics: {
+    alignSelf: 'center',
+    height: metrics.width * 0.10,
+    width: metrics.width * 0.10,
+    marginTop: metrics.height * 0.05,
   },
 
   contentContainerStyle: {

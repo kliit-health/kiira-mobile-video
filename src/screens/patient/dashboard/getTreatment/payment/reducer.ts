@@ -4,7 +4,7 @@ import {
   SET_NATIVE_PAY_SUPPORT,
   SET_ORDER_DATA,
   SET_USER_DATA,
-} from 'redux/types';
+} from '~/redux/types';
 
 const initialState = {
   creditAmountOptions: null,

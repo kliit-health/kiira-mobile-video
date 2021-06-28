@@ -47,6 +47,8 @@
 	<string>Kiira would like to use your camera.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Kiira would like access to your contacts for scheduling</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Enabling Face ID allows you quick and secure access to your account.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Kiira would like to access your location when in use</string>
 	<key>NSMicrophoneUsageDescription</key>

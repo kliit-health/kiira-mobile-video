@@ -27,7 +27,8 @@ function* getUser() {
   }
 }
 
-function* updateUser({data: {uid, ...rest}}) {
+function* updateUser({data: { ...rest}}) {
+  const uid = auth().currentUser.uid;
   try {
     yield put({type: UPDATE_USER_PENDING});
     yield firebaseSingleUpdate(uid, 'users', {...rest});

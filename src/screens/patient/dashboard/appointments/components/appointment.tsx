@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import CustomButton from 'components/customButton';
-import CustomText from 'components/customText';
+import CustomButton from '~/components/customButton';
+import CustomText from '~/components/customText';
 import {Rating} from 'react-native-elements';
 import styles from '../style';
 import {useDispatch, useSelector} from 'react-redux';
@@ -12,12 +12,13 @@ const Appointment = ({visit, date, navigation}) => {
   const lang = useSelector((state) => state.language);
   const dispatch = useDispatch();
 
-  const {uid, calendarID} = visit;
+  const {uid, calendarID, appointmentType: {credits,duration}} = visit;
   const data = {
     uid: visit.uid,
     id: visit.id,
     expert: visit.expert,
     prepaid: visit.prepaid,
+    credits: credits
   };
 
   return (
@@ -80,7 +81,7 @@ const Appointment = ({visit, date, navigation}) => {
             <Text>{date.hour.am_pm} </Text>
           </View>
           <View style={{alignItems: 'center', margin: 20}}>
-            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>30 </Text>
+            <Text style={{marginBottom: 10, fontWeight: 'bold'}}>{duration} </Text>
             <Text>MIN </Text>
           </View>
         </View>

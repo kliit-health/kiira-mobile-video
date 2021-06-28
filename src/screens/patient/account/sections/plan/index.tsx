@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {ModalConfirm, TextButton} from 'components';
+import {ModalConfirm, TextButton} from '~/components';
 import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
 import {View, Text, Linking} from 'react-native';
-import {cancelSubscription} from 'redux/actions';
+import {cancelSubscription} from '~/redux/actions';
 import styles from './styles';
 
 export default ({subscription, user}) => {

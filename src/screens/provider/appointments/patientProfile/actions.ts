@@ -6,7 +6,7 @@ import {
   GET_MEDICAL_HISTORY,
   SET_MEDICAL_HISTORY,
   CLEAR_MEDICAL_HISTORY,
-} from 'redux/types';
+} from '~/redux/types';
 
 export const getPatientDetails = (data) => ({
   type: GET_PATIENT_DETAILS,

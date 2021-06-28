@@ -2,8 +2,8 @@ import React, {Fragment, useState} from 'react';
 import {useSelector, shallowEqual} from 'react-redux';
 import {View, Text, SectionList} from 'react-native';
 import moment from 'moment';
-import {screenNames, videoHistory} from 'utils/constants';
-import {ListItem, TextButton, Modal} from 'components';
+import {screenNames, videoHistory} from '~/utils/constants';
+import {ListItem, TextButton, Modal} from '~/components';
 import {getSections, formatTime} from './helpers';
 import {
   listStyles,
@@ -47,6 +47,7 @@ const VideoHistory = ({navigation, expertDetails}) => {
   return (
     <Fragment>
       <SectionList
+        showsVerticalScrollIndicator={false}
         style={listStyles.root}
         ListEmptyComponent={() => <Fallback />}
         keyExtractor={({visit}, index) => `${visit.id} ${index}`}
@@ -79,7 +80,7 @@ const VideoHistory = ({navigation, expertDetails}) => {
 };
 
 const ItemFuture = (props) => {
-  const {reason, time, expert, onPress, index} = props;
+  const {reason, time, expert, onPress, index, appointmentType: {duration}} = props;
   const {firstName, lastName} = expert;
 
   const handlePress = () => {
@@ -100,7 +101,7 @@ const ItemFuture = (props) => {
         </View>
       </View>
       <View style={itemFutureStyles.timeContainer}>
-        {formatTime(time).map(({primary, secondary}) => (
+        {formatTime(time,duration).map(({primary, secondary}) => (
           <View key={primary} style={itemFutureStyles.timeItem}>
             <Text style={itemFutureStyles.primaryText}>{primary}</Text>
             <Text style={itemFutureStyles.secondaryText}>{secondary}</Text>

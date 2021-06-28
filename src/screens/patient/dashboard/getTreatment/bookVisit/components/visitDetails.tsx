@@ -3,11 +3,12 @@ import {View, Text} from 'react-native';
 import styles from '../style';
 import moment from 'moment';
 
-const VisitDetails = ({applyCredit, booked, visitData, price}) => {
+const VisitDetails = ({applyCredit, booked, visitData}) => {
+  const {appointmentType: {price, duration}} = visitData;
   return (
     <View style={styles.visitDetailsContainer}>
       <View style={styles.visitDetailsWrapper}>
-        <Text style={styles.visitDetails}>30 min video call</Text>
+        <Text style={styles.visitDetails}>{`${duration} min video call`}</Text>
       </View>
       <View style={styles.visitDetailsWrapper}>
         <Text style={styles.visitDetails}>

@@ -6,7 +6,7 @@ import {
   SET_APPOINTMENT_DATES,
   SET_CALENDAR_ID,
   SET_TIMES,
-} from 'redux/types';
+} from '~/redux/types';
 
 const initialState = {
   reason: null,
