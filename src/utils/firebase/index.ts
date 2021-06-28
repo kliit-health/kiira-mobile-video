@@ -346,7 +346,7 @@ export async function makeAppointment({data}) {
 
       if (expertPrev.exists) {
         await expertDocument.set(
-          {history: {[uid]: [...expertPrev.data().history[uid], response]}},
+          {history: {[uid]: [...expertPrev.data().history[uid] || [], response]}},
           {merge: true},
         );
       } else {
