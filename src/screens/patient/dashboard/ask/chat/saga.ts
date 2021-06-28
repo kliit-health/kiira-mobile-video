@@ -285,9 +285,8 @@ function* loadMessagesOfUser({data, dispatch}) {
         );
       },
       (error) => {
-        const {message, code} = error;
-        displayConsole('message loadMessagesOfUser', message);
-        displayConsole('code loadMessagesOfUser', code);
+        const {message} = error;
+
         const data = {
           success: false,
           message: message,
@@ -337,9 +336,8 @@ function* checkExpertStatus({data, dispatch}) {
         );
       },
       (error) => {
-        const {message, code} = error;
-        displayConsole('message', message);
-        displayConsole('code', code);
+        const {message} = error;
+
         const data = {
           success: false,
           message: message,
@@ -378,9 +376,8 @@ function* checkQuestStatus({data, dispatch}) {
         );
       },
       (error) => {
-        const {message, code} = error;
-        displayConsole('message', message);
-        displayConsole('code', code);
+        const {message} = error;
+
         const data = {
           success: false,
           message: message,
