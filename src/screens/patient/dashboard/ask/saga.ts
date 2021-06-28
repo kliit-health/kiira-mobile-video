@@ -49,8 +49,6 @@ function* getQuestions({data, dispatch}) {
       },
       (error) => {
         const {message, code} = error;
-        displayConsole('message getQuestionsData', message);
-        displayConsole('code getQuestionsData', code);
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
@@ -88,7 +86,6 @@ function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
       },
       (error) => {
         const {message, code} = error;
-        displayConsole('code getRecentExpertsData', code);
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
@@ -120,8 +117,6 @@ function* getPreviousQuestions(previousQuestionParams, dispatch) {
       },
       (error) => {
         const {message, code} = error;
-        displayConsole('message getPreviousQuestions', message);
-        displayConsole('code getPreviousQuestions', code);
         dispatch(hideApiLoader());
         if (code && code !== 'firestore/permission-denied') {
           dispatch(

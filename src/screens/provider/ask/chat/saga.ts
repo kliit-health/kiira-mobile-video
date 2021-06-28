@@ -161,9 +161,8 @@ function* loadMessagesOfExpert({data, dispatch}) {
         );
       },
       (error) => {
-        const {message, code} = error;
-        displayConsole('message loadMessagesOfExpert', message);
-        displayConsole('code loadMessagesOfExpert', code);
+        const {message} = error;
+
         const data = {
           success: false,
           message: message,

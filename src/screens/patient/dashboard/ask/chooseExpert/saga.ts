@@ -105,8 +105,7 @@ function* getExperts(data, dispatch) {
       },
       (error) => {
         const {message, code} = error;
-        displayConsole('message getExpertsData', message);
-        displayConsole('code getExpertsData', code);
+        
         if (code && code !== 'firestore/permission-denied') {
           if (!isProfessionLangaugesDataLoaded) {
             dispatch(hideApiLoader());
