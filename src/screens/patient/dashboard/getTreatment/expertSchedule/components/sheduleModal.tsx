@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react';
-import {useSelector} from 'react-redux';
 import {
   ScrollView,
   View,
@@ -146,7 +145,7 @@ const SheduleModal = ({
                   (styles.firstAvaliable,
                   {alignSelf: 'center', marginVertical: 5})
                 }>
-                No Availibility
+                No Availability
               </CustomText>
             )}
 
@@ -194,7 +193,7 @@ const SheduleModal = ({
                     (styles.firstAvaliable,
                     {alignSelf: 'center', marginVertical: 15})
                   }>
-                  No Availibility
+                  No Availability
                 </CustomText>
               )}
             </ScrollView>

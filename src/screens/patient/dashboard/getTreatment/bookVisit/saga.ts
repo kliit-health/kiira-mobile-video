@@ -21,7 +21,7 @@ function* setAppointment(data) {
 
     if (appointment && !appointment.availible) {
       yield put(
-        showOrHideModal('Appointment is unavailible please reschedule.'),
+        showOrHideModal('Appointment is unavailable please select a different time.'),
       ); 
       NavigationService.goBack();
     } else {

@@ -84,11 +84,11 @@ function* updateAppointment({data, data: {navigation}}) {
 
     if (appointment && !appointment.availible) {
       yield put(
-        showOrHideModal('Appointment is unavailible please reschedule.'),
+        showOrHideModal('Appointment is unavailable please select a different time.'),
       );
       navigation.navigate('Appointments');
     }
-    yield showOrHideModal('Appointment has been rescheduled.');
+    yield showOrHideModal('Your appointment has been sucessfully rescheduled.');
     yield put(getAppointmentsList({uid: data.data.uid}));
 
     navigation.navigate('Appointments');

@@ -69,7 +69,7 @@ export const UPDATE_NEW_USER_DETAIL_DATA = 'UPDATE_NEW_USER_DETAIL_DATA';
 export const UPDATE_USER_DETAIL_DATA = 'UPDATE_USER_DETAIL_DATA';
 export const UPDATE_EXPERT_DETAIL_DATA = 'UPDATE_EXPERT_DETAIL_DATA';
 
-// Update Availibility Types
+// Update Availability Types
 export const UPDATE_EXPERT_HOURS_DATA = 'UPDATE_EXPERT_HOURS_DATA';
 
 // Chat Types
