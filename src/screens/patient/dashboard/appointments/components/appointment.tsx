@@ -3,10 +3,12 @@ import {View, Text, Image} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import CustomButton from '~/components/customButton';
 import CustomText from '~/components/customText';
+import {showOrHideModal} from '~/components/customModal/action';
 import {Rating} from 'react-native-elements';
 import styles from '../style';
 import {useDispatch, useSelector} from 'react-redux';
 import {cancelAppointment} from '../action';
+import moment from 'moment';
 
 const Appointment = ({visit, date, navigation}) => {
   const lang = useSelector((state) => state.language);
@@ -20,6 +22,17 @@ const Appointment = ({visit, date, navigation}) => {
     prepaid: visit.prepaid,
     credits: credits
   };
+
+  let today = moment().local()
+  let daysUntilVisit = Math.abs(
+    moment.duration(today.diff(visit.time)).asDays(),
+  );
+
+  const sameDay = daysUntilVisit < 1
+
+  const handleSameDay = () => (
+    dispatch(showOrHideModal("Appointments can not be cancelled or rescheduled if your appointment is within 24 hours."))
+  )
 
   return (
     <View style={{alignSelf: 'center', paddingBottom: 50}}>
@@ -101,6 +114,7 @@ const Appointment = ({visit, date, navigation}) => {
           buttonStyle={styles.noContainerStyle}
           textStyle={styles.noTextStyle}
           onPress={() =>
+            sameDay ? handleSameDay() :
             navigation.navigate('RescheduleVisit', {
               visit,
               date,
@@ -114,7 +128,7 @@ const Appointment = ({visit, date, navigation}) => {
         <CustomButton
           buttonStyle={styles.noContainerStyle}
           textStyle={styles.noTextStyle}
-          onPress={() => dispatch(cancelAppointment(data))}
+          onPress={() => sameDay ? handleSameDay() : dispatch(cancelAppointment(data))}
           text="Cancel Appointment"
         />
       </View>

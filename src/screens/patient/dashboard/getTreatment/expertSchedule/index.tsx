@@ -25,8 +25,8 @@ import {
 } from './components';
 
 const ExpertSchedule = (props) => {
+  
   const expertData = useSelector((state) => state.expertProfile.expertData);
-
   const appointmentData = useSelector((state) => state.expertSchedule);
   const {appointmentType: {appointmentType}} = appointmentData;
 
@@ -50,7 +50,7 @@ const ExpertSchedule = (props) => {
     };
 
     let addMonth = moment(`${current.year}-${current.monthNumber}`);
-    addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
 
     dispatch(getExpertsData(obj));
     dispatch(setCalendarID(calendarID));
@@ -77,7 +77,7 @@ const ExpertSchedule = (props) => {
     time,
     today,
   };
-
+  
   return (
     <View style={styles.parentContainerStyle}>
       <Header title="Book Visit" onBack={() => navigation.goBack()} />
