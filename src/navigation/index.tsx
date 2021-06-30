@@ -139,63 +139,6 @@ const PaymentStack = createStackNavigator(
 );
 const BottomTab = createBottomTabNavigator(
   {
-    Home: {
-      screen: Dashboard,
-      navigationOptions: {
-        tabBarIcon: ({focused}) => (
-          <View
-            style={{
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: focused ? '#e4fdfd' : '',
-              padding: focused ? 10 : 0,
-              marginTop: 5,
-              borderRadius: 20,
-            }}>
-            <Image
-              resizeMode={'contain'}
-              style={{width: tabIconSize, height: tabIconSize}}
-              source={
-                focused
-                  ? require('../../assets/home-active.png')
-                  : require('../../assets/home.png')
-              }
-            />
-          </View>
-        ),
-      },
-    },
-    RequestVisit: {
-      screen: RequestVisit,
-      navigationOptions: {
-        tabBarIcon: ({focused}) => (
-          <View
-            style={{
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: focused ? '#e4fdfd' : '',
-              padding: focused ? 10 : 0,
-              marginTop: 5,
-              borderRadius: 20,
-            }}>
-            <Image
-              resizeMode={'contain'}
-              style={{
-                width: tabIconSize,
-                height: tabIconSize,
-              }}
-              source={
-                focused
-                  ? require('../../assets/doctor-active.png')
-                  : require('../../assets/doctor.png')
-              }
-            />
-          </View>
-        ),
-      },
-    },
     Community: {
       screen: Learn,
       navigationOptions: {
@@ -223,6 +166,33 @@ const BottomTab = createBottomTabNavigator(
             </View>
           );
         },
+      },
+    },
+    Home: {
+      screen: Dashboard,
+      navigationOptions: {
+        tabBarIcon: ({focused}) => (
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: focused ? '#e4fdfd' : '',
+              padding: focused ? 10 : 0,
+              marginTop: 5,
+              borderRadius: 20,
+            }}>
+            <Image
+              resizeMode={'contain'}
+              style={{width: tabIconSize, height: tabIconSize}}
+              source={
+                focused
+                  ? require('../../assets/home-active.png')
+                  : require('../../assets/home.png')
+              }
+            />
+          </View>
+        ),
       },
     },
     Me: {

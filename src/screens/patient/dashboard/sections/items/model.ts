@@ -1,40 +1,41 @@
-import {screenNames, icons} from '~/utils/constants';
+import {screenNames} from '~/utils/constants';
+import * as SVG from '~/svgs';
 
 export default [
   {
     title: `dashboard.getTreatment`,
     destination: screenNames.requestVisit,
-    icon: icons.bandAid,
+    Icon: SVG.Camera,
     features: 'video',
   },
   {
     title: `dashboard.mySquad`,
     destination: screenNames.careSquad,
-    icon: icons.squad,
+    Icon: SVG.Squad,
     features: '',
   },
   {
     title: `dashboard.chatExpert`,
     destination: screenNames.ask,
-    icon: icons.chat,
+    Icon: SVG.Chat,
     features: 'chat',
   },
   {
     title: `dashboard.myHistory`,
     destination: screenNames.healthHistory,
-    icon: icons.clipboard,
+    Icon: SVG.ClockBack,
     features: '',
   },
   {
     title: `dashboard.reminders`,
     destination: screenNames.appointments,
-    icon: icons.reminders,
+    Icon: SVG.Calendar,
     features: 'video',
   },
   {
     title: `dashboard.sos`,
     destination: screenNames.sos,
-    icon: icons.sos,
+    Icon: SVG.Caution,
     features: '',
   },
 ];

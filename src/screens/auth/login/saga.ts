@@ -62,6 +62,7 @@ function* loginFirebase({data}) {
       yield put(getTermsAndConditions());
       const userData = yield select((state) => state.user.data);
       yield delay(1000);
+
       yield auth().currentUser.getIdTokenResult().then( ({claims: {role}}) => {
           if (role.student || role.subscriber) {
             if (!userData.firstLogin && userData.agreeToTerms) {

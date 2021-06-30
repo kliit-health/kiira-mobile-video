@@ -40,7 +40,7 @@ export default {
       paleLilac: '#e5e5ea',
       pinkColor: '#FE9FD8',
       pinkishGreyColor: 'rgb(206 ,206 ,206)',
-      purple: 'red',
+      purple: '#9102E2',
       redColor: 'red',
       redColorLogout: '#D41F08',
       redColorExpired: '#d92405',
@@ -1842,6 +1842,12 @@ export const urls = {
     appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
     appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth'
   }
+}
+
+export const assessment = {
+  initial: "Schedule your free 15 minute health assessment!",
+  pending: "Health Assessment",
+  complete: "Select Get Treatment to schedule your visit for:"
 }
 
 export const videoHistory = {
