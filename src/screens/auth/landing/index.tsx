@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {
-  SafeAreaView,
   StatusBar,
   View,
-  ImageBackground,
+  Image,
   ScrollView,
   Dimensions,
   Platform,
@@ -19,11 +18,8 @@ import {
 import SplashScreen from 'react-native-smart-splash-screen';
 import styles from './style';
 import Constant from '~/utils/constants';
-import CustomButton from '~/components/customButton';
-import Carousel from '~/components/carousel';
+import {Carousel, PageIndicator, CustomButton} from '~/components';
 import VersionCheck from 'react-native-version-check';
-import RNExitApp from 'react-native-exit-app';
-import JailMonkey from 'jail-monkey';
 
 const largeDisplay = Dimensions.get('window').height > 800;
 
@@ -54,9 +50,9 @@ let banner = [
   },
 ];
 
-const Landing = (props) => {
+const Landing = props => {
   const {navigation} = props;
-  const lang = useSelector((state) => state.language);
+  const lang = useSelector(state => state.language);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -65,7 +61,7 @@ const Landing = (props) => {
         PERMISSIONS.ANDROID.RECORD_AUDIO,
         PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
       ])
-        .then((statuses) => {
+        .then(statuses => {
           for (var key in statuses) {
             if (statuses.hasOwnProperty(key)) {
               switch (statuses[key]) {
@@ -76,7 +72,7 @@ const Landing = (props) => {
                     PERMISSIONS.ANDROID.CAMERA,
                     PERMISSIONS.ANDROID.RECORD_AUDIO,
                     PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
-                  ]).then((result) => {});
+                  ]).then(result => {});
                   break;
                 case RESULTS.GRANTED:
                   break;
@@ -86,7 +82,7 @@ const Landing = (props) => {
             }
           }
         })
-        .catch((error) => {
+        .catch(error => {
           console.log('The permission error', error);
         });
     }
@@ -98,7 +94,7 @@ const Landing = (props) => {
   }, []);
 
   useEffect(() => {
-    VersionCheck.needUpdate().then(async (res) => {
+    VersionCheck.needUpdate().then(async res => {
       if (res.isNeeded) {
         Linking.openURL(res.storeUrl); // open store if update is needed.
       }
@@ -115,25 +111,11 @@ const Landing = (props) => {
 
   const renderSliderView = () => {
     return (
-      <View style={styles.sliderViewStyle}>
+      <View style={styles.carouselContianer}>
         <StatusBar hidden />
-        <Carousel
-          autoplay
-          autoplayTimeout={5000}
-          loop
-          index={0}
-          pageSize={Dimensions.get('window').width}
-          activePageIndicatorStyle={{
-            backgroundColor: Constant.App.colors.blueColor,
-          }}>
-          {banner.map((item, key) => (
-            <View key={key}>
-              <ImageBackground
-                style={styles.bannerImageStyle}
-                resizeMethod={'auto'}
-                source={item.image}
-              />
-            </View>
+        <Carousel pageIndicator={props => <PageIndicator {...props} />}>
+          {banner.map(({image}, index) => (
+            <Image key={index} style={styles.carouselImage} source={image} />
           ))}
         </Carousel>
       </View>

@@ -3,15 +3,15 @@ import metrics from '~/utils/metrices';
 import Constant, {text, colors} from '~/utils/constants';
 
 const styles = StyleSheet.create({
-  bannerImageStyle: {
+  carouselImage: {
     height: metrics.height,
     width: metrics.width,
   },
 
   buttonContainerStyle: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-end',
     // alignItems: 'center',
     height: metrics.height * 0.08,
     // backgroundColor: colors.white,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
   loginButtonStyle: {
     padding: 8,
-    width: metrics.width * 0.40,
+    width: metrics.width * 0.4,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',
@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
 
   loginButtonTextStyle: {
     fontFamily: text.fontFamily.poppinsRegular,
-    fontSize: text.size.normal,
+    fontSize: text.size.regular,
     color: colors.blue,
     textAlign: 'center',
   },
 
-  sliderViewStyle: {
+  carouselContianer: {
     height: metrics.height * 0.92,
     width: metrics.width,
   },
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   verifyButtonStyle: {
     // margin: 12,
     padding: 8,
-    width: metrics.width * 0.40,
+    width: metrics.width * 0.4,
     borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
     justifyContent: 'center',
     alignItems: 'center',

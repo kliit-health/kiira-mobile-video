@@ -25,3 +25,4 @@ export {default as TextInput} from './textInput';
 export {default as TimeDisplay} from './timeDisplay';
 export {default as Divider} from './divider';
 export {default as ModalConfirm} from './modalConfirm';
+export {Carousel, PageIndicator} from './carousel';
