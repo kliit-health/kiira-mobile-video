@@ -337,6 +337,7 @@ export default {
     InvalidEmailMsg: 'Enter a valid email address. For example abc@domain.com.',
     EmptyPasswordMsg: 'Password is a required field.',
     Verify: 'Get Activation Link',
+    Activation: 'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
     NoBiometrics: 'Please login with email and password to enable.'
   },
 
@@ -509,7 +510,7 @@ export default {
     mySquad: 'My Squad',
     chatExpert: 'Chat with an Expert',
     myHistory: 'My History',
-    reminders: 'Reminders',
+    appointments: 'Appointments',
     sos: 'SOS',
     helloName: 'Hello, ',
     notFeelingSick: `I'm not feeling sick`,

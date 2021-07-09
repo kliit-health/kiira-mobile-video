@@ -493,6 +493,7 @@ export default {
       passwordInvisibleIcon: require('../../../assets/eye_hide.png'),
       payPalIcon: require('../../../assets/paypal.png'),
       penguin: require('../../../assets/kiira_penguin.png'),
+      penguin_b: require('../../../assets/kiira_penguin_b.png'),
       plusIcon: require('../../../assets/plus.png'),
       pregnancy: require('../../../assets/pregnancy.png'),
       profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
@@ -1844,7 +1845,7 @@ export const urls = {
   }
 }
 
-export const assessment = {
+export const assessmentText = {
   initial: "Schedule your free 15 minute health assessment!",
   pending: "Health Assessment",
   complete: "Select Get Treatment to schedule your visit for:"

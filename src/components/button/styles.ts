@@ -1,16 +1,18 @@
 import {StyleSheet} from 'react-native';
 import {text, colors} from '~/utils/constants';
+import { smallScreen } from '~/utils/metrices';
 
 const styles = StyleSheet.create({
     text: {
         color: colors.blue,
         textAlign: "center",
-        fontSize: text.size.xLarge
+        fontSize: smallScreen ? 17 : text.size.xLarge
     },
     button: {
         backgroundColor: colors.white,
-        margin: 20,
-        padding: 15,
+        marginVertical: smallScreen ? 10 : 20,
+        marginHorizontal: 20,
+        padding: smallScreen ? 10 : 15,
         borderRadius: 30
     }
 })

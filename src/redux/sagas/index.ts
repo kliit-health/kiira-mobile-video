@@ -6,6 +6,7 @@ import agreements from './agreements';
 import appointments from '../../screens/patient/dashboard/appointments/saga';
 import ask from '../../screens/patient/dashboard/ask/saga';
 import askExpert from '../../screens/provider/ask/saga';
+import assessment from './assessment';
 import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/saga';
 import changePassword from '../../screens/patient/account/settings/changePassword/saga';
 import chat from '../../screens/patient/dashboard/ask/chat/saga';
@@ -50,6 +51,7 @@ export default function* rootSaga() {
     appointments(),
     askExpert(),
     ask(),
+    assessment(),
     bookVisit(),
     changePassword(),
     chat(),

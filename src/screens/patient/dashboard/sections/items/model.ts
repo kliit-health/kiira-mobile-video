@@ -27,7 +27,7 @@ export default [
     features: '',
   },
   {
-    title: `dashboard.reminders`,
+    title: `dashboard.appointments`,
     destination: screenNames.appointments,
     Icon: SVG.Calendar,
     features: 'video',

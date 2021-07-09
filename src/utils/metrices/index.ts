@@ -16,4 +16,4 @@ export default {
   BOTTOM_SAVE_AREA: getBottomSpace(),
 };
 
-export const smallScreen = width <= 400 && height <= 666;
+export const smallScreen = width <= 400 && height <= 667;

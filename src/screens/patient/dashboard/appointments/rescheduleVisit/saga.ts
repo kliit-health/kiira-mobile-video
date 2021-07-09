@@ -18,6 +18,7 @@ import {
 } from '~/utils/firebase';
 import {getAppointmentsList} from '../action';
 import {showOrHideModal} from '~/components/customModal/action';
+import {updateUser} from '~/redux/actions';
 import {setTimes, setAppointmentDates} from './action';
 
 function* getExperts({data}) {
@@ -76,7 +77,8 @@ function* getAppointmentDates({data}) {
   }
 }
 
-function* updateAppointment({data, data: {navigation}}) {
+function* updateAppointment({data, data: {data: {time}, navigation}}) {
+  const {assessment} = yield select((state) => state.user.data);
   try {
     yield put(showApiLoader());
     let appointment = yield changeAppointmentAsync(data);
@@ -88,6 +90,7 @@ function* updateAppointment({data, data: {navigation}}) {
       );
       navigation.navigate('Appointments');
     }
+    yield put(updateUser({assessment: {...assessment, time}}))
     yield showOrHideModal('Your appointment has been sucessfully rescheduled.');
     yield put(getAppointmentsList({uid: data.data.uid}));
 

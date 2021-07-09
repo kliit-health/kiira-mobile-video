@@ -42,7 +42,6 @@ export default StyleSheet.create({
   textStyle: {
     width: metrices.width - 80,
     color: Constant.App.colors.blackColor,
-    textAlign: 'center',
     paddingLeft: 25,
     paddingRight: 25,
     fontSize: Constant.App.textSize.Large,

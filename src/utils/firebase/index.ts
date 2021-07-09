@@ -185,11 +185,13 @@ export async function getAppointmentsByDayAsync(data, isToday) {
   }
 
   try {
-    let response = {};
+    const times = {};
     await fetch(urls.dev.appointmentGetByDay , obj)
       .then((res) => res.json())
-      .then((data) => (isToday ? response.today = data : response.future = data));
-    return response;
+      .then((data) =>{ 
+        isToday ? times.today = data : times.current = data
+      });
+    return times;
   } catch (error) {
     return error;
   }
@@ -252,6 +254,7 @@ export async function getAppointmentDatesAsync(data) {
 }
 
 export async function makeAppointment({data}) {
+
   try {
     const {
       firstName,
@@ -322,7 +325,7 @@ export async function makeAppointment({data}) {
         .catch((error) => {
           console.error(error);
         });
-      
+
       const document = firestore().collection('appointments').doc(uid);
       const prev = await document.get();
 
@@ -455,6 +458,9 @@ export async function changeAppointmentAsync({data}) {
         if (res.body.error) {
           return res.body;
         }
+
+        console.log(res);
+
         const document = firestore().collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();

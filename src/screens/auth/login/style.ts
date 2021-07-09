@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Constant, {text, colors} from '~/utils/constants';
-import metrics from '~/utils/metrices';
+import metrics, {smallScreen} from '~/utils/metrices';
 import {getStatusBarHeight} from '~/components/iPhoneXHelper';
 
 let parentPaddingValue = metrics.width * 0.08;
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainerStyle: {
-    padding: parentPaddingValue,
+    padding: smallScreen ? 0 : parentPaddingValue,
   },
 
   forgotPasswordTextStyle: {
