@@ -1,26 +1,21 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import { Button } from '~/components';
 import { newUser } from './models';
-import { toogleModal } from '~/redux/reducers/assessment';
-import QuickModal from './quickModal';
-
 import styles from '../styles';
 
-const NewUser = () => {
-    const dispatch = useDispatch();
+const NewUser = ({ navigation }) => {
+    const handleNavigation = () => {
+        navigation.navigate('HealthAssessmentSchedule');
+    };
 
     return (
         <View style={styles.newUser}>
             <Text style={styles.title}>{newUser.title}</Text>
-            <Button
-                text={newUser.button}
-                onPress={() => dispatch(toogleModal())}
-            />
-            <QuickModal />
+            <Button text={newUser.button} onPress={handleNavigation} />
         </View>
     );
 };
 
-export default NewUser;
+export default withNavigation(NewUser);

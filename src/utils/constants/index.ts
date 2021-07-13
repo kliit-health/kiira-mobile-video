@@ -1828,12 +1828,12 @@ export const collections = {
 
 export const urls = {
   prod: {
-    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayAuth',
-    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthAuth',
-    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeAuth',
-    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeAuth',
+    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
+    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
+    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
+    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
     appointmentCancel: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeAuth'
+    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType'
   },
   dev: {
     appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',

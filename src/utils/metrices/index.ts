@@ -4,7 +4,7 @@ import {
   getBottomSpace,
 } from '../../components/iPhoneXHelper';
 
-const IS_ANDROID = Platform.OS === 'android';
+export const IS_ANDROID = Platform.OS === 'android';
 
 const {height, width} = Dimensions.get('window');
 

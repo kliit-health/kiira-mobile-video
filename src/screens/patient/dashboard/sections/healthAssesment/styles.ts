@@ -1,10 +1,8 @@
 import {StyleSheet} from 'react-native';
 import {text, colors} from '~/utils/constants';
-import metrics, {smallScreen} from '~/utils/metrices';
+import metrics, {smallScreen, IS_ANDROID} from '~/utils/metrices';
 import Constant from '~/utils/constants';
 
-let parentPaddingValue = metrics.width * 0.1;
-let parentPadding = parentPaddingValue * 2;
 let titlePaddingValue = metrics.width * 0.05;
 
 
@@ -32,6 +30,10 @@ export default StyleSheet.create({
         marginHorizontal: 10,
         borderRadius: 15,
         marginVertical: smallScreen ? 0 : 40,
+        shadowOffset: {width: 0, height: 4},
+        shadowColor: '#000000',
+        shadowOpacity: 0.8,
+        shadowRadius: 7,
         elevation: 10,
         overflow: 'visible',
     },
@@ -58,10 +60,6 @@ export default StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: 'rgba(0,0,0, .4)',
-        shadowOffset: {height: 13, width: 1},
-        shadowOpacity: 1,
-        shadowRadius: 10,
     },
 
     dayContainer: {
@@ -105,6 +103,10 @@ export default StyleSheet.create({
         borderRadius: 15,
         marginHorizontal: 5,
         marginVertical: smallScreen ? 0 : 40,
+        shadowOffset: {width: 0, height: 4},
+        shadowColor: '#000000',
+        shadowOpacity: 0.8,
+        shadowRadius: 7,
         elevation: 10,
         overflow: 'visible',
     },
@@ -115,6 +117,10 @@ export default StyleSheet.create({
         marginHorizontal: 10,
         borderRadius: 15,
         marginVertical: smallScreen ? 0 : 40,
+        shadowOffset: {width: 0, height: 4},
+        shadowColor: '#000000',
+        shadowOpacity: 0.8,
+        shadowRadius: 7,
         elevation: 10,
         overflow: 'visible',
     },
@@ -144,7 +150,7 @@ export default StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         alignSelf: 'center',
         paddingHorizontal: 20,
-        paddingVertical: smallScreen ? 10 : 20,
+        paddingVertical: smallScreen ? 10 : 15,
         color: colors.white,
     },
 
@@ -152,38 +158,8 @@ export default StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      marginTop: 22
-    },
-        
-    modalView: {
-      margin: 20,
-      backgroundColor: "white",
-      borderRadius: 20,
-      padding: 35,
-      alignItems: "center",
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5
-    },    
-        
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2
-    },
-
-    buttonOpen: {
-      backgroundColor: "#F194FF",
-    },
-        
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
+      marginTop: 22,
+    },   
     
     textStyle: {
       color: "white",
@@ -195,51 +171,6 @@ export default StyleSheet.create({
       marginBottom: 15,
       textAlign: "center"
     },    
-
-    backContainerStyle: {
-      alignSelf: 'flex-start',
-      marginTop: 3,
-    },
-        
-    bioContainerStyle: {
-      paddingLeft: parentPaddingValue,
-      paddingRight: parentPaddingValue,
-      paddingTop: parentPaddingValue,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      width: metrics.width,
-    },     
-        
-    bioTextStyle: {
-      width: metrics.width - parentPadding,
-      marginTop: metrics.height * 0.02,
-      color: Constant.App.colors.blackColor,
-      fontSize: Constant.App.textSize.Medium,
-      fontFamily: Constant.App.fontFamily.bodyRegular,
-    },     
-        
-    bioTextStyleBold: {
-      width: metrics.width - parentPadding,
-      marginTop: metrics.height * 0.02,
-      color: Constant.App.colors.blackColor,
-      fontSize: Constant.App.textSize.Medium,
-      fontFamily: Constant.App.fontFamily.headerBold,
-      fontWeight: '500',
-    },
-        
-    bioTitleTextStyle: {
-      width: metrics.width - parentPadding,
-      color: Constant.App.colors.blackColor,
-      fontSize: Constant.App.textSize.xLarge,
-      fontFamily: Constant.App.fontFamily.headerBold,
-      fontWeight: '500',
-    },
-        
-    closeSheduleContainerStyle: {
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      marginTop: 3,
-    },
         
     dateContainerStyle: {
       borderColor: Constant.App.colors.blueColor,
@@ -247,7 +178,7 @@ export default StyleSheet.create({
       padding: 8,
       backgroundColor: Constant.App.colors.whiteColor,
       marginVertical: metrics.height * 0.015,
-      elevation: 3,
+      elevation: 1,
     },
         
     dateSelectedContainerStyle: {
@@ -257,7 +188,7 @@ export default StyleSheet.create({
       padding: 8,
       backgroundColor: Constant.App.colors.blueColor,
       marginVertical: metrics.height * 0.015,
-      elevation: 3,
+      elevation: 1,
     },
         
     dateTextStyle: {
@@ -265,7 +196,7 @@ export default StyleSheet.create({
       color: Constant.App.colors.blackColor,
       width: 18,
       height: 18,
-      elevation: 3,
+      elevation: 1,
       fontSize: 14
     },
         
@@ -274,7 +205,7 @@ export default StyleSheet.create({
       color: Constant.App.colors.whiteColor,
       width: 18,
       height: 18,
-      elevation: 3,
+      elevation: 1,
       fontSize: 14
     },
         
@@ -289,6 +220,7 @@ export default StyleSheet.create({
       height: 40,
       backgroundColor: Constant.App.colors.whiteColor,
       marginTop: metrics.height * 0.01,
+      margin: 5,
     },
         
     dateTimeSelectedSlotContainerStyle: {
@@ -302,10 +234,12 @@ export default StyleSheet.create({
       height: 40,
       backgroundColor: Constant.App.colors.blueColor,
       marginTop: metrics.height * 0.01,
+      margin: 5,
     },
         
     dateTimeSlotTextStyle: {
       width: 80,
+      height: 40,
       textAlign: 'center',
       fontSize: smallScreen  ? Constant.App.textSize.Small : Constant.App.textSize.Medium,
       fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -314,6 +248,7 @@ export default StyleSheet.create({
         
     dateTimeSelectedSlotTextStyle: {
       width: 80,
+      height: 40,
       textAlign: 'center',
       fontSize: smallScreen  ? Constant.App.textSize.Small : Constant.App.textSize.Medium,
       fontFamily: Constant.App.fontFamily.bodyRegular,
@@ -323,139 +258,15 @@ export default StyleSheet.create({
     dow: {
       textAlign: 'center',
       color: Constant.App.colors.blackColor,
-      width: 30,
+      width: 35,
       height: 30,
-      elevation: 3,
+      elevation: 1,
       fontSize: 14,
       marginBottom: smallScreen ? 50 : 40, 
     },
 
     dowSelect: {
       color: Constant.App.colors.blueColor
-    },
-        
-    expertDetailsCard: {
-      width: metrics.width,
-    },
-        
-    expertIsOffline: {
-      width: 18,
-      height: 18,
-      top: 40,
-      left: 20,
-      borderRadius: 8,
-      backgroundColor: Constant.App.colors.grayColor,
-      position: 'absolute',
-    },
-        
-    expertIsOnline: {
-      width: 18,
-      height: 18,
-      top: 40,
-      left: 20,
-      borderRadius: 8,
-      backgroundColor: Constant.App.colors.greenColor,
-      position: 'absolute',
-    },
-        
-    expertIsPrescriber: {
-      flexDirection: 'row',
-    },
-        
-    expertImage: {
-      width: 100,
-      height: 100,
-      borderRadius: 60,
-      borderWidth: 2,
-      borderColor: Constant.App.colors.blueColor,
-      margin: 10
-    },
-        
-    expertImageContainer: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      zIndex: 1,
-    },
-        
-    expertName: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-        
-    expertNameTextStyle: {
-      color: Constant.App.colors.blackColor,
-      fontSize: 35,
-      fontFamily: Constant.App.fontFamily.bodyRegular,
-    },
-        
-    expertPrescriberImage: {
-      width: 20,
-      height: 20,
-    },
-        
-    expertPrescriberTextStyle: {
-      color: Constant.App.colors.blueColor,
-      marginLeft: 10,
-    },
-        
-    expertProfession: {
-      flexDirection: 'row',
-      marginVertical: 5,
-    },
-        
-    expertProfessionTextStyle: {
-      fontSize: Constant.App.textSize.xxlarge,
-      color: Constant.App.colors.blueGrey,
-      marginRight: 10,
-    },
-        
-    expertRatingImage: {
-      width: 20,
-      height: 20,
-      padding: 5,
-    },
-        
-    expertRatingTextStyle: {
-      fontSize: Constant.App.textSize.Large,
-      color: Constant.App.colors.blueGrey,
-    },
-        
-    expertInfoParentContainerStyle: {
-      backgroundColor: Constant.App.colors.whiteColor,
-      paddingLeft: parentPaddingValue * 0.2,
-      paddingRight: parentPaddingValue * 0.2,
-      paddingBottom: parentPaddingValue * 0.2,
-      paddingTop: parentPaddingValue * 0.2,
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      width: metrics.width,
-    },
-        
-    expertInfoProfessionTextStyle: {
-      color: Constant.App.colors.blackColor,
-      fontSize: Constant.App.textSize.Small,
-      fontFamily: Constant.App.fontFamily.bodyRegular,
-      fontWeight: '200',
-    },
-        
-    hoursContainerStyle: {
-      padding: parentPaddingValue,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      width: metrics.width,
-      marginBottom: 70,
-    },
-        
-    parentContainerStyle: {
-      paddingTop: 35,
-      backgroundColor: Constant.App.colors.whiteColor,
-      flexDirection: 'column',
-    },
-        
-    phoneNumberTextStyleBold: {
-      color: Constant.App.colors.blueColor,
-      fontSize: Constant.App.textSize.Medium,
-      fontFamily: Constant.App.fontFamily.bodyRegular,
     },
   
     titleContainerStyle: {
@@ -465,31 +276,6 @@ export default StyleSheet.create({
       width: metrics.width,
       alignItems: 'center',
       justifyContent: 'center',
-    },
-        
-    availability: {
-      fontSize: Constant.App.textSize.Large,
-      fontWeight: '500',
-      marginLeft: -70,
-      marginTop: 20,
-  
-      width: metrics.width,
-    },
-  
-    noAvailability: {
-      fontSize: Constant.App.textSize.Medium,
-      fontWeight: '500',
-      marginLeft: -70,
-      marginTop: 10,
-      width: metrics.width,
-    },
-  
-    myRecentExpertContainerStyle: {
-      flexDirection: 'column',
-      paddingLeft: parentPaddingValue + 4,
-      paddingRight: (parentPaddingValue + 4) * 0.5,
-      backgroundColor: 'white',
-      borderRadius: 15,
     },
         
     confirmButton: {
@@ -529,12 +315,21 @@ export default StyleSheet.create({
       color: Constant.App.colors.blueColor,
     },
 
+    expertImage: {
+      width: smallScreen ? 100 : 120,
+      height: smallScreen ? 100 : 120,
+      borderRadius: 60,
+      borderWidth: 2,
+      borderColor: Constant.App.colors.blueColor,
+      margin: 10
+    },
+
     fillOutButton: {
       borderColor: Constant.App.colors.blueColor,
       borderWidth: 1,
       borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
       padding: Constant.App.dimensions.btnPaddingGlobal,
-      width: metrics.width * 0.5,
+      width: metrics.width * 0.85,
       height: smallScreen ? 35 : 45,
       backgroundColor: Constant.App.colors.whiteColor,
     },
@@ -545,7 +340,7 @@ export default StyleSheet.create({
       borderWidth: 1,
       borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
       padding: Constant.App.dimensions.btnPaddingGlobal,
-      width: metrics.width * 0.5,
+      width: metrics.width * 0.85,
       height: smallScreen ? 35 : 45,
       backgroundColor: Constant.App.colors.blueColor,
       marginTop: 10
@@ -553,8 +348,8 @@ export default StyleSheet.create({
   
     fillOutButtonText: {
       textAlign: 'center',
-      width: metrics.width * 0.45,
-      height: smallScreen ? 12 : 15,
+      width: metrics.width * 0.85,
+      height: smallScreen ? 15 : 20,
       fontSize: smallScreen ? Constant.App.textSize.Medium : Constant.App.textSize.Large,
       fontFamily: Constant.App.fontFamily.bodyRegular,
       color: Constant.App.colors.blueColor,
@@ -562,45 +357,21 @@ export default StyleSheet.create({
         
     doneButtonText: {
       textAlign: 'center',
-      width: metrics.width * 0.45,
-      height: smallScreen ? 12 : 15,
+      width: metrics.width * 0.85,
+      height: smallScreen ? 15 : 20,
       fontSize: smallScreen ? Constant.App.textSize.Medium : Constant.App.textSize.Large,
       fontFamily: Constant.App.fontFamily.bodyRegular,
       color: Constant.App.colors.whiteColor,
     },
-  
-    sheduleContainer: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      height: smallScreen ? metrics.height * 0.85 : metrics.height * 0.75,
-      alignItems: 'center',
-      position: 'absolute',
-      bottom: 0,
-      backgroundColor: 'white',
-      width: metrics.width,
-      padding: 60,
-      borderRadius: 12,
-      borderColor: 'lightgrey',
-      borderWidth: 1,
-      height: 40,
-      shadowOffset: {width: 0, height: 2},
-      shadowColor: '#000000',
-      shadowOpacity: 1,
-      shadowRadius: 7,
-    },
         
     showSheduleContainer: {
-      height: smallScreen ? metrics.height * 0.85 : metrics.height * 0.75,
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      position: 'absolute',
-      bottom: 0,
-      backgroundColor: 'white',
-      width: metrics.width * .95,
-      padding: 5,
+      height: metrics.height,
+      marginTop: IS_ANDROID ? 0 : 40,
       borderRadius: 12,
-      borderColor: 'lightgrey',
-      borderWidth: 1,
+      alignItems: 'center',
+      justifyContent: "flex-start",
+      backgroundColor: 'white',
+      width: metrics.width,
       shadowOffset: {width: 0, height: 2},
       shadowColor: '#000000',
       shadowOpacity: 1,
@@ -617,6 +388,7 @@ export default StyleSheet.create({
       backgroundColor: Constant.App.colors.whiteColor,
       marginTop: metrics.height * 0.02,
       marginRight: 15,
+      margin: 20
     },
   
     timeSlotTextStyle: {
@@ -656,10 +428,12 @@ export default StyleSheet.create({
       shadowOffset: {height: -10, width: 2},
       shadowOpacity: 0.15,
       shadowRadius: 10,
+      marginBottom: 15,
     },
 
     heading: {
       marginTop: smallScreen ? metrics.height * 0.01 : metrics.height * 0.05,
+      marginHorizontal: 20,
       fontSize: smallScreen ? 17 : text.size.xLarge,
       fontFamily: text.fontFamily.poppinsMedium,
       textAlign: "center",
@@ -675,17 +449,23 @@ export default StyleSheet.create({
       fontSize: smallScreen ? 17 : text.size.xLarge,
       fontFamily: text.fontFamily.poppinsRegular,
       textAlign: "center",
+      marginVertical: smallScreen ? 5 : 10,
     },
 
     assessmentText: {
-      fontSize: smallScreen ? text.size.small : text.size.medium,
+      fontSize: smallScreen ? text.size.small : IS_ANDROID ? text.size.medium : text.size.large,
       fontFamily: text.fontFamily.poppinsLight,
-      marginHorizontal: 10,
-      marginBottom: 10,
+      marginHorizontal: smallScreen ? 10 : 20,
+      marginVertical: smallScreen ? 5 : 10,
     },
 
     appointmentTimesContainer: {
       height: smallScreen ? "55%" : "60%"
+    },
+
+    buttonContainer: {
+      flex: 1,
+      marginTop: 10
     }
 
 });

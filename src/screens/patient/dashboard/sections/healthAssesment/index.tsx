@@ -11,12 +11,10 @@ import Pending from './components/visitPending';
 import styles from './styles';
 
 const HealthAssessment = () => {
-    const { showModal } = useSelector(state => state.assessment);
     const { assessment } = useSelector(state => state.user.data);
-    const notScheduled =
-        assessment === undefined || assessment === null || showModal;
-    const scheduled =
-        assessment && assessment.complete === false && showModal === false;
+
+    const notScheduled = assessment === undefined || assessment === null;
+    const scheduled = assessment && assessment.complete === false;
 
     const now = moment(new Date());
     const appointment = !notScheduled && moment(assessment.time);

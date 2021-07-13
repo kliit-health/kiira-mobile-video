@@ -26,7 +26,8 @@ const Agreements = ({ navigation }) => {
     useEffect(() => {
         if (
             currentRoute === screenNames.requestVisit ||
-            currentRoute === 'Home'
+            currentRoute === 'Home' ||
+            currentRoute === 'HealthAssessmentSchedule'
         ) {
             const agreed = user.consentAgreements.length > 0;
             setVisible(!agreed);

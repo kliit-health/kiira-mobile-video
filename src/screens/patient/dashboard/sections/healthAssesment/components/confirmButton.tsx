@@ -39,19 +39,20 @@ const ConfirmButton = ({ day, time }: ConfirmButtonProps): JSX.Element => {
         gender: user.profileInfo.gender,
         organizationId: user.organizationId,
         expert: {
-            firstName: 'Nick',
-            lastName: 'Riviera',
-            profession: 'GP',
+            firstName: 'Candice',
+            lastName: 'Fraser',
+            profession: 'OBGYN',
             imageUrl:
-                'https://firebasestorage.googleapis.com/v0/b/kliit-health-dev.appspot.com/o/Kiira%2Fnick.jpeg?alt=media&token=a099e504-f231-4007-99a1-a995452d1ae1',
-            rating: 5,
-            uid: 'uY0A6EUv2ehuLuJk5qaFsymOWBs2',
+                'https://firebasestorage.googleapis.com/v0/b/kliit-health-app.appspot.com/o/Kliit%2F158453698551228C511E5-726E-4A6A-B48F-5789FB54A554.jpg?alt=media&token=0e896a21-1c3e-4fb8-b401-a3724d60339b',
+            rating: 10,
+            uid: '5VTy6Z1Q3XXAF1UP6POtcYwDojk1',
         },
     };
 
     return (
         <View style={styles.confirmContainer}>
             <TouchableOpacity
+                disabled={!day || !time}
                 onPress={() => dispatch(bookAppointment(data))}
                 style={
                     day && time

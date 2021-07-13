@@ -9,7 +9,6 @@ let addMonth = moment(`${current.year}-${current.monthNumber}`);
     addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
 
 interface AssessmentState {
-    showModal: boolean
     loading: boolean
     details: object
     current: object
@@ -20,10 +19,9 @@ interface AssessmentState {
 }
 
 const initialState: AssessmentState = {
-    showModal: false,
     loading: true,
     details: {
-      calendarID: '5213164',
+      calendarID: '4344533',
       appointmentType: {
         appointmentType: '24164653',
         appointmentTypeID: '24164653',
@@ -49,9 +47,6 @@ export const assessmentSlice = createSlice({
   name: 'assessment',
   initialState,
   reducers: {
-    toogleModal: state => {
-      state.showModal = !state.showModal
-    },
     toggleLoading: state => {
       state.loading = !state.loading
     },
@@ -62,10 +57,10 @@ export const assessmentSlice = createSlice({
       state.appointment = action.payload
     },
     cancelAppointment: (state) => state,
-    getAppointmentDates: (state, action: PayloadAction<object>) => {
+    getAppointmentDates: (state) => {
       return state
     },
-    getAppointmentsByDay: (state, action: PayloadAction<object>) => {
+    getAppointmentsByDay: (state) => {
       return state
     },
     setAppointmentDates: (state, action: PayloadAction<string>) => {
@@ -77,8 +72,7 @@ export const assessmentSlice = createSlice({
   }
 })
 
-export const { 
-  toogleModal, 
+export const {  
   toggleLoading, 
   setSelectedDate, 
   bookAppointment, 

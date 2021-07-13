@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
-    zIndex: 1,
   },
 
   modalView: {

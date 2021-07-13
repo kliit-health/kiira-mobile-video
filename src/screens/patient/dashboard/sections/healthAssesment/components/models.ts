@@ -12,7 +12,7 @@ export const pending = {
             title: "Fill out your health history in advance"
         },
         {
-            title: "Select Appointments to meet with \nDr. Riveria"
+            title: "Select Appointments to meet with \nDr. Fraser"
         }
     ]
 };

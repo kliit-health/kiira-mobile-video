@@ -31,8 +31,6 @@ function* setAppointment(data) {
     yield put(showApiLoader());
     
     let appointment = yield makeAppointment({data: data.payload});
-    
-    yield put(hideApiLoader());
 
     if (appointment && !appointment.availible) {
       yield put(
@@ -43,6 +41,8 @@ function* setAppointment(data) {
       yield put(updateUser({ assessment: details}))
       yield put(getUser());
       yield sendAppointmentNotification(uid, time);
+      yield put(hideApiLoader());
+      NavigationService.navigate("HealthAssessmentConfirmation");
     }
   } catch (error) {
     console.error(error);
@@ -53,15 +53,18 @@ function* getAppointmentsForDay(data) {
     const lang = yield select((state) => state.language);
     const { payload } = data;
     const isToday = false;
+    yield put(toggleLoading());
     try {
       yield put(showApiLoader(lang.apiLoader.loadingText));
       const response = yield getAppointmentsByDayAsync(payload, isToday);
       yield put(setAppointmentTimes(response.current));
       yield put(hideApiLoader());
+      yield put(toggleLoading());
       return;
     } catch (error) {
       yield put(hideApiLoader());
       yield put(showOrHideModal(lang.errorMessage.serverError));
+      yield put(toggleLoading());
     }
   }
   
@@ -72,7 +75,7 @@ function* getAppointmentsForDay(data) {
       yield put(showApiLoader(lang.apiLoader.loadingText));
       const response = yield getAppointmentDatesAsync(payload);
       yield put(setAppointmentDates(response));
-      yield put(toggleLoading());
+      
       yield put(hideApiLoader());
       return;
     } catch (error) {
