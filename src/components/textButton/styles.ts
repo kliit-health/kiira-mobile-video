@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
-import { colors, text } from '../../utils/constants';
+import {colors, text} from '../../utils/constants';
 import metrices from '../../utils/metrices';
 
 export default StyleSheet.create({
   root: {
     maxHeight: 50,
     flex: 1,
-    width: metrices.width * 0.80,
+    width: metrices.width * 0.8,
     alignSelf: 'center',
+    borderRadius: 30,
+    backgroundColor: colors.blue,
   },
   touchable: {
     flexDirection: 'row',
@@ -15,8 +17,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: colors.blue,
-    backgroundColor: colors.blue,
+    borderColor: 'transparent',
     opacity: 1,
   },
   text: {
@@ -47,6 +48,7 @@ export const modifiers = {
   outlined: {
     touchable: {
       backgroundColor: colors.white,
+      borderColor: colors.blue,
     },
     text: {
       color: colors.blue,
@@ -63,6 +65,7 @@ export const modifiers = {
     },
   },
   secondary: {
+    root: {},
     text: {
       color: colors.blueGrey,
     },

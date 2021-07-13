@@ -1,9 +1,30 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import {shape, node, object, bool, func, string, any, number} from 'prop-types';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  GestureResponderEvent,
+} from 'react-native';
 import {colors} from '../../utils/constants';
 import {mergeStyles} from '../../utils/functions';
 import defaultStyles, {modifiers} from './styles';
+
+export type TextButtonProps = {
+  styles?: any;
+  children: ReactNode;
+  outlined?: boolean;
+  id?: string;
+  disabled?: boolean;
+  hidden?: boolean;
+  secondary?: boolean;
+  link?: boolean;
+  icon?: any;
+  iconColor?: string;
+  activeOpacity?: number;
+  onPress?: (id: string) => void;
+};
 
 const TextButton = ({
   styles: customStyles,
@@ -19,8 +40,8 @@ const TextButton = ({
   iconColor,
   activeOpacity,
   ...rest
-}) => {
-  const handlePress = () => {
+}: TextButtonProps) => {
+  const handlePress = (event: GestureResponderEvent): void => {
     onPress(id);
   };
 
@@ -51,7 +72,11 @@ const TextButton = ({
   };
 
   return (
-    <View style={styles.root}>
+    <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 0}}
+      colors={['#0089FF', '#0253E2']}
+      style={styles.root}>
       <TouchableOpacity
         activeOpacity={activeOpacity}
         disabled={disabled || hidden}
@@ -65,7 +90,7 @@ const TextButton = ({
         )}
         <Text style={styles.text}>{children}</Text>
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 };
 

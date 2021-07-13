@@ -16,6 +16,6 @@ export default StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     flexDirection: 'row',
-    bottom: 10,
+    bottom: 20,
   },
 });
