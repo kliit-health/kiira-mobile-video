@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import {shape, node, object, bool, func, string, any, number} from 'prop-types';
 import {
   TouchableOpacity,
@@ -72,11 +71,7 @@ const TextButton = ({
   };
 
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
-      colors={link ? ['transparent'] : ['#0089FF', '#0253E2']}
-      style={styles.root}>
+    <View style={styles.root}>
       <TouchableOpacity
         activeOpacity={activeOpacity}
         disabled={disabled || hidden}
@@ -90,7 +85,7 @@ const TextButton = ({
         )}
         <Text style={styles.text}>{children}</Text>
       </TouchableOpacity>
-    </LinearGradient>
+    </View>
   );
 };
 
