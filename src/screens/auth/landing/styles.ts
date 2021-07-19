@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {colors} from '~/utils/constants';
 
 export default StyleSheet.create({
@@ -12,6 +12,6 @@ export default StyleSheet.create({
 
 export const indicatorStyles = StyleSheet.create({
   indicatorContainer: {
-    bottom: 80,
+    bottom: Dimensions.get('screen').height / 9,
   },
 });

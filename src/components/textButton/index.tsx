@@ -75,7 +75,7 @@ const TextButton = ({
     <LinearGradient
       start={{x: 0, y: 0}}
       end={{x: 1, y: 0}}
-      colors={['#0089FF', '#0253E2']}
+      colors={link ? ['transparent'] : ['#0089FF', '#0253E2']}
       style={styles.root}>
       <TouchableOpacity
         activeOpacity={activeOpacity}
