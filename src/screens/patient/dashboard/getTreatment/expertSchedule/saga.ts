@@ -35,7 +35,7 @@ function* getAppointmentsForToday({data}) {
   const lang = yield select((state) => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
-    const isToday = true
+    const isToday = true;
     const response = yield getAppointmentsByDayAsync(data, isToday);
     yield put(setTimes(response));
     yield put(hideApiLoader());

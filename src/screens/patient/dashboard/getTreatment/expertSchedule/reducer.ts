@@ -17,6 +17,7 @@ const initialState = {
   date: null,
   appointments: {
     todayLoading: true,
+    current: [],
     today: [],
     future: [],
     dates: [],
