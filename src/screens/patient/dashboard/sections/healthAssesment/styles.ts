@@ -365,7 +365,7 @@ export default StyleSheet.create({
     },
         
     showSheduleContainer: {
-      height: metrics.height,
+      height: IS_ANDROID ? metrics.height : metrics.height * 0.95,
       marginTop: IS_ANDROID ? 0 : 40,
       borderRadius: 12,
       alignItems: 'center',
