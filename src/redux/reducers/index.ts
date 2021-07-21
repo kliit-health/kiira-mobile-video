@@ -5,6 +5,7 @@ import agreements from './agreements';
 import addProfile from '../../screens/patient/account/settings/addProfileData/reducer';
 import addNewProfile from '../../screens/auth/chatBot/reducer';
 import appointments from '../../screens/patient/dashboard/appointments/reducer';
+import assessment from '../reducers/assessment';
 import ask from '../../screens/patient/dashboard/ask/reducer';
 import askExpert from '../../screens/provider/ask/reducer';
 import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
@@ -57,6 +58,7 @@ export const rootReducer = combineReducers({
   appointments,
   ask,
   askExpert,
+  assessment,
   bookVisit,
   changePassword,
   chat,

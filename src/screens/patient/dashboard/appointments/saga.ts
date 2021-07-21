@@ -17,6 +17,7 @@ import {
   hideApiLoader,
 } from '~/components/customLoader/action';
 import {showOrHideModal} from '~/components/customModal/action';
+import { updateUser } from '../../../../redux/actions';
 
 function* getAppointments({data}) {
   try {
@@ -47,7 +48,10 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
-      
+      if(credits === 0) {
+        yield put(updateUser({assessment: null}))
+      }
+
       yield updateCredits(credits, data);
       yield put(getUser());
     }

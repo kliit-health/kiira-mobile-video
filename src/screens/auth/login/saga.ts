@@ -30,14 +30,14 @@ function* loginFirebase({data}) {
     const {uid} = response;
 
     if (uid) {
+      yield put(getUser());
+
       Keychain.setGenericPassword(params.email, params.password, {
         service: 'kiira',
         accessControl: 'BiometryAny' as any,
         accessible: 'AccessibleWhenPasscodeSetThisDeviceOnly' as any
       })
 
-      yield put(getUser());
-      
       const enabled = yield messaging().hasPermission();
 
       yield delay(500);
@@ -59,18 +59,29 @@ function* loginFirebase({data}) {
         }
       }
 
+      
       yield put(getTermsAndConditions());
       const userData = yield select((state) => state.user.data);
+      yield delay(500);
+      const {agreeToTerms, firstLogin, role} = userData;
+      yield delay(1000);
 
-      yield auth().currentUser.getIdTokenResult().then( ({claims: {role}}) => {
-          if (role.student || role.subscriber) {
-            if (!userData.firstLogin && userData.agreeToTerms) {
+      yield auth().currentUser.getIdTokenResult().then( ({claims}) => {
+          const isStudent = claims.role && claims.role.student;
+          const isSubscriber = claims.role && claims.role.subscriber;
+          const isExpert = claims.role && claims.role.expert;
+          const hasExpertRole = role === "Expert"
+          const isUser = role === "User";
+          const isNewUser = !agreeToTerms || firstLogin;
+          
+          if (isStudent || isSubscriber || isUser) {
+            if (!isNewUser) {
                 navigation.navigate(Constant.App.stack.AppStack);
-            } else if (userData.firstLogin) {
+            } else if (isNewUser) {
               navigation.navigate(Constant.App.screenNames.Welcome);
             } 
           } else {
-            if (role.expert) {
+            if (isExpert || hasExpertRole) {
               navigation.navigate(Constant.App.stack.AppStackExpert);
             }
           }      

@@ -4,7 +4,7 @@ import {
   getBottomSpace,
 } from '../../components/iPhoneXHelper';
 
-const IS_ANDROID = Platform.OS === 'android';
+export const IS_ANDROID = Platform.OS === 'android';
 
 const {height, width} = Dimensions.get('window');
 
@@ -16,4 +16,4 @@ export default {
   BOTTOM_SAVE_AREA: getBottomSpace(),
 };
 
-export const smallScreen = width <= 400 && height <= 666;
+export const smallScreen = width <= 400 && height <= 667;
