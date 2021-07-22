@@ -1,7 +1,6 @@
-import {all} from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 import account from '../../screens/patient/account/saga';
 import addProfile from '../../screens/patient/account/settings/addProfileData/saga';
-import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
 import appointments from '../../screens/patient/dashboard/appointments/saga';
 import ask from '../../screens/patient/dashboard/ask/saga';
@@ -46,7 +45,6 @@ export default function* rootSaga() {
   yield all([
     account(),
     addProfile(),
-    agreeToTerms(),
     agreements(),
     appointments(),
     askExpert(),

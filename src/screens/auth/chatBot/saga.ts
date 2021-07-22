@@ -1,41 +1,38 @@
-import {UPDATE_NEW_USER_DETAIL_DATA} from '~/redux/types';
-import {put, takeEvery, select} from 'redux-saga/effects';
-import {
-  showApiLoader,
-  hideApiLoader,
-} from '~/components/customLoader/action';
-import {showOrHideModal} from '~/components/customModal/action';
+import { UPDATE_NEW_USER_DETAIL_DATA } from '~/redux/types';
+import { put, takeEvery, select } from 'redux-saga/effects';
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
+import { showOrHideModal } from '~/components/customModal/action';
 import Constant from '~/utils/constants';
-import {updateUser} from '~/redux/actions/user';
+import { updateUser } from '~/redux/actions/user';
 
 const defaultImage =
   'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf';
 
-function* updateNewUserData({data}) {
-  const lang = yield select((state) => state.language);
-  const user = yield select((state) => state.user.data);
+function* updateNewUserData({ data }) {
+  const lang = yield select(state => state.language);
+  const user = yield select(state => state.user.data);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
-    const {userParams, navigation} = data;
+    const { userParams, navigation } = data;
 
     const userInfo = {
-      ...(userParams.address && {address: userParams.address}),
+      ...(userParams.address && { address: userParams.address }),
       agreeToTerms: false,
       chats: userParams.chats,
-      ...(userParams.customer && {customer: userParams.customer}),
+      ...(userParams.customer && { customer: userParams.customer }),
       displayName: user.displayName,
       email: userParams.email,
       firstLogin: true,
       ...(userParams.invitationDate && {
         invitationDate: userParams.invitationDate,
       }),
-      ...(userParams.invitationId && {invitationId: userParams.invitationId}),
+      ...(userParams.invitationId && { invitationId: userParams.invitationId }),
       ...(userParams.invitationDate && {
         invitationDate: userParams.invitationDate,
       }),
       signUpDate: userParams.signUpDate,
       fcmToken: userParams.fcmToken,
-      ...(userParams.plan && {plan: userParams.plan}),
+      ...(userParams.plan && { plan: userParams.plan }),
       prepaid: userParams.prepaid,
       profileInfo: {
         email: userParams.email,
@@ -49,17 +46,17 @@ function* updateNewUserData({data}) {
         sexuality: userParams.sexuality,
         insurance: userParams.insurance,
         insurancePlan: userParams.insurancePlan,
-        ...(userParams.zipcode && {zipcode: userParams.zipcode}),
-        ...(userParams.enrollment && {enrollment: userParams.enrollment}),
-        ...(userParams.income && {income: userParams.income}),
-        ...(userParams.homeSecure && {homeSecure: userParams.homeSecure}),
-        ...(userParams.foodSecure && {foodSecure: userParams.foodSecure}),
-        ...(userParams.ethnicity && {ethnicity: userParams.ethnicity}),
+        ...(userParams.zipcode && { zipcode: userParams.zipcode }),
+        ...(userParams.enrollment && { enrollment: userParams.enrollment }),
+        ...(userParams.income && { income: userParams.income }),
+        ...(userParams.homeSecure && { homeSecure: userParams.homeSecure }),
+        ...(userParams.foodSecure && { foodSecure: userParams.foodSecure }),
+        ...(userParams.ethnicity && { ethnicity: userParams.ethnicity }),
         lang: 'en',
         phoneNumber: userParams.phoneNumber,
       },
       ...(userParams.subscription && {
-        subscription: {...userParams.subscription},
+        subscription: { ...userParams.subscription },
       }),
       role: 'User',
       uid: user.uid,
@@ -67,10 +64,10 @@ function* updateNewUserData({data}) {
       visits: userParams.visits,
     };
 
-    yield put(updateUser({uid: user.uid, ...userInfo}));
+    yield put(updateUser({ uid: user.uid, ...userInfo }));
     yield put(hideApiLoader());
 
-    navigation.navigate(Constant.App.screenNames.NewUser);
+    navigation.navigate(Constant.App.screenNames.home);
   } catch (error) {
     console.error(error);
     yield put(hideApiLoader());

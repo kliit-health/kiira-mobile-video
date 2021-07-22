@@ -1,6 +1,5 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import account from '../../screens/patient/account/reducer';
-import agreeToTerms from '../../screens/auth/newUser/reducer';
 import agreements from './agreements';
 import addProfile from '../../screens/patient/account/settings/addProfileData/reducer';
 import addNewProfile from '../../screens/auth/chatBot/reducer';
@@ -29,7 +28,6 @@ import login from '../../screens/auth/login/reducer';
 import medicalHistory from '../../screens/provider/appointments/patientProfile/reducer';
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';
-import newUser from '../../screens/auth/newUser/reducer';
 import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
 import plan from './plan';
 import plans from './plans';
@@ -51,7 +49,6 @@ import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
 
 export const rootReducer = combineReducers({
   account,
-  agreeToTerms,
   addProfile,
   addNewProfile,
   agreements,
@@ -81,7 +78,6 @@ export const rootReducer = combineReducers({
   messaging,
   modal,
   navigator,
-  newUser,
   payment,
   plan,
   plans,

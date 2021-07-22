@@ -1,6 +1,6 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import {shape, object, func, bool, node, number} from 'prop-types';
+import { shape, object, func, bool, node, number } from 'prop-types';
 import defaultStyles from './styles';
 
 const Modal = ({
@@ -17,11 +17,11 @@ const Modal = ({
   return (
     <NativeModal
       onBackdropPress={onBackdropPress}
-      transparent
       isVisible={visible}
       style={styles.root}
       hideModalContentWhileAnimating
-      {...rest}>
+      {...rest}
+    >
       {children}
     </NativeModal>
   );

@@ -1,8 +1,8 @@
 export default {
   user: {
     agreeToTerms: false,
+    acceptedTreatmentTerms: false,
     chats: '',
-    consentAgreements: [],
     displayName: '',
     email: '',
     fcmToken: '',
@@ -115,5 +115,8 @@ export default {
     userRating: [],
     id: '',
     videoEnabled: false,
+  },
+  agreements: {
+    contract: '',
   },
 };
