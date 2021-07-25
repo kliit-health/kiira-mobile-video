@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {text, colors} from '~/utils/constants';
+import { StyleSheet } from 'react-native';
+import { text, colors } from '~/utils/constants';
 
 export default StyleSheet.create({
   container: {
@@ -10,9 +10,9 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    fontSize: text.size.xxxxLarge,
-    fontFamily: text.fontFamily.poppinsSemiBold,
+    fontSize: text.size.xxxLarge,
+    fontFamily: text.fontFamily.poppinsRegular,
     textAlign: 'center',
-    color: colors.charcoal,
+    color: colors.black,
   },
 });

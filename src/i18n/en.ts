@@ -23,7 +23,7 @@ export default {
   requestVisit: {
     title: 'Request a Visit',
     goHome: 'Go Home',
-    goBack: 'Go Back'
+    goBack: 'Go Back',
   },
   addCreditCardData: {
     cardNumber: 'Card number',
@@ -116,8 +116,7 @@ export default {
     title: 'I Have Given Birth',
     confirm: 'Confirm',
     congratulations: 'Congratulations!',
-    help:
-      'Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
+    help: 'Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
   },
 
   children: {
@@ -177,7 +176,7 @@ export default {
     videoChatText: 'video session(s) left this month',
     asking: 'Asking',
     buyMoreCredits: 'Buy More Credits',
-    selectTopic: 'Select Topic'
+    selectTopic: 'Select Topic',
   },
 
   askExpert: {
@@ -337,8 +336,9 @@ export default {
     InvalidEmailMsg: 'Enter a valid email address. For example abc@domain.com.',
     EmptyPasswordMsg: 'Password is a required field.',
     Verify: 'Get Activation Link',
-    Activation: 'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
-    NoBiometrics: 'Please login with email and password to enable.'
+    Activation:
+      'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+    NoBiometrics: 'Please login with email and password to enable.',
   },
 
   paymentMethods: {
@@ -520,5 +520,10 @@ export default {
     great: `That's great! If that changes let us know.`,
     serviceUnavailable: 'This Service is currently unavailable in your state',
     chatNotAvailable: 'Chat unavailable with current plan',
+    talk: 'Talk with providers',
+    getHelp: 'Get help with question 24/7',
+    buildTeam: 'Build your team of experts',
+    seeUpcoming: 'See upcoming visits',
+    provideInformation: 'Provide your past information',
   },
 };

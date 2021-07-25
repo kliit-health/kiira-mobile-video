@@ -96,494 +96,491 @@ import AgreementDetails from '../screens/provider/appointments/patientProfile/ag
 import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 
-import Constant from '../utils/constants';
+import Constant, { colors } from '../utils/constants';
 
 let tabIconSize = 25;
 const screenNames = Constant.App.screenNames;
 
 const TransparentStyle = {
-    cardStyle: {
-        // opacity: 1,
-        backgroundColor: '#fff',
-    },
+  cardStyle: {
+    // opacity: 1,
+    backgroundColor: '#fff',
+  },
 
-    containerStyle: {
-        backgroundColor: '#fff',
-    },
+  containerStyle: {
+    backgroundColor: '#fff',
+  },
 };
 
 const AuthStack = createStackNavigator(
-    {
-        ChatBot: { screen: ChatBot },
-        ForgotPassword: { screen: ForgotPassword },
-        Landing: { screen: Landing },
-        Login: { screen: Login },
-        Verify: { screen: Verify },
-        Welcome: { screen: Welcome },
-    },
-    {
-        headerMode: 'none',
-        initialRouteName: 'Landing',
-        ...TransparentStyle,
-    },
+  {
+    ChatBot: { screen: ChatBot },
+    ForgotPassword: { screen: ForgotPassword },
+    Landing: { screen: Landing },
+    Login: { screen: Login },
+    Verify: { screen: Verify },
+    Welcome: { screen: Welcome },
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'Landing',
+    ...TransparentStyle,
+  },
 );
 
 const PaymentStack = createStackNavigator(
-    {
-        [screenNames.BuyingCredit]: { screen: BuyingCredit },
-    },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-        initialRouteName: screenNames.BuyingCredit,
-        ...TransparentStyle,
-    },
+  {
+    [screenNames.BuyingCredit]: { screen: BuyingCredit },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    initialRouteName: screenNames.BuyingCredit,
+    ...TransparentStyle,
+  },
 );
 const BottomTab = createBottomTabNavigator(
-    {
-        Community: {
-            screen: Learn,
-            navigationOptions: {
-                tabBarIcon: ({ focused }) => {
-                    return (
-                        <View
-                            style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: focused ? '#e4fdfd' : '',
-                                padding: focused ? 10 : 0,
-                                marginTop: 5,
-                                borderRadius: 20,
-                            }}
-                        >
-                            <Image
-                                resizeMode={'contain'}
-                                style={{
-                                    width: tabIconSize,
-                                    height: tabIconSize,
-                                }}
-                                source={
-                                    focused
-                                        ? require('../../assets/kiira_icon.png')
-                                        : require('../../assets/kiira_icon_inactive.png')
-                                }
-                            />
-                        </View>
-                    );
-                },
-            },
+  {
+    Community: {
+      screen: Learn,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: focused ? '#e4fdfd' : '',
+                padding: focused ? 10 : 0,
+                marginTop: 5,
+                borderRadius: 20,
+              }}
+            >
+              <Image
+                resizeMode={'contain'}
+                style={{
+                  width: tabIconSize,
+                  height: tabIconSize,
+                }}
+                source={
+                  focused
+                    ? require('../../assets/kiira_icon.png')
+                    : require('../../assets/kiira_icon_inactive.png')
+                }
+              />
+            </View>
+          );
         },
-        Home: {
-            screen: Dashboard,
-            navigationOptions: {
-                tabBarIcon: ({ focused }) => (
-                    <View
-                        style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: focused ? '#e4fdfd' : '',
-                            padding: focused ? 10 : 0,
-                            marginTop: 5,
-                            borderRadius: 20,
-                        }}
-                    >
-                        <Image
-                            resizeMode={'contain'}
-                            style={{ width: tabIconSize, height: tabIconSize }}
-                            source={
-                                focused
-                                    ? require('../../assets/home-active.png')
-                                    : require('../../assets/home.png')
-                            }
-                        />
-                    </View>
-                ),
-            },
-        },
-        Me: {
-            screen: Account,
-            navigationOptions: {
-                tabBarIcon: ({ focused }) => {
-                    return (
-                        <View
-                            style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: focused ? '#e4fdfd' : '',
-                                padding: focused ? 10 : 0,
-                                marginTop: 5,
-                                borderRadius: 20,
-                            }}
-                        >
-                            <Image
-                                resizeMode={'contain'}
-                                style={{
-                                    width: tabIconSize,
-                                    height: tabIconSize,
-                                }}
-                                source={
-                                    focused
-                                        ? require('../../assets/me-active.png')
-                                        : require('../../assets/me.png')
-                                }
-                            />
-                        </View>
-                    );
-                },
-            },
-        },
+      },
     },
-    {
-        initialRouteName: 'Home',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
-        defaultNavigationOptions: {
-            route: 'Home',
-        },
-        tabBarOptions: {
-            activeTintColor: 'black',
-            inactiveTintColor: 'black',
-            showLabel: false,
-            style: {
-                backgroundColor: 'white',
-                borderRadius: 12,
-                borderColor: 'lightgrey',
-                borderWidth: 1,
-                marginHorizontal: 5,
-                height: 40,
-                shadowOffset: { width: 0, height: 2 },
-                shadowColor: '#000000',
-                shadowOpacity: 1,
-                shadowRadius: 7,
-            },
-        },
+    Home: {
+      screen: Dashboard,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: focused ? '#e4fdfd' : '',
+              padding: focused ? 10 : 0,
+              marginTop: 5,
+              borderRadius: 20,
+            }}
+          >
+            <Image
+              resizeMode={'contain'}
+              style={{ width: tabIconSize, height: tabIconSize }}
+              source={
+                focused
+                  ? require('../../assets/home-active.png')
+                  : require('../../assets/home.png')
+              }
+            />
+          </View>
+        ),
+      },
     },
+    Me: {
+      screen: Account,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: focused ? '#e4fdfd' : '',
+                padding: focused ? 10 : 0,
+                marginTop: 5,
+                borderRadius: 20,
+              }}
+            >
+              <Image
+                resizeMode={'contain'}
+                style={{
+                  width: tabIconSize,
+                  height: tabIconSize,
+                }}
+                source={
+                  focused
+                    ? require('../../assets/me-active.png')
+                    : require('../../assets/me.png')
+                }
+              />
+            </View>
+          );
+        },
+      },
+    },
+  },
+  {
+    initialRouteName: 'Home',
+    tabBarposition: 'bottom',
+    swipeEnabled: true,
+    defaultNavigationOptions: {
+      route: 'Home',
+    },
+    tabBarOptions: {
+      activeTintColor: 'black',
+      inactiveTintColor: 'black',
+      showLabel: false,
+      style: {
+        backgroundColor: 'white',
+        height: 40,
+        shadowColor: colors.black,
+        shadowOffset: { width: 1, height: 1 },
+        shadowRadius: 5,
+        shadowOpacity: 0.2,
+        borderWidth: 0,
+      },
+    },
+  },
 );
 
 const BottomTabExpert = createBottomTabNavigator(
-    {
-        AccountExpert: {
-            screen: AccountExpert,
-            navigationOptions: {
-                tabBarIcon: ({ tintColor, focused }) => (
-                    <View
-                        style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: focused ? '#e4fdfd' : '',
-                            padding: focused ? 10 : 0,
-                            marginTop: 5,
-                            borderRadius: 20,
-                        }}
-                    >
-                        <Image
-                            resizeMode={'contain'}
-                            style={{ width: tabIconSize, height: tabIconSize }}
-                            source={
-                                focused
-                                    ? require('../../assets/me-active.png')
-                                    : require('../../assets/me.png')
-                            }
-                        />
-                    </View>
-                ),
-            },
-        },
-        AskExpert: {
-            screen: AskExpert,
-            navigationOptions: {
-                tabBarIcon: ({ tintColor, focused }) => (
-                    <View
-                        style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: focused ? '#e4fdfd' : '',
-                            padding: focused ? 10 : 0,
-                            marginTop: 5,
-                            borderRadius: 20,
-                        }}
-                    >
-                        <Image
-                            resizeMode={'contain'}
-                            style={{
-                                width: tabIconSize,
-                                height: tabIconSize,
-                            }}
-                            source={
-                                focused
-                                    ? require('../../assets/chat-new-active.png')
-                                    : require('../../assets/chat-new.png')
-                            }
-                        />
-                    </View>
-                ),
-            },
-        },
-        ExpertAppointments: {
-            screen: ExpertAppointments,
-            navigationOptions: {
-                tabBarIcon: ({ tintColor, focused }) => (
-                    <View
-                        style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: focused ? '#e4fdfd' : '',
-                            padding: focused ? 10 : 0,
-                            marginTop: 5,
-                            borderRadius: 20,
-                        }}
-                    >
-                        <Image
-                            resizeMode={'contain'}
-                            style={{
-                                width: tabIconSize,
-                                height: tabIconSize,
-                            }}
-                            source={
-                                focused
-                                    ? require('../../assets/doctor-active.png')
-                                    : require('../../assets/doctor.png')
-                            }
-                        />
-                    </View>
-                ),
-            },
-        },
-        Community: {
-            screen: Patients,
-            navigationOptions: {
-                tabBarIcon: ({ focused }) => {
-                    return (
-                        <View
-                            style={{
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: focused ? '#e4fdfd' : '',
-                                padding: focused ? 10 : 0,
-                                marginTop: 5,
-                                borderRadius: 20,
-                            }}
-                        >
-                            <Image
-                                resizeMode={'contain'}
-                                style={{
-                                    width: tabIconSize,
-                                    height: tabIconSize,
-                                }}
-                                source={
-                                    focused
-                                        ? require('../../assets/history-active.png')
-                                        : require('../../assets/history.png')
-                                }
-                            />
-                        </View>
-                    );
-                },
-            },
-        },
+  {
+    AccountExpert: {
+      screen: AccountExpert,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor, focused }) => (
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: focused ? '#e4fdfd' : '',
+              padding: focused ? 10 : 0,
+              marginTop: 5,
+              borderRadius: 20,
+            }}
+          >
+            <Image
+              resizeMode={'contain'}
+              style={{ width: tabIconSize, height: tabIconSize }}
+              source={
+                focused
+                  ? require('../../assets/me-active.png')
+                  : require('../../assets/me.png')
+              }
+            />
+          </View>
+        ),
+      },
     },
-    {
-        initialRouteName: 'AskExpert',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
-        tabBarOptions: {
-            activeTintColor: 'black',
-            inactiveTintColor: 'black',
-            showLabel: false,
-            style: {
-                backgroundColor: 'white',
-                borderRadius: 12,
-                borderColor: 'lightgrey',
-                borderWidth: 1,
-                marginHorizontal: 5,
-                height: 40,
-                shadowOffset: { width: 0, height: 2 },
-                shadowColor: '#000000',
-                shadowOpacity: 1,
-                shadowRadius: 7,
-            },
-        },
+    AskExpert: {
+      screen: AskExpert,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor, focused }) => (
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: focused ? '#e4fdfd' : '',
+              padding: focused ? 10 : 0,
+              marginTop: 5,
+              borderRadius: 20,
+            }}
+          >
+            <Image
+              resizeMode={'contain'}
+              style={{
+                width: tabIconSize,
+                height: tabIconSize,
+              }}
+              source={
+                focused
+                  ? require('../../assets/chat-new-active.png')
+                  : require('../../assets/chat-new.png')
+              }
+            />
+          </View>
+        ),
+      },
     },
+    ExpertAppointments: {
+      screen: ExpertAppointments,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor, focused }) => (
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: focused ? '#e4fdfd' : '',
+              padding: focused ? 10 : 0,
+              marginTop: 5,
+              borderRadius: 20,
+            }}
+          >
+            <Image
+              resizeMode={'contain'}
+              style={{
+                width: tabIconSize,
+                height: tabIconSize,
+              }}
+              source={
+                focused
+                  ? require('../../assets/doctor-active.png')
+                  : require('../../assets/doctor.png')
+              }
+            />
+          </View>
+        ),
+      },
+    },
+    Community: {
+      screen: Patients,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => {
+          return (
+            <View
+              style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: focused ? '#e4fdfd' : '',
+                padding: focused ? 10 : 0,
+                marginTop: 5,
+                borderRadius: 20,
+              }}
+            >
+              <Image
+                resizeMode={'contain'}
+                style={{
+                  width: tabIconSize,
+                  height: tabIconSize,
+                }}
+                source={
+                  focused
+                    ? require('../../assets/history-active.png')
+                    : require('../../assets/history.png')
+                }
+              />
+            </View>
+          );
+        },
+      },
+    },
+  },
+  {
+    initialRouteName: 'AskExpert',
+    tabBarposition: 'bottom',
+    swipeEnabled: true,
+    tabBarOptions: {
+      activeTintColor: 'black',
+      inactiveTintColor: 'black',
+      showLabel: false,
+      style: {
+        backgroundColor: 'white',
+        borderRadius: 12,
+        borderColor: 'lightgrey',
+        borderWidth: 1,
+        marginHorizontal: 5,
+        height: 40,
+        shadowOffset: { width: 0, height: 2 },
+        shadowColor: '#000000',
+        shadowOpacity: 1,
+        shadowRadius: 7,
+      },
+    },
+  },
 );
 
 const AppStackExpert = createStackNavigator(
-    {
-        AllergiesHistory: { screen: AllergiesHistory },
-        BottomTabExpert: { screen: BottomTabExpert },
-        Consent: { screen: Consent },
-        ChangePasswordExpert: { screen: ChangePasswordExpert },
-        ChatExpert: { screen: ChatExpert },
-        ExpertTwillioLogin: { screen: ExpertTwillioLogin },
-        ExpertTwillioCalling: { screen: ExpertTwillioCalling },
-        ExpertVisit: { screen: ExpertVisit },
-        FamilyHistory: { screen: FamilyHistory },
-        GynHistory: { screen: GynHistory },
-        Help: { screen: Help },
-        Learn: { screen: Learn },
-        MedicationsHistory: { screen: MedicationsHistory },
-        MedicalHistoryExpert: { screen: MedicalHistoryExpert },
-        Confirm: { screen: Confirm },
-        PatientProfile: { screen: PatientProfile },
-        PersonalMedicalHistory: { screen: PersonalMedicalHistory },
-        PhysicalExam: { screen: PhysicalExam },
-        Plan: { screen: Plan },
-        PregnancyHistoryExpert: { screen: PregnancyHistoryExpert },
-        PreviousVisits: { screen: PreviousVisits },
-        PrivacyPolicy: { screen: PrivacyPolicy },
-        Recap: { screen: Recap },
-        SocialHistory: { screen: SocialHistory },
-        SettingsExpert: { screen: SettingsExpert },
-        Summary: { screen: Summary },
-        SurgicalHistory: { screen: SurgicalHistory },
-        TermsConditions: { screen: TermsConditions },
-        UpdateAvailablity: { screen: UpdateAvailablity },
-        PersonalInformation: { screen: PersonalInformation },
-        AgreementDetails: { screen: AgreementDetails },
-        VisitExpert: { screen: VisitExpert },
-    },
-    {
-        headerMode: 'none',
-        initialRouteName: 'BottomTabExpert',
-    },
+  {
+    AllergiesHistory: { screen: AllergiesHistory },
+    BottomTabExpert: { screen: BottomTabExpert },
+    Consent: { screen: Consent },
+    ChangePasswordExpert: { screen: ChangePasswordExpert },
+    ChatExpert: { screen: ChatExpert },
+    ExpertTwillioLogin: { screen: ExpertTwillioLogin },
+    ExpertTwillioCalling: { screen: ExpertTwillioCalling },
+    ExpertVisit: { screen: ExpertVisit },
+    FamilyHistory: { screen: FamilyHistory },
+    GynHistory: { screen: GynHistory },
+    Help: { screen: Help },
+    Learn: { screen: Learn },
+    MedicationsHistory: { screen: MedicationsHistory },
+    MedicalHistoryExpert: { screen: MedicalHistoryExpert },
+    Confirm: { screen: Confirm },
+    PatientProfile: { screen: PatientProfile },
+    PersonalMedicalHistory: { screen: PersonalMedicalHistory },
+    PhysicalExam: { screen: PhysicalExam },
+    Plan: { screen: Plan },
+    PregnancyHistoryExpert: { screen: PregnancyHistoryExpert },
+    PreviousVisits: { screen: PreviousVisits },
+    PrivacyPolicy: { screen: PrivacyPolicy },
+    Recap: { screen: Recap },
+    SocialHistory: { screen: SocialHistory },
+    SettingsExpert: { screen: SettingsExpert },
+    Summary: { screen: Summary },
+    SurgicalHistory: { screen: SurgicalHistory },
+    TermsConditions: { screen: TermsConditions },
+    UpdateAvailablity: { screen: UpdateAvailablity },
+    PersonalInformation: { screen: PersonalInformation },
+    AgreementDetails: { screen: AgreementDetails },
+    VisitExpert: { screen: VisitExpert },
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'BottomTabExpert',
+  },
 );
 
 const MainAppStack = createStackNavigator(
-    {
-        Ask: { screen: Ask },
-        AddChild: { screen: AddChild },
-        AddCreditOrDebitCard: { screen: AddCreditOrDebitCard },
-        Allergies: { screen: Allergies },
-        Appointments: { screen: Appointments },
-        BasicInfo: { screen: BasicInfo },
-        Birth: { screen: Birth },
-        BookVisit: { screen: BookVisit },
-        BottomTab: { screen: BottomTab },
-        CareSquad: { screen: CareSquad },
-        GetTreatment: { screen: GetTreatment },
-        TreatmentHistory: { screen: TreatmentHistory },
-        ChangePassword: { screen: ChangePassword },
-        Chat: { screen: Chat },
-        Children: { screen: Children },
-        ChooseExpert: { screen: ChooseExpert },
-        DueDate: { screen: DueDate },
-        ExpertProfile: { screen: ExpertProfile },
-        ExpertSchedule: { screen: ExpertSchedule },
-        HealthHistory: { screen: HealthHistory },
-        HealthAssessmentConfirmation: { screen: HealthAssessmentConfirmation },
-        HealthAssessmentSchedule: { screen: HealthAssessmentSchedule },
-        Help: { screen: Help },
-        Learn: { screen: Learn },
-        Lifestyle: { screen: Lifestyle },
-        Loss: { screen: Loss },
-        Medications: { screen: Medications },
-        MedicalHistory: { screen: MedicalHistory },
-        NeedsPresciption: { screen: NeedsPresciption },
-        NewUser: { screen: NewUser },
-        PaymentMethods: { screen: PaymentMethods },
-        PayPalApproval: { screen: PayPalApproval },
-        PregnancyAndChildren: { screen: Pregnancy },
-        PregnancyCurrent: { screen: CurrentPregnancy },
-        PregnancyHistory: { screen: PregnancyHistory },
-        PrivacyPolicy: { screen: PrivacyPolicy },
-        ReferFriend: { screen: ReferFriend },
-        RescheduleVisit: { screen: RescheduleVisit },
-        RequestVisit: { screen: RequestVisit },
-        SelectCareType: { screen: SelectCareType },
-        SelectExpert: { screen: SelectExpert },
-        Settings: { screen: Settings },
-        SOS: { screen: SOS },
-        TermsConditions: { screen: TermsConditions },
-        TreatmentBot: { screen: TreatmentBot },
-        Visit: { screen: Visit },
-        VisitSummary: { screen: VisitSummary },
-        VideoRating: { screen: VideoRating },
-        TwillioLogin: { screen: TwillioLogin },
-        TwillioCalling: { screen: TwillioCalling },
-        VisitEnd: { screen: VisitEnd },
-    },
-    {
-        headerMode: 'none',
-        initialRouteName: 'BottomTab',
-    },
+  {
+    Ask: { screen: Ask },
+    AddChild: { screen: AddChild },
+    AddCreditOrDebitCard: { screen: AddCreditOrDebitCard },
+    Allergies: { screen: Allergies },
+    Appointments: { screen: Appointments },
+    BasicInfo: { screen: BasicInfo },
+    Birth: { screen: Birth },
+    BookVisit: { screen: BookVisit },
+    BottomTab: { screen: BottomTab },
+    CareSquad: { screen: CareSquad },
+    GetTreatment: { screen: GetTreatment },
+    TreatmentHistory: { screen: TreatmentHistory },
+    ChangePassword: { screen: ChangePassword },
+    Chat: { screen: Chat },
+    Children: { screen: Children },
+    ChooseExpert: { screen: ChooseExpert },
+    DueDate: { screen: DueDate },
+    ExpertProfile: { screen: ExpertProfile },
+    ExpertSchedule: { screen: ExpertSchedule },
+    HealthHistory: { screen: HealthHistory },
+    HealthAssessmentConfirmation: { screen: HealthAssessmentConfirmation },
+    HealthAssessmentSchedule: { screen: HealthAssessmentSchedule },
+    Help: { screen: Help },
+    Learn: { screen: Learn },
+    Lifestyle: { screen: Lifestyle },
+    Loss: { screen: Loss },
+    Medications: { screen: Medications },
+    MedicalHistory: { screen: MedicalHistory },
+    NeedsPresciption: { screen: NeedsPresciption },
+    NewUser: { screen: NewUser },
+    PaymentMethods: { screen: PaymentMethods },
+    PayPalApproval: { screen: PayPalApproval },
+    PregnancyAndChildren: { screen: Pregnancy },
+    PregnancyCurrent: { screen: CurrentPregnancy },
+    PregnancyHistory: { screen: PregnancyHistory },
+    PrivacyPolicy: { screen: PrivacyPolicy },
+    ReferFriend: { screen: ReferFriend },
+    RescheduleVisit: { screen: RescheduleVisit },
+    RequestVisit: { screen: RequestVisit },
+    SelectCareType: { screen: SelectCareType },
+    SelectExpert: { screen: SelectExpert },
+    Settings: { screen: Settings },
+    SOS: { screen: SOS },
+    TermsConditions: { screen: TermsConditions },
+    TreatmentBot: { screen: TreatmentBot },
+    Visit: { screen: Visit },
+    VisitSummary: { screen: VisitSummary },
+    VideoRating: { screen: VideoRating },
+    TwillioLogin: { screen: TwillioLogin },
+    TwillioCalling: { screen: TwillioCalling },
+    VisitEnd: { screen: VisitEnd },
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'BottomTab',
+  },
 );
 
 const AppStack = createStackNavigator(
-    {
-        MainApp: MainAppStack,
-        Payment: PaymentStack,
-    },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-        initialRouteName: 'MainApp',
-        ...TransparentStyle,
-    },
+  {
+    MainApp: MainAppStack,
+    Payment: PaymentStack,
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    initialRouteName: 'MainApp',
+    ...TransparentStyle,
+  },
 );
 
 const AppNavigator = createSwitchNavigator(
-    {
-        Auth: AuthStack,
-        App: AppStack,
-        AppExpert: AppStackExpert,
-    },
-    {
-        initialRouteName: 'Auth',
-        headerMode: 'none',
-        ...TransparentStyle,
-    },
+  {
+    Auth: AuthStack,
+    App: AppStack,
+    AppExpert: AppStackExpert,
+  },
+  {
+    initialRouteName: 'Auth',
+    headerMode: 'none',
+    ...TransparentStyle,
+  },
 );
 
 const prevGetStateForActionHomeStack = AuthStack.router.getStateForAction;
 
 AuthStack.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'ReplaceCurrentScreen') {
-        const routes = state.routes.slice(0, state.routes.length - 1);
-        routes.push(action);
-        return {
-            ...state,
-            index: routes.length - 1,
-            routes,
-        };
-    }
-    return prevGetStateForActionHomeStack(action, state);
+  if (state && action.type === 'ReplaceCurrentScreen') {
+    const routes = state.routes.slice(0, state.routes.length - 1);
+    routes.push(action);
+    return {
+      ...state,
+      index: routes.length - 1,
+      routes,
+    };
+  }
+  return prevGetStateForActionHomeStack(action, state);
 };
 
 const prevGetStateForActionAppStack = AppStack.router.getStateForAction;
 
 AppStack.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'ReplaceCurrentScreen') {
-        const routes = state.routes.slice(0, state.routes.length - 1);
-        routes.push(action);
-        return {
-            ...state,
-            index: routes.length - 1,
-            routes,
-        };
-    }
-    return prevGetStateForActionAppStack(action, state);
+  if (state && action.type === 'ReplaceCurrentScreen') {
+    const routes = state.routes.slice(0, state.routes.length - 1);
+    routes.push(action);
+    return {
+      ...state,
+      index: routes.length - 1,
+      routes,
+    };
+  }
+  return prevGetStateForActionAppStack(action, state);
 };
 
 const prevGetStateForActionAppStackExpert =
-    AppStackExpert.router.getStateForAction;
+  AppStackExpert.router.getStateForAction;
 
 AppStackExpert.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'ReplaceCurrentScreen') {
-        const routes = state.routes.slice(0, state.routes.length - 1);
-        routes.push(action);
-        return {
-            ...state,
-            index: routes.length - 1,
-            routes,
-        };
-    }
-    return prevGetStateForActionAppStackExpert(action, state);
+  if (state && action.type === 'ReplaceCurrentScreen') {
+    const routes = state.routes.slice(0, state.routes.length - 1);
+    routes.push(action);
+    return {
+      ...state,
+      index: routes.length - 1,
+      routes,
+    };
+  }
+  return prevGetStateForActionAppStackExpert(action, state);
 };
 
 export default createAppContainer(AppNavigator);
