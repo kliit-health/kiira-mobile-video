@@ -1,20 +1,18 @@
-import {StyleSheet} from 'react-native';
-import {text, colors} from '~/utils/constants';
-import { smallScreen } from '~/utils/metrices';
+import { StyleSheet } from 'react-native';
+import { text, colors } from '~/utils/constants';
 
-const styles = StyleSheet.create({
-    text: {
-        color: colors.blue,
-        textAlign: "center",
-        fontSize: smallScreen ? 17 : text.size.xLarge
-    },
-    button: {
-        backgroundColor: colors.white,
-        marginVertical: smallScreen ? 10 : 20,
-        marginHorizontal: 20,
-        padding: smallScreen ? 10 : 15,
-        borderRadius: 30
-    }
-})
-
-export default styles;
+export default StyleSheet.create({
+  container: {
+    backgroundColor: colors.azure,
+    marginTop: 'auto',
+    borderRadius: 50,
+  },
+  title: {
+    fontFamily: text.fontFamily.poppinsRegular,
+    color: colors.white,
+    fontSize: text.size.regular,
+    textAlign: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+});

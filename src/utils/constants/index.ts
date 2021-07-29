@@ -736,16 +736,18 @@ export const screenNames = {
   treatmentBot: 'TreatmentBot',
 };
 
-export enum routes {
+export enum route {
   requestVisit = 'RequestVisit',
   careSquad = 'CareSquad',
   ask = 'Ask',
   healthHistory = 'HealthHistory',
   appointments = 'Appointments',
   sos = 'SOS',
+  healthAssesmentSchedule = 'HealthAssessmentSchedule',
+  healthAssessmentConfirmation = 'HealthAssessmentConfirmation',
 }
 
-export enum features {
+export enum feature {
   video,
   chat,
 }

@@ -4,15 +4,12 @@ import { text, colors } from '~/utils/constants';
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginHorizontal: 14,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 10,
+    marginHorizontal: 20,
+    alignItems: 'flex-start',
   },
   title: {
     fontSize: text.size.xxxLarge,
     fontFamily: text.fontFamily.poppinsRegular,
-    textAlign: 'center',
     color: colors.black,
   },
 });

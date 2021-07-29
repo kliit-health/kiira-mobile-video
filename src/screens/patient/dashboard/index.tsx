@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
 import { Container } from '~/components';
-import { Item, Welcome, HealthAssesment } from './sections';
+import { Item, Welcome, Banner } from './sections';
 import model from './model';
 import styles from './styles';
 import i18n from '~/i18n';
@@ -107,9 +107,9 @@ const Dashboard = ({ navigation }) => {
     <Container styles={styles.container} barStyle="dark-content" unformatted>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Welcome displayName={user.profileInfo.firstName} />
-        <HealthAssesment />
+        <Banner />
         {model.map((item, index) => (
-          <Item {...item} onPress={handleNavigation} index={index} />
+          <Item {...item} onPress={handleNavigation} />
         ))}
       </ScrollView>
     </Container>

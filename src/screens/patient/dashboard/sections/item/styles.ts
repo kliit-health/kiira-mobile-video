@@ -4,7 +4,7 @@ import { colors, text } from '~/utils/constants';
 export default StyleSheet.create({
   root: {
     padding: 20,
-    borderBottomWidth: 0.4,
+    borderTopWidth: 0.4,
     borderColor: colors.gray,
     flexDirection: 'row',
     width: '100%',

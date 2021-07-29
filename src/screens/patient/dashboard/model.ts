@@ -1,49 +1,49 @@
-import { routes, features } from '~/utils/constants';
+import { route, feature } from '~/utils/constants';
 import { Camera, Chat, Squad, Sheet, Calendar } from '~/svgs';
 
 export type Item = {
   title: string;
   description: string;
-  destination: routes;
+  destination: route;
   icon: any;
-  features: features | undefined;
+  feature: feature | undefined;
 };
 
 const model: Item[] = [
   {
     title: 'dashboard.getTreatment',
     description: 'dashboard.talk',
-    destination: routes.requestVisit,
+    destination: route.requestVisit,
     icon: Camera,
-    features: features.video,
+    feature: feature.video,
   },
   {
     title: 'dashboard.chatExpert',
     description: 'dashboard.getHelp',
-    destination: routes.ask,
+    destination: route.ask,
     icon: Chat,
-    features: undefined,
+    feature: undefined,
   },
   {
     title: 'dashboard.mySquad',
     description: 'dashboard.buildTeam',
-    destination: routes.careSquad,
+    destination: route.careSquad,
     icon: Squad,
-    features: undefined,
+    feature: undefined,
   },
   {
     title: 'dashboard.appointments',
     description: 'dashboard.seeUpcoming',
-    destination: routes.appointments,
+    destination: route.appointments,
     icon: Calendar,
-    features: features.video,
+    feature: feature.video,
   },
   {
     title: 'dashboard.myHistory',
     description: 'dashboard.provideInformation',
-    destination: routes.healthHistory,
+    destination: route.healthHistory,
     icon: Sheet,
-    features: undefined,
+    feature: undefined,
   },
 ];
 

@@ -1,9 +1,9 @@
-import { features, routes } from '~/utils/constants';
+import { feature, route } from '~/utils/constants';
 
 export type Item = {
   title: string;
   description: string;
-  destination: routes;
+  destination: route;
   icon: any;
-  features: features;
+  features: feature;
 };

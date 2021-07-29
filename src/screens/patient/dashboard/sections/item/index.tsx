@@ -2,20 +2,18 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { useSelector, shallowEqual } from 'react-redux';
 import { get } from 'lodash';
-import { routes, features, colors } from '~/utils/constants';
+import { route, feature, colors } from '~/utils/constants';
 import { Item as ItemType } from './types';
 import { ChevronRight } from '~/svgs';
 import styles from './styles';
 
 export type ItemProps = {
-  index: number;
-  onPress: (destination: routes, features: features) => void;
+  onPress: (destination: route, features: feature) => void;
 } & ItemType;
 
 const Item = ({
   title,
   description,
-  index,
   destination,
   onPress,
   features,
@@ -26,7 +24,7 @@ const Item = ({
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={[styles.root, { borderTopWidth: index === 0 ? 0.4 : 0 }]}
+      style={styles.root}
       onPress={() => onPress(destination, features)}
     >
       <View style={styles.icon}>
