@@ -157,7 +157,7 @@ export default {
     emptyStateSelectionMsg: 'State of residence is a required field',
     emptyPronounsMsg: 'Your pronouns is a required field',
     insurance: 'Insurance',
-    plan: 'Plan',
+    plan: 'Insurance Plan / ID',
   },
 
   askUser: {

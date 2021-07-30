@@ -77,8 +77,9 @@ function* getAppointmentDates({data}) {
   }
 }
 
-function* updateAppointment({data, data: {data: {time}, navigation}}) {
+function* updateAppointment({data, data: {data: {time, appointmentType}, navigation}}) {
   const {assessment} = yield select((state) => state.user.data);
+  
   try {
     yield put(showApiLoader());
     let appointment = yield changeAppointmentAsync(data);
@@ -90,7 +91,9 @@ function* updateAppointment({data, data: {data: {time}, navigation}}) {
       );
       navigation.navigate('Appointments');
     }
-    yield put(updateUser({assessment: {...assessment, time}}))
+    if(assessment && appointmentType.title === "Health Check") {
+      yield put(updateUser({assessment: {...assessment, time}}))
+    }
     yield showOrHideModal('Your appointment has been sucessfully rescheduled.');
     yield put(getAppointmentsList({uid: data.data.uid}));
 

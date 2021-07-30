@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
     ScrollView,
     View,
@@ -42,7 +42,6 @@ const SheduleModal = ({
     visit,
 }) => {
     const dispatch = useDispatch();
-
     return (
         <View
             style={
@@ -52,7 +51,7 @@ const SheduleModal = ({
             }
         >
             {showShedule && (
-                <Fragment>
+                <>
                     <View>
                         <TouchableOpacity
                             onPress={() => {
@@ -81,7 +80,9 @@ const SheduleModal = ({
                         <CustomText style={styles.firstAvaliable}>
                             Select Appointment Date
                         </CustomText>
-                        {showShedule && !appointmentData.dates ? (
+                        {showShedule &&
+                        appointmentData.dates &&
+                        !appointmentData.dates.length ? (
                             <ActivityIndicator size="large" color="#008AFC" />
                         ) : (
                             <FlatList
@@ -223,7 +224,7 @@ const SheduleModal = ({
                                 )}
                         </ScrollView>
                     </View>
-                </Fragment>
+                </>
             )}
             <TouchableOpacity
                 onPress={() =>

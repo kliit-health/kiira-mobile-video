@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Image, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import Constant from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
+import * as actions from '~/redux/actions';
+import DeviceInfo from 'react-native-device-info';
 
 const Welcome = ({ navigation }) => {
+    const dispatch = useDispatch();
     const { staticImages, screenNames } = Constant.App;
+
+    useEffect(() => {
+        const device = {
+            manufacturer: DeviceInfo.getManufacturerSync(),
+            model: DeviceInfo.getModel(),
+            osVersion: DeviceInfo.getSystemVersion(),
+            appVersion: DeviceInfo.getVersion(),
+        };
+        dispatch(actions.updateUser({ device }));
+    }, []);
 
     const user = useSelector(state => state.user.data);
 

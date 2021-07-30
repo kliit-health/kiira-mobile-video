@@ -87,19 +87,20 @@ const App = () => {
 
   const _handleAppStateChange = (nextAppState) => {
     let timeoutId;
-
+    
     if (nextAppState === 'active') {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
+      
     } else {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
 
       timeoutId = BackgroundTimer.setTimeout(() => {
+        
         const payload = {
-          navigation: navigationRef.current._navigation,
           isLoaderShow: false,
         };
         dispatch(signOut(payload));

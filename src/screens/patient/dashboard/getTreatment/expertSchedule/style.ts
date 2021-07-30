@@ -6,8 +6,6 @@ let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 let titlePaddingValue = metrics.width * 0.05;
 
-let childPaddingValue = metrics.width * 0.03;
-var childPadding = parentPadding + childPaddingValue * 2;
 
 const styles = StyleSheet.create({
   backContainerStyle: {
@@ -290,6 +288,12 @@ const styles = StyleSheet.create({
     paddingRight: (parentPaddingValue + 4) * 0.5,
     backgroundColor: 'white',
     borderRadius: 15,
+  },
+
+  loaderContainer: {
+    justifyContent: 'center',
+    width: metrics.width * 0.5,
+    marginBottom: 60,
   },
 
   noContainerStyle: {

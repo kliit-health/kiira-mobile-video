@@ -1,14 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import CustomButton from '~/components/customButton';
 import styles from '../style';
-import Constant from '~/utils/constants';
-import {
-    makeAppointment,
-    prepaidAppointment,
-    getAppointmentsList,
-} from '../action';
+import { makeAppointment, prepaidAppointment } from '../action';
 
 const Buttons = ({
     applyCredit,
@@ -23,18 +18,7 @@ const Buttons = ({
 }) => {
     const dispatch = useDispatch();
     const bookedButtons = () => (
-        <Fragment>
-            <CustomButton
-                buttonStyle={styles.yesContainerStyle}
-                textStyle={styles.yesTextStyle}
-                onPress={() => {
-                    dispatch(
-                        getAppointmentsList({ uid: appointmentDetails.uid }),
-                    );
-                    navigation.navigate(Constant.App.screenNames.Appointments);
-                }}
-                text="Check Upcoming Visits"
-            />
+        <>
             <CustomButton
                 buttonStyle={styles.noContainerStyle}
                 textStyle={styles.noTextStyle}
@@ -43,11 +27,11 @@ const Buttons = ({
                 }}
                 text="Go Home"
             />
-        </Fragment>
+        </>
     );
 
     const pay = () => (
-        <Fragment>
+        <>
             <CustomButton
                 buttonStyle={styles.yesContainerStyle}
                 textStyle={styles.yesTextStyle}
@@ -76,7 +60,7 @@ const Buttons = ({
                 }}
                 text="Apply Credit"
             />
-        </Fragment>
+        </>
     );
 
     const confirm = () => (
