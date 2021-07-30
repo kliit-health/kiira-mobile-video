@@ -16,6 +16,7 @@ export default StyleSheet.create({
   logoContainer: {
     marginTop: 30,
     marginBottom: 50,
+    alignItems: 'center',
   },
   description: {
     fontFamily: text.fontFamily.poppinsRegular,

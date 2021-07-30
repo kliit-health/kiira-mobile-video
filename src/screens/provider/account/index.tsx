@@ -10,11 +10,11 @@ import {signOut} from '../../patient/account/action';
 import styles, {modifiers} from './styles';
 
 const ExpertAccount = ({navigation}) => {
-  const language = useSelector((state) => state.language, shallowEqual);
-  const details = useSelector((state) => state.user.data);
+  const language = useSelector(state => state.language, shallowEqual);
+  const details = useSelector(state => state.user.data);
   const dispatch = useDispatch();
 
-  const handleNavigation = (destination) => {
+  const handleNavigation = destination => {
     navigation.navigate(destination);
   };
 
