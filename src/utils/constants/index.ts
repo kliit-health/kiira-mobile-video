@@ -40,7 +40,7 @@ export default {
       paleLilac: '#e5e5ea',
       pinkColor: '#FE9FD8',
       pinkishGreyColor: 'rgb(206 ,206 ,206)',
-      purple: 'red',
+      purple: '#9102E2',
       redColor: 'red',
       redColorLogout: '#D41F08',
       redColorExpired: '#d92405',
@@ -493,6 +493,7 @@ export default {
       passwordInvisibleIcon: require('../../../assets/eye_hide.png'),
       payPalIcon: require('../../../assets/paypal.png'),
       penguin: require('../../../assets/kiira_penguin.png'),
+      penguin_b: require('../../../assets/kiira_penguin_b.png'),
       plusIcon: require('../../../assets/plus.png'),
       pregnancy: require('../../../assets/pregnancy.png'),
       profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
@@ -1827,12 +1828,12 @@ export const collections = {
 
 export const urls = {
   prod: {
-    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayAuth',
-    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthAuth',
-    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeAuth',
-    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeAuth',
+    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
+    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
+    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
+    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
     appointmentCancel: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeAuth'
+    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType'
   },
   dev: {
     appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
@@ -1842,6 +1843,12 @@ export const urls = {
     appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
     appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth'
   }
+}
+
+export const assessmentText = {
+  initial: "Schedule your free 15 minute health assessment!",
+  pending: "Health Assessment",
+  complete: "Select Get Treatment to schedule your visit for:"
 }
 
 export const videoHistory = {

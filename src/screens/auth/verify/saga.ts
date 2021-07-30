@@ -13,7 +13,7 @@ function* sendVerificationEmail({data}) {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     yield call(sendEmailVerification, data);
     yield put(hideApiLoader());
-    yield put(showOrHideModal('Check your email'));
+    yield put(showOrHideModal(lang.login.Activation));
   } catch (error) {
     yield put(hideApiLoader());
     yield put(showOrHideModal(lang.errorMessage.serverError));

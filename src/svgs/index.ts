@@ -1,0 +1,10 @@
+export {default as Camera} from './camera.svg';
+export {default as Squad} from './squad.svg';
+export {default as Chat} from './chat.svg';
+export {default as ClockBack} from './clock-back.svg';
+export {default as Calendar} from './calendar.svg';
+export {default as Caution} from './caution.svg';
+export {default as PrimaryCare} from './primaryCare.svg';
+export {default as MentalHealth} from './mentalHealth.svg';
+export {default as WomensHealth} from './womensHealth.svg';
+export {default as VideoChat} from './videoChat.svg';

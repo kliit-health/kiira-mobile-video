@@ -13,6 +13,7 @@ import analytics from '@react-native-firebase/analytics';
 import { signOut } from './src/screens/patient/account/action';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
+import FastImage from 'react-native-fast-image';
 import { NavigationService } from './src/navigation/';
 import { setCurrentRoute, setPreviousRoute } from './src/redux/actions';
 
@@ -23,6 +24,12 @@ const App = () => {
   const spinner = useSelector((state) => state.loader);
   const toast = useSelector((state) => state.toast);
   const { showModalError, errorMessage } = useSelector((state) => state.modal);
+
+  FastImage.preload([
+    {
+        uri: 'https://firebasestorage.googleapis.com/v0/b/kliit-health-app.appspot.com/o/Kliit%2F158453698551228C511E5-726E-4A6A-B48F-5789FB54A554.jpg?alt=media&token=0e896a21-1c3e-4fb8-b401-a3724d60339b',
+    },
+])
 
   useEffect(async () => {
     LogBox.ignoreAllLogs();
@@ -80,19 +87,20 @@ const App = () => {
 
   const _handleAppStateChange = (nextAppState) => {
     let timeoutId;
-
+    
     if (nextAppState === 'active') {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
+      
     } else {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
 
       timeoutId = BackgroundTimer.setTimeout(() => {
+        
         const payload = {
-          navigation: navigationRef.current._navigation,
           isLoaderShow: false,
         };
         dispatch(signOut(payload));

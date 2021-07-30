@@ -141,9 +141,7 @@ const ItemPast = (props) => {
       </View>
       <View style={itemPastStyles.subtitleContainer}>
         <Text style={itemPastStyles.dateText}>
-          {moment.unix(time).calendar(null, {
-            sameElse: 'MM/DD/YYYY',
-          })}
+          {moment.unix(time).format("MM/DD/YY")}
         </Text>
       </View>
     </ListItem>

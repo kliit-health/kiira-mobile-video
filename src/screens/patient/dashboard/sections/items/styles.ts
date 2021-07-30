@@ -1,5 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {text, colors} from '~/utils/constants';
+import {smallScreen} from '~/utils/metrices';
 
 const width = Dimensions.get('window').width;
 
@@ -9,12 +10,14 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     margin: 9,
   },
+
   container: {
     width: width / 3 - 24,
     marginHorizontal: 9,
   },
+
   title: {
-    fontSize: text.size.small,
+    fontSize: smallScreen ? text.size.xSmall : text.size.small,
     fontFamily: text.fontFamily.poppinsRegular,
     alignSelf: 'center',
     marginTop: 3,
@@ -22,6 +25,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: colors.charcoal,
   },
+
   box: {
     height: width / 3 - 24,
     width: width / 3 - 24,
@@ -35,8 +39,10 @@ export default StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 0.2,
   },
+
   image: {
     width: 50,
     height: 50,
   },
+
 });
