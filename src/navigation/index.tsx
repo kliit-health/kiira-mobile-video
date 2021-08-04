@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import { Image, View } from 'react-native';
+import { Text } from '~/components';
 
 import Account from '../screens/patient/account';
 import AccountExpert from '../screens/provider/account';
@@ -96,14 +97,13 @@ import AgreementDetails from '../screens/provider/appointments/patientProfile/ag
 import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 
-import Constant, { colors } from '../utils/constants';
+import Constant, { colors, icons } from '../utils/constants';
 
 let tabIconSize = 25;
 const screenNames = Constant.App.screenNames;
 
 const TransparentStyle = {
   cardStyle: {
-    // opacity: 1,
     backgroundColor: '#fff',
   },
 
@@ -149,12 +149,12 @@ const BottomTab = createBottomTabNavigator(
             <View
               style={{
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                backgroundColor: focused ? '#e4fdfd' : '',
-                padding: focused ? 10 : 0,
-                marginTop: 5,
-                borderRadius: 20,
+                borderTopWidth: focused ? 2 : 0,
+                borderTopColor: colors.primaryBlue,
+                padding: focused ? 8 : 10,
+                marginTop: 10,
               }}
             >
               <Image
@@ -163,12 +163,9 @@ const BottomTab = createBottomTabNavigator(
                   width: tabIconSize,
                   height: tabIconSize,
                 }}
-                source={
-                  focused
-                    ? require('../../assets/kiira_icon.png')
-                    : require('../../assets/kiira_icon_inactive.png')
-                }
+                source={focused ? icons.blogActive : icons.blog}
               />
+              <Text options={focused ? 'active small' : 'small'}>Blog</Text>
             </View>
           );
         },
@@ -181,23 +178,20 @@ const BottomTab = createBottomTabNavigator(
           <View
             style={{
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'center',
-              backgroundColor: focused ? '#e4fdfd' : '',
-              padding: focused ? 10 : 0,
-              marginTop: 5,
-              borderRadius: 20,
+              borderTopWidth: focused ? 2 : 0,
+              borderTopColor: colors.primaryBlue,
+              padding: focused ? 8 : 10,
+              marginTop: 10,
             }}
           >
             <Image
               resizeMode={'contain'}
               style={{ width: tabIconSize, height: tabIconSize }}
-              source={
-                focused
-                  ? require('../../assets/home-active.png')
-                  : require('../../assets/home.png')
-              }
+              source={focused ? icons.homeActive : icons.home}
             />
+            <Text options={focused ? 'active small' : 'small'}>Home</Text>
           </View>
         ),
       },
@@ -210,12 +204,12 @@ const BottomTab = createBottomTabNavigator(
             <View
               style={{
                 flexDirection: 'column',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                backgroundColor: focused ? '#e4fdfd' : '',
-                padding: focused ? 10 : 0,
-                marginTop: 5,
-                borderRadius: 20,
+                borderTopWidth: focused ? 2 : 0,
+                borderTopColor: colors.primaryBlue,
+                padding: focused ? 8 : 10,
+                marginTop: 10,
               }}
             >
               <Image
@@ -224,12 +218,9 @@ const BottomTab = createBottomTabNavigator(
                   width: tabIconSize,
                   height: tabIconSize,
                 }}
-                source={
-                  focused
-                    ? require('../../assets/me-active.png')
-                    : require('../../assets/me.png')
-                }
+                source={focused ? icons.profileActive : icons.profile}
               />
+              <Text options={focused ? 'active small' : 'small'}>Profile</Text>
             </View>
           );
         },

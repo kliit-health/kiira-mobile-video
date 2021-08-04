@@ -557,6 +557,7 @@ export const colors = {
   paleLilac: '#e5e5ea',
   pink: '#FE9FD8',
   pinkGrey: 'rgb(206 ,206 ,206)',
+  primaryBlue: '#0253E2',
   purple: '#8359FF',
   red: 'red',
   white: '#FFFFFF',
@@ -567,6 +568,7 @@ export const colors = {
 
 export const text = {
   size: {
+    xxSmall: 8,
     xSmall: 10,
     small: 12,
     medium: 14,
@@ -601,6 +603,8 @@ export const icons = {
   backIcon: require('../../../assets/back.png'),
   basket: require('../../../assets/basket.png'),
   bandAid: require('../../../assets/bandaid.png'),
+  blog: require('../../../assets/blog.png'),
+  blogActive: require('../../../assets/blog-active.png'),
   camera: require('../../../assets/camera_grey.png'),
   cameraWhiteImg: require('../../../assets/camera_white.png'),
   cardIcon: require('../../../assets/card.png'),
@@ -614,6 +618,8 @@ export const icons = {
   clipboard: require('../../../assets/clipboard.png'),
   downArrow: require('../../../assets/down_arrow.png'),
   filterIcon: require('../../../assets/filter.png'),
+  home: require('../../../assets/home.png'),
+  homeActive: require('../../../assets/home-active.png'),
   greyDownArrow: require('../../../assets/grey_down_arrow.png'),
   kliitCredit: require('../../../assets/kliit_credits.png'),
   lockIcon: require('../../../assets/npLock.png'),
@@ -626,6 +632,8 @@ export const icons = {
   payPalIcon: require('../../../assets/paypal.png'),
   penguin: require('../../../assets/kiira_penguin.png'),
   plusIcon: require('../../../assets/plus.png'),
+  profile: require('../../../assets/profile.png'),
+  profileActive: require('../../../assets/profile-active.png'),
   profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
   radioCheckBlueIcon: require('../../../assets/check_blue.png'),
   radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
