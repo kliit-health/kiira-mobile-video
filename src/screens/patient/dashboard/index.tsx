@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollView } from 'react-native';
+import { ScrollView, Linking, Platform } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
 import { Container } from '~/components';
-import { Items, Intro, HealthAssesment } from './sections';
+import { Item, Welcome, Banner } from './sections';
+import model from './model';
 import styles from './styles';
 import i18n from '~/i18n';
 import DeviceInfo from 'react-native-device-info';
@@ -81,40 +82,45 @@ const Dashboard = ({ navigation }) => {
     }, [user]);
 
     const handleNavigation = (destination, features) => {
-        if (features === 'video' && !videoEnabled) {
-            dispatch(
-                actions.showMessage({
-                    message: lang.dashboard.serviceUnavailable,
-                }),
-            );
-            return;
-        }
+        console.log(features);
+        if (features === 'urgent') {
+            const isAndroid = Platform.OS != 'ios';
+            Linking.openURL(isAndroid ? 'tel:${911}' : 'telprompt:${911}');
+        } else {
+            if (features === 'video' && !videoEnabled) {
+                dispatch(
+                    actions.showMessage({
+                        message: lang.dashboard.serviceUnavailable,
+                    }),
+                );
+                return;
+            }
 
-        if (features === 'chat' && !chatEnabled) {
-            dispatch(
-                actions.showMessage({
-                    message: lang.dashboard.chatNotAvailable,
-                }),
-            );
-            return;
-        }
+            if (features === 'chat' && !chatEnabled) {
+                dispatch(
+                    actions.showMessage({
+                        message: lang.dashboard.chatNotAvailable,
+                    }),
+                );
+                return;
+            }
 
-        navigation.navigate(destination);
+            navigation.navigate(destination);
+        }
     };
 
     return (
         <Container
             styles={styles.container}
-            barStyle={'dark-content'}
+            barStyle="dark-content"
             unformatted
         >
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Intro
-                    displayName={user.profileInfo.firstName}
-                    profileImageUrl={user.profileInfo.profileImageUrl}
-                />
-                <Items onPress={handleNavigation} />
-                <HealthAssesment />
+                <Welcome displayName={user.profileInfo.firstName} />
+                <Banner />
+                {model.map((item, index) => (
+                    <Item {...item} onPress={handleNavigation} />
+                ))}
             </ScrollView>
         </Container>
     );

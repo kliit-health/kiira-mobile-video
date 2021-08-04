@@ -23,7 +23,7 @@ export default {
   requestVisit: {
     title: 'Request a Visit',
     goHome: 'Go Home',
-    goBack: 'Go Back'
+    goBack: 'Go Back',
   },
   addCreditCardData: {
     cardNumber: 'Card number',
@@ -33,66 +33,53 @@ export default {
     lastName: 'Last Name',
     saveCard: 'Save Card',
   },
-
   addCreditOrDebitCard: {
     title: 'Add Credit/Debit Card',
     footer: 'Your information is encrypted and processed by Stripe.',
   },
-
   personalInformation: {
     title: 'Personal Information',
     save: 'Save',
   },
-
   consent: {
     title: 'Consent Agreements',
     acceptanceDate: 'Acceptance Date',
   },
-
   agreementDetails: {
     title: 'Agreement Details',
   },
-
   medications: {
     title: 'Medications',
     save: 'Save',
   },
-
   pregnancy: {
     title: 'Pregnancy and Children',
   },
-
   pregnancyHistory: {
     title: 'Pregnancy History',
     save: 'Save',
   },
-
   pregnancyCurrent: {
     title: 'Current Pregnancy',
     addPregnancy: 'Add Pregnancy',
   },
-
   medicalHistory: {
     title: 'Medical History',
     save: 'Save',
   },
-
   allergies: {
     title: 'Allergies',
     previous: 'Previous',
     next: 'Next',
     finish: 'Finish',
   },
-
   insurance: {
     title: 'Insurance',
     save: 'Save',
   },
-
   previousAppointmentsNotes: {
     title: 'Previous Appointments Notes',
   },
-
   dueDate: {
     title: 'Due Date',
   },
@@ -102,7 +89,6 @@ export default {
     no: 'No',
     notSure: `I'm not sure`,
   },
-
   loss: {
     title: 'I Have Experienced a Loss',
     confirm: 'Confirm',
@@ -111,15 +97,12 @@ export default {
     expertsNetwork:
       'Kiira network of expertsis available to support you throught this difficult time.',
   },
-
   birth: {
     title: 'I Have Given Birth',
     confirm: 'Confirm',
     congratulations: 'Congratulations!',
-    help:
-      'Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
+    help: 'Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
   },
-
   children: {
     title: 'Children',
     addChild: 'Add Child',
@@ -131,12 +114,10 @@ export default {
     delete: 'Delete',
     name: 'Name',
   },
-
   careSquad: {
     title: 'Care Squad',
     search: 'Search Care Squad',
   },
-
   addProfileData: {
     title: 'Tell us more about you in your profile.',
     stateText: 'State of Residence',
@@ -159,7 +140,6 @@ export default {
     insurance: 'Insurance',
     plan: 'Insurance Plan / ID',
   },
-
   askUser: {
     headingText1: 'Hi',
     headingText2: 'What do you want to ask an expert?',
@@ -177,19 +157,16 @@ export default {
     videoChatText: 'video session(s) left this month',
     asking: 'Asking',
     buyMoreCredits: 'Buy More Credits',
-    selectTopic: 'Select Topic'
+    selectTopic: 'Select Topic',
   },
-
   askExpert: {
     recent: 'Recent',
     resolved: 'Resolved',
     title: 'Kiira Chat',
   },
-
   apiLoader: {
     loadingText: 'Loading..',
   },
-
   buyingCredits: {
     title: 'Purchase a single consultation',
     kiira: 'Kiira',
@@ -203,7 +180,6 @@ export default {
     googlePayTitle: 'G Pay',
     selectPaymentMethod: 'Please select a payment method first',
   },
-
   chat: {
     action: 'Actions',
     resolveQuestion: 'Resolve Question',
@@ -215,7 +191,6 @@ export default {
     resolved:
       'This conversation has been resolved. To start a new question, return to the ask tab.',
   },
-
   changePassword: {
     title: 'Change Password',
     cancel: 'Cancel',
@@ -229,7 +204,6 @@ export default {
       'New Password should have at least 1 special character',
     passwordUpdateSuccessfullyMsg: 'Password has been updated successfully',
   },
-
   chooseExpert: {
     questionTitle: 'Choose an expert to answer…',
     edit: 'Edit',
@@ -241,7 +215,6 @@ export default {
     professionFilterTitle: 'Show me:',
     genderFilterTitle: 'Show me experts who are…',
   },
-
   errorMessage: {
     serverError: 'Something went wrong please try after some time',
     noDataAvailable: 'No data available',
@@ -249,7 +222,6 @@ export default {
     invalidSecretKey: 'Invalid secret key.',
     invalidreferalCode: 'Invalid referral code.',
   },
-
   expertProfile: {
     title: 'Expert Profile',
     btnText: 'Ask This Expert',
@@ -261,7 +233,6 @@ export default {
     closed: 'Closed',
     prescriber: 'Prescriber',
   },
-
   forgotPassword: {
     Submit: 'Submit',
     Email: 'Your email',
@@ -270,14 +241,12 @@ export default {
     resetEmailSentMessage:
       'A password reset message sent to your email address. Please click the link in that message to reset your password.',
   },
-
   lifestyle: {
     title: 'Lifestyle',
     finish: 'Finish',
     next: 'Next',
     previous: 'Previous',
   },
-
   getTreatment: {
     title: 'Get Treatment',
     seeHistory: 'See History',
@@ -286,18 +255,15 @@ export default {
     languages: 'Languages',
     specialties: 'Specialities',
   },
-
   treatmentHistory: {
     chatHistory: 'Chat History',
     videoHistory: 'Video History',
   },
-
   chatHistory: {
     empty: 'You have no chat history linked to this provider.',
     resolved: 'Resolved',
     unresolved: 'Unresolved',
   },
-
   videoHistory: {
     empty: 'You have no video history linked to this provider.',
     subject: 'Subject: ',
@@ -307,12 +273,10 @@ export default {
     afterVisit:
       'After visit summary has not been provided by your expert. Check again later.',
   },
-
   basicInfo: {
     title: 'Basic Information',
     save: 'Save',
   },
-
   healthHistory: {
     title: 'My Health History',
     basicInfo: 'Basic Information',
@@ -324,7 +288,6 @@ export default {
     insurance: 'Insurance',
     notes: 'Previous Appointment Notes',
   },
-
   login: {
     ForgotPassword: 'Forgot your password?',
     Login: 'Log In',
@@ -337,10 +300,10 @@ export default {
     InvalidEmailMsg: 'Enter a valid email address. For example abc@domain.com.',
     EmptyPasswordMsg: 'Password is a required field.',
     Verify: 'Get Activation Link',
-    Activation: 'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
-    NoBiometrics: 'Please login with email and password to enable.'
+    Activation:
+      'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+    NoBiometrics: 'Please login with email and password to enable.',
   },
-
   paymentMethods: {
     title: 'Payment Methods',
     myPayment: 'My Payment Methods',
@@ -348,7 +311,6 @@ export default {
     addCard: 'Add Credit/Debit Card',
     addPaypal: 'Add PayPal',
   },
-
   referFriend: {
     title: 'Refer a Friend',
     subTitleText: 'Invite friends, get 10 credits',
@@ -359,7 +321,6 @@ export default {
     moreWays: 'More ways to share',
     smsFb: 'SMS, Facebook, Twitter & More',
   },
-
   setting: {
     title: 'Settings',
     cancel: 'Cancel',
@@ -367,7 +328,6 @@ export default {
     changePhoto: 'Change Profile Photo',
     changePassword: 'Change Password',
   },
-
   signUp: {
     titleText1: 'Hello!',
     titleText2: 'Sign up to get started.',
@@ -391,25 +351,15 @@ export default {
     sceretKey: 'Secret Key',
     or: 'OR',
   },
-
   successMessages: {
     visitAddedSuccessfully: 'Your payment was successful',
     cardAddedSuccessfully: 'Your card has been added successfully',
   },
-
-  sos: {
-    title: 'SOS',
-    yes: 'Yes',
-    no: 'No',
-    emergency: 'Are you experiencing an emergency?',
-  },
-
   tabs: {
     account: 'Account',
     ask: 'Ask',
     learn: 'Learn',
   },
-
   tutorial: {
     signUp: 'Sign up',
     login: 'Log In',
@@ -511,7 +461,7 @@ export default {
     chatExpert: 'Chat with an Expert',
     myHistory: 'My History',
     appointments: 'Appointments',
-    sos: 'SOS',
+    sos: 'Urgent',
     helloName: 'Hello, ',
     notFeelingSick: `I'm not feeling sick`,
     nowMention: 'Now that you mention it',
@@ -520,5 +470,25 @@ export default {
     great: `That's great! If that changes let us know.`,
     serviceUnavailable: 'This Service is currently unavailable in your state',
     chatNotAvailable: 'Chat unavailable with current plan',
+    talk: 'Talk with providers',
+    getHelp: 'Get help with question 24/7',
+    buildTeam: 'Build your team of experts',
+    seeUpcoming: 'See upcoming visits',
+    provideInformation: 'Provide your past information',
+    urgent: "Call 911"
+  },
+  schedule: {
+    schedule: 'Schedule your free 15 minute health assessment!',
+    letsDoIt: `Let's do it!`,
+  },
+  book: {
+    bookVisit: 'Book a visit to get treatment for:',
+    primaryCare: `Primary\nCare`,
+    mentalHealth: 'Mental\nHealth',
+    womensHealth: `Women's\nHealth`,
+  },
+  reminder: {
+    nexAppointment: 'Your next appointment is scheduled for:',
+    view: 'View',
   },
 };

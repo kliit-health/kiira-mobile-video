@@ -21,6 +21,7 @@ export {default as RadioGroup} from './radioGroup';
 export {default as Ratings} from './ratings';
 export {default as RatingModal} from './ratingModal';
 export {default as SearchBar} from './searchBar';
+export {default as Text} from './text';
 export {default as TextButton} from './textButton';
 export {default as TextInput} from './textInput';
 export {default as TimeDisplay} from './timeDisplay';

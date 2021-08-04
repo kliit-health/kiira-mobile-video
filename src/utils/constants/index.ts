@@ -97,19 +97,19 @@ export default {
     logoutInterval: 1000 * 90 * 60,
     Modal: {
       gender: [
-        {value: 'Male', code: 'M'},
-        {value: 'Female', code: 'F'},
+        { value: 'Male', code: 'M' },
+        { value: 'Female', code: 'F' },
       ],
       income: [
-        {value: '0 - 35,000', code: '0 - 35,000'},
-        {value: '35,001 - 60,000', code: '35,001 - 60,000'},
-        {value: '60,001 - 80,000', code: '60,001 - 80,000'},
-        {value: '80,001 - 100,000', code: '80,001 - 100,000'},
-        {value: '100,000 - 125,000', code: '100,000 - 125,000'},
-        {value: '125,001 - 150,000', code: '125,001 - 150,000'},
-        {value: '150,001 - 175,000', code: '150,001 - 175,000'},
-        {value: '175,001 - 200,000', code: '175,001 - 200,000'},
-        {value: '200,000+', code: '200,000+'},
+        { value: '0 - 35,000', code: '0 - 35,000' },
+        { value: '35,001 - 60,000', code: '35,001 - 60,000' },
+        { value: '60,001 - 80,000', code: '60,001 - 80,000' },
+        { value: '80,001 - 100,000', code: '80,001 - 100,000' },
+        { value: '100,000 - 125,000', code: '100,000 - 125,000' },
+        { value: '125,001 - 150,000', code: '125,001 - 150,000' },
+        { value: '150,001 - 175,000', code: '150,001 - 175,000' },
+        { value: '175,001 - 200,000', code: '175,001 - 200,000' },
+        { value: '200,000+', code: '200,000+' },
       ],
       states: [
         {
@@ -350,18 +350,18 @@ export default {
         },
       ],
       sexuality: [
-        {value: 'Asexual', code: 'Asexual'},
-        {value: 'Bisexual', code: 'Bisexual'},
-        {value: 'Gay', code: 'Gay'},
-        {value: 'Lesbian', code: 'Lesbian'},
-        {value: 'Pansexual', code: 'Pansexual'},
-        {value: 'Straight', code: 'Straight'},
-        {value: 'Queer', code: 'Queer'},
+        { value: 'Asexual', code: 'Asexual' },
+        { value: 'Bisexual', code: 'Bisexual' },
+        { value: 'Gay', code: 'Gay' },
+        { value: 'Lesbian', code: 'Lesbian' },
+        { value: 'Pansexual', code: 'Pansexual' },
+        { value: 'Straight', code: 'Straight' },
+        { value: 'Queer', code: 'Queer' },
       ],
       race: [
-        {value: 'Arab', code: 'Arab'},
-        {value: 'Asian', code: 'Asian'},
-        {value: 'Hispanic or Latino', code: 'Hispanic or Latino'},
+        { value: 'Arab', code: 'Arab' },
+        { value: 'Asian', code: 'Asian' },
+        { value: 'Hispanic or Latino', code: 'Hispanic or Latino' },
         {
           value: 'American Indian or Alaskan Native',
           code: 'American Indian or Alaskan Native',
@@ -370,10 +370,13 @@ export default {
           value: 'Native Hawaiian or Other Pacific Islander',
           code: 'Native Hawaiian or Other Pacific Islander',
         },
-        {value: 'Black or African American', code: 'Black or African American'},
-        {value: 'White', code: 'White'},
-        {value: 'Two or more', code: 'Two or more'},
-        {value: 'Prefer not to say', code: 'Prefer not to say'},
+        {
+          value: 'Black or African American',
+          code: 'Black or African American',
+        },
+        { value: 'White', code: 'White' },
+        { value: 'Two or more', code: 'Two or more' },
+        { value: 'Prefer not to say', code: 'Prefer not to say' },
       ],
     },
 
@@ -434,7 +437,6 @@ export default {
       Setting: 'Setting',
       SettingExpert: 'SettingExpert',
       SignUp: 'SignUp',
-      SOS: 'SOS',
       TermsAndConditions: 'TermsConditions',
       UpdateAvailablity: 'UpdateAvailablity',
       Verify: 'Verify',
@@ -541,7 +543,7 @@ export default {
 };
 
 export const colors = {
-  azure: 'rgb(0, 138, 252)',
+  azure: '#0253E2',
   black: 'black',
   blue: '#0089FF',
   blueGrey: '#8e8e93',
@@ -554,6 +556,7 @@ export const colors = {
   paleLilac: '#e5e5ea',
   pink: '#FE9FD8',
   pinkGrey: 'rgb(206 ,206 ,206)',
+  primaryBlue: '#0253E2',
   purple: '#8359FF',
   red: 'red',
   white: '#FFFFFF',
@@ -564,6 +567,7 @@ export const colors = {
 
 export const text = {
   size: {
+    xxSmall: 8,
     xSmall: 10,
     small: 12,
     medium: 14,
@@ -598,6 +602,8 @@ export const icons = {
   backIcon: require('../../../assets/back.png'),
   basket: require('../../../assets/basket.png'),
   bandAid: require('../../../assets/bandaid.png'),
+  blog: require('../../../assets/blog.png'),
+  blogActive: require('../../../assets/blog-active.png'),
   camera: require('../../../assets/camera_grey.png'),
   cameraWhiteImg: require('../../../assets/camera_white.png'),
   cardIcon: require('../../../assets/card.png'),
@@ -611,6 +617,8 @@ export const icons = {
   clipboard: require('../../../assets/clipboard.png'),
   downArrow: require('../../../assets/down_arrow.png'),
   filterIcon: require('../../../assets/filter.png'),
+  home: require('../../../assets/home.png'),
+  homeActive: require('../../../assets/home-active.png'),
   greyDownArrow: require('../../../assets/grey_down_arrow.png'),
   kliitCredit: require('../../../assets/kliit_credits.png'),
   lockIcon: require('../../../assets/npLock.png'),
@@ -623,6 +631,8 @@ export const icons = {
   payPalIcon: require('../../../assets/paypal.png'),
   penguin: require('../../../assets/kiira_penguin.png'),
   plusIcon: require('../../../assets/plus.png'),
+  profile: require('../../../assets/profile.png'),
+  profileActive: require('../../../assets/profile-active.png'),
   profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
   radioCheckBlueIcon: require('../../../assets/check_blue.png'),
   radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
@@ -695,7 +705,6 @@ export const screenNames = {
   Setting: 'Setting',
   SettingExpert: 'SettingExpert',
   SignUp: 'SignUp',
-  SOS: 'SOS',
   TermsAndConditions: 'TermsConditions',
   Verify: 'Verify',
   Welcome: 'Welcome',
@@ -727,11 +736,26 @@ export const screenNames = {
   chatExpert: 'ChatExpert',
   healthHistory: 'HealthHistory',
   appointments: 'Appointments',
-  sos: 'SOS',
   ask: 'Ask',
   addChild: 'AddChild',
   treatmentBot: 'TreatmentBot',
 };
+
+export enum route {
+  requestVisit = 'RequestVisit',
+  careSquad = 'CareSquad',
+  ask = 'Ask',
+  healthHistory = 'HealthHistory',
+  appointments = 'Appointments',
+  healthAssesmentSchedule = 'HealthAssessmentSchedule',
+  healthAssessmentConfirmation = 'HealthAssessmentConfirmation',
+}
+
+export enum feature {
+  chat = 'chat',
+  urgent = 'urgent',
+  video = 'video',
+}
 
 export const units = {
   weight: [
@@ -1828,28 +1852,40 @@ export const collections = {
 
 export const urls = {
   prod: {
-    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
-    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
-    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
-    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
-    appointmentCancel: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType'
+    appointmentGetByDay:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
+    appointmentGetByMonth:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
+    appointmentCheckTime:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
+    appointmentMake:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
+    appointmentCancel:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
+    appointmentChange:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType',
   },
   dev: {
-    appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-    appointmentGetByMonth: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-    appointmentCheckTime: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-    appointmentMake: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
-    appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth'
-  }
-}
+    appointmentGetByDay:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
+    appointmentGetByMonth:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
+    appointmentCheckTime:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
+    appointmentMake:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
+    appointmentCancel:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
+    appointmentChange:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
+  },
+};
 
 export const assessmentText = {
-  initial: "Schedule your free 15 minute health assessment!",
-  pending: "Health Assessment",
-  complete: "Select Get Treatment to schedule your visit for:"
-}
+  initial: 'Schedule your free 15 minute health assessment!',
+  pending: 'Health Assessment',
+  complete: 'Select Get Treatment to schedule your visit for:',
+};
 
 export const videoHistory = {
   subject: 'Subject: ',

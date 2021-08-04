@@ -3,16 +3,13 @@ import { text, colors } from '~/utils/constants';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.azure,
-    marginTop: 'auto',
-    borderRadius: 50,
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    alignItems: 'flex-start',
   },
   title: {
+    fontSize: text.size.xxxLarge,
     fontFamily: text.fontFamily.poppinsRegular,
-    color: colors.white,
-    fontSize: text.size.regular,
-    textAlign: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    color: colors.black,
   },
 });
