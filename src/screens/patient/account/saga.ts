@@ -3,6 +3,7 @@ import {
   showApiLoader,
   hideApiLoader,
 } from '~/components/customLoader/action';
+import {NavigationService} from '../../../navigation';
 import {showOrHideModal} from '~/components/customModal/action';
 import {SIGN_OUT_API_HIT} from '~/redux/types';
 import {logout, updateStatus} from '~/utils/firebase';
@@ -10,7 +11,7 @@ import Constant from '~/utils/constants';
 import {clearAskState} from '../dashboard/ask/action';
 
 function* signout({data}) {
-  const {navigation, isLoaderShow} = data;
+  const {isLoaderShow} = data;
   const lang = yield select((state) => state.language);
   try {
     const state = yield select();
@@ -33,14 +34,14 @@ function* signout({data}) {
     yield put(clearAskState());
     yield logout(userData);
     yield put(hideApiLoader());
-    navigation.navigate(Constant.App.stack.AuthStack);
+    NavigationService.navigate(Constant.App.stack.AuthStack);
 
   } catch (error) {
     if (isLoaderShow) {
       yield put(hideApiLoader());
     }
     
-    navigation.navigate(Constant.App.stack.AuthStack);
+    NavigationService.navigate(Constant.App.stack.AuthStack);
     yield put(showOrHideModal(lang.errorMessage.serverError));
   }
 }

@@ -10,11 +10,11 @@ import styles, {modifiers} from './styles';
 const Account = ({navigation}) => {
   const dispatch = useDispatch();
 
-  const subscription = useSelector((state) => state.subscription);
-  const user = useSelector((state) => state.user.data);
-  const lang = useSelector((state) => state.language);
+  const subscription = useSelector(state => state.subscription);
+  const user = useSelector(state => state.user.data);
+  const lang = useSelector(state => state.language);
 
-  const handleNavigation = (destination) => {
+  const handleNavigation = destination => {
     navigation.navigate(destination);
   };
 

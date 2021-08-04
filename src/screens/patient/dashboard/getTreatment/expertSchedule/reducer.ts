@@ -6,6 +6,7 @@ import {
   SET_APPOINTMENT_DATES,
   SET_CALENDAR_ID,
   SET_TIMES,
+  CLEAR_APPOINTMENTS
 } from '~/redux/types';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   appointmentType: null,
   time: null,
   date: null,
+  dates: [],
   appointments: {
     todayLoading: true,
     current: [],
@@ -66,6 +68,11 @@ const expertSchedule = (state = initialState, action) => {
           todayLoading: false,
         },
       };
+    case CLEAR_APPOINTMENTS: 
+      return {
+        ...state,
+        ...initialState
+      }
     default:
       return {
         ...state,

@@ -30,9 +30,10 @@ const VisitSummary = ({navigation}) => {
   const lang = useSelector((state) => state.language);
 
   useEffect(() => {
-    const {appointment, summary, plan} = data.find(
+    const {appointment, summary, plan, lockTime} = data.find(
       (item) => item.appointment.visit.id === id,
     );
+    console.log(appointment.visit.locked)
     setSummary({
       patient: {
         firstName: appointment.visit.firstName,
@@ -40,7 +41,7 @@ const VisitSummary = ({navigation}) => {
       },
       visit: {
         date: appointment.visit.time,
-        locked: appointment.visit.locked ? 'Yes' : 'No',
+        locked: lockTime ? 'Yes' : 'No',
         summary: summary.notes || 'None',
         reason: appointment.visit.reason,
         assessment: plan.notes || 'None',

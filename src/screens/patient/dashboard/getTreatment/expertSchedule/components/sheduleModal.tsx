@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     ScrollView,
     View,
@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     ActivityIndicator,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import CustomButton from '../../../../../../components/customButton';
 import CustomText from '../../../../../../components/customText';
 import styles from '../style';
@@ -41,24 +41,25 @@ const SheduleModal = ({
     const dispatch = useDispatch();
     const { uid } = navigation.state.params;
     const {
+        dates,
+        appointments,
         appointmentType: { appointmentType },
     } = appointmentData;
 
-    const { dates } = useSelector(state => state.expertSchedule);
-
     const handleModalToggle = () => {
-        setShowShedule(!showShedule);
-        setSelectedDate(dates[0].date);
-        const firstAvaliable = generateDateInfo(dates[0].date);
-        setDay(dates[0].date);
-
-        dispatch(
-            getAppointmentsByDay({
-                ...firstAvaliable,
-                calendarID,
-                appointmentType,
-            }),
-        );
+        if (dates.length) {
+            setShowShedule(!showShedule);
+            setSelectedDate(dates[0].date);
+            const firstAvaliable = generateDateInfo(dates[0].date);
+            setDay(dates[0].date);
+            dispatch(
+                getAppointmentsByDay({
+                    ...firstAvaliable,
+                    calendarID,
+                    appointmentType,
+                }),
+            );
+        }
     };
 
     return (
@@ -99,9 +100,11 @@ const SheduleModal = ({
                         <CustomText style={styles.firstAvaliable}>
                             Select Appointment Date
                         </CustomText>
-                        {showShedule && !appointmentData.dates ? (
+                        {showShedule &&
+                        appointmentData.dates &&
+                        !appointmentData.dates.length ? (
                             <ActivityIndicator size="large" color="#008AFC" />
-                        ) : appointmentData.dates.length ? (
+                        ) : (
                             <FlatList
                                 showsHorizontalScrollIndicator={false}
                                 keyboardDismissMode={
@@ -110,7 +113,20 @@ const SheduleModal = ({
                                 keyboardShouldPersistTaps={
                                     Platform.OS === 'ios' ? 'never' : 'always'
                                 }
-                                data={appointmentData.dates}
+                                ListEmptyComponent={
+                                    <CustomText
+                                        style={
+                                            (styles.firstAvaliable,
+                                            {
+                                                alignSelf: 'center',
+                                                marginVertical: 5,
+                                            })
+                                        }
+                                    >
+                                        No Availability
+                                    </CustomText>
+                                }
+                                data={appointmentData.dates || []}
                                 horizontal={true}
                                 decelerationRate={'fast'}
                                 extraData={selectedDate}
@@ -189,15 +205,6 @@ const SheduleModal = ({
                                 }}
                                 keyExtractor={(item, index) => index.toString()}
                             />
-                        ) : (
-                            <CustomText
-                                style={
-                                    (styles.firstAvaliable,
-                                    { alignSelf: 'center', marginVertical: 5 })
-                                }
-                            >
-                                No Availability
-                            </CustomText>
                         )}
 
                         <CustomText style={styles.firstAvaliable}>
@@ -265,29 +272,36 @@ const SheduleModal = ({
                     </View>
                 </>
             )}
-
-            <TouchableOpacity
-                onPress={() =>
-                    day && time
-                        ? navigation.navigate('BookVisit', { uid })
-                        : handleModalToggle()
-                }
-                style={
-                    day && time
-                        ? styles.noSelectedContainerStyle
-                        : styles.noContainerStyle
-                }
-            >
-                <Text
+            {!dates.length ? (
+                <ActivityIndicator
+                    style={styles.loaderContainer}
+                    size="large"
+                    color="#008AFC"
+                />
+            ) : (
+                <TouchableOpacity
+                    onPress={() =>
+                        day && time
+                            ? navigation.navigate('BookVisit', { uid })
+                            : handleModalToggle()
+                    }
                     style={
                         day && time
-                            ? styles.noSelectedTextStyle
-                            : styles.noTextStyle
+                            ? styles.noSelectedContainerStyle
+                            : styles.noContainerStyle
                     }
                 >
-                    {showShedule ? 'Confirm' : 'See Full Schedule'}
-                </Text>
-            </TouchableOpacity>
+                    <Text
+                        style={
+                            day && time
+                                ? styles.noSelectedTextStyle
+                                : styles.noTextStyle
+                        }
+                    >
+                        {showShedule ? 'Confirm' : 'See Schedule'}
+                    </Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 };

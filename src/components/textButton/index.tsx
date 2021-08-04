@@ -1,9 +1,29 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {shape, node, object, bool, func, string, any, number} from 'prop-types';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  GestureResponderEvent,
+} from 'react-native';
 import {colors} from '../../utils/constants';
 import {mergeStyles} from '../../utils/functions';
 import defaultStyles, {modifiers} from './styles';
+
+export type TextButtonProps = {
+  styles?: any;
+  children: ReactNode;
+  outlined?: boolean;
+  id?: string;
+  disabled?: boolean;
+  hidden?: boolean;
+  secondary?: boolean;
+  link?: boolean;
+  icon?: any;
+  iconColor?: string;
+  activeOpacity?: number;
+  onPress?: (id: string) => void;
+};
 
 const TextButton = ({
   styles: customStyles,
@@ -19,8 +39,8 @@ const TextButton = ({
   iconColor,
   activeOpacity,
   ...rest
-}) => {
-  const handlePress = () => {
+}: TextButtonProps) => {
+  const handlePress = (event: GestureResponderEvent): void => {
     onPress(id);
   };
 
