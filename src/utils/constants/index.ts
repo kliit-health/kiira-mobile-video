@@ -97,19 +97,19 @@ export default {
     logoutInterval: 1000 * 90 * 60,
     Modal: {
       gender: [
-        {value: 'Male', code: 'M'},
-        {value: 'Female', code: 'F'},
+        { value: 'Male', code: 'M' },
+        { value: 'Female', code: 'F' },
       ],
       income: [
-        {value: '0 - 35,000', code: '0 - 35,000'},
-        {value: '35,001 - 60,000', code: '35,001 - 60,000'},
-        {value: '60,001 - 80,000', code: '60,001 - 80,000'},
-        {value: '80,001 - 100,000', code: '80,001 - 100,000'},
-        {value: '100,000 - 125,000', code: '100,000 - 125,000'},
-        {value: '125,001 - 150,000', code: '125,001 - 150,000'},
-        {value: '150,001 - 175,000', code: '150,001 - 175,000'},
-        {value: '175,001 - 200,000', code: '175,001 - 200,000'},
-        {value: '200,000+', code: '200,000+'},
+        { value: '0 - 35,000', code: '0 - 35,000' },
+        { value: '35,001 - 60,000', code: '35,001 - 60,000' },
+        { value: '60,001 - 80,000', code: '60,001 - 80,000' },
+        { value: '80,001 - 100,000', code: '80,001 - 100,000' },
+        { value: '100,000 - 125,000', code: '100,000 - 125,000' },
+        { value: '125,001 - 150,000', code: '125,001 - 150,000' },
+        { value: '150,001 - 175,000', code: '150,001 - 175,000' },
+        { value: '175,001 - 200,000', code: '175,001 - 200,000' },
+        { value: '200,000+', code: '200,000+' },
       ],
       states: [
         {
@@ -350,18 +350,18 @@ export default {
         },
       ],
       sexuality: [
-        {value: 'Asexual', code: 'Asexual'},
-        {value: 'Bisexual', code: 'Bisexual'},
-        {value: 'Gay', code: 'Gay'},
-        {value: 'Lesbian', code: 'Lesbian'},
-        {value: 'Pansexual', code: 'Pansexual'},
-        {value: 'Straight', code: 'Straight'},
-        {value: 'Queer', code: 'Queer'},
+        { value: 'Asexual', code: 'Asexual' },
+        { value: 'Bisexual', code: 'Bisexual' },
+        { value: 'Gay', code: 'Gay' },
+        { value: 'Lesbian', code: 'Lesbian' },
+        { value: 'Pansexual', code: 'Pansexual' },
+        { value: 'Straight', code: 'Straight' },
+        { value: 'Queer', code: 'Queer' },
       ],
       race: [
-        {value: 'Arab', code: 'Arab'},
-        {value: 'Asian', code: 'Asian'},
-        {value: 'Hispanic or Latino', code: 'Hispanic or Latino'},
+        { value: 'Arab', code: 'Arab' },
+        { value: 'Asian', code: 'Asian' },
+        { value: 'Hispanic or Latino', code: 'Hispanic or Latino' },
         {
           value: 'American Indian or Alaskan Native',
           code: 'American Indian or Alaskan Native',
@@ -370,10 +370,13 @@ export default {
           value: 'Native Hawaiian or Other Pacific Islander',
           code: 'Native Hawaiian or Other Pacific Islander',
         },
-        {value: 'Black or African American', code: 'Black or African American'},
-        {value: 'White', code: 'White'},
-        {value: 'Two or more', code: 'Two or more'},
-        {value: 'Prefer not to say', code: 'Prefer not to say'},
+        {
+          value: 'Black or African American',
+          code: 'Black or African American',
+        },
+        { value: 'White', code: 'White' },
+        { value: 'Two or more', code: 'Two or more' },
+        { value: 'Prefer not to say', code: 'Prefer not to say' },
       ],
     },
 
@@ -442,6 +445,7 @@ export default {
       Welcome: 'Welcome',
       expertChat: 'ChatExpert',
       requestVisit: 'RequestVisit',
+      home: 'Home',
     },
 
     stack: {
@@ -1828,28 +1832,40 @@ export const collections = {
 
 export const urls = {
   prod: {
-    appointmentGetByDay: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
-    appointmentGetByMonth: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
-    appointmentCheckTime: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
-    appointmentMake: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
-    appointmentCancel: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType'
+    appointmentGetByDay:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
+    appointmentGetByMonth:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
+    appointmentCheckTime:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
+    appointmentMake:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
+    appointmentCancel:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
+    appointmentChange:
+      'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType',
   },
   dev: {
-    appointmentGetByDay: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-    appointmentGetByMonth: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-    appointmentCheckTime: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-    appointmentMake: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
-    appointmentCancel: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
-    appointmentChange: 'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth'
-  }
-}
+    appointmentGetByDay:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
+    appointmentGetByMonth:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
+    appointmentCheckTime:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
+    appointmentMake:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
+    appointmentCancel:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
+    appointmentChange:
+      'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
+  },
+};
 
 export const assessmentText = {
-  initial: "Schedule your free 15 minute health assessment!",
-  pending: "Health Assessment",
-  complete: "Select Get Treatment to schedule your visit for:"
-}
+  initial: 'Schedule your free 15 minute health assessment!',
+  pending: 'Health Assessment',
+  complete: 'Select Get Treatment to schedule your visit for:',
+};
 
 export const videoHistory = {
   subject: 'Subject: ',

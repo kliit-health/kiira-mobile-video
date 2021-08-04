@@ -1,61 +1,96 @@
-import {StyleSheet} from 'react-native';
-import {text} from '~/utils/constants';
+import { StyleSheet } from 'react-native';
+import { text } from '~/utils/constants';
 
 export default StyleSheet.create({
   activityIndicator: {
     alignSelf: 'center',
   },
-  title: {
-    fontFamily: text.fontFamily.poppinsRegular,
-    fontSize: text.size.large,
-    textAlign: 'center',
-    alignSelf: 'center',
-    fontWeight: '500',
-    marginBottom: 20,
+  logo: {
+    alignItems: 'center',
+    marginVertical: 20,
   },
-  logoContainer: {
-    marginTop: 30,
-    marginBottom: 50,
-  },
-  description: {
-    fontFamily: text.fontFamily.poppinsRegular,
-    fontSize: text.size.regular,
-    textAlign: 'justify',
-  },
-  contents: {
-    flex: 1,
-  },
-  body: {
+  content: {
     flex: 1,
     flexDirection: 'column',
     alignContent: 'center',
     alignSelf: 'center',
+    paddingHorizontal: 20,
   },
 });
 
-export const modifiers = {
-  modal: {
-    root: {
-      height: '100%',
-      backgroundColor: 'transparent',
-      justifyContent: 'center',
-      paddingBottom: 70,
-      paddingTop: 70,
-      padding: 20,
-    },
+export const buttonStyles = StyleSheet.create({
+  root: {
+    marginVertical: 20,
+  },
+});
+
+export const headerStyles = StyleSheet.create({
+  root: {
+    padding: 10,
+    paddingHorizontal: 20,
+    height: 60,
+  },
+});
+
+export const modalStyles = StyleSheet.create({
+  root: {
+    height: '100%',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+  },
+});
+
+export const containerStyles = StyleSheet.create({
+  root: {
+    overflow: 'hidden',
+    borderRadius: 20,
   },
   container: {
-    root: {
-      overflow: 'hidden',
-      borderRadius: 20,
-    },
-    container: {
-      padding: 20,
-    },
+    padding: 0,
   },
-  button: {
-    root: {
-      marginTop: 20,
-    },
+});
+
+export const markdownStyles = {
+  heading1: {
+    color: 'red',
+    fontSize: text.size.large,
+    textAlign: 'left',
+  },
+  heading2: {
+    color: 'black',
+    textAlign: 'justify',
+    fontSize: text.size.large,
+  },
+  strong: {
+    color: 'blue',
+  },
+  em: {
+    color: 'cyan',
+  },
+  text: {
+    color: 'black',
+    textAlign: 'justify',
+  },
+  blockQuoteText: {
+    color: 'grey',
+  },
+  blockQuoteSection: {
+    flexDirection: 'row',
+  },
+  blockQuoteSectionBar: {
+    width: 3,
+    height: null,
+    backgroundColor: '#DDDDDD',
+    marginRight: 15,
+  },
+  codeBlock: {
+    fontFamily: 'Courier',
+    fontWeight: '500',
+    backgroundColor: '#DDDDDD',
+  },
+  tableHeader: {
+    backgroundColor: 'grey',
   },
 };

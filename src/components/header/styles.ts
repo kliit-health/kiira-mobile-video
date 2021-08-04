@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors, text} from '../../utils/constants';
+import { StyleSheet } from 'react-native';
+import { colors, text } from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
@@ -46,7 +46,7 @@ export const modifiers = {
   },
   backButton: {
     image: {
-      transform: [{rotate: '180deg'}],
+      transform: [{ rotate: '180deg' }],
     },
   },
 };

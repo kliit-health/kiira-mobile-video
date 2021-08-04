@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import {
   GET_CLIENT_MEDICAL_HISTORY_FULFILLED,
   GET_CLIENT_MEDICAL_HISTORY_PENDING,
@@ -12,13 +12,13 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [GET_CLIENT_MEDICAL_HISTORY_PENDING]: (state) => {
+  [GET_CLIENT_MEDICAL_HISTORY_PENDING]: state => {
     state.loading = true;
   },
-  [GET_CLIENT_MEDICAL_HISTORY_FULFILLED]: (state, {data}) => {
+  [GET_CLIENT_MEDICAL_HISTORY_FULFILLED]: (state, { data }) => {
     state.data = data.history;
   },
-  [GET_CLIENT_MEDICAL_HISTORY_REJECTED]: (state) => {
+  [GET_CLIENT_MEDICAL_HISTORY_REJECTED]: state => {
     state.error = 'Failed to get medical history.';
   },
 });
