@@ -437,7 +437,6 @@ export default {
       Setting: 'Setting',
       SettingExpert: 'SettingExpert',
       SignUp: 'SignUp',
-      SOS: 'SOS',
       TermsAndConditions: 'TermsConditions',
       UpdateAvailablity: 'UpdateAvailablity',
       Verify: 'Verify',
@@ -706,7 +705,6 @@ export const screenNames = {
   Setting: 'Setting',
   SettingExpert: 'SettingExpert',
   SignUp: 'SignUp',
-  SOS: 'SOS',
   TermsAndConditions: 'TermsConditions',
   Verify: 'Verify',
   Welcome: 'Welcome',
@@ -738,7 +736,6 @@ export const screenNames = {
   chatExpert: 'ChatExpert',
   healthHistory: 'HealthHistory',
   appointments: 'Appointments',
-  sos: 'SOS',
   ask: 'Ask',
   addChild: 'AddChild',
   treatmentBot: 'TreatmentBot',
@@ -750,14 +747,14 @@ export enum route {
   ask = 'Ask',
   healthHistory = 'HealthHistory',
   appointments = 'Appointments',
-  sos = 'SOS',
   healthAssesmentSchedule = 'HealthAssessmentSchedule',
   healthAssessmentConfirmation = 'HealthAssessmentConfirmation',
 }
 
 export enum feature {
-  video,
-  chat,
+  chat = 'chat',
+  urgent = 'urgent',
+  video = 'video',
 }
 
 export const units = {

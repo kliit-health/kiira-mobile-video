@@ -1,12 +1,12 @@
 import { route, feature } from '~/utils/constants';
-import { Camera, Chat, Squad, Sheet, Calendar } from '~/svgs';
+import { Camera, Chat, Squad, Sheet, Calendar, Urgent } from '~/svgs';
 
 export type Item = {
   title: string;
   description: string;
-  destination: route;
+  destination: route | undefined;
   icon: any;
-  feature: feature | undefined;
+  features: feature | undefined;
 };
 
 const model: Item[] = [
@@ -15,35 +15,42 @@ const model: Item[] = [
     description: 'dashboard.talk',
     destination: route.requestVisit,
     icon: Camera,
-    feature: feature.video,
+    features: feature.video,
   },
   {
     title: 'dashboard.chatExpert',
     description: 'dashboard.getHelp',
     destination: route.ask,
     icon: Chat,
-    feature: undefined,
+    features: undefined,
   },
   {
     title: 'dashboard.mySquad',
     description: 'dashboard.buildTeam',
     destination: route.careSquad,
     icon: Squad,
-    feature: undefined,
+    features: undefined,
   },
   {
     title: 'dashboard.appointments',
     description: 'dashboard.seeUpcoming',
     destination: route.appointments,
     icon: Calendar,
-    feature: feature.video,
+    features: feature.video,
   },
   {
     title: 'dashboard.myHistory',
     description: 'dashboard.provideInformation',
     destination: route.healthHistory,
     icon: Sheet,
-    feature: undefined,
+    features: undefined,
+  },
+  {
+    title: 'dashboard.sos',
+    description: 'dashboard.urgent',
+    destination: undefined,
+    icon: Urgent,
+    features: feature.urgent,
   },
 ];
 

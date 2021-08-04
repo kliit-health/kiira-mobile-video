@@ -80,7 +80,6 @@ import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
-import SOS from '../screens/patient/dashboard/sos';
 import Landing from '../screens/auth/landing';
 import TermsConditions from '../screens/common/termsAndConditions';
 import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
@@ -486,7 +485,6 @@ const MainAppStack = createStackNavigator(
     SelectCareType: { screen: SelectCareType },
     SelectExpert: { screen: SelectExpert },
     Settings: { screen: Settings },
-    SOS: { screen: SOS },
     TermsConditions: { screen: TermsConditions },
     TreatmentBot: { screen: TreatmentBot },
     Visit: { screen: Visit },

@@ -355,12 +355,6 @@ export default {
     visitAddedSuccessfully: 'Your payment was successful',
     cardAddedSuccessfully: 'Your card has been added successfully',
   },
-  sos: {
-    title: 'SOS',
-    yes: 'Yes',
-    no: 'No',
-    emergency: 'Are you experiencing an emergency?',
-  },
   tabs: {
     account: 'Account',
     ask: 'Ask',
@@ -467,7 +461,7 @@ export default {
     chatExpert: 'Chat with an Expert',
     myHistory: 'My History',
     appointments: 'Appointments',
-    sos: 'SOS',
+    sos: 'Urgent',
     helloName: 'Hello, ',
     notFeelingSick: `I'm not feeling sick`,
     nowMention: 'Now that you mention it',
@@ -481,6 +475,7 @@ export default {
     buildTeam: 'Build your team of experts',
     seeUpcoming: 'See upcoming visits',
     provideInformation: 'Provide your past information',
+    urgent: "Call 911"
   },
   schedule: {
     schedule: 'Schedule your free 15 minute health assessment!',
