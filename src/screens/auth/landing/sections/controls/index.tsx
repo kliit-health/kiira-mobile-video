@@ -25,7 +25,7 @@ const Controls = () => {
             <TextButton
                 styles={buttonStyles}
                 onPress={() =>
-                    handleNavigation(Constant.App.screenNames.Verify)
+                    handleNavigation(Constant.App.screenNames.Activate)
                 }
             >
                 {lang.tutorial.verify}

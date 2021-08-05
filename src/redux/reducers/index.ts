@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import account from '../../screens/patient/account/reducer';
+import activate from './activate';
 import agreeToTerms from '../../screens/auth/newUser/reducer';
 import agreements from './agreements';
 import addProfile from '../../screens/patient/account/settings/addProfileData/reducer';
@@ -20,7 +21,7 @@ import expertProfile from '../../screens/common/expertProfile/reducer';
 import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/reducer';
 import experts from './experts';
 import favoriteExperts from './favoriteExperts';
-import forgotPassword from '../../screens/auth/forgotPassword/reducer';
+import forgotPassword from './forgotPassword';
 import healthHistory from './healthHistory';
 import language from './language';
 import licenses from './licenses';
@@ -41,7 +42,6 @@ import settingsExpert from '../../screens/provider/account/settings/reducer';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
 import toast from '../../components/customToast/reducer';
-import verify from '../../screens/auth/verify/reducer';
 import navigator from './navigator';
 import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/reducer';
 import twillio from './twillio';
@@ -51,6 +51,7 @@ import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
 
 export const rootReducer = combineReducers({
     account,
+    activate,
     agreeToTerms,
     addProfile,
     addNewProfile,
@@ -97,7 +98,6 @@ export const rootReducer = combineReducers({
     toast,
     updateExpert,
     user,
-    verify,
     visit,
 });
 

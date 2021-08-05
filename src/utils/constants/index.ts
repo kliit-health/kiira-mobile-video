@@ -388,6 +388,7 @@ export default {
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
 
         screenNames: {
+            Activate: 'Activate',
             AddChild: 'AddChild',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
             Allergies: 'Allergies',
@@ -440,7 +441,6 @@ export default {
             SignUp: 'SignUp',
             TermsAndConditions: 'TermsConditions',
             UpdateAvailablity: 'UpdateAvailablity',
-            Verify: 'Verify',
             Visit: 'Visit',
             Welcome: 'Welcome',
             expertChat: 'ChatExpert',

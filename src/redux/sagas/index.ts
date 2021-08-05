@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 import account from '../../screens/patient/account/saga';
+import activate from './activate';
 import addProfile from '../../screens/patient/account/settings/addProfileData/saga';
 import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
@@ -19,7 +20,7 @@ import expertProfile from '../../screens/common/expertProfile/saga';
 import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/saga';
 import experts from './experts';
 import favoriteExperts from './favoriteExperts';
-import forgotPassword from '../../screens/auth/forgotPassword/saga';
+import forgotPassword from './forgotPassword';
 import healthHistory from './healthHistory';
 import licenses from './licenses';
 import login from '../../screens/auth/login/saga';
@@ -35,7 +36,6 @@ import reschedule from '../../screens/patient/dashboard/appointments/rescheduleV
 import setting from '../../screens/patient/account/settings/saga';
 import settingExpert from '../../screens/provider/account/settings/saga';
 import subscription from './subscription';
-import verification from '../../screens/auth/verify/saga';
 import termsAndConditions from './termsAndConditions';
 import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/saga';
 import twillio from './twillio';
@@ -45,6 +45,7 @@ import updateExpert from '../../screens/provider/account/updateAvailablity/saga'
 export default function* rootSaga() {
     yield all([
         account(),
+        activate(),
         addProfile(),
         agreeToTerms(),
         agreements(),
@@ -82,7 +83,6 @@ export default function* rootSaga() {
         subscription(),
         termsAndConditions(),
         twillio(),
-        verification(),
         treatmentHistory(),
         updateExpert(),
         user(),

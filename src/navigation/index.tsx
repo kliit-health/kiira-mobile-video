@@ -7,6 +7,7 @@ import { Image, View } from 'react-native';
 import { Text } from '~/components';
 
 import Account from '../screens/patient/account';
+import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
 import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addChild';
 import AddCreditOrDebitCard from '../screens/patient/dashboard/getTreatment/payment/AddCreditOrDebitCard';
@@ -84,7 +85,6 @@ import Landing from '../screens/auth/landing';
 import TermsConditions from '../screens/common/termsAndConditions';
 import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
-import Verify from '../screens/auth/verify';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
 import Welcome from '../screens/auth/welcome';
@@ -113,11 +113,11 @@ const TransparentStyle = {
 
 const AuthStack = createStackNavigator(
     {
+        Activate: { screen: Activate },
         ChatBot: { screen: ChatBot },
         ForgotPassword: { screen: ForgotPassword },
         Landing: { screen: Landing },
         Login: { screen: Login },
-        Verify: { screen: Verify },
         Welcome: { screen: Welcome },
     },
     {

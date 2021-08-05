@@ -1,14 +1,16 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects';
-import { SEND_VERIFICATION_EMAIL } from '~/redux/types';
+import { sendVerification } from '~/redux/reducers/activate';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { sendEmailVerification } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
 
-function* sendVerificationEmail({ data }) {
+function* sendVerificationEmail({ payload }) {
     const lang = yield select(state => state.language);
+    const { email } = payload;
+
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
-        yield call(sendEmailVerification, data);
+        yield put(showApiLoader());
+        yield call(sendEmailVerification, email);
         yield put(hideApiLoader());
         yield put(showOrHideModal(lang.login.Activation));
     } catch (error) {
@@ -18,5 +20,5 @@ function* sendVerificationEmail({ data }) {
 }
 
 export default function* verificationSaga() {
-    yield takeEvery(SEND_VERIFICATION_EMAIL, sendVerificationEmail);
+    yield takeEvery(sendVerification, sendVerificationEmail);
 }

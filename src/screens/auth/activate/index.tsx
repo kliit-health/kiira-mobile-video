@@ -13,10 +13,10 @@ import CustomInputText from '~/components/customInputText';
 import CustomButton from '~/components/customButton';
 import { showOrHideModal } from '~/components/customModal/action';
 import { isEmail } from '~/utils/helper';
-import { sendVerification } from './action';
+import { sendVerification } from '~/redux/reducers/activate';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-const Verify = props => {
+const Activate = props => {
     const dispatch = useDispatch();
     const { navigation } = props;
     const { staticImages } = Constant.App;
@@ -80,6 +80,7 @@ const Verify = props => {
     const renderButtonView = () => {
         return (
             <CustomButton
+                disabled={false}
                 buttonStyle={styles.loginButtonContainerStyle}
                 textStyle={styles.loginButtonTextStyle}
                 onPress={() => {
@@ -89,10 +90,7 @@ const Verify = props => {
                         dispatch(showOrHideModal(lang.login.InvalidEmailMsg));
                     } else {
                         const data = {
-                            params: {
-                                email: email.trim(),
-                            },
-                            navigation,
+                            email: email.trim(),
                         };
                         dispatch(sendVerification(data));
                     }
@@ -120,4 +118,4 @@ const Verify = props => {
     );
 };
 
-export default Verify;
+export default Activate;

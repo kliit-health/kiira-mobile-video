@@ -31,6 +31,7 @@ const Welcome = ({ navigation }) => {
                 </View>
 
                 <CustomButton
+                    disabled={false}
                     buttonStyle={styles.buttonContainer}
                     textStyle={styles.buttonText}
                     onPress={() => {

@@ -7,7 +7,10 @@ import Constant from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
 import CustomButton from '~/components/customButton';
 import { showOrHideModal } from '~/components/customModal/action';
-import { forgotPasswordApiHit, resertForgotPasswordState } from './action';
+import {
+    forgotPasswordApiHit,
+    resetForgotPasswordState,
+} from '~/redux/reducers/forgotPassword';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { isEmail } from '~/utils/helper';
 
@@ -25,7 +28,7 @@ const ForgotPassword = props => {
     useEffect(() => {
         if (forgotPasswordSuccess) {
             setEmail('');
-            dispatch(resertForgotPasswordState());
+            dispatch(resetForgotPasswordState());
         }
     });
 

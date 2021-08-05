@@ -115,9 +115,8 @@ export function getPlanDetails(planDetails) {
     }
 }
 
-export async function sendEmailVerification(obj) {
+export async function sendEmailVerification(email: string) {
     try {
-        const { email } = obj.params;
         await functions().httpsCallable('sendActivationLink')(email);
         return { ok: true, data: null };
     } catch (err) {
