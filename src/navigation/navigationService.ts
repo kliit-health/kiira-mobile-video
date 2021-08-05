@@ -1,7 +1,7 @@
-import { NavigationActions, StackActions } from 'react-navigation';
+import {NavigationActions, StackActions} from 'react-navigation';
 
 class NavigationService {
-	public _navigator: any;
+  public _navigator: any;
 
   constructor() {
     this._navigator = null;
@@ -15,8 +15,10 @@ class NavigationService {
     return this._navigator;
   }
 
-  navigate(routeName, params, action) {
-    this.navigator.dispatch(NavigationActions.navigate({ routeName, params, action }));
+  navigate(routeName: string, params?: object, action?: any) {
+    this.navigator.dispatch(
+      NavigationActions.navigate({routeName, params, action}),
+    );
   }
 
   goBack() {
@@ -24,16 +26,18 @@ class NavigationService {
   }
 
   push(routeName, params, action) {
-    this.navigator.dispatch(StackActions.push({ routeName, params, action }));
+    this.navigator.dispatch(StackActions.push({routeName, params, action}));
   }
 
   pop(numberOfScreens) {
-    this.navigator.dispatch(StackActions.pop({ n: numberOfScreens }));
+    this.navigator.dispatch(StackActions.pop({n: numberOfScreens}));
   }
 
   reset(routeName, index, params, navigatorKey) {
-    const mainAction = NavigationActions.navigate({ routeName, params });
-    this.navigator.dispatch(StackActions.reset({ index, actions: [mainAction], key: navigatorKey }));
+    const mainAction = NavigationActions.navigate({routeName, params});
+    this.navigator.dispatch(
+      StackActions.reset({index, actions: [mainAction], key: navigatorKey}),
+    );
   }
 }
 

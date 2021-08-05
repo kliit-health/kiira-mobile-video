@@ -1,29 +1,31 @@
 import {StyleSheet} from 'react-native';
-import { colors, text } from '../../utils/constants';
-import metrices from '../../utils/metrices';
+import {colors, text} from '../../utils/constants';
 
 export default StyleSheet.create({
   root: {
-    maxHeight: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
-    width: metrices.width * 0.80,
-    alignSelf: 'center',
+    maxHeight: 45,
+    minHeight: 45,
+    borderRadius: 50,
+    backgroundColor: colors.blue,
   },
   touchable: {
     flexDirection: 'row',
     justifyContent: 'center',
+    height: '100%',
+    width: '100%',
     alignItems: 'center',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: colors.blue,
-    backgroundColor: colors.blue,
+    borderColor: 'transparent',
     opacity: 1,
   },
   text: {
     fontFamily: text.fontFamily.poppinsRegular,
     fontSize: text.size.regular,
     color: colors.white,
-    padding: 10,
     fontWeight: '500',
   },
   icon: {
@@ -33,7 +35,9 @@ export default StyleSheet.create({
 
 export const modifiers = {
   link: {
-    root: {},
+    root: {
+      backgroundColor: 'transparent',
+    },
     touchable: {
       backgroundColor: 'transparent',
       borderWidth: 0,
@@ -47,6 +51,7 @@ export const modifiers = {
   outlined: {
     touchable: {
       backgroundColor: colors.white,
+      borderColor: colors.blue,
     },
     text: {
       color: colors.blue,
@@ -63,6 +68,7 @@ export const modifiers = {
     },
   },
   secondary: {
+    root: {},
     text: {
       color: colors.blueGrey,
     },
