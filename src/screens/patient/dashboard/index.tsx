@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollView } from 'react-native';
+import { ScrollView, Linking, Platform } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
 import { Container } from '~/components';
@@ -82,25 +82,31 @@ const Dashboard = ({ navigation }) => {
   }, [user]);
 
   const handleNavigation = (destination, features) => {
-    if (features === 'video' && !videoEnabled) {
-      dispatch(
-        actions.showMessage({
-          message: lang.dashboard.serviceUnavailable,
-        }),
-      );
-      return;
-    }
+    console.log(features);
+    if (features === 'urgent') {
+      const isAndroid = Platform.OS != 'ios';
+      Linking.openURL(isAndroid ? 'tel:${911}' : 'telprompt:${911}');
+    } else {
+      if (features === 'video' && !videoEnabled) {
+        dispatch(
+          actions.showMessage({
+            message: lang.dashboard.serviceUnavailable,
+          }),
+        );
+        return;
+      }
 
-    if (features === 'chat' && !chatEnabled) {
-      dispatch(
-        actions.showMessage({
-          message: lang.dashboard.chatNotAvailable,
-        }),
-      );
-      return;
-    }
+      if (features === 'chat' && !chatEnabled) {
+        dispatch(
+          actions.showMessage({
+            message: lang.dashboard.chatNotAvailable,
+          }),
+        );
+        return;
+      }
 
-    navigation.navigate(destination);
+      navigation.navigate(destination);
+    }
   };
 
   return (

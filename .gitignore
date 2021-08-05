@@ -39,6 +39,8 @@ local.properties
 
 # node.js
 #
+.prettierrc.js
+package-lock.json
 yarn.lock
 node_modules/
 npm-debug.log

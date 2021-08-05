@@ -401,13 +401,6 @@ export default {
     cardAddedSuccessfully: 'Spanish Your card has been added successfully',
   },
 
-  sos: {
-    title: 'Spanish SOS',
-    yes: 'Spanish Yes',
-    no: 'Spanish No',
-    emergency: 'Spanish Are you experiencing an emergency?',
-  },
-
   tabs: {
     account: 'Spanish Account',
     ask: 'Spanish Ask',
