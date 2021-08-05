@@ -77,7 +77,7 @@ const Landing = () => {
                 )}
             >
                 {pages.map(props => (
-                    <Page {...props} />
+                    <Page key={props.title} {...props} />
                 ))}
             </Carousel>
             <Controls />

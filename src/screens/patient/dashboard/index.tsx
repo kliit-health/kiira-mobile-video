@@ -115,7 +115,7 @@ const Dashboard = ({ navigation }) => {
         <Welcome displayName={user.profileInfo.firstName} />
         <Banner />
         {model.map((item, index) => (
-          <Item {...item} onPress={handleNavigation} />
+          <Item key={item.title} {...item} onPress={handleNavigation} />
         ))}
       </ScrollView>
     </Container>
