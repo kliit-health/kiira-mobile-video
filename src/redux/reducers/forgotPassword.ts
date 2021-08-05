@@ -12,7 +12,7 @@ export const forgotPasswordSlice = createSlice({
     name: 'forgotPassword',
     initialState,
     reducers: {
-        forgotPasswordApiHit: (state, action: PayloadAction<string>) => {
+        forgotPasswordApiHit: (state, action: PayloadAction<object>) => {
             return state;
         },
         forgotPasswordApiHitSuccess: state => {

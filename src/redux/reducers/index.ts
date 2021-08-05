@@ -26,7 +26,7 @@ import healthHistory from './healthHistory';
 import language from './language';
 import licenses from './licenses';
 import loader from '../../components/customLoader/reducer';
-import login from '../../screens/auth/login/reducer';
+import login from './login';
 import medicalHistory from '../../screens/provider/appointments/patientProfile/reducer';
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';

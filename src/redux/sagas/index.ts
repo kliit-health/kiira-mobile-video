@@ -23,7 +23,7 @@ import favoriteExperts from './favoriteExperts';
 import forgotPassword from './forgotPassword';
 import healthHistory from './healthHistory';
 import licenses from './licenses';
-import login from '../../screens/auth/login/saga';
+import login from './login';
 import messaging from './messaging';
 import newUser from '../../screens/auth/chatBot/saga';
 import patientDetails from '../../screens/provider/appointments/patientProfile/saga';

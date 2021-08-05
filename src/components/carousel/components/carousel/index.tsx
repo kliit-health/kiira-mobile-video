@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     Animated,
-    View,
     ScrollView,
     PanResponder,
     Dimensions,
@@ -232,7 +231,7 @@ const Carousel = (props: CarouselProps) => {
     });
 
     return (
-        <Fragment>
+        <>
             <ScrollView
                 ref={scrollViewRef}
                 style={{ width: pageSize }}
@@ -269,7 +268,7 @@ const Carousel = (props: CarouselProps) => {
                     scrollValue,
                     loop,
                 })}
-        </Fragment>
+        </>
     );
 };
 

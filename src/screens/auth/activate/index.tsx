@@ -7,6 +7,7 @@ import {
     Platform,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import styles from './style';
 import Constant from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
@@ -21,7 +22,9 @@ const Activate = props => {
     const { navigation } = props;
     const { staticImages } = Constant.App;
     const [email, setEmail] = useState('');
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => {
+        return state.language;
+    });
 
     const renderInputTextView = () => {
         return (

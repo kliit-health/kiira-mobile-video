@@ -1,12 +1,11 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
-import { LOGIN_FIREBASE_USER } from '~/redux/types';
 import messaging from '@react-native-firebase/messaging';
 import auth from '@react-native-firebase/auth';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { loginInWithFirebase } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
 import Constant from '~/utils/constants';
-import { loginFailure } from './action';
+import { loginFailure, loginApi } from '~/redux/reducers/login';
 import { getUser, updateUser } from '~/redux/actions/user';
 import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -14,13 +13,13 @@ import * as Keychain from 'react-native-keychain';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-function* loginFirebase({ data }) {
+function* loginFirebase({ payload }) {
     const lang = yield select(state => state.language);
 
     try {
         let token;
-        const { params, navigation } = data;
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        const { params, navigation } = payload;
+        yield put(showApiLoader());
         const response = yield loginInWithFirebase(params);
 
         const { uid } = response;
@@ -105,5 +104,5 @@ function* loginFirebase({ data }) {
 }
 
 export default function* loginSaga() {
-    yield takeEvery(LOGIN_FIREBASE_USER, loginFirebase);
+    yield takeEvery(loginApi, loginFirebase);
 }

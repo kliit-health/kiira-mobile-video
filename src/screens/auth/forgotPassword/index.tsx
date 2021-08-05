@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+    View,
+    ScrollView,
+    Image,
+    TouchableOpacity,
+    Platform,
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import CustomText from '~/components/customText';
 import styles from './style';
 import Constant from '~/utils/constants';
@@ -20,9 +27,9 @@ const ForgotPassword = props => {
     const { navigation } = props;
     const { staticImages } = Constant.App;
 
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
     const forgotPasswordSuccess = useSelector(
-        state => state.forgotPassword.forgotPasswordSuccess,
+        (state: RootState) => state.forgotPassword.forgotPasswordSuccess,
     );
 
     useEffect(() => {
@@ -95,6 +102,7 @@ const ForgotPassword = props => {
     const renderButtonView = () => {
         return (
             <CustomButton
+                disabled={false}
                 buttonStyle={styles.buttonContainerStyle}
                 textStyle={styles.buttonTextStyle}
                 onPress={() => {
