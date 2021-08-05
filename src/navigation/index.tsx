@@ -137,7 +137,9 @@ const PaymentStack = createStackNavigator(
         mode: 'modal',
         headerMode: 'none',
         initialRouteName: screenNames.BuyingCredit,
-        ...TransparentStyle,
+        defaultNavigationOptions: {
+            ...TransparentStyle,
+        },
     },
 );
 const BottomTab = createBottomTabNavigator(
@@ -242,9 +244,7 @@ const BottomTab = createBottomTabNavigator(
         initialRouteName: 'Home',
         tabBarposition: 'bottom',
         swipeEnabled: true,
-        defaultNavigationOptions: {
-            route: 'Home',
-        },
+        defaultNavigationOptions: {},
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
@@ -521,7 +521,9 @@ const AppStack = createStackNavigator(
         mode: 'modal',
         headerMode: 'none',
         initialRouteName: 'MainApp',
-        ...TransparentStyle,
+        defaultNavigationOptions: {
+            ...TransparentStyle,
+        },
     },
 );
 
