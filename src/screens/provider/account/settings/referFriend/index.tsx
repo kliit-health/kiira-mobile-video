@@ -1,187 +1,193 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Share,
-  Platform,
-  Clipboard,
+    View,
+    TouchableOpacity,
+    Image,
+    ScrollView,
+    Share,
+    Platform,
+    Clipboard,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styles from './style';
 import CustomText from '~/components/customText';
-import {showOrHideModal} from '~/components/customModal/action';
+import { showOrHideModal } from '~/components/customModal/action';
 import Constant from '~/utils/constants';
 import CustomButton from '~/components/customButton';
 class ReferFriend extends PureComponent {
-	public props: any;
-	public userData: any;
-	public navigation: any;
-	public lang: any;
-	public staticImages: any;
+    public props: any;
+    public userData: any;
+    public navigation: any;
+    public lang: any;
+    public staticImages: any;
 
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {}
-  onShare = async () => {
-    const {userData} = this.props;
-    try {
-      const result = await Share.share({
-        message: `Refer a friend and get 10 credits for free! Enter referal code ${
-          userData.referalCode
-        } while registrating in application. You can also download the application from given link ${
-          Platform.OS == 'android'
-            ? Constant.App.appLiveLink.googlePlay
-            : Constant.App.appLiveLink.appleStore
-        }`,
-      });
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
+    constructor(props) {
+        super(props);
     }
-  };
-  renderHeaderView() {
-    const {navigation, lang} = this.props;
-    const {staticImages} = Constant.App;
-    return (
-      <View style={styles.titleContainerStyle}>
-        <TouchableOpacity
-          style={styles.backContainerStyle}
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Image
-            resizeMode="contain"
-            source={staticImages.backIcon}
-            style={styles.backIconStyle}
-          />
-        </TouchableOpacity>
-        <CustomText style={styles.titleTextStyle}>
-          {lang.referFriend.title}
-        </CustomText>
-      </View>
-    );
-  }
 
-  renderSubHeaderView() {
-    const {lang} = this.props;
-    return (
-      <View style={styles.subTitleContainerStyle}>
-        <CustomText style={styles.subTitleTextBoldStyle}>
-          {lang.referFriend.subTitleText}
-        </CustomText>
-        <CustomText style={styles.subTitleTextRegularStyle}>
-          {lang.referFriend.subTitleText2}
-        </CustomText>
-      </View>
-    );
-  }
+    componentDidMount() {
+        this.fetchData();
+    }
 
-  writeToClipboard = async () => {
-    const {userData} = this.props;
-    await Clipboard.setString(userData.referralCode);
-    alert('Code copied to clipboard');
-  };
+    fetchData() {}
+    onShare = async () => {
+        const { userData } = this.props;
+        try {
+            const result = await Share.share({
+                message: `Refer a friend and get 10 credits for free! Enter referal code ${
+                    userData.referalCode
+                } while registrating in application. You can also download the application from given link ${
+                    Platform.OS == 'android'
+                        ? Constant.App.appLiveLink.googlePlay
+                        : Constant.App.appLiveLink.appleStore
+                }`,
+            });
 
-  renderYourReferralTitleView() {
-    const {userData, lang} = this.props;
-    return (
-      <View style={styles.referalCodeTitleContainerStyle}>
-        <CustomText style={styles.referalCodeTitleTextBoldStyle}>
-          {lang.referFriend.yourreferalCode}
-        </CustomText>
-        <CustomText style={styles.referalCodeTextStyle}>
-          {userData.referalCode}
-        </CustomText>
-        <CustomButton
-          buttonStyle={styles.btnContainerStyle}
-          textStyle={styles.btnTextStyle}
-          text={lang.referFriend.btnText}
-          onPress={() => {
-            this.writeToClipboard();
-          }}
-        />
-      </View>
-    );
-  }
-
-  render() {
-    const {userData, lang} = this.props;
-    const {staticImages} = Constant.App;
-    return (
-      userData && (
-        <View style={styles.parentContainerStyle}>
-          {this.renderHeaderView()}
-          <ScrollView
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}>
-            <View>
-              {this.renderSubHeaderView()}
-              {this.renderYourReferralTitleView()}
-              <TouchableOpacity
-                style={styles.itemsParentContainerStyle}
-                onPress={() => {
-                  this.onShare();
-                }}>
-                <Image
-                  style={{
-                    width: 20,
-                    height: 40,
-                  }}
-                  resizeMode="contain"
-                  source={staticImages.shareIcon}
-                />
-                <View
-                  style={{
-                    flexDirection: 'column',
-                  }}>
-                  <CustomText style={styles.itemTextStyle}>
-                    {lang.referFriend.moreWays}
-                  </CustomText>
-                  <CustomText style={styles.itemTextBlueStyle}>
-                    {lang.referFriend.smsFb}
-                  </CustomText>
-                </View>
-                <Image
-                  style={{
-                    width: 20,
-                    height: 40,
-                  }}
-                  resizeMode="contain"
-                  source={staticImages.rightChevronIcon}
-                />
-              </TouchableOpacity>
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+    renderHeaderView() {
+        const { navigation, lang } = this.props;
+        const { staticImages } = Constant.App;
+        return (
+            <View style={styles.titleContainerStyle}>
+                <TouchableOpacity
+                    style={styles.backContainerStyle}
+                    onPress={() => {
+                        navigation.goBack();
+                    }}
+                >
+                    <Image
+                        resizeMode="contain"
+                        source={staticImages.backIcon}
+                        style={styles.backIconStyle}
+                    />
+                </TouchableOpacity>
+                <CustomText style={styles.titleTextStyle}>
+                    {lang.referFriend.title}
+                </CustomText>
             </View>
-          </ScrollView>
-        </View>
-      )
-    );
-  }
+        );
+    }
+
+    renderSubHeaderView() {
+        const { lang } = this.props;
+        return (
+            <View style={styles.subTitleContainerStyle}>
+                <CustomText style={styles.subTitleTextBoldStyle}>
+                    {lang.referFriend.subTitleText}
+                </CustomText>
+                <CustomText style={styles.subTitleTextRegularStyle}>
+                    {lang.referFriend.subTitleText2}
+                </CustomText>
+            </View>
+        );
+    }
+
+    writeToClipboard = async () => {
+        const { userData } = this.props;
+        await Clipboard.setString(userData.referralCode);
+        alert('Code copied to clipboard');
+    };
+
+    renderYourReferralTitleView() {
+        const { userData, lang } = this.props;
+        return (
+            <View style={styles.referalCodeTitleContainerStyle}>
+                <CustomText style={styles.referalCodeTitleTextBoldStyle}>
+                    {lang.referFriend.yourreferalCode}
+                </CustomText>
+                <CustomText style={styles.referalCodeTextStyle}>
+                    {userData.referalCode}
+                </CustomText>
+                <CustomButton
+                    buttonStyle={styles.btnContainerStyle}
+                    textStyle={styles.btnTextStyle}
+                    text={lang.referFriend.btnText}
+                    onPress={() => {
+                        this.writeToClipboard();
+                    }}
+                />
+            </View>
+        );
+    }
+
+    render() {
+        const { userData, lang } = this.props;
+        const { staticImages } = Constant.App;
+        return (
+            userData && (
+                <View style={styles.parentContainerStyle}>
+                    {this.renderHeaderView()}
+                    <ScrollView
+                        keyboardShouldPersistTaps="handled"
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <View>
+                            {this.renderSubHeaderView()}
+                            {this.renderYourReferralTitleView()}
+                            <TouchableOpacity
+                                style={styles.itemsParentContainerStyle}
+                                onPress={() => {
+                                    this.onShare();
+                                }}
+                            >
+                                <Image
+                                    style={{
+                                        width: 20,
+                                        height: 40,
+                                    }}
+                                    resizeMode="contain"
+                                    source={staticImages.shareIcon}
+                                />
+                                <View
+                                    style={{
+                                        flexDirection: 'column',
+                                    }}
+                                >
+                                    <CustomText style={styles.itemTextStyle}>
+                                        {lang.referFriend.moreWays}
+                                    </CustomText>
+                                    <CustomText
+                                        style={styles.itemTextBlueStyle}
+                                    >
+                                        {lang.referFriend.smsFb}
+                                    </CustomText>
+                                </View>
+                                <Image
+                                    style={{
+                                        width: 20,
+                                        height: 40,
+                                    }}
+                                    resizeMode="contain"
+                                    source={staticImages.rightChevronIcon}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
+            )
+        );
+    }
 }
 
-const mapStateToProps = (state) => ({
-  userData: state.user.data,
-  lang: state.language,
+const mapStateToProps = state => ({
+    userData: state.user.data,
+    lang: state.language,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
+const mapDispatchToProps = dispatch => ({
+    showHideErrorModal: value => dispatch(showOrHideModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReferFriend);

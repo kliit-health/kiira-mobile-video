@@ -100,9 +100,10 @@ const ExpertInfo = ({
                                                         styles.timeSlotTextStyle
                                                     }
                                                     onPress={() => {
-                                                        var date = generateDateInfo(
-                                                            item,
-                                                        );
+                                                        var date =
+                                                            generateDateInfo(
+                                                                item,
+                                                            );
                                                         setShowShedule(
                                                             !showShedule,
                                                         );

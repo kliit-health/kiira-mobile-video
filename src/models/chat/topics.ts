@@ -1,23 +1,23 @@
 export default [
     {
-      title: 'Birth Control',
+        title: 'Birth Control',
     },
     {
-      title: 'General Medical Advise',
+        title: 'General Medical Advise',
     },
     {
-      title: 'LGBTQ',
+        title: 'LGBTQ',
     },
     {
-      title: 'Mental Health',
+        title: 'Mental Health',
     },
     {
-      title: 'Pain or Injury',
+        title: 'Pain or Injury',
     },
     {
-      title: 'Pregnancy',
+        title: 'Pregnancy',
     },
     {
-      title: 'STI / STD',
+        title: 'STI / STD',
     },
-  ];
+];

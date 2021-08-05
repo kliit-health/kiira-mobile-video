@@ -1,26 +1,26 @@
-import {StyleSheet} from 'react-native';
-import {text, colors} from '~/utils/constants';
+import { StyleSheet } from 'react-native';
+import { text, colors } from '~/utils/constants';
 
 const styles = StyleSheet.create({
-  version: {
-    alignSelf: 'center',
-  },
+    version: {
+        alignSelf: 'center',
+    },
 });
 
 export default styles;
 
 export const modifiers = {
-  container: {
-    safeAreaBottom: {
-      height: 0,
+    container: {
+        safeAreaBottom: {
+            height: 0,
+        },
+        root: {
+            backgroundColor: colors.offWhite,
+        },
     },
-    root: {
-      backgroundColor: colors.offWhite,
+    button: {
+        text: {
+            fontSize: text.size.large,
+        },
     },
-  },
-  button: {
-    text: {
-      fontSize: text.size.large,
-    },
-  },
 };

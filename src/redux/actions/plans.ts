@@ -1,5 +1,5 @@
-import {GET_PLANS} from '../types';
+import { GET_PLANS } from '../types';
 
 export const getPlans = () => ({
-  type: GET_PLANS,
+    type: GET_PLANS,
 });

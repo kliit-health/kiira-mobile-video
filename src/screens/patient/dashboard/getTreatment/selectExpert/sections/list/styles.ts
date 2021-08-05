@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  flatlistContainer: {
-    paddingTop: 20,
-  },
+    flatlistContainer: {
+        paddingTop: 20,
+    },
 });

@@ -193,12 +193,8 @@ class AddProfileData extends PureComponent {
     }
 
     renderInputTextView() {
-        const {
-            firstName,
-            lastName,
-            showSelectStateModal,
-            selectedState,
-        } = this.state;
+        const { firstName, lastName, showSelectStateModal, selectedState } =
+            this.state;
         const { lang } = this.props;
         const { staticImages } = Constant.App;
 
@@ -352,12 +348,8 @@ class AddProfileData extends PureComponent {
     }
 
     renderButtonView() {
-        const {
-            uploadUserData,
-            showHideErrorModal,
-            navigation,
-            lang,
-        } = this.props;
+        const { uploadUserData, showHideErrorModal, navigation, lang } =
+            this.props;
         const {
             firstName,
             lastName,
@@ -411,9 +403,8 @@ class AddProfileData extends PureComponent {
                                     firstName: firstName.trim(),
                                     lastName: lastName.trim(),
                                     dob: dob ? dob : '',
-                                    pronouns: this.getSelectedPronoun(
-                                        pronounsArr,
-                                    ),
+                                    pronouns:
+                                        this.getSelectedPronoun(pronounsArr),
                                     state: selectedState,
                                 },
                                 imageParams: {
@@ -432,9 +423,8 @@ class AddProfileData extends PureComponent {
                                     firstName: firstName.trim(),
                                     lastName: lastName.trim(),
                                     dob: dob ? dob : '',
-                                    pronouns: this.getSelectedPronoun(
-                                        pronounsArr,
-                                    ),
+                                    pronouns:
+                                        this.getSelectedPronoun(pronounsArr),
                                     state: selectedState,
                                 },
                                 navigation,

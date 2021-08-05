@@ -10,12 +10,12 @@ export type Visit = {
     createdAt: number;
     prepaid: boolean;
     expert: {
-      firstName: string;
-      profession: string;
-      lastName: string;
-      imageUrl: string;
-      uid: string;
-      rating: number;
+        firstName: string;
+        profession: string;
+        lastName: string;
+        imageUrl: string;
+        uid: string;
+        rating: number;
     };
     insurance: string;
     id: number;
@@ -23,12 +23,12 @@ export type Visit = {
     uid: string;
     email: string;
     appointmentType: {
-      credits: number;
-      duration: string;
-      title: string;
-      price: number;
-      appointmentType: string;
-      appointmentTypeID: string;
+        credits: number;
+        duration: string;
+        title: string;
+        price: number;
+        appointmentType: string;
+        appointmentTypeID: string;
     };
     firstName: string;
     organizationId: string;
@@ -36,9 +36,9 @@ export type Visit = {
     phoneNumber: any;
     pronouns: string;
     lastName: string;
-  }
-  
-  export type Date = {
+};
+
+export type Date = {
     month: string;
     monthNumber: string;
     day: string;
@@ -49,4 +49,4 @@ export type Visit = {
         time: string;
         am_pm: string;
     };
-  }
+};

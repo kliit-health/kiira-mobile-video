@@ -4,19 +4,19 @@ import { Text, View } from 'react-native';
 import styles from './styles';
 
 export type WelcomeProps = {
-  displayName: string;
+    displayName: string;
 };
 
 const Welcome = ({ displayName }: WelcomeProps): JSX.Element => {
-  const lang = useSelector(state => state.language);
+    const lang = useSelector(state => state.language);
 
-  return (
-    <View style={styles.container}>
-      <Text
-        style={styles.title}
-      >{`${lang.dashboard.helloName}${displayName}`}</Text>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text
+                style={styles.title}
+            >{`${lang.dashboard.helloName}${displayName}`}</Text>
+        </View>
+    );
 };
 
 export default Welcome;

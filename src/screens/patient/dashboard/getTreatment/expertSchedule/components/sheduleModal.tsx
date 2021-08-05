@@ -129,10 +129,9 @@ const SheduleModal = ({
                                                 style={
                                                     selectedDate === item.date
                                                         ? {
-                                                              color:
-                                                                  Constant.App
-                                                                      .colors
-                                                                      .blueColor,
+                                                              color: Constant
+                                                                  .App.colors
+                                                                  .blueColor,
                                                           }
                                                         : { color: 'black' }
                                                 }
@@ -174,10 +173,9 @@ const SheduleModal = ({
                                                 style={
                                                     selectedDate === item.date
                                                         ? {
-                                                              color:
-                                                                  Constant.App
-                                                                      .colors
-                                                                      .blueColor,
+                                                              color: Constant
+                                                                  .App.colors
+                                                                  .blueColor,
                                                           }
                                                         : { color: 'black' }
                                                 }
