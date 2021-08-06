@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+import { RootState } from '~/redux/reducers';
 import Constant from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
@@ -9,7 +10,7 @@ import CustomButton from '~/components/customButton';
 const Welcome = ({ navigation }) => {
     const { staticImages, screenNames } = Constant.App;
 
-    const user = useSelector(state => state.user.data);
+    const user = useSelector((state: RootState) => state.user.data);
 
     return (
         <View style={styles.container}>

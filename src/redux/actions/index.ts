@@ -1,4 +1,4 @@
-export { setCurrentRoute, setPreviousRoute, setAppScreen } from './navigator';
+export { setCurrentRoute, setPreviousRoute } from './navigator';
 export { updateUser, getUser } from './user';
 export { getMedicalHistory } from './medicalHistory';
 export { getPlan } from './plan';

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { text, colors } from '~/utils/constants';
 
 export default {
-    card: {
+    card: StyleSheet.create({
         container: {
             backgroundColor: colors.white,
             borderRadius: 10,
@@ -20,7 +20,7 @@ export default {
             color: colors.black,
             textAlign: 'auto',
         },
-    },
+    }),
     modal: StyleSheet.create({
         root: {
             backgroundColor: 'transparent',

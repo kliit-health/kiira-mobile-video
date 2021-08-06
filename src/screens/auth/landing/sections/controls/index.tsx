@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import navigationService from '~/navigation/navigationService';
 import { TextButton } from '~/components';
 import Constant from '~/utils/constants';
@@ -9,7 +10,7 @@ import styles, { buttonStyles } from './styles';
 
 const Controls = () => {
     const insets = useSafeAreaInsets();
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     const handleNavigation = (route: string) => {
         navigationService.navigate(route);

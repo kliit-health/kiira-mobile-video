@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 const initialState = {};
 
@@ -14,6 +15,6 @@ export const activateSlice = createSlice({
 
 export const { sendVerification } = activateSlice.actions;
 
-export const selectForgotPassword = state => state;
+export const selectForgotPassword = (state: RootState) => state.activate;
 
 export default activateSlice.reducer;
