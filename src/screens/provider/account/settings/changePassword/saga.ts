@@ -26,11 +26,7 @@ function* changeUserPassword({ data }) {
             yield put(hideApiLoader());
             yield delay(500);
             if (responseChangePassword.success) {
-                yield put(
-                    showOrHideModal(
-                        lang.changePassword.passwordUpdateSuccessfullyMsg,
-                    ),
-                );
+                yield put(showOrHideModal(lang.changePassword.success));
                 navigation.goBack();
             } else {
                 yield put(

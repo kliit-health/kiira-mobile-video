@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import styles from './style';
 import { hasSpecialCharactors } from '~/utils/helper';
 import Constant from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
 import CustomText from '~/components/customText';
 import CustomButton from '~/components/customButton';
-import { changePassword } from './action';
+import { updatePassword } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
 
 const ChangePassword = props => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     const dispatch = useDispatch();
     const [currentPassword, setCurrentPassword] = useState('');
@@ -165,28 +166,16 @@ const ChangePassword = props => {
                 onPress={() => {
                     if (!currentPassword.trim()) {
                         dispatch(
-                            showOrHideModal(
-                                lang.changePassword.EmptyCurrentPasswordMsg,
-                            ),
+                            showOrHideModal(lang.changePassword.emptyCurrent),
                         );
                     } else if (!newPassword.trim()) {
-                        dispatch(
-                            showOrHideModal(
-                                lang.changePassword.EmptyNewPasswordMsg,
-                            ),
-                        );
+                        dispatch(showOrHideModal(lang.changePassword.emptyNew));
                     } else if (newPassword.trim().length < 7) {
                         dispatch(
-                            showOrHideModal(
-                                lang.changePassword.passwordLimitErrorMsg,
-                            ),
+                            showOrHideModal(lang.changePassword.limitError),
                         );
                     } else if (!hasSpecialCharactors(newPassword)) {
-                        dispatch(
-                            showOrHideModal(
-                                lang.changePassword.passwordSpecialCharErrorMsg,
-                            ),
-                        );
+                        dispatch(showOrHideModal(lang.changePassword.error));
                     } else {
                         const data = {
                             params: {
@@ -195,7 +184,7 @@ const ChangePassword = props => {
                             },
                             navigation,
                         };
-                        dispatch(changePassword(data));
+                        dispatch(updatePassword(data));
                     }
                 }}
                 text={lang.changePassword.updatePassword}

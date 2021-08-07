@@ -9,7 +9,6 @@ import assessment from '../reducers/assessment';
 import ask from '../../screens/patient/dashboard/ask/reducer';
 import askExpert from '../../screens/provider/ask/reducer';
 import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
-import changePassword from '../../screens/patient/account/settings/changePassword/reducer';
 import chat from '../../screens/patient/dashboard/ask/chat/reducer';
 import chatExpert from '../../screens/provider/ask/chat/reducer';
 import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
@@ -58,7 +57,6 @@ export const rootReducer = combineReducers({
     askExpert,
     assessment,
     bookVisit,
-    changePassword,
     chat,
     chatExpert,
     chooseExpert,

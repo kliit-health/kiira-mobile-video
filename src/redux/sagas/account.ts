@@ -1,19 +1,14 @@
-import {
-    put,
-    takeEvery,
-    select,
-    takeLatest,
-    takeLeading,
-} from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { showOrHideModal } from '~/components/customModal/action';
-import { signOut, updateAccount } from '../reducers/account';
+import { signOut, updateAccount, updatePassword } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import Constant from '~/utils/constants';
 import { clearAskState } from '~/screens/patient/dashboard/ask/action';
 import { uploadImage, updateUserData } from '~/utils/firebase';
 import { getUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
+import { changePassword, reAunthenticate } from '~/utils/firebase';
 
 function* signout({ payload }) {
     const { navigation } = payload;
@@ -147,7 +142,58 @@ function* updateUser({ payload }) {
     }
 }
 
+function* changeUserPassword({ payload }) {
+    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+    const lang = yield select(state => state.language);
+    try {
+        const { params, navigation } = payload;
+        yield put(showApiLoader());
+        const responseReAunthenticate = yield reAunthenticate(
+            params.currentPassword,
+        );
+
+        if (responseReAunthenticate.success) {
+            const responseChangePassword = yield changePassword(
+                params.newPassword,
+            );
+
+            yield delay(500);
+            yield put(hideApiLoader());
+            yield delay(500);
+            if (responseChangePassword.success) {
+                yield put(showOrHideModal(lang.changePassword.success));
+                navigation.goBack();
+            } else {
+                yield put(
+                    showOrHideModal(
+                        responseChangePassword.message
+                            ? responseChangePassword.message
+                            : lang.errorMessage.serverError,
+                    ),
+                );
+            }
+        } else {
+            yield delay(500);
+            yield put(hideApiLoader());
+            yield delay(500);
+            yield put(
+                showOrHideModal(
+                    responseReAunthenticate.message
+                        ? responseReAunthenticate.message
+                        : lang.errorMessage.serverError,
+                ),
+            );
+        }
+    } catch (error) {
+        yield delay(500);
+        yield put(hideApiLoader());
+        yield delay(500);
+        yield put(showOrHideModal(lang.errorMessage.serverError));
+    }
+}
+
 export default function* accountSaga() {
     yield takeEvery(signOut, signout);
     yield takeEvery(updateAccount, updateUser);
+    yield takeEvery(updatePassword, changeUserPassword);
 }

@@ -224,15 +224,12 @@ export default {
         currentPassword: 'Spanish Current Password',
         newPassword: 'Spanish New Password',
         updatePassword: 'Spanish Update Password',
-        EmptyCurrentPasswordMsg:
-            'Spanish Current Password is a required field.',
-        EmptyNewPasswordMsg: 'Spanish New Password is a required field.',
-        passwordLimitErrorMsg:
-            'Spanish New Password should be at least 7 characters',
-        passwordSpecialCharErrorMsg:
+        emptyCurrent: 'Spanish Current Password is a required field.',
+        emptyNew: 'Spanish New Password is a required field.',
+        limitError: 'Spanish New Password should be at least 7 characters',
+        specialCharError:
             'Spanish New Password should have at least 1 special character',
-        passwordUpdateSuccessfullyMsg:
-            'Spanish Password has been updated successfully',
+        success: 'Spanish Password has been updated successfully',
     },
 
     chooseExpert: {

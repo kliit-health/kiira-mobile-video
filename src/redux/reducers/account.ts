@@ -13,10 +13,13 @@ export const account = createSlice({
         updateAccount: (state, action: PayloadAction<object>) => {
             return state;
         },
+        updatePassword: (state, action: PayloadAction<object>) => {
+            return state;
+        },
     },
 });
 
-export const { signOut, updateAccount } = account.actions;
+export const { signOut, updateAccount, updatePassword } = account.actions;
 
 export const selectAccount = (state: RootState) => state.account;
 

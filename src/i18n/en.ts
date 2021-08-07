@@ -198,12 +198,11 @@ export default {
         currentPassword: 'Current Password',
         newPassword: 'New Password',
         updatePassword: 'Update Password',
-        EmptyCurrentPasswordMsg: 'Current Password is a required field.',
-        EmptyNewPasswordMsg: 'New Password is a required field.',
-        passwordLimitErrorMsg: 'New Password should be at least 7 characters',
-        passwordSpecialCharErrorMsg:
-            'New Password should have at least 1 special character',
-        passwordUpdateSuccessfullyMsg: 'Password has been updated successfully',
+        emptyCurrent: 'Current Password is a required field.',
+        emptyNew: 'New Password is a required field.',
+        limitError: 'New Password should be at least 7 characters',
+        error: 'New Password should have at least 1 special character',
+        success: 'Password has been updated successfully',
     },
     chooseExpert: {
         questionTitle: 'Choose an expert to answer…',
