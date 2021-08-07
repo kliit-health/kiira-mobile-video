@@ -2,12 +2,17 @@ import React from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import Image from 'react-native-fast-image';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { Header, Container } from '~/components';
+import { icons } from '~/utils/constants';
+
 import styles from './styles';
 
 const PrivacyPolicy = ({ navigation }) => {
-    const sections = useSelector(state => state.privacyPolicy.data.sections);
-    const lang = useSelector(state => state.language);
+    const sections = useSelector(
+        (state: RootState) => state.privacyPolicy.data.sections,
+    );
+    const lang = useSelector((state: RootState) => state.language);
 
     const handleOnBackPress = () => {
         navigation.goBack();
@@ -24,7 +29,7 @@ const PrivacyPolicy = ({ navigation }) => {
                 showsVerticalScrollIndicator={false}
             >
                 <Image
-                    source={require('../../../../assets/logo-sm.png')}
+                    source={icons.logoHorizontal}
                     style={styles.logo}
                     resizeMode="contain"
                 />

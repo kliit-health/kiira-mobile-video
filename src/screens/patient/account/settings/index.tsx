@@ -19,7 +19,7 @@ import CustomSelectModal from '~/components/customselectModal';
 import DatePicker from '~/components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
-import { updateUserDataToFirebase } from './action';
+import { updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
 
 class Setting extends PureComponent {
@@ -657,7 +657,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateUserData: value => dispatch(updateUserDataToFirebase(value)),
+    updateUserData: value => dispatch(updateAccount(value)),
     showHideErrorModal: value => dispatch(showOrHideModal(value)),
 });
 

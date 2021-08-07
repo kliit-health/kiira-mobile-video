@@ -1,7 +1,6 @@
 import { all } from 'redux-saga/effects';
-import account from '../../screens/patient/account/saga';
+import account from './account';
 import activate from './activate';
-import addProfile from '../../screens/patient/account/settings/addProfileData/saga';
 import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
 import appointments from '../../screens/patient/dashboard/appointments/saga';
@@ -33,7 +32,6 @@ import plans from './plans';
 import privacyPolicy from './privacyPolicy';
 import questions from './questions';
 import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/saga';
-import setting from '../../screens/patient/account/settings/saga';
 import settingExpert from '../../screens/provider/account/settings/saga';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
@@ -46,7 +44,6 @@ export default function* rootSaga() {
     yield all([
         account(),
         activate(),
-        addProfile(),
         agreeToTerms(),
         agreements(),
         appointments(),
@@ -79,7 +76,6 @@ export default function* rootSaga() {
         questions(),
         reschedule(),
         settingExpert(),
-        setting(),
         subscription(),
         termsAndConditions(),
         twillio(),

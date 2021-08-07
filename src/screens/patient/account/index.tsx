@@ -1,18 +1,19 @@
 import React from 'react';
 import { Container, TextButton } from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { ScrollView, Text } from 'react-native';
 import { app } from '~/utils/constants';
 import { Profile, List, Plan } from './sections';
-import { signOut } from './action';
+import { signOut } from '~/redux/reducers/account';
 import styles, { modifiers } from './styles';
 
 const Account = ({ navigation }) => {
     const dispatch = useDispatch();
 
-    const subscription = useSelector(state => state.subscription);
-    const user = useSelector(state => state.user.data);
-    const lang = useSelector(state => state.language);
+    const subscription = useSelector((state: RootState) => state.subscription);
+    const user = useSelector((state: RootState) => state.user.data);
+    const lang = useSelector((state: RootState) => state.language);
 
     const handleNavigation = destination => {
         navigation.navigate(destination);

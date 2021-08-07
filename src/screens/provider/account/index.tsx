@@ -6,7 +6,7 @@ import VersionCheck from 'react-native-version-check';
 import { get } from 'lodash';
 import { ProfileCard } from './sections';
 import model from './model';
-import { signOut } from '../../patient/account/action';
+import { signOut } from '~/redux/reducers/account';
 import styles, { modifiers } from './styles';
 
 const ExpertAccount = ({ navigation }) => {

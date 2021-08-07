@@ -1,17 +1,51 @@
-import { UPDATE_USER_DETAIL_DATA } from '~/redux/types';
-import { put, takeEvery, select } from 'redux-saga/effects';
+import {
+    put,
+    takeEvery,
+    select,
+    takeLatest,
+    takeLeading,
+} from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import { uploadImage } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
-import { getUser, updateUser } from '~/redux/actions';
+import { signOut, updateAccount } from '../reducers/account';
+import { logout, updateStatus } from '~/utils/firebase';
+import Constant from '~/utils/constants';
+import { clearAskState } from '~/screens/patient/dashboard/ask/action';
+import { uploadImage, updateUserData } from '~/utils/firebase';
+import { getUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 
-function* updateUserData({ data }) {
+function* signout({ payload }) {
+    const { navigation } = payload;
+    const lang = yield select(state => state.language);
+    const userData = yield select(state => state.user.data);
+
+    try {
+        yield put(showApiLoader());
+
+        const updateStatusParams = {
+            uid: userData.uid,
+            updatedData: {
+                isOnline: false,
+            },
+        };
+        yield updateStatus(updateStatusParams);
+        yield put(clearAskState());
+        yield logout();
+        yield put(hideApiLoader());
+        navigation.navigate(Constant.App.stack.AuthStack);
+    } catch (error) {
+        navigation.navigate(Constant.App.stack.AuthStack);
+        yield put(showOrHideModal(lang.errorMessage.serverError));
+    }
+}
+
+function* updateUser({ payload }) {
     const lang = yield select(state => state.language);
     const user = yield select(state => state.user.data);
     try {
-        const { userParams, imageParams, navigation } = data;
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        const { userParams, imageParams, navigation } = payload;
+        yield put(showApiLoader());
 
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
@@ -101,7 +135,7 @@ function* updateUserData({ data }) {
                 },
             };
 
-            yield put(updateUser({ uid: user.uid, ...userUpdate }));
+            yield updateUserData(userUpdate, user.uid);
             yield put(getUser());
             yield put(hideApiLoader());
             navigation.goBack();
@@ -113,6 +147,7 @@ function* updateUserData({ data }) {
     }
 }
 
-export default function* settingSaga() {
-    yield takeEvery(UPDATE_USER_DETAIL_DATA, updateUserData);
+export default function* accountSaga() {
+    yield takeEvery(signOut, signout);
+    yield takeEvery(updateAccount, updateUser);
 }

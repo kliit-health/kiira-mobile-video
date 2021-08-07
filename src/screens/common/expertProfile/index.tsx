@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
     Image,
     View,
@@ -8,6 +7,8 @@ import {
     Platform,
     Linking,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { getExpertsData, clearExpertProfileState } from './action';
 import styles from './style';
 import CustomText from '~/components/customText';
@@ -18,9 +19,9 @@ import FastImage from 'react-native-fast-image';
 import { clearTopic } from '../../patient/dashboard/ask/action';
 
 const ExpertProfile = props => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
     const expertDetails = useSelector(
-        state => state.expertProfileReducer.expertData,
+        (state: RootState) => state.expertProfileReducer.expertData,
     );
 
     const dispatch = useDispatch();

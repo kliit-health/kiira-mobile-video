@@ -10,7 +10,7 @@ import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
 import messaging from '@react-native-firebase/messaging';
 import analytics from '@react-native-firebase/analytics';
-import { signOut } from './src/screens/patient/account/action';
+import { signOut } from '~/redux/reducers/account';
 import Constant from './src/utils/constants';
 import BackgroundTimer from 'react-native-background-timer';
 import FastImage from 'react-native-fast-image';
