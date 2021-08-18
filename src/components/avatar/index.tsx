@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { shape, object, bool, string, func, number, oneOf } from 'prop-types';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';
+import { ConsoleWriter } from 'istanbul-lib-report';
 
 const Avatar = ({
     styles: customStyles,
@@ -19,6 +20,8 @@ const Avatar = ({
     online,
     deleteMode,
 }) => {
+    const [loading, setLoading] = useState(true);
+
     const styles = {
         image: mergeStyles([
             modifiers[size].image,
@@ -51,15 +54,25 @@ const Avatar = ({
         onLayout(layout);
     };
 
+    const handleEndLoad = () => {
+        setLoading(false);
+    };
+
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
             <View onLayout={handleLayout} style={styles.root}>
                 <FastImage
                     style={styles.image}
-                    source={{ uri: source ? source : null }}
-                    fallback={true}
+                    onLoadEnd={handleEndLoad}
+                    source={
+                        loading
+                            ? require('../../../assets/profile_img_placeholder.png')
+                            : {
+                                  uri: source,
+                                  priority: FastImage.priority.normal,
+                              }
+                    }
                     resizeMode={resizeMode}
-                    defaultSource={require('../../../assets/profile_img_placeholder.png')}
                 />
                 <View style={styles.status} />
                 {deleteMode && (

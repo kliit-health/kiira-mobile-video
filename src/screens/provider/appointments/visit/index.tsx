@@ -4,7 +4,7 @@ import { View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { ExpertHeader } from '~/components';
 import { PatientDetails, VisitDetails } from './components';
-import { getExpertsData } from '../../../patient/dashboard/getTreatment/expertSchedule/action';
+import { getExpertsData } from '~/redux/reducers/appointments';
 import Constant from '~/utils/constants';
 
 const ExpertVisit = ({ navigation }) => {

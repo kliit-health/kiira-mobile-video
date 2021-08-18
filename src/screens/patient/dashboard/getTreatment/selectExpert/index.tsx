@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { Header, Container } from '~/components';
 import NoProviders from '~/components/noProviders';
 import { screenNames } from '~/utils/constants';
 import { List } from './sections';
-import styles from './style';
+import { IAppointments } from '~/redux/reducers/appointments';
 
 const SelectExpert = ({ navigation }) => {
     const [availableExperts, setAvailableExperts] = useState([]);
-    const experts = useSelector(state => state.experts.data);
-    const userProfile = useSelector(state => state.user.data.profileInfo);
-    const visit = useSelector(state => state.expertSchedule);
-    const lang = useSelector(state => state.language);
+    const experts = useSelector((state: RootState) => state.experts.data);
+    const userProfile = useSelector(
+        (state: RootState) => state.user.data.profileInfo,
+    );
+    const visit: IAppointments = useSelector(state => state.appointments);
+    const lang = useSelector((state: RootState) => state.language);
 
     useEffect(() => {
         if (experts.length && userProfile) {
@@ -31,9 +34,9 @@ const SelectExpert = ({ navigation }) => {
                         profession: { specialities },
                     },
                 }) => {
-                    return specialities.some(specialty =>
-                        specialty.includes(visit.reason),
-                    );
+                    return specialities.some(specialty => {
+                        return specialty.includes(visit.reason.title);
+                    });
                 },
             );
 

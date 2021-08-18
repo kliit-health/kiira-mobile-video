@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, Text } from 'react-native';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import styles from './style';
 import treatment from '~/utils/constants/getTreatment';
 import { ListItem } from '~/components';
@@ -8,7 +9,7 @@ import { Header, Container } from '~/components';
 import Agreements from '../agreements';
 
 const RequestVisit = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     const handleNavigation = key => {
         navigation.navigate('SelectCareType', { key });

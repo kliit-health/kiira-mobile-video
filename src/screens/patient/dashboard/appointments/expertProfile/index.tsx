@@ -8,7 +8,10 @@ import {
     Platform,
     Linking,
 } from 'react-native';
-import { getExpertsData, clearExpertProfileState } from './action';
+import {
+    getExpertsData,
+    clearExpertProfileState,
+} from '~/redux/reducers/appointments';
 import styles from './style';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';
@@ -17,7 +20,7 @@ import CustomButton from '~/components/customButton';
 import FastImage from 'react-native-fast-image';
 
 const ExpertProfile = props => {
-    const expertDetails = useSelector(state => state.expertProfile.expertData);
+    const expertDetails = useSelector(state => state.appointments.expertData);
     const lang = useSelector(state => state.language);
     const dispatch = useDispatch();
 

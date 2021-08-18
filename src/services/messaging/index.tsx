@@ -6,7 +6,7 @@ import { Modal } from '~/components';
 import { hideMessage } from '~/redux/actions';
 import styles from './styles';
 
-export default () => {
+export default ({ children }) => {
     const dispatch = useDispatch();
     const message = useSelector((state: RootState) => state.messaging.message);
     const visible = useSelector((state: RootState) => state.messaging.visible);
@@ -25,6 +25,7 @@ export default () => {
         >
             <View style={styles.card.container}>
                 <Text style={styles.card.text}>{message}</Text>
+                {children}
             </View>
         </Modal>
     );

@@ -4,11 +4,10 @@ import activate from './activate';
 import agreeToTerms from '../../screens/auth/newUser/reducer';
 import agreements from './agreements';
 import addNewProfile from '../../screens/auth/chatBot/reducer';
-import appointments from '../../screens/patient/dashboard/appointments/reducer';
+import appointments from './appointments';
 import assessment from '../reducers/assessment';
 import ask from '../../screens/patient/dashboard/ask/reducer';
 import askExpert from '../../screens/provider/ask/reducer';
-import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
 import chat from '../../screens/patient/dashboard/ask/chat/reducer';
 import chatExpert from '../../screens/provider/ask/chat/reducer';
 import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
@@ -16,7 +15,6 @@ import clientMedicalHistory from './medicalHistory';
 import expertAppointments from '../../screens/provider/appointments/reducer';
 import expertPatients from '../../screens/provider/patients/reducer';
 import expertProfile from '../../screens/common/expertProfile/reducer';
-import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/reducer';
 import experts from './experts';
 import favoriteExperts from './favoriteExperts';
 import forgotPassword from './forgotPassword';
@@ -34,7 +32,6 @@ import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
 import questions from './questions';
-import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/reducer';
 import settingsExpert from '../../screens/provider/account/settings/reducer';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
@@ -56,7 +53,6 @@ export const rootReducer = combineReducers({
     ask,
     askExpert,
     assessment,
-    bookVisit,
     chat,
     chatExpert,
     chooseExpert,
@@ -64,7 +60,6 @@ export const rootReducer = combineReducers({
     expertAppointments,
     expertPatients,
     expertProfile,
-    expertSchedule,
     experts,
     favoriteExperts,
     forgotPassword,
@@ -83,7 +78,6 @@ export const rootReducer = combineReducers({
     plans,
     privacyPolicy,
     questions,
-    reschedule,
     settingsExpert,
     subscription,
     termsAndConditions,

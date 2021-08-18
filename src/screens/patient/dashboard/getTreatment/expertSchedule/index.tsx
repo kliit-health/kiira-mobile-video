@@ -5,10 +5,10 @@ import { Header } from '~/components';
 import {
     getExpertsData,
     setCalendarID,
-    getAppointmentsByDay,
     getAppointmentDates,
     getAppointmentsForToday,
-} from './action';
+} from '~/redux/reducers/appointments';
+
 import { generateDateInfo } from '~/utils/helper';
 import styles from './style';
 import Constant from '~/utils/constants';
@@ -23,13 +23,16 @@ import {
     Hours,
     SheduleModal,
 } from './components';
+import { RootState } from '~/redux/reducers';
 
 const ExpertSchedule = props => {
-    const expertData = useSelector(state => state.expertProfile.expertData);
-    const appointmentData = useSelector(state => state.expertSchedule);
+    const appointmentData = useSelector(
+        (state: RootState) => state.appointments,
+    );
+
     const {
-        dates,
-        appointmentType: { appointmentType },
+        expertData,
+        reason: { sessionType },
     } = appointmentData;
 
     const today = moment(new Date()).format('YYYY-MM-DD');
@@ -59,7 +62,7 @@ const ExpertSchedule = props => {
                 ...current,
                 calendarID,
                 addMonth,
-                appointmentType,
+                appointmentTypeID: sessionType.appointmentTypeID,
             }),
         );
 
@@ -69,7 +72,7 @@ const ExpertSchedule = props => {
             getAppointmentsForToday({
                 ...current,
                 calendarID,
-                appointmentType,
+                appointmentTypeID: sessionType.appointmentTypeID,
             }),
         );
     }, []);

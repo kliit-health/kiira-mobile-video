@@ -9,8 +9,8 @@ export default {
         firstLogin: true,
         isActive: false,
         isOnline: false,
-        plan: '',
         prepaid: 0,
+        organizationId: '',
         profileInfo: {
             dob: '',
             enrollment: '',

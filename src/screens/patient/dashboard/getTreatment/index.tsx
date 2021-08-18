@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import {
     Container,
     Header,
@@ -22,7 +23,7 @@ import { screenNames } from '~/utils/constants';
 import styles, { modifiers } from './styles';
 
 const GetTreatment = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     const details = navigation.getParam('details');
     const navigator = navigation.getParam('navigator');

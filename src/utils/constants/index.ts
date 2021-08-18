@@ -451,6 +451,7 @@ export default {
             AuthStack: 'Auth',
             AppStack: 'App',
             AppStackExpert: 'AppExpert',
+            AppStackSupport: 'AppSupport',
         },
 
         staticImages: {
@@ -564,6 +565,7 @@ export const colors = {
     yellow: '#F8C51E',
     charcoal: '#535A67',
     lightBlue: '#6AC5FF',
+    babyBlue: 'ECFCFF',
 };
 
 export const text = {
@@ -655,6 +657,13 @@ export const icons = {
     unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
     xCloseIcon: require('../../../assets/xclose.png'),
     kiiraLogo: require('../../../assets/logo.png'),
+};
+
+export const stack = {
+    AuthStack: 'Auth',
+    AppStack: 'App',
+    AppStackExpert: 'AppExpert',
+    AppStackSupport: 'AppSupport',
 };
 
 export const screenNames = {

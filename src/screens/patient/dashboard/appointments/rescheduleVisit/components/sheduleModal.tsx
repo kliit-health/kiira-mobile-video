@@ -20,12 +20,12 @@ import {
     setAppointmentTime,
     getAppointmentsByDay,
     updateVisit,
-} from '../action';
+} from '~/redux/reducers/appointments';
 
 const { staticImages } = Constant.App;
 
 const SheduleModal = ({
-    appointmentType,
+    appointmentTypeID,
     appointmentData,
     calendarID,
     setShowShedule,
@@ -136,7 +136,7 @@ const SheduleModal = ({
                                                         getAppointmentsByDay({
                                                             ...item,
                                                             calendarID,
-                                                            appointmentType,
+                                                            appointmentTypeID,
                                                         }),
                                                     );
                                                     setSelectedDate(item.date);

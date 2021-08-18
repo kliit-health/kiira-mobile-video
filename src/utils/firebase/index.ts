@@ -161,8 +161,8 @@ export async function getAppointmentsAsync(uid) {
     }
 }
 
-export async function getAppointmentsByDayAsync(data, isToday) {
-    const { calendarID, date, appointmentType } = data;
+export async function getAppointmentsByDayAsync(data) {
+    const { calendarID, date, appointmentTypeID } = data;
 
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
@@ -177,18 +177,16 @@ export async function getAppointmentsByDayAsync(data, isToday) {
             data: {
                 calendarID,
                 date,
-                appointmentTypeID: appointmentType,
+                appointmentTypeID,
             },
         }),
     };
 
     try {
         const times = {};
-        await fetch(urls.prod.appointmentGetByDay, obj)
+        await fetch(urls.dev.appointmentGetByDay, obj)
             .then(res => res.json())
-            .then(data => {
-                isToday ? (times.today = data) : (times.current = data);
-            });
+            .then(data => (times.current = data));
         return times;
     } catch (error) {
         return error;
@@ -200,7 +198,7 @@ export async function getAppointmentDatesAsync(data) {
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
 
-        const { calendarID, monthNumber, addMonth, year, appointmentType } =
+        const { calendarID, monthNumber, addMonth, year, appointmentTypeID } =
             data;
         const currentMonth = `${year}-${monthNumber}`;
 
@@ -212,7 +210,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID: appointmentType,
+                    appointmentTypeID,
                     calendarID: calendarID,
                     month: currentMonth,
                 },
@@ -220,7 +218,7 @@ export async function getAppointmentDatesAsync(data) {
         };
 
         let response = [];
-        await fetch(urls.prod.appointmentGetByMonth, obj)
+        await fetch(urls.dev.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -234,14 +232,14 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID: appointmentType,
+                    appointmentTypeID,
                     calendarID: calendarID,
                     month: addMonth,
                 },
             }),
         };
 
-        await fetch(urls.prod.appointmentGetByMonth, obj)
+        await fetch(urls.dev.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -252,7 +250,7 @@ export async function getAppointmentDatesAsync(data) {
     }
 }
 
-export async function makeAppointment({ data }) {
+export async function makeAppointment(data) {
     try {
         const {
             firstName,
@@ -264,7 +262,7 @@ export async function makeAppointment({ data }) {
             prescription,
             uid,
             expert,
-            appointmentType,
+            appointmentTypeID,
         } = data;
 
         let noPrescription = 'I do not need a prescription,';
@@ -277,7 +275,6 @@ export async function makeAppointment({ data }) {
 
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
-        const { appointmentTypeID } = appointmentType;
 
         var obj = {
             method: 'POST',
@@ -287,21 +284,21 @@ export async function makeAppointment({ data }) {
             }),
             body: JSON.stringify({
                 data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    calendarID: calendarID,
-                    time: time,
-                    email: email,
-                    reason: reason,
-                    prescription: prescription,
-                    notes: notes,
-                    appointmentTypeID: appointmentTypeID,
+                    firstName,
+                    lastName,
+                    calendarID,
+                    time,
+                    email,
+                    reason,
+                    prescription,
+                    notes,
+                    appointmentTypeID,
                 },
             }),
         };
 
         let response;
-        let checkTime = await fetch(urls.prod.appointmentCheckTime, obj)
+        let checkTime = await fetch(urls.dev.appointmentCheckTime, obj)
             .then(res => res.json())
             .then(data => data)
             .catch(error => {
@@ -309,7 +306,7 @@ export async function makeAppointment({ data }) {
             });
 
         if (checkTime.valid) {
-            await fetch(urls.prod.appointmentMake, obj)
+            await fetch(urls.dev.appointmentMake, obj)
                 .then(res => res.json())
                 .then(res => {
                     response = {
@@ -373,7 +370,7 @@ export async function makeAppointment({ data }) {
     }
 }
 
-export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
+export async function cancelAppointmentAsync({ id, uid, expert }) {
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
 
@@ -391,7 +388,7 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
     };
 
     try {
-        return await fetch(urls.prod.appointmentCancel, obj)
+        return await fetch(urls.dev.appointmentCancel, obj)
             .then(res => {
                 let response = res.json();
                 return response;
@@ -458,7 +455,7 @@ export async function changeAppointmentAsync({ data }) {
     };
 
     try {
-        return await fetch(urls.prod.appointmentChange, obj)
+        return await fetch(urls.dev.appointmentChange, obj)
             .then(res => res.json())
             .then(async res => {
                 if (res.body.error) {

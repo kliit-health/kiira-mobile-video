@@ -9,6 +9,7 @@ import { Text } from '~/components';
 import Account from '../screens/patient/account';
 import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
+import AccountSupport from '../screens/support/account';
 import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addChild';
 import AddCreditOrDebitCard from '../screens/patient/dashboard/getTreatment/payment/AddCreditOrDebitCard';
 import Allergies from '../screens/patient/dashboard/healthHistory/allergies';
@@ -16,6 +17,7 @@ import AllergiesHistory from '../screens/provider/appointments/patientProfile/al
 import Appointments from '../screens/patient/dashboard/appointments';
 import Ask from '../screens/patient/dashboard/ask';
 import AskExpert from '../screens/provider/ask';
+import AskSupport from '../screens/support/ask';
 import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
@@ -142,6 +144,7 @@ const PaymentStack = createStackNavigator(
         },
     },
 );
+
 const BottomTab = createBottomTabNavigator(
     {
         Community: {
@@ -412,6 +415,92 @@ const BottomTabExpert = createBottomTabNavigator(
     },
 );
 
+const BottomTabSupport = createBottomTabNavigator(
+    {
+        AccountSupport: {
+            screen: AccountSupport,
+            navigationOptions: {
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <View
+                        style={{
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: focused ? '#e4fdfd' : '',
+                            padding: focused ? 10 : 0,
+                            marginTop: 5,
+                            borderRadius: 20,
+                        }}
+                    >
+                        <Image
+                            resizeMode={'contain'}
+                            style={{ width: tabIconSize, height: tabIconSize }}
+                            source={
+                                focused
+                                    ? require('../../assets/me-active.png')
+                                    : require('../../assets/me.png')
+                            }
+                        />
+                    </View>
+                ),
+            },
+        },
+        AskSupport: {
+            screen: AskSupport,
+            navigationOptions: {
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <View
+                        style={{
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: focused ? '#e4fdfd' : '',
+                            padding: focused ? 10 : 0,
+                            marginTop: 5,
+                            borderRadius: 20,
+                        }}
+                    >
+                        <Image
+                            resizeMode={'contain'}
+                            style={{
+                                width: tabIconSize,
+                                height: tabIconSize,
+                            }}
+                            source={
+                                focused
+                                    ? require('../../assets/chat-new-active.png')
+                                    : require('../../assets/chat-new.png')
+                            }
+                        />
+                    </View>
+                ),
+            },
+        },
+    },
+    {
+        initialRouteName: 'AskSupport',
+        tabBarposition: 'bottom',
+        swipeEnabled: true,
+        tabBarOptions: {
+            activeTintColor: 'black',
+            inactiveTintColor: 'black',
+            showLabel: false,
+            style: {
+                backgroundColor: 'white',
+                borderRadius: 12,
+                borderColor: 'lightgrey',
+                borderWidth: 1,
+                marginHorizontal: 5,
+                height: 40,
+                shadowOffset: { width: 0, height: 2 },
+                shadowColor: '#000000',
+                shadowOpacity: 1,
+                shadowRadius: 7,
+            },
+        },
+    },
+);
+
 const AppStackExpert = createStackNavigator(
     {
         AllergiesHistory: { screen: AllergiesHistory },
@@ -450,6 +539,18 @@ const AppStackExpert = createStackNavigator(
     {
         headerMode: 'none',
         initialRouteName: 'BottomTabExpert',
+    },
+);
+
+const AppStackSupport = createStackNavigator(
+    {
+        BottomTabSupport: { screen: BottomTabSupport },
+        // ChatSupport: { screen: CSupport },
+        AccountSupport: { screen: AccountSupport },
+    },
+    {
+        headerMode: 'none',
+        initialRouteName: 'BottomTabSupport',
     },
 );
 
@@ -532,6 +633,7 @@ const AppNavigator = createSwitchNavigator(
         Auth: AuthStack,
         App: AppStack,
         AppExpert: AppStackExpert,
+        AppSupport: AppStackSupport,
     },
     {
         initialRouteName: 'Auth',

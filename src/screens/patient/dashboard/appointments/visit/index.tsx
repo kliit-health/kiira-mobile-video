@@ -4,7 +4,7 @@ import { View, ScrollView, SafeAreaView } from 'react-native';
 import { Header } from '~/components';
 import { withNavigation } from 'react-navigation';
 import { ExpertInfo, VisitDetails } from './components';
-import { getExpertsData } from '../../getTreatment/expertSchedule/action';
+import { getExpertsData } from '~/redux/reducers/appointments';
 import { setVisit } from './actions';
 import ErrorBoundary from 'react-native-error-boundary';
 import Constant from '~/utils/constants';

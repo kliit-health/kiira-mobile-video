@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { View, TouchableOpacity, Platform, Linking } from 'react-native';
 import CustomText from '~/components/customText';
 import styles from '../style';
 
 const ClinicInfo = ({ expertData }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     return (
         <View style={styles.bioContainerStyle}>

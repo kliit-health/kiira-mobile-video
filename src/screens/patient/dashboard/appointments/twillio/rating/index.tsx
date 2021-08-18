@@ -5,7 +5,7 @@ import { AirbnbRating, Rating } from 'react-native-elements';
 import CustomButton from '~/components/customButton';
 import Constant from '~/utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
-import { rateVisit } from '../../../appointments/action';
+import { rateVisit } from '~/redux/reducers/appointments';
 
 import styles from './styles';
 

@@ -1,15 +1,16 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { View, Text } from 'react-native';
 import { TextButton, Header, Container } from '~/components';
-import { needsPrescription } from '../expertSchedule/action';
+import { needsPrescription } from '~/redux/reducers/appointments';
 import { screenNames } from '~/utils/constants';
 import styles, { modifiers } from './style';
 
 const NeedsPresciption = props => {
     const { navigation } = props;
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
     const dispatch = useDispatch();
 
     return (

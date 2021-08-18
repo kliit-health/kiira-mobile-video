@@ -5,10 +5,10 @@ import CustomButton from '~/components/customButton';
 import styles from '../style';
 import Constant from '~/utils/constants';
 import {
-    makeAppointment,
-    prepaidAppointment,
+    setPrepaid,
+    bookAppointment,
     getAppointmentsList,
-} from '../action';
+} from '~/redux/reducers/appointments';
 
 const Buttons = ({
     applyCredit,
@@ -70,7 +70,7 @@ const Buttons = ({
                 }
                 onPress={() => {
                     if (userData.visits === 0) {
-                        dispatch(prepaidAppointment());
+                        dispatch(setPrepaid());
                     }
                     setModalVisible(!modalVisible);
                 }}
@@ -84,7 +84,7 @@ const Buttons = ({
             buttonStyle={styles.yesContainerStyle}
             textStyle={styles.yesTextStyle}
             onPress={() => {
-                dispatch(makeAppointment(appointmentDetails));
+                dispatch(bookAppointment(appointmentDetails));
                 setBooked(true);
                 navigation.navigate('Dashboard');
             }}

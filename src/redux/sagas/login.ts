@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { loginInWithFirebase } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
-import Constant from '~/utils/constants';
+import { stack, screenNames } from '~/utils/constants';
 import { loginFailure, loginApi } from '~/redux/reducers/login';
 import { getUser, updateUser } from '~/redux/actions/user';
 import { getTermsAndConditions } from '~/redux/actions';
@@ -69,20 +69,21 @@ function* loginFirebase({ payload }) {
                     const hasExpertRole = role === 'Expert';
                     const isUser = role === 'User';
                     const isNewUser = !agreeToTerms || firstLogin;
+                    const isSupport = role === 'support';
 
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
-                            navigation.navigate(Constant.App.stack.AppStack);
+                            navigation.navigate(stack.AppStack);
                         } else if (isNewUser) {
-                            navigation.navigate(
-                                Constant.App.screenNames.Welcome,
-                            );
+                            navigation.navigate(screenNames.Welcome);
                         }
                     } else {
                         if (isExpert || hasExpertRole) {
-                            navigation.navigate(
-                                Constant.App.stack.AppStackExpert,
-                            );
+                            navigation.navigate(stack.AppStackExpert);
+                        }
+
+                        if (isSupport) {
+                            navigation.navigate(stack.AppStackSupport);
                         }
                     }
                 });

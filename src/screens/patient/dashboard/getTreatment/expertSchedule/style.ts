@@ -268,11 +268,10 @@ const styles = StyleSheet.create({
     },
 
     availability: {
-        fontSize: Constant.App.textSize.Large,
+        fontSize: Constant.App.textSize.Medium,
         fontWeight: '500',
-        marginLeft: -70,
+        marginLeft: -85,
         marginTop: 20,
-
         width: metrics.width,
     },
 

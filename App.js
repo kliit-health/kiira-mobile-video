@@ -19,8 +19,8 @@ import { setCurrentRoute, setPreviousRoute } from './src/redux/actions';
 
 const App = () => {
     const dispatch = useDispatch();
-    let navigationRef = useRef();
 
+    let navigationRef = useRef();
     const spinner = useSelector(state => state.loader);
     const toast = useSelector(state => state.toast);
     const { showModalError, errorMessage } = useSelector(state => state.modal);
@@ -113,7 +113,6 @@ const App = () => {
 
             timeoutId = BackgroundTimer.setTimeout(() => {
                 const payload = {
-                    navigation: navigationRef.current._navigation,
                     isLoaderShow: false,
                 };
                 dispatch(signOut(payload));

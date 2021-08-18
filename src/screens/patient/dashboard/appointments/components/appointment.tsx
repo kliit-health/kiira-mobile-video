@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
+import { RootState } from '~/redux/reducers';
 import FastImage from 'react-native-fast-image';
 import CustomButton from '~/components/customButton';
 import CustomText from '~/components/customText';
@@ -7,24 +8,24 @@ import { showOrHideModal } from '~/components/customModal/action';
 import { Rating } from 'react-native-elements';
 import styles from '../style';
 import { useDispatch, useSelector } from 'react-redux';
-import { cancelAppointment } from '../action';
+import { cancelAppointment } from '~/redux/reducers/appointments';
+import constants, { text, colors } from '~/utils/constants';
 import moment from 'moment';
 
 const Appointment = ({ visit, date, navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
+    const { staticImages } = constants.App;
 
-    const {
-        uid,
-        calendarID,
-        appointmentType: { credits, duration },
-    } = visit;
+    const { uid, calendarID, reason, id, expert, prepaid } = visit;
+    const { credits, duration } = reason.sessionType;
     const data = {
-        uid: visit.uid,
-        id: visit.id,
-        expert: visit.expert,
-        prepaid: visit.prepaid,
-        credits: credits,
+        uid,
+        id,
+        expert,
+        prepaid,
+        credits,
     };
 
     let today = moment().local();
@@ -41,19 +42,57 @@ const Appointment = ({ visit, date, navigation }) => {
             ),
         );
 
+    const handleEndLoad = () => {
+        setLoading(false);
+    };
+
     return (
-        <View style={{ alignSelf: 'center', paddingBottom: 50 }}>
+        <View
+            style={{
+                alignSelf: 'center',
+                marginHorizontal: 20,
+                paddingBottom: 50,
+                width: '100%',
+            }}
+        >
             <View style={styles.myRecentExpertContainerStyle}>
+                <View
+                    style={{
+                        // flex: 1,
+                        alignSelf: 'center',
+                        backgroundColor: colors.gray,
+                        padding: 10,
+                        overflow: 'hidden',
+                        width: '100%',
+                    }}
+                >
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontFamily: text.fontFamily.poppinsRegular,
+                            fontSize: text.size.xxLarge,
+                            textAlign: 'center',
+                        }}
+                    >
+                        {moment(date.date).format('llll')}
+                    </Text>
+                </View>
                 <View style={styles.expertContainer}>
                     <View style={styles.expertImageContainer}>
                         <FastImage
+                            onLoadEnd={handleEndLoad}
                             style={styles.expertImage}
-                            defaultSource={require('../../../../../../assets/profile_img_placeholder.png')}
-                            source={{ uri: visit.expert.imageUrl }}
-                            activeOpacity={0.7}
+                            source={
+                                loading
+                                    ? staticImages.profilePlaceholderImg
+                                    : {
+                                          uri: visit.expert.imageUrl,
+                                          priority: FastImage.priority.normal,
+                                      }
+                            }
                         />
                     </View>
-                    <View>
+                    <View style={{ width: '100%' }}>
                         <View style={styles.expertName}>
                             <Text style={styles.expertNameTextStyle}>
                                 {`${visit.expert.firstName} ${visit.expert.lastName}`}
@@ -65,56 +104,10 @@ const Appointment = ({ visit, date, navigation }) => {
                             >
                                 {visit.expert.profession}
                             </CustomText>
-                            <View>
-                                <Image
-                                    style={styles.expertPrescriberImage}
-                                    source={require('../../../../../../assets/rx.png')}
-                                    resizeMode="contain"
-                                />
-                            </View>
-                            <CustomText
-                                style={styles.expertPrescriberTextStyle}
-                            >
-                                {lang.expertProfile.prescriber}
-                            </CustomText>
-                        </View>
-                        <View style={styles.expertIsPrescriber}>
-                            <Rating
-                                imageSize={20}
-                                readonly
-                                startingValue={parseFloat(
-                                    visit.expert.rating / 2,
-                                )}
-                            />
                         </View>
                     </View>
                 </View>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        alignSelf: 'center',
-                    }}
-                >
-                    <View style={{ alignItems: 'center', margin: 20 }}>
-                        <Text style={{ marginBottom: 10, fontWeight: 'bold' }}>
-                            {date.dow}{' '}
-                        </Text>
-                        <Text>{`${date.month} ${date.day}`}</Text>
-                    </View>
-                    <View style={{ alignItems: 'center', margin: 20 }}>
-                        <Text style={{ marginBottom: 10, fontWeight: 'bold' }}>
-                            {date.hour.time}{' '}
-                        </Text>
-                        <Text>{date.hour.am_pm} </Text>
-                    </View>
-                    <View style={{ alignItems: 'center', margin: 20 }}>
-                        <Text style={{ marginBottom: 10, fontWeight: 'bold' }}>
-                            {duration}{' '}
-                        </Text>
-                        <Text>MIN </Text>
-                    </View>
-                </View>
-                <CustomButton
+                {/* <CustomButton
                     buttonStyle={styles.yesContainerStyle}
                     textStyle={styles.yesTextStyle}
                     onPress={() => {
@@ -124,34 +117,42 @@ const Appointment = ({ visit, date, navigation }) => {
                         });
                     }}
                     text="View Details"
-                />
-
-                <CustomButton
-                    buttonStyle={styles.noContainerStyle}
-                    textStyle={styles.noTextStyle}
-                    onPress={() =>
-                        sameDay
-                            ? handleSameDay()
-                            : navigation.navigate('RescheduleVisit', {
-                                  visit,
-                                  date,
-                                  navigation,
-                                  uid,
-                                  calendarID,
-                              })
-                    }
-                    text="Reschedule Appointment"
-                />
-                <CustomButton
-                    buttonStyle={styles.noContainerStyle}
-                    textStyle={styles.noTextStyle}
-                    onPress={() =>
-                        sameDay
-                            ? handleSameDay()
-                            : dispatch(cancelAppointment(data))
-                    }
-                    text="Cancel Appointment"
-                />
+                /> */}
+                <View
+                    style={{
+                        width: '80%',
+                        flexDirection: 'row',
+                        marginLeft: 20,
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <CustomButton
+                        buttonStyle={styles.noContainerStyle}
+                        textStyle={styles.noTextStyle}
+                        onPress={() =>
+                            sameDay
+                                ? handleSameDay()
+                                : dispatch(cancelAppointment(data))
+                        }
+                        text="Cancel"
+                    />
+                    <CustomButton
+                        buttonStyle={styles.noContainerStyle}
+                        textStyle={styles.noTextStyle}
+                        onPress={() =>
+                            sameDay
+                                ? handleSameDay()
+                                : navigation.navigate('RescheduleVisit', {
+                                      visit,
+                                      date,
+                                      navigation,
+                                      uid,
+                                      calendarID,
+                                  })
+                        }
+                        text="Reschedule"
+                    />
+                </View>
             </View>
         </View>
     );

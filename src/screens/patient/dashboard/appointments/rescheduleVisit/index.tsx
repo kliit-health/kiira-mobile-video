@@ -8,7 +8,7 @@ import {
     getAppointmentsByDay,
     getAppointmentDates,
     getAppointmentsForToday,
-} from './action';
+} from '~/redux/reducers/appointments';
 import { generateDateInfo } from '~/utils/helper';
 import styles from './style';
 import Constant from '~/utils/constants';
@@ -25,17 +25,10 @@ import {
 
 const RescheduleVisit = props => {
     const { navigation, visit } = props.navigation.state.params;
-    const {
-        calendarID,
-        expert,
-        uid,
-        id,
-        appointmentType: { appointmentType },
-    } = visit;
+    const { calendarID, expert, uid, id, appointmentTypeID } = visit;
 
-    const expertData = useSelector(state => state.expertProfile.expertData);
-
-    const appointmentData = useSelector(state => state.expertSchedule);
+    const expertData = useSelector(state => state.appointments.expertData);
+    const appointmentData = useSelector(state => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(null);
@@ -61,24 +54,24 @@ const RescheduleVisit = props => {
             getAppointmentsForToday({
                 ...current,
                 calendarID,
-                appointmentType,
+                appointmentTypeID,
             }),
         );
         dispatch(
-            getAppointmentsByDay({ ...current, calendarID, appointmentType }),
+            getAppointmentsByDay({ ...current, calendarID, appointmentTypeID }),
         );
         dispatch(
             getAppointmentDates({
                 ...current,
                 calendarID,
                 addMonth,
-                appointmentType,
+                appointmentTypeID,
             }),
         );
     }, []);
 
     const childProps = {
-        appointmentType,
+        appointmentTypeID,
         appointmentData,
         calendarID,
         day,

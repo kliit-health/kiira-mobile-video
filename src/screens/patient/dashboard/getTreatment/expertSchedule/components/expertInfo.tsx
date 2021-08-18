@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, FlatList, Image, ActivityIndicator } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import CustomButton from '~/components/customButton';
 import CustomText from '~/components/customText';
 import { Conditional } from '~/components';
 import { Rating } from 'react-native-elements';
 import styles from '../style';
-import { setAppointmentTime } from '../action';
+import { setAppointmentTime } from '~/redux/reducers/appointments';
 import moment from 'moment';
 
 const ExpertInfo = ({
@@ -22,7 +23,7 @@ const ExpertInfo = ({
     setDay,
     setTime,
 }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: RootState) => state.language);
     const dispatch = useDispatch();
     const { appointments } = appointmentData;
 
@@ -76,18 +77,22 @@ const ExpertInfo = ({
                             </View>
                         </View>
                         <View>
-                            <CustomText style={styles.availability}>
-                                Today's Availability
-                            </CustomText>
-                            <Conditional if={appointments.today.length}>
+                            <Conditional if={appointments.current.length}>
+                                <CustomText style={styles.availability}>
+                                    {appointments.current[0]
+                                        ? `Next Availability ${moment(
+                                              appointments.current[0].time,
+                                          ).format('ddd ll')}`
+                                        : ''}
+                                </CustomText>
+                            </Conditional>
+                            <Conditional if={appointments.current.length}>
                                 <View
                                     style={{ marginLeft: -90, marginRight: 90 }}
                                 >
                                     <FlatList
                                         showsHorizontalScrollIndicator={false}
-                                        data={
-                                            appointmentData.appointments.today
-                                        }
+                                        data={appointments.current}
                                         horizontal={true}
                                         decelerationRate={'fast'}
                                         renderItem={({ item, index }) => {
@@ -137,7 +142,7 @@ const ExpertInfo = ({
                                     />
                                 </View>
                             </Conditional>
-                            <Conditional if={!appointments.today.length}>
+                            <Conditional if={!appointments.current.length}>
                                 <CustomText style={styles.noAvailability}>
                                     No appointments
                                 </CustomText>

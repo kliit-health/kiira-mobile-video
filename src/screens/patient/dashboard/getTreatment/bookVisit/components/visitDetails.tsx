@@ -5,7 +5,9 @@ import moment from 'moment';
 
 const VisitDetails = ({ applyCredit, booked, visitData }) => {
     const {
-        appointmentType: { price, duration },
+        reason: {
+            sessionType: { price, duration },
+        },
     } = visitData;
     return (
         <View style={styles.visitDetailsContainer}>

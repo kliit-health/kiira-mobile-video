@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text, Image } from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import styles, { modifiers } from './style';
 import { Container, Header, TextButton } from '~/components';
 import Conditional from '~/components/conditional';
 import { screenNames } from '~/utils/constants';
-import { getAppointmentsList } from './action';
+import { getAppointmentsList } from '~/redux/reducers/appointments';
 import Appointment from './components/appointment';
 import { generateDateInfo } from '~/utils/helper';
 import moment from 'moment';
@@ -14,18 +15,19 @@ import moment from 'moment';
 const Appointments = ({ navigation }) => {
     const dispatch = useDispatch();
 
-    const userData = useSelector(state => state.user.data);
-    const visitData = useSelector(state => state.appointments);
-    const lang = useSelector(state => state.language);
+    const userData = useSelector((state: RootState) => state.user.data);
+    const visitData = useSelector((state: RootState) => state.appointments);
+    const lang = useSelector((state: RootState) => state.language);
     const [visits, setVisits] = useState(visitData);
+    const { history } = visitData;
 
     useEffect(() => {
         dispatch(getAppointmentsList({ uid: userData.uid }));
     }, []);
 
     useEffect(() => {
-        if (visitData.history.length) {
-            let filtered = visitData.history.filter(visit => {
+        if (history.length) {
+            let filtered = history.filter(visit => {
                 let appointment = moment(visit.time);
                 let now = moment(new Date());
                 if (appointment.diff(now, 'hours') >= -1) {
@@ -53,9 +55,9 @@ const Appointments = ({ navigation }) => {
     const FallBack = () => <View></View>;
 
     return (
-        <Container>
+        <Container styles={{ root: { backgroundColor: '#ECFCFF' } }}>
             <Header
-                title="Upcoming Visits"
+                title="Appointments"
                 onBack={() => navigation.navigate('Home')}
             />
 
@@ -69,6 +71,7 @@ const Appointments = ({ navigation }) => {
                         Platform.OS === 'ios' ? 'never' : 'always'
                     }
                     data={visits}
+                    extraData={visits}
                     decelerationRate={'fast'}
                     renderItem={({ item, index }) => {
                         const date = generateDateInfo(item.time);

@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { getExpertsData, clearExpertProfileState } from './action';
+import {
+    getExpertsData,
+    clearExpertProfileState,
+} from '~/redux/reducers/appointments';
 import styles from './style';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';

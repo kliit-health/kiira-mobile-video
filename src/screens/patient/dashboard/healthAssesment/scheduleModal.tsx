@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { withNavigation } from 'react-navigation';
 import moment from 'moment';
 import {
@@ -47,14 +48,14 @@ const ScheduleModal = ({ navigation }) => {
     const { dates } = appointments;
     const { consentAgreements } = useSelector(state => state.user.data);
 
-    const agreements = useSelector(state => state.agreements);
+    const agreements = useSelector((state: RootState) => state.agreements);
     const hasSigned = consentAgreements.length > 0;
 
     useEffect(() => {
         dispatch(
             getAppointmentDates({
                 ...current,
-                calendarID,
+                calendarID: '5213164',
                 addMonth,
                 appointmentType,
             }),

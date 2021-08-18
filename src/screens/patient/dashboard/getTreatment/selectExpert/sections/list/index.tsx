@@ -16,7 +16,7 @@ const List = ({ data, onCardPress }) => (
 );
 
 const ListItem = props => {
-    const { profileInfo, isOnline, rating, onCardPress } = props;
+    const { profileInfo, rating, onCardPress } = props;
     const {
         firstName,
         lastName,
@@ -37,7 +37,6 @@ const ListItem = props => {
             rating={calculateRating(rating)}
             tags={specialities.slice(0, 3)}
             avatar={profileImageUrl}
-            // online={isOnline}
             onPress={handleCardPress}
         />
     );

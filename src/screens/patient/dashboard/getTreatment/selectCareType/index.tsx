@@ -3,7 +3,7 @@ import { FlatList, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './style';
 import { ListItem, Conditional } from '~/components';
-import { reasonForVisit } from '../expertSchedule/action';
+import { reasonForVisit } from '~/redux/reducers/appointments';
 import { Header, Container } from '~/components';
 import { screenNames } from '~/utils/constants';
 import { getDocumentFromCollection } from '~/utils/firebase';

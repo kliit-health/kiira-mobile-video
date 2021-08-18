@@ -3,11 +3,10 @@ import account from './account';
 import activate from './activate';
 import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
-import appointments from '../../screens/patient/dashboard/appointments/saga';
+import appointments from './appointments';
 import ask from '../../screens/patient/dashboard/ask/saga';
 import askExpert from '../../screens/provider/ask/saga';
 import assessment from './assessment';
-import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/saga';
 import chat from '../../screens/patient/dashboard/ask/chat/saga';
 import chatExpert from '../../screens/provider/ask/chat/saga';
 import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/saga';
@@ -15,7 +14,6 @@ import clientMedicalHistory from './medicalHistory';
 import expertAppointments from '../../screens/provider/appointments/saga';
 import expertPatients from '../../screens/provider/patients/saga';
 import expertProfile from '../../screens/common/expertProfile/saga';
-import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/saga';
 import experts from './experts';
 import favoriteExperts from './favoriteExperts';
 import forgotPassword from './forgotPassword';
@@ -30,7 +28,6 @@ import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
 import questions from './questions';
-import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/saga';
 import settingExpert from '../../screens/provider/account/settings/saga';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
@@ -49,7 +46,6 @@ export default function* rootSaga() {
         askExpert(),
         ask(),
         assessment(),
-        bookVisit(),
         chat(),
         chatExpert(),
         chooseExpert(),
@@ -57,7 +53,6 @@ export default function* rootSaga() {
         expertAppointments(),
         expertPatients(),
         expertProfile(),
-        expertSchedule(),
         experts(),
         favoriteExperts(),
         forgotPassword(),
@@ -72,7 +67,6 @@ export default function* rootSaga() {
         plans(),
         privacyPolicy(),
         questions(),
-        reschedule(),
         settingExpert(),
         subscription(),
         termsAndConditions(),

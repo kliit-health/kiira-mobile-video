@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import Constant, { text, colors } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices';
-import { text } from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -111,17 +110,16 @@ const styles = StyleSheet.create({
     },
 
     myRecentExpertContainerStyle: {
+        flex: 1,
         alignItems: 'flex-start',
         backgroundColor: 'white',
-        width: metrics.width * 0.85,
-        borderRadius: 15,
+        borderRadius: 10,
         shadowColor: 'rgba(0,0,0, .4)', // IOS
         shadowOffset: { height: 13, width: 1 }, // IOS
         shadowOpacity: 1, // IOS
         shadowRadius: 10, //IOS
         elevation: 2, // Android
-        margin: 15,
-        padding: 15,
+        overflow: 'hidden',
     },
 
     parentContainerStyle: {
@@ -147,35 +145,30 @@ const styles = StyleSheet.create({
 
     expertContainer: {
         flexDirection: smallScreen ? 'column' : 'row',
-        alignSelf: 'center',
     },
 
     expertImage: {
-        width: smallScreen ? 90 : 100,
-        height: smallScreen ? 90 : 100,
+        width: 68,
+        height: 68,
         padding: 2,
         borderRadius: 60,
-        borderWidth: 2,
+        borderWidth: 1,
+        borderColor: 'black',
         margin: 5,
-        borderColor: Constant.App.colors.blueColor,
     },
 
     expertImageContainer: {
         flexDirection: 'row',
         margin: 10,
         alignSelf: 'center',
+        justifyContent: 'flex-start',
         zIndex: 1,
     },
 
     expertName: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-
-    expertNameTextStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: 35,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        width: '100%',
     },
 
     expertPrescriberImage: {
@@ -189,22 +182,21 @@ const styles = StyleSheet.create({
     },
 
     expertProfession: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginVertical: 5,
+        marginVertical: 10,
     },
 
     expertProfessionTextStyle: {
-        fontSize: Constant.App.textSize.xxlarge,
+        fontSize: text.size.regular,
         color: Constant.App.colors.blueGrey,
+        fontFamily: text.fontFamily.poppinsMedium,
         marginRight: 10,
     },
 
     expertNameTextStyle: {
         flex: 1,
         marginTop: metrics.height * 0.025,
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        fontSize: text.size.xLarge,
+        fontFamily: text.fontFamily.poppinsRegular,
     },
 
     expertRatingImage: {
@@ -229,20 +221,21 @@ const styles = StyleSheet.create({
 
     noContainerStyle: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+        borderRadius: 10,
         padding: Constant.App.dimensions.btnPaddingGlobal,
-        width: metrics.width - childPadding,
+        width: '45%',
         backgroundColor: Constant.App.colors.whiteColor,
         marginTop: metrics.height * 0.01,
-        borderColor: Constant.App.colors.blueColor,
+        borderColor: colors.lightGrey,
         borderWidth: 1,
+        marginBottom: 20,
     },
 
     noTextStyle: {
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.blueColor,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        color: colors.azure,
     },
 
     yesContainerStyle: {
