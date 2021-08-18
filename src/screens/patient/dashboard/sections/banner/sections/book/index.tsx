@@ -5,37 +5,37 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles, { buttonStyles } from './styles';
 
 const Book = () => {
-  const lang = useSelector(state => state.language.book, shallowEqual);
+    const lang = useSelector(state => state.language.book, shallowEqual);
 
-  const handleSchedule = (id: string) => {
-    console.log(id);
-  };
+    const handleSchedule = (id: string) => {
+        console.log(id);
+    };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.description}>{lang.bookVisit}</Text>
-      <View style={styles.actions}>
-        <Button
-          style={buttonStyles}
-          onPress={handleSchedule}
-          title={lang.mentalHealth}
-          id="mentalHealth"
-        />
-        <Button
-          style={buttonStyles}
-          onPress={handleSchedule}
-          title={lang.primaryCare}
-          id="primaryCare"
-        />
-        <Button
-          style={buttonStyles}
-          onPress={handleSchedule}
-          title={lang.womensHealth}
-          id="womensHealth"
-        />
-      </View>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.description}>{lang.bookVisit}</Text>
+            <View style={styles.actions}>
+                <Button
+                    style={buttonStyles}
+                    onPress={handleSchedule}
+                    title={lang.mentalHealth}
+                    id="mentalHealth"
+                />
+                <Button
+                    style={buttonStyles}
+                    onPress={handleSchedule}
+                    title={lang.primaryCare}
+                    id="primaryCare"
+                />
+                <Button
+                    style={buttonStyles}
+                    onPress={handleSchedule}
+                    title={lang.womensHealth}
+                    id="womensHealth"
+                />
+            </View>
+        </View>
+    );
 };
 
 export default Book;

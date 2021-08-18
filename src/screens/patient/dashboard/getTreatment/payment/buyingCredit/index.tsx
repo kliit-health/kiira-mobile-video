@@ -112,12 +112,8 @@ class BuyingCredit extends PureComponent {
             },
         ];
 
-        const {
-            cellHeight,
-            marginVertical,
-            marginRight,
-            marginBottom,
-        } = PaymentDropdownDimensions;
+        const { cellHeight, marginVertical, marginRight, marginBottom } =
+            PaymentDropdownDimensions;
         const dropDownViewHeight =
             Math.min(paymentMethods.length, 6) * cellHeight + marginVertical;
 

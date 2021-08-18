@@ -1,5 +1,5 @@
-import {GET_EXPERTS} from '../types';
+import { GET_EXPERTS } from '../types';
 
 export const getExperts = () => ({
-  type: GET_EXPERTS,
+    type: GET_EXPERTS,
 });

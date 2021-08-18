@@ -6,7 +6,7 @@ import CustomButton from '~/components/customButton';
 import CustomText from '~/components/customText';
 import { Rating } from 'react-native-elements';
 import styles from '../style';
-import { setAppointmentTime } from '../action';
+import { setAppointmentTime } from '~/redux/reducers/appointments';
 import moment from 'moment';
 
 const ExpertInfo = ({
@@ -106,9 +106,10 @@ const ExpertInfo = ({
                                                         styles.timeSlotTextStyle
                                                     }
                                                     onPress={() => {
-                                                        var date = generateDateInfo(
-                                                            item,
-                                                        );
+                                                        var date =
+                                                            generateDateInfo(
+                                                                item,
+                                                            );
                                                         setShowShedule(
                                                             !showShedule,
                                                         );

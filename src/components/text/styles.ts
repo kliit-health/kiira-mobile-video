@@ -7,7 +7,7 @@ export default StyleSheet.create({
     default: {
         fontSize: size.regular,
         fontFamily: fontFamily.poppinsRegular,
-        color: colors.black
+        color: colors.black,
     },
 
     small: {
@@ -16,5 +16,5 @@ export default StyleSheet.create({
 
     active: {
         color: colors.primaryBlue,
-    }
-})
+    },
+});

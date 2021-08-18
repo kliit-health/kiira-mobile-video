@@ -35,7 +35,7 @@
     "@reduxjs/toolkit": "^1.4.0",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.9",
-    "@types/react-native": "^0.63.51",
+    "@types/react-native": "^0.64.12",
     "@types/react-redux": "^7.1.16",
     "@types/react-test-renderer": "^17.0.1",
     "acuityscheduling": "^0.1.9",

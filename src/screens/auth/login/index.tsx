@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import CustomText from '../../../components/customText';
 import styles from './style';
 import Constant, { app } from '../../../utils/constants';
@@ -16,12 +17,14 @@ import CustomInputText from '../../../components/customInputText';
 import CustomButton from '../../../components/customButton';
 import { showOrHideModal } from '../../../components/customModal/action';
 import { isEmail } from '../../../utils/helper';
-import { loginApi, resetLoginState } from './action';
+import { loginApi, resetLoginState } from '~/redux/reducers/login';
 import * as Keychain from 'react-native-keychain';
 
 const Login = props => {
-    const lang = useSelector(state => state.language);
-    const loginFailure = useSelector(state => state.login.loginFailure);
+    const lang = useSelector((state: RootState) => state.language);
+    const loginFailure = useSelector(
+        (state: RootState) => state.login.loginFailure,
+    );
     const dispatch = useDispatch();
     const { navigation } = props;
     const { staticImages } = Constant.App;

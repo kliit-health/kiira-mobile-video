@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import { screenNames } from '~/utils/constants';
 import { Modal, TextButton, Header, Container } from '~/components';
 import Logo from '../../../../../svgs/penguin.svg';
@@ -17,11 +18,13 @@ const Agreements = ({ navigation }) => {
         action: 'Agree',
     });
 
-    const user = useSelector(state => state.user.data);
-    const currentRoute = useSelector(state => state.navigator.currentRoute);
-    const agreements = useSelector(state => state.agreements.data);
-    const loading = useSelector(state => state.agreements.loading);
-    const error = useSelector(state => state.agreements.error);
+    const user = useSelector((state: RootState) => state.user.data);
+    const currentRoute = useSelector(
+        (state: RootState) => state.navigator.currentRoute,
+    );
+    const agreements = useSelector((state: RootState) => state.agreements.data);
+    const loading = useSelector((state: RootState) => state.agreements.loading);
+    const error = useSelector((state: RootState) => state.agreements.error);
 
     useEffect(() => {
         if (

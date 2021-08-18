@@ -7,31 +7,33 @@ import styles from './styles';
 import { pending } from './models';
 
 const Pending = () => {
-  const { assessment } = useSelector(state => state.user.data);
+    const { assessment } = useSelector(state => state.user.data);
 
-  return (
-    <View style={styles.pending}>
-      <View style={{ flexDirection: 'row' }}>
-        <VideoChat style={styles.pendingIcon} />
-        <View>
-          <Text style={styles.pendingTitle}>{pending.title}</Text>
-          <Text style={styles.pendingSubTitle}>
-            {moment(assessment.time).format('llll')}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.actionItems}>
-        {pending.items.map(({ title }) => {
-          return (
-            <View key={title} style={{ flexDirection: 'row' }}>
-              <Text style={styles.actionItem}>{'\u2022' + '   '}</Text>
-              <Text style={styles.actionItem}>{title}</Text>
+    return (
+        <View style={styles.pending}>
+            <View style={{ flexDirection: 'row' }}>
+                <VideoChat style={styles.pendingIcon} />
+                <View>
+                    <Text style={styles.pendingTitle}>{pending.title}</Text>
+                    <Text style={styles.pendingSubTitle}>
+                        {moment(assessment.time).format('llll')}
+                    </Text>
+                </View>
             </View>
-          );
-        })}
-      </View>
-    </View>
-  );
+            <View style={styles.actionItems}>
+                {pending.items.map(({ title }) => {
+                    return (
+                        <View key={title} style={{ flexDirection: 'row' }}>
+                            <Text style={styles.actionItem}>
+                                {'\u2022' + '   '}
+                            </Text>
+                            <Text style={styles.actionItem}>{title}</Text>
+                        </View>
+                    );
+                })}
+            </View>
+        </View>
+    );
 };
 
 export default Pending;

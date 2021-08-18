@@ -1,7 +1,7 @@
 export const modifiers = {
-  header: {
-    root: {
-      borderBottomWidth: 0,
+    header: {
+        root: {
+            borderBottomWidth: 0,
+        },
     },
-  },
 };

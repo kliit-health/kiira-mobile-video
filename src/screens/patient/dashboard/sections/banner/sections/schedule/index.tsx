@@ -7,22 +7,22 @@ import styles, { buttonStyles } from './styles';
 import { route } from '~/utils/constants';
 
 const Schedule = ({ navigation }) => {
-  const lang = useSelector(state => state.language.schedule, shallowEqual);
+    const lang = useSelector(state => state.language.schedule, shallowEqual);
 
-  const handleSchedule = () => {
-    navigation.navigate(route.healthAssesmentSchedule);
-  };
+    const handleSchedule = () => {
+        navigation.navigate(route.healthAssesmentSchedule);
+    };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.description}>{lang.schedule}</Text>
-      <Button
-        style={buttonStyles}
-        onPress={handleSchedule}
-        title={lang.letsDoIt}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.description}>{lang.schedule}</Text>
+            <Button
+                style={buttonStyles}
+                onPress={handleSchedule}
+                title={lang.letsDoIt}
+            />
+        </View>
+    );
 };
 
 export default withNavigation(Schedule);

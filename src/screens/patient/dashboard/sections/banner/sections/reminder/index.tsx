@@ -8,26 +8,30 @@ import { route } from '~/utils/constants';
 import styles, { buttonStyles } from './styles';
 
 const Reminder = ({ navigation }) => {
-  const lang = useSelector(state => state.language.reminder, shallowEqual);
-  const assessment = useSelector(state => state.user.data.assessment);
+    const lang = useSelector(state => state.language.reminder, shallowEqual);
+    const assessment = useSelector(state => state.user.data.assessment);
 
-  const handleView = () => {
-    navigation.navigate(route.appointments);
-  };
+    const handleView = () => {
+        navigation.navigate(route.appointments);
+    };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.description}>{lang.nexAppointment}</Text>
-      <View style={styles.appointment}>
-        {assessment && (
-          <Text style={styles.time}>
-            {moment(assessment.time).format('llll')}
-          </Text>
-        )}
-        <Button style={buttonStyles} onPress={handleView} title={lang.view} />
-      </View>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.description}>{lang.nexAppointment}</Text>
+            <View style={styles.appointment}>
+                {assessment && (
+                    <Text style={styles.time}>
+                        {moment(assessment.time).format('llll')}
+                    </Text>
+                )}
+                <Button
+                    style={buttonStyles}
+                    onPress={handleView}
+                    title={lang.view}
+                />
+            </View>
+        </View>
+    );
 };
 
 export default withNavigation(Reminder);

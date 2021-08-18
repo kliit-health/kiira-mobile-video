@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     ScrollView,
     View,
@@ -7,8 +7,10 @@ import {
     Image,
     TouchableOpacity,
     ActivityIndicator,
+    Platform,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import CustomButton from '../../../../../../components/customButton';
 import CustomText from '../../../../../../components/customText';
 import styles from '../style';
@@ -19,7 +21,7 @@ import {
     setAppointmentDay,
     setAppointmentTime,
     getAppointmentsByDay,
-} from '../action';
+} from '~/redux/reducers/appointments';
 
 const { staticImages } = Constant.App;
 
@@ -41,24 +43,29 @@ const SheduleModal = ({
     const dispatch = useDispatch();
     const { uid } = navigation.state.params;
     const {
-        appointmentType: { appointmentType },
+        appointments,
+        reason: {
+            sessionType: { appointmentTypeID },
+        },
     } = appointmentData;
 
-    const { dates } = useSelector(state => state.expertSchedule);
+    const { dates } = useSelector((state: RootState) => state.appointments);
 
     const handleModalToggle = () => {
-        setShowShedule(!showShedule);
-        setSelectedDate(dates[0].date);
-        const firstAvaliable = generateDateInfo(dates[0].date);
-        setDay(dates[0].date);
+        if (dates.length) {
+            setShowShedule(!showShedule);
+            setSelectedDate(dates[0].date);
+            const firstAvaliable = generateDateInfo(dates[0].date);
 
-        dispatch(
-            getAppointmentsByDay({
-                ...firstAvaliable,
-                calendarID,
-                appointmentType,
-            }),
-        );
+            setDay(dates[0].date);
+            dispatch(
+                getAppointmentsByDay({
+                    ...firstAvaliable,
+                    calendarID,
+                    appointmentTypeID,
+                }),
+            );
+        }
     };
 
     return (
@@ -116,6 +123,7 @@ const SheduleModal = ({
                                 extraData={selectedDate}
                                 renderItem={({ item, index }) => {
                                     item = generateDateInfo(item.date);
+
                                     return (
                                         <View
                                             style={{
@@ -129,10 +137,9 @@ const SheduleModal = ({
                                                 style={
                                                     selectedDate === item.date
                                                         ? {
-                                                              color:
-                                                                  Constant.App
-                                                                      .colors
-                                                                      .blueColor,
+                                                              color: Constant
+                                                                  .App.colors
+                                                                  .blueColor,
                                                           }
                                                         : { color: 'black' }
                                                 }
@@ -155,7 +162,7 @@ const SheduleModal = ({
                                                         getAppointmentsByDay({
                                                             ...item,
                                                             calendarID,
-                                                            appointmentType,
+                                                            appointmentTypeID,
                                                         }),
                                                     );
                                                     setSelectedDate(item.date);
@@ -174,10 +181,9 @@ const SheduleModal = ({
                                                 style={
                                                     selectedDate === item.date
                                                         ? {
-                                                              color:
-                                                                  Constant.App
-                                                                      .colors
-                                                                      .blueColor,
+                                                              color: Constant
+                                                                  .App.colors
+                                                                  .blueColor,
                                                           }
                                                         : { color: 'black' }
                                                 }

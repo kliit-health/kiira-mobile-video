@@ -5,7 +5,7 @@
 const ifFunction = f => (f instanceof Function ? f() : f);
 
 const switchcase = cases => defaultCase => key =>
-	cases.hasOwnProperty(key) ? cases[key] : defaultCase;
+    cases.hasOwnProperty(key) ? cases[key] : defaultCase;
 
 export const switchCase = cases => defaultCase => key =>
-	ifFunction(switchcase(cases)(defaultCase)(key));
+    ifFunction(switchcase(cases)(defaultCase)(key));

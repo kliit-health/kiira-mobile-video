@@ -1,46 +1,44 @@
 import React from 'react';
-import {View, Linking, Text} from 'react-native';
-import {useSelector} from 'react-redux';
-import {Header, Container, TextButton} from '~/components';
+import { View, Linking, Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
+import { Header, Container, TextButton } from '~/components';
 import Image from 'react-native-fast-image';
-import {screenNames} from '~/utils/constants';
-import styles, {modifiers} from './styles';
+import { screenNames } from '~/utils/constants';
+import { icons } from '~/utils/constants';
 
-const Help = ({navigation}) => {
-  // const {appScreen} = useSelector((state) => state.authLoading);
-  const lang = useSelector((state) => state.language);
+import styles, { modifiers } from './styles';
 
-  const handleBack = () => {
-    navigation.goBack();
-  };
+const Help = ({ navigation }) => {
+    const lang = useSelector((state: RootState) => state.language);
 
-  const handleAsk = () => {
-    // if (appScreen && appScreen.currentScreen === screenNames.Help) {
-    Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
-    setTimeout(() => {
-      navigation.navigate(
-        appScreen.prevScreen ? appScreen.prevScreen : screenNames.Help,
-      );
-    }, 200);
-    // }
-  };
+    const handleBack = () => {
+        navigation.goBack();
+    };
 
-  return (
-    <Container>
-      <Header title={lang.help.title} onBack={handleBack} />
-      <View style={styles.imageContainer}>
-        <Image
-          source={require('../../../../assets/logo-sm.png')}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View>
-      <Text style={styles.question}>{lang.help.question}</Text>
-      <TextButton styles={modifiers.button} onPress={handleAsk}>
-        {lang.help.ask}
-      </TextButton>
-    </Container>
-  );
+    const handleAsk = () => {
+        Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
+        setTimeout(() => {
+            navigation.navigate(screenNames.Help);
+        }, 200);
+    };
+
+    return (
+        <Container>
+            <Header title={lang.help.title} onBack={handleBack} />
+            <View>
+                <Image
+                    source={icons.logoHorizontal}
+                    style={styles.logo}
+                    resizeMode="contain"
+                />
+            </View>
+            <Text style={styles.question}>{lang.help.question}</Text>
+            <TextButton styles={modifiers.button} onPress={handleAsk}>
+                {lang.help.ask}
+            </TextButton>
+        </Container>
+    );
 };
 
 export default Help;

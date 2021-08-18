@@ -1,1 +1,1 @@
-export { default as Prescriber } from "./prescriber";
+export { default as Prescriber } from './prescriber';
