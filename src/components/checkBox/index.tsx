@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { shape, object, bool, string, func } from 'prop-types';
 import { Text, TouchableOpacity } from 'react-native';
-import CheckedBox from '../../svgs/checked_box.svg';
-import Box from '../../svgs/box.svg';
+import CheckedBox from '~/svgs/checked_box.svg';
+import Box from '~/svgs/box.svg';
 import defaultStyles from './styles';
 import { colors } from '../../utils/constants';
 

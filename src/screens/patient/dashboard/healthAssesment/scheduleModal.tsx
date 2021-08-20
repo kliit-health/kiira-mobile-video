@@ -40,7 +40,7 @@ const ScheduleModal = ({ navigation }) => {
         addMonth,
         details: {
             calendarID,
-            appointmentType: { appointmentType },
+            appointmentType: { appointmentTypeID },
         },
         appointments,
     } = useSelector(selectAssessment);
@@ -57,7 +57,7 @@ const ScheduleModal = ({ navigation }) => {
                 ...current,
                 calendarID: '5213164',
                 addMonth,
-                appointmentType,
+                appointmentTypeID,
             }),
         );
     }, []);
@@ -69,7 +69,7 @@ const ScheduleModal = ({ navigation }) => {
                 getAppointmentsByDay({
                     ...dates[0],
                     calendarID,
-                    appointmentType,
+                    appointmentTypeID,
                 }),
             );
         }
@@ -85,7 +85,7 @@ const ScheduleModal = ({ navigation }) => {
             getAppointmentsByDay({
                 ...item,
                 calendarID,
-                appointmentType,
+                appointmentTypeID,
             }),
         );
         setTime(null);
@@ -142,20 +142,20 @@ const ScheduleModal = ({ navigation }) => {
                                         {item.month}
                                     </Text>
                                     <Button
-                                        containerStyle={
-                                            day === item.date
-                                                ? styles.dateSelectedContainerStyle
-                                                : styles.dateContainerStyle
-                                        }
-                                        textStyle={
-                                            day === item.date
-                                                ? styles.dateSelectedTextStyle
-                                                : styles.dateTextStyle
-                                        }
+                                        style={{
+                                            container:
+                                                day === item.date
+                                                    ? styles.dateSelectedContainerStyle
+                                                    : styles.dateContainerStyle,
+                                            title:
+                                                day === item.date
+                                                    ? styles.dateSelectedTextStyle
+                                                    : styles.dateTextStyle,
+                                        }}
                                         onPress={() =>
                                             handleDateSelection(item)
                                         }
-                                        text={item.day}
+                                        title={item.day}
                                     />
                                     <Text
                                         style={

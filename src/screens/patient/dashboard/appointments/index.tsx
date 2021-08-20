@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, Image } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import styles, { modifiers } from './style';
-import { Container, Header, TextButton } from '~/components';
+import { Container, Header, TextButton, Row, Text } from '~/components';
 import Conditional from '~/components/conditional';
 import { screenNames } from '~/utils/constants';
 import { getAppointmentsList } from '~/redux/reducers/appointments';
@@ -19,6 +19,7 @@ const Appointments = ({ navigation }) => {
     const visitData = useSelector((state: RootState) => state.appointments);
     const lang = useSelector((state: RootState) => state.language);
     const [visits, setVisits] = useState(visitData);
+    const [pastSelected, setPastSelected] = useState(false);
     const { history } = visitData;
 
     useEffect(() => {
@@ -60,7 +61,12 @@ const Appointments = ({ navigation }) => {
                 title="Appointments"
                 onBack={() => navigation.navigate('Home')}
             />
-
+            <Row options={'verticalPad grey absolute'}>
+                <Text options={pastSelected ? 'inactive' : 'active blueBorder'}>
+                    UPCOMING VISITS
+                </Text>
+                <Text>PAST VISITS</Text>
+            </Row>
             <Conditional if={visits.length > 0}>
                 <FlatList
                     showsVerticalScrollIndicator={false}

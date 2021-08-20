@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { combineStyles } from '~/utils/functions/combineStyles';
 import styles from './styles';
 
-const KiiraText = ({ children, options }) => {
+const KiiraText = ({ children, options = null }) => {
     const [optional, setOptional] = useState({});
     useEffect(() => {
         setOptional(combineStyles(options, styles));

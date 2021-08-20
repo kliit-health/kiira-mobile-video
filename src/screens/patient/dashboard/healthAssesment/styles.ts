@@ -8,7 +8,7 @@ let titlePaddingValue = metrics.width * 0.05;
 export default StyleSheet.create({
     actionItem: {
         marginTop: smallScreen ? 0 : 5,
-        fontSize: smallScreen ? text.size.Large : 17,
+        fontSize: smallScreen ? text.size.large : 17,
         fontFamily: smallScreen
             ? text.fontFamily.poppinsRegular
             : text.fontFamily.poppinsLight,
@@ -142,7 +142,7 @@ export default StyleSheet.create({
 
     pendingSubTitle: {
         color: colors.purple,
-        fontSize: text.size.Small,
+        fontSize: text.size.small,
         fontFamily: text.fontFamily.poppinsSemiBold,
         paddingHorizontal: 20,
         paddingTop: 5,
@@ -178,7 +178,7 @@ export default StyleSheet.create({
     dateContainerStyle: {
         borderColor: Constant.App.colors.blueColor,
         borderWidth: 1,
-        padding: 8,
+        borderRadius: 50,
         backgroundColor: Constant.App.colors.whiteColor,
         marginVertical: metrics.height * 0.015,
         elevation: 1,
@@ -188,28 +188,21 @@ export default StyleSheet.create({
         borderColor: Constant.App.colors.blueColor,
         borderWidth: 1,
         borderRadius: 50,
-        padding: 8,
         backgroundColor: Constant.App.colors.blueColor,
         marginVertical: metrics.height * 0.015,
         elevation: 1,
     },
 
     dateTextStyle: {
-        textAlign: 'center',
         color: Constant.App.colors.blackColor,
-        width: 18,
-        height: 18,
         elevation: 1,
-        fontSize: 14,
+        fontSize: text.size.regular,
     },
 
     dateSelectedTextStyle: {
-        textAlign: 'center',
         color: Constant.App.colors.whiteColor,
-        width: 18,
-        height: 18,
         elevation: 1,
-        fontSize: 14,
+        fontSize: text.size.regular,
     },
 
     dateTimeSlotContainerStyle: {

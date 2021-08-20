@@ -11,6 +11,76 @@ var childPadding = parentPadding + childPaddingValue * 2;
 export const AVATAR_SIZE = 111;
 
 const styles = StyleSheet.create({
+    active: {
+        alignSelf: 'center',
+        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+        padding: Constant.App.dimensions.btnPaddingGlobal,
+        width: metrics.width - childPadding,
+        backgroundColor: Constant.App.colors.blueColor,
+        marginTop: metrics.height * 0.03,
+    },
+
+    activeText: {
+        textAlign: 'center',
+        fontSize: Constant.App.textSize.Normal,
+        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: Constant.App.colors.whiteColor,
+    },
+
+    appointment: {
+        alignSelf: 'center',
+        backgroundColor: colors.blueGrey,
+        padding: 10,
+        overflow: 'hidden',
+        width: '100%',
+    },
+    appointmentButtonContainer: {
+        alignSelf: 'center',
+        borderRadius: 10,
+        padding: Constant.App.dimensions.btnPaddingGlobal,
+        width: '45%',
+        backgroundColor: Constant.App.colors.whiteColor,
+        marginTop: metrics.height * 0.01,
+        borderColor: colors.lightGrey,
+        borderWidth: 1,
+        marginBottom: 20,
+    },
+
+    appointmentButtonText: {
+        textAlign: 'center',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        color: colors.azure,
+    },
+
+    appointmentContainer: {
+        alignSelf: 'center',
+        marginHorizontal: 20,
+        marginVertical: 50,
+        paddingBottom: 30,
+        width: '100%',
+        alignItems: 'flex-start',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        overflow: 'hidden',
+        borderColor: colors.blueGrey,
+        borderWidth: 1,
+    },
+
+    appointmentDate: {
+        color: 'white',
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.xxLarge,
+        textAlign: 'center',
+    },
+
+    appointmentModify: {
+        width: '80%',
+        flexDirection: 'row',
+        marginLeft: 20,
+        justifyContent: 'space-between',
+    },
+
     cancelTextStyle: {
         textAlign: 'left',
         color: Constant.App.colors.blackColor,
@@ -49,6 +119,15 @@ const styles = StyleSheet.create({
         fontSize: Constant.App.textSize.xLarge,
         fontFamily: Constant.App.fontFamily.headerMedium,
         fontWeight: '500',
+    },
+
+    disabled: {
+        alignSelf: 'center',
+        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+        padding: Constant.App.dimensions.btnPaddingGlobal,
+        width: metrics.width - childPadding,
+        backgroundColor: colors.lightGrey,
+        marginTop: metrics.height * 0.03,
     },
 
     genderTextStyle: {
@@ -110,15 +189,9 @@ const styles = StyleSheet.create({
     },
 
     myRecentExpertContainerStyle: {
-        flex: 1,
         alignItems: 'flex-start',
         backgroundColor: 'white',
         borderRadius: 10,
-        shadowColor: 'rgba(0,0,0, .4)', // IOS
-        shadowOffset: { height: 13, width: 1 }, // IOS
-        shadowOpacity: 1, // IOS
-        shadowRadius: 10, //IOS
-        elevation: 2, // Android
         overflow: 'hidden',
     },
 
@@ -217,41 +290,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 1, // IOS
         shadowRadius: 10, //IOS
         elevation: 2, // Android
-    },
-
-    noContainerStyle: {
-        alignSelf: 'center',
-        borderRadius: 10,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
-        width: '45%',
-        backgroundColor: Constant.App.colors.whiteColor,
-        marginTop: metrics.height * 0.01,
-        borderColor: colors.lightGrey,
-        borderWidth: 1,
-        marginBottom: 20,
-    },
-
-    noTextStyle: {
-        textAlign: 'center',
-        fontSize: text.size.regular,
-        fontFamily: text.fontFamily.poppinsRegular,
-        color: colors.azure,
-    },
-
-    yesContainerStyle: {
-        alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
-        width: metrics.width - childPadding,
-        backgroundColor: Constant.App.colors.blueColor,
-        marginTop: metrics.height * 0.03,
-    },
-
-    yesTextStyle: {
-        textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.whiteColor,
     },
 
     centeredView: {

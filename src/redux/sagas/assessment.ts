@@ -61,7 +61,7 @@ function* getAppointmentsForDay(data) {
     const isToday = false;
     yield put(toggleLoading());
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const response = yield getAppointmentsByDayAsync(payload, isToday);
         yield put(setAppointmentTimes(response.current));
         yield put(hideApiLoader());
@@ -77,8 +77,9 @@ function* getAppointmentsForDay(data) {
 function* getAllAppointmentDates(data) {
     const lang = yield select(state => state.language);
     const { payload } = data;
+    console.log('DATA', data);
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const response = yield getAppointmentDatesAsync(payload);
         yield put(setAppointmentDates(response));
 

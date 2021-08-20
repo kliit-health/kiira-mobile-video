@@ -464,7 +464,7 @@ class Setting extends PureComponent {
                 </View>
 
                 <View style={styles.birthDayContainerStyle}>
-                    <DatePicker
+                    {/* <DatePicker
                         selectedDate={dob}
                         placeHolder={lang.addProfileData.yourBirthDay}
                         textStyle={styles.birthDayTextStyle}
@@ -474,6 +474,13 @@ class Setting extends PureComponent {
                                 dob: date,
                             });
                         }}
+                    /> */}
+                    <CustomInputText
+                        onChangeText={value => this.setState({ dob: value })}
+                        placeholder={'DOB'}
+                        value={dob}
+                        style={styles.birthDayTextStyle}
+                        placeholderTextColor={Constant.App.colors.blackColor}
                     />
                 </View>
 
