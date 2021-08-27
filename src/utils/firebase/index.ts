@@ -5,6 +5,7 @@ import storage from '@react-native-firebase/storage';
 import { displayConsole } from '../helper';
 import moment from 'moment';
 import Constant, { collections, urls } from '../constants';
+import { Login } from '~/typescript/types';
 
 var voucher_codes = require('voucher-code-generator');
 
@@ -25,7 +26,7 @@ export function getPlans(plan) {
     }
 }
 
-export function loginInWithFirebase(obj) {
+export function loginInWithFirebase(obj: Login) {
     try {
         return auth()
             .signInWithEmailAndPassword(obj.email, obj.password)
@@ -152,6 +153,10 @@ export function uploadImage(obj, success?, error?) {
 }
 
 export async function getAppointmentsAsync(uid) {
+    console.log(auth.PhoneAuthState);
+    await auth()
+        .currentUser.getIdTokenResult()
+        .then(result => console.log(result));
     try {
         const document = firestore().collection('appointments').doc(uid);
         const appointments = await document.get();

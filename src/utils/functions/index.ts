@@ -10,3 +10,4 @@ export { calculateRating } from './calculateRating';
 export { searchObject } from './searchObject';
 export { formatLanguages } from './formatLanguages';
 export { getNested } from './getNested';
+export { handleNavigation } from './handleNavigation';

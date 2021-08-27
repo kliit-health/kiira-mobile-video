@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Platform, Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+import { setCallConfig, getCallToken } from '~/redux/actions/twillio';
+import { RootState } from '~/redux/reducers';
 import FastImage from 'react-native-fast-image';
 import {
     Bold,
@@ -13,15 +16,25 @@ import {
 import { showOrHideModal } from '~/components/customModal/action';
 import styles from '../style';
 import { useDispatch } from 'react-redux';
-import { cancelAppointment } from '~/redux/reducers/appointments';
-import constants from '~/utils/constants';
+import { cancelAppointment, setVisit } from '~/redux/reducers/appointments';
+import constants, { colors } from '~/utils/constants';
 import moment from 'moment';
-import { Camera } from '~/svgs';
+import { CameraBlack } from '~/svgs';
+
+import {
+    checkMultiple,
+    request,
+    requestMultiple,
+    PERMISSIONS,
+    RESULTS,
+} from 'react-native-permissions';
 
 const Appointment = ({ visit, date, navigation }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState(false);
+    const user = useSelector((state: RootState) => state.user);
+    const callConfig = useSelector((state: RootState) => state.twillio);
     const { staticImages } = constants.App;
 
     const { uid, calendarID, reason, id, expert, prepaid } = visit;
@@ -40,6 +53,86 @@ const Appointment = ({ visit, date, navigation }) => {
     );
 
     const sameDay = daysUntilVisit < 1;
+
+    useEffect(() => {
+        dispatch(setVisit(visit));
+        checkPermissions();
+    }, []);
+
+    const checkPermissions = (callback?) => {
+        const iosPermissions = [
+            PERMISSIONS.IOS.CAMERA,
+            PERMISSIONS.IOS.MICROPHONE,
+        ];
+        const androidPermissions = [
+            PERMISSIONS.ANDROID.CAMERA,
+            PERMISSIONS.ANDROID.RECORD_AUDIO,
+        ];
+        checkMultiple(
+            Platform.OS === 'ios' ? iosPermissions : androidPermissions,
+        ).then(statuses => {
+            const [CAMERA, AUDIO] =
+                Platform.OS === 'ios' ? iosPermissions : androidPermissions;
+            if (
+                statuses[CAMERA] === RESULTS.UNAVAILABLE ||
+                statuses[AUDIO] === RESULTS.UNAVAILABLE
+            ) {
+                Alert.alert(
+                    'Error',
+                    'Hardware to support video calls is not available',
+                );
+            } else if (
+                statuses[CAMERA] === RESULTS.BLOCKED ||
+                statuses[AUDIO] === RESULTS.BLOCKED
+            ) {
+                Alert.alert(
+                    'Error',
+                    'Permission to access hardware was blocked, please grant manually',
+                );
+            } else {
+                if (
+                    statuses[CAMERA] === RESULTS.DENIED &&
+                    statuses[AUDIO] === RESULTS.DENIED
+                ) {
+                    requestMultiple(
+                        Platform.OS === 'ios'
+                            ? iosPermissions
+                            : androidPermissions,
+                    ).then(newStatuses => {
+                        if (
+                            newStatuses[CAMERA] === RESULTS.GRANTED &&
+                            newStatuses[AUDIO] === RESULTS.GRANTED
+                        ) {
+                            callback && callback();
+                        } else {
+                            Alert.alert(
+                                'Error',
+                                'One of the permissions was not granted',
+                            );
+                        }
+                    });
+                } else if (
+                    statuses[CAMERA] === RESULTS.DENIED ||
+                    statuses[AUDIO] === RESULTS.DENIED
+                ) {
+                    request(
+                        statuses[CAMERA] === RESULTS.DENIED ? CAMERA : AUDIO,
+                    ).then(result => {
+                        if (result === RESULTS.GRANTED) {
+                            callback && callback();
+                        } else {
+                            Alert.alert('Error', 'Permission not granted');
+                        }
+                    });
+                } else if (
+                    statuses[CAMERA] === RESULTS.GRANTED ||
+                    statuses[AUDIO] === RESULTS.GRANTED
+                ) {
+                    callback && callback();
+                }
+            }
+        });
+    };
 
     const handleSameDay = () =>
         dispatch(
@@ -63,16 +156,22 @@ const Appointment = ({ visit, date, navigation }) => {
     };
 
     const handleVisitStart = () => {
-        navigation.navigate('Visit', {
-            uid: visit.expert.uid,
-            visit,
+        dispatch(
+            setCallConfig({
+                ...callConfig,
+                userName: uid,
+                roomName: uid,
+            }),
+        );
+        checkPermissions(() => {
+            dispatch(getCallToken({ navigation, uid }));
         });
     };
 
     const VisitTime = () => {
         return (
             <View style={styles.appointment}>
-                <Text options={'xxlarge white horizontalPad'}>
+                <Text options={'xxlarge white pad_h'}>
                     {moment(date.date).format('llll')}
                 </Text>
             </View>
@@ -99,7 +198,7 @@ const Appointment = ({ visit, date, navigation }) => {
                 </View>
                 <View style={{ width: '100%', marginTop: 15 }}>
                     <View style={styles.expertName}>
-                        <Text options={'large'}>
+                        <Text options={'xLarge'}>
                             {`${visit.expert.firstName} ${visit.expert.lastName}`}
                         </Text>
                     </View>
@@ -141,34 +240,39 @@ const Appointment = ({ visit, date, navigation }) => {
     const VisitDetails = () => {
         return (
             <>
-                <Row options={'horizontalPad'}>
-                    <Camera />
-                    <Text options={'horizontalPad large'}>
+                <Row options={'pad_h'}>
+                    <CameraBlack />
+                    <Text options={'pad_h large'}>
                         <Bold>30 min. Virtual Visit</Bold>
                     </Text>
                 </Row>
 
-                <Text options={'horizontalPad verticalPad large'}>
-                    Your visit should be starting in <Bold>15 minutes. </Bold>
-                    Please return to this screen and enter the waiting room at
-                    least 5 minutes before your appointment time.
+                <Text options={'pad_h sm_pad_v large light'}>
+                    {`Your visit should be starting\n${
+                        daysUntilVisit > 0
+                            ? `in ${Math.round(daysUntilVisit)} days.`
+                            : 'today.'
+                    } Please return to this screen and enter the waiting room at least 5 minutes before your appointment time.`}
                 </Text>
             </>
         );
     };
 
     const Disclaimer = () => (
-        <Row options={'horizontalPad'}>
+        <Row options={'pad_h'}>
             <CheckBox
-                styles={{ root: { alignItems: 'flex-start', marginLeft: 15 } }}
+                styles={{
+                    root: {
+                        alignItems: 'flex-start',
+                        marginLeft: 15,
+                    },
+                }}
                 key={'Certified'}
                 onPress={() => setChecked(!checked)}
                 checked={checked}
             />
-            <Text options={'blue large'}>
-                I certify that I am currently in the state of California and
-                that this consultation will be conducted while within state
-                boundaries.
+            <Text options={'blue large light pad_r'}>
+                {`I certify that I am currently in the state of ${user.data.profileInfo.state.value} and that this consultation will be conducted while within state boundaries.`}
             </Text>
         </Row>
     );
@@ -178,7 +282,6 @@ const Appointment = ({ visit, date, navigation }) => {
             {VisitTime()}
             {ExpertDetails()}
             {ModifyVisit()}
-            <Line />
             {VisitDetails()}
             <Line />
             {Disclaimer()}

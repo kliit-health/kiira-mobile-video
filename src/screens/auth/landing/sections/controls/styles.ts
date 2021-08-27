@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { colors } from '~/utils/constants';
 
 export default StyleSheet.create({
     actions: {
@@ -7,13 +8,28 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-});
 
-export const buttonStyles = StyleSheet.create({
-    root: {
+    container: {
         margin: 10,
+        padding: 5,
+        width: '45%',
     },
+
     text: {
         fontSize: 14,
+    },
+
+    container2: {
+        margin: 10,
+        padding: 5,
+        width: '45%',
+        backgroundColor: colors.white,
+        borderColor: colors.primaryBlue,
+        borderWidth: 1,
+    },
+
+    text2: {
+        fontSize: 14,
+        color: colors.primaryBlue,
     },
 });

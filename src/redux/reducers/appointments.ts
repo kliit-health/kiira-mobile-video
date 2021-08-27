@@ -17,6 +17,7 @@ const initialState = {
         future: [],
         dates: [],
     },
+    visit: {},
 };
 
 export type IAppointments = {
@@ -36,6 +37,7 @@ export type IAppointments = {
         future: Array<string>;
         dates: Array<string>;
     };
+    visit: object;
 };
 
 export const appointmentsSlice = createSlice({
@@ -135,6 +137,12 @@ export const appointmentsSlice = createSlice({
         bookAppointment: (state, action: PayloadAction<object>) => {
             return state;
         },
+        setVisit: (state, action: PayloadAction<object>) => {
+            return {
+                ...state,
+                visit: action.payload,
+            };
+        },
     },
 });
 
@@ -159,6 +167,7 @@ export const {
     fetchAppointments,
     bookAppointment,
     setPrepaid,
+    setVisit,
 } = appointmentsSlice.actions;
 
 export default appointmentsSlice.reducer;

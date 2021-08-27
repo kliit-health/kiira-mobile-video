@@ -1,38 +1,44 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-
-import Container from '~/components/container';
-import Header from '~/components/header';
+import { View, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/redux/reducers';
+import { Container, Header, Row, Text, Button } from '~/components';
+import { handleNavigation } from '~/utils/functions';
+import { images } from '~/utils/constants';
 
 import styles from './styles';
 
-const VisitEnd = ({ navigation }) => {
+const VisitEnd = () => {
+    const lang = useSelector((state: RootState) => state.language);
+
     return (
-        <Container barStyle="dark-content">
-            <Header title="Kiira Videochat" />
-            <Image
-                style={styles.logo}
-                resizeMode="contain"
-                source={require('../../../../../../../assets/logo.png')}
-            />
-            <View style={styles.buttonStyle}>
-                <TouchableOpacity
-                    style={styles.submitButtonStyle}
-                    activeOpacity={0.5}
-                    onPress={() => navigation.navigate('TwillioLogin')}
-                >
-                    <Text style={styles.textStyle}> Return To Visit </Text>
-                </TouchableOpacity>
+        <Container styles={{ root: styles.container }} unformatted>
+            <Header title="Virtual Visit" />
+            <View style={styles.confirmationContainer}>
+                <Image
+                    style={styles.logo}
+                    resizeMode="contain"
+                    source={images.kiiraLogo}
+                />
+                <Text options={'center xxLarge'}>
+                    {lang.appointments.endVisit}
+                </Text>
             </View>
-            <View style={styles.buttonStyle}>
-                <TouchableOpacity
-                    style={styles.submitButtonStyle}
-                    activeOpacity={0.5}
-                    onPress={() => navigation.navigate('VideoRating')}
-                >
-                    <Text style={styles.textStyle}> End Visit </Text>
-                </TouchableOpacity>
-            </View>
+            <Row>
+                <Button
+                    style={{
+                        container: styles.visitReturn,
+                        title: styles.visitReturnText,
+                    }}
+                    title="Return to Visit"
+                    onPress={() => handleNavigation('Appointments')}
+                />
+                <Button
+                    style={{ container: styles.visitEnd }}
+                    title="End Visit"
+                    onPress={() => handleNavigation('VideoRating')}
+                />
+            </Row>
         </Container>
     );
 };

@@ -1,7 +1,9 @@
-import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import { StyleSheet, Platform } from 'react-native';
+import { text, colors, dimensions } from '~/utils/constants';
 import metrics from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
+
+const { size, fontFamily } = text;
 
 let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -23,12 +25,12 @@ const styles = StyleSheet.create({
     forgotPasswordTextStyle: {
         textAlign: 'center',
         marginTop: metrics.height * 0.02,
-        color: Constant.App.colors.blueColor,
-        fontSize: Constant.App.textSize.Medium,
+        color: colors.primaryBlue,
+        fontSize: size.medium,
         width: metrics.width - parentPadding,
         paddingLeft: childPaddingValue,
         paddingRight: childPaddingValue,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        fontFamily: fontFamily.poppinsRegular,
         marginBottom: metrics.height * 0.02,
     },
 
@@ -47,40 +49,39 @@ const styles = StyleSheet.create({
         width: metrics.width - childPadding,
         paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
         marginTop: metrics.height * 0.01,
-        borderBottomColor: Constant.App.colors.blackColor,
+        borderBottomColor: colors.black,
         borderBottomWidth: 0.5,
     },
 
     inputTypeStyle: {
-        color: Constant.App.colors.blackColor,
-        width: metrics.width - parentPadding,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrics.width - childPadding,
     },
 
     inputTypePasswordStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
+        color: colors.black,
+        fontSize: size.regular,
         textAlign: 'left',
         width: metrics.width - childPadding - metrics.width * 0.05,
     },
 
-    loginButtonContainerStyle: {
+    loginButton: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
         width: metrics.width - childPadding,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         marginTop: metrics.height * 0.05,
     },
 
-    loginButtonTextStyle: {
+    loginButtonText: {
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.whiteColor,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.white,
     },
 
     logoStyle: {
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: getStatusBarHeight(),
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         borderRadius: 25,
         overflow: 'hidden',
     },

@@ -31,7 +31,11 @@ const CheckBox = ({ styles: customStyles, checked, onPress, label }) => {
             style={styles.root}
             activeOpacity={1}
         >
-            {checked ? <CheckedBox color={blue} /> : <Box color={gray} />}
+            {checked ? (
+                <CheckedBox color={colors.primaryBlue} />
+            ) : (
+                <Box color={gray} />
+            )}
             <Text style={styles.text}>{label}</Text>
         </TouchableOpacity>
     );

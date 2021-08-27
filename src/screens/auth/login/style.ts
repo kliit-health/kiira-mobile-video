@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Constant, { text, colors } from '~/utils/constants';
+import { text, colors, dimensions } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
 
@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
         padding: smallScreen ? 0 : parentPaddingValue,
     },
 
-    forgotPasswordTextStyle: {
+    forgotPasswordText: {
         textAlign: 'center',
         marginTop: metrics.height * 0.02,
-        color: colors.blue,
+        color: colors.primaryBlue,
         fontSize: text.size.medium,
         width: metrics.width - parentPadding,
         paddingLeft: childPaddingValue,
@@ -60,8 +60,7 @@ const styles = StyleSheet.create({
 
     inputTypeStyle: {
         color: colors.black,
-        width: metrics.width - parentPadding,
-        fontSize: text.size.normal,
+        fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrics.width - childPadding,
@@ -69,23 +68,23 @@ const styles = StyleSheet.create({
 
     inputTypePasswordStyle: {
         color: colors.black,
-        fontSize: text.size.normal,
+        fontSize: text.size.regular,
         textAlign: 'left',
         width: metrics.width - childPadding - metrics.width * 0.05,
     },
 
-    loginButtonContainerStyle: {
+    loginButton: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
         width: metrics.width - childPadding,
-        backgroundColor: colors.blue,
+        backgroundColor: colors.primaryBlue,
         marginTop: metrics.height * 0.05,
     },
 
-    loginButtonTextStyle: {
+    loginButtonText: {
         textAlign: 'center',
-        fontSize: text.size.normal,
+        fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         color: colors.white,
     },

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Image } from 'react-native';
+import { View, FlatList, Image, TouchableOpacity } from 'react-native';
 import ErrorBoundary from 'react-native-error-boundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import styles, { modifiers } from './style';
-import { Container, Header, TextButton, Row, Text } from '~/components';
+import { Container, Header, TextButton, Row, Text, Line } from '~/components';
 import Conditional from '~/components/conditional';
 import { screenNames } from '~/utils/constants';
 import { getAppointmentsList } from '~/redux/reducers/appointments';
@@ -53,7 +53,119 @@ const Appointments = ({ navigation }) => {
         navigation.navigate(destination);
     };
 
+    const handleFuture = () => {
+        setPastSelected(!pastSelected);
+        if (history.length) {
+            let filtered = history.filter(visit => {
+                let appointment = moment(visit.time);
+                let now = moment(new Date());
+                if (appointment.diff(now, 'hours') >= -1) {
+                    return visit;
+                }
+            });
+
+            filtered = filtered.sort((a, b) => {
+                return (
+                    parseInt(moment(a.time).format('x')) -
+                    parseInt(moment(b.time).format('x'))
+                );
+            });
+
+            setVisits(filtered);
+        } else {
+            setVisits([]);
+        }
+    };
+
+    const handlePast = () => {
+        setPastSelected(!pastSelected);
+        if (history.length) {
+            let filtered = history.filter(visit => {
+                let appointment = moment(visit.time);
+                let now = moment(new Date());
+                if (appointment.diff(now, 'hours') < 0) {
+                    return visit;
+                }
+            });
+
+            filtered = filtered.sort((a, b) => {
+                return (
+                    parseInt(moment(a.time).format('x')) -
+                    parseInt(moment(b.time).format('x'))
+                );
+            });
+
+            setVisits(filtered);
+        } else {
+            setVisits([]);
+        }
+    };
+
     const FallBack = () => <View></View>;
+
+    const Tab = ({ text, textOptions, lineOptions, handlePress }) => {
+        return (
+            <Line options={lineOptions}>
+                <TouchableOpacity onPress={handlePress}>
+                    <Text options={textOptions}>{text}</Text>
+                </TouchableOpacity>
+            </Line>
+        );
+    };
+
+    const Tabs = ({ pastSelected }) => {
+        return (
+            <Row options={'pad_v grey absolute grey_br_b'}>
+                <Tab
+                    text={'UPCOMING VISITS'}
+                    lineOptions={
+                        !pastSelected
+                            ? 'bottom blue_br_b small pad_top width_auto'
+                            : 'none small pad_top width_auto'
+                    }
+                    textOptions={
+                        !pastSelected
+                            ? 'active blueBorder pad_bottom tiny regular'
+                            : 'inactive pad_bottom tiny regular'
+                    }
+                    handlePress={handleFuture}
+                />
+                <Tab
+                    text="PAST VISITS"
+                    lineOptions={
+                        pastSelected
+                            ? 'bottom blue_br_b small pad_top width_auto'
+                            : 'none small pad_top width_auto'
+                    }
+                    textOptions={
+                        pastSelected
+                            ? 'active blueBorder pad_bottom tiny regular'
+                            : 'inactive pad_bottom tiny regular'
+                    }
+                    handlePress={handlePast}
+                />
+            </Row>
+        );
+    };
+
+    const NoAppointments = () => {
+        return (
+            <Container>
+                <Image
+                    style={styles.image}
+                    resizeMode="contain"
+                    source={require('../../../../../assets/bell.png')}
+                />
+                <Text style={styles.title}>{lang.appointments.noVisits}</Text>
+                <TextButton
+                    styles={modifiers.button}
+                    onPress={() => handleNavigation(screenNames.requestVisit)}
+                >
+                    {lang.appointments.scheduleAppointment}
+                </TextButton>
+            </Container>
+        );
+    };
 
     return (
         <Container styles={{ root: { backgroundColor: '#ECFCFF' } }}>
@@ -61,12 +173,7 @@ const Appointments = ({ navigation }) => {
                 title="Appointments"
                 onBack={() => navigation.navigate('Home')}
             />
-            <Row options={'verticalPad grey absolute'}>
-                <Text options={pastSelected ? 'inactive' : 'active blueBorder'}>
-                    UPCOMING VISITS
-                </Text>
-                <Text>PAST VISITS</Text>
-            </Row>
+            <Tabs pastSelected={pastSelected} />
             <Conditional if={visits.length > 0}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -77,7 +184,6 @@ const Appointments = ({ navigation }) => {
                         Platform.OS === 'ios' ? 'never' : 'always'
                     }
                     data={visits}
-                    extraData={visits}
                     decelerationRate={'fast'}
                     renderItem={({ item, index }) => {
                         const date = generateDateInfo(item.time);
@@ -99,24 +205,7 @@ const Appointments = ({ navigation }) => {
             </Conditional>
 
             <Conditional if={!visits.length}>
-                <Container>
-                    <Image
-                        style={styles.image}
-                        resizeMode="contain"
-                        source={require('../../../../../assets/bell.png')}
-                    />
-                    <Text style={styles.title}>
-                        {lang.appointments.noVisits}
-                    </Text>
-                    <TextButton
-                        styles={modifiers.button}
-                        onPress={() =>
-                            handleNavigation(screenNames.requestVisit)
-                        }
-                    >
-                        {lang.appointments.scheduleAppointment}
-                    </TextButton>
-                </Container>
+                <NoAppointments />
             </Conditional>
         </Container>
     );

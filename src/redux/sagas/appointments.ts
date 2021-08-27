@@ -173,14 +173,15 @@ function* cancelTheAppointment({ payload }) {
 }
 
 function* setExpertRating({ payload }) {
-    const { navigation } = payload;
-    try {
-        yield setVideoVisitRating(payload);
-    } catch (error) {
-        console.error(error);
-    }
+    console.log(payload);
+    // const { navigation } = payload;
+    // try {
+    //     yield setVideoVisitRating(payload);
+    // } catch (error) {
+    //     console.error(error);
+    // }
 
-    navigation.navigate('BottomTab');
+    // navigation.navigate('BottomTab');
 }
 
 function* setAppointment({ payload }) {

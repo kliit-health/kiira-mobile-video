@@ -1,5 +1,6 @@
 export { default as Calendar } from './calendar.svg';
 export { default as Camera } from './camera.svg';
+export { default as CameraBlack } from './camera_black.svg';
 export { default as Caution } from './caution.svg';
 export { default as Chat } from './chat.svg';
 export { default as Chevron } from './chevron.svg';

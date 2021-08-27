@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
         padding: Constant.App.dimensions.btnPaddingGlobal,
         width: metrics.width - childPadding,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         marginTop: metrics.height * 0.03,
     },
 
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     appointmentContainer: {
         alignSelf: 'center',
         marginHorizontal: 20,
-        marginVertical: 50,
+        marginVertical: 60,
         paddingBottom: 30,
         width: '100%',
         alignItems: 'flex-start',
@@ -75,10 +75,9 @@ const styles = StyleSheet.create({
     },
 
     appointmentModify: {
-        width: '80%',
+        width: '100%',
         flexDirection: 'row',
-        marginLeft: 20,
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
     },
 
     cancelTextStyle: {
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.whiteColor,
-        paddingTop: 35,
+        paddingTop: 55,
     },
 
     creditButtonStyle: {

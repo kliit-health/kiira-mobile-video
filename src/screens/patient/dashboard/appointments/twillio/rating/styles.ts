@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices';
+import { colors, text, dimensions } from '~/utils/constants';
+
+const { size, fontFamily } = text;
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -11,17 +13,34 @@ var childPadding = parentPadding + childPaddingValue * 2;
 export const AVATAR_SIZE = 111;
 
 const styles = StyleSheet.create({
+    buttonStyle: {
+        alignSelf: 'center',
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
+        width: metrics.width - childPadding,
+        backgroundColor: colors.primaryBlue,
+        marginTop: metrics.height * 0.03,
+        zIndex: 10,
+    },
+
+    buttonTextStyle: {
+        textAlign: 'center',
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.white,
+    },
+
     heading: {
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.white,
         height: 250,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     headingText: {
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.whiteColor,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.white,
         fontWeight: '700',
     },
 
@@ -29,7 +48,7 @@ const styles = StyleSheet.create({
         width: smallScreen ? 90 : 120,
         height: smallScreen ? 90 : 120,
         borderRadius: 60,
-        marginTop: -80,
+        marginTop: -60,
     },
 
     expertImageContainer: {
@@ -37,9 +56,9 @@ const styles = StyleSheet.create({
     },
 
     expertText: {
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.blackColor,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.black,
         marginVertical: 50,
         alignSelf: 'center',
     },
@@ -55,12 +74,9 @@ const styles = StyleSheet.create({
     },
 
     ratingContainer: {
-        marginTop: -30,
-        borderTopRightRadius: 35,
-        borderTopLeftRadius: 35,
-        borderColor: Constant.App.colors.whiteColor,
+        borderColor: colors.white,
         borderTopWidth: 30,
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.babyBlue,
         height: metrics.height,
     },
 
@@ -71,22 +87,6 @@ const styles = StyleSheet.create({
 
     modalRatingStarContainer: {
         marginVertical: 40,
-    },
-
-    yesContainerStyle: {
-        alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
-        width: metrics.width - childPadding,
-        backgroundColor: Constant.App.colors.blueColor,
-        marginTop: metrics.height * 0.03,
-    },
-
-    yesTextStyle: {
-        textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.whiteColor,
     },
 
     centeredView: {
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        zIndex: 5,
     },
 
     textStyle: {

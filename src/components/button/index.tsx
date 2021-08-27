@@ -2,6 +2,7 @@ import React from 'react';
 import {
     TouchableOpacity,
     Text,
+    TextStyle,
     ViewStyle,
     TouchableOpacityProps,
 } from 'react-native';
@@ -13,7 +14,7 @@ export type ButtonProps = TouchableOpacityProps & {
     onPress?: (id: string) => void;
     style?: {
         container?: ViewStyle;
-        title?: ViewStyle;
+        title?: TextStyle;
     };
 };
 

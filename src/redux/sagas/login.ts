@@ -10,24 +10,25 @@ import { getUser, updateUser } from '~/redux/actions/user';
 import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
+import { default as navigation } from '~/navigation/navigationService';
 
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 function* loginFirebase({ payload }) {
     const lang = yield select(state => state.language);
 
     try {
-        let token;
-        const { params, navigation } = payload;
+        let token: string;
+        const { email, password } = payload;
         yield put(showApiLoader());
-        const response = yield loginInWithFirebase(params);
+        const response = yield loginInWithFirebase(payload);
 
         const { uid } = response;
 
         if (uid) {
             yield put(getUser());
 
-            Keychain.setGenericPassword(params.email, params.password, {
+            Keychain.setGenericPassword(email, password, {
                 service: 'kiira',
                 accessControl: 'BiometryAny' as any,
                 accessible: 'AccessibleWhenPasscodeSetThisDeviceOnly' as any,

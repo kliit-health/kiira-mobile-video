@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import styles from './style';
-import Constant from '~/utils/constants';
+import Constant, { colors, icons } from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
 import CustomButton from '~/components/customButton';
 import { showOrHideModal } from '~/components/customModal/action';
@@ -40,7 +40,7 @@ const Activate = props => {
                                 ? styles.inputTypeStyle
                                 : [styles.inputTypeStyle, { fontWeight: '100' }]
                         }
-                        placeholderTextColor={Constant.App.colors.blackColor}
+                        placeholderTextColor={colors.black}
                     />
                 </View>
             </View>
@@ -56,7 +56,7 @@ const Activate = props => {
             >
                 <Image
                     resizeMode="contain"
-                    source={staticImages.crossIcon}
+                    source={icons.crossIcon}
                     style={styles.backIconStyle}
                 />
             </TouchableOpacity>
@@ -68,12 +68,12 @@ const Activate = props => {
             <View style={styles.contentContainerStyle}>
                 <Image
                     resizeMode="contain"
-                    source={staticImages.loginLogoImage}
+                    source={staticImages.kiiraLogo}
                     style={styles.logoStyle}
                 />
                 <Image
                     resizeMode="contain"
-                    source={staticImages.loginLogoImage2}
+                    source={staticImages.kiiraLogo2}
                     style={styles.logo2Style}
                 />
             </View>
@@ -84,8 +84,8 @@ const Activate = props => {
         return (
             <CustomButton
                 disabled={false}
-                buttonStyle={styles.loginButtonContainerStyle}
-                textStyle={styles.loginButtonTextStyle}
+                buttonStyle={styles.loginButton}
+                textStyle={styles.loginButtonText}
                 onPress={() => {
                     if (!email.trim()) {
                         dispatch(showOrHideModal(lang.login.EmptyEmailMsg));

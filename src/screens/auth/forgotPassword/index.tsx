@@ -80,7 +80,7 @@ const ForgotPassword = props => {
         return (
             <Image
                 resizeMode="contain"
-                source={staticImages.loginLogoImage}
+                source={staticImages.kiiraLogo}
                 style={styles.logoStyle}
             />
         );

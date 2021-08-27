@@ -424,8 +424,9 @@ export default {
     },
     appointments: {
         scheduleAppointment: 'Schedule Appointment',
-        notify: `We'll notifiy you about upcoming appointments, new messages, and more`,
-        noVisits: `You have no upcoming visits`,
+        notify: "We'll notifiy you about upcoming appointments, new messages, and more",
+        noVisits: 'You have no upcoming visits',
+        endVisit: 'Are you sure you want to end your visit?',
     },
     expertChats: {
         title: 'Chats',

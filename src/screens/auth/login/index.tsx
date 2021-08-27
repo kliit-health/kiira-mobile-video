@@ -69,11 +69,8 @@ const Login = props => {
                         if (typeof result !== 'boolean') {
                             if (result.username || result.password) {
                                 const data = {
-                                    params: {
-                                        email: result.username,
-                                        password: result.password,
-                                    },
-                                    navigation,
+                                    email: result.username,
+                                    password: result.password,
                                 };
                                 dispatch(loginApi(data));
                             } else {
@@ -164,12 +161,12 @@ const Login = props => {
             <View style={styles.contentContainerStyle}>
                 <Image
                     resizeMode="contain"
-                    source={staticImages.loginLogoImage}
+                    source={staticImages.kiiraLogo}
                     style={styles.logoStyle}
                 />
                 <Image
                     resizeMode="contain"
-                    source={staticImages.loginLogoImage2}
+                    source={staticImages.kiiraLogo2}
                     style={styles.logo2Style}
                 />
                 <Text style={styles.version}>{app.version}</Text>
@@ -180,8 +177,8 @@ const Login = props => {
     const renderButtonView = () => {
         return (
             <CustomButton
-                buttonStyle={styles.loginButtonContainerStyle}
-                textStyle={styles.loginButtonTextStyle}
+                buttonStyle={styles.loginButton}
+                textStyle={styles.loginButtonText}
                 onPress={() => {
                     if (!email.trim()) {
                         dispatch(showOrHideModal(lang.login.EmptyEmailMsg));
@@ -214,7 +211,7 @@ const Login = props => {
                     );
                 }}
             >
-                <CustomText style={styles.forgotPasswordTextStyle}>
+                <CustomText style={styles.forgotPasswordText}>
                     {lang.login.ForgotPassword}
                 </CustomText>
             </TouchableOpacity>

@@ -1,34 +1,43 @@
 import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import { colors } from '~/utils/constants';
 
 const styles = StyleSheet.create({
-    buttonStyle: {
-        margin: 20,
-        marginLeft: 50,
-        marginRight: 50,
+    container: {
+        borderColor: colors.black,
+        borderWidth: 2,
+        backgroundColor: colors.babyBlue,
+        justifyContent: 'flex-end',
+    },
+
+    confirmationContainer: {
         justifyContent: 'center',
+        flex: 1,
+    },
+
+    visitEnd: {
+        margin: 20,
+        justifyContent: 'center',
+        width: '40%',
+    },
+
+    visitReturn: {
+        margin: 20,
+        justifyContent: 'center',
+        width: '40%',
+        backgroundColor: colors.white,
+        borderColor: colors.greyAccent,
+        borderWidth: 2,
+    },
+
+    visitReturnText: {
+        color: colors.primaryBlue,
     },
 
     logo: {
         width: 150,
         height: 150,
         alignSelf: 'center',
-        marginTop: 30,
-    },
-
-    submitButtonStyle: {
-        marginTop: 10,
-        paddingTop: 15,
-        paddingBottom: 15,
-        backgroundColor: Constant.App.colors.blueColor,
-        borderRadius: 20,
-    },
-
-    textStyle: {
-        color: '#fff',
-        textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        marginHorizontal: 30,
     },
 });
 
