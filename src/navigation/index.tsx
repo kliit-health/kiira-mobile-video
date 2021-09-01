@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
-import { Image, View } from 'react-native';
+import { Image, View, StyleSheet } from 'react-native';
 import { Text } from '~/components';
 
 import Account from '../screens/patient/account';
@@ -91,7 +91,6 @@ import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
 import Welcome from '../screens/auth/welcome';
 import TreatmentHistory from '../screens/patient/dashboard/careSquad/treatmentHistory';
-import TwillioLogin from '../screens/patient/dashboard/appointments/twillio/Login';
 import TwillioCalling from '../screens/patient/dashboard/appointments/twillio/Callling';
 import PersonalInformation from '../screens/provider/appointments/patientProfile/personalInformation';
 import AgreementDetails from '../screens/provider/appointments/patientProfile/agreementDetails';
@@ -99,19 +98,25 @@ import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 
 import Constant, { colors, icons } from '../utils/constants';
+import { default as globalStyles } from '~/components/styles';
 
 let tabIconSize = 25;
 const screenNames = Constant.App.screenNames;
 
-const TransparentStyle = {
+const TransparentStyle = StyleSheet.create({
     cardStyle: {
-        backgroundColor: '#fff',
+        backgroundColor: colors.white,
     },
 
     containerStyle: {
-        backgroundColor: '#fff',
+        backgroundColor: colors.white,
     },
-};
+});
+
+const { active, tiny, regular, space_sm, gray_dark } = globalStyles;
+
+const selected = [active, tiny, regular, space_sm];
+const notSelected = [tiny, gray_dark, regular, space_sm];
 
 const AuthStack = createStackNavigator(
     {
@@ -171,7 +176,7 @@ const BottomTab = createBottomTabNavigator(
                                 }}
                                 source={focused ? icons.blogActive : icons.blog}
                             />
-                            <Text options={focused ? 'active small' : 'small'}>
+                            <Text options={focused ? selected : notSelected}>
                                 Blog
                             </Text>
                         </View>
@@ -199,7 +204,7 @@ const BottomTab = createBottomTabNavigator(
                             style={{ width: tabIconSize, height: tabIconSize }}
                             source={focused ? icons.homeActive : icons.home}
                         />
-                        <Text options={focused ? 'active small' : 'small'}>
+                        <Text options={focused ? selected : notSelected}>
                             Home
                         </Text>
                     </View>
@@ -234,7 +239,7 @@ const BottomTab = createBottomTabNavigator(
                                         : icons.profile
                                 }
                             />
-                            <Text options={focused ? 'active small' : 'small'}>
+                            <Text options={focused ? selected : notSelected}>
                                 Profile
                             </Text>
                         </View>
@@ -603,7 +608,6 @@ const MainAppStack = createStackNavigator(
         Visit: { screen: Visit },
         VisitSummary: { screen: VisitSummary },
         VideoRating: { screen: VideoRating },
-        TwillioLogin: { screen: TwillioLogin },
         TwillioCalling: { screen: TwillioCalling },
         VisitEnd: { screen: VisitEnd },
     },

@@ -5,7 +5,7 @@ import metrices from '~/utils/metrices';
 const { size, fontFamily } = text;
 
 export default StyleSheet.create({
-    //FONTS
+    //FONT SIZE
 
     large: {
         fontSize: size.large,
@@ -26,17 +26,44 @@ export default StyleSheet.create({
         fontSize: size.xSmall,
     },
 
+    //FONTS
+
     light: {
         fontFamily: fontFamily.poppinsLight,
     },
 
     regular: {
         fontFamily: fontFamily.poppinsRegular,
-        letterSpacing: 3,
     },
 
     medium: {
         fontFamily: fontFamily.poppinsMedium,
+    },
+
+    //SPACE
+
+    space_sm: {
+        letterSpacing: 1,
+    },
+
+    space_md: {
+        letterSpacing: 3,
+    },
+
+    space_lg: {
+        letterSpacing: 5,
+    },
+
+    space_around: {
+        justifyContent: 'space-around',
+    },
+
+    space_evenly: {
+        justifyContent: 'space-evenly',
+    },
+
+    space_between: {
+        justifyContent: 'space-between',
     },
 
     //LAYOUT
@@ -55,6 +82,10 @@ export default StyleSheet.create({
         borderTopWidth: 0,
         borderBottomWidth: 3,
         paddingHorizontal: 5,
+    },
+
+    expand: {
+        flex: 1,
     },
 
     sm_pad_h: {
@@ -89,8 +120,24 @@ export default StyleSheet.create({
         marginVertical: 20,
     },
 
+    pad_v_md: {
+        marginVertical: 30,
+    },
+
+    pad_v_lg: {
+        marginVertical: 40,
+    },
+
     pad_top: {
         paddingTop: 10,
+    },
+
+    pad_top_lg: {
+        marginTop: 50,
+    },
+
+    pad_top_xlg: {
+        marginTop: 80,
     },
 
     pad_bottom: {
@@ -103,12 +150,40 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
 
+    justify_c: {
+        justifyContent: 'center',
+    },
+
+    align_items_c: {
+        alignItems: 'center',
+    },
+
     centerText: {
         textAlign: 'center',
     },
 
+    width: {
+        width: '100%',
+    },
+
     width_auto: {
         width: 'auto',
+    },
+
+    height: {
+        height: 300,
+    },
+
+    height_auto: {
+        height: 'auto',
+    },
+
+    full: {
+        flex: 1,
+    },
+
+    hide_overflow: {
+        overflow: 'hidden',
     },
 
     //COLORS
@@ -133,8 +208,12 @@ export default StyleSheet.create({
         color: colors.black,
     },
 
-    grey: {
-        backgroundColor: colors.greyLight,
+    gray: {
+        color: colors.lightGrey,
+    },
+
+    gray_dark: {
+        color: colors.greyDark,
     },
 
     none: {
@@ -147,6 +226,14 @@ export default StyleSheet.create({
         backgroundColor: colors.babyBlue,
     },
 
+    grey_bg: {
+        backgroundColor: colors.greyLight,
+    },
+
+    white_bg: {
+        backgroundColor: colors.white,
+    },
+
     //Borders
 
     black_br: {
@@ -156,7 +243,12 @@ export default StyleSheet.create({
 
     blue_br_b: {
         borderBottomColor: colors.primaryBlue,
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
+    },
+
+    clear_br_b: {
+        borderBottomColor: 'transparent',
+        borderBottomWidth: 2,
     },
 
     grey_br: {

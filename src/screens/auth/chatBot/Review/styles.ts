@@ -1,24 +1,25 @@
 import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import { text, colors } from '~/utils/constants';
 
-const style = StyleSheet.create({
+const { size, fontFamily } = text;
+
+const styles = StyleSheet.create({
     category: {
         flexWrap: 'wrap',
-        fontFamily: Constant.App.fontFamily.headerSemiBold,
+        fontFamily: fontFamily.poppinsSemiBold,
     },
 
     value: {
         flexWrap: 'wrap',
-        fontFamily: Constant.App.fontFamily.proximaNovaSemiBold,
-        color: '#509AEC',
+        fontFamily: fontFamily.proximaNovaSemiBold,
+        color: colors.primaryBlue,
         marginBottom: 10,
     },
 
     plan: {
-        // alignSelf: 'center',
         flexWrap: 'wrap',
-        fontFamily: Constant.App.fontFamily.proximaNovaSemiBold,
-        color: '#509AEC',
+        fontFamily: fontFamily.proximaNovaSemiBold,
+        color: colors.primaryBlue,
         marginBottom: 10,
     },
 
@@ -43,13 +44,13 @@ const style = StyleSheet.create({
     },
 
     title: {
-        fontFamily: Constant.App.fontFamily.headerSemiBold,
-        fontSize: Constant.App.textSize.xLarge,
+        fontFamily: fontFamily.poppinsSemiBold,
+        fontSize: size.xLarge,
         textAlign: 'center',
         borderBottomWidth: 2,
-        borderBottomColor: 'black',
+        borderBottomColor: colors.black,
         marginHorizontal: 8,
     },
 });
 
-export default style;
+export default styles;

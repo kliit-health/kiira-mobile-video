@@ -7,6 +7,7 @@ import { app } from '~/utils/constants';
 import { Profile, List, Plan } from './sections';
 import { signOut } from '~/redux/reducers/account';
 import styles, { modifiers } from './styles';
+import { handleNavigation } from '~/utils/functions';
 
 const Account = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -14,10 +15,6 @@ const Account = ({ navigation }) => {
     const subscription = useSelector((state: RootState) => state.subscription);
     const user = useSelector((state: RootState) => state.user.data);
     const lang = useSelector((state: RootState) => state.language);
-
-    const handleNavigation = destination => {
-        navigation.navigate(destination);
-    };
 
     const handleSignOut = () => {
         dispatch(signOut({ navigation }));

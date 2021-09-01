@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const Row = ({ children, options = null }) => {
+const Column = ({ children, options = null }) => {
     return (
         <View style={options ? [base.default, ...options] : base.default}>
             {children}
@@ -11,8 +11,9 @@ const Row = ({ children, options = null }) => {
 
 const base = StyleSheet.create({
     default: {
-        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'center',
     },
 });
 
-export default Row;
+export default Column;

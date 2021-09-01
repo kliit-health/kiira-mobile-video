@@ -5,8 +5,11 @@ import { RootState } from '~/redux/reducers';
 import { Container, Header, Row, Text, Button } from '~/components';
 import { handleNavigation } from '~/utils/functions';
 import { images } from '~/utils/constants';
+import { default as globalStyles } from '~/components/styles';
 
 import styles from './styles';
+
+const { center, xxLarge } = globalStyles;
 
 const VisitEnd = () => {
     const lang = useSelector((state: RootState) => state.language);
@@ -20,7 +23,7 @@ const VisitEnd = () => {
                     resizeMode="contain"
                     source={images.kiiraLogo}
                 />
-                <Text options={'center xxLarge'}>
+                <Text options={[center, xxLarge]}>
                     {lang.appointments.endVisit}
                 </Text>
             </View>

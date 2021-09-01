@@ -4,8 +4,9 @@ import { RootState } from '~/redux/reducers';
 import { ScrollView, Linking, Platform } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
-import { Container } from '~/components';
-import { Item, Welcome, Banner } from './sections';
+import { getAppointmentsList } from '~/redux/reducers/appointments';
+import { Container, NavItem } from '~/components';
+import { Welcome, Banner } from './sections';
 import model from './model';
 import styles from './styles';
 import i18n from '~/i18n';
@@ -33,6 +34,7 @@ const Dashboard = ({ navigation }) => {
             appVersion: DeviceInfo.getVersion(),
         };
         dispatch(actions.updateUser({ device }));
+        dispatch(getAppointmentsList({ uid: user.uid }));
     }, []);
 
     useDidMount(() => {
@@ -123,7 +125,7 @@ const Dashboard = ({ navigation }) => {
                 <Welcome displayName={user.profileInfo.firstName} />
                 <Banner />
                 {model.map(item => (
-                    <Item
+                    <NavItem
                         key={item.title}
                         {...item}
                         onPress={handleNavigation}

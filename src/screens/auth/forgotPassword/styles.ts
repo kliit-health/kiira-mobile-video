@@ -1,7 +1,9 @@
 import { StyleSheet, Platform } from 'react-native';
-import Constant from '~/utils/constants';
+import { dimensions, text, colors } from '~/utils/constants';
 import metrics from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
+
+const { size, fontFamily } = text;
 
 let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -18,18 +20,18 @@ const styles = StyleSheet.create({
 
     buttonContainerStyle: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
         width: metrics.width - childPadding,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         marginTop: metrics.height * 0.02,
     },
 
     buttonTextStyle: {
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        color: Constant.App.colors.whiteColor,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        fontSize: size.regular,
+        color: colors.white,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     contentContainerStyle: {
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: metrics.width - childPadding,
         paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
-        borderBottomColor: Constant.App.colors.blackColor,
+        borderBottomColor: colors.black,
         borderBottomWidth: 0.5,
     },
 
@@ -57,9 +59,9 @@ const styles = StyleSheet.create({
     },
 
     inputTypeStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrics.width - childPadding,
     },
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: getStatusBarHeight(),
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         borderRadius: 25,
         overflow: 'hidden',
     },
@@ -83,9 +85,9 @@ const styles = StyleSheet.create({
     subTitleTextStyle: {
         marginTop: metrics.height * 0.01,
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.headerRegular,
-        color: Constant.App.colors.blackColor,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.black,
         width: metrics.width - childPadding,
     },
 
@@ -101,9 +103,9 @@ const styles = StyleSheet.create({
 
     titleTextStyle: {
         textAlign: 'center',
-        fontSize: Constant.App.textSize.xxLarge,
-        fontFamily: Constant.App.fontFamily.headerBold,
-        color: Constant.App.colors.blackColor,
+        fontSize: size.xxLarge,
+        fontFamily: fontFamily.poppinsSemiBold,
+        color: colors.black,
         width: metrics.width - childPadding,
     },
 });

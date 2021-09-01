@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import CustomText from '../../../components/customText';
 import styles from './style';
-import Constant, { app } from '../../../utils/constants';
+import Constant, { app, colors, screenNames } from '../../../utils/constants';
 import CustomInputText from '../../../components/customInputText';
 import CustomButton from '../../../components/customButton';
 import { showOrHideModal } from '../../../components/customModal/action';
@@ -100,7 +100,7 @@ const Login = props => {
             });
     };
 
-    const renderInputTextView = () => {
+    const InputText = () => {
         return (
             <View style={styles.inputTextParentContainerStyle}>
                 <View style={styles.inputTextContainerStyle}>
@@ -115,7 +115,7 @@ const Login = props => {
                                 ? styles.inputTypeStyle
                                 : [styles.inputTypeStyle, { fontWeight: '100' }]
                         }
-                        placeholderTextColor={Constant.App.colors.blackColor}
+                        placeholderTextColor={colors.black}
                     />
                 </View>
                 <View style={styles.inputTextContainerStyle}>
@@ -133,14 +133,14 @@ const Login = props => {
                                       { fontWeight: '100' },
                                   ]
                         }
-                        placeholderTextColor={Constant.App.colors.blackColor}
+                        placeholderTextColor={colors.black}
                     />
                 </View>
             </View>
         );
     };
 
-    const renderCrossIconView = () => {
+    const CrossIcon = () => {
         return (
             <TouchableOpacity
                 onPress={() => {
@@ -156,7 +156,7 @@ const Login = props => {
         );
     };
 
-    const renderLogoView = () => {
+    const Logo = () => {
         return (
             <View style={styles.contentContainerStyle}>
                 <Image
@@ -174,7 +174,7 @@ const Login = props => {
         );
     };
 
-    const renderButtonView = () => {
+    const Button = () => {
         return (
             <CustomButton
                 buttonStyle={styles.loginButton}
@@ -188,11 +188,8 @@ const Login = props => {
                         dispatch(showOrHideModal(lang.login.EmptyPasswordMsg));
                     } else {
                         const data = {
-                            params: {
-                                email: email.trim(),
-                                password: password.trim(),
-                            },
-                            navigation,
+                            email: email.trim(),
+                            password: password.trim(),
                         };
                         dispatch(loginApi(data));
                     }
@@ -202,13 +199,11 @@ const Login = props => {
         );
     };
 
-    const renderForgotPasswordView = () => {
+    const ForgotPassword = () => {
         return (
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(
-                        Constant.App.screenNames.ForgotPassword,
-                    );
+                    navigation.navigate(screenNames.ForgotPassword);
                 }}
             >
                 <CustomText style={styles.forgotPasswordText}>
@@ -218,7 +213,7 @@ const Login = props => {
         );
     };
 
-    const renderBiometricLogin = () => {
+    const BiometricLogin = () => {
         return (
             <TouchableOpacity
                 disabled={biometricType === ''}
@@ -243,13 +238,13 @@ const Login = props => {
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                {renderCrossIconView()}
+                <CrossIcon />
                 <View style={styles.contentContainerStyle}>
-                    {renderLogoView()}
-                    {renderInputTextView()}
-                    {renderBiometricLogin()}
-                    {renderButtonView()}
-                    {renderForgotPasswordView()}
+                    <Logo />
+                    <InputText />
+                    <BiometricLogin />
+                    <Button />
+                    <ForgotPassword />
                 </View>
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}

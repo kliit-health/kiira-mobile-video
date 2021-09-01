@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TextInput, StyleSheet, ViewStyle } from 'react-native';
-import styles from '~/components/styles';
-import { combineStyles } from '~/utils/functions/combineStyles';
 import { text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 
@@ -10,9 +8,9 @@ export type InputProps = {
     value: string;
     onChangeText: (text: string) => void;
     placeholder?: string;
-    placeholderTextColor: ViewStyle;
+    placeholderTextColor?: ViewStyle;
     multiline: boolean;
-    options: null | string;
+    options: null | ViewStyle[];
 };
 
 const Input = ({
@@ -23,15 +21,9 @@ const Input = ({
     multiline,
     options = null,
 }: InputProps) => {
-    const [optional, setOptional] = useState({});
-
-    useEffect(() => {
-        setOptional(combineStyles(options, styles));
-    }, []);
-
     return (
         <TextInput
-            style={options ? [base.default, optional] : base.default}
+            style={options ? [base.default, options] : base.default}
             editable={editable}
             value={value}
             onChangeText={onChangeText}

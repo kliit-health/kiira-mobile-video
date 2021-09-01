@@ -19,6 +19,7 @@ import Button from './Button';
 import ButtonText from './ButtonText';
 import { SafeAreaView } from 'react-navigation';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { colors } from '~/utils/constants';
 
 const { height, width } = Dimensions.get('window');
 
@@ -724,11 +725,11 @@ ChatBot.defaultProps = {
     bubbleStyle: {},
     optionStyle: {
         borderWidth: 1,
-        borderColor: '#509AEC',
+        borderColor: colors.primaryBlue,
         borderRadius: 20,
     },
     optionBubbleColor: '#fff',
-    optionFontColor: '#509AEC',
+    optionFontColor: colors.primaryBlue,
     optionElementStyle: {},
     contentStyle: {},
     customStyle: {},

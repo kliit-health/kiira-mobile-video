@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import CustomText from '~/components/customText';
-import styles from './style';
+import styles from './styles';
 import Constant from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
 import CustomButton from '~/components/customButton';

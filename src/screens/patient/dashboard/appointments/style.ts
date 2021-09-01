@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         padding: Constant.App.dimensions.btnPaddingGlobal,
         width: metrics.width - childPadding,
         backgroundColor: colors.primaryBlue,
-        marginTop: metrics.height * 0.03,
+        marginVertical: metrics.height * 0.03,
     },
 
     activeText: {
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         width: '100%',
     },
+
     appointmentButtonContainer: {
         alignSelf: 'center',
         borderRadius: 10,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     appointmentContainer: {
         alignSelf: 'center',
         marginHorizontal: 20,
-        marginVertical: 60,
+        marginVertical: 40,
         paddingBottom: 30,
         width: '100%',
         alignItems: 'flex-start',
@@ -291,64 +292,25 @@ const styles = StyleSheet.create({
         elevation: 2, // Android
     },
 
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
-    },
-
-    modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-
-    openButton: {
-        backgroundColor: '#F194FF',
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-    },
-
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
-    },
-
     title: {
         fontFamily: text.fontFamily.poppinsRegular,
         fontWeight: '500',
-        fontSize: text.size.xxxxLarge,
+        fontSize: text.size.xxxLarge,
         textAlign: 'center',
     },
+
     subtitle: {
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         textAlign: 'center',
         marginTop: 20,
     },
+
     image: {
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
         alignSelf: 'center',
-        margin: 20,
+        marginTop: 'auto',
     },
 
     centeredView: {
@@ -357,6 +319,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
+
     modalView: {
         margin: 20,
         backgroundColor: 'white',
@@ -372,17 +335,20 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
+
     openButton: {
         backgroundColor: '#F194FF',
         borderRadius: 20,
         padding: 10,
         elevation: 2,
     },
+
     textStyle: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
     },
+
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
@@ -390,11 +356,3 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
-
-export const modifiers = {
-    button: {
-        root: {
-            marginTop: 'auto',
-        },
-    },
-};

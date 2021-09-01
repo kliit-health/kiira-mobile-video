@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Platform, Alert } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import { setCallConfig, getCallToken } from '~/redux/actions/twillio';
 import { RootState } from '~/redux/reducers';
@@ -12,14 +13,17 @@ import {
     Row,
     Line,
     CheckBox,
+    Column,
 } from '~/components';
 import { showOrHideModal } from '~/components/customModal/action';
 import styles from '../style';
 import { useDispatch } from 'react-redux';
 import { cancelAppointment, setVisit } from '~/redux/reducers/appointments';
-import constants, { colors } from '~/utils/constants';
+import constants from '~/utils/constants';
 import moment from 'moment';
 import { CameraBlack } from '~/svgs';
+
+import { default as globalStyles } from '~/components/styles';
 
 import {
     checkMultiple,
@@ -29,7 +33,24 @@ import {
     RESULTS,
 } from 'react-native-permissions';
 
-const Appointment = ({ visit, date, navigation }) => {
+const {
+    xLarge,
+    xxLarge,
+    white,
+    pad_h,
+    pad_v,
+    sm_pad_v,
+    blue,
+    large,
+    light,
+    pad_r,
+    white_bg,
+    radius_md,
+    hide_overflow,
+    grey_br,
+} = globalStyles;
+
+const Future = ({ visit, date, navigation }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState(false);
@@ -55,7 +76,6 @@ const Appointment = ({ visit, date, navigation }) => {
     const sameDay = daysUntilVisit < 1;
 
     useEffect(() => {
-        dispatch(setVisit(visit));
         checkPermissions();
     }, []);
 
@@ -156,6 +176,7 @@ const Appointment = ({ visit, date, navigation }) => {
     };
 
     const handleVisitStart = () => {
+        dispatch(setVisit(visit));
         dispatch(
             setCallConfig({
                 ...callConfig,
@@ -171,7 +192,7 @@ const Appointment = ({ visit, date, navigation }) => {
     const VisitTime = () => {
         return (
             <View style={styles.appointment}>
-                <Text options={'xxlarge white pad_h'}>
+                <Text options={[xxLarge, white, pad_h]}>
                     {moment(date.date).format('llll')}
                 </Text>
             </View>
@@ -198,7 +219,7 @@ const Appointment = ({ visit, date, navigation }) => {
                 </View>
                 <View style={{ width: '100%', marginTop: 15 }}>
                     <View style={styles.expertName}>
-                        <Text options={'xLarge'}>
+                        <Text options={[xLarge]}>
                             {`${visit.expert.firstName} ${visit.expert.lastName}`}
                         </Text>
                     </View>
@@ -240,14 +261,14 @@ const Appointment = ({ visit, date, navigation }) => {
     const VisitDetails = () => {
         return (
             <>
-                <Row options={'pad_h'}>
+                <Row options={[pad_h]}>
                     <CameraBlack />
-                    <Text options={'pad_h large'}>
-                        <Bold>30 min. Virtual Visit</Bold>
+                    <Text options={[pad_h, large]}>
+                        <Bold>{`${duration} min. Virtual Visit`}</Bold>
                     </Text>
                 </Row>
 
-                <Text options={'pad_h sm_pad_v large light'}>
+                <Text options={[pad_h, sm_pad_v, large, light]}>
                     {`Your visit should be starting\n${
                         daysUntilVisit > 0
                             ? `in ${Math.round(daysUntilVisit)} days.`
@@ -259,32 +280,40 @@ const Appointment = ({ visit, date, navigation }) => {
     };
 
     const Disclaimer = () => (
-        <Row options={'pad_h'}>
+        <Row options={[pad_h]}>
             <CheckBox
                 styles={{
                     root: {
                         alignItems: 'flex-start',
-                        marginLeft: 15,
                     },
                 }}
                 key={'Certified'}
                 onPress={() => setChecked(!checked)}
                 checked={checked}
             />
-            <Text options={'blue large light pad_r'}>
+            <Text options={[blue, large, light, pad_r]}>
                 {`I certify that I am currently in the state of ${user.data.profileInfo.state.value} and that this consultation will be conducted while within state boundaries.`}
             </Text>
         </Row>
     );
 
     return (
-        <View style={styles.appointmentContainer}>
-            {VisitTime()}
-            {ExpertDetails()}
-            {ModifyVisit()}
-            {VisitDetails()}
+        <Column
+            options={[
+                white_bg,
+                pad_h,
+                pad_v,
+                radius_md,
+                hide_overflow,
+                grey_br,
+            ]}
+        >
+            <VisitTime />
+            <ExpertDetails />
+            <ModifyVisit />
+            <VisitDetails />
             <Line />
-            {Disclaimer()}
+            <Disclaimer />
             <CustomButton
                 disabled={!checked}
                 buttonStyle={
@@ -294,8 +323,8 @@ const Appointment = ({ visit, date, navigation }) => {
                 onPress={handleVisitStart}
                 text="Begin Visit"
             />
-        </View>
+        </Column>
     );
 };
 
-export default Appointment;
+export default withNavigation(Future);

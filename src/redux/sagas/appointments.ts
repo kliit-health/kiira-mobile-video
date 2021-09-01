@@ -1,7 +1,7 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
 import { getUser, updateUser } from '~/redux/actions';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import { NavigationService } from '~/navigation';
+import { NavigationService as navigation } from '~/navigation';
 import { showOrHideModal } from '~/components/customModal/action';
 
 import {
@@ -132,12 +132,10 @@ function* updateAppointment({ payload }) {
 
 function* getAppointments({ payload }) {
     try {
-        yield put(showApiLoader());
         const appointments = yield getAppointmentsAsync(payload.uid);
         if (appointments) {
             yield put(fetchAppointments(appointments));
         }
-        yield put(hideApiLoader());
     } catch (error) {
         console.error(error);
     }
@@ -173,15 +171,13 @@ function* cancelTheAppointment({ payload }) {
 }
 
 function* setExpertRating({ payload }) {
-    console.log(payload);
-    // const { navigation } = payload;
-    // try {
-    //     yield setVideoVisitRating(payload);
-    // } catch (error) {
-    //     console.error(error);
-    // }
+    try {
+        yield setVideoVisitRating(payload);
+    } catch (error) {
+        console.error(error);
+    }
 
-    // navigation.navigate('BottomTab');
+    navigation.navigate('BottomTab');
 }
 
 function* setAppointment({ payload }) {
@@ -203,7 +199,7 @@ function* setAppointment({ payload }) {
                     'Appointment is unavailable please select a different time.',
                 ),
             );
-            NavigationService.goBack();
+            navigation.goBack();
         } else {
             yield updateCredits(-credits, payload);
             yield put(getUser());

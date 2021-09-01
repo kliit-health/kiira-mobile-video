@@ -1,213 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Image, TouchableOpacity } from 'react-native';
-import ErrorBoundary from 'react-native-error-boundary';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import styles, { modifiers } from './style';
-import { Container, Header, TextButton, Row, Text, Line } from '~/components';
-import Conditional from '~/components/conditional';
-import { screenNames } from '~/utils/constants';
-import { getAppointmentsList } from '~/redux/reducers/appointments';
-import Appointment from './components/appointment';
-import { generateDateInfo } from '~/utils/helper';
+import { Column, Header, Screen, Tabs } from '~/components';
+import { Show } from './components';
+import { tabs } from './models';
 import moment from 'moment';
+import { default as globalStyles } from '~/components/styles';
+
+const { blue_bg } = globalStyles;
 
 const Appointments = ({ navigation }) => {
-    const dispatch = useDispatch();
-
-    const userData = useSelector((state: RootState) => state.user.data);
     const visitData = useSelector((state: RootState) => state.appointments);
-    const lang = useSelector((state: RootState) => state.language);
-    const [visits, setVisits] = useState(visitData);
+    const [past, setPast] = useState([]);
+    const [future, setFuture] = useState([]);
     const [pastSelected, setPastSelected] = useState(false);
     const { history } = visitData;
 
     useEffect(() => {
-        dispatch(getAppointmentsList({ uid: userData.uid }));
+        let past = [];
+        let future = [];
+        if (history.length) {
+            history.forEach(visit => {
+                let appointment = moment(visit.time);
+                let now = moment(new Date());
+                if (appointment.diff(now, 'hours') >= -1) {
+                    future.push(visit);
+                } else if (appointment.diff(now, 'hours') <= -1) {
+                    past.push(visit);
+                }
+            });
+
+            past = past.sort((a, b) => {
+                return (
+                    parseInt(moment(a.time).format('x')) -
+                    parseInt(moment(b.time).format('x'))
+                );
+            });
+
+            future = future.sort((a, b) => {
+                return (
+                    parseInt(moment(a.time).format('x')) -
+                    parseInt(moment(b.time).format('x'))
+                );
+            });
+            console.log('Past: ', past);
+            setPast(past);
+            setFuture(future);
+        }
     }, []);
 
-    useEffect(() => {
-        if (history.length) {
-            let filtered = history.filter(visit => {
-                let appointment = moment(visit.time);
-                let now = moment(new Date());
-                if (appointment.diff(now, 'hours') >= -1) {
-                    return visit;
-                }
-            });
-
-            filtered = filtered.sort((a, b) => {
-                return (
-                    parseInt(moment(a.time).format('x')) -
-                    parseInt(moment(b.time).format('x'))
-                );
-            });
-
-            setVisits(filtered);
-        } else {
-            setVisits([]);
-        }
-    }, [visitData]);
-
-    const handleNavigation = destination => {
-        navigation.navigate(destination);
-    };
-
-    const handleFuture = () => {
-        setPastSelected(!pastSelected);
-        if (history.length) {
-            let filtered = history.filter(visit => {
-                let appointment = moment(visit.time);
-                let now = moment(new Date());
-                if (appointment.diff(now, 'hours') >= -1) {
-                    return visit;
-                }
-            });
-
-            filtered = filtered.sort((a, b) => {
-                return (
-                    parseInt(moment(a.time).format('x')) -
-                    parseInt(moment(b.time).format('x'))
-                );
-            });
-
-            setVisits(filtered);
-        } else {
-            setVisits([]);
-        }
-    };
-
-    const handlePast = () => {
-        setPastSelected(!pastSelected);
-        if (history.length) {
-            let filtered = history.filter(visit => {
-                let appointment = moment(visit.time);
-                let now = moment(new Date());
-                if (appointment.diff(now, 'hours') < 0) {
-                    return visit;
-                }
-            });
-
-            filtered = filtered.sort((a, b) => {
-                return (
-                    parseInt(moment(a.time).format('x')) -
-                    parseInt(moment(b.time).format('x'))
-                );
-            });
-
-            setVisits(filtered);
-        } else {
-            setVisits([]);
-        }
-    };
-
-    const FallBack = () => <View></View>;
-
-    const Tab = ({ text, textOptions, lineOptions, handlePress }) => {
-        return (
-            <Line options={lineOptions}>
-                <TouchableOpacity onPress={handlePress}>
-                    <Text options={textOptions}>{text}</Text>
-                </TouchableOpacity>
-            </Line>
-        );
-    };
-
-    const Tabs = ({ pastSelected }) => {
-        return (
-            <Row options={'pad_v grey absolute grey_br_b'}>
-                <Tab
-                    text={'UPCOMING VISITS'}
-                    lineOptions={
-                        !pastSelected
-                            ? 'bottom blue_br_b small pad_top width_auto'
-                            : 'none small pad_top width_auto'
-                    }
-                    textOptions={
-                        !pastSelected
-                            ? 'active blueBorder pad_bottom tiny regular'
-                            : 'inactive pad_bottom tiny regular'
-                    }
-                    handlePress={handleFuture}
-                />
-                <Tab
-                    text="PAST VISITS"
-                    lineOptions={
-                        pastSelected
-                            ? 'bottom blue_br_b small pad_top width_auto'
-                            : 'none small pad_top width_auto'
-                    }
-                    textOptions={
-                        pastSelected
-                            ? 'active blueBorder pad_bottom tiny regular'
-                            : 'inactive pad_bottom tiny regular'
-                    }
-                    handlePress={handlePast}
-                />
-            </Row>
-        );
-    };
-
-    const NoAppointments = () => {
-        return (
-            <Container>
-                <Image
-                    style={styles.image}
-                    resizeMode="contain"
-                    source={require('../../../../../assets/bell.png')}
-                />
-                <Text style={styles.title}>{lang.appointments.noVisits}</Text>
-                <TextButton
-                    styles={modifiers.button}
-                    onPress={() => handleNavigation(screenNames.requestVisit)}
-                >
-                    {lang.appointments.scheduleAppointment}
-                </TextButton>
-            </Container>
-        );
-    };
-
     return (
-        <Container styles={{ root: { backgroundColor: '#ECFCFF' } }}>
-            <Header
-                title="Appointments"
-                onBack={() => navigation.navigate('Home')}
-            />
-            <Tabs pastSelected={pastSelected} />
-            <Conditional if={visits.length > 0}>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    keyboardDismissMode={
-                        Platform.OS === 'ios' ? 'none' : 'on-drag'
-                    }
-                    keyboardShouldPersistTaps={
-                        Platform.OS === 'ios' ? 'never' : 'always'
-                    }
-                    data={visits}
-                    decelerationRate={'fast'}
-                    renderItem={({ item, index }) => {
-                        const date = generateDateInfo(item.time);
-                        return (
-                            <ErrorBoundary
-                                FallbackComponent={FallBack}
-                                onError={() => navigation.navigate('Home')}
-                            >
-                                <Appointment
-                                    visit={item}
-                                    date={date}
-                                    navigation={navigation}
-                                />
-                            </ErrorBoundary>
-                        );
-                    }}
-                    keyExtractor={index => `${index.id}`}
+        <Screen>
+            <Column options={[blue_bg]}>
+                <Header
+                    title="Appointments"
+                    onBack={() => navigation.navigate('Home')}
                 />
-            </Conditional>
-
-            <Conditional if={!visits.length}>
-                <NoAppointments />
-            </Conditional>
-        </Container>
+                <Tabs
+                    list={tabs}
+                    pastSelected={pastSelected}
+                    setPastSelected={setPastSelected}
+                />
+                <Show pastSelected={pastSelected} past={past} future={future} />
+            </Column>
+        </Screen>
     );
 };
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { text, colors, dimensions } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';

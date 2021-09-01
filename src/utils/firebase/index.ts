@@ -1627,6 +1627,7 @@ async function saveMedicalHistory(payload, visit) {
 export async function setVideoVisitRating(data) {
     const {
         rating,
+        review,
         visit: { expert, uid },
     } = data;
     const document = firestore().collection('users').doc(expert.uid);
@@ -1634,7 +1635,12 @@ export async function setVideoVisitRating(data) {
     const expertData = expertDoc.data();
 
     await document.set(
-        { userRating: [...expertData.userRating, { rating: rating * 2, uid }] },
+        {
+            userRating: [
+                ...expertData.userRating,
+                { rating: rating * 2, uid, review },
+            ],
+        },
         { merge: true },
     );
 }

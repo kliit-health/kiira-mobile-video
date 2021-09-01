@@ -43,7 +43,6 @@ const SheduleModal = ({
     const dispatch = useDispatch();
     const { uid } = navigation.state.params;
     const {
-        appointments,
         reason: {
             sessionType: { appointmentTypeID },
         },

@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import style from './style';
+import styles from './styles';
 import PropTypes from 'prop-types';
 
 const Review = props => {
@@ -93,142 +93,146 @@ const Review = props => {
     }
 
     return (
-        <View style={style.container}>
-            <View style={style.title}>
-                <Text style={style.title}>Summary</Text>
+        <View style={styles.container}>
+            <View style={styles.title}>
+                <Text style={styles.title}>Summary</Text>
             </View>
 
-            <View style={style.rowContainer}>
+            <View style={styles.rowContainer}>
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>First Name:</Text>
-                    <Text style={style.value}>{first_name.value}</Text>
+                    <Text style={styles.category}>First Name:</Text>
+                    <Text style={styles.value}>{first_name.value}</Text>
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Last Name:</Text>
-                    <Text style={style.value}>{last_name.value}</Text>
+                    <Text style={styles.category}>Last Name:</Text>
+                    <Text style={styles.value}>{last_name.value}</Text>
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>State:</Text>
+                    <Text style={styles.category}>State:</Text>
 
                     {typeof state === null || !state ? (
                         <Text> </Text>
                     ) : (
-                        <Text style={style.value}>{state.value || ''}</Text>
+                        <Text style={styles.value}>{state.value || ''}</Text>
                     )}
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Date of Birth:</Text>
-                    <Text style={style.value}>{dob.value}</Text>
+                    <Text style={styles.category}>Date of Birth:</Text>
+                    <Text style={styles.value}>{dob.value}</Text>
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Pronouns:</Text>
-                    <Text style={style.value}>{pronouns.value}</Text>
+                    <Text style={styles.category}>Pronouns:</Text>
+                    <Text style={styles.value}>{pronouns.value}</Text>
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Gender:</Text>
-                    <Text style={style.value}>{gender.value}</Text>
+                    <Text style={styles.category}>Gender:</Text>
+                    <Text style={styles.value}>{gender.value}</Text>
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Sexuality:</Text>
+                    <Text style={styles.category}>Sexuality:</Text>
 
                     {typeof sexuality === null || !sexuality ? (
                         <Text> </Text>
                     ) : (
-                        <Text style={style.value}>{sexuality.value || ''}</Text>
+                        <Text style={styles.value}>
+                            {sexuality.value || ''}
+                        </Text>
                     )}
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Insurance:</Text>
+                    <Text style={styles.category}>Insurance:</Text>
                     {typeof insurance === null || !insurance ? (
                         <Text> </Text>
                     ) : (
-                        <Text style={style.value}>{insurance.value || ''}</Text>
+                        <Text style={styles.value}>
+                            {insurance.value || ''}
+                        </Text>
                     )}
                 </View>
 
                 <View style={{ width: 100 }}>
-                    <Text style={style.category}>Plan:</Text>
+                    <Text style={styles.category}>Plan:</Text>
                     {typeof plan === null || !plan ? (
                         <Text> </Text>
                     ) : (
-                        <Text style={style.plan}>{plan.value || ''}</Text>
+                        <Text style={styles.plan}>{plan.value || ''}</Text>
                     )}
                 </View>
 
                 {custom && (
                     <Fragment>
                         <View style={{ width: 100 }}>
-                            <Text style={style.category}>Zip Code:</Text>
+                            <Text style={styles.category}>Zip Code:</Text>
                             {typeof zipcode === null || !zipcode ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {zipcode.value || ''}
                                 </Text>
                             )}
                         </View>
 
                         <View style={{ width: 100 }}>
-                            <Text style={style.category}>Home Secure:</Text>
+                            <Text style={styles.category}>Home Secure:</Text>
                             {typeof housingSecure === null || !housingSecure ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {housingSecure.message || ''}
                                 </Text>
                             )}
                         </View>
 
                         <View>
-                            <Text style={style.category}>Food Secure:</Text>
+                            <Text style={styles.category}>Food Secure:</Text>
                             {typeof foodSecure === null || !foodSecure ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {foodSecure.message || ''}
                                 </Text>
                             )}
                         </View>
 
                         <View style={{ width: 100 }}>
-                            <Text style={style.category}>Enrollment:</Text>
+                            <Text style={styles.category}>Enrollment:</Text>
                             {typeof enrollment === null || !enrollment ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {enrollment.value || ''}
                                 </Text>
                             )}
                         </View>
 
                         <View>
-                            <Text style={style.category}>
+                            <Text style={styles.category}>
                                 Household Income:
                             </Text>
                             {typeof income === null || !income ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {income.value || ''}
                                 </Text>
                             )}
                         </View>
 
                         <View>
-                            <Text style={style.category}>
+                            <Text style={styles.category}>
                                 Race / Ethnicity:
                             </Text>
                             {typeof ethnicity === null || !ethnicity ? (
                                 <Text> </Text>
                             ) : (
-                                <Text style={style.plan}>
+                                <Text style={styles.plan}>
                                     {ethnicity.value || ''}
                                 </Text>
                             )}

@@ -7,11 +7,15 @@ import Constant, { colors } from '~/utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { rateVisit } from '~/redux/reducers/appointments';
+import { handleNavigation } from '~/utils/functions';
+import { default as globalStyles } from '~/components/styles';
 
 import styles from './styles';
-import { handleNavigation } from '~/utils/functions';
 
 const { staticImages } = Constant.App;
+
+const { black, pad_h, xxLarge, large, pad_v, center, grey_br, radius_md } =
+    globalStyles;
 
 const VideoRating = () => {
     const dispatch = useDispatch();
@@ -30,7 +34,7 @@ const VideoRating = () => {
         <ScrollView>
             <StatusBar barStyle="light-content" translucent />
             <View style={styles.heading}>
-                <Text options={'black pad_h lite xxLarge'}>
+                <Text options={[black, pad_h, xxLarge]}>
                     We hope you had a great visit! Please rate your visit
                 </Text>
             </View>
@@ -44,7 +48,7 @@ const VideoRating = () => {
                     />
                 </View>
                 <Text
-                    options={'black large pad_v center'}
+                    options={[black, large, pad_v, center]}
                 >{`${visit.expert.firstName} ${visit.expert.lastName}`}</Text>
                 <Rating
                     type="custom"
@@ -63,7 +67,7 @@ const VideoRating = () => {
                     value={review}
                     onChangeText={setReview}
                     placeholder="Tell us about your experience"
-                    options="grey_br radius_md pad_v"
+                    options={[grey_br, radius_md, pad_v]}
                 />
                 <Conditional if={review.length || hasRated}>
                     <CustomButton
@@ -75,7 +79,7 @@ const VideoRating = () => {
                         text="Submit"
                     />
                 </Conditional>
-                <Conditional if={!review.length && !hasRated}>
+                <Conditional if={!hasRated}>
                     <CustomButton
                         buttonStyle={styles.buttonStyle}
                         textStyle={styles.buttonTextStyle}

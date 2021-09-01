@@ -20,6 +20,7 @@ function* loginFirebase({ payload }) {
     try {
         let token: string;
         const { email, password } = payload;
+
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
 
