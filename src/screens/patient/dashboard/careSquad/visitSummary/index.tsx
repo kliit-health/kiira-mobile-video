@@ -42,7 +42,7 @@ const VisitSummary = ({ navigation }) => {
                 date: appointment.visit.time,
                 locked: appointment.visit.locked ? 'Yes' : 'No',
                 summary: summary.notes || 'None',
-                reason: appointment.visit.reason,
+                reason: appointment.visit.reason.title || '',
                 assessment: plan.notes || 'None',
             },
             expert: {
@@ -111,9 +111,9 @@ const VisitSummary = ({ navigation }) => {
                 </View>
                 <View style={styles.card}>
                     <Text style={styles.sectionTitle}>{chiefComplaint}</Text>
-                    <Text style={styles.detailsDescription}>
+                    {/* <Text style={styles.detailsDescription}>
                         {visit.reason}
-                    </Text>
+                    </Text> */}
                 </View>
                 <View style={styles.card}>
                     <Text style={styles.sectionTitle}>{assessmentPlan}</Text>

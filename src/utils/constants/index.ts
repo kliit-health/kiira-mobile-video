@@ -559,7 +559,7 @@ export const colors = {
     greyLight: '#F6F7FA',
     green: '#57d596',
     lightBlue: '#6AC5FF',
-    lightGrey: '#d3d3d3',
+    lightGrey: '#F6F7FA',
     offWhite: '#F9F9F9',
     orange: '#F49C20',
     paleLilac: '#e5e5ea',
@@ -834,13 +834,15 @@ export const screenNames = {
 };
 
 export enum route {
-    requestVisit = 'RequestVisit',
-    careSquad = 'CareSquad',
-    ask = 'Ask',
-    healthHistory = 'HealthHistory',
     appointments = 'Appointments',
-    healthAssesmentSchedule = 'HealthAssessmentSchedule',
+    ask = 'Ask',
+    book = 'Book',
+    careSquad = 'CareSquad',
+    chat = 'NewChat',
     healthAssessmentConfirmation = 'HealthAssessmentConfirmation',
+    healthAssesmentSchedule = 'HealthAssessmentSchedule',
+    healthHistory = 'HealthHistory',
+    requestVisit = 'RequestVisit',
 }
 
 export enum feature {

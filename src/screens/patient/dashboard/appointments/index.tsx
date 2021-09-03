@@ -5,9 +5,6 @@ import { Column, Header, Screen, Tabs } from '~/components';
 import { Show } from './components';
 import { tabs } from './models';
 import moment from 'moment';
-import { default as globalStyles } from '~/components/styles';
-
-const { blue_bg } = globalStyles;
 
 const Appointments = ({ navigation }) => {
     const visitData = useSelector((state: RootState) => state.appointments);
@@ -43,7 +40,7 @@ const Appointments = ({ navigation }) => {
                     parseInt(moment(b.time).format('x'))
                 );
             });
-            console.log('Past: ', past);
+
             setPast(past);
             setFuture(future);
         }
@@ -51,15 +48,15 @@ const Appointments = ({ navigation }) => {
 
     return (
         <Screen>
-            <Column options={[blue_bg]}>
+            <Column>
                 <Header
                     title="Appointments"
                     onBack={() => navigation.navigate('Home')}
                 />
                 <Tabs
                     list={tabs}
-                    pastSelected={pastSelected}
-                    setPastSelected={setPastSelected}
+                    active={pastSelected}
+                    setActive={setPastSelected}
                 />
                 <Show pastSelected={pastSelected} past={past} future={future} />
             </Column>

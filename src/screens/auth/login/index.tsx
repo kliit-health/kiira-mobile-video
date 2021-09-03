@@ -21,15 +21,15 @@ import { loginApi, resetLoginState } from '~/redux/reducers/login';
 import * as Keychain from 'react-native-keychain';
 
 const Login = props => {
-    const lang = useSelector((state: RootState) => state.language);
+    const { login } = useSelector((state: RootState) => state.language);
     const loginFailure = useSelector(
         (state: RootState) => state.login.loginFailure,
     );
     const dispatch = useDispatch();
     const { navigation } = props;
     const { staticImages } = Constant.App;
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('aaron@kiira.io');
+    const [password, setPassword] = useState('Test1234!');
     const [biometricType, setBiometricType] = useState('');
 
     useEffect(() => {
@@ -64,7 +64,7 @@ const Login = props => {
                           },
                 ) => {
                     if (!result) {
-                        dispatch(showOrHideModal(lang.login.NoBiometrics));
+                        dispatch(showOrHideModal(login.NoBiometrics));
                     } else {
                         if (typeof result !== 'boolean') {
                             if (result.username || result.password) {
@@ -74,9 +74,7 @@ const Login = props => {
                                 };
                                 dispatch(loginApi(data));
                             } else {
-                                dispatch(
-                                    showOrHideModal(lang.login.NoBiometrics),
-                                );
+                                dispatch(showOrHideModal(login.NoBiometrics));
                             }
                         }
                     }
@@ -108,7 +106,7 @@ const Login = props => {
                         autoCapitalize="none"
                         autoCorrect={false}
                         onChangeText={value => setEmail(value)}
-                        placeholder={lang.login.Email}
+                        placeholder={login.Email}
                         value={email}
                         style={
                             email
@@ -122,7 +120,7 @@ const Login = props => {
                     <CustomInputText
                         autoCapitalize="none"
                         onChangeText={value => setPassword(value)}
-                        placeholder={lang.login.Password}
+                        placeholder={login.Password}
                         value={password}
                         secureTextEntry
                         style={
@@ -181,11 +179,11 @@ const Login = props => {
                 textStyle={styles.loginButtonText}
                 onPress={() => {
                     if (!email.trim()) {
-                        dispatch(showOrHideModal(lang.login.EmptyEmailMsg));
+                        dispatch(showOrHideModal(login.EmptyEmailMsg));
                     } else if (!isEmail(email.trim())) {
-                        dispatch(showOrHideModal(lang.login.InvalidEmailMsg));
+                        dispatch(showOrHideModal(login.InvalidEmailMsg));
                     } else if (!password) {
-                        dispatch(showOrHideModal(lang.login.EmptyPasswordMsg));
+                        dispatch(showOrHideModal(login.EmptyPasswordMsg));
                     } else {
                         const data = {
                             email: email.trim(),
@@ -194,7 +192,7 @@ const Login = props => {
                         dispatch(loginApi(data));
                     }
                 }}
-                text={lang.login.Login}
+                text={login.Login}
             />
         );
     };
@@ -207,7 +205,7 @@ const Login = props => {
                 }}
             >
                 <CustomText style={styles.forgotPasswordText}>
-                    {lang.login.ForgotPassword}
+                    {login.ForgotPassword}
                 </CustomText>
             </TouchableOpacity>
         );

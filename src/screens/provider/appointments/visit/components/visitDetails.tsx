@@ -11,7 +11,9 @@ import CancelModal from './cancelModal';
 const VisitDetails = ({ navigation, visit }) => {
     const dispatch = useDispatch();
     const {
-        appointmentType: { duration },
+        reason: {
+            sessionType: { duration },
+        },
     } = visit;
     let today = moment().startOf('day');
     let appointment = moment(visit.time).format('YYYY-MM-DD');

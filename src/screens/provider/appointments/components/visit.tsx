@@ -71,7 +71,7 @@ const Visit = props => {
                         {lang.expertAppointments.subject}
                     </Text>
                     <Text numberOfLines={1} style={styles.subtitle}>
-                        {reason}
+                        {reason.title}
                     </Text>
                 </View>
             </View>

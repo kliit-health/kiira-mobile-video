@@ -1,5 +1,9 @@
-import navigationService from '~/navigation/navigationService';
+import { NavigationService as navigation } from '~/navigation';
 
 export const handleNavigation = (destination: string) => {
-    navigationService.navigate(destination);
+    navigation.navigate(destination);
+};
+
+export const handleBack = () => {
+    navigation.goBack();
 };

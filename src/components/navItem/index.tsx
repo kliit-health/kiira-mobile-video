@@ -13,7 +13,7 @@ export type NavItemProps = {
     description: string;
     destination: route;
     onPress: (destination: route, features: feature) => void;
-    features: feature;
+    features?: feature;
     icon: any;
 };
 
@@ -54,7 +54,8 @@ const NavItem = ({
 
 const styles = StyleSheet.create({
     root: {
-        padding: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
         borderTopWidth: 0.4,
         borderColor: colors.gray,
         flexDirection: 'row',

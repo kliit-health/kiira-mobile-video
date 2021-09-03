@@ -117,7 +117,9 @@ const ItemFuture = props => {
                     <Text style={itemFutureStyles.subject}>
                         {videoHistory.subject}
                     </Text>
-                    <Text style={itemFutureStyles.subtitle}>{reason}</Text>
+                    <Text style={itemFutureStyles.subtitle}>
+                        {reason.title}
+                    </Text>
                 </View>
             </View>
             <View style={itemFutureStyles.timeContainer}>
@@ -160,7 +162,7 @@ const ItemPast = props => {
                     <Text style={itemPastStyles.subject}>
                         {videoHistory.subject}
                     </Text>
-                    <Text style={itemPastStyles.subtitle}>{reason}</Text>
+                    <Text style={itemPastStyles.subtitle}>{reason.title}</Text>
                 </View>
                 <View style={itemPastStyles.subtitleContainer}>
                     <Text style={itemPastStyles.subject}>

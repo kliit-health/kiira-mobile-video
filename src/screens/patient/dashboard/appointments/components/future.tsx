@@ -38,7 +38,7 @@ const {
     xxLarge,
     white,
     pad_h,
-    pad_v,
+    pad_v_md,
     sm_pad_v,
     blue,
     large,
@@ -302,7 +302,7 @@ const Future = ({ visit, date, navigation }) => {
             options={[
                 white_bg,
                 pad_h,
-                pad_v,
+                pad_v_md,
                 radius_md,
                 hide_overflow,
                 grey_br,
@@ -312,7 +312,9 @@ const Future = ({ visit, date, navigation }) => {
             <ExpertDetails />
             <ModifyVisit />
             <VisitDetails />
-            <Line />
+            <Column options={[pad_h]}>
+                <Line />
+            </Column>
             <Disclaimer />
             <CustomButton
                 disabled={!checked}

@@ -119,7 +119,7 @@ const ExpertAppointments = ({ navigation }) => {
     };
 
     const FallBack = () => <View></View>;
-
+    console.log('SEARCH: ', search);
     return (
         <Container unformatted styles={modifiers.container} themed>
             <StatusBar barStyle="light-content" translucent={true} />
@@ -139,12 +139,6 @@ const ExpertAppointments = ({ navigation }) => {
                         index,
                     })}
                     onScrollToIndexFailed={0}
-                    keyboardDismissMode={
-                        Platform.OS === 'ios' ? 'none' : 'on-drag'
-                    }
-                    keyboardShouldPersistTaps={
-                        Platform.OS === 'ios' ? 'never' : 'always'
-                    }
                     data={dates}
                     horizontal={true}
                     decelerationRate={'fast'}
@@ -208,12 +202,6 @@ const ExpertAppointments = ({ navigation }) => {
                 {visits.length > 0 ? (
                     <FlatList
                         showsVerticalScrollIndicator={false}
-                        keyboardDismissMode={
-                            Platform.OS === 'ios' ? 'none' : 'on-drag'
-                        }
-                        keyboardShouldPersistTaps={
-                            Platform.OS === 'ios' ? 'never' : 'always'
-                        }
                         data={search}
                         decelerationRate={'fast'}
                         extraData={selectedDate}

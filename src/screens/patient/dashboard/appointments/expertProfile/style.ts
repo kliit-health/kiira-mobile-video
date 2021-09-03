@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 import metrics from '~/utils/metrices';
-import Constant from '~/utils/constants';
+import { text, colors } from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 let titlePaddingValue = metrics.width * 0.05;
+
+const { size, fontFamily } = text;
 
 const styles = StyleSheet.create({
     backContainerStyle: {
@@ -29,25 +31,25 @@ const styles = StyleSheet.create({
     bioTextStyle: {
         width: metrics.width - parentPadding,
         marginTop: metrics.height * 0.02,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Medium,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.medium,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     bioTextStyleBold: {
         width: metrics.width - parentPadding,
         marginTop: metrics.height * 0.02,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Medium,
-        fontFamily: Constant.App.fontFamily.headerBold,
+        color: colors.black,
+        fontSize: size.medium,
+        fontFamily: fontFamily.poppinsSemiBold,
         fontWeight: '500',
     },
 
     bioTitleTextStyle: {
         width: metrics.width - parentPadding,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.xLarge,
-        fontFamily: Constant.App.fontFamily.headerBold,
+        color: colors.black,
+        fontSize: size.xLarge,
+        fontFamily: fontFamily.poppinsSemiBold,
         fontWeight: '500',
     },
 
@@ -55,19 +57,19 @@ const styles = StyleSheet.create({
         marginTop: metrics.height * 0.02,
         width: metrics.width - parentPadding,
         padding: 12,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         borderRadius: 20,
     },
 
     btnTextStyle: {
-        color: Constant.App.colors.whiteColor,
+        color: colors.white,
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     expertInfoParentContainerStyle: {
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         paddingLeft: parentPaddingValue,
         paddingRight: parentPaddingValue,
         paddingBottom: parentPaddingValue * 0.2,
@@ -80,26 +82,26 @@ const styles = StyleSheet.create({
 
     expertNameTextBoldStyle: {
         marginTop: metrics.height * 0.01,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Large,
+        color: colors.black,
+        fontSize: size.large,
         fontWeight: '500',
-        fontFamily: Constant.App.fontFamily.headerBold,
+        fontFamily: fontFamily.poppinsSemiBold,
     },
 
     expertInfoProfessionTextStyle: {
         marginTop: metrics.height * 0.01,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Small,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.small,
+        fontFamily: fontFamily.poppinsRegular,
         fontWeight: '200',
     },
 
     expertProfessionLoctionBoldStyle: {
         marginTop: metrics.height * 0.01,
-        color: Constant.App.colors.greyColorText,
-        fontSize: Constant.App.textSize.Small,
+        color: colors.greyAccent,
+        fontSize: size.small,
         fontWeight: '200',
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     hoursContainerStyle: {
@@ -113,22 +115,22 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         marginTop: 35,
-        backgroundColor: Constant.App.colors.greyBgAsk,
+        backgroundColor: colors.greyLight,
         flexDirection: 'column',
     },
 
     phoneNumberTextStyleBold: {
-        color: Constant.App.colors.blueColor,
-        fontSize: Constant.App.textSize.Medium,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.primaryBlue,
+        fontSize: size.medium,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     titleContainerStyle: {
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         padding: titlePaddingValue,
         flexDirection: 'column',
         width: metrics.width,
-        borderBottomColor: Constant.App.colors.borderColorFilterModal,
+        borderBottomColor: colors.greyLight,
         borderBottomWidth: 4,
         alignItems: 'center',
         justifyContent: 'center',
@@ -137,10 +139,10 @@ const styles = StyleSheet.create({
     titleTextStyle: {
         alignSelf: 'center',
         position: 'absolute',
-        color: Constant.App.colors.blackColor,
+        color: colors.black,
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.headerBold,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsSemiBold,
         fontWeight: '600',
     },
 });

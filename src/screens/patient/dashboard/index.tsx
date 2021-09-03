@@ -15,6 +15,8 @@ import DeviceInfo from 'react-native-device-info';
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
+
+    const firstName = user.profileInfo.firstName;
     const subscription = useSelector(
         (state: RootState) => state.subscription.data,
     );
@@ -122,7 +124,7 @@ const Dashboard = ({ navigation }) => {
             unformatted
         >
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Welcome displayName={user.profileInfo.firstName} />
+                <Welcome displayName={firstName} />
                 <Banner />
                 {model.map(item => (
                     <NavItem

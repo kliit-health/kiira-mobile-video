@@ -18,9 +18,9 @@ export default StyleSheet.create({
         left: 0,
         right: 0,
         color: colors.black,
-        fontSize: text.size.large,
+        fontSize: text.size.xLarge,
         fontFamily: text.fontFamily.poppinsRegular,
-        fontWeight: '500',
+        fontWeight: '400',
     },
     editButton: {
         marginLeft: '42%',

@@ -6,7 +6,7 @@ import Tab from '../tab';
 import { default as globalStyles } from '../styles';
 
 const {
-    active,
+    blue,
     blue_br_b,
     bottom,
     inactive,
@@ -16,24 +16,27 @@ const {
     small,
     tiny,
     width_auto,
+    text_space,
 } = globalStyles;
 
-const Tabs = ({ list, setPastSelected, pastSelected }) => {
+const Tabs = ({ list, setActive, active, options = null }) => {
     const [selected, setSelected] = useState(list[0].title);
 
     const line = [none, small, width_auto];
-    const text = [inactive, pad_bottom, tiny, regular];
+    const text = [inactive, pad_bottom, tiny, regular, text_space];
 
     const lineSelected = [bottom, blue_br_b, small, width_auto];
-    const textSelected = [active, pad_bottom, tiny, regular];
+    const textSelected = [blue, pad_bottom, tiny, regular, text_space];
 
-    const handlePress = title => {
+    const handlePress = (title: string) => {
         setSelected(title);
-        setPastSelected(!pastSelected);
+        if (setActive && active) {
+            setActive(!active);
+        }
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, options]}>
             <FlatList
                 scrollEnabled={false}
                 contentContainerStyle={styles.listContainer}
@@ -56,7 +59,7 @@ const Tabs = ({ list, setPastSelected, pastSelected }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.greyAccent,
+        backgroundColor: colors.greyLight,
         height: 40,
         borderBottomColor: colors.greyDark,
         borderBottomWidth: 1,

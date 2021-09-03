@@ -13,8 +13,8 @@ export type ButtonProps = TouchableOpacityProps & {
     id?: string;
     onPress?: (id: string) => void;
     style?: {
-        container?: ViewStyle;
-        title?: TextStyle;
+        container?: ViewStyle[];
+        title?: TextStyle[];
     };
 };
 

@@ -1,5 +1,5 @@
 import { route, feature } from '~/utils/constants';
-import { Camera, Chat, Squad, Sheet, Calendar, Urgent } from '~/svgs';
+import { Camera, Chat, Calendar, Urgent } from '~/svgs';
 
 export type Item = {
     title: string;
@@ -11,24 +11,17 @@ export type Item = {
 
 const model: Item[] = [
     {
-        title: 'dashboard.getTreatment',
+        title: 'dashboard.book',
         description: 'dashboard.talk',
-        destination: route.requestVisit,
+        destination: route.book,
         icon: Camera,
         features: feature.video,
     },
     {
         title: 'dashboard.chatExpert',
         description: 'dashboard.getHelp',
-        destination: route.ask,
+        destination: route.chat,
         icon: Chat,
-        features: undefined,
-    },
-    {
-        title: 'dashboard.mySquad',
-        description: 'dashboard.buildTeam',
-        destination: route.careSquad,
-        icon: Squad,
         features: undefined,
     },
     {
@@ -37,13 +30,6 @@ const model: Item[] = [
         destination: route.appointments,
         icon: Calendar,
         features: feature.video,
-    },
-    {
-        title: 'dashboard.myHistory',
-        description: 'dashboard.provideInformation',
-        destination: route.healthHistory,
-        icon: Sheet,
-        features: undefined,
     },
     {
         title: 'dashboard.sos',

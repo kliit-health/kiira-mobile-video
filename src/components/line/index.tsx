@@ -18,9 +18,9 @@ const Line = ({ children = null, options = null }) => {
 
 const base = StyleSheet.create({
     default: {
-        borderColor: colors.lightGrey,
+        borderColor: colors.greyAccent,
         borderTopWidth: 1,
-        width: '90%',
+        width: '100%',
         marginBottom: 20,
         alignSelf: 'center',
     },

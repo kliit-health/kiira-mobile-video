@@ -153,10 +153,6 @@ export function uploadImage(obj, success?, error?) {
 }
 
 export async function getAppointmentsAsync(uid) {
-    console.log(auth.PhoneAuthState);
-    await auth()
-        .currentUser.getIdTokenResult()
-        .then(result => console.log(result));
     try {
         const document = firestore().collection('appointments').doc(uid);
         const appointments = await document.get();

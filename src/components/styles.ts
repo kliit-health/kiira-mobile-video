@@ -3,12 +3,21 @@ import { text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 
 const { size, fontFamily } = text;
+const { height, width } = metrices;
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
     //FONT SIZE
 
     large: {
         fontSize: size.large,
+    },
+
+    small: {
+        fontSize: size.xSmall,
+    },
+
+    tiny: {
+        fontSize: size.small,
     },
 
     xLarge: {
@@ -17,13 +26,6 @@ export default StyleSheet.create({
 
     xxLarge: {
         fontSize: size.xxLarge,
-    },
-    tiny: {
-        fontSize: size.small,
-    },
-
-    small: {
-        fontSize: size.xSmall,
     },
 
     //FONTS
@@ -34,6 +36,7 @@ export default StyleSheet.create({
 
     regular: {
         fontFamily: fontFamily.poppinsRegular,
+        fontWeight: '300',
     },
 
     medium: {
@@ -146,6 +149,10 @@ export default StyleSheet.create({
         paddingBottom: 20,
     },
 
+    pad: {
+        padding: 20,
+    },
+
     center: {
         alignSelf: 'center',
     },
@@ -156,6 +163,22 @@ export default StyleSheet.create({
 
     align_items_c: {
         alignItems: 'center',
+    },
+
+    justify_fs: {
+        justifyContent: 'flex-start',
+    },
+
+    align_items_fs: {
+        alignItems: 'flex-start',
+    },
+
+    justify_fe: {
+        justifyContent: 'flex-end',
+    },
+
+    align_items_fe: {
+        alignItems: 'flex-end',
     },
 
     centerText: {
@@ -186,11 +209,13 @@ export default StyleSheet.create({
         overflow: 'hidden',
     },
 
-    //COLORS
+    //Text
 
-    active: {
-        color: colors.primaryBlue,
+    bold: {
+        fontWeight: '800',
     },
+
+    //COLORS
 
     blue: {
         color: colors.primaryBlue,
@@ -209,11 +234,14 @@ export default StyleSheet.create({
     },
 
     gray: {
-        color: colors.lightGrey,
+        color: colors.greyAccent,
     },
 
     gray_dark: {
         color: colors.greyDark,
+    },
+    gray_light: {
+        color: colors.lightGrey,
     },
 
     none: {
@@ -261,6 +289,21 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
     },
 
+    grey_br_b_md: {
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 2,
+    },
+
+    grey_br_t: {
+        borderTopColor: colors.greyAccent,
+        borderTopWidth: 1,
+    },
+
+    grey_br_t_md: {
+        borderTopColor: colors.greyAccent,
+        borderTopWidth: 2,
+    },
+
     //Radius
 
     radius_sm: {
@@ -274,4 +317,44 @@ export default StyleSheet.create({
     radius_lg: {
         borderRadius: 20,
     },
+
+    //Elements
+
+    icon: {
+        alignSelf: 'center',
+        margin: 5,
+    },
+
+    text_space: {
+        letterSpacing: 2,
+    },
+
+    //Screens
+
+    height_25: {
+        height: '25%',
+    },
+
+    height_30: {
+        height: '30%',
+    },
+
+    height_50: {
+        height: '50%',
+    },
+
+    height_75: {
+        height: '75%',
+    },
 });
+
+export const card = [
+    styles.justify_fs,
+    styles.pad_h,
+    styles.pad_v,
+    styles.white_bg,
+    styles.grey_br,
+    styles.radius_md,
+];
+
+export default styles;

@@ -10,7 +10,7 @@ import {
     oneOfType,
     any,
 } from 'prop-types';
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import RadioButton from '../radioButton';
 import { isEqual } from 'lodash';
 import { mergeStyles } from '../../utils/functions';
@@ -85,19 +85,21 @@ const RadioGroup = ({
     };
 
     return (
-        <View style={styles.root}>
-            {data.map((item, index) => (
+        <FlatList
+            showsVerticalScrollIndicator={false}
+            data={data}
+            keyExtractor={({ index }) => 'group' + index}
+            renderItem={({ item, index }) => (
                 <RadioButton
                     key={item + index}
                     label={typeof item === 'object' ? item.label : item}
                     selected={compare(item, selected)}
                     onPress={() => handlePress(item, index)}
                     boxed={horizontal ? false : boxed}
-                    key={item.label}
                     styles={styles.button}
                 />
-            ))}
-        </View>
+            )}
+        />
     );
 };
 

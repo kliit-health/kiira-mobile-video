@@ -20,12 +20,14 @@ import AskExpert from '../screens/provider/ask';
 import AskSupport from '../screens/support/ask';
 import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
+import Book from '../screens/patient/dashboard/book';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
 import BuyingCredit from '../screens/patient/dashboard/getTreatment/payment/buyingCredit';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
 import ChangePasswordExpert from '../screens/provider/account/settings/changePassword';
 import Chat from '../screens/patient/dashboard/ask/chat';
+import NewChat from '../screens/patient/dashboard/chat';
 import ChatBot from '../screens/auth/chatBot';
 import ChatExpert from '../screens/provider/ask/chat';
 import Children from '../screens/patient/dashboard/healthHistory/pregnancy/children';
@@ -96,6 +98,7 @@ import PersonalInformation from '../screens/provider/appointments/patientProfile
 import AgreementDetails from '../screens/provider/appointments/patientProfile/agreementDetails';
 import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
+import VisitOverView from '../screens/patient/dashboard/appointments/visitSummary';
 
 import Constant, { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
@@ -568,6 +571,7 @@ const MainAppStack = createStackNavigator(
         Appointments: { screen: Appointments },
         BasicInfo: { screen: BasicInfo },
         Birth: { screen: Birth },
+        Book: { screen: Book },
         BookVisit: { screen: BookVisit },
         BottomTab: { screen: BottomTab },
         CareSquad: { screen: CareSquad },
@@ -575,6 +579,7 @@ const MainAppStack = createStackNavigator(
         TreatmentHistory: { screen: TreatmentHistory },
         ChangePassword: { screen: ChangePassword },
         Chat: { screen: Chat },
+        NewChat: { screen: NewChat },
         Children: { screen: Children },
         ChooseExpert: { screen: ChooseExpert },
         DueDate: { screen: DueDate },
@@ -606,6 +611,7 @@ const MainAppStack = createStackNavigator(
         TermsConditions: { screen: TermsConditions },
         TreatmentBot: { screen: TreatmentBot },
         Visit: { screen: Visit },
+        VisitOverView: { screen: VisitOverView },
         VisitSummary: { screen: VisitSummary },
         VideoRating: { screen: VideoRating },
         TwillioCalling: { screen: TwillioCalling },

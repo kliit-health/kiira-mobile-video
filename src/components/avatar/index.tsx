@@ -5,7 +5,6 @@ import FastImage from 'react-native-fast-image';
 import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';
-import { ConsoleWriter } from 'istanbul-lib-report';
 
 const Avatar = ({
     styles: customStyles,

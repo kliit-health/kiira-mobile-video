@@ -1,12 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Text, Row, Line, Column } from '~/components';
+import { TouchableOpacity, View } from 'react-native';
+import { NavigationService as navigation } from '~/navigation';
+import { Text, Row, Line, Column, Conditional } from '~/components';
+import Feather from 'react-native-vector-icons/Feather';
 import styles from '../style';
 import { default as globalStyles } from '~/components/styles';
+import { colors, screenNames } from '~/utils/constants';
 
 const {
     pad_b,
+    sm_pad_h,
     pad_h,
+    sm_pad_v,
     pad_v,
     radius_md,
     large,
@@ -19,13 +24,18 @@ const {
     hide_overflow,
     gray_dark,
     light,
+    blue,
+    text_space,
+    grey_br,
 } = globalStyles;
 
 export const Past = ({ visit, date }) => {
-    const { uid, calendarID, reason, id, expert, prepaid } = visit;
+    const { expert, reason, locked } = visit;
     const { duration } = reason.sessionType;
 
-    console.log('Visit: ', visit.locked);
+    const handleVisitSummary = () => {
+        navigation.navigate('VisitOverView', { visit });
+    };
 
     const VisitTime = () => {
         return (
@@ -34,14 +44,18 @@ export const Past = ({ visit, date }) => {
                     styles.appointment,
                     {
                         width: '20%',
-                        paddingVertical: 30,
+                        paddingVertical: 35,
                         justifyContent: 'space-evenly',
                     },
                 ]}
             >
-                <Text options={[white, center]}>{date.month}</Text>
-                <Text options={[white, center]}>{date.day}</Text>
-                <Text options={[white, center]}>{date.year}</Text>
+                <Text options={[white, center, text_space]}>
+                    {date.month.toUpperCase()}
+                </Text>
+                <Text options={[white, center, xxLarge, sm_pad_v]}>
+                    {date.day}
+                </Text>
+                <Text options={[white, center, text_space]}>{date.year}</Text>
             </View>
         );
     };
@@ -50,19 +64,36 @@ export const Past = ({ visit, date }) => {
         return (
             <Column>
                 <Column options={[pad_h]}>
-                    <Text options={[xxLarge, light]}>
-                        {`${visit.expert.firstName} ${visit.expert.lastName}`}
+                    <Text options={[xxLarge, light, sm_pad_v]}>
+                        {`${expert.firstName} ${expert.lastName}`}
                     </Text>
                     <Text options={[large]}>
                         {`${duration} min. Virtual List`}
                     </Text>
                 </Column>
-                <Column>
+                <Column options={[pad_h]}>
                     <Line />
                 </Column>
-                <Text options={[pad_h, pad_b, large, gray_dark]}>
-                    {`Waiting for visit summary`}
-                </Text>
+                <Conditional if={!locked}>
+                    <Text options={[pad_h, pad_b, large, gray_dark]}>
+                        {`Waiting for visit summary`}
+                    </Text>
+                </Conditional>
+                <Conditional if={locked}>
+                    <TouchableOpacity onPress={handleVisitSummary}>
+                        <Row options={[pad_h]}>
+                            <Feather
+                                style={[pad_b, blue]}
+                                name="file-text"
+                                color={colors.blue}
+                                size={25}
+                            />
+                            <Text options={[sm_pad_h, pad_b, xLarge, blue]}>
+                                {`View Visit Summary`}
+                            </Text>
+                        </Row>
+                    </TouchableOpacity>
+                </Conditional>
             </Column>
         );
     };
@@ -77,10 +108,11 @@ export const Past = ({ visit, date }) => {
                     pad_v,
                     hide_overflow,
                     radius_md,
+                    grey_br,
                 ]}
             >
-                {VisitTime()}
-                {ExpertDetails()}
+                <VisitTime />
+                <ExpertDetails />
             </Row>
         </Column>
     );
