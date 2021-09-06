@@ -2,17 +2,6 @@ import { StyleSheet } from 'react-native';
 import Constant, { colors, text } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 
-export default {
-    container: StyleSheet.create({
-        root: {
-            backgroundColor: colors.white,
-        },
-        safeAreaBottom: {
-            height: 0,
-        },
-    }),
-};
-
 export const style = StyleSheet.create({
     button: {
         alignSelf: 'center',
