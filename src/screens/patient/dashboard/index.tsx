@@ -5,12 +5,12 @@ import { ScrollView, Linking, Platform } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
 import { getAppointmentsList } from '~/redux/reducers/appointments';
-import { Container, NavItem } from '~/components';
+import { Screen, NavItem } from '~/components';
 import { Welcome, Banner } from './sections';
 import model from './model';
-import styles from './styles';
 import i18n from '~/i18n';
 import DeviceInfo from 'react-native-device-info';
+import styles from '~/components/styles';
 
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -118,11 +118,7 @@ const Dashboard = ({ navigation }) => {
     };
 
     return (
-        <Container
-            styles={styles.container}
-            barStyle="dark-content"
-            unformatted
-        >
+        <Screen options={[styles.white_bg]} test="DashBoard">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Welcome displayName={firstName} />
                 <Banner />
@@ -134,7 +130,7 @@ const Dashboard = ({ navigation }) => {
                     />
                 ))}
             </ScrollView>
-        </Container>
+        </Screen>
     );
 };
 

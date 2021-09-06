@@ -214,6 +214,7 @@ const Login = props => {
     const BiometricLogin = () => {
         return (
             <TouchableOpacity
+                testID="Bio Login"
                 disabled={biometricType === ''}
                 onPress={loginWithBiometrics}
             >

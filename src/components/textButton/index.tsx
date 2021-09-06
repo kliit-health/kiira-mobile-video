@@ -20,6 +20,7 @@ import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 
 export type TextButtonProps = {
+    test?: string;
     styles?: any;
     children: ReactNode;
     outlined?: boolean;
@@ -47,6 +48,7 @@ const TextButton = ({
     icon: Icon,
     iconColor,
     activeOpacity,
+    test = '',
     ...rest
 }: TextButtonProps) => {
     const handlePress = (event: GestureResponderEvent): void => {
@@ -80,7 +82,7 @@ const TextButton = ({
     };
 
     return (
-        <View style={styles.root}>
+        <View testID={test} style={styles.root}>
             <TouchableOpacity
                 activeOpacity={activeOpacity}
                 disabled={disabled || hidden}

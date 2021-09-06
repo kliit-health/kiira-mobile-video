@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, TextButton } from '~/components';
+import { Screen, TextButton } from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { ScrollView, Text } from 'react-native';
@@ -21,12 +21,7 @@ const Account = ({ navigation }) => {
     };
 
     return (
-        <Container
-            styles={modifiers.container}
-            barStyle="light-content"
-            themed
-            unformatted
-        >
+        <Screen test="Profile Screen">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Profile {...user} />
                 {!!subscription.data.id && (
@@ -35,6 +30,7 @@ const Account = ({ navigation }) => {
                 <List onItemPress={handleNavigation} />
                 <Text style={styles.version}>{app.version}</Text>
                 <TextButton
+                    test="Logout"
                     onPress={handleSignOut}
                     styles={modifiers.button}
                     link
@@ -42,7 +38,7 @@ const Account = ({ navigation }) => {
                     {lang.account.logout}
                 </TextButton>
             </ScrollView>
-        </Container>
+        </Screen>
     );
 };
 

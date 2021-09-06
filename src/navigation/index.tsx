@@ -116,9 +116,9 @@ const TransparentStyle = StyleSheet.create({
     },
 });
 
-const { active, tiny, regular, space_sm, gray_dark } = globalStyles;
+const { blue, tiny, regular, space_sm, gray_dark } = globalStyles;
 
-const selected = [active, tiny, regular, space_sm];
+const selected = [blue, tiny, regular, space_sm];
 const notSelected = [tiny, gray_dark, regular, space_sm];
 
 const AuthStack = createStackNavigator(
@@ -161,6 +161,7 @@ const BottomTab = createBottomTabNavigator(
                 tabBarIcon: ({ focused }) => {
                     return (
                         <View
+                            testID="Community Tab"
                             style={{
                                 flexDirection: 'column',
                                 justifyContent: 'space-between',
@@ -192,6 +193,7 @@ const BottomTab = createBottomTabNavigator(
             navigationOptions: {
                 tabBarIcon: ({ focused }) => (
                     <View
+                        testID="Home Tab"
                         style={{
                             flexDirection: 'column',
                             justifyContent: 'space-between',
@@ -220,6 +222,7 @@ const BottomTab = createBottomTabNavigator(
                 tabBarIcon: ({ focused }) => {
                     return (
                         <View
+                            testID="Profile Tab"
                             style={{
                                 flexDirection: 'column',
                                 justifyContent: 'space-between',
@@ -255,7 +258,10 @@ const BottomTab = createBottomTabNavigator(
         initialRouteName: 'Home',
         tabBarposition: 'bottom',
         swipeEnabled: true,
-        defaultNavigationOptions: {},
+
+        defaultNavigationOptions: {
+            tabBarTestID: 'Patient',
+        },
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
@@ -280,6 +286,7 @@ const BottomTabExpert = createBottomTabNavigator(
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
                     <View
+                        testID="Expert Profile Tab"
                         style={{
                             flexDirection: 'column',
                             justifyContent: 'center',
@@ -308,6 +315,7 @@ const BottomTabExpert = createBottomTabNavigator(
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
                     <View
+                        testID="Expert Chat Tab"
                         style={{
                             flexDirection: 'column',
                             justifyContent: 'center',
@@ -339,6 +347,7 @@ const BottomTabExpert = createBottomTabNavigator(
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
                     <View
+                        testID="Expert Appointments Tab"
                         style={{
                             flexDirection: 'column',
                             justifyContent: 'center',
@@ -371,6 +380,7 @@ const BottomTabExpert = createBottomTabNavigator(
                 tabBarIcon: ({ focused }) => {
                     return (
                         <View
+                            testID="Expert Community Tab"
                             style={{
                                 flexDirection: 'column',
                                 justifyContent: 'center',
