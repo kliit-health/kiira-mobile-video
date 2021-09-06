@@ -231,7 +231,7 @@ const Login = props => {
     };
 
     return (
-        <View style={styles.parentContainerStyle}>
+        <View testID="Login Screen" style={styles.parentContainerStyle}>
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}

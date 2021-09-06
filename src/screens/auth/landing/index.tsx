@@ -68,7 +68,10 @@ const Landing = () => {
     }, []);
 
     return (
-        <View style={[styles.root, { paddingTop: insets.top > 0 ? 50 : 20 }]}>
+        <View
+            testID="Landing"
+            style={[styles.root, { paddingTop: insets.top > 0 ? 50 : 20 }]}
+        >
             <StatusBar hidden />
             <Logo />
             <Carousel
