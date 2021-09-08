@@ -40,4 +40,28 @@ describe('Login / Logout Flow', () => {
     it('should log user out', async () => {
         await element(by.id('Logout')).tap();
     });
+
+
+    it('should show Activate Account screen after tap', async () => {
+        await element(by.id('Activate Button')).tap();
+        await expect(element(by.id('Activate Screen'))).toBeVisible(); //test failed no identifier matching
+    });
+
+    //implement back to Landing
+    it('should go back to Landing screen after tap', async () => {
+        await element(by.id('Close Button')).tap();
+        await expect(element(by.id('Landing'))).toBeVisible();
+    });
+
+    it('should show Login screen after tap', async () => {
+        await element(by.id('Login Button')).tap();
+        await expect(element(by.id('Login Screen'))).toBeVisible();
+    });
+
+    // clear previous values in email and password
+    it('should clear email and password field on focus', async () => {
+        await element(by.id('Login Email')).clearText();
+        await element(by.id('Login Password')).clearText();
+    });
+
 });

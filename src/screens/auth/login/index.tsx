@@ -103,6 +103,7 @@ const Login = props => {
             <View style={styles.inputTextParentContainerStyle}>
                 <View style={styles.inputTextContainerStyle}>
                     <CustomInputText
+                        testID="Login Email"
                         autoCapitalize="none"
                         autoCorrect={false}
                         onChangeText={value => setEmail(value)}
@@ -118,6 +119,7 @@ const Login = props => {
                 </View>
                 <View style={styles.inputTextContainerStyle}>
                     <CustomInputText
+                        testID="Login Password"
                         autoCapitalize="none"
                         onChangeText={value => setPassword(value)}
                         placeholder={login.Password}

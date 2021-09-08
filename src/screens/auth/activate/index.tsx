@@ -47,16 +47,17 @@ const Activate = props => {
         );
     };
 
-    const renderCrossIconView = () => {
+    const CrossIcon = () => {
         return (
             <TouchableOpacity
+                testID="Close Button"
                 onPress={() => {
                     navigation.goBack();
                 }}
             >
                 <Image
                     resizeMode="contain"
-                    source={icons.crossIcon}
+                    source={icons.cross}
                     style={styles.backIconStyle}
                 />
             </TouchableOpacity>
@@ -109,7 +110,7 @@ const Activate = props => {
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                {renderCrossIconView()}
+                <CrossIcon/>
                 <View style={styles.contentContainerStyle}>
                     {renderLogoView()}
                     {renderInputTextView()}
