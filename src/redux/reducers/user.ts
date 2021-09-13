@@ -13,16 +13,16 @@ import {
 interface UserState {
     data: object;
     loading: boolean;
-    error: null;
+    error: null | object;
 }
 
-const initialState = {
+const initialState: UserState = {
     data: models.user,
     loading: false,
     error: null,
 };
 
-export default createReducer((state = initialState), {
+export default createReducer(initialState, {
     [GET_USER_PENDING]: state => {
         state.loading = true;
     },

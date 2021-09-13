@@ -37,16 +37,16 @@ export default StyleSheet.create({
 export const modifiers = {
     selected: {
         ring: {
-            borderColor: colors.blue,
+            borderColor: colors.primaryBlue,
         },
         circle: {
-            backgroundColor: colors.blue,
+            backgroundColor: colors.primaryBlue,
         },
         root: {
-            borderColor: colors.blue,
+            borderColor: colors.primaryBlue,
         },
         label: {
-            color: colors.blue,
+            color: colors.primaryBlue,
         },
     },
     boxed: {

@@ -3,7 +3,7 @@ import { text, colors } from '~/utils/constants';
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: colors.azure,
+        backgroundColor: colors.primaryBlue,
         marginTop: 'auto',
         borderRadius: 50,
     },

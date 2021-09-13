@@ -1,40 +1,63 @@
 import { StyleSheet, Platform } from 'react-native';
 import { text, colors, dimensions } from '~/utils/constants';
-import metrics from '~/utils/metrices';
+import metrics, { smallScreen } from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
-
-const { size, fontFamily } = text;
 
 let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
 let childPaddingValue = metrics.width * 0.03;
 let childPadding = parentPadding + childPaddingValue * 2;
 
+const { size, fontFamily } = text;
+
 const styles = StyleSheet.create({
-    backIconStyle: {
+    backIcon: {
         margin: metrics.height * 0.02,
         height: metrics.width * 0.05,
         width: metrics.width * 0.05,
         alignSelf: 'flex-end',
     },
 
-    contentContainerStyle: {
-        padding: parentPaddingValue,
+    biometrics: {
+        alignSelf: 'center',
+        height: metrics.width * 0.1,
+        width: metrics.width * 0.1,
+        marginTop: metrics.height * 0.05,
     },
 
-    forgotPasswordTextStyle: {
+    buttonContainer: {
+        alignSelf: 'center',
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
+        width: metrics.width - childPadding,
+        backgroundColor: colors.primaryBlue,
+        marginTop: metrics.height * 0.02,
+    },
+
+    buttonText: {
+        textAlign: 'center',
+        fontSize: size.regular,
+        color: colors.white,
+        fontFamily: fontFamily.poppinsRegular,
+    },
+
+    contentContainer: {
+        padding: smallScreen ? 0 : parentPaddingValue,
+    },
+
+    forgotPasswordText: {
         textAlign: 'center',
         marginTop: metrics.height * 0.02,
         color: colors.primaryBlue,
-        fontSize: size.medium,
+        fontSize: text.size.medium,
         width: metrics.width - parentPadding,
         paddingLeft: childPaddingValue,
         paddingRight: childPaddingValue,
-        fontFamily: fontFamily.poppinsRegular,
+        fontFamily: text.fontFamily.poppinsRegular,
         marginBottom: metrics.height * 0.02,
     },
 
-    inputTextParentContainerStyle: {
+    inputTextParentContainer: {
         flexDirection: 'column',
         width: metrics.width - parentPadding,
         marginTop: metrics.height * 0.01,
@@ -42,7 +65,7 @@ const styles = StyleSheet.create({
         paddingRight: childPaddingValue,
     },
 
-    inputTextContainerStyle: {
+    inputTextContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -53,17 +76,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
     },
 
-    inputTypeStyle: {
+    inputType: {
         color: colors.black,
-        fontSize: size.regular,
-        fontFamily: fontFamily.poppinsRegular,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrics.width - childPadding,
     },
 
-    inputTypePasswordStyle: {
+    inputTypePassword: {
         color: colors.black,
-        fontSize: size.regular,
+        fontSize: text.size.regular,
         textAlign: 'left',
         width: metrics.width - childPadding - metrics.width * 0.05,
     },
@@ -79,37 +102,68 @@ const styles = StyleSheet.create({
 
     loginButtonText: {
         textAlign: 'center',
-        fontSize: size.regular,
-        fontFamily: fontFamily.poppinsRegular,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
         color: colors.white,
     },
 
-    logoStyle: {
+    logo: {
         alignSelf: 'center',
         height: metrics.width * 0.2,
         width: metrics.width * 0.2,
     },
 
-    logo2Style: {
+    logo2: {
         alignSelf: 'center',
         height: metrics.width * 0.35,
         width: metrics.width * 0.35,
     },
 
-    parentContainerStyle: {
+    parentContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: getStatusBarHeight(),
         backgroundColor: colors.white,
-        borderRadius: 25,
+        borderRadius: 35,
         overflow: 'hidden',
     },
 
-    passwordHideShowIconStyle: {
+    passwordHideShowIcon: {
         height: metrics.width * 0.05,
         width: metrics.width * 0.05,
         marginTop: metrics.height * 0.02,
+    },
+
+    subTitleText: {
+        marginTop: metrics.height * 0.01,
+        textAlign: 'center',
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.black,
+        width: metrics.width - childPadding,
+    },
+
+    titleContainer: {
+        marginTop: metrics.height * 0.08,
+        flexDirection: 'column',
+        width: metrics.width - parentPadding,
+        paddingLeft: childPaddingValue,
+        paddingRight: childPaddingValue,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    titleText: {
+        textAlign: 'center',
+        fontSize: size.xxLarge,
+        fontFamily: fontFamily.poppinsSemiBold,
+        color: colors.black,
+        width: metrics.width - childPadding,
+    },
+
+    version: {
+        alignSelf: 'center',
     },
 });
 

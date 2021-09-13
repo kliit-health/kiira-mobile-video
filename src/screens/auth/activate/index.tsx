@@ -6,39 +6,37 @@ import {
     TouchableOpacity,
     Platform,
 } from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { CustomInputText, CustomButton } from '~/components/';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import styles from './style';
-import Constant, { colors, icons } from '~/utils/constants';
-import CustomInputText from '~/components/customInputText';
-import CustomButton from '~/components/customButton';
-import { showOrHideModal } from '~/components/customModal/action';
-import { isEmail } from '~/utils/helper';
 import { sendVerification } from '~/redux/reducers/activate';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { showOrHideModal } from '~/components/customModal/action';
+import Constant, { colors, icons } from '~/utils/constants';
+import { isEmail } from '~/utils/helper';
+import styles from '../styles';
 
-const Activate = props => {
+const Activate = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { navigation } = props;
     const { staticImages } = Constant.App;
     const [email, setEmail] = useState('');
-    const lang = useSelector((state: RootState) => {
-        return state.language;
+    const login = useSelector((state: RootState) => {
+        return state.language.login;
     });
 
-    const renderInputTextView = () => {
+    const InputText = () => {
         return (
-            <View style={styles.inputTextParentContainerStyle}>
-                <View style={styles.inputTextContainerStyle}>
+            <View style={styles.inputTextParentContainer}>
+                <View style={styles.inputTextContainer}>
                     <CustomInputText
                         autoCapitalize="none"
                         onChangeText={value => setEmail(value)}
-                        placeholder={lang.login.Email}
+                        placeholder={login.Email}
                         value={email}
                         style={
                             email
-                                ? styles.inputTypeStyle
-                                : [styles.inputTypeStyle, { fontWeight: '100' }]
+                                ? styles.inputType
+                                : [styles.inputType, { fontWeight: '100' }]
                         }
                         placeholderTextColor={colors.black}
                     />
@@ -47,7 +45,7 @@ const Activate = props => {
         );
     };
 
-    const renderCrossIconView = () => {
+    const CrossIcon = () => {
         return (
             <TouchableOpacity
                 onPress={() => {
@@ -56,31 +54,31 @@ const Activate = props => {
             >
                 <Image
                     resizeMode="contain"
-                    source={icons.crossIcon}
-                    style={styles.backIconStyle}
+                    source={icons.cross}
+                    style={styles.backIcon}
                 />
             </TouchableOpacity>
         );
     };
 
-    const renderLogoView = () => {
+    const LogoView = () => {
         return (
-            <View style={styles.contentContainerStyle}>
+            <View style={styles.contentContainer}>
                 <Image
                     resizeMode="contain"
                     source={staticImages.kiiraLogo}
-                    style={styles.logoStyle}
+                    style={styles.logo}
                 />
                 <Image
                     resizeMode="contain"
                     source={staticImages.kiiraLogo2}
-                    style={styles.logo2Style}
+                    style={styles.logo2}
                 />
             </View>
         );
     };
 
-    const renderButtonView = () => {
+    const Button = () => {
         return (
             <CustomButton
                 disabled={false}
@@ -88,9 +86,9 @@ const Activate = props => {
                 textStyle={styles.loginButtonText}
                 onPress={() => {
                     if (!email.trim()) {
-                        dispatch(showOrHideModal(lang.login.EmptyEmailMsg));
+                        dispatch(showOrHideModal(login.EmptyEmailMsg));
                     } else if (!isEmail(email.trim())) {
-                        dispatch(showOrHideModal(lang.login.InvalidEmailMsg));
+                        dispatch(showOrHideModal(login.InvalidEmailMsg));
                     } else {
                         const data = {
                             email: email.trim(),
@@ -98,22 +96,22 @@ const Activate = props => {
                         dispatch(sendVerification(data));
                     }
                 }}
-                text={lang.login.Verify}
+                text={login.Verify}
             />
         );
     };
 
     return (
-        <View style={styles.parentContainerStyle}>
+        <View style={styles.parentContainer}>
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                {renderCrossIconView()}
-                <View style={styles.contentContainerStyle}>
-                    {renderLogoView()}
-                    {renderInputTextView()}
-                    {renderButtonView()}
+                <CrossIcon />
+                <View style={styles.contentContainer}>
+                    <LogoView />
+                    <InputText />
+                    <Button />
                 </View>
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}

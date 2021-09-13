@@ -10,7 +10,7 @@ import {
     oneOfType,
     any,
 } from 'prop-types';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import RadioButton from '../radioButton';
 import { isEqual } from 'lodash';
 import { mergeStyles } from '../../utils/functions';
@@ -38,6 +38,7 @@ const RadioGroup = ({
     onChange,
     boxed,
     horizontal,
+    onSelect = null,
 }) => {
     const [selected, setSelected] = useState(undefined);
     const [index, setIndex] = useState(undefined);
@@ -61,6 +62,10 @@ const RadioGroup = ({
     const handlePress = item => {
         setSelected(item);
         setIndex(index);
+
+        if (onSelect) {
+            onSelect(item);
+        }
     };
 
     const styles = {
@@ -88,7 +93,7 @@ const RadioGroup = ({
         <FlatList
             showsVerticalScrollIndicator={false}
             data={data}
-            keyExtractor={({ index }) => 'group' + index}
+            keyExtractor={(item, index) => 'group' + index}
             renderItem={({ item, index }) => (
                 <RadioButton
                     key={item + index}

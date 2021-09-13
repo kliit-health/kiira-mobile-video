@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { colors } from '~/utils/constants';
+import { Tab as TabType } from '~/screens/patient/dashboard/book/model';
 import Tab from '../tab';
 
 import { default as globalStyles } from '../styles';
@@ -19,7 +20,14 @@ const {
     text_space,
 } = globalStyles;
 
-const Tabs = ({ list, setActive, active, options = null }) => {
+export type TabsType = {
+    list: TabType[];
+    setActive?: () => undefined;
+    active?: boolean;
+    options?: null | ViewStyle[];
+};
+
+const Tabs = ({ list, setActive, active, options = null }: TabsType) => {
     const [selected, setSelected] = useState(list[0].title);
 
     const line = [none, small, width_auto];
@@ -28,10 +36,10 @@ const Tabs = ({ list, setActive, active, options = null }) => {
     const lineSelected = [bottom, blue_br_b, small, width_auto];
     const textSelected = [blue, pad_bottom, tiny, regular, text_space];
 
-    const handlePress = (title: string) => {
+    const handlePress = (title: string, label: string, list) => {
         setSelected(title);
         if (setActive && active) {
-            setActive(!active);
+            setActive(label, list);
         }
     };
 
@@ -44,12 +52,12 @@ const Tabs = ({ list, setActive, active, options = null }) => {
                 keyExtractor={({ title }) => title}
                 extraData={selected}
                 horizontal
-                renderItem={({ item: { title } }) => (
+                renderItem={({ item: { title, label } }) => (
                     <Tab
                         text={title}
                         textOptions={title === selected ? textSelected : text}
                         lineOptions={title === selected ? lineSelected : line}
-                        handlePress={() => handlePress(title)}
+                        handlePress={() => handlePress(title, label, list)}
                     />
                 )}
             />

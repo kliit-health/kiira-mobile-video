@@ -22,7 +22,7 @@ const style = StyleSheet.create({
 
     buttonText: {
         textAlign: 'center',
-        fontSize: text.size.normal,
+        fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         color: colors.white,
     },
