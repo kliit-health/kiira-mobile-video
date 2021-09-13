@@ -19,7 +19,7 @@ const Controls = () => {
                 onPress={() => handleNavigation(screenNames.Activate)}
             />
             <Button
-                testID="Login Button"
+                testID="Open Login"
                 title={lang.tutorial.login}
                 style={{ container: styles.container2, title: styles.text2 }}
                 onPress={() => handleNavigation(screenNames.Login)}

@@ -177,6 +177,8 @@ const Login = props => {
     const Button = () => {
         return (
             <CustomButton
+                test="Login Button"
+                //Custom bot accepteed by default. Only native coponents accept testID
                 buttonStyle={styles.loginButton}
                 textStyle={styles.loginButtonText}
                 onPress={() => {
@@ -242,7 +244,7 @@ const Login = props => {
                 <CrossIcon />
                 <View style={styles.contentContainerStyle}>
                     <Logo />
-                    <InputText />
+                    {InputText()}
                     <BiometricLogin />
                     <Button />
                     <ForgotPassword />

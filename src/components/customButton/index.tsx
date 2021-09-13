@@ -8,6 +8,7 @@ type ButtonProps = {
     buttonStyle: object;
     disabled?: boolean;
     textStyle: object;
+    test?: string;
 };
 
 const CustomButton = ({
@@ -16,8 +17,14 @@ const CustomButton = ({
     buttonStyle,
     disabled,
     textStyle,
+    test,
 }: ButtonProps) => (
-    <TouchableOpacity disabled={disabled} onPress={onPress} style={buttonStyle}>
+    <TouchableOpacity
+        testID={test}
+        disabled={disabled}
+        onPress={onPress}
+        style={buttonStyle}
+    >
         <CustomText style={textStyle}>{text}</CustomText>
     </TouchableOpacity>
 );
