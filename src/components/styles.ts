@@ -147,6 +147,10 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
 
+    pad_top_none: {
+        marginTop: 0,
+    },
+
     pad_top_xlg: {
         marginTop: 80,
     },
@@ -286,6 +290,16 @@ const styles = StyleSheet.create({
 
     black_br: {
         borderColor: colors.black,
+        borderWidth: 2,
+    },
+
+    blue_br_sm: {
+        borderColor: colors.primaryBlue,
+        borderWidth: 1,
+    },
+
+    blue_br: {
+        borderColor: colors.primaryBlue,
         borderWidth: 2,
     },
 

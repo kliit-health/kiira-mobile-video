@@ -37,8 +37,6 @@ const {
     center,
     blue_bg,
     pad,
-    align_items_c,
-    justify_c,
     pad_sm,
     radius_sm,
     hide_overflow,
@@ -124,7 +122,7 @@ const SelectProvider = ({ navigation }) => {
             </TouchableOpacity>
         );
     };
-    console.log(expert);
+
     return (
         <Screen test="Book Screen">
             <Header title="Book Visit" onBack={handleBack} />
@@ -204,7 +202,9 @@ const SelectProvider = ({ navigation }) => {
                         <Text options={[pad_h, xLarge]}>Languages</Text>
                         <Row options={[pad]}>
                             {expert.profileInfo.languages.map(lang => (
-                                <Text>{`${lang.value}  `}</Text>
+                                <Text
+                                    key={lang.value}
+                                >{`${lang.value}  `}</Text>
                             ))}
                         </Row>
                         <Button

@@ -64,6 +64,7 @@ import NewUser from '../screens/auth/newUser';
 import Confirm from '../screens/provider/appointments/patientProfile/confirm';
 import Patients from '../screens/provider/patients';
 import PatientProfile from '../screens/provider/appointments/patientProfile';
+import Payment from '../screens/patient/dashboard/book/screens/payment';
 import PaymentMethods from '../screens/patient/dashboard/getTreatment/payment/paymentMethods';
 import PayPalApproval from '../screens/patient/dashboard/getTreatment/payment/buyingCredit/paypal';
 import PersonalMedicalHistory from '../screens/provider/appointments/patientProfile/pmh';
@@ -539,6 +540,7 @@ const AppStackExpert = createStackNavigator(
         MedicalHistoryExpert: { screen: MedicalHistoryExpert },
         Confirm: { screen: Confirm },
         PatientProfile: { screen: PatientProfile },
+        // Payment: { screen: Payment },
         PersonalMedicalHistory: { screen: PersonalMedicalHistory },
         PhysicalExam: { screen: PhysicalExam },
         Plan: { screen: Plan },
@@ -609,6 +611,7 @@ const MainAppStack = createStackNavigator(
         MedicalHistory: { screen: MedicalHistory },
         NeedsPresciption: { screen: NeedsPresciption },
         NewUser: { screen: NewUser },
+        Payment: { screen: Payment },
         PaymentMethods: { screen: PaymentMethods },
         PayPalApproval: { screen: PayPalApproval },
         PregnancyAndChildren: { screen: Pregnancy },
@@ -640,7 +643,7 @@ const MainAppStack = createStackNavigator(
 const AppStack = createStackNavigator(
     {
         MainApp: MainAppStack,
-        Payment: PaymentStack,
+        // Payment: PaymentStack,
     },
     {
         mode: 'modal',
