@@ -46,6 +46,10 @@ const Appointments = ({ navigation }) => {
         }
     }, [visitData]);
 
+    const handleTabSelect = () => {
+        setPastSelected(!pastSelected);
+    };
+
     return (
         <Screen>
             <Column>
@@ -56,7 +60,7 @@ const Appointments = ({ navigation }) => {
                 <Tabs
                     list={tabs}
                     active={pastSelected}
-                    setActive={setPastSelected}
+                    setActive={handleTabSelect}
                 />
                 <Show pastSelected={pastSelected} past={past} future={future} />
             </Column>

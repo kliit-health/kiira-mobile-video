@@ -120,7 +120,7 @@ const Payment = ({ navigation }) => {
                         white,
                     ]}
                 >
-                    {moment(time.date).format('llll')}
+                    {moment(time.date).format('ddd MMM Do h:mm a')}
                 </Text>
                 <Row options={[pad_h, pad_v]}>
                     <FastImage

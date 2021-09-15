@@ -28,6 +28,7 @@ const {
     image_lg,
     white_bg,
     sm_pad_v,
+    sm_pad_h,
     grey_br_b_md,
     white_br,
     pad_h,
@@ -182,7 +183,7 @@ const SelectProvider = ({ navigation }) => {
                                     return (
                                         <Text
                                             options={[
-                                                pad_h,
+                                                sm_pad_h,
                                                 sm_pad_v,
                                                 blue_bg,
                                                 { height: 40 },

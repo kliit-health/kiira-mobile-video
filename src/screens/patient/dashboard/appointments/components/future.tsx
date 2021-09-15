@@ -48,6 +48,7 @@ const {
     radius_md,
     hide_overflow,
     grey_br,
+    text_align_c,
 } = globalStyles;
 
 const Future = ({ visit, date, navigation }) => {
@@ -192,8 +193,8 @@ const Future = ({ visit, date, navigation }) => {
     const VisitTime = () => {
         return (
             <View style={styles.appointment}>
-                <Text options={[xxLarge, white, pad_h]}>
-                    {moment(date.date).format('llll')}
+                <Text options={[xxLarge, white, pad_h, text_align_c]}>
+                    {moment(date.date).format('ddd MMM Do h:mm a')}
                 </Text>
             </View>
         );

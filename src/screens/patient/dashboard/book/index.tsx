@@ -123,7 +123,7 @@ const Book = ({ navigation }) => {
                         </Conditional>
                     </Column>
                     <Expandable onPress={handleLinePress} list={sections} />
-                    <Column options={[pad_h, grey_br_t_md]}>
+                    <Column options={[pad_h, grey_br_t_md, { flex: 0 }]}>
                         <Conditional if={selection}>
                             <Button
                                 onPress={() =>
@@ -131,7 +131,9 @@ const Book = ({ navigation }) => {
                                         appointment,
                                     })
                                 }
-                                style={{ container: { marginTop: 10 } }}
+                                style={{
+                                    container: [{ marginTop: 10 }],
+                                }}
                                 title="See Providers"
                             />
                         </Conditional>

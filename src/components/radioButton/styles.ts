@@ -53,9 +53,9 @@ export const modifiers = {
         root: {
             alignSelf: 'auto',
             width: '100%',
-            borderWidth: 1,
-            borderColor: colors.gray,
-            borderRadius: 6,
+            // borderWidth: 1,
+            // borderColor: colors.gray,
+            // borderRadius: 6,
             padding: 10,
         },
     },

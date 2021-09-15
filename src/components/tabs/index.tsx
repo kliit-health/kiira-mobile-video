@@ -39,7 +39,7 @@ const Tabs = ({ list, setActive, active, options = null }: TabsType) => {
     const handlePress = (title: string, label: string, list) => {
         setSelected(title);
         if (setActive) {
-            setActive(!active);
+            setActive(label, list);
         }
     };
 
