@@ -32,6 +32,7 @@ const NavItem = ({
 
     return (
         <TouchableOpacity
+            testID={title}
             activeOpacity={0.8}
             style={styles.root}
             onPress={() => onPress(destination, features)}

@@ -13,7 +13,7 @@ const Controls = () => {
     return (
         <View style={[styles.actions, { marginBottom: 10 }]}>
             <Button
-                testID="Activate Button"
+                testID="Open Activate"
                 title={tutorial.verify}
                 style={{ container: styles.container, title: styles.text }}
                 onPress={() => handleNavigation(screenNames.Activate)}

@@ -41,7 +41,6 @@ describe('Login / Logout Flow', () => {
         await element(by.id('Logout')).tap();
     });
 
-
     it('should show Activate Account screen after tap', async () => {
         await element(by.id('Activate Button')).tap();
         await expect(element(by.id('Activate Screen'))).toBeVisible(); //test failed no identifier matching
@@ -69,9 +68,10 @@ describe('Login / Logout Flow', () => {
     it('should validate username and password', async () => {
         await element(by.id('Login Button')).tap();
     });
-    // it('should should show App Dashboard', async () => {
-    //     await waitFor(element(by.id('DashBoard')))
-    //         .toBeVisible()
-    //         .withTimeout(4000);
-    // });
+
+    it('should should show App Dashboard', async () => {
+        await waitFor(element(by.id('DashBoard')))
+            .toBeVisible()
+            .withTimeout(4000);
+    });
 });

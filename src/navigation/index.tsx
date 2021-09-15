@@ -51,7 +51,7 @@ import GetTreatment from '../screens/patient/dashboard/getTreatment';
 import HealthAssessmentConfirmation from '../screens/patient/dashboard/healthAssesment/confirmation';
 import HealthAssessmentSchedule from '../screens/patient/dashboard/healthAssesment/scheduleModal';
 import Help from '../screens/common/help';
-import Learn from '../screens/patient/learn';
+import Learn from '../screens/patient/blog';
 import Lifestyle from '../screens/patient/dashboard/healthHistory/lifestyle';
 import Loss from '../screens/patient/dashboard/healthHistory/pregnancy/loss';
 import Login from '../screens/auth/login';
