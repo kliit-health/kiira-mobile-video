@@ -38,8 +38,8 @@ const base = StyleSheet.create({
     default: {
         flexDirection: 'row',
         alignSelf: 'center',
-        width: metrices.width * 0.8,
         height: metrices.height * 0.15,
+        width: metrices.width,
         backgroundColor: colors.white,
         padding: 10,
         fontSize: text.size.regular,

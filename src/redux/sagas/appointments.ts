@@ -142,12 +142,11 @@ function* getAppointments({ payload }) {
 }
 
 function* cancelTheAppointment({ payload }) {
-    const { uid, credits } = payload;
+    const { credits } = payload;
 
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(payload);
-        const appointments = yield getAppointmentsAsync(uid);
         if (result) {
             yield put(
                 showOrHideModal(
@@ -162,7 +161,7 @@ function* cancelTheAppointment({ payload }) {
             yield updateCredits(credits, payload);
             yield put(getUser());
         }
-        yield put(fetchAppointments(appointments));
+        yield getAppointments({ payload });
         yield put(hideApiLoader());
     } catch (error) {
         yield put(hideApiLoader());
@@ -203,7 +202,10 @@ function* setAppointment({ payload }) {
         } else {
             yield updateCredits(-credits, payload);
             yield put(getUser());
+            yield getAppointments({ payload });
             yield sendAppointmentNotification(uid, time);
+            yield put(showOrHideModal('Appointment successfully booked.'));
+            navigation.navigate('Home');
         }
     } catch (error) {
         console.error(error);

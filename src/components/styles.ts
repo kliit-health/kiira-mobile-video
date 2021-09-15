@@ -282,6 +282,14 @@ const styles = StyleSheet.create({
         backgroundColor: colors.greyLight,
     },
 
+    grey_mid_bg: {
+        backgroundColor: colors.greyAccent,
+    },
+
+    grey_dark_bg: {
+        backgroundColor: colors.greyDark,
+    },
+
     white_bg: {
         backgroundColor: colors.white,
     },
@@ -349,6 +357,16 @@ const styles = StyleSheet.create({
     },
 
     //Radius
+
+    radius_top: {
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+
+    radius_bottom: {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+    },
 
     radius_sm: {
         borderRadius: 5,

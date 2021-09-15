@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     getAppointmentDates,
@@ -16,6 +16,10 @@ import {
 } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
 import { default as globalStyles } from '~/components/styles';
+import { colors } from '~/utils/constants';
+import metrices from '~/utils/metrices';
+
+const { width } = metrices;
 
 const Calendar = ({ navigation }) => {
     const appointments = useSelector((state: RootState) => state.appointments);
@@ -42,10 +46,8 @@ const Calendar = ({ navigation }) => {
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
     const [time, setTime] = useState(null);
-    const [showShedule, setShowShedule] = useState(false);
     const { expert, appointment } = navigation.state.params;
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [selectedTime, setSelectedTime] = useState(null);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -102,6 +104,13 @@ const Calendar = ({ navigation }) => {
                     horizontal
                     keyExtractor={({ date }) => date}
                     data={appointments.dates}
+                    ListEmptyComponent={() => (
+                        <ActivityIndicator
+                            style={{ marginLeft: width / 2 - 30 }}
+                            size="large"
+                            color={colors.blue}
+                        />
+                    )}
                     renderItem={({ item }) => {
                         let date = generateDateInfo(item.date);
 
@@ -114,7 +123,6 @@ const Calendar = ({ navigation }) => {
                                         white_bg,
                                         sm_pad_h,
                                         pad_top_none,
-                                        ,
                                         { width: 65 },
                                         moment(date.date).format('ll') === day
                                             ? blue_br
@@ -138,33 +146,43 @@ const Calendar = ({ navigation }) => {
                 }}
                 keyExtractor={({ time }) => time}
                 data={appointments.appointments.current}
+                ListEmptyComponent={() => (
+                    <ActivityIndicator size="large" color={colors.blue} />
+                )}
                 renderItem={({ item }) => {
-                    let date = generateDateInfo(item.time);
-                    let selection = `${date.hour.time} ${date.hour.time}`;
-
+                    let current = generateDateInfo(item.time);
+                    console.log('TIME: ', time);
                     return (
                         <Button
-                            onPress={() => setTime(selection)}
+                            onPress={() => setTime(current)}
                             style={{
                                 container: [
                                     radius_sm,
                                     white_bg,
                                     sm_pad_h,
                                     pad_top_none,
-
                                     { width: 100 },
                                     { margin: 20 },
-                                    selection === time ? blue_br_sm : grey_br,
+                                    time && current.date === time.date
+                                        ? blue_br_sm
+                                        : grey_br,
                                 ],
                                 title: [blue],
                             }}
-                            title={`${date.hour.time} ${date.hour.am_pm}`}
+                            title={`${current.hour.time} ${current.hour.am_pm}`}
                         />
                     );
                 }}
             />
             <Button
-                onPress={() => handleNavigation('Payment')}
+                onPress={() =>
+                    handleNavigation('Payment', {
+                        expert,
+                        appointment,
+                        day,
+                        time,
+                    })
+                }
                 title="Confirm"
                 style={{ container: [sm_pad_v, pad_h], title: [] }}
             />

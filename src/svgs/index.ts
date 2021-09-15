@@ -1,11 +1,13 @@
 export { default as Calendar } from './calendar.svg';
 export { default as Camera } from './camera.svg';
 export { default as CameraBlack } from './camera_black.svg';
+export { default as Cart } from './cart.svg';
 export { default as Caution } from './caution.svg';
 export { default as Chat } from './chat.svg';
 export { default as Chevron } from './chevron.svg';
 export { default as ChevronRight } from './chevron_right.svg';
 export { default as ClockBack } from './clock-back.svg';
+export { default as Dollar } from './dollar.svg';
 export { default as Femme } from './femme.svg';
 export { default as Happy } from './happy.svg';
 export { default as MedCross } from './medCross.svg';
