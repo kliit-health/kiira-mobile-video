@@ -1,110 +1,36 @@
 export type Tab = {
     title: string;
+    label: string;
 };
 
 export const tabs: Tab[] = [
     {
         title: 'PRIMARY CARE',
+        label: 'primaryCare',
     },
     {
         title: "WOMEN'S",
+        label: 'womensCare',
     },
     {
         title: 'MENTAL',
+        label: 'mentalHealth',
     },
 ];
 
-export type Reason = {};
-
-export const reasons = {
-    primary: [
-        {
-            title: 'Asthma',
-            label: 'Asthma',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Cold and Flu',
-            label: 'Cold and Flu',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Headaches',
-            label: 'Headaches',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Sexually Transmitted Infections',
-            label: 'Sexually Transmitted Infections',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Acne',
-            label: 'Acne',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'UTI',
-            label: 'UTI',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Sore Throat',
-            label: 'Sore Throat',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Rashes',
-            label: 'Rashes',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Depression / Anxiety',
-            label: 'Depression / Anxiety',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Nutrition',
-            label: 'Nutrition',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'Covid 19',
-            label: 'Covid 19',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-        {
-            title: 'General Health',
-            label: 'General Health',
-            type: 'fCDnEzhnJkiuLuFIoWZc',
-        },
-    ],
-    womens: [
-        {
-            title: 'Primary Care',
-            key: 'primaryCare',
-        },
-        {
-            title: 'Womens Care',
-            key: 'womensCare',
-        },
-        {
-            title: 'Mental Health',
-            key: 'mentalHealth',
-        },
-    ],
-    mental: [
-        {
-            title: 'Primary Care',
-            key: 'primaryCare',
-        },
-        {
-            title: 'Womens Care',
-            key: 'womensCare',
-        },
-        {
-            title: 'Mental Health',
-            key: 'mentalHealth',
-        },
-    ],
-};
+export const sections = [
+    {
+        title: 'Payment & Insurance',
+        sections: [
+            'If you are sponsored by a school or organization your available credits will be applied.',
+            'If you are out of credits, any additional costs will be paid out of pocket.',
+            'If you are covered by your insurance you will be asked to pay cash upfront but can submit the receipt to your insurance for reimbursement.',
+        ],
+    },
+    {
+        title: 'Cancellation',
+        sections: [
+            'If you need to cancel or reschedule your appontment, you will need to do so at least 24 hours in advance.',
+        ],
+    },
+];

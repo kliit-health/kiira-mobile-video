@@ -6,31 +6,27 @@ import {
     TouchableOpacity,
     Platform,
 } from 'react-native';
+import { CustomInputText, CustomButton, CustomText } from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { RootState } from '~/redux/reducers';
-import CustomText from '~/components/customText';
-import styles from './styles';
-import Constant from '~/utils/constants';
-import CustomInputText from '~/components/customInputText';
-import CustomButton from '~/components/customButton';
 import { showOrHideModal } from '~/components/customModal/action';
 import {
     forgotPasswordApiHit,
     resetForgotPasswordState,
 } from '~/redux/reducers/forgotPassword';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { colors, icons, images } from '~/utils/constants';
 import { isEmail } from '~/utils/helper';
+import styles from '../styles';
 
-const ForgotPassword = props => {
+const ForgotPassword = ({ navigation }) => {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const { navigation } = props;
-    const { staticImages } = Constant.App;
-
     const lang = useSelector((state: RootState) => state.language);
     const forgotPasswordSuccess = useSelector(
         (state: RootState) => state.forgotPassword.forgotPasswordSuccess,
     );
+
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         if (forgotPasswordSuccess) {
@@ -39,28 +35,7 @@ const ForgotPassword = props => {
         }
     });
 
-    const renderInputTextView = () => {
-        return (
-            <View style={styles.inputTextParentContainerStyle}>
-                <View style={styles.inputTextContainerStyle}>
-                    <CustomInputText
-                        autoCapitalize="none"
-                        onChangeText={value => setEmail(value)}
-                        placeholder={lang.forgotPassword.Email}
-                        value={email}
-                        style={
-                            email
-                                ? styles.inputTypeStyle
-                                : [styles.inputTypeStyle, { fontWeight: '100' }]
-                        }
-                        placeholderTextColor={Constant.App.colors.blackColor}
-                    />
-                </View>
-            </View>
-        );
-    };
-
-    const renderCrossIconView = () => {
+    const CrossIcon = () => {
         return (
             <TouchableOpacity
                 onPress={() => {
@@ -69,42 +44,63 @@ const ForgotPassword = props => {
             >
                 <Image
                     resizeMode="contain"
-                    source={staticImages.crossIcon}
-                    style={styles.backIconStyle}
+                    source={icons.cross}
+                    style={styles.backIcon}
                 />
             </TouchableOpacity>
         );
     };
 
-    const renderLogoView = () => {
+    const Logo = () => {
         return (
             <Image
                 resizeMode="contain"
-                source={staticImages.kiiraLogo}
-                style={styles.logoStyle}
+                source={images.kiiraLogo}
+                style={styles.logo}
             />
         );
     };
 
-    const renderTitleView = () => {
+    const Title = () => {
         return (
             <View style={styles.titleContainer}>
-                <CustomText style={styles.titleTextStyle}>
+                <CustomText style={styles.titleText}>
                     {lang.forgotPassword.Title}
                 </CustomText>
-                <CustomText style={styles.subTitleTextStyle}>
+                <CustomText style={styles.subTitleText}>
                     {lang.forgotPassword.Subtitle}
                 </CustomText>
             </View>
         );
     };
 
-    const renderButtonView = () => {
+    const InputText = () => {
+        return (
+            <View style={styles.inputTextParentContainer}>
+                <View style={styles.inputTextContainer}>
+                    <CustomInputText
+                        autoCapitalize="none"
+                        onChangeText={value => setEmail(value)}
+                        placeholder={lang.forgotPassword.Email}
+                        value={email}
+                        style={
+                            email
+                                ? styles.inputType
+                                : [styles.inputType, { fontWeight: '100' }]
+                        }
+                        placeholderTextColor={colors.black}
+                    />
+                </View>
+            </View>
+        );
+    };
+
+    const Button = () => {
         return (
             <CustomButton
                 disabled={false}
-                buttonStyle={styles.buttonContainerStyle}
-                textStyle={styles.buttonTextStyle}
+                buttonStyle={styles.buttonContainer}
+                textStyle={styles.buttonText}
                 onPress={() => {
                     if (!email.trim()) {
                         dispatch(showOrHideModal(lang.login.EmptyEmailMsg));
@@ -123,17 +119,17 @@ const ForgotPassword = props => {
     };
 
     return (
-        <View style={styles.parentContainerStyle}>
+        <View style={styles.parentContainer}>
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
             >
-                {renderCrossIconView()}
-                <View style={styles.contentContainerStyle}>
-                    {renderLogoView()}
-                    {renderTitleView()}
-                    {renderInputTextView()}
-                    {renderButtonView()}
+                <CrossIcon />
+                <View style={styles.contentContainer}>
+                    <Logo />
+                    <Title />
+                    <InputText />
+                    <Button />
                 </View>
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}

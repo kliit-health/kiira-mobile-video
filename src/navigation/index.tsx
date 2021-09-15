@@ -23,6 +23,7 @@ import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import Book from '../screens/patient/dashboard/book';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
 import BuyingCredit from '../screens/patient/dashboard/getTreatment/payment/buyingCredit';
+import Calendar from '../screens/patient/dashboard/book/screens/calendar';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
 import ChangePasswordExpert from '../screens/provider/account/settings/changePassword';
@@ -80,6 +81,7 @@ import RescheduleVisit from '../screens/patient/dashboard/appointments/reschedul
 import RequestVisit from '../screens/patient/dashboard/getTreatment/requestVisit';
 import SelectCareType from '../screens/patient/dashboard/getTreatment/selectCareType';
 import SelectExpert from '../screens/patient/dashboard/getTreatment/selectExpert';
+import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvider';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
@@ -584,6 +586,7 @@ const MainAppStack = createStackNavigator(
         Book: { screen: Book },
         BookVisit: { screen: BookVisit },
         BottomTab: { screen: BottomTab },
+        Calendar: { screen: Calendar },
         CareSquad: { screen: CareSquad },
         GetTreatment: { screen: GetTreatment },
         TreatmentHistory: { screen: TreatmentHistory },
@@ -617,6 +620,7 @@ const MainAppStack = createStackNavigator(
         RequestVisit: { screen: RequestVisit },
         SelectCareType: { screen: SelectCareType },
         SelectExpert: { screen: SelectExpert },
+        SelectProvider: { screen: SelectProvider },
         Settings: { screen: Settings },
         TermsConditions: { screen: TermsConditions },
         TreatmentBot: { screen: TreatmentBot },

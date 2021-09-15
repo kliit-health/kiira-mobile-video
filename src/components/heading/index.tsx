@@ -1,21 +1,9 @@
 import React from 'react';
 import Text from '../text';
-import { default as globalStyles } from '../styles';
-
-const { xxLarge, pad_h, sm_pad_v } = globalStyles;
+import { h1 } from '../styles';
 
 const Heading = ({ children, options = null }) => {
-    return (
-        <Text
-            options={
-                options
-                    ? [xxLarge, pad_h, sm_pad_v, options]
-                    : [xxLarge, pad_h, sm_pad_v]
-            }
-        >
-            {children}
-        </Text>
-    );
+    return <Text options={options ? [h1, options] : [h1]}>{children}</Text>;
 };
 
 export default Heading;

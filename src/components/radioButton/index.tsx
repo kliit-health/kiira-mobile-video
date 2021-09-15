@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { shape, object, bool, string, func, number } from 'prop-types';
 import { View, TouchableOpacity, Animated, Text } from 'react-native';
 import { mergeStyles } from '../../utils/functions';

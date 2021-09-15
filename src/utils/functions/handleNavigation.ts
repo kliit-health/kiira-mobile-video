@@ -1,7 +1,7 @@
 import { NavigationService as navigation } from '~/navigation';
 
-export const handleNavigation = (destination: string) => {
-    navigation.navigate(destination);
+export const handleNavigation = (destination: string, params?: object) => {
+    navigation.navigate(destination, { ...params });
 };
 
 export const handleBack = () => {

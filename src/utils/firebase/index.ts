@@ -63,6 +63,28 @@ export function getDocumentFromCollection(path) {
     }
 }
 
+export function getAllDocumentsFromCollection(path: string) {
+    try {
+        return firestore()
+            .collection(path)
+            .get()
+            .then(querySnapshot => {
+                const temp = [];
+                querySnapshot.forEach(doc => {
+                    temp.push(doc.data());
+                });
+                return temp;
+            })
+            .catch(e => {
+                displayConsole('e', e);
+                return false;
+            });
+    } catch (error) {
+        displayConsole('Crash error', error);
+        return false;
+    }
+}
+
 export function getPolicyFromFirebase() {
     try {
         let policyRef = firestore().doc('legal/privacy').get();

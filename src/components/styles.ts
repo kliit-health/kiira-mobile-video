@@ -99,6 +99,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
 
+    no_pad_h: {
+        marginHorizontal: 0,
+    },
+
     pad_l: {
         marginLeft: 20,
     },
@@ -131,6 +135,10 @@ const styles = StyleSheet.create({
         marginVertical: 40,
     },
 
+    no_pad_v: {
+        marginVertical: 0,
+    },
+
     pad_top: {
         paddingTop: 10,
     },
@@ -151,6 +159,14 @@ const styles = StyleSheet.create({
 
     pad: {
         padding: 20,
+    },
+
+    pad_sm: {
+        padding: 10,
+    },
+
+    pad_vertical: {
+        paddingVertical: 10,
     },
 
     center: {
@@ -213,6 +229,10 @@ const styles = StyleSheet.create({
 
     bold: {
         fontWeight: '800',
+    },
+
+    text_align_c: {
+        textAlign: 'center',
     },
 
     //COLORS
@@ -304,6 +324,16 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
     },
 
+    grey_dark_br_t_md: {
+        borderTopColor: colors.greyDark,
+        borderTopWidth: 2,
+    },
+
+    white_br: {
+        borderColor: colors.white,
+        borderWidth: 2,
+    },
+
     //Radius
 
     radius_sm: {
@@ -346,7 +376,81 @@ const styles = StyleSheet.create({
     height_75: {
         height: '75%',
     },
+
+    width_10: {
+        width: '10%',
+    },
+
+    width_25: {
+        width: '25%',
+    },
+
+    width_30: {
+        width: '30%',
+    },
+
+    width_50: {
+        width: '50%',
+    },
+
+    width_75: {
+        width: '75%',
+    },
+
+    width_80: {
+        width: '80%',
+    },
+
+    width_85: {
+        width: '85%',
+    },
+
+    width_90: {
+        width: '90%',
+    },
+
+    //Transforms
+
+    flip_90: {
+        transform: [{ rotate: '90deg' }],
+    },
+
+    flip_180: {
+        transform: [{ rotate: '180deg' }],
+    },
+
+    flip_270: {
+        transform: [{ rotate: '270deg' }],
+    },
+
+    //Images
+
+    image_sm: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
+
+    image_md: {
+        width: 75,
+        height: 75,
+        borderRadius: 38,
+    },
+
+    image_lg: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+    },
+
+    image_xLg: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+    },
 });
+
+//Transforms
 
 export const card = [
     styles.justify_fs,
@@ -356,5 +460,10 @@ export const card = [
     styles.grey_br,
     styles.radius_md,
 ];
+
+export const h1 = [styles.xxLarge, styles.pad_h, styles.sm_pad_v];
+export const h2 = [styles.xLarge, styles.pad_h, styles.sm_pad_v];
+export const h3 = [styles.large, styles.pad_h];
+export const h4 = [styles.medium, styles.pad_h];
 
 export default styles;

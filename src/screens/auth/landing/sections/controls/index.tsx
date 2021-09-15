@@ -8,13 +8,13 @@ import { handleNavigation } from '~/utils/functions';
 import styles from './styles';
 
 const Controls = () => {
-    const lang = useSelector((state: RootState) => state.language);
+    const tutorial = useSelector((state: RootState) => state.language.tutorial);
 
     return (
         <View style={[styles.actions, { marginBottom: 10 }]}>
             <Button
                 testID="Activate Button"
-                title={lang.tutorial.verify}
+                title={tutorial.verify}
                 style={{ container: styles.container, title: styles.text }}
                 onPress={() => handleNavigation(screenNames.Activate)}
             />

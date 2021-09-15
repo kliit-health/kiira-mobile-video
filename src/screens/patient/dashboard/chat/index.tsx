@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
-import {
-    Screen,
-    Header,
-    Heading,
-    NavItem,
-    Column,
-    Text,
-    Tabs,
-} from '~/components';
+import { Screen, Header, NavItem, Column, Text, Tabs } from '~/components';
 import {
     handleBack,
     handleNavigation,
@@ -33,7 +25,9 @@ const Chat = () => {
     return (
         <Screen>
             <Header title="Chats" onBack={handleBack} />
-            <Heading>Please select a category</Heading>
+            <Text options={[xxLarge, pad_h, sm_pad_v]}>
+                Please select a category
+            </Text>
             <Text options={[gray_dark, medium, pad_h, pad_b]}>
                 Responses are typically with 24 hours
             </Text>
@@ -52,8 +46,8 @@ const Chat = () => {
             <Tabs
                 options={[blue_bg]}
                 list={chatTabs}
-                pastSelected={pastSelected}
-                setPastSelected={setPastSelected}
+                active={pastSelected}
+                setActive={setPastSelected}
             />
             <Column options={[white_bg]}>
                 <FlatList

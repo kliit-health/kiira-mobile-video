@@ -7,6 +7,7 @@ export { default as Column } from './column';
 export { default as Conditional } from './conditional';
 export { default as Container } from './container';
 export { default as CustomButton } from './customButton';
+export { default as CustomInputText } from './customInputText';
 export { default as CustomText } from './customText';
 export { default as ExpertHeader } from './expertHeader';
 export { default as FooterNavigation } from './footerNavigation';

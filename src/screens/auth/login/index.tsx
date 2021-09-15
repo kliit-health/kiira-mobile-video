@@ -8,26 +8,29 @@ import {
     Platform,
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import * as Keychain from 'react-native-keychain';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import CustomText from '../../../components/customText';
-import styles from './style';
-import Constant, { app, colors, screenNames } from '../../../utils/constants';
-import CustomInputText from '../../../components/customInputText';
-import CustomButton from '../../../components/customButton';
+import { loginApi, resetLoginState } from '~/redux/reducers/login';
+import { CustomText, CustomInputText, CustomButton } from '~/components';
 import { showOrHideModal } from '../../../components/customModal/action';
 import { isEmail } from '../../../utils/helper';
-import { loginApi, resetLoginState } from '~/redux/reducers/login';
-import * as Keychain from 'react-native-keychain';
+import {
+    app,
+    colors,
+    screenNames,
+    icons,
+    images,
+} from '../../../utils/constants';
+import styles from '../styles';
 
-const Login = props => {
+const Login = ({ navigation }) => {
+    const dispatch = useDispatch();
     const { login } = useSelector((state: RootState) => state.language);
     const loginFailure = useSelector(
         (state: RootState) => state.login.loginFailure,
     );
-    const dispatch = useDispatch();
-    const { navigation } = props;
-    const { staticImages } = Constant.App;
+
     const [email, setEmail] = useState('aaron@kiira.io');
     const [password, setPassword] = useState('Test1234!');
     const [biometricType, setBiometricType] = useState('');
@@ -98,10 +101,44 @@ const Login = props => {
             });
     };
 
+    const CrossIcon = () => {
+        return (
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.goBack();
+                }}
+            >
+                <Image
+                    resizeMode="contain"
+                    source={icons.cross}
+                    style={styles.backIcon}
+                />
+            </TouchableOpacity>
+        );
+    };
+
+    const Logo = () => {
+        return (
+            <View style={styles.contentContainer}>
+                <Image
+                    resizeMode="contain"
+                    source={images.kiiraLogo}
+                    style={styles.logo}
+                />
+                <Image
+                    resizeMode="contain"
+                    source={images.kiiraLogo2}
+                    style={styles.logo2}
+                />
+                <Text style={styles.version}>{app.version}</Text>
+            </View>
+        );
+    };
+
     const InputText = () => {
         return (
-            <View style={styles.inputTextParentContainerStyle}>
-                <View style={styles.inputTextContainerStyle}>
+            <View style={styles.inputTextParentContainer}>
+                <View style={styles.inputTextContainer}>
                     <CustomInputText
                         testID="Login Email"
                         autoCapitalize="none"
@@ -111,13 +148,13 @@ const Login = props => {
                         value={email}
                         style={
                             email
-                                ? styles.inputTypeStyle
-                                : [styles.inputTypeStyle, { fontWeight: '100' }]
+                                ? styles.inputType
+                                : [styles.inputType, { fontWeight: '100' }]
                         }
                         placeholderTextColor={colors.black}
                     />
                 </View>
-                <View style={styles.inputTextContainerStyle}>
+                <View style={styles.inputTextContainer}>
                     <CustomInputText
                         testID="Login Password"
                         autoCapitalize="none"
@@ -127,9 +164,9 @@ const Login = props => {
                         secureTextEntry
                         style={
                             password
-                                ? styles.inputTypePasswordStyle
+                                ? styles.inputTypePassword
                                 : [
-                                      styles.inputTypePasswordStyle,
+                                      styles.inputTypePassword,
                                       { fontWeight: '100' },
                                   ]
                         }
@@ -140,37 +177,23 @@ const Login = props => {
         );
     };
 
-    const CrossIcon = () => {
+    const BiometricLogin = () => {
         return (
             <TouchableOpacity
-                onPress={() => {
-                    navigation.goBack();
-                }}
+                testID="Bio Login"
+                disabled={biometricType === ''}
+                onPress={loginWithBiometrics}
             >
                 <Image
                     resizeMode="contain"
-                    source={staticImages.crossIcon}
-                    style={styles.backIconStyle}
+                    source={
+                        biometricType === 'FaceID'
+                            ? images.faceID
+                            : images.fingerprint
+                    }
+                    style={styles.biometrics}
                 />
             </TouchableOpacity>
-        );
-    };
-
-    const Logo = () => {
-        return (
-            <View style={styles.contentContainerStyle}>
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo}
-                    style={styles.logoStyle}
-                />
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo2}
-                    style={styles.logo2Style}
-                />
-                <Text style={styles.version}>{app.version}</Text>
-            </View>
         );
     };
 
@@ -215,34 +238,14 @@ const Login = props => {
         );
     };
 
-    const BiometricLogin = () => {
-        return (
-            <TouchableOpacity
-                testID="Bio Login"
-                disabled={biometricType === ''}
-                onPress={loginWithBiometrics}
-            >
-                <Image
-                    resizeMode="contain"
-                    source={
-                        biometricType === 'FaceID'
-                            ? staticImages.faceID
-                            : staticImages.fingerprint
-                    }
-                    style={styles.biometrics}
-                />
-            </TouchableOpacity>
-        );
-    };
-
     return (
-        <View testID="Login Screen" style={styles.parentContainerStyle}>
+        <View testID="Login Screen" style={styles.parentContainer}>
             <ScrollView
-                keyboardShouldPersistTaps="handled"
+                keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
             >
                 <CrossIcon />
-                <View style={styles.contentContainerStyle}>
+                <View style={styles.contentContainer}>
                     <Logo />
                     {InputText()}
                     <BiometricLogin />

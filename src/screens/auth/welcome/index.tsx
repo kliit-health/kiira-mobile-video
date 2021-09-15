@@ -9,7 +9,6 @@ import CustomButton from '~/components/customButton';
 
 const Welcome = ({ navigation }) => {
     const { staticImages, screenNames } = Constant.App;
-
     const user = useSelector((state: RootState) => state.user.data);
 
     return (
