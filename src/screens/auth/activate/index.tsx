@@ -48,6 +48,7 @@ const Activate = ({ navigation }) => {
     const CrossIcon = () => {
         return (
             <TouchableOpacity
+                testID="Close Button"
                 onPress={() => {
                     navigation.goBack();
                 }}

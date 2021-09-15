@@ -140,6 +140,7 @@ const Login = ({ navigation }) => {
             <View style={styles.inputTextParentContainer}>
                 <View style={styles.inputTextContainer}>
                     <CustomInputText
+                        testID="Login Email"
                         autoCapitalize="none"
                         autoCorrect={false}
                         onChangeText={value => setEmail(value)}
@@ -155,6 +156,7 @@ const Login = ({ navigation }) => {
                 </View>
                 <View style={styles.inputTextContainer}>
                     <CustomInputText
+                        testID="Login Password"
                         autoCapitalize="none"
                         onChangeText={value => setPassword(value)}
                         placeholder={login.Password}
@@ -198,6 +200,8 @@ const Login = ({ navigation }) => {
     const Button = () => {
         return (
             <CustomButton
+                test="Login Button"
+                //Custom bot accepteed by default. Only native coponents accept testID
                 buttonStyle={styles.loginButton}
                 textStyle={styles.loginButtonText}
                 onPress={() => {
