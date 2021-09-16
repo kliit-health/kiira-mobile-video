@@ -238,6 +238,7 @@ const Future = ({ test, visit, date, navigation }) => {
         return (
             <View style={styles.appointmentModify}>
                 <CustomButton
+                    test={test}
                     buttonStyle={styles.appointmentButtonContainer}
                     textStyle={styles.appointmentButtonText}
                     onPress={() =>

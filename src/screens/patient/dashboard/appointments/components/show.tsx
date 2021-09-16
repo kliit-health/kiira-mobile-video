@@ -19,6 +19,7 @@ export const Show = ({ pastSelected, past, future }) => {
                 extraData={pastSelected}
                 renderItem={({ item }) => {
                     const date = generateDateInfo(item.time);
+
                     return (
                         <ErrorBoundary
                             FallbackComponent={() => <FallBack />}

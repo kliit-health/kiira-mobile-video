@@ -124,6 +124,7 @@ const Dashboard = ({ navigation }) => {
                 <Banner />
                 {model.map(item => (
                     <NavItem
+                        test={item.title}
                         key={item.title}
                         {...item}
                         onPress={handleNavigation}

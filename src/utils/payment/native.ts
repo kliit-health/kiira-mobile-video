@@ -1,10 +1,9 @@
-import stripe from 'tipsi-stripe';
+import { initStripe } from '@stripe/stripe-react-native';
 import { Platform } from 'react-native';
 
-stripe.setOptions({
+initStripe({
     publishableKey: 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K',
-    merchantId: 'merchant.com.kliit',
-    androidPayMode: __DEV__ ? 'test' : 'production',
+    merchantIdentifier: 'merchant.com.kliit',
 });
 
 export const deviceSupportsNativePay = async () => {

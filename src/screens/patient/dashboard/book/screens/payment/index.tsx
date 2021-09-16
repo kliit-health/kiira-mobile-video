@@ -17,6 +17,12 @@ import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
 import { bookAppointment } from '~/redux/reducers/appointments';
+import {
+    ApplePayButton,
+    CardField,
+    CardForm,
+    useStripe,
+} from '@stripe/stripe-react-native';
 
 const {
     pad_b,
@@ -167,6 +173,36 @@ const Payment = ({ navigation }) => {
                         {` -$60 credit ($120 available)`}
                     </Text>
                 </Row>
+                <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
+                <CardField
+                    postalCodeEnabled={true}
+                    placeholder={{
+                        number: 'CC #',
+                    }}
+                    cardStyle={{
+                        backgroundColor: '#FFFFFF',
+                        textColor: '#000000',
+                    }}
+                    style={{
+                        width: '100%',
+                        height: 50,
+                        marginHorizontal: 10,
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                    }}
+                    onCardChange={cardDetails => {
+                        console.log('cardDetails', cardDetails);
+                    }}
+                    onFocus={focusedField => {
+                        console.log('focusField', focusedField);
+                    }}
+                />
+                <ApplePayButton
+                    type="plain"
+                    buttonStyle="black"
+                    borderRadius={4}
+                    onPress={() => console.log('Apple Pay')}
+                />
                 <Line options={[{ width: '90%' }]} />
                 <Text options={[pad_h, large, pad_b]}>Total: $0</Text>
             </Column>
