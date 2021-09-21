@@ -201,7 +201,6 @@ const Login = ({ navigation }) => {
         return (
             <CustomButton
                 test="Login Button"
-                //Custom bot accepteed by default. Only native coponents accept testID
                 buttonStyle={styles.loginButton}
                 textStyle={styles.loginButtonText}
                 onPress={() => {

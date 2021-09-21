@@ -13,6 +13,7 @@ export const Show = ({ pastSelected, past, future }) => {
     const Visits = ({ data }) => {
         return (
             <FlatList
+                testID="Appointments List"
                 showsVerticalScrollIndicator={false}
                 data={data}
                 extraData={pastSelected}
@@ -27,7 +28,11 @@ export const Show = ({ pastSelected, past, future }) => {
                                 <Past visit={item} date={date} />
                             </Conditional>
                             <Conditional if={!pastSelected}>
-                                <Future visit={item} date={date} />
+                                <Future
+                                    test="Future Appointment"
+                                    visit={item}
+                                    date={date}
+                                />
                             </Conditional>
                         </ErrorBoundary>
                     );

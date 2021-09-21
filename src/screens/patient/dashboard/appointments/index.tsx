@@ -47,7 +47,7 @@ const Appointments = ({ navigation }) => {
     }, [visitData]);
 
     return (
-        <Screen>
+        <Screen test="Appointment Screen">
             <Column>
                 <Header
                     title="Appointments"

@@ -97,7 +97,7 @@ const Payment = ({ navigation }) => {
     };
 
     return (
-        <Screen>
+        <Screen test="Appointment Payment">
             <Header onBack={handleBack} title="Book Visit" />
             <Column
                 options={[
@@ -183,6 +183,7 @@ const Payment = ({ navigation }) => {
             />
 
             <Button
+                test="Confirm Appointment"
                 onPress={bookVisit}
                 style={{ container: [pad_h], title: [large] }}
                 title="Confirm"

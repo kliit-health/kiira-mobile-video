@@ -111,11 +111,12 @@ const Calendar = ({ navigation }) => {
                             color={colors.blue}
                         />
                     )}
-                    renderItem={({ item }) => {
+                    renderItem={({ item, index }) => {
                         let date = generateDateInfo(item.date);
 
                         return (
                             <Button
+                                test={'date ' + index}
                                 onPress={() => handlePress(date)}
                                 style={{
                                     container: [
@@ -149,11 +150,11 @@ const Calendar = ({ navigation }) => {
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     let current = generateDateInfo(item.time);
-                    console.log('TIME: ', time);
                     return (
                         <Button
+                            test={'time ' + index}
                             onPress={() => setTime(current)}
                             style={{
                                 container: [
@@ -175,6 +176,7 @@ const Calendar = ({ navigation }) => {
                 }}
             />
             <Button
+                test="Confirm Date and Time"
                 onPress={() =>
                     handleNavigation('Payment', {
                         expert,

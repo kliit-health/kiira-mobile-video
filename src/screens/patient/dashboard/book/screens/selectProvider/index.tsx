@@ -105,6 +105,7 @@ const SelectProvider = ({ navigation }) => {
             <TouchableOpacity onPress={() => handleSelection(expert)}>
                 <Row options={[white_bg, sm_pad_v, pad_vertical]}>
                     <FastImage
+                        testID={expertName}
                         style={[pad_h, image_md]}
                         resizeMode="contain"
                         source={{
@@ -208,6 +209,7 @@ const SelectProvider = ({ navigation }) => {
                             ))}
                         </Row>
                         <Button
+                            testID="See Availability"
                             onPress={handlePress}
                             style={{ container: [pad_h, sm_pad_v] }}
                             title="See Availability"
