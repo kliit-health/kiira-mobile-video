@@ -5,7 +5,7 @@
     "apps": {
         "ios": {
             "type": "ios.app",
-            "binaryPath": "/Users/aaronelkins/Library/Developer/Xcode/DerivedData/kiira-danovqmmnzdevwhhhupcivuxxoja/Build/Products/Debug-iphonesimulator/kiira.app",
+            "binaryPath": "/Users/jessicakelley/Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphonesimulator/kiira.app",
             "build": "yarn ios"
         }
     },

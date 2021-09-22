@@ -126,6 +126,7 @@ const Book = ({ navigation }) => {
                     <Column options={[pad_h, grey_br_t_md, { flex: 0 }]}>
                         <Conditional if={selection}>
                             <Button
+                                testID="See Providers"
                                 onPress={() =>
                                     navigation.navigate('SelectProvider', {
                                         appointment,

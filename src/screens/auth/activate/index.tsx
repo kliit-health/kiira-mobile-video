@@ -82,6 +82,7 @@ const Activate = ({ navigation }) => {
     const Button = () => {
         return (
             <CustomButton
+                test="Get Activation Link"
                 disabled={false}
                 buttonStyle={styles.loginButton}
                 textStyle={styles.loginButtonText}

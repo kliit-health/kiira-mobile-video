@@ -19,7 +19,7 @@ import { showOrHideModal } from '~/components/customModal/action';
 import styles from '../style';
 import { useDispatch } from 'react-redux';
 import { cancelAppointment, setVisit } from '~/redux/reducers/appointments';
-import constants from '~/utils/constants';
+import constants, { text } from '~/utils/constants';
 import moment from 'moment';
 import { CameraBlack } from '~/svgs';
 
@@ -51,7 +51,7 @@ const {
     text_align_c,
 } = globalStyles;
 
-const Future = ({ visit, date, navigation }) => {
+const Future = ({ test, visit, date, navigation }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [checked, setChecked] = useState(false);

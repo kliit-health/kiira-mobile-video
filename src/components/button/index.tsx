@@ -9,6 +9,7 @@ import {
 import defaultStyles from './styles';
 
 export type ButtonProps = TouchableOpacityProps & {
+    test: string;
     title: string | number;
     id?: string;
     onPress?: (id: string) => void;
@@ -18,13 +19,14 @@ export type ButtonProps = TouchableOpacityProps & {
     };
 };
 
-const Button = ({ title, style, id, onPress, ...rest }: ButtonProps) => {
+const Button = ({ test, title, style, id, onPress, ...rest }: ButtonProps) => {
     const handlePress = () => {
         onPress(id);
     };
 
     return (
         <TouchableOpacity
+            testID={test}
             style={[defaultStyles.container, style.container]}
             onPress={handlePress}
             {...rest}

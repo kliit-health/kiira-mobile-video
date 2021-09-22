@@ -14,6 +14,7 @@ const IconButton = ({
     activeOpacity,
     onPress,
     boxed,
+    test,
     ...rest
 }) => {
     const styles = {
@@ -36,6 +37,7 @@ const IconButton = ({
 
     return (
         <TouchableOpacity
+            test={test}
             disabled={disabled}
             activeOpacity={activeOpacity}
             onPress={handlePress}

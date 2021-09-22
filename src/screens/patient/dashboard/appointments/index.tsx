@@ -51,7 +51,7 @@ const Appointments = ({ navigation }) => {
     };
 
     return (
-        <Screen>
+        <Screen test="Appointment Screen">
             <Column>
                 <Header
                     title="Appointments"

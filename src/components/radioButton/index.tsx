@@ -59,6 +59,7 @@ const RadioButton = ({
 
     return (
         <TouchableOpacity
+            testID={label}
             onPress={handlePress}
             style={styles.root}
             activeOpacity={1}

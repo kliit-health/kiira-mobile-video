@@ -43,6 +43,7 @@ const Header = ({
         <View style={styles.root}>
             {onBack && (
                 <IconButton
+                    test="Back Button"
                     styles={styles.backButton}
                     source={icons.chevron}
                     onPress={onBack}
