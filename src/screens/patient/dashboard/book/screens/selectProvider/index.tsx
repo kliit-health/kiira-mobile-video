@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, FlatList } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
+import { setAppointmentExpert } from '~/redux/reducers/appointments';
 import { RootState } from '~/redux/reducers';
 import {
     Screen,
@@ -44,8 +45,8 @@ const {
     no_pad_v,
 } = globalStyles;
 
-const SelectProvider = ({ navigation }) => {
-    const { appointment } = navigation.state.params;
+const SelectProvider = () => {
+    const dispatch = useDispatch();
     const [availableExperts, setAvailableExperts] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [expert, setExpert] = useState(null);
@@ -87,13 +88,17 @@ const SelectProvider = ({ navigation }) => {
     };
 
     const handleSelection = expert => {
+        const { uid, calendarID, profileInfo, expertName } = expert;
         setExpert(expert);
+        dispatch(
+            setAppointmentExpert({ uid, calendarID, profileInfo, expertName }),
+        );
         toggleModal();
     };
 
     const handlePress = () => {
         toggleModal();
-        handleNavigation('Calendar', { expert, appointment });
+        handleNavigation('Calendar', { expert });
     };
 
     const ExpertDetails = ({ expert }) => {

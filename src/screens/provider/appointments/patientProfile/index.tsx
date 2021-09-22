@@ -14,7 +14,6 @@ import { screenNames } from '~/utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '~/redux/actions';
 import { getPatientDetails } from './actions';
-import { handleNavigation } from '~/utils/functions';
 import { withNavigation } from 'react-navigation';
 import styles from './style';
 

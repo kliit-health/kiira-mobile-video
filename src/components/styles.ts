@@ -393,6 +393,10 @@ const styles = StyleSheet.create({
 
     //Screens
 
+    zero_flex: {
+        flex: 0,
+    },
+
     height_25: {
         height: '25%',
     },
@@ -491,6 +495,16 @@ export const card = [
     styles.white_bg,
     styles.grey_br,
     styles.radius_md,
+    styles.hide_overflow,
+    styles.zero_flex,
+];
+
+export const card_title = [
+    styles.pad_sm,
+    styles.grey_dark_bg,
+    styles.text_align_c,
+    styles.xxLarge,
+    styles.white,
 ];
 
 export const h1 = [styles.xxLarge, styles.pad_h, styles.sm_pad_v];

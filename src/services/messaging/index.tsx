@@ -25,7 +25,6 @@ export default ({ children }) => {
         >
             <View style={styles.card.container}>
                 <Text style={styles.card.text}>{message}</Text>
-                {children}
             </View>
         </Modal>
     );

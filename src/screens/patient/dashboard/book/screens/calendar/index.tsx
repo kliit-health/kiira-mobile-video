@@ -6,6 +6,7 @@ import {
     getExpertsData,
     setCalendarID,
     getAppointmentsForToday,
+    setAppointmentDayAndTime,
 } from '~/redux/reducers/appointments';
 import { RootState } from '~/redux/reducers';
 import moment from 'moment';
@@ -21,7 +22,7 @@ import metrices from '~/utils/metrices';
 
 const { width } = metrices;
 
-const Calendar = ({ navigation }) => {
+const Calendar = () => {
     const appointments = useSelector((state: RootState) => state.appointments);
 
     const {
@@ -42,16 +43,17 @@ const Calendar = ({ navigation }) => {
         black,
     } = globalStyles;
 
+    const { visit } = appointments;
+
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
     const [time, setTime] = useState(null);
-    const { expert, appointment } = navigation.state.params;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const { calendarID, uid } = expert;
+        const { calendarID, uid } = visit.expert;
         const obj = {
             expertsParams: {
                 tableName: 'users',
@@ -67,7 +69,7 @@ const Calendar = ({ navigation }) => {
                 ...current,
                 calendarID,
                 addMonth,
-                appointmentTypeID: appointment.details.appointmentTypeID,
+                appointmentTypeID: visit.details.appointmentTypeID,
             }),
         );
 
@@ -77,21 +79,26 @@ const Calendar = ({ navigation }) => {
             getAppointmentsForToday({
                 ...current,
                 calendarID,
-                appointmentTypeID: appointment.details.appointmentTypeID,
+                appointmentTypeID: visit.details.appointmentTypeID,
             }),
         );
     }, []);
 
     const handlePress = date => {
-        const { calendarID } = expert;
+        const { calendarID } = visit.expert;
         setDay(moment(date.date).format('ll'));
         dispatch(
             getAppointmentsForToday({
                 ...date,
                 calendarID,
-                appointmentTypeID: appointment.details.appointmentTypeID,
+                appointmentTypeID: visit.details.appointmentTypeID,
             }),
         );
+    };
+
+    const handleConfirm = () => {
+        dispatch(setAppointmentDayAndTime({ day, time }));
+        handleNavigation('Payment');
     };
 
     return (
@@ -139,6 +146,7 @@ const Calendar = ({ navigation }) => {
             </Row>
             <Text options={[pad]}>Please select an appointment time</Text>
             <FlatList
+                initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     flexWrap: 'wrap',
@@ -176,15 +184,7 @@ const Calendar = ({ navigation }) => {
                 }}
             />
             <Button
-                test="Confirm Date and Time"
-                onPress={() =>
-                    handleNavigation('Payment', {
-                        expert,
-                        appointment,
-                        day,
-                        time,
-                    })
-                }
+                onPress={handleConfirm}
                 title="Confirm"
                 style={{ container: [sm_pad_v, pad_h], title: [] }}
             />

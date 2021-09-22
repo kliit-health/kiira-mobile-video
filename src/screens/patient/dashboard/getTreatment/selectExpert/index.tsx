@@ -17,7 +17,6 @@ const SelectExpert = ({ navigation }) => {
     const lang = useSelector((state: RootState) => state.language);
 
     useEffect(() => {
-        console.log(experts);
         if (experts.length && userProfile) {
             const userState = userProfile.state.code;
             const stateAvailableExperts = experts.filter(({ profileInfo }) => {
@@ -40,7 +39,7 @@ const SelectExpert = ({ navigation }) => {
                     });
                 },
             );
-            console.log(videoEnabledExperts);
+
             if (visit.prescription) {
                 const prescriberFilter = filteredExperts.filter(
                     ({ isPrescriber }) => visit.prescription && isPrescriber,

@@ -22,7 +22,7 @@ const {
 
 export type TabsType = {
     list: TabType[];
-    setActive?: () => undefined;
+    setActive?: (label?: string, list?: TabType[]) => void;
     active?: boolean;
     options?: null | ViewStyle[];
 };

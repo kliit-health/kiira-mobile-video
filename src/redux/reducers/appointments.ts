@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { State } from 'react-native-gesture-handler';
 
 const initialState = {
     prepaid: false,
@@ -17,7 +18,7 @@ const initialState = {
         future: [],
         dates: [],
     },
-    visit: {},
+    visit: null,
 };
 
 export type IAppointments = {
@@ -143,6 +144,28 @@ export const appointmentsSlice = createSlice({
                 visit: action.payload,
             };
         },
+        setAppointmentDetails: (state, action: PayloadAction<object>) => {
+            return {
+                ...state,
+                visit: { ...state.visit, ...action.payload },
+            };
+        },
+        setAppointmentExpert: (state, action: PayloadAction<object>) => {
+            return {
+                ...state,
+                visit: { ...state.visit, expert: { ...action.payload } },
+            };
+        },
+        setAppointmentDayAndTime: (state, action: PayloadAction<object>) => {
+            return {
+                ...state,
+                visit: {
+                    ...state.visit,
+                    day: action.payload.day,
+                    time: action.payload.time,
+                },
+            };
+        },
     },
 });
 
@@ -168,6 +191,9 @@ export const {
     bookAppointment,
     setPrepaid,
     setVisit,
+    setAppointmentDetails,
+    setAppointmentExpert,
+    setAppointmentDayAndTime,
 } = appointmentsSlice.actions;
 
 export default appointmentsSlice.reducer;

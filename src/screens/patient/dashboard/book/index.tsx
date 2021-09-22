@@ -11,6 +11,9 @@ import {
     Button,
     Conditional,
 } from '~/components';
+import { RootState } from '~/redux/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAppointmentDetails } from '~/redux/reducers/appointments';
 import { handleBack } from '~/utils/functions/handleNavigation';
 import { tabs, sections } from './model';
 import { card } from '~/components/styles';
@@ -30,6 +33,8 @@ const {
 } = globalStyles;
 
 const Book = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const { visit } = useSelector((state: RootState) => state.appointments);
     const [activeTab, setActiveTab] = useState('primaryCare');
     const [data, setData] = useState(null);
     const [cardHeight, setCardHeight] = useState(330);
@@ -37,7 +42,6 @@ const Book = ({ navigation }) => {
     const [selection, setSelection] = useState(null);
     const [catagories, setCatagories] = useState(null);
     const [appointmentTypes, setAppointmentTypes] = useState(null);
-    const [appointment, setAppointment] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -88,10 +92,12 @@ const Book = ({ navigation }) => {
     const handleSelection = item => {
         setLoading(true);
         setSelection(item);
-        setAppointment({
-            reason: item.label,
-            details: appointmentTypes[item.type],
-        });
+        dispatch(
+            setAppointmentDetails({
+                reason: item.label,
+                details: appointmentTypes[item.type],
+            }),
+        );
         setLoading(false);
     };
 
@@ -115,9 +121,9 @@ const Book = ({ navigation }) => {
                             <ActivityIndicator size="large" />
                         </Conditional>
                         <Conditional if={!loading && selection}>
-                            {appointment && (
+                            {visit && (
                                 <Heading options={[h3]}>
-                                    {`${appointment.details.title}: ${appointment.details.duration} min $${appointment.details.price}`}
+                                    {`${visit.details.title}: ${visit.details.duration} min $${visit.details.price}`}
                                 </Heading>
                             )}
                         </Conditional>
@@ -128,9 +134,7 @@ const Book = ({ navigation }) => {
                             <Button
                                 testID="See Providers"
                                 onPress={() =>
-                                    navigation.navigate('SelectProvider', {
-                                        appointment,
-                                    })
+                                    navigation.navigate('SelectProvider')
                                 }
                                 style={{
                                     container: [{ marginTop: 10 }],

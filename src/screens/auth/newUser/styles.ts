@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import { StyleSheet, Platform } from 'react-native';
+import { dimensions, text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
+
+const { size, fontFamily } = text;
 
 let parentPaddingValue = metrices.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -8,50 +10,50 @@ let parentPadding = parentPaddingValue * 2;
 const styles = StyleSheet.create({
     agreementButtonContainerStyle: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
         padding: 10,
         width: metrices.width - parentPadding,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         marginTop: 20,
     },
 
     buttonContainerStyle: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
         width: metrices.width - parentPadding,
-        backgroundColor: Constant.App.colors.blueColor,
+        backgroundColor: colors.primaryBlue,
         marginTop: metrices.height * 0.1,
     },
 
     buttonTextStyle: {
         textAlign: 'center',
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        color: Constant.App.colors.whiteColor,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
+        color: colors.white,
     },
 
     cancelTextStyle: {
         textAlign: 'left',
         alignSelf: 'center',
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Medium,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.medium,
+        fontFamily: fontFamily.poppinsRegular,
     },
 
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         marginTop: 35,
     },
 
     disabledButtonContainerStyle: {
         alignSelf: 'center',
-        borderRadius: Constant.App.dimensions.btnBorderRadiusGlobal,
-        padding: Constant.App.dimensions.btnPaddingGlobal,
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
         width: metrices.width - parentPadding,
-        backgroundColor: Constant.App.colors.grayColor,
+        backgroundColor: colors.greyAccent,
         marginTop: metrices.height * 0.1,
     },
 
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: parentPaddingValue * 0.5,
-        backgroundColor: Constant.App.colors.whiteColor,
-        borderBottomColor: Constant.App.colors.greyBgAsk,
+        backgroundColor: colors.white,
+        borderBottomColor: colors.gray,
         borderBottomWidth: 3,
     },
 
@@ -79,14 +81,14 @@ const styles = StyleSheet.create({
         width: metrices.width - parentPadding,
         paddingBottom: Platform.OS === 'ios' ? metrices.height * 0.01 : 0,
         marginTop: metrices.height * 0.05,
-        borderBottomColor: Constant.App.colors.blackColor,
+        borderBottomColor: colors.black,
         borderBottomWidth: 0.5,
     },
 
     inputTypePasswordStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrices.width - parentPadding - metrices.width * 0.05,
     },
@@ -109,9 +111,9 @@ const styles = StyleSheet.create({
 
     passwordValidationTextStyle: {
         marginLeft: 3,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrices.width - parentPadding - 15,
     },
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
 
     pronounsParentContainerStyle: {
         width: metrices.width,
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         paddingLeft: parentPaddingValue,
         paddingRight: parentPaddingValue,
         paddingTop: metrices.height * 0.03,
@@ -131,14 +133,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomColor: Constant.App.colors.lightGrey,
+        borderBottomColor: colors.lightGrey,
         borderBottomWidth: 0.5,
     },
 
     pronounsTitleTextStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrices.width - parentPadding,
     },
@@ -153,9 +155,9 @@ const styles = StyleSheet.create({
 
     pronounsTextStyle: {
         paddingLeft: 10,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: size.regular,
+        fontFamily: fontFamily.poppinsRegular,
         textAlign: 'left',
         width: metrices.width - parentPadding - metrices.width * 0.05,
     },
@@ -170,9 +172,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         width: metrices.width,
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Large,
-        fontFamily: Constant.App.fontFamily.headerBold,
+        color: colors.black,
+        fontSize: size.large,
+        fontFamily: fontFamily.poppinsBold,
     },
 });
 

@@ -1376,6 +1376,21 @@ export async function payAmount(cardID, amount) {
     }
 }
 
+export async function payIntent(cardID = 'VISA', amount = 1) {
+    try {
+        const amountInCents = Number(amount) * 100;
+        const response = await functions().httpsCallable('paymentIntent')({
+            card_id: cardID,
+            amount: amountInCents,
+        });
+
+        return response.data;
+    } catch (err) {
+        let status = err.status ? err.status : 'internal';
+        return { ok: false, status };
+    }
+}
+
 export async function payAmountWithToken(tokenID, amount) {
     try {
         const amountInCents = Number(amount) * 100;

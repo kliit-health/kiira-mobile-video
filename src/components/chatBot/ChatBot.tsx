@@ -238,7 +238,7 @@ class ChatBot extends Component {
         }
     }
 
-    getStepMessage(message) {
+    getStepMessage = message => {
         const { previousSteps } = this.state;
         const lastStepIndex =
             previousSteps.length > 0 ? previousSteps.length - 1 : 0;
@@ -247,7 +247,7 @@ class ChatBot extends Component {
         return typeof message === 'function'
             ? message({ previousValue, steps })
             : message;
-    }
+    };
 
     getTriggeredStep(trigger, value?, selection?) {
         const steps = this.generateRenderedStepsById();

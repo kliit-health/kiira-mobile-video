@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Screen,
     Header,
@@ -13,15 +13,18 @@ import FastImage from 'react-native-fast-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { handleBack } from '~/utils/functions/handleNavigation';
+import { payIntent } from '~/utils/firebase';
 import moment from 'moment';
-import { default as globalStyles } from '~/components/styles';
+import { default as globalStyles, card, card_title } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
 import { bookAppointment } from '~/redux/reducers/appointments';
 import {
     ApplePayButton,
     CardField,
-    CardForm,
-    useStripe,
+    useApplePay,
+    useConfirmPayment,
+    presentApplePay,
+    confirmApplePayPayment,
 } from '@stripe/stripe-react-native';
 
 const {
@@ -29,28 +32,27 @@ const {
     pad_h,
     pad_v,
     text_align_c,
-    grey_dark_bg,
     radius_lg,
     radius_md,
-    hide_overflow,
     large,
+    xLarge,
     xxLarge,
-    white,
-    white_bg,
-    justify_fs,
     grey_br,
     sm_pad_v,
-    pad_sm,
     space_around,
     gray_dark,
 } = globalStyles;
 
 const Payment = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { expert, appointment, day, time } = navigation.state.params;
-    const userData = useSelector((state: RootState) => state.user.data);
+    const { isApplePaySupported } = useApplePay();
+    const { confirmPayment, loading } = useConfirmPayment();
+    const user = useSelector((state: RootState) => state.user.data);
+    const appointments = useSelector((state: RootState) => state.appointments);
 
     const [message, setMessage] = useState('');
+    const [cardDetails, setCardDetails] = useState(null);
+    const [balance, setBalance] = useState(null);
 
     const {
         firstName,
@@ -61,116 +63,168 @@ const Payment = ({ navigation }) => {
         dob,
         gender,
         insurance,
-    } = userData.profileInfo;
+    } = user.profileInfo;
 
-    const { email, uid, organizationId, plan } = userData;
+    const { email, uid, organizationId, plan, visits } = user;
 
-    const appointmentDetails = {
-        firstName,
-        lastName,
-        email,
-        calendarID: expert.calendarID,
-        time: time.date,
-        reason: {
-            reason: appointment.reason,
-            sessionType: appointment.details,
-        },
-        details: appointment.details,
-        prescription: true,
-        appointmentTypeID: appointment.details.appointmentType,
-        uid,
-        insurance,
-        plan,
-        complete: false,
-        profile: profileImageUrl,
-        pronouns,
-        phoneNumber,
-        dob,
-        gender,
-        organizationId,
-        expert: {
-            firstName: expert.profileInfo.firstName,
-            lastName: expert.profileInfo.lastName,
-            profession: expert.profileInfo.profession.shortName,
-            imageUrl: expert.profileInfo.profileImageUrl,
-            rating: expert.rating,
-            uid: expert.uid,
-        },
-    };
+    // const appointmentDetails = {
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     calendarID: expert.calendarID,
+    //     time: time.date,
+    //     reason: {
+    //         reason: appointment.reason,
+    //         sessionType: appointment.details,
+    //     },
+    //     details: appointment.details,
+    //     prescription: true,
+    //     appointmentTypeID: appointment.details.appointmentType,
+    //     uid,
+    //     insurance,
+    //     plan,
+    //     complete: false,
+    //     profile: profileImageUrl,
+    //     pronouns,
+    //     phoneNumber,
+    //     dob,
+    //     gender,
+    //     organizationId,
+    //     expert: {
+    //         firstName: expert.profileInfo.firstName,
+    //         lastName: expert.profileInfo.lastName,
+    //         profession: expert.profileInfo.profession.shortName,
+    //         imageUrl: expert.profileInfo.profileImageUrl,
+    //         rating: expert.rating,
+    //         uid: expert.uid,
+    //     },
+    // };
 
     const bookVisit = () => {
-        dispatch(bookAppointment(appointmentDetails));
+        // dispatch(bookAppointment(appointmentDetails));
+        console.log(cardDetails);
+    };
+
+    const calculateTotal = () => {
+        if (appointments.visit.details.price <= visits * 60) {
+            return 0;
+        } else {
+            return appointments.visit.details.price - visits * 60;
+        }
+    };
+
+    const fetchPaymentIntentClientSecret = async () => {
+        const response = await payIntent();
+
+        return response;
+    };
+
+    const handlePayPress = async () => {
+        const billingDetails = {
+            email,
+            firstName,
+            lastName,
+            ...cardDetails,
+        };
+
+        const clientSecret = await fetchPaymentIntentClientSecret();
+
+        const { paymentIntent, error } = await confirmPayment(clientSecret, {
+            type: 'Card',
+            billingDetails,
+        });
+
+        if (error) {
+            console.log('Payment confirmation error', error);
+        } else if (paymentIntent) {
+            console.log('Success from promise', paymentIntent);
+        }
+    };
+
+    const handleApplePay = async () => {
+        if (!isApplePaySupported) return;
+
+        const { error } = await presentApplePay({
+            cartItems: [{ label: 'Kiira Balance', amount: '1.00' }],
+            country: 'US',
+            currency: 'USD',
+            requiredBillingContactFields: ['phoneNumber', 'name'],
+        });
+
+        if (error) {
+            // handle error
+        } else {
+            const clientSecret = await fetchPaymentIntentClientSecret();
+
+            const { error: confirmError } = await confirmApplePayPayment(
+                clientSecret,
+            );
+
+            if (confirmError) {
+                console.log(confirmError);
+            }
+        }
+    };
+
+    useEffect(() => {
+        setBalance(calculateTotal());
+    }, []);
+
+    const VisitRecap = () => {
+        return (
+            <Column options={[card]}>
+                <Text options={[card_title]}>
+                    {moment(appointments.visit.time.date).format(
+                        'ddd MMM Do h:mm a',
+                    )}
+                </Text>
+                <Row options={[pad_h, pad_v]}>
+                    <FastImage
+                        style={[{ height: 75, width: 75 }, [radius_lg]]}
+                        source={{
+                            uri: appointments.visit.expert.profileInfo
+                                .profileImageUrl,
+                        }}
+                    />
+                    <Column options={[pad_h, space_around]}>
+                        <Text options={[xxLarge]}>
+                            {appointments.visit.expert.expertName}
+                        </Text>
+                        <Text options={[gray_dark]}>
+                            {
+                                appointments.visit.expert.profileInfo.profession
+                                    .shortName
+                            }
+                        </Text>
+                    </Column>
+                </Row>
+            </Column>
+        );
     };
 
     return (
         <Screen test="Appointment Payment">
             <Header onBack={handleBack} title="Book Visit" />
-            <Column
-                options={[
-                    radius_md,
-                    pad_h,
-                    hide_overflow,
-                    white_bg,
-                    justify_fs,
-                    pad_v,
-                    { flex: 0 },
-                    grey_br,
-                ]}
-            >
-                <Text
-                    options={[
-                        pad_sm,
-                        grey_dark_bg,
-                        text_align_c,
-                        xxLarge,
-                        white,
-                    ]}
-                >
-                    {moment(time.date).format('ddd MMM Do h:mm a')}
-                </Text>
-                <Row options={[pad_h, pad_v]}>
-                    <FastImage
-                        style={[{ height: 75, width: 75 }, [radius_lg]]}
-                        source={{ uri: expert.profileInfo.profileImageUrl }}
-                    />
-                    <Column options={[pad_h, space_around]}>
-                        <Text options={[xxLarge]}>{expert.expertName}</Text>
-                        <Text options={[gray_dark]}>
-                            {expert.profileInfo.profession.shortName}
-                        </Text>
-                    </Column>
-                </Row>
-            </Column>
-            <Column
-                options={[
-                    radius_md,
-                    pad_h,
-                    hide_overflow,
-                    white_bg,
-                    justify_fs,
-                    pad_v,
-                    grey_br,
-                    { flex: 0 },
-                ]}
-            >
+            <VisitRecap />
+            <Column options={[card]}>
                 <Row options={[pad_h, sm_pad_v]}>
                     <CameraBlack />
                     <Text options={[pad_h, large]}>
-                        {`${appointment.details.duration} min Video Visit`}
+                        {`${appointments.visit.details.duration} min Video Visit`}
                     </Text>
                 </Row>
                 <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
                 <Row options={[pad_h, sm_pad_v]}>
                     <Cart />
                     <Text options={[pad_h, large]}>
-                        {`$${appointment.details.price}`}
+                        {`$${appointments.visit.details.price}`}
                     </Text>
                 </Row>
                 <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
                 <Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Text options={[pad_h, large]}>
-                        {` -$60 credit ($120 available)`}
+                        {` -$${visits * 60} credit ($${visits * 60} available)`}
                     </Text>
                 </Row>
                 <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
@@ -184,30 +238,45 @@ const Payment = ({ navigation }) => {
                         textColor: '#000000',
                     }}
                     style={{
-                        width: '100%',
                         height: 50,
                         marginHorizontal: 10,
-                        flexDirection: 'row',
-                        flexWrap: 'wrap',
                     }}
                     onCardChange={cardDetails => {
-                        console.log('cardDetails', cardDetails);
+                        setCardDetails(cardDetails);
                     }}
-                    onFocus={focusedField => {
-                        console.log('focusField', focusedField);
-                    }}
-                />
-                <ApplePayButton
-                    type="plain"
-                    buttonStyle="black"
-                    borderRadius={4}
-                    onPress={() => console.log('Apple Pay')}
                 />
                 <Line options={[{ width: '90%' }]} />
-                <Text options={[pad_h, large, pad_b]}>Total: $0</Text>
+                <Row
+                    options={[
+                        { justifyContent: 'space-between' },
+                        { alignItems: 'center' },
+                        pad_b,
+                    ]}
+                >
+                    <Text options={[pad_h, xxLarge]}>Total: ${balance}</Text>
+                    {isApplePaySupported && (
+                        <ApplePayButton
+                            onPress={handleApplePay}
+                            type="plain"
+                            buttonStyle="black"
+                            borderRadius={4}
+                            style={[{ width: 80 }, { height: 40 }]}
+                        />
+                    )}
+                    {balance > 0 && (
+                        <Button
+                            onPress={handlePayPress}
+                            style={{
+                                container: [pad_h],
+                                title: [xLarge],
+                            }}
+                            title="Pay"
+                        />
+                    )}
+                </Row>
             </Column>
 
-            <Text options={[text_align_c, pad_b]}>
+            <Text options={[text_align_c]}>
                 Anything you would like to add?
             </Text>
             <Input
@@ -218,12 +287,14 @@ const Payment = ({ navigation }) => {
                 placeholder="You can say something like 'I need new birth control'"
             />
 
-            <Button
-                test="Confirm Appointment"
-                onPress={bookVisit}
-                style={{ container: [pad_h], title: [large] }}
-                title="Confirm"
-            />
+            {balance === 0 && (
+                <Button
+                    test="Confirm Appointment"
+                    onPress={bookVisit}
+                    style={{ container: [pad_h], title: [large] }}
+                    title="Confirm"
+                />
+            )}
         </Screen>
     );
 };
