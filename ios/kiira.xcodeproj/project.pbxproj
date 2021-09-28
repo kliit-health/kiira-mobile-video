@@ -37,6 +37,7 @@
 		A5CDB462E219426AADEFB9C3 /* Poppins-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F9E7946994A54FFEBADF2F03 /* Poppins-ThinItalic.otf */; };
 		AB7BDA1BB6A64BB8B20F856A /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C71DC7E330AA4D13969A9DF9 /* Poppins-SemiBold.otf */; };
 		B42F090E4662493AAFD1220D /* Poppins-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D03850FD6BFD45168077209D /* Poppins-Thin.otf */; };
+		B452C6EAC679C60969050DF0 /* libPods-kiira.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA6A0B8C8C959DCADCE05300 /* libPods-kiira.a */; };
 		C2E2046BC9104277AC743ABF /* Poppins-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C264C275E86249DA9C63BC98 /* Poppins-ExtraBold.otf */; };
 		E802665E26F2A97C002F10FE /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = E802665D26F2A97C002F10FE /* Fix.swift */; };
 		E8EA6720245A256200800AFD /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8EA671E245A256200800AFD /* AppCenter-Config.plist */; };
@@ -98,12 +99,15 @@
 		9F90CFD1202144479FCEC162 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		A2534040CD244D07A42BB570 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		A3DA468C6B2245E0ADAA06AE /* Avenir-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Light.ttf"; path = "../assets/fonts/Avenir-Light.ttf"; sourceTree = "<group>"; };
+		A4A40E846CF82C5631157830 /* Pods-kiira.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.release.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.release.xcconfig"; sourceTree = "<group>"; };
 		A544915BB0B44A4DA64B682D /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		A74CDC66C22E4C858CDEB29C /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		AA6A0B8C8C959DCADCE05300 /* libPods-kiira.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kiira.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15CBF31B54A4AE5AD6EA508 /* Poppins-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.otf"; path = "../assets/fonts/Poppins-Italic.otf"; sourceTree = "<group>"; };
 		C264C275E86249DA9C63BC98 /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.otf"; path = "../assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
 		C71B8AEA0C434924A9DD4B20 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		C71DC7E330AA4D13969A9DF9 /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.otf"; path = "../assets/fonts/Poppins-SemiBold.otf"; sourceTree = "<group>"; };
+		C8123205AD70EE925F49D78B /* Pods-kiira.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kiira.debug.xcconfig"; path = "Target Support Files/Pods-kiira/Pods-kiira.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5490853EDA497B88269DE0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		CC26887ABB126A6F812EE86C /* libPods-kiira.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kiira.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF589B6E34684D88A07325FC /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.otf"; path = "../assets/fonts/Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kiira/Pods-kiira-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+
 		BADE993557E7741014330269 /* [CP-User] [RNFB] Core Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
