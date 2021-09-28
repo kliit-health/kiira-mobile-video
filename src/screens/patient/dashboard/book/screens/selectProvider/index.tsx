@@ -4,22 +4,12 @@ import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAppointmentExpert } from '~/redux/reducers/appointments';
 import { RootState } from '~/redux/reducers';
-import {
-    Screen,
-    Header,
-    Heading,
-    Column,
-    Row,
-    Text,
-    Modal,
-    Line,
-    Button,
-} from '~/components';
+import * as Kiira from '~/components';
 import {
     handleBack,
     handleNavigation,
 } from '~/utils/functions/handleNavigation';
-import { default as globalStyles } from '~/components/styles';
+import { select_provider } from '~/components/styles';
 
 const {
     medium,
@@ -43,7 +33,7 @@ const {
     radius_sm,
     hide_overflow,
     no_pad_v,
-} = globalStyles;
+} = select_provider;
 
 const SelectProvider = () => {
     const dispatch = useDispatch();
@@ -98,7 +88,7 @@ const SelectProvider = () => {
 
     const handlePress = () => {
         toggleModal();
-        handleNavigation('Calendar', { expert });
+        handleNavigation('Calendar');
     };
 
     const ExpertDetails = ({ expert }) => {
@@ -109,7 +99,7 @@ const SelectProvider = () => {
 
         return (
             <TouchableOpacity onPress={() => handleSelection(expert)}>
-                <Row options={[white_bg, sm_pad_v, pad_vertical]}>
+                <Kiira.Row options={[white_bg, sm_pad_v, pad_vertical]}>
                     <FastImage
                         testID={expertName}
                         style={[pad_h, image_md]}
@@ -119,111 +109,109 @@ const SelectProvider = () => {
                             priority: FastImage.priority.normal,
                         }}
                     />
-                    <Column>
-                        <Text options={[pad_h, xLarge]}>{expertName}</Text>
-                        <Text options={[pad_h, medium, light]}>
+                    <Kiira.Column>
+                        <Kiira.Text options={[pad_h, xLarge]}>
+                            {expertName}
+                        </Kiira.Text>
+                        <Kiira.Text options={[pad_h, medium, light]}>
                             {profession.fullName}
-                        </Text>
-                    </Column>
-                </Row>
+                        </Kiira.Text>
+                    </Kiira.Column>
+                </Kiira.Row>
             </TouchableOpacity>
         );
     };
 
+    const ExpertModal = () => (
+        <Kiira.Modal
+            styles={{
+                root: {
+                    marginTop: 150,
+                    marginHorizontal: 0,
+                },
+            }}
+            visible={showModal}
+            onBackdropPress={toggleModal}
+        >
+            <FastImage
+                style={[pad_h, image_lg, white_br, center, { marginTop: -50 }]}
+                resizeMode="contain"
+                source={{
+                    uri: expert.profileInfo.profileImageUrl,
+                    priority: FastImage.priority.normal,
+                }}
+            />
+            <Kiira.Column options={[white_bg, justify_fs, sm_pad_v]}>
+                <Kiira.Text options={[pad_h, xLarge, center]}>
+                    {expert.expertName}
+                </Kiira.Text>
+                <Kiira.Text options={[pad_h, medium, light, center, sm_pad_v]}>
+                    {expert.profileInfo.profession.fullName}
+                </Kiira.Text>
+                <Kiira.Line options={[grey_br_b_md]} />
+                <Kiira.Text options={[pad_h, xLarge]}>Specialities</Kiira.Text>
+                <Kiira.Row options={[no_pad_v, { height: 60 }]}>
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        keyExtractor={item => item}
+                        data={expert.profileInfo.profession.specialities}
+                        horizontal
+                        renderItem={({ item }) => {
+                            return (
+                                <Kiira.Text
+                                    options={[
+                                        sm_pad_h,
+                                        sm_pad_v,
+                                        blue_bg,
+                                        { height: 40 },
+                                        pad_sm,
+                                        radius_sm,
+                                        hide_overflow,
+                                    ]}
+                                >
+                                    {item}
+                                </Kiira.Text>
+                            );
+                        }}
+                    />
+                </Kiira.Row>
+                <Kiira.Text options={[pad_h, xLarge]}>Bio</Kiira.Text>
+                <Kiira.Text options={[pad]}>
+                    {expert.profileInfo.bio}
+                </Kiira.Text>
+                <Kiira.Text options={[pad_h, xLarge]}>Languages</Kiira.Text>
+                <Kiira.Row options={[pad]}>
+                    {expert.profileInfo.languages.map(lang => (
+                        <Kiira.Text
+                            key={lang.value}
+                        >{`${lang.value}  `}</Kiira.Text>
+                    ))}
+                </Kiira.Row>
+                <Kiira.Button
+                    testID="See Availability"
+                    onPress={handlePress}
+                    style={{ container: [pad_h, sm_pad_v] }}
+                    title="See Availability"
+                />
+            </Kiira.Column>
+        </Kiira.Modal>
+    );
+
     return (
-        <Screen test="Book Screen">
-            <Header title="Book Visit" onBack={handleBack} />
-            <Heading options={[text_align_c]}>Please choose a provider</Heading>
+        <Kiira.Screen test="Book Screen">
+            <Kiira.Header title="Book Visit" onBack={handleBack} />
+            <Kiira.Heading options={[text_align_c]}>
+                Please choose a provider
+            </Kiira.Heading>
             <FlatList
-                data={experts}
+                data={availableExperts}
                 keyExtractor={item => item.expertName}
                 renderItem={({ item }) => {
                     return <ExpertDetails expert={item} />;
                 }}
             />
-            {showModal && (
-                <Modal
-                    styles={{
-                        root: {
-                            marginTop: 150,
-                            marginHorizontal: 0,
-                        },
-                    }}
-                    visible={showModal}
-                    onBackdropPress={toggleModal}
-                >
-                    <FastImage
-                        style={[
-                            pad_h,
-                            image_lg,
-                            white_br,
-                            center,
-                            { marginTop: -50 },
-                        ]}
-                        resizeMode="contain"
-                        source={{
-                            uri: expert.profileInfo.profileImageUrl,
-                            priority: FastImage.priority.normal,
-                        }}
-                    />
-                    <Column options={[white_bg, justify_fs, sm_pad_v]}>
-                        <Text options={[pad_h, xLarge, center]}>
-                            {expert.expertName}
-                        </Text>
-                        <Text
-                            options={[pad_h, medium, light, center, sm_pad_v]}
-                        >
-                            {expert.profileInfo.profession.fullName}
-                        </Text>
-                        <Line options={[grey_br_b_md]} />
-                        <Text options={[pad_h, xLarge]}>Specialities</Text>
-                        <Row options={[no_pad_v, { height: 60 }]}>
-                            <FlatList
-                                showsHorizontalScrollIndicator={false}
-                                keyExtractor={item => item}
-                                data={
-                                    expert.profileInfo.profession.specialities
-                                }
-                                horizontal
-                                renderItem={({ item }) => {
-                                    return (
-                                        <Text
-                                            options={[
-                                                sm_pad_h,
-                                                sm_pad_v,
-                                                blue_bg,
-                                                { height: 40 },
-                                                pad_sm,
-                                                radius_sm,
-                                                hide_overflow,
-                                            ]}
-                                        >
-                                            {item}
-                                        </Text>
-                                    );
-                                }}
-                            />
-                        </Row>
-                        <Text options={[pad_h, xLarge]}>Bio</Text>
-                        <Text options={[pad]}>{expert.profileInfo.bio}</Text>
-                        <Text options={[pad_h, xLarge]}>Languages</Text>
-                        <Row options={[pad]}>
-                            {expert.profileInfo.languages.map(lang => (
-                                <Text
-                                    key={lang.value}
-                                >{`${lang.value}  `}</Text>
-                            ))}
-                        </Row>
-                        <Button
-                            testID="See Availability"
-                            onPress={handlePress}
-                            style={{ container: [pad_h, sm_pad_v] }}
-                            title="See Availability"
-                        />
-                    </Column>
-                </Modal>
-            )}
-        </Screen>
+            {showModal && <ExpertModal />}
+        </Kiira.Screen>
     );
 };
 

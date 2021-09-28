@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
+import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import {
     getAppointmentDates,
     getExpertsData,
@@ -8,17 +10,18 @@ import {
     getAppointmentsForToday,
     setAppointmentDayAndTime,
 } from '~/redux/reducers/appointments';
-import { RootState } from '~/redux/reducers';
-import moment from 'moment';
-import { Row, Text, Header, Screen, Button } from '~/components';
+
 import {
     handleBack,
     handleNavigation,
 } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
-import { default as globalStyles } from '~/components/styles';
 import { colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
+
+import moment from 'moment';
+
+import { default as globalStyles } from '~/components/styles';
 
 const { width } = metrices;
 
@@ -102,10 +105,10 @@ const Calendar = () => {
     };
 
     return (
-        <Screen>
-            <Header onBack={handleBack} title="Book Visit" />
-            <Text options={[pad, medium, light, pad_t]}>{day}</Text>
-            <Row options={[sm_pad_h, { height: 90 }]}>
+        <Kiira.Screen>
+            <Kiira.Header onBack={handleBack} title="Book Visit" />
+            <Kiira.Text options={[pad, medium, light, pad_t]}>{day}</Kiira.Text>
+            <Kiira.Row options={[sm_pad_h, { height: 90 }]}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
@@ -122,7 +125,7 @@ const Calendar = () => {
                         let date = generateDateInfo(item.date);
 
                         return (
-                            <Button
+                            <Kiira.Button
                                 test={'date ' + index}
                                 onPress={() => handlePress(date)}
                                 style={{
@@ -143,16 +146,14 @@ const Calendar = () => {
                         );
                     }}
                 />
-            </Row>
-            <Text options={[pad]}>Please select an appointment time</Text>
+            </Kiira.Row>
+            <Kiira.Text options={[pad]}>
+                Please select an appointment time
+            </Kiira.Text>
             <FlatList
+                numColumns={3}
                 initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{
-                    flexWrap: 'wrap',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                }}
                 keyExtractor={({ time }) => time}
                 data={appointments.appointments.current}
                 ListEmptyComponent={() => (
@@ -161,7 +162,7 @@ const Calendar = () => {
                 renderItem={({ item, index }) => {
                     let current = generateDateInfo(item.time);
                     return (
-                        <Button
+                        <Kiira.Button
                             test={'time ' + index}
                             onPress={() => setTime(current)}
                             style={{
@@ -183,12 +184,13 @@ const Calendar = () => {
                     );
                 }}
             />
-            <Button
+            <Kiira.Button
+                test="Confirm Date and Time"
                 onPress={handleConfirm}
                 title="Confirm"
                 style={{ container: [sm_pad_v, pad_h], title: [] }}
             />
-        </Screen>
+        </Kiira.Screen>
     );
 };
 

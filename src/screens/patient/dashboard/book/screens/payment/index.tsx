@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Screen,
-    Header,
-    Column,
-    Row,
-    Text,
-    Button,
-    Line,
-    Input,
-} from '~/components';
+import * as Kiira from '~/components';
 import FastImage from 'react-native-fast-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
@@ -18,6 +9,7 @@ import moment from 'moment';
 import { default as globalStyles, card, card_title } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
 import { bookAppointment } from '~/redux/reducers/appointments';
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import {
     ApplePayButton,
     CardField,
@@ -32,7 +24,6 @@ const {
     pad_h,
     pad_v,
     text_align_c,
-    radius_lg,
     radius_md,
     large,
     xLarge,
@@ -41,9 +32,10 @@ const {
     sm_pad_v,
     space_around,
     gray_dark,
+    image_md,
 } = globalStyles;
 
-const Payment = ({ navigation }) => {
+const Payment = () => {
     const dispatch = useDispatch();
     const { isApplePaySupported } = useApplePay();
     const { confirmPayment, loading } = useConfirmPayment();
@@ -66,43 +58,44 @@ const Payment = ({ navigation }) => {
     } = user.profileInfo;
 
     const { email, uid, organizationId, plan, visits } = user;
+    const { visit } = appointments;
+    const { expert } = visit;
 
-    // const appointmentDetails = {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     calendarID: expert.calendarID,
-    //     time: time.date,
-    //     reason: {
-    //         reason: appointment.reason,
-    //         sessionType: appointment.details,
-    //     },
-    //     details: appointment.details,
-    //     prescription: true,
-    //     appointmentTypeID: appointment.details.appointmentType,
-    //     uid,
-    //     insurance,
-    //     plan,
-    //     complete: false,
-    //     profile: profileImageUrl,
-    //     pronouns,
-    //     phoneNumber,
-    //     dob,
-    //     gender,
-    //     organizationId,
-    //     expert: {
-    //         firstName: expert.profileInfo.firstName,
-    //         lastName: expert.profileInfo.lastName,
-    //         profession: expert.profileInfo.profession.shortName,
-    //         imageUrl: expert.profileInfo.profileImageUrl,
-    //         rating: expert.rating,
-    //         uid: expert.uid,
-    //     },
-    // };
+    const appointmentDetails = {
+        firstName,
+        lastName,
+        email,
+        calendarID: visit.expert.calendarID,
+        time: visit.time.date,
+        reason: {
+            reason: visit.reason,
+            sessionType: visit.details,
+        },
+        appointmentTypeID: visit.details.appointmentType,
+        uid,
+        insurance,
+        plan,
+        complete: false,
+        profile: profileImageUrl,
+        pronouns,
+        phoneNumber,
+        dob,
+        gender,
+        organizationId,
+        expert: {
+            firstName: expert.profileInfo.firstName,
+            lastName: expert.profileInfo.lastName,
+            profession: expert.profileInfo.profession.shortName,
+            imageUrl: expert.profileInfo.profileImageUrl,
+            rating: expert.rating,
+            uid: expert.uid,
+        },
+        visits,
+        prepaid: null,
+    };
 
     const bookVisit = () => {
-        // dispatch(bookAppointment(appointmentDetails));
-        console.log(cardDetails);
+        dispatch(bookAppointment(appointmentDetails));
     };
 
     const calculateTotal = () => {
@@ -114,12 +107,13 @@ const Payment = ({ navigation }) => {
     };
 
     const fetchPaymentIntentClientSecret = async () => {
-        const response = await payIntent();
+        const response = await payIntent({ visit: appointments.visit.details });
 
         return response;
     };
 
     const handlePayPress = async () => {
+        dispatch(showApiLoader());
         const billingDetails = {
             email,
             firstName,
@@ -137,7 +131,7 @@ const Payment = ({ navigation }) => {
         if (error) {
             console.log('Payment confirmation error', error);
         } else if (paymentIntent) {
-            console.log('Success from promise', paymentIntent);
+            bookVisit();
         }
     };
 
@@ -145,7 +139,7 @@ const Payment = ({ navigation }) => {
         if (!isApplePaySupported) return;
 
         const { error } = await presentApplePay({
-            cartItems: [{ label: 'Kiira Balance', amount: '1.00' }],
+            cartItems: [{ label: 'Kiira Balance', amount: `${balance}.00` }],
             country: 'US',
             currency: 'USD',
             requiredBillingContactFields: ['phoneNumber', 'name'],
@@ -155,13 +149,15 @@ const Payment = ({ navigation }) => {
             // handle error
         } else {
             const clientSecret = await fetchPaymentIntentClientSecret();
-
+            console.log(clientSecret);
             const { error: confirmError } = await confirmApplePayPayment(
                 clientSecret,
             );
 
             if (confirmError) {
                 console.log(confirmError);
+            } else {
+                // bookVisit();
             }
         }
     };
@@ -172,130 +168,132 @@ const Payment = ({ navigation }) => {
 
     const VisitRecap = () => {
         return (
-            <Column options={[card]}>
-                <Text options={[card_title]}>
+            <Kiira.Column options={[card]}>
+                <Kiira.Text options={[card_title]}>
                     {moment(appointments.visit.time.date).format(
                         'ddd MMM Do h:mm a',
                     )}
-                </Text>
-                <Row options={[pad_h, pad_v]}>
+                </Kiira.Text>
+                <Kiira.Row options={[pad_h, pad_v]}>
                     <FastImage
-                        style={[{ height: 75, width: 75 }, [radius_lg]]}
+                        style={[image_md]}
                         source={{
                             uri: appointments.visit.expert.profileInfo
                                 .profileImageUrl,
                         }}
                     />
-                    <Column options={[pad_h, space_around]}>
-                        <Text options={[xxLarge]}>
+                    <Kiira.Column options={[pad_h, space_around]}>
+                        <Kiira.Text options={[xxLarge]}>
                             {appointments.visit.expert.expertName}
-                        </Text>
-                        <Text options={[gray_dark]}>
+                        </Kiira.Text>
+                        <Kiira.Text options={[gray_dark]}>
                             {
                                 appointments.visit.expert.profileInfo.profession
                                     .shortName
                             }
-                        </Text>
-                    </Column>
-                </Row>
-            </Column>
+                        </Kiira.Text>
+                    </Kiira.Column>
+                </Kiira.Row>
+            </Kiira.Column>
         );
     };
 
     return (
-        <Screen test="Appointment Payment">
-            <Header onBack={handleBack} title="Book Visit" />
+        <Kiira.Screen test="Appointment Payment">
+            <Kiira.Header onBack={handleBack} title="Book Visit" />
             <VisitRecap />
-            <Column options={[card]}>
-                <Row options={[pad_h, sm_pad_v]}>
+            <Kiira.Column options={[card]}>
+                <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <CameraBlack />
-                    <Text options={[pad_h, large]}>
+                    <Kiira.Text options={[pad_h, large]}>
                         {`${appointments.visit.details.duration} min Video Visit`}
-                    </Text>
-                </Row>
-                <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Row options={[pad_h, sm_pad_v]}>
+                    </Kiira.Text>
+                </Kiira.Row>
+                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
+                <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Cart />
-                    <Text options={[pad_h, large]}>
+                    <Kiira.Text options={[pad_h, large]}>
                         {`$${appointments.visit.details.price}`}
-                    </Text>
-                </Row>
-                <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Row options={[pad_h, sm_pad_v]}>
+                    </Kiira.Text>
+                </Kiira.Row>
+                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
+                <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
-                    <Text options={[pad_h, large]}>
-                        {` -$${visits * 60} credit ($${visits * 60} available)`}
-                    </Text>
-                </Row>
-                <Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <CardField
-                    postalCodeEnabled={true}
-                    placeholder={{
-                        number: 'CC #',
-                    }}
-                    cardStyle={{
-                        backgroundColor: '#FFFFFF',
-                        textColor: '#000000',
-                    }}
-                    style={{
-                        height: 50,
-                        marginHorizontal: 10,
-                    }}
-                    onCardChange={cardDetails => {
-                        setCardDetails(cardDetails);
-                    }}
-                />
-                <Line options={[{ width: '90%' }]} />
-                <Row
-                    options={[
-                        { justifyContent: 'space-between' },
-                        { alignItems: 'center' },
-                        pad_b,
-                    ]}
-                >
-                    <Text options={[pad_h, xxLarge]}>Total: ${balance}</Text>
-                    {isApplePaySupported && (
-                        <ApplePayButton
-                            onPress={handleApplePay}
-                            type="plain"
-                            buttonStyle="black"
-                            borderRadius={4}
-                            style={[{ width: 80 }, { height: 40 }]}
-                        />
-                    )}
-                    {balance > 0 && (
-                        <Button
-                            onPress={handlePayPress}
-                            style={{
-                                container: [pad_h],
-                                title: [xLarge],
+                    <Kiira.Text options={[pad_h, large]}>
+                        {` -$${appointments.visit.details.price} credit ($${
+                            visits * 60
+                        } available)`}
+                    </Kiira.Text>
+                </Kiira.Row>
+                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
+                <Kiira.Conditional if={balance > 0}>
+                    <>
+                        <CardField
+                            postalCodeEnabled={true}
+                            placeholder={{
+                                number: 'CC #',
                             }}
-                            title="Pay"
+                            style={{
+                                height: 50,
+                                marginHorizontal: 10,
+                            }}
+                            onCardChange={cardDetails => {
+                                setCardDetails(cardDetails);
+                            }}
                         />
-                    )}
-                </Row>
-            </Column>
+                        <Kiira.Line options={[{ width: '90%' }]} />
+                        <Kiira.Row
+                            options={[
+                                { justifyContent: 'space-between' },
+                                { alignItems: 'center' },
+                                pad_b,
+                            ]}
+                        >
+                            <Kiira.Text options={[pad_h, xxLarge]}>
+                                Total: ${balance}
+                            </Kiira.Text>
+                            {isApplePaySupported && (
+                                <ApplePayButton
+                                    onPress={handleApplePay}
+                                    type="plain"
+                                    buttonStyle="black"
+                                    borderRadius={4}
+                                    style={[{ width: 80 }, { height: 40 }]}
+                                />
+                            )}
 
-            <Text options={[text_align_c]}>
+                            <Kiira.Button
+                                onPress={handlePayPress}
+                                style={{
+                                    container: [pad_h],
+                                    title: [xLarge],
+                                }}
+                                title="Pay"
+                            />
+                        </Kiira.Row>
+                    </>
+                </Kiira.Conditional>
+            </Kiira.Column>
+
+            <Kiira.Text options={[text_align_c]}>
                 Anything you would like to add?
-            </Text>
-            <Input
+            </Kiira.Text>
+            <Kiira.Input
                 value={message}
                 onChangeText={setMessage}
                 options={[radius_md, grey_br, { width: '90%' }]}
                 multiline
                 placeholder="You can say something like 'I need new birth control'"
             />
-
             {balance === 0 && (
-                <Button
+                <Kiira.Button
                     test="Confirm Appointment"
                     onPress={bookVisit}
                     style={{ container: [pad_h], title: [large] }}
                     title="Confirm"
                 />
             )}
-        </Screen>
+        </Kiira.Screen>
     );
 };
 

@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, ActivityIndicator } from 'react-native';
-import {
-    Screen,
-    Header,
-    Heading,
-    Column,
-    Tabs,
-    RadioGroup,
-    Line,
-    Button,
-    Conditional,
-} from '~/components';
+import * as Kiira from '~/components';
 import { RootState } from '~/redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAppointmentDetails } from '~/redux/reducers/appointments';
@@ -22,14 +12,18 @@ import Expandable from '~/components/expandable';
 import { getAllDocumentsFromCollection } from '~/utils/firebase';
 
 const {
-    width_10,
-    grey_dark_br_t_md,
-    pad_v,
-    hide_overflow,
-    no_pad_v,
-    no_pad_h,
     grey_br_t_md,
+    grey_dark_br_t_md,
+    hide_overflow,
+    height_250,
+    no_pad_h,
+    no_pad_v,
+    pad_b,
     pad_h,
+    pad_v,
+    sm_pad_t,
+    width_10,
+    zero_flex,
 } = globalStyles;
 
 const Book = ({ navigation }) => {
@@ -102,50 +96,61 @@ const Book = ({ navigation }) => {
     };
 
     return (
-        <Screen test="Book Screen">
-            <Header title="Book Visit" onBack={handleBack} />
-            <Heading>Please select the main reason for your visit:</Heading>
-            <Column
-                options={[card, hide_overflow, { flex: 0, height: cardHeight }]}
+        <Kiira.Screen test="Book Screen">
+            <Kiira.Header title="Book Visit" onBack={handleBack} />
+            <Kiira.Heading>
+                Please select the main reason for your visit:
+            </Kiira.Heading>
+            <Kiira.Column
+                options={[
+                    card,
+                    hide_overflow,
+                    zero_flex,
+                    { height: cardHeight },
+                ]}
             >
-                <Tabs list={tabs} active setActive={handleTabSelect} />
-                <Column options={[{ flex: 0, height: 250 }, pad_v]}>
-                    <RadioGroup onSelect={handleSelection} data={data} />
-                </Column>
-            </Column>
-            <Column options={[card, hide_overflow, no_pad_v, no_pad_h]}>
+                <Kiira.Tabs list={tabs} active setActive={handleTabSelect} />
+                <Kiira.Column options={[zero_flex, height_250, pad_v]}>
+                    <Kiira.RadioGroup onSelect={handleSelection} data={data} />
+                </Kiira.Column>
+            </Kiira.Column>
+            <Kiira.Column options={[card, hide_overflow, no_pad_v, no_pad_h]}>
                 <ScrollView>
-                    <Line options={[pad_v, width_10, grey_dark_br_t_md]} />
-                    <Column options={[pad_h]}>
-                        <Conditional if={loading && selection}>
+                    <Kiira.Line
+                        options={[pad_v, width_10, grey_dark_br_t_md]}
+                    />
+                    <Kiira.Column options={[pad_h]}>
+                        <Kiira.Conditional if={loading && selection}>
                             <ActivityIndicator size="large" />
-                        </Conditional>
-                        <Conditional if={!loading && selection}>
+                        </Kiira.Conditional>
+                        <Kiira.Conditional if={!loading && selection}>
                             {visit && (
-                                <Heading options={[h3]}>
+                                <Kiira.Heading options={[h3]}>
                                     {`${visit.details.title}: ${visit.details.duration} min $${visit.details.price}`}
-                                </Heading>
+                                </Kiira.Heading>
                             )}
-                        </Conditional>
-                    </Column>
+                        </Kiira.Conditional>
+                    </Kiira.Column>
                     <Expandable onPress={handleLinePress} list={sections} />
-                    <Column options={[pad_h, grey_br_t_md, { flex: 0 }]}>
-                        <Conditional if={selection}>
-                            <Button
+                    <Kiira.Column
+                        options={[pad_h, pad_b, grey_br_t_md, zero_flex]}
+                    >
+                        <Kiira.Conditional if={selection}>
+                            <Kiira.Button
                                 testID="See Providers"
                                 onPress={() =>
                                     navigation.navigate('SelectProvider')
                                 }
                                 style={{
-                                    container: [{ marginTop: 10 }],
+                                    container: [sm_pad_t],
                                 }}
                                 title="See Providers"
                             />
-                        </Conditional>
-                    </Column>
+                        </Kiira.Conditional>
+                    </Kiira.Column>
                 </ScrollView>
-            </Column>
-        </Screen>
+            </Kiira.Column>
+        </Kiira.Screen>
     );
 };
 
