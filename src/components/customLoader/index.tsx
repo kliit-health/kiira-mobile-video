@@ -11,7 +11,8 @@ const CustomLoader = ({ showLoader, textMsg }) => {
                 <View style={style.innerContainerStyle}>
                     <Animatable.View
                         iterationCount="infinite"
-                        animation="bounce"
+                        animation="fadeIn"
+                        easing="ease-in-out"
                     >
                         <Image
                             source={require('../../../assets/logo.png')}

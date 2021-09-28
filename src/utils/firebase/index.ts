@@ -1376,12 +1376,10 @@ export async function payAmount(cardID, amount) {
     }
 }
 
-export async function payIntent(cardID = 'VISA', amount = 1) {
+export async function payIntent({ visit }) {
     try {
-        const amountInCents = Number(amount) * 100;
         const response = await functions().httpsCallable('paymentIntent')({
-            card_id: cardID,
-            amount: amountInCents,
+            visit,
         });
 
         return response.data;
@@ -1407,18 +1405,38 @@ export async function payAmountWithToken(tokenID, amount) {
     }
 }
 
-export async function updateCredits(visits, { data }) {
+export async function updateCredits(
+    visits: number,
+    payload: object,
+    prepaid?: boolean,
+) {
+    const { uid } = payload;
+
     try {
-        const docData = await firestore()
-            .collection('users')
-            .doc(data.uid)
-            .get();
-        const userData = docData.data();
-        const paymentType = data.prepaid
-            ? { prepaid: userData.prepaid + visits }
-            : { visits: userData.visits + visits };
-        await firestore().collection('users').doc(data.uid).update(paymentType);
-        return { ok: true };
+        const docData = await firestore().collection('users').doc(uid).get();
+        const user = docData.data();
+
+        if (!prepaid) {
+            await firestore()
+                .collection('users')
+                .doc(uid)
+                .update({ visits: user.visits + visits });
+
+            return { ok: true };
+        } else {
+            const purchased = payload.prepaid.amount;
+            const monthlyCredit =
+                payload.reason.sessionType.credits - payload.prepaid.amount;
+            await firestore()
+                .collection('users')
+                .doc(uid)
+                .update({
+                    visits: user.visits + monthlyCredit,
+                    prepaid: user.prepaid + purchased,
+                });
+
+            return { ok: true };
+        }
     } catch (err) {
         return { ok: false, status: 'internal' };
     }

@@ -9,7 +9,7 @@ import { uploadImage, updateUserData } from '~/utils/firebase';
 import { getUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 import { changePassword, reAunthenticate } from '~/utils/firebase';
-import { NavigationService } from '~/navigation';
+import { default as navigation } from '~/navigation/navigationService';
 
 function* signout() {
     const lang = yield select(state => state.language);
@@ -28,9 +28,9 @@ function* signout() {
         yield put(clearAskState());
         yield logout();
         yield put(hideApiLoader());
-        NavigationService.navigate(Constant.App.stack.AuthStack);
+        navigation.navigate('Landing');
     } catch (error) {
-        NavigationService.navigate(Constant.App.stack.AuthStack);
+        navigation.navigate('Landing');
         yield put(showOrHideModal(lang.errorMessage.serverError));
     }
 }

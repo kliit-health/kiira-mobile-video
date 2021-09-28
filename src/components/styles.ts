@@ -111,6 +111,10 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
 
+    sm_pad_t: {
+        marginTop: 10,
+    },
+
     pad_t: {
         marginTop: 20,
     },
@@ -413,6 +417,14 @@ const styles = StyleSheet.create({
         height: '75%',
     },
 
+    height_250: {
+        height: 250,
+    },
+
+    height_330: {
+        height: 330,
+    },
+
     width_10: {
         width: '10%',
     },
@@ -506,6 +518,30 @@ export const card_title = [
     styles.xxLarge,
     styles.white,
 ];
+
+export const select_provider = {
+    medium: styles.medium,
+    xLarge: styles.xLarge,
+    text_align_c: styles.text_align_c,
+    image_md: styles.image_md,
+    image_lg: styles.image_lg,
+    white_bg: styles.white_bg,
+    sm_pad_v: styles.sm_pad_v,
+    sm_pad_h: styles.sm_pad_h,
+    grey_br_b_md: styles.grey_br_b_md,
+    white_br: styles.white_br,
+    pad_h: styles.pad_h,
+    pad_vertical: styles.pad_vertical,
+    light: styles.light,
+    justify_fs: styles.justify_fs,
+    center: styles.center,
+    blue_bg: styles.blue_bg,
+    pad: styles.pad,
+    pad_sm: styles.pad_sm,
+    radius_sm: styles.radius_sm,
+    hide_overflow: styles.hide_overflow,
+    no_pad_v: styles.no_pad_v,
+};
 
 export const h1 = [styles.xxLarge, styles.pad_h, styles.sm_pad_v];
 export const h2 = [styles.xLarge, styles.pad_h, styles.sm_pad_v];

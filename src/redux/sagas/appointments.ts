@@ -142,8 +142,8 @@ function* getAppointments({ payload }) {
 }
 
 function* cancelTheAppointment({ payload }) {
-    const { credits } = payload;
-
+    const { credits, prepaid } = payload;
+    console.log('CANCEL', payload);
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(payload);
@@ -157,9 +157,13 @@ function* cancelTheAppointment({ payload }) {
             if (credits === 0) {
                 yield put(updateUser({ assessment: null }));
             }
-
-            yield updateCredits(credits, payload);
-            yield put(getUser());
+            if (prepaid.isPrePaid) {
+                yield updateCredits(credits, payload, true);
+                yield put(getUser());
+            } else {
+                yield updateCredits(credits, payload);
+                yield put(getUser());
+            }
         }
         yield getAppointments({ payload });
         yield put(hideApiLoader());
@@ -180,19 +184,30 @@ function* setExpertRating({ payload }) {
 }
 
 function* setAppointment({ payload }) {
-    const { time, reason, expert } = payload;
+    const { time, reason, expert, visits } = payload;
+
     const {
         sessionType: { credits },
     } = reason;
     const { uid } = expert;
 
-    try {
-        yield put(showApiLoader());
+    let total = credits - visits;
 
+    payload.prepaid = {
+        isPrePaid: credits > visits,
+        amount: total,
+    };
+
+    if (credits > visits) {
+        yield updateCredits(total, { data: payload });
+        yield put(getUser());
+    }
+
+    try {
         let appointment = yield makeAppointment(payload);
-        yield put(hideApiLoader());
 
         if (appointment && !appointment.availible) {
+            yield put(hideApiLoader());
             yield put(
                 showOrHideModal(
                     'Appointment is unavailable please select a different time.',
@@ -200,15 +215,16 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            yield updateCredits(-credits, payload);
+            yield updateCredits(-total, { data: payload });
             yield put(getUser());
             yield getAppointments({ payload });
             yield sendAppointmentNotification(uid, time);
-            yield put(showOrHideModal('Appointment successfully booked.'));
             navigation.navigate('Home');
+            yield put(hideApiLoader());
         }
     } catch (error) {
         console.error(error);
+        yield put(hideApiLoader());
     }
 }
 

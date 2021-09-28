@@ -19,7 +19,7 @@ describe('Booking Flow', () => {
     it('should clear email and password field on focus', async () => {
         await element(by.id('Login Email')).clearText();
         await element(by.id('Login Password')).clearText();
-        await element(by.id('Login Email')).typeText('jkkiiradev@gmail.com');
+        await element(by.id('Login Email')).typeText('aaron@kiira.io');
         await element(by.id('Login Password')).typeText('Test1234!');
     });
 
@@ -68,6 +68,7 @@ describe('Booking Flow', () => {
             .withTimeout(4000);
         await element(by.id('time 3')).tap();
     });
+
     it('should confirm date and time', async () => {
         await element(by.id('Confirm Date and Time')).tap();
     });

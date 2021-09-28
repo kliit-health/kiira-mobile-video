@@ -5,8 +5,12 @@
     "apps": {
         "ios": {
             "type": "ios.app",
-            "binaryPath": "/Users/jessicakelley/Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphonesimulator/kiira.app",
+            "binaryPath": "/Users/aaronelkins/Library/Developer/Xcode/DerivedData/kiira-danovqmmnzdevwhhhupcivuxxoja/Build/Products/Debug-iphonesimulator/kiira.app",
             "build": "yarn ios"
+        },
+        "android": {
+            "type": "android.apk",
+            "binaryPath": "SPECIFY_PATH_TO_YOUR_APP_BINARY"
         }
     },
     "devices": {

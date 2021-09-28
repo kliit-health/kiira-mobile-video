@@ -1,4 +1,4 @@
-describe('Login / Logout Flow', () => {
+describe('Cancel Booking', () => {
     beforeAll(async () => {
         await device.launchApp({
             permissions: {
@@ -19,7 +19,7 @@ describe('Login / Logout Flow', () => {
     it('should clear email and password field on focus', async () => {
         await element(by.id('Login Email')).clearText();
         await element(by.id('Login Password')).clearText();
-        await element(by.id('Login Email')).typeText('jkkiiradev@gmail.com');
+        await element(by.id('Login Email')).typeText('aaron@kiira.io');
         await element(by.id('Login Password')).typeText('Test1234!');
     });
 
@@ -32,12 +32,14 @@ describe('Login / Logout Flow', () => {
             .toBeVisible()
             .withTimeout(4000);
     });
+
     it('should navigate to Appointment Screen', async () => {
         await element(by.id('dashboard.appointments')).tap();
         await waitFor(element(by.id('Appointment Screen'))) //Add Test Screen
             .toBeVisible()
             .withTimeout(2000);
     });
+
     it('should cancel last appointment', async () => {
         await element(by.id('Appointments List')).scrollTo('bottom');
         await element(by.text('Cancel')).atIndex(3).tap();
