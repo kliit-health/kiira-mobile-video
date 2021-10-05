@@ -16,18 +16,21 @@ const Book = () => {
             <Text style={styles.description}>{lang.bookVisit}</Text>
             <View style={styles.actions}>
                 <Button
+                    test="mentalHealth"
                     style={buttonStyles}
                     onPress={handleSchedule}
                     title={lang.mentalHealth}
                     id="mentalHealth"
                 />
                 <Button
+                    test="primaryCare"
                     style={buttonStyles}
                     onPress={handleSchedule}
                     title={lang.primaryCare}
                     id="primaryCare"
                 />
                 <Button
+                    test="womensHealth"
                     style={buttonStyles}
                     onPress={handleSchedule}
                     title={lang.womensHealth}

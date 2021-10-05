@@ -20,7 +20,7 @@ const Welcome = ({ navigation }) => {
             />
             <View>
                 <Text style={styles.title}>
-                    {`Welcome ${user.displayName}! \n Let's Set up your profile.`}
+                    {`Welcome ${user.displayName}! \n Let's set up your profile.`}
                 </Text>
                 <View style={styles.imageContainer}>
                     <Image
