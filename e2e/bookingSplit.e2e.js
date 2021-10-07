@@ -97,13 +97,36 @@ describe('Booking Flow Split/Purchase', () => {
             .withTimeout(4000);
         await element(by.id('Confirm Appointment')).tap();
     });
-    xit('should navigate to Dashboard with Appointment Confirmation Modal', async () => {
-        await waitFor(element(by.id('Appointment Confirmed Modal'))) //@Todo modal and text tests redundant. Worth cleaning up.
+    it('should should show App Dashboard', async () => {
+        await waitFor(element(by.id('DashBoard')))
             .toBeVisible()
             .withTimeout(4000);
-        await waitFor(by.text('Appointment successfully booked.'))
+    });
+    it('should navigate to Appointment Screen', async () => {
+        await element(by.id('dashboard.appointments')).tap();
+        await waitFor(element(by.id('Appointment Screen')))
+            .toBeVisible()
+            .withTimeout(2000);
+    });
+
+    it('should cancel last appointment', async () => {
+        await element(by.id('Appointments List')).scrollTo('bottom');
+        await element(by.text('Cancel')).atIndex(3).tap(); //
+    });
+    it('should should show App Dashboard', async () => {
+        await waitFor(element(by.id('DashBoard')))
             .toBeVisible()
             .withTimeout(4000);
-        await element(by.text('OK')).tap();
+    });
+
+    it('should navigate to Profile', async () => {
+        await element(by.id('Profile Tab')).atIndex(1).tap();
+        await waitFor(element(by.id('Profile Screen')))
+            .toBeVisible()
+            .withTimeout(2000);
+    });
+
+    it('should log user out', async () => {
+        await element(by.id('Logout')).tap();
     });
 });
