@@ -21,7 +21,7 @@ import {
     Languages,
     ClinicInfo,
     Hours,
-    SheduleModal,
+    ScheduleModal,
 } from './components';
 import { RootState } from '~/redux/reducers';
 
@@ -39,7 +39,7 @@ const ExpertSchedule = props => {
     const current = generateDateInfo(today);
     const [day, setDay] = useState(null);
     const [time, setTime] = useState(null);
-    const [showShedule, setShowShedule] = useState(false);
+    const [showSchedule, setShowSchedule] = useState(false);
     const { navigation } = props;
     const { uid, calendarID } = navigation.state.params;
     const [selectedDate, setSelectedDate] = useState(null);
@@ -87,11 +87,11 @@ const ExpertSchedule = props => {
         selectedDate,
         selectedTime,
         setDay,
-        setShowShedule,
+        setShowSchedule,
         setSelectedDate,
         setSelectedTime,
         setTime,
-        showShedule,
+        showSchedule,
         time,
         today,
     };
@@ -114,7 +114,7 @@ const ExpertSchedule = props => {
                     </View>
                 )}
             </ScrollView>
-            <SheduleModal {...childProps} />
+            <ScheduleModal {...childProps} />
         </View>
     );
 };

@@ -15,7 +15,7 @@ const SocialHistory = ({ navigation }) => {
         smoke,
         alcohol,
         drugs,
-        caffine,
+        caffeine,
         safe,
         abuse,
         currentAbuse,
@@ -41,9 +41,9 @@ const SocialHistory = ({ navigation }) => {
             history: drugs.history,
             notes: drugs.notes,
         },
-        caffine: {
-            history: caffine.history,
-            notes: caffine.notes,
+        caffeine: {
+            history: caffeine.history,
+            notes: caffeine.notes,
         },
         safe: {
             history: safe.history,

@@ -65,7 +65,7 @@ const initialState = {
             history: false,
             notes: '',
         },
-        caffine: {
+        caffeine: {
             history: false,
             notes: '',
         },

@@ -15,9 +15,9 @@ export const questions = [
         key: 'drugs',
     },
     {
-        question: 'Does patient consume caffine?',
+        question: 'Does patient consume caffeine?',
         textPrompt: 'How many cups per day? How many cups per week?',
-        key: 'caffine',
+        key: 'caffeine',
     },
     {
         question: 'Does patient (not) feel safe at home?',

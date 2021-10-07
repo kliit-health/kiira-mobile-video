@@ -421,7 +421,8 @@ export default {
             'You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
         patientName: 'Patient Name',
         subject: 'CC',
-        lockError: 'There was an error saving the record please retry shortly',
+        lockError:
+            'There was an error saving the record, please retry shortly.',
     },
     expertAccount: {
         logout: 'Logout',
@@ -480,7 +481,7 @@ export default {
         buildTeam: 'Build your team of experts',
         chatExpert: 'Chat with an Expert',
         chatNotAvailable: 'Chat unavailable with current plan',
-        getHelp: 'Get help with question 24/7',
+        getHelp: 'Get help with questions 24/7',
         getTreatment: 'Get Treatment',
         great: `That's great! If that changes let us know.`,
         helloName: 'Hello, ',
