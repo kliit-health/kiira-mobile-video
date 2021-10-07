@@ -1,4 +1,4 @@
-describe('Cancel Booking', () => {
+describe('Chat With Expert', () => {
     beforeAll(async () => {
         await device.launchApp({
             permissions: {
@@ -32,16 +32,16 @@ describe('Cancel Booking', () => {
     //         .toBeVisible()
     //         .withTimeout(4000);
     // });
-
-    // it('should navigate to Appointment Screen', async () => {
-    //     await element(by.id('dashboard.appointments')).tap();
-    //     await waitFor(element(by.id('Appointment Screen')))
+    // it('should navigate to Chat Screen', async () => {
+    //     await element(by.id('dashboard.chatExpert')).tap();
+    //     await waitFor(element(by.id('Chat Screen')))
     //         .toBeVisible()
     //         .withTimeout(2000);
     // });
-
-    // it('should cancel last appointment', async () => {
-    //     await element(by.id('Appointments List')).scrollTo('bottom');
-    //     await element(by.text('Cancel')).atIndex(3).tap(); //
+    // it('should select Tech Support', async () => {
+    //     await element(by.text('General health questions'));
+    //         .toBeVisible()
+    //         .withTimeout(2000);
+    //     await element(by.title(chat.primaryCare.title)).tap();
     // });
 });
