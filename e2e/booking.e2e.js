@@ -11,19 +11,19 @@ describe('Booking Flow', () => {
         });
     });
 
-    // xit('should show Login screen after tap', async () => {
+    // it('should show Login screen after tap', async () => {
     //     await element(by.id('Open Login')).tap();
     //     await expect(element(by.id('Login Screen'))).toBeVisible();
     // });
 
-    // xit('should clear email and password field on focus', async () => {
+    // it('should clear email and password field on focus', async () => {
     //     await element(by.id('Login Email')).clearText();
     //     await element(by.id('Login Password')).clearText();
     //     await element(by.id('Login Email')).typeText('jkkiiradev@gmail.com');
     //     await element(by.id('Login Password')).typeText('Test1234!');
     // });
 
-    // xit('should validate username and password', async () => {
+    // it('should validate username and password', async () => {
     //     await element(by.id('Login Button')).tap();
     // });
 
@@ -79,13 +79,42 @@ describe('Booking Flow', () => {
     //         .withTimeout(4000);
     //     await element(by.id('Confirm Appointment')).tap();
     // });
-    // xit('should navigate to Dashboard with Appointment Confirmation Modal', async () => {
-    //     await waitFor(element(by.id('Appointment Confirmed Modal'))) //@Todo modal and text tests redundant. Worth cleaning up.
+    // it('should should show App Dashboard', async () => {
+    //     await waitFor(element(by.id('DashBoard')))
     //         .toBeVisible()
     //         .withTimeout(4000);
-    //     await waitFor(by.text('Appointment successfully booked.'))
+    // });
+
+    // it('should navigate to Appointment Screen', async () => {
+    //     await element(by.id('dashboard.appointments')).tap();
+    //     await waitFor(element(by.id('Appointment Screen')))
+    //         .toBeVisible()
+    //         .withTimeout(2000);
+    // });
+
+    // it('should cancel last appointment', async () => {
+    //     await element(by.id('Appointments List')).scrollTo('bottom');
+    //     await element(by.text('Cancel')).atIndex(3).tap(); //
+    // });
+    ////@@ToDo: Select Back caret to take user to dashboard
+    // it('should navigate to App Dashboard', async () => {
+    //     await element(by.id('Close Button')).tap();
+    //     await expect(element(by.id('DashBoard'))).toBeVisible();
+    // });
+    // it('should should show App Dashboard', async () => {
+    //     await waitFor(element(by.id('DashBoard')))
     //         .toBeVisible()
     //         .withTimeout(4000);
-    //     await element(by.text('OK')).tap();
+    // });
+
+    // it('should navigate to Profile', async () => {
+    //     await element(by.id('Profile Tab')).atIndex(1).tap();
+    //     await waitFor(element(by.id('Profile Screen')))
+    //         .toBeVisible()
+    //         .withTimeout(2000);
+    // });
+
+    // it('should log user out', async () => {
+    //     await element(by.id('Logout')).tap();
     // });
 });
