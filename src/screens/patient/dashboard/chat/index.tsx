@@ -23,13 +23,13 @@ const Chat = () => {
     const [pastSelected, setPastSelected] = useState(false);
 
     return (
-        <Screen>
+        <Screen test="Chat Screen">
             <Header title="Chats" onBack={handleBack} />
             <Text options={[xxLarge, pad_h, sm_pad_v]}>
                 Please select a category
             </Text>
             <Text options={[gray_dark, medium, pad_h, pad_b]}>
-                Responses are typically with 24 hours
+                Responses are typically recieved within 24 hours
             </Text>
             <Column options={[white_bg]}>
                 <FlatList

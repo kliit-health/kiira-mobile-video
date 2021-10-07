@@ -13,7 +13,7 @@ const Confirmation = ({ navigation }) => {
     const { assessment } = useSelector(state => state.user.data);
 
     return (
-        <View style={styles.showSheduleContainer}>
+        <View style={styles.showScheduleContainer}>
             <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
                 <Text style={styles.heading}>
                     You are all set for your free 15 minute assessment!

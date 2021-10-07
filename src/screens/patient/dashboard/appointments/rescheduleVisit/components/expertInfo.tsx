@@ -12,8 +12,8 @@ import moment from 'moment';
 const ExpertInfo = ({
     expertData,
     appointmentData,
-    setShowShedule,
-    showShedule,
+    setShowSchedule,
+    showSchedule,
     generateDateInfo,
     setSelectedDate,
     today,
@@ -110,8 +110,8 @@ const ExpertInfo = ({
                                                             generateDateInfo(
                                                                 item,
                                                             );
-                                                        setShowShedule(
-                                                            !showShedule,
+                                                        setShowSchedule(
+                                                            !showSchedule,
                                                         );
                                                         dispatch(
                                                             setAppointmentTime(

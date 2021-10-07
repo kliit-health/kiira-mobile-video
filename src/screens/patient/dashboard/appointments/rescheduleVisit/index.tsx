@@ -20,7 +20,7 @@ import {
     Languages,
     ClinicInfo,
     Hours,
-    SheduleModal,
+    ScheduleModal,
 } from './components';
 
 const RescheduleVisit = props => {
@@ -33,7 +33,7 @@ const RescheduleVisit = props => {
     const current = generateDateInfo(today);
     const [day, setDay] = useState(null);
     const [time, setTime] = useState(null);
-    const [showShedule, setShowShedule] = useState(false);
+    const [showSchedule, setShowSchedule] = useState(false);
     const [selectedDate, setSelectedDate] = useState(today);
     const [selectedTime, setSelectedTime] = useState(null);
     const dispatch = useDispatch();
@@ -83,11 +83,11 @@ const RescheduleVisit = props => {
         selectedDate,
         selectedTime,
         setDay,
-        setShowShedule,
+        setShowSchedule,
         setSelectedDate,
         setSelectedTime,
         setTime,
-        showShedule,
+        showSchedule,
         time,
         today,
         uid,
@@ -114,7 +114,7 @@ const RescheduleVisit = props => {
                     </View>
                 )}
             </ScrollView>
-            <SheduleModal {...childProps} />
+            <ScheduleModal {...childProps} />
         </View>
     );
 };

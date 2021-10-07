@@ -93,7 +93,7 @@ const ScheduleModal = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.showSheduleContainer}>
+        <View style={styles.showScheduleContainer}>
             <Conditional if={agreements.data && !hasSigned}>
                 <Agreements navigation={navigation} />
             </Conditional>

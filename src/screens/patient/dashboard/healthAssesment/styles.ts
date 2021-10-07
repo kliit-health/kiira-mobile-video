@@ -368,7 +368,7 @@ export default StyleSheet.create({
         color: Constant.App.colors.whiteColor,
     },
 
-    showSheduleContainer: {
+    showScheduleContainer: {
         height: IS_ANDROID ? metrics.height : metrics.height * 0.95,
         marginTop: IS_ANDROID ? 0 : 40,
         borderRadius: 12,

@@ -24,12 +24,12 @@ import {
 
 const { staticImages } = Constant.App;
 
-const SheduleModal = ({
+const ScheduleModal = ({
     appointmentTypeID,
     appointmentData,
     calendarID,
-    setShowShedule,
-    showShedule,
+    setShowSchedule,
+    showSchedule,
     selectedDate,
     selectedTime,
     setSelectedDate,
@@ -46,17 +46,17 @@ const SheduleModal = ({
     return (
         <View
             style={
-                showShedule
-                    ? styles.showSheduleContainer
-                    : styles.sheduleContainer
+                showSchedule
+                    ? styles.showScheduleContainer
+                    : styles.scheduleContainer
             }
         >
-            {showShedule && (
+            {showSchedule && (
                 <Fragment>
                     <View>
                         <TouchableOpacity
                             onPress={() => {
-                                setShowShedule(!showShedule);
+                                setShowSchedule(!showSchedule);
                                 setSelectedTime(null);
                                 setTime(null);
                             }}
@@ -81,7 +81,7 @@ const SheduleModal = ({
                         <CustomText style={styles.firstAvaliable}>
                             Select Appointment Date
                         </CustomText>
-                        {showShedule && !appointmentData.dates ? (
+                        {showSchedule && !appointmentData.dates ? (
                             <ActivityIndicator size="large" color="#008AFC" />
                         ) : (
                             <FlatList
@@ -184,7 +184,7 @@ const SheduleModal = ({
                                 justifyContent: 'space-evenly',
                             }}
                         >
-                            {showShedule &&
+                            {showSchedule &&
                                 appointmentData.appointments.current &&
                                 appointmentData.appointments.current.map(
                                     (item, i) => {
@@ -232,7 +232,7 @@ const SheduleModal = ({
                                   navigation,
                               }),
                           )
-                        : setShowShedule(!showShedule)
+                        : setShowSchedule(!showSchedule)
                 }
                 style={
                     day && time
@@ -247,11 +247,11 @@ const SheduleModal = ({
                             : styles.noTextStyle
                     }
                 >
-                    {showShedule ? 'Confirm' : 'See Full Schedule'}
+                    {showSchedule ? 'Confirm' : 'See Full Schedule'}
                 </Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default SheduleModal;
+export default ScheduleModal;
