@@ -58,7 +58,7 @@ describe('Cancel Booking', () => {
             .toBeVisible()
             .withTimeout(4000);
         await element(by.id('date 3')).tap();
-        //ToDo apply test={'date ' + index} to reschedule calendar
+        //@@ToDo apply test={'date ' + index} to reschedule calendar
     });
 
     it('should select time from list', async () => {
@@ -66,6 +66,6 @@ describe('Cancel Booking', () => {
             .toBeVisible()
             .withTimeout(4000);
         await element(by.id('time 3')).tap();
-        //ToDo apply test={'time ' + index} to reschedule calendar
+        //@@ToDo apply test={'time ' + index} to reschedule calendar
     });
 });
