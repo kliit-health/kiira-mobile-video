@@ -25,11 +25,11 @@ import {
 
 const { staticImages } = Constant.App;
 
-const SheduleModal = ({
+const ScheduleModal = ({
     appointmentData,
     calendarID,
-    setShowShedule,
-    showShedule,
+    setShowSchedule,
+    showSchedule,
     selectedDate,
     selectedTime,
     setSelectedDate,
@@ -52,7 +52,7 @@ const SheduleModal = ({
 
     const handleModalToggle = () => {
         if (dates.length) {
-            setShowShedule(!showShedule);
+            setShowSchedule(!showSchedule);
             setSelectedDate(dates[0].date);
             const firstAvaliable = generateDateInfo(dates[0].date);
 
@@ -70,17 +70,17 @@ const SheduleModal = ({
     return (
         <View
             style={
-                showShedule
-                    ? styles.showSheduleContainer
-                    : styles.sheduleContainer
+                showSchedule
+                    ? styles.showScheduleContainer
+                    : styles.scheduleContainer
             }
         >
-            {showShedule && (
+            {showSchedule && (
                 <>
                     <View>
                         <TouchableOpacity
                             onPress={() => {
-                                setShowShedule(!showShedule);
+                                setShowSchedule(!showSchedule);
                                 setSelectedTime(null);
                                 setTime(null);
                             }}
@@ -105,7 +105,7 @@ const SheduleModal = ({
                         <CustomText style={styles.firstAvaliable}>
                             Select Appointment Date
                         </CustomText>
-                        {showShedule && !appointmentData.dates ? (
+                        {showSchedule && !appointmentData.dates ? (
                             <ActivityIndicator size="large" color="#008AFC" />
                         ) : appointmentData.dates.length ? (
                             <FlatList
@@ -218,7 +218,7 @@ const SheduleModal = ({
                                 justifyContent: 'space-evenly',
                             }}
                         >
-                            {showShedule &&
+                            {showSchedule &&
                             appointmentData.appointments.current.length ? (
                                 appointmentData.appointments.current.map(
                                     (item, i) => {
@@ -290,11 +290,11 @@ const SheduleModal = ({
                             : styles.noTextStyle
                     }
                 >
-                    {showShedule ? 'Confirm' : 'See Full Schedule'}
+                    {showSchedule ? 'Confirm' : 'See Full Schedule'}
                 </Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default SheduleModal;
+export default ScheduleModal;

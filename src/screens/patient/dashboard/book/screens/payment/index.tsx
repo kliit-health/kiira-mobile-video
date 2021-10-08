@@ -230,6 +230,7 @@ const Payment = () => {
                 <Kiira.Conditional if={balance > 0}>
                     <>
                         <CardField
+                            testID="Credit Card"
                             postalCodeEnabled={true}
                             placeholder={{
                                 number: 'CC #',

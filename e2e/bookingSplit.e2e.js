@@ -1,4 +1,4 @@
-describe('Booking Flow', () => {
+describe('Booking Flow Split/Purchase', () => {
     beforeAll(async () => {
         await device.launchApp({
             permissions: {
@@ -38,8 +38,14 @@ describe('Booking Flow', () => {
             .toBeVisible()
             .withTimeout(2000);
     });
+    it('should select mental health tab', async () => {
+        await waitFor(element(by.text('MENTAL')))
+            .toBeVisible()
+            .withTimeout(2000);
+        await element(by.text('MENTAL')).tap();
+    });
     it('should select a reason for visit', async () => {
-        await element(by.id('Cold and Flu')).tap(); //identified by label
+        await element(by.id('ADHD')).tap(); //@@Todo
     });
     it('should select See Providers', async () => {
         await element(by.id('See Providers')).tap();
@@ -72,8 +78,20 @@ describe('Booking Flow', () => {
     it('should confirm date and time', async () => {
         await element(by.id('Confirm Date and Time')).tap();
     });
-
-    it('should confirm appointment', async () => {
+    it('should insert CC info into fields and pay', async () => {
+        await waitFor(element(by.id('Appointment Payment')))
+            .toBeVisible()
+            .withTimeout(2000);
+        await element(by.text('CC #')).tap();
+        await element(by.id('Credit Card')).typeText(
+            '4242424242424242112212391208', //dd 1122 cvv 123 zip 91208',
+        );
+        await waitFor(element(by.text('Pay')))
+            .toBeVisible()
+            .withTimeout(4000);
+        await element(by.text('Pay')).tap();
+    });
+    xit('should confirm appointment', async () => {
         await waitFor(element(by.id('Appointment Payment')))
             .toBeVisible()
             .withTimeout(4000);
@@ -84,7 +102,6 @@ describe('Booking Flow', () => {
             .toBeVisible()
             .withTimeout(4000);
     });
-
     it('should navigate to Appointment Screen', async () => {
         await element(by.id('dashboard.appointments')).tap();
         await waitFor(element(by.id('Appointment Screen')))
@@ -95,11 +112,6 @@ describe('Booking Flow', () => {
     it('should cancel last appointment', async () => {
         await element(by.id('Appointments List')).scrollTo('bottom');
         await element(by.text('Cancel')).atIndex(3).tap(); //
-    });
-    //@@ToDo: Select Back caret to take user to dashboard
-    it('should navigate to App Dashboard', async () => {
-        await element(by.id('Close Button')).tap();
-        await expect(element(by.id('DashBoard'))).toBeVisible();
     });
     it('should should show App Dashboard', async () => {
         await waitFor(element(by.id('DashBoard')))

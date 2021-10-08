@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
 
-    closeSheduleContainerStyle: {
+    closeScheduleContainerStyle: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginTop: 3,
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
         backgroundColor: Constant.App.colors.whiteColor,
     },
 
-    sheduleContainer: {
+    scheduleContainer: {
         flexDirection: 'column',
         height: 50,
         justifyContent: 'center',
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
         shadowRadius: 7,
     },
 
-    showSheduleContainer: {
+    showScheduleContainer: {
         flexDirection: 'column',
         height: metrics.height * 0.75,
         justifyContent: 'flex-end',

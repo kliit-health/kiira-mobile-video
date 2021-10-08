@@ -19,7 +19,7 @@ describe('Cancel Booking', () => {
     it('should clear email and password field on focus', async () => {
         await element(by.id('Login Email')).clearText();
         await element(by.id('Login Password')).clearText();
-        await element(by.id('Login Email')).typeText('aaron@kiira.io');
+        await element(by.id('Login Email')).typeText('jkkiiradev@gmail.com');
         await element(by.id('Login Password')).typeText('Test1234!');
     });
 
@@ -35,13 +35,37 @@ describe('Cancel Booking', () => {
 
     it('should navigate to Appointment Screen', async () => {
         await element(by.id('dashboard.appointments')).tap();
-        await waitFor(element(by.id('Appointment Screen'))) //Add Test Screen
+        await waitFor(element(by.id('Appointment Screen')))
             .toBeVisible()
             .withTimeout(2000);
     });
 
-    it('should cancel last appointment', async () => {
+    it('should reschedule last appointment', async () => {
         await element(by.id('Appointments List')).scrollTo('bottom');
-        await element(by.text('Cancel')).atIndex(3).tap();
+        await element(by.text('Reschedule')).atIndex(2).tap();
+    });
+    it('should navigate to Reschedule Screen', async () => {
+        await element(by.id('dashboard.appointments')).tap();
+        await waitFor(element(by.id('Appointment Screen')))
+            .toBeVisible()
+            .withTimeout(2000);
+    });
+    it('should bring up clinician calendar', async () => {
+        await element(by.text('See Full Schedule')).tap();
+    });
+    it('should select date from calendar', async () => {
+        await waitFor(element(by.id('date 3')))
+            .toBeVisible()
+            .withTimeout(4000);
+        await element(by.id('date 3')).tap();
+        //@@ToDo apply test={'date ' + index} to reschedule calendar
+    });
+
+    it('should select time from list', async () => {
+        await waitFor(element(by.id('time 3')))
+            .toBeVisible()
+            .withTimeout(4000);
+        await element(by.id('time 3')).tap();
+        //@@ToDo apply test={'time ' + index} to reschedule calendar
     });
 });

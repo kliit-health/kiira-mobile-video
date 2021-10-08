@@ -249,6 +249,7 @@ const Future = ({ test, visit, date, navigation }) => {
                     text="Cancel"
                 />
                 <CustomButton
+                    test={test}
                     buttonStyle={styles.appointmentButtonContainer}
                     textStyle={styles.appointmentButtonText}
                     onPress={() =>

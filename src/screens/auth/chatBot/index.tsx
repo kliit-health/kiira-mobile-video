@@ -198,7 +198,7 @@ class ChatBotScreen extends Component {
                 },
                 {
                     id: '5',
-                    message: 'What is your preferred Pronouns?',
+                    message: 'What are your preferred Pronouns?',
                     trigger: 'pronouns',
                 },
                 {
