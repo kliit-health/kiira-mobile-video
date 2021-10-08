@@ -244,7 +244,7 @@ const Future = ({ test, visit, date, navigation }) => {
                     onPress={() =>
                         sameDay
                             ? handleSameDay()
-                            : dispatch(cancelAppointment(data))
+                            : dispatch(cancelAppointment({ data }))
                     }
                     text="Cancel"
                 />

@@ -38,11 +38,8 @@ function* getAppointments({ data }) {
     }
 }
 
-function* cancelAppointment(data) {
-    const {
-        data: { expert },
-    } = data;
-
+function* cancelAppointment({ data }) {
+    const { expert, prepaid } = data;
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(data);
@@ -56,7 +53,6 @@ function* cancelAppointment(data) {
                 ),
             );
         } else {
-            console.log('EXPERT CANCEL SUCCESSFUL');
             yield updateCredits(1, data);
         }
 

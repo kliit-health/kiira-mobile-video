@@ -9,7 +9,7 @@ import {
 import { select, put, takeEvery } from 'redux-saga/effects';
 import { makeAppointment } from '~/utils/firebase';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import { NavigationService } from '../../navigation';
+import { NavigationService as navigation } from '../../navigation';
 import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
 import {
@@ -42,13 +42,13 @@ function* setAppointment(data) {
                     'Appointment is unavailable please select a different time.',
                 ),
             );
-            NavigationService.goBack();
+            navigation.goBack();
         } else {
             yield put(updateUser({ assessment: details }));
             yield put(getUser());
             yield sendAppointmentNotification(uid, time);
             yield put(hideApiLoader());
-            NavigationService.navigate('HealthAssessmentConfirmation');
+            navigation.navigate('HealthAssessmentConfirmation');
         }
     } catch (error) {
         console.error(error);
@@ -77,7 +77,7 @@ function* getAppointmentsForDay(data) {
 function* getAllAppointmentDates(data) {
     const lang = yield select(state => state.language);
     const { payload } = data;
-    console.log('DATA', data);
+
     try {
         yield put(showApiLoader());
         const response = yield getAppointmentDatesAsync(payload);

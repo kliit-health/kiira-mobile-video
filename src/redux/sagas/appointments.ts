@@ -122,7 +122,7 @@ function* updateAppointment({ payload }) {
             'Your appointment has been sucessfully rescheduled.',
         );
 
-        yield put(getAppointmentsList({ uid }));
+        yield put(getAppointmentsList(uid));
 
         navigation.navigate('Appointments');
     } catch (error) {
@@ -130,9 +130,10 @@ function* updateAppointment({ payload }) {
     }
 }
 
-function* getAppointments({ payload }) {
+function* getAppointments() {
+    const user = yield select(state => state.user.data);
     try {
-        const appointments = yield getAppointmentsAsync(payload.uid);
+        const appointments = yield getAppointmentsAsync(user.uid);
         if (appointments) {
             yield put(fetchAppointments(appointments));
         }
@@ -142,11 +143,21 @@ function* getAppointments({ payload }) {
 }
 
 function* cancelTheAppointment({ payload }) {
-    const { credits, prepaid } = payload;
-    console.log('CANCEL', payload);
+    const { credits } = payload.data;
+
+    const totals = {
+        creditsRequired: 1,
+        monthlyCredits: 0,
+        prepaidCredits: 0,
+        purchasedCredits: 1,
+        redeemCredits: 0,
+        availibleCredits: 1,
+    };
+
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(payload);
+
         if (result) {
             yield put(
                 showOrHideModal(
@@ -157,15 +168,11 @@ function* cancelTheAppointment({ payload }) {
             if (credits === 0) {
                 yield put(updateUser({ assessment: null }));
             }
-            if (prepaid.isPrePaid) {
-                yield updateCredits(credits, payload, true);
-                yield put(getUser());
-            } else {
-                yield updateCredits(credits, payload);
-                yield put(getUser());
-            }
+
+            yield updateCredits(payload, totals, true);
+            yield put(getUser());
         }
-        yield getAppointments({ payload });
+        yield getAppointments();
         yield put(hideApiLoader());
     } catch (error) {
         yield put(hideApiLoader());
@@ -184,26 +191,38 @@ function* setExpertRating({ payload }) {
 }
 
 function* setAppointment({ payload }) {
-    const { time, reason, expert, visits } = payload;
+    const { time, reason, expert, visits, prepaid } = payload;
 
     const {
         sessionType: { credits },
     } = reason;
     const { uid } = expert;
 
-    let total = credits - visits;
-
-    payload.prepaid = {
-        isPrePaid: credits > visits,
-        amount: total,
+    const totals = {
+        required: credits,
+        monthly: visits,
+        prepaid: prepaid,
+        purchased: credits - (visits + prepaid),
+        redeemPurchased: credits - prepaid,
+        redeemMonthly: credits - (visits + prepaid),
+        availible: visits + prepaid,
+        isPrepaid: credits > visits + prepaid,
     };
 
-    if (credits > visits) {
-        yield updateCredits(total, { data: payload });
+    payload.prepaidInfo = {
+        isPrePaid: totals.required > totals.availible,
+        amount: totals.purchased,
+    };
+
+    if (payload.prepaidInfo.isPrePaid) {
+        console.log('isPrepaid');
+        yield updateCredits({ data: payload }, totals, true);
         yield put(getUser());
     }
 
     try {
+        yield put(hideApiLoader());
+        yield put(showApiLoader());
         let appointment = yield makeAppointment(payload);
 
         if (appointment && !appointment.availible) {
@@ -215,9 +234,9 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            yield updateCredits(-total, { data: payload });
+            yield updateCredits({ data: payload }, totals, false);
             yield put(getUser());
-            yield getAppointments({ payload });
+            yield getAppointments();
             yield sendAppointmentNotification(uid, time);
             navigation.navigate('Home');
             yield put(hideApiLoader());
