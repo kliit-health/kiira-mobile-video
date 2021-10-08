@@ -429,8 +429,6 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
                 appointments.history = appointments.history.filter(
                     item => item.id !== id,
                 );
-                console.log('UID', uid);
-                console.log('DOCUMENT', response.data());
 
                 await document.set(
                     { history: [...(appointments.history || [])] },
@@ -1424,8 +1422,6 @@ export async function updateCredits(
 
     try {
         if (addition) {
-            console.log('ADD', payload);
-            console.log('ADD', credits);
             await firestore()
                 .collection('users')
                 .doc(uid)
@@ -1437,8 +1433,6 @@ export async function updateCredits(
                 });
             return { ok: true };
         } else {
-            console.log('SUB', payload);
-            console.log('SUB', credits);
             await firestore()
                 .collection('users')
                 .doc(uid)
