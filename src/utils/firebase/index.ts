@@ -185,7 +185,7 @@ export async function getAppointmentsByDayAsync(data, isToday) {
 
   try {
     const times = {};
-    await fetch(urls.prod.appointmentGetByDay, obj)
+    await fetch(urls.dev.appointmentGetByDay, obj)
       .then(res => res.json())
       .then(data => {
         isToday ? (times.today = data) : (times.current = data);
@@ -220,7 +220,8 @@ export async function getAppointmentDatesAsync(data) {
     };
 
     let response = [];
-    await fetch(urls.prod.appointmentGetByMonth, obj)
+    
+    await fetch(urls.dev.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
         response = [...response, ...data];
@@ -241,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
       }),
     };
 
-    await fetch(urls.prod.appointmentGetByMonth, obj)
+    await fetch(urls.dev.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
         response = [...response, ...data];
@@ -301,7 +302,7 @@ export async function makeAppointment({ data }) {
     };
 
     let response;
-    let checkTime = await fetch(urls.prod.appointmentCheckTime, obj)
+    let checkTime = await fetch(urls.dev.appointmentCheckTime, obj)
       .then(res => res.json())
       .then(data => data)
       .catch(error => {
@@ -309,7 +310,7 @@ export async function makeAppointment({ data }) {
       });
 
     if (checkTime.valid) {
-      await fetch(urls.prod.appointmentMake, obj)
+      await fetch(urls.dev.appointmentMake, obj)
         .then(res => res.json())
         .then(res => {
           response = {
@@ -388,7 +389,7 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   };
 
   try {
-    return await fetch(urls.prod.appointmentCancel, obj)
+    return await fetch(urls.dev.appointmentCancel, obj)
       .then(res => {
         let response = res.json();
         return response;
@@ -453,7 +454,7 @@ export async function changeAppointmentAsync({ data }) {
   };
 
   try {
-    return await fetch(urls.prod.appointmentChange, obj)
+    return await fetch(urls.dev.appointmentChange, obj)
       .then(res => res.json())
       .then(async res => {
         if (res.body.error) {
@@ -1684,11 +1685,37 @@ export async function addClaimsToUser(
   }
 }
 
+
+export async function sendNotificationOnJoin(uid: string) {
+  try {
+    await functions().httpsCallable('sendPushNotificationOnExpertJoin')({
+      uid,
+    })
+    } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function usePromoCode(code: string) {
   try {
     await functions().httpsCallable('usePromoCode')({ code });
     return;
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function sendSms(uid: string, time: string, phone: string) {
+  try {
+    await functions().httpsCallable('sendSms')({
+      uid,
+      message: `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
+        time,
+      ).format('llll')}`,
+      phoneNumber: phone,
+    });
+    return;
+  } catch (error) {
+    console.log('SMS ERROR:', error);
   }
 }
