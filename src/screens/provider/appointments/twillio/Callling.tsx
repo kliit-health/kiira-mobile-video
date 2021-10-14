@@ -1,16 +1,21 @@
 import 'react-native-gesture-handler';
-import React, {useRef, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {smallScreen} from '~/utils/metrices';
-import {setExpertCallConfig} from '~/redux/actions/twillio';
+import React, { useRef, useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { smallScreen } from '~/utils/metrices';
+import { setExpertCallConfig } from '~/redux/actions/twillio';
 import {
   TwilioVideoLocalView,
   TwilioVideoParticipantView,
   TwilioVideo,
 } from 'react-native-twilio-video-webrtc';
 import KeepAwake from 'react-native-keep-awake';
-
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -26,10 +31,10 @@ const initialState = {
   token: '',
 };
 
-const ExpertTwillioCalling = ({navigation}) => {
+const ExpertTwillioCalling = ({ navigation }) => {
   const twilioVideo = useRef(null);
   const dispatch = useDispatch();
-  const callConfig = useSelector((state) => state.twillio);
+  const callConfig = useSelector(state => state.twillio);
   const [videoTracks, setVideoTracks] = useState(new Map());
 
   useEffect(() => {
@@ -37,7 +42,7 @@ const ExpertTwillioCalling = ({navigation}) => {
       roomName: callConfig.roomName,
       accessToken: callConfig.token,
     });
-    dispatch(setExpertCallConfig({...callConfig, status: 'connecting'}));
+    dispatch(setExpertCallConfig({ ...callConfig, status: 'connecting' }));
     return () => {
       _onEndButtonPress();
     };
@@ -46,16 +51,16 @@ const ExpertTwillioCalling = ({navigation}) => {
 
   const _onEndButtonPress = () => {
     twilioVideo.current.disconnect();
-    dispatch(setExpertCallConfig({...initialState}));
+    dispatch(setExpertCallConfig({ ...initialState }));
     navigation.goBack();
   };
 
   const _onPauseButtonPress = () => {
     twilioVideo.current
       .setLocalVideoEnabled(!callConfig.isVideoEnabled)
-      .then((isEnabled) =>
+      .then(isEnabled =>
         dispatch(
-          setExpertCallConfig({...callConfig, isVideoEnabled: isEnabled}),
+          setExpertCallConfig({ ...callConfig, isVideoEnabled: isEnabled }),
         ),
       );
   };
@@ -63,9 +68,9 @@ const ExpertTwillioCalling = ({navigation}) => {
   const _onMuteButtonPress = () => {
     twilioVideo.current
       .setLocalAudioEnabled(!callConfig.isAudioEnabled)
-      .then((isEnabled) =>
+      .then(isEnabled =>
         dispatch(
-          setExpertCallConfig({...callConfig, isAudioEnabled: isEnabled}),
+          setExpertCallConfig({ ...callConfig, isAudioEnabled: isEnabled }),
         ),
       );
   };
@@ -100,52 +105,56 @@ const ExpertTwillioCalling = ({navigation}) => {
       <SafeAreaView>
         <View style={styles.optionsContainer}>
           <TouchableOpacity
-            style={{...styles.button, flexDirection: 'column'}}
-            onPress={_onEndButtonPress}>
+            style={{ ...styles.button, flexDirection: 'column' }}
+            onPress={_onEndButtonPress}
+          >
             <Ionicons
               style={styles.icon}
               name="call"
               color="#4F8EF7"
               size={smallScreen ? 15 : 20}
             />
-            <Text style={{fontSize: 12, textAlign: 'center'}}>End</Text>
+            <Text style={{ fontSize: 12, textAlign: 'center' }}>End</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{...styles.button, flexDirection: 'column'}}
-            onPress={_onMuteButtonPress}>
+            style={{ ...styles.button, flexDirection: 'column' }}
+            onPress={_onMuteButtonPress}
+          >
             <Octicons
               style={styles.icon}
               name={callConfig.isAudioEnabled ? 'unmute' : 'mute'}
               color="#4F8EF7"
               size={smallScreen ? 15 : 20}
             />
-            <Text style={{fontSize: 12, textAlign: 'center'}}>
+            <Text style={{ fontSize: 12, textAlign: 'center' }}>
               {callConfig.isAudioEnabled ? 'Mute' : 'Unmute'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{...styles.button, flexDirection: 'column'}}
-            onPress={_onPauseButtonPress}>
+            style={{ ...styles.button, flexDirection: 'column' }}
+            onPress={_onPauseButtonPress}
+          >
             <Feather
               style={styles.icon}
               name={callConfig.isVideoEnabled ? 'video' : 'video-off'}
               color="#4F8EF7"
               size={smallScreen ? 15 : 20}
             />
-            <Text style={{fontSize: 12, textAlign: 'center'}}>
+            <Text style={{ fontSize: 12, textAlign: 'center' }}>
               {callConfig.isVideoEnabled ? 'On' : 'Off'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{...styles.button, flexDirection: 'column'}}
-            onPress={_onFlipButtonPress}>
+            style={{ ...styles.button, flexDirection: 'column' }}
+            onPress={_onFlipButtonPress}
+          >
             <Ionicons
               style={styles.icon}
               name="camera-reverse"
               color="#4F8EF7"
               size={smallScreen ? 15 : 20}
             />
-            <Text style={{fontSize: 12, textAlign: 'center'}}>Flip</Text>
+            <Text style={{ fontSize: 12, textAlign: 'center' }}>Flip</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -158,17 +167,17 @@ const ExpertTwillioCalling = ({navigation}) => {
       <TwilioVideo
         ref={twilioVideo}
         onRoomDidConnect={() => {
-          dispatch(setExpertCallConfig({...callConfig, status: 'connected'}));
+          dispatch(setExpertCallConfig({ ...callConfig, status: 'connected' }));
         }}
         onRoomDidDisconnect={() => {
           navigation.goBack();
         }}
-        onRoomDidFailToConnect={(error) => {
+        onRoomDidFailToConnect={error => {
           Alert.alert('Error', error.error);
-          dispatch(setExpertCallConfig({...initialState}));
+          dispatch(setExpertCallConfig({ ...initialState }));
           navigation.goBack();
         }}
-        onParticipantAddedVideoTrack={({participant, track}) => {
+        onParticipantAddedVideoTrack={({ participant, track }) => {
           if (track.enabled) {
             setVideoTracks(
               new Map([
@@ -184,7 +193,7 @@ const ExpertTwillioCalling = ({navigation}) => {
             );
           }
         }}
-        onParticipantRemovedVideoTrack={({participant, track}) => {
+        onParticipantRemovedVideoTrack={({ participant, track }) => {
           const videoTracksLocal = videoTracks;
           videoTracksLocal.delete(track.trackSid);
           setVideoTracks(videoTracksLocal);

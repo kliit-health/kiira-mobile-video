@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,33 +10,33 @@ import {
 import Image from 'react-native-fast-image';
 import ExpertHeader from '~/components/expertHeader';
 import PatientCard from './components/patientCard';
-import {screenNames} from '~/utils/constants';
-import {useDispatch, useSelector} from 'react-redux';
-import {getUser} from '~/redux/actions';
-import {getPatientDetails} from './actions';
-import {withNavigation} from 'react-navigation';
+import { screenNames } from '~/utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '~/redux/actions';
+import { getPatientDetails } from './actions';
+import { withNavigation } from 'react-navigation';
 import styles from './style';
 
-const PatientProfile = ({navigation}) => {
-  const {visit, patient} = navigation.state.params;
+const PatientProfile = ({ navigation }) => {
+  const { visit, patient } = navigation.state.params;
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const patientInfo = useSelector((state) => state.user.data);
-  const appointment = useSelector((state) => state.medicalHistory.appointment);
+  const patientInfo = useSelector(state => state.user.data);
+  const appointment = useSelector(state => state.medicalHistory.appointment);
 
   useEffect(() => {
-    dispatch(getUser(patient.uid));
+    dispatch(getUser(visit.uid));
   }, []);
 
   useEffect(() => {
     dispatch(
       getPatientDetails({
-        uid: patient.uid,
+        uid: visit.uid,
       }),
     );
   }, []);
 
-  const handleNavigation = (destination) => {
+  const handleNavigation = destination => {
     navigation.push(destination, {
       visit: visit,
       patientInfo,
@@ -51,10 +51,11 @@ const PatientProfile = ({navigation}) => {
       <ScrollView>
         <View style={styles.infoContainer}>
           <TouchableOpacity
-            onPress={() => handleNavigation(screenNames.personalInformation)}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            onPress={() => handleNavigation(screenNames.personalInformation)}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../../../assets/HPI.png')}
                 activeOpacity={0.7}
@@ -64,10 +65,11 @@ const PatientProfile = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             disabled={appointment && appointment.visit.locked}
-            onPress={() => handleNavigation('MedicalHistoryExpert')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            onPress={() => handleNavigation('MedicalHistoryExpert')}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../../../assets/firstaid.png')}
                 activeOpacity={0.7}
@@ -77,7 +79,7 @@ const PatientProfile = ({navigation}) => {
                 {appointment && appointment.visit.locked && (
                   <Image
                     resizeMode="contain"
-                    containerStyle={{alignSelf: 'center'}}
+                    containerStyle={{ alignSelf: 'center' }}
                     style={styles.icon}
                     source={require('../../../../../assets/lock.png')}
                     activeOpacity={0.7}
@@ -87,9 +89,9 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('PreviousVisits')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../../../assets/notes.png')}
                 activeOpacity={0.7}
@@ -98,10 +100,11 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => handleNavigation(screenNames.consent)}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            onPress={() => handleNavigation(screenNames.consent)}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../../../assets/agreement.png')}
                 activeOpacity={0.7}
@@ -110,10 +113,10 @@ const PatientProfile = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleNavigation('VisitExpert')}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image
                 resizeMode="contain"
-                containerStyle={{alignSelf: 'center'}}
+                containerStyle={{ alignSelf: 'center' }}
                 style={styles.icon}
                 source={require('../../../../../assets/phone.png')}
                 activeOpacity={0.7}
@@ -129,7 +132,8 @@ const PatientProfile = ({navigation}) => {
         visible={modalVisible}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
-        }}>
+        }}
+      >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.title}>Important !</Text>
@@ -141,8 +145,11 @@ const PatientProfile = ({navigation}) => {
               style={styles.cancelButton}
               onPress={() => {
                 setModalVisible(!modalVisible);
-              }}>
-              <Text style={{...styles.textStyle, color: '#2196F3'}}>Close</Text>
+              }}
+            >
+              <Text style={{ ...styles.textStyle, color: '#2196F3' }}>
+                Close
+              </Text>
             </Pressable>
           </View>
         </View>
