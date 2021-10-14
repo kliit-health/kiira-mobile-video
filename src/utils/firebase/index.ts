@@ -2,9 +2,9 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
-import {displayConsole} from '../helper';
+import { displayConsole } from '../helper';
 import moment from 'moment';
-import Constant, {collections, urls} from '../constants';
+import Constant, { collections, urls } from '../constants';
 
 var voucher_codes = require('voucher-code-generator');
 
@@ -12,10 +12,10 @@ export function getPlans(plan) {
   try {
     let planRef = firestore().doc(`plans/${plan}`).get();
     return planRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -30,11 +30,11 @@ export function loginInWithFirebase(obj) {
     return auth()
       .signInWithEmailAndPassword(obj.email, obj.password)
       .then(function (success) {
-        const {user} = success;
+        const { user } = success;
         return user;
       })
       .catch(function (error) {
-        const {message, code} = error;
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         return error;
@@ -49,10 +49,10 @@ export function getDocumentFromCollection(path) {
   try {
     let documentRef = firestore().doc(path).get();
     return documentRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -66,10 +66,10 @@ export function getPolicyFromFirebase() {
   try {
     let policyRef = firestore().doc('legal/privacy').get();
     return policyRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -84,10 +84,10 @@ export function getTermsFromFirebase() {
     const user = auth().currentUser;
     let termsRef = firestore().doc('legal/terms').get();
     return termsRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -102,10 +102,10 @@ export function getPlanDetails(planDetails) {
     const user = auth().currentUser;
     let planRef = firestore().doc(`plans/${planDetails}`).get();
     return planRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -117,12 +117,12 @@ export function getPlanDetails(planDetails) {
 
 export async function sendEmailVerification(obj) {
   try {
-    const {email} = obj.params;
+    const { email } = obj.params;
     await functions().httpsCallable('sendActivationLink')(email);
-    return {ok: true, data: null};
+    return { ok: true, data: null };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -130,15 +130,15 @@ export function uploadImage(obj, success?, error?) {
   try {
     const result = storage().ref(`Kiira/${obj.filename}`).putFile(obj.file);
     return result
-      .then((data) => {
+      .then(data => {
         const obj = {
           success: true,
           data,
         };
         return obj;
       })
-      .catch((error) => {
-        const {message} = error;
+      .catch(error => {
+        const { message } = error;
         displayConsole('---message--', message);
         const obj = {
           success: true,
@@ -163,33 +163,32 @@ export async function getAppointmentsAsync(uid) {
 }
 
 export async function getAppointmentsByDayAsync(data, isToday) {
-
-  const {calendarID, date, appointmentType} = data;
+  const { calendarID, date, appointmentType } = data;
 
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
-   
-  var obj = {  
+
+  var obj = {
     method: 'POST',
     headers: new Headers({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + jwtToken
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + jwtToken,
     }),
     body: JSON.stringify({
-      "data": {
+      data: {
         calendarID,
         date,
-        appointmentTypeID: appointmentType
-      }
-    })
-  }
+        appointmentTypeID: appointmentType,
+      },
+    }),
+  };
 
   try {
     const times = {};
-    await fetch(urls.prod.appointmentGetByDay , obj)
-      .then((res) => res.json())
-      .then((data) =>{ 
-        isToday ? times.today = data : times.current = data
+    await fetch(urls.prod.appointmentGetByDay, obj)
+      .then(res => res.json())
+      .then(data => {
+        isToday ? (times.today = data) : (times.current = data);
       });
     return times;
   } catch (error) {
@@ -201,50 +200,50 @@ export async function getAppointmentDatesAsync(data) {
   try {
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
-   
-    const {calendarID, monthNumber, addMonth, year, appointmentType} = data;
+
+    const { calendarID, monthNumber, addMonth, year, appointmentType } = data;
     const currentMonth = `${year}-${monthNumber}`;
 
-    var obj = {  
+    var obj = {
       method: 'POST',
       headers: new Headers({
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + jwtToken
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + jwtToken,
       }),
       body: JSON.stringify({
-        "data": {
-          "appointmentTypeID": appointmentType,
-          "calendarID": calendarID,
-          "month": currentMonth
-        }
-      })
-    }
+        data: {
+          appointmentTypeID: appointmentType,
+          calendarID: calendarID,
+          month: currentMonth,
+        },
+      }),
+    };
 
     let response = [];
     await fetch(urls.prod.appointmentGetByMonth, obj)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         response = [...response, ...data];
       });
 
-      var obj = {  
-        method: 'POST',
-        headers: new Headers({
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + jwtToken
-        }),
-        body: JSON.stringify({
-          "data": {
-            "appointmentTypeID": appointmentType,
-            "calendarID": calendarID,
-            "month": addMonth
-          }
-        })
-      }
+    var obj = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + jwtToken,
+      }),
+      body: JSON.stringify({
+        data: {
+          appointmentTypeID: appointmentType,
+          calendarID: calendarID,
+          month: addMonth,
+        },
+      }),
+    };
 
     await fetch(urls.prod.appointmentGetByMonth, obj)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         response = [...response, ...data];
       });
     return response;
@@ -253,8 +252,7 @@ export async function getAppointmentDatesAsync(data) {
   }
 }
 
-export async function makeAppointment({data}) {
-
+export async function makeAppointment({ data }) {
   try {
     const {
       firstName,
@@ -266,7 +264,7 @@ export async function makeAppointment({data}) {
       prescription,
       uid,
       expert,
-      appointmentType
+      appointmentType,
     } = data;
 
     let noPrescription = 'I do not need a prescription,';
@@ -279,41 +277,41 @@ export async function makeAppointment({data}) {
 
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
-    const {appointmentTypeID} = appointmentType;
+    const { appointmentTypeID } = appointmentType;
 
-    var obj = {  
+    var obj = {
       method: 'POST',
       headers: new Headers({
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + jwtToken
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + jwtToken,
       }),
       body: JSON.stringify({
-        "data": {
-          "firstName": firstName,
-          "lastName": lastName,
-          "calendarID": calendarID,
-          "time": time,
-          "email": email,
-          "reason": reason,
-          "prescription": prescription,
-          "notes": notes,
-          "appointmentTypeID": appointmentTypeID,
-        }
-      })
-    }
+        data: {
+          firstName: firstName,
+          lastName: lastName,
+          calendarID: calendarID,
+          time: time,
+          email: email,
+          reason: reason,
+          prescription: prescription,
+          notes: notes,
+          appointmentTypeID: appointmentTypeID,
+        },
+      }),
+    };
 
     let response;
-    let checkTime = await fetch(urls.prod.appointmentCheckTime,obj)
-      .then((res) => res.json())
-      .then((data) => data)
-      .catch((error) => {
+    let checkTime = await fetch(urls.prod.appointmentCheckTime, obj)
+      .then(res => res.json())
+      .then(data => data)
+      .catch(error => {
         console.error(error);
       });
 
     if (checkTime.valid) {
       await fetch(urls.prod.appointmentMake, obj)
-        .then((res) => res.json())
-        .then((res) => {
+        .then(res => res.json())
+        .then(res => {
           response = {
             ...data,
             createdAt: moment().unix(),
@@ -322,7 +320,7 @@ export async function makeAppointment({data}) {
             locked: false,
           };
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error);
         });
 
@@ -331,14 +329,14 @@ export async function makeAppointment({data}) {
 
       if (prev.exists) {
         await document.set(
-          {history: [...prev.data().history, response]},
-          {merge: true},
+          { history: [...prev.data().history, response] },
+          { merge: true },
         );
       } else {
         await firestore()
           .collection('appointments')
           .doc(uid)
-          .set({history: [response]});
+          .set({ history: [response] });
       }
 
       const expertDocument = firestore()
@@ -349,50 +347,53 @@ export async function makeAppointment({data}) {
 
       if (expertPrev.exists) {
         await expertDocument.set(
-          {history: {[uid]: [...expertPrev.data().history[uid] || [], response]}},
-          {merge: true},
+          {
+            history: {
+              [uid]: [...(expertPrev.data().history[uid] || []), response],
+            },
+          },
+          { merge: true },
         );
       } else {
         await firestore()
           .collection('appointments')
           .doc(expert.uid)
           .set({
-            history: {[uid]: [response]},
+            history: { [uid]: [response] },
           });
       }
       return;
     }
-    
   } catch (error) {
     console.error(error);
-    return {availible: false};
+    return { availible: false };
   }
 }
 
-export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
+export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
-   
-  var obj = {  
+
+  var obj = {
     method: 'POST',
     headers: new Headers({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + jwtToken
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + jwtToken,
     }),
     body: JSON.stringify({
-      "data": {
-        "id": id
-      }
-    })
-  }
+      data: {
+        id: id,
+      },
+    }),
+  };
 
   try {
     return await fetch(urls.prod.appointmentCancel, obj)
-      .then((res) => {
+      .then(res => {
         let response = res.json();
         return response;
       })
-      .then(async (res) => {
+      .then(async res => {
         if (res.body.error) {
           return res.body;
         }
@@ -401,12 +402,12 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
         const response = await document.get();
         let appointments = response.data();
         appointments.history = appointments.history.filter(
-          (item) => item.id !== id,
+          item => item.id !== id,
         );
 
         await document.set(
-          {history: [...(appointments.history || [])]},
-          {merge: true},
+          { history: [...(appointments.history || [])] },
+          { merge: true },
         );
 
         const expertDocument = firestore()
@@ -414,16 +415,16 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
           .doc(expert.uid);
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
-        let filtered = expertAppointments.history[uid].filter((item) => {
+        let filtered = expertAppointments.history[uid].filter(item => {
           return item.id !== id ? item : false;
         });
 
         await expertDocument.set(
-          {history: {[uid]: [...(filtered || [])]}},
-          {merge: true},
+          { history: { [uid]: [...(filtered || [])] } },
+          { merge: true },
         );
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   } catch (error) {
@@ -432,29 +433,29 @@ export async function cancelAppointmentAsync({data: {id, uid, expert}}) {
   }
 }
 
-export async function changeAppointmentAsync({data}) {
-  const {id, time, uid, expert} = data;
+export async function changeAppointmentAsync({ data }) {
+  const { id, time, uid, expert } = data;
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
-   
-  var obj = {  
+
+  var obj = {
     method: 'POST',
     headers: new Headers({
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + jwtToken
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + jwtToken,
     }),
     body: JSON.stringify({
-      "data": {
-        "id": id,
-        "time": time
-      }
-    })
-  }
+      data: {
+        id: id,
+        time: time,
+      },
+    }),
+  };
 
   try {
     return await fetch(urls.prod.appointmentChange, obj)
-      .then((res) => res.json())
-      .then(async (res) => {
+      .then(res => res.json())
+      .then(async res => {
         if (res.body.error) {
           return res.body;
         }
@@ -462,14 +463,17 @@ export async function changeAppointmentAsync({data}) {
         const document = firestore().collection('appointments').doc(uid);
         const response = await document.get();
         let appointments = response.data();
-        appointments.history = appointments.history.map((item) => {
+        appointments.history = appointments.history.map(item => {
           if (item.id === id) {
             return (item = data);
           }
           return item;
         });
 
-        await document.set({history: [...appointments.history]}, {merge: true});
+        await document.set(
+          { history: [...appointments.history] },
+          { merge: true },
+        );
 
         const expertDocument = firestore()
           .collection('appointments')
@@ -478,7 +482,7 @@ export async function changeAppointmentAsync({data}) {
         const expertResponse = await expertDocument.get();
         let expertAppointments = expertResponse.data();
         expertAppointments.history[uid] = expertAppointments.history[uid].map(
-          (item) => {
+          item => {
             if (item.id === id) {
               return (item = data);
             }
@@ -486,11 +490,11 @@ export async function changeAppointmentAsync({data}) {
           },
         );
         await expertDocument.set(
-          {history: {[uid]: [...(expertAppointments.history[uid] || [])]}},
-          {merge: true},
+          { history: { [uid]: [...(expertAppointments.history[uid] || [])] } },
+          { merge: true },
         );
       })
-      .catch((error) => {
+      .catch(error => {
         console.error(error);
       });
   } catch (error) {
@@ -522,10 +526,10 @@ export function getDataFromTable(obj) {
   try {
     let userRef = firestore().doc(`${obj.tableName}/${obj.uid}`).get();
     return userRef
-      .then((doc) => {
+      .then(doc => {
         return doc.data();
       })
-      .catch((e) => {
+      .catch(e => {
         displayConsole('e', e);
         return false;
       });
@@ -539,9 +543,9 @@ export function getCollectionData(obj) {
   try {
     let userRef = firestore().collection(obj.tableName).get();
     return userRef
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         const arr = [];
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           arr.push(element.data());
         });
         const data = {
@@ -550,8 +554,8 @@ export function getCollectionData(obj) {
         };
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -573,9 +577,9 @@ export function getCollectionDataWithCondition(obj) {
       .where(obj.key, '==', obj.value)
       .get();
     return userRef
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         const arr = [];
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           arr.push(element.data());
         });
         const data = {
@@ -584,8 +588,8 @@ export function getCollectionDataWithCondition(obj) {
         };
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -646,7 +650,7 @@ export function logout() {
           };
           return data;
         },
-        (error) => {
+        error => {
           const data = {
             success: true,
           };
@@ -662,10 +666,10 @@ export function logout() {
 export async function resetPassword(email) {
   try {
     await functions().httpsCallable('sendPasswordResetEmail')(email);
-    return {ok: true, data: null};
+    return { ok: true, data: null };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -679,9 +683,9 @@ export function getFilterDataWithCondition(obj) {
     }
     return collection
       .get()
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         const arr = [];
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           if (
             obj.professions &&
             obj.professions.length > 0 &&
@@ -691,27 +695,25 @@ export function getFilterDataWithCondition(obj) {
             let isLanguagesMatch = false;
             let isProfessionMatch = false;
 
-            obj.professions.forEach((profession) => {
+            obj.professions.forEach(profession => {
               if (
                 element.data().profileInfo.profession.fullName == profession
               ) {
                 isProfessionMatch = true;
               }
             });
-            obj.languages.forEach((language) => {
-              element
-                .data()
-                .profileInfo.languages.forEach((elementLanguage) => {
-                  if (elementLanguage.code == language.code) {
-                    isLanguagesMatch = true;
-                  }
-                });
+            obj.languages.forEach(language => {
+              element.data().profileInfo.languages.forEach(elementLanguage => {
+                if (elementLanguage.code == language.code) {
+                  isLanguagesMatch = true;
+                }
+              });
             });
             if (isLanguagesMatch && isProfessionMatch) {
               arr.push(element.data());
             }
           } else if (obj.professions && obj.professions.length > 0) {
-            obj.professions.forEach((profession) => {
+            obj.professions.forEach(profession => {
               if (
                 element.data().profileInfo.profession.fullName == profession
               ) {
@@ -719,14 +721,12 @@ export function getFilterDataWithCondition(obj) {
               }
             });
           } else if (obj.languages && obj.languages.length > 0) {
-            obj.languages.forEach((language) => {
-              element
-                .data()
-                .profileInfo.languages.forEach((elementLanguage) => {
-                  if (elementLanguage.code == language.code) {
-                    arr.push(element.data());
-                  }
-                });
+            obj.languages.forEach(language => {
+              element.data().profileInfo.languages.forEach(elementLanguage => {
+                if (elementLanguage.code == language.code) {
+                  arr.push(element.data());
+                }
+              });
             });
           } else {
             arr.push(element.data());
@@ -738,8 +738,8 @@ export function getFilterDataWithCondition(obj) {
         };
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -771,7 +771,7 @@ export function reAunthenticate(userProvidedPassword) {
         return data;
       })
       .catch(function (error) {
-        const {message, code} = error;
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -796,7 +796,7 @@ export function changePassword(newPassword) {
         return reAunthenticate(newPassword);
       })
       .catch(function (error) {
-        const {message, code} = error;
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
       });
@@ -806,7 +806,7 @@ export function changePassword(newPassword) {
   }
 }
 
-export const sendMessage = (obj) => {
+export const sendMessage = obj => {
   try {
     firestore()
       .collection(Constant.App.firebaseTableNames.messages)
@@ -814,7 +814,7 @@ export const sendMessage = (obj) => {
       .collection('chat')
       .doc()
       .set(obj.messageParams);
-    const {userUnreadCount, expertUnreadCount} = obj.unreadCount;
+    const { userUnreadCount, expertUnreadCount } = obj.unreadCount;
     const updateData = {
       lastMessage: obj.lastMessage,
       modifiedDate: moment().unix(),
@@ -831,7 +831,6 @@ export const sendMessage = (obj) => {
 };
 
 export const loadMessages = (obj, success, error) => {
-
   let ref = firestore()
     .collection(Constant.App.firebaseTableNames.messages)
     .doc(`${obj.id}`)
@@ -865,8 +864,8 @@ export function resolvedQuestion(obj) {
           };
           return data;
         },
-        (error) => {
-          const {message, code} = error;
+        error => {
+          const { message, code } = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -889,24 +888,24 @@ export const updateRefrealcodeForAllUsers = (uid, data) => {
   firestore()
     .collection('users')
     .doc(uid)
-    .set(data, {merge: true})
+    .set(data, { merge: true })
     .then(
       function () {
         displayConsole('updateRefrealcodeForAllUsers success', true);
       },
-      (error) => {
-        const {message, code} = error;
+      error => {
+        const { message, code } = error;
         displayConsole('updateRefrealcodeForAllUsers error message', message);
         displayConsole('updateRefrealcodeForAllUserserror code', code);
       },
     );
 };
 
-export const updateStatus = (obj) => {
+export const updateStatus = obj => {
   firestore().collection('users').doc(obj.uid).update(obj.updatedData);
 };
 
-export const updateUnreadCount = (obj) => {
+export const updateUnreadCount = obj => {
   firestore()
     .collection(Constant.App.firebaseTableNames.questions)
     .doc(obj.questionData.questionId)
@@ -935,8 +934,8 @@ export function saveQuestion(obj) {
 
                 return data;
               },
-              (error) => {
-                const {message, code} = error;
+              error => {
+                const { message, code } = error;
                 displayConsole('error message', message);
                 displayConsole('error code', code);
                 const data = {
@@ -948,8 +947,8 @@ export function saveQuestion(obj) {
               },
             );
         },
-        (error) => {
-          const {message, code} = error;
+        error => {
+          const { message, code } = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -974,7 +973,7 @@ export async function updateQuestion(updates, questionId) {
     const document = firestore()
       .collection(collections.questions)
       .doc(questionId);
-    await document.set({...updates}, {merge: true});
+    await document.set({ ...updates }, { merge: true });
     return;
   } catch (error) {
     return error;
@@ -991,31 +990,31 @@ export function updateReadMessageStatus(obj) {
       .where(obj.key, '==', obj.value)
       .get();
     questionDocRef
-      .then((querySnapshotQuestionDoc) => {
-        querySnapshotQuestionDoc.docs.forEach((element) => {
+      .then(querySnapshotQuestionDoc => {
+        querySnapshotQuestionDoc.docs.forEach(element => {
           batch.update(element._ref, {
             isRead: true,
           });
         });
         batch
           .commit()
-          .then((response) => {
+          .then(response => {
             displayConsole('response', response);
             const data = {
               success: true,
             };
             displayConsole('response', data);
           })
-          .catch((error) => {
+          .catch(error => {
             displayConsole('batch error', error);
-            const {message, code} = error;
+            const { message, code } = error;
             displayConsole('batch error message', message);
             displayConsole('batch error code', code);
           });
       })
-      .catch((error) => {
+      .catch(error => {
         displayConsole('questionDocRef error', error);
-        const {message, code} = error;
+        const { message, code } = error;
         displayConsole('questionDocRef error message', message);
         displayConsole('questionDocRef error code', code);
       });
@@ -1043,9 +1042,9 @@ export function checkSecretKey(obj) {
       .where('secretKey', '==', obj.secretKey)
       .get();
     return userRef
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         var secretKeyData;
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           secretKeyData = element.data();
         });
         const data = {
@@ -1055,8 +1054,8 @@ export function checkSecretKey(obj) {
 
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1079,9 +1078,9 @@ export function checkReferedUserData(obj) {
       .where('referalCode', '==', obj.referalCode)
       .get();
     return userRef
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         var userData;
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           userData = element.data();
         });
         const data = {
@@ -1091,8 +1090,8 @@ export function checkReferedUserData(obj) {
 
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1114,7 +1113,7 @@ export function setDataTesting() {
     return firestore()
       .collection('userSecretKey')
       .doc('bc8uTx6LvbqkvhTrGVHY')
-      .update({secretKey: 'Admin123#'})
+      .update({ secretKey: 'Admin123#' })
       .then(
         function () {
           const data = {
@@ -1122,8 +1121,8 @@ export function setDataTesting() {
           };
           return data;
         },
-        (error) => {
-          const {message, code} = error;
+        error => {
+          const { message, code } = error;
           displayConsole('error message', message);
           displayConsole('error code', code);
           const data = {
@@ -1177,9 +1176,9 @@ export function getFiltersDataWithCondition(obj) {
     }
     return collection
       .get()
-      .then((querySnapshot) => {
+      .then(querySnapshot => {
         const arr = [];
-        querySnapshot.docs.forEach((element) => {
+        querySnapshot.docs.forEach(element => {
           if (
             obj.professions &&
             obj.professions.length > 0 &&
@@ -1189,27 +1188,25 @@ export function getFiltersDataWithCondition(obj) {
             let isLanguagesMatch = false;
             let isProfessionMatch = false;
 
-            obj.professions.forEach((profession) => {
+            obj.professions.forEach(profession => {
               if (
                 element.data().profileInfo.profession.fullName == profession
               ) {
                 isProfessionMatch = true;
               }
             });
-            obj.languages.forEach((language) => {
-              element
-                .data()
-                .profileInfo.languages.forEach((elementLanguage) => {
-                  if (elementLanguage.code == language.code) {
-                    isLanguagesMatch = true;
-                  }
-                });
+            obj.languages.forEach(language => {
+              element.data().profileInfo.languages.forEach(elementLanguage => {
+                if (elementLanguage.code == language.code) {
+                  isLanguagesMatch = true;
+                }
+              });
             });
             if (isLanguagesMatch && isProfessionMatch) {
               arr.push(element.data());
             }
           } else if (obj.professions && obj.professions.length > 0) {
-            obj.professions.forEach((profession) => {
+            obj.professions.forEach(profession => {
               if (
                 element.data().profileInfo.profession.fullName == profession
               ) {
@@ -1217,14 +1214,12 @@ export function getFiltersDataWithCondition(obj) {
               }
             });
           } else if (obj.languages && obj.languages.length > 0) {
-            obj.languages.forEach((language) => {
-              element
-                .data()
-                .profileInfo.languages.forEach((elementLanguage) => {
-                  if (elementLanguage.code == language.code) {
-                    arr.push(element.data());
-                  }
-                });
+            obj.languages.forEach(language => {
+              element.data().profileInfo.languages.forEach(elementLanguage => {
+                if (elementLanguage.code == language.code) {
+                  arr.push(element.data());
+                }
+              });
             });
           } else {
             arr.push(element.data());
@@ -1237,8 +1232,8 @@ export function getFiltersDataWithCondition(obj) {
 
         return data;
       })
-      .catch((error) => {
-        const {message, code} = error;
+      .catch(error => {
+        const { message, code } = error;
         displayConsole('error message', message);
         displayConsole('error code', code);
         const data = {
@@ -1256,7 +1251,7 @@ export function getFiltersDataWithCondition(obj) {
 
 export async function addNewPaymentCard(obj) {
   try {
-    const {card_number, exp_month, exp_year, cvc} = obj;
+    const { card_number, exp_month, exp_year, cvc } = obj;
 
     await functions().httpsCallable('apiPaymentsAddCard')({
       card_number: card_number,
@@ -1264,11 +1259,11 @@ export async function addNewPaymentCard(obj) {
       exp_year: exp_year,
       cvc: cvc,
     });
-    return {ok: true, data: null};
+    return { ok: true, data: null };
   } catch (err) {
     console.log('Card payment error', err);
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -1278,7 +1273,7 @@ export async function getPaymentMethods() {
     if (response.data.data) {
       return {
         ok: true,
-        data: response.data.data.map((data) => ({...data.card, id: data.id})),
+        data: response.data.data.map(data => ({ ...data.card, id: data.id })),
       };
     } else {
       return {
@@ -1289,7 +1284,7 @@ export async function getPaymentMethods() {
   } catch (err) {
     console.log('ERRROROROROROROROROROR', err);
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -1301,10 +1296,10 @@ export async function payAmount(cardID, amount) {
       amount: amountInCents,
     });
 
-    return {ok: response.data};
+    return { ok: response.data };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -1317,24 +1312,24 @@ export async function payAmountWithToken(tokenID, amount) {
       token_id: tokenID,
       amount: amountInCents,
     });
-    return {ok: response};
+    return { ok: response };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
-export async function updateCredits(visits, {data}) {
+export async function updateCredits(visits, { data }) {
   try {
     const docData = await firestore().collection('users').doc(data.uid).get();
     const userData = docData.data();
     const paymentType = data.prepaid
-      ? {prepaid: userData.prepaid + visits}
-      : {visits: userData.visits + visits};
+      ? { prepaid: userData.prepaid + visits }
+      : { visits: userData.visits + visits };
     await firestore().collection('users').doc(data.uid).update(paymentType);
-    return {ok: true};
+    return { ok: true };
   } catch (err) {
-    return {ok: false, status: 'internal'};
+    return { ok: false, status: 'internal' };
   }
 }
 
@@ -1343,10 +1338,10 @@ export async function getPayPalAccessToken() {
     const response = await functions().httpsCallable(
       'apiPaymentsGetPaypalAccesstoken',
     )();
-    return {ok: true, data: response};
+    return { ok: true, data: response };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
-    return {ok: false, status};
+    return { ok: false, status };
   }
 }
 
@@ -1356,11 +1351,11 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
       try {
         let query = firestore().collection(collectionName);
         for (let condition of conditions) {
-          const {key, operator, value} = condition;
+          const { key, operator, value } = condition;
           query = query.where(key, operator, value);
         }
         const response = await query.limit(limit).get();
-        const data = response.docs.map((item) => ({
+        const data = response.docs.map(item => ({
           ...item.data(),
           id: item.id,
         }));
@@ -1374,7 +1369,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
 export async function addHealthHistory(data, uid) {
   try {
     const document = firestore().collection('healthHistory').doc(uid);
-    await document.set(data, {merge: true});
+    await document.set(data, { merge: true });
     return;
   } catch (error) {
     return error;
@@ -1403,12 +1398,11 @@ export async function getMedicalHistoryAsync(data) {
 }
 
 export const updateUserData = (updates, uid, merge = true) =>
-
   new Promise((resolve, reject) =>
     (async () => {
       const user = firestore().collection('users').doc(uid);
       try {
-        await user.set(updates, {merge});
+        await user.set(updates, { merge });
         resolve(updates);
       } catch (error) {
         reject(error);
@@ -1451,7 +1445,7 @@ export const firebaseSingleUpdate = (id, collection, updates, merge = true) =>
     (async () => {
       const user = firestore().collection(collection).doc(id);
       try {
-        await user.set(updates, {merge});
+        await user.set(updates, { merge });
         resolve(updates);
       } catch (error) {
         reject(error);
@@ -1468,13 +1462,13 @@ export const firebaseRealTimeFetch = (
   let query = firestore().collection(collectionName);
 
   for (let condition of conditions) {
-    const {key, operator, value} = condition;
+    const { key, operator, value } = condition;
     query = query.where(key, operator, value);
   }
 
   query.onSnapshot(
-    (snapshot) => {
-      const data = snapshot.docs.map((item) => ({
+    snapshot => {
+      const data = snapshot.docs.map(item => ({
         ...item.data(),
         id: item.id,
       }));
@@ -1482,15 +1476,15 @@ export const firebaseRealTimeFetch = (
         onSucess(data);
       }
     },
-    (error) => {
+    error => {
       onError(error);
     },
   );
 };
 
-export async function saveAndLock({payload}) {
-  const {appointment} = payload;
-  const {visit} = appointment;
+export async function saveAndLock({ payload }) {
+  const { appointment } = payload;
+  const { visit } = appointment;
 
   try {
     await lockPaitentRecord(visit);
@@ -1498,7 +1492,7 @@ export async function saveAndLock({payload}) {
     await saveMedicalHistory(payload, visit);
     const update = {
       ...appointment,
-      visit: {...visit, locked: true, complete: true},
+      visit: { ...visit, locked: true, complete: true },
     };
     return update;
   } catch (error) {
@@ -1507,12 +1501,12 @@ export async function saveAndLock({payload}) {
   }
 }
 
-async function lockPaitentRecord({uid, id}) {
+async function lockPaitentRecord({ uid, id }) {
   const document = firestore().collection('appointments').doc(uid);
   const appointments = await document.get();
   const appointmentList = appointments.data();
 
-  appointmentList.history.map((item) => {
+  appointmentList.history.map(item => {
     if (item.id === id) {
       item.locked = true;
       item.complete = true;
@@ -1521,15 +1515,15 @@ async function lockPaitentRecord({uid, id}) {
     return item;
   });
 
-  await document.set({...appointmentList}, {merge: true});
+  await document.set({ ...appointmentList }, { merge: true });
 }
 
-async function lockExpertRecord({uid, id, expert}) {
+async function lockExpertRecord({ uid, id, expert }) {
   const document = firestore().collection('appointments').doc(expert.uid);
   const appointments = await document.get();
   const appointmentList = appointments.data();
 
-  appointmentList.history[uid].map((item) => {
+  appointmentList.history[uid].map(item => {
     if (item.id === id) {
       item.locked = true;
       item.complete = true;
@@ -1538,7 +1532,10 @@ async function lockExpertRecord({uid, id, expert}) {
     return item;
   });
 
-  await document.set({history: {...appointmentList.history}}, {merge: true});
+  await document.set(
+    { history: { ...appointmentList.history } },
+    { merge: true },
+  );
 }
 
 async function saveMedicalHistory(payload, visit) {
@@ -1552,14 +1549,14 @@ async function saveMedicalHistory(payload, visit) {
 
     if (recordList) {
       await document.set(
-        {history: [...recordList.history, payload]},
-        {merge: true},
+        { history: [...recordList.history, payload] },
+        { merge: true },
       );
     } else {
       await firestore()
         .collection('medicalHistory')
         .doc(visit.uid)
-        .set({history: [payload]});
+        .set({ history: [payload] });
     }
   } catch (error) {
     console.log(error);
@@ -1570,19 +1567,19 @@ async function saveMedicalHistory(payload, visit) {
 export async function setVideoVisitRating(data) {
   const {
     rating,
-    visit: {expert, uid},
+    visit: { expert, uid },
   } = data;
   const document = firestore().collection('users').doc(expert.uid);
   const expertDoc = await document.get();
   const expertData = expertDoc.data();
 
   await document.set(
-    {userRating: [...expertData.userRating, {rating: rating * 2, uid}]},
-    {merge: true},
+    { userRating: [...expertData.userRating, { rating: rating * 2, uid }] },
+    { merge: true },
   );
 }
 
-export async function sendVisitRecap({payload}) {
+export async function sendVisitRecap({ payload }) {
   try {
     await functions().httpsCallable(
       'sendMailNotificationOnMedicalRecordCreate',
@@ -1592,7 +1589,7 @@ export async function sendVisitRecap({payload}) {
   }
 }
 
-export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
+export const updateSubscriptionPlan = ({ subscriptionId, planId }) =>
   new Promise((resolve, reject) =>
     (async function () {
       const updateSubscriptionPlan = functions().httpsCallable(
@@ -1610,12 +1607,11 @@ export const updateSubscriptionPlan = ({subscriptionId, planId}) =>
     })(),
   );
 
-export const cancelSubscription = ({subscriptionId, userId}) =>
+export const cancelSubscription = ({ subscriptionId, userId }) =>
   new Promise((resolve, reject) =>
     (async function () {
-      const cancelSubscription = functions().httpsCallable(
-        'cancelSubscription',
-      );
+      const cancelSubscription =
+        functions().httpsCallable('cancelSubscription');
       try {
         const response = await cancelSubscription({
           subscriptionId,
@@ -1653,7 +1649,10 @@ export async function authorizeVideo(uid) {
 
 export async function sendAppointmentNotification(uid: String, time) {
   try {
-    await functions().httpsCallable('sendPushNotificationAppointmentCreate')({uid, time});
+    await functions().httpsCallable('sendPushNotificationAppointmentCreate')({
+      uid,
+      time,
+    });
     return;
   } catch (error) {
     console.log(error);
@@ -1662,16 +1661,33 @@ export async function sendAppointmentNotification(uid: String, time) {
 
 export async function sendChatUpdateNotification(uid: String) {
   try {
-    await functions().httpsCallable('sendPushNotificationChat')({uid});
+    await functions().httpsCallable('sendPushNotificationChat')({ uid });
     return;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function addClaimsToUser(organizationId: string, uid: string, roles: object) {
+export async function addClaimsToUser(
+  organizationId: string,
+  uid: string,
+  roles: object,
+) {
   try {
-    await functions().httpsCallable('addClaimsOnCall')({organizationId, uid, roles});
+    await functions().httpsCallable('addClaimsOnCall')({
+      organizationId,
+      uid,
+      roles,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function usePromoCode(code: string) {
+  try {
+    await functions().httpsCallable('usePromoCode')({ code });
+    return;
   } catch (error) {
     console.log(error);
   }

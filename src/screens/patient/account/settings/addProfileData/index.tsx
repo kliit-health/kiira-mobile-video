@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   ScrollView,
@@ -8,46 +8,46 @@ import {
   Platform,
   Linking,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CustomText from '~/components/customText';
 import styles from './style';
 import Constant from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
 import CustomButton from '~/components/customButton';
 import ImagePicker from 'react-native-image-picker';
-import {displayConsole} from '~/utils/helper';
-import {uploadUserDataToFirebase} from './action';
-import {showOrHideModal} from '~/components/customModal/action';
+import { displayConsole } from '~/utils/helper';
+import { uploadUserDataToFirebase } from './action';
+import { showOrHideModal } from '~/components/customModal/action';
 import CustomSelectModal from '~/components/customselectModal';
 import DatePicker from '~/components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 
 const states = Constant.App.Modal.states;
 
 class AddProfileData extends PureComponent {
-	public state: any;
-	public setState: any;
-	public props: any;
-	public lang: any;
-	public staticImages: any;
-	public imageSrc: any;
-	public firstName: any;
-	public lastName: any;
-	public showSelectStateModal: any;
-	public selectedState: any;
-	public pronounsArr: any;
-	public uploadUserData: any;
-	public showHideErrorModal: any;
-	public navigation: any;
-	public dob: any;
-	public imageUri: any;
-	public file: any;
-	public filepath: any;
+  public state: any;
+  public setState: any;
+  public props: any;
+  public lang: any;
+  public staticImages: any;
+  public imageSrc: any;
+  public firstName: any;
+  public lastName: any;
+  public showSelectStateModal: any;
+  public selectedState: any;
+  public pronounsArr: any;
+  public uploadUserData: any;
+  public showHideErrorModal: any;
+  public navigation: any;
+  public dob: any;
+  public imageUri: any;
+  public file: any;
+  public filepath: any;
 
   constructor(props) {
     super(props);
-    const {lang} = props;
+    const { lang } = props;
     this.state = {
       firstName: '',
       lastName: '',
@@ -111,12 +111,12 @@ class AddProfileData extends PureComponent {
         path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
       } else if (response.error) {
         alert('And error occured: ' + JSON.stringify(response));
       } else {
-        const source = {uri: response.uri};
+        const source = { uri: response.uri };
         this.setState({
           imageSrc: source,
           imageUri: source.uri,
@@ -128,8 +128,8 @@ class AddProfileData extends PureComponent {
   };
 
   renderProfileImageView() {
-    const {staticImages} = Constant.App;
-    const {imageSrc} = this.state;
+    const { staticImages } = Constant.App;
+    const { imageSrc } = this.state;
     return (
       <View style={styles.profileImgViewStyle}>
         {imageSrc ? (
@@ -137,7 +137,7 @@ class AddProfileData extends PureComponent {
         ) : (
           <Avatar
             size={150}
-            imageProps={{resizeMode: 'contain'}}
+            imageProps={{ resizeMode: 'contain' }}
             rounded
             source={staticImages.profilePlaceholderImg}
             activeOpacity={0.7}
@@ -148,7 +148,8 @@ class AddProfileData extends PureComponent {
             style={styles.cameraIconContainerStyle}
             onPress={() => {
               this.requestCameraPermission();
-            }}>
+            }}
+          >
             <Image
               resizeMode="contain"
               source={staticImages.cameraWhiteImg}
@@ -161,7 +162,7 @@ class AddProfileData extends PureComponent {
   }
 
   renderTitleView() {
-    const {lang} = this.props;
+    const { lang } = this.props;
     return (
       <View style={styles.titleContainer}>
         <CustomText style={styles.titleTextStyle}>
@@ -172,14 +173,10 @@ class AddProfileData extends PureComponent {
   }
 
   renderInputTextView() {
-    const {
-      firstName,
-      lastName,
-      showSelectStateModal,
-      selectedState,
-    } = this.state;
-    const {lang} = this.props;
-    const {staticImages} = Constant.App;
+    const { firstName, lastName, showSelectStateModal, selectedState } =
+      this.state;
+    const { lang } = this.props;
+    const { staticImages } = Constant.App;
 
     return (
       <View style={styles.inputTextParentContainerStyle}>
@@ -187,13 +184,13 @@ class AddProfileData extends PureComponent {
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({firstName: value})}
+              onChangeText={value => this.setState({ firstName: value })}
               placeholder={lang.addProfileData.firstName}
               value={firstName}
               style={
                 firstName
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
@@ -201,13 +198,13 @@ class AddProfileData extends PureComponent {
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({lastName: value})}
+              onChangeText={value => this.setState({ lastName: value })}
               placeholder={lang.addProfileData.lastName}
               value={lastName}
               style={
                 lastName
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
@@ -218,7 +215,7 @@ class AddProfileData extends PureComponent {
           <DatePicker
             placeHolder={lang.addProfileData.yourBirthDay}
             textStyle={styles.birthDayTextStyle}
-            onSelection={(date) => {
+            onSelection={date => {
               this.setState({
                 dob: date,
               });
@@ -228,10 +225,11 @@ class AddProfileData extends PureComponent {
 
         <View style={styles.stateDropDownContainerStyle}>
           <TouchableOpacity
-            style={{flexDirection: 'row'}}
+            style={{ flexDirection: 'row' }}
             onPress={() => {
-              this.setState({showSelectStateModal: !showSelectStateModal});
-            }}>
+              this.setState({ showSelectStateModal: !showSelectStateModal });
+            }}
+          >
             <CustomText style={styles.stateDropDownTextStyle}>
               {selectedState
                 ? selectedState.value
@@ -249,9 +247,9 @@ class AddProfileData extends PureComponent {
   }
 
   renderPronounsView() {
-    const {staticImages} = Constant.App;
-    const {pronounsArr} = this.state;
-    const {lang} = this.props;
+    const { staticImages } = Constant.App;
+    const { pronounsArr } = this.state;
+    const { lang } = this.props;
 
     return (
       <View style={styles.pronounsParentContainerStyle}>
@@ -271,7 +269,8 @@ class AddProfileData extends PureComponent {
               this.setState({
                 pronounsArr: Object.assign([], [], pronounsArr),
               });
-            }}>
+            }}
+          >
             <View style={styles.pronounsContainerStyle}>
               <Image
                 resizeMode="contain"
@@ -294,7 +293,7 @@ class AddProfileData extends PureComponent {
 
   isPronounSelected(pronounsArr) {
     let isSelected = false;
-    pronounsArr.forEach((element) => {
+    pronounsArr.forEach(element => {
       if (element.selected) {
         isSelected = true;
       }
@@ -304,7 +303,7 @@ class AddProfileData extends PureComponent {
 
   getSelectedPronoun(pronounsArr) {
     let selectedValue = '';
-    pronounsArr.forEach((element) => {
+    pronounsArr.forEach(element => {
       if (element.selected) {
         selectedValue = element.title;
       }
@@ -313,7 +312,7 @@ class AddProfileData extends PureComponent {
   }
 
   renderButtonView() {
-    const {uploadUserData, showHideErrorModal, navigation, lang} = this.props;
+    const { uploadUserData, showHideErrorModal, navigation, lang } = this.props;
     const {
       firstName,
       lastName,
@@ -391,7 +390,7 @@ class AddProfileData extends PureComponent {
   }
 
   renderTermsConditionsView() {
-    const {lang} = this.props;
+    const { lang } = this.props;
     return (
       <View style={styles.termsConditionsTextContainerStyle}>
         <CustomText style={styles.termsConditionsTextStyle}>
@@ -400,7 +399,8 @@ class AddProfileData extends PureComponent {
         <TouchableOpacity
           onPress={() => {
             Linking.openURL(Constant.App.termsAndConditionsUrl);
-          }}>
+          }}
+        >
           <CustomText style={styles.termsConditionsTextHighlightedStyle}>
             {lang.signUp.termsConditionsText2}
           </CustomText>
@@ -411,7 +411,8 @@ class AddProfileData extends PureComponent {
         <TouchableOpacity
           onPress={() => {
             Linking.openURL(Constant.App.termsAndConditionsUrl);
-          }}>
+          }}
+        >
           <CustomText style={styles.termsConditionsTextHighlightedStyle}>
             {lang.signUp.termsConditionsText4}
           </CustomText>
@@ -421,13 +422,14 @@ class AddProfileData extends PureComponent {
   }
 
   render() {
-    const {showSelectStateModal} = this.state;
+    const { showSelectStateModal } = this.state;
 
     return (
       <View style={styles.parentContainerStyle}>
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.contentContainerStyle}>
             {this.renderProfileImageView()}
             {this.renderTitleView()}
@@ -438,7 +440,7 @@ class AddProfileData extends PureComponent {
             {showSelectStateModal ? (
               <CustomSelectModal
                 data={states}
-                onSelection={(item) => {
+                onSelection={item => {
                   console.log('---onSelection CustomSelectModal---', item);
                   this.setState({
                     selectedState: item,
@@ -461,14 +463,13 @@ class AddProfileData extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   lang: state.language,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
-  uploadUserData: (value) =>
-    dispatch(uploadUserDataToFirebase(value, dispatch)),
+const mapDispatchToProps = dispatch => ({
+  showHideErrorModal: value => dispatch(showOrHideModal(value)),
+  uploadUserData: value => dispatch(uploadUserDataToFirebase(value, dispatch)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddProfileData);
