@@ -220,6 +220,7 @@ export async function getAppointmentDatesAsync(data) {
     };
 
     let response = [];
+    
     await fetch(urls.dev.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
@@ -1684,11 +1685,20 @@ export async function addClaimsToUser(
   }
 }
 
+
 export async function sendNotificationOnJoin(uid: string) {
   try {
     await functions().httpsCallable('sendPushNotificationOnExpertJoin')({
       uid,
-    });
+    })
+    } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function usePromoCode(code: string) {
+  try {
+    await functions().httpsCallable('usePromoCode')({ code });
     return;
   } catch (error) {
     console.log(error);

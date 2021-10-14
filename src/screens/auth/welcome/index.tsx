@@ -1,59 +1,83 @@
-import React, { useEffect } from 'react';
-import { View, Image, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, View, Image, Text, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import Constant from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
+import CustomInputText from '~/components/customInputText';
 import * as actions from '~/redux/actions';
 import DeviceInfo from 'react-native-device-info';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { usePromoCode } from '~/utils/firebase';
 
 const Welcome = ({ navigation }) => {
-    const dispatch = useDispatch();
-    const { staticImages, screenNames } = Constant.App;
+  const dispatch = useDispatch();
+  const { staticImages, screenNames } = Constant.App;
+  const [code, setCode] = useState('');
 
-    useEffect(() => {
-        const device = {
-            manufacturer: DeviceInfo.getManufacturerSync(),
-            model: DeviceInfo.getModel(),
-            osVersion: DeviceInfo.getSystemVersion(),
-            appVersion: DeviceInfo.getVersion(),
-        };
-        dispatch(actions.updateUser({ device }));
-    }, []);
+  useEffect(() => {
+    const device = {
+      manufacturer: DeviceInfo.getManufacturerSync(),
+      model: DeviceInfo.getModel(),
+      osVersion: DeviceInfo.getSystemVersion(),
+      appVersion: DeviceInfo.getVersion(),
+    };
+    dispatch(actions.updateUser({ device }));
+  }, []);
 
-    const user = useSelector(state => state.user.data);
+  const user = useSelector(state => state.user.data);
 
-    return (
-        <View style={styles.container}>
+  const handlePress = () => {
+    if (code.length) {
+      usePromoCode(code.toLowerCase());
+    }
+
+    navigation.navigate(screenNames.ChatBot);
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        <Image
+          resizeMode="contain"
+          source={staticImages.logoHorizontal}
+          style={styles.logoStyle}
+        />
+        <View>
+          <View style={styles.imageContainer}>
+            <Text style={styles.title}>{`Welcome ${user.displayName}!`}</Text>
             <Image
-                resizeMode="contain"
-                source={staticImages.logoHorizontal}
-                style={styles.logoStyle}
+              source={staticImages.penguin_b}
+              style={styles.image}
+              resizeMode="contain"
             />
-            <View>
-                <Text style={styles.title}>
-                    {`Welcome ${user.displayName}! \n Let's Set up your profile.`}
-                </Text>
-                <View style={styles.imageContainer}>
-                    <Image
-                        source={staticImages.penguin_b}
-                        style={styles.image}
-                        resizeMode="contain"
-                    />
-                </View>
-
-                <CustomButton
-                    buttonStyle={styles.buttonContainer}
-                    textStyle={styles.buttonText}
-                    onPress={() => {
-                        navigation.navigate(screenNames.ChatBot);
-                    }}
-                    text="Get Started"
-                />
+            <Text style={styles.heading}>Do you have a promo code?</Text>
+            <Text style={styles.bodyText}>
+              If not, that's fine just press Setup Profile.
+            </Text>
+            <View style={styles.inputTextContainerStyle}>
+              <CustomInputText
+                autoCapitalize="none"
+                onChangeText={value => setCode(value)}
+                placeholder="Enter Promo Code"
+                value={code}
+                style={styles.inputTypeStyle}
+              />
             </View>
+          </View>
+
+          <CustomButton
+            buttonStyle={styles.buttonContainer}
+            textStyle={styles.buttonText}
+            onPress={handlePress}
+            text="Setup Profile"
+          />
         </View>
-    );
+      </ScrollView>
+      {Platform.OS === 'ios' && <KeyboardSpacer />}
+    </View>
+  );
 };
 
 export default withNavigation(Welcome);
