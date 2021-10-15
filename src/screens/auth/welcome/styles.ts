@@ -78,6 +78,7 @@ const style = StyleSheet.create({
     fontFamily: text.fontFamily.poppinsRegular,
     textAlign: 'left',
     width: metrics.width - childPadding,
+    backgroundColor: colors.offWhite,
   },
 
   inputTextContainerStyle: {
