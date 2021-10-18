@@ -541,6 +541,7 @@ export const select_provider = {
     radius_sm: styles.radius_sm,
     hide_overflow: styles.hide_overflow,
     no_pad_v: styles.no_pad_v,
+    pad_v: styles.pad_v,
 };
 
 export const h1 = [styles.xxLarge, styles.pad_h, styles.sm_pad_v];
