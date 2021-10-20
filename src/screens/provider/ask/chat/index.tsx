@@ -9,7 +9,7 @@ import {
   AppState,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styles from './style';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';
@@ -27,11 +27,11 @@ import {
   toggleExpertStatus,
   resolveQuestion,
 } from './action';
-import {getChatItems} from './selectors';
+import { getChatItems } from './selectors';
 import moment from 'moment';
 import CustomButton from '~/components/customButton';
-import {stopObserverChat} from './action';
-import {topics} from '~/models';
+import { stopObserverChat } from './action';
+import { topics } from '~/models';
 
 let key;
 class ChatExpert extends React.PureComponent {
@@ -76,8 +76,8 @@ class ChatExpert extends React.PureComponent {
   }
 
   initStatus(status) {
-    const {navigation, toggleStatus, userData} = this.props;
-    const {questionData} = navigation.state.params;
+    const { navigation, toggleStatus, userData } = this.props;
+    const { questionData } = navigation.state.params;
     const payloadToggleStatus = {
       userInfo: userData,
       toggleStatusParams: {
@@ -96,10 +96,10 @@ class ChatExpert extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const {loadUserMessages, navigation, setId, checkStatus} = this.props;
+    const { loadUserMessages, navigation, setId, checkStatus } = this.props;
     // key = await sendEncryptedKeyToFirebase();
     // rsa.setPublicString(JSON.parse(key.publicKey));
-    const {questionData} = navigation.state.params;
+    const { questionData } = navigation.state.params;
     this.initStatus(true);
     const payloadCheckStatus = {
       userInfo: questionData.userInfo,
@@ -119,15 +119,15 @@ class ChatExpert extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const {clearState, stopObervers} = this.props;
+    const { clearState, stopObervers } = this.props;
     clearState();
     this.initStatus(false);
     stopObervers();
   }
 
   handleButtonPress() {
-    const {sendMessageUser, messageId, questionId} = this.props;
-    const {message, imageUri, filename, path} = this.state;
+    const { sendMessageUser, messageId, questionId } = this.props;
+    const { message, imageUri, filename, path } = this.state;
     var encrypted = '';
     var payloadData = {};
     // rsa.setPublicString(JSON.parse(key.publicKey));
@@ -207,7 +207,7 @@ class ChatExpert extends React.PureComponent {
     };
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log('You cancelled image picker');
+        console.log('You canceled image picker');
       } else if (response.error) {
         alert('And error occured: ' + JSON.stringify(response));
       } else {
@@ -231,9 +231,9 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderHeaderView() {
-    const {navigation} = this.props;
-    const {staticImages} = Constant.App;
-    const {questionData} = navigation.state.params;
+    const { navigation } = this.props;
+    const { staticImages } = Constant.App;
+    const { questionData } = navigation.state.params;
     return (
       <View style={styles.headerStyle}>
         <TouchableOpacity
@@ -242,7 +242,8 @@ class ChatExpert extends React.PureComponent {
           }}
           onPress={() => {
             navigation.goBack();
-          }}>
+          }}
+        >
           <Image
             style={{
               width: 20,
@@ -254,13 +255,13 @@ class ChatExpert extends React.PureComponent {
         </TouchableOpacity>
         <View style={styles.profileHeaderStyle}>
           <FastImage
-            containerStyle={{alignSelf: 'center'}}
+            containerStyle={{ alignSelf: 'center' }}
             style={{
               width: 50,
               height: 50,
               borderRadius: 50,
             }}
-            source={{uri: questionData.userInfo.profileInfo.profileImageUrl}}
+            source={{ uri: questionData.userInfo.profileInfo.profileImageUrl }}
             activeOpacity={0.7}
           />
           <CustomText style={styles.titleTextStyle}>
@@ -276,7 +277,8 @@ class ChatExpert extends React.PureComponent {
             this.setState({
               showActionModal: true,
             });
-          }}>
+          }}
+        >
           <Image
             style={{
               width: 20,
@@ -291,9 +293,9 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderFooterView() {
-    const {staticImages} = Constant.App;
-    const {message, imageUri} = this.state;
-    const {lang} = this.props;
+    const { staticImages } = Constant.App;
+    const { message, imageUri } = this.state;
+    const { lang } = this.props;
     return (
       <View style={styles.chatInputParentContainer}>
         {imageUri ? (
@@ -307,7 +309,8 @@ class ChatExpert extends React.PureComponent {
                   filename: '',
                   path: '',
                 })
-              }>
+              }
+            >
               <Image
                 style={styles.imageCrossStyle}
                 resizeMode="contain"
@@ -361,7 +364,8 @@ class ChatExpert extends React.PureComponent {
             />
             <TouchableOpacity
               style={styles.sendButtonContainerStyle}
-              onPress={() => (message || imageUri) && this.handleButtonPress()}>
+              onPress={() => (message || imageUri) && this.handleButtonPress()}
+            >
               <Image
                 style={{
                   width: 28,
@@ -378,7 +382,7 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderResolvedFooterView() {
-    const {lang} = this.props;
+    const { lang } = this.props;
     return (
       <View style={styles.resolvedParentContainer}>
         <CustomText style={styles.resovledTextStyle}>
@@ -399,7 +403,7 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderMessageView() {
-    const {messages} = this.props;
+    const { messages } = this.props;
     const datamessage = getChatItems(messages);
     return (
       <FlatList
@@ -407,10 +411,10 @@ class ChatExpert extends React.PureComponent {
           this.flatList = ref;
         }}
         data={datamessage}
-        style={{paddingBottom: 10}}
+        style={{ paddingBottom: 10 }}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) =>
+        renderItem={({ item, index }) =>
           this.renderMessageList(item, index, datamessage)
         }
         inverted={true}
@@ -419,8 +423,8 @@ class ChatExpert extends React.PureComponent {
   }
 
   renderActionModal() {
-    const {showActionModal} = this.state;
-    const {questionData, resolve, navigation, lang} = this.props;
+    const { showActionModal } = this.state;
+    const { questionData, resolve, navigation, lang } = this.props;
 
     const resolveQuestionByCategory = topic => {
       this.setState({
@@ -443,18 +447,20 @@ class ChatExpert extends React.PureComponent {
         animationType="fade"
         onRequestClose={() => {}}
         transparent
-        isVisible={showActionModal}>
+        isVisible={showActionModal}
+      >
         <View style={styles.actionModalParentContainerStyle}>
           <View style={styles.actionModalInnerContainerStyle}>
             <CustomText style={styles.actionModalTitleTextStyle}>
               {'Resolve question by topic:'}
             </CustomText>
-            {topics.map(({title}) => (
+            {topics.map(({ title }) => (
               // <View key={title} style={styles.actionModalLineSeperator}>
               <TouchableOpacity
                 onPress={() => {
                   resolveQuestionByCategory(title);
-                }}>
+                }}
+              >
                 <CustomText style={styles.actionModalBlueTextStyle}>
                   {title}
                 </CustomText>
@@ -478,9 +484,9 @@ class ChatExpert extends React.PureComponent {
   }
 
   render() {
-    const {navigation} = this.props;
-    const {questionData} = navigation.state.params;
-    const {showActionModal} = this.state;
+    const { navigation } = this.props;
+    const { questionData } = navigation.state.params;
+    const { showActionModal } = this.state;
     return (
       <View style={styles.parentContainer}>
         {this.renderHeaderView()}

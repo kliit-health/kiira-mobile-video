@@ -54,7 +54,7 @@ const Welcome = ({ navigation }) => {
             />
             <Text style={styles.heading}>Do you have a promo code?</Text>
             <Text style={styles.bodyText}>
-              If not, that's fine just press Setup Profile.
+              If not, that's fine just press Set Up Profile.
             </Text>
             <View style={styles.inputTextContainerStyle}>
               <CustomInputText
@@ -71,7 +71,7 @@ const Welcome = ({ navigation }) => {
             buttonStyle={styles.buttonContainer}
             textStyle={styles.buttonText}
             onPress={handlePress}
-            text="Setup Profile"
+            text="Set Up Profile"
           />
         </View>
       </ScrollView>

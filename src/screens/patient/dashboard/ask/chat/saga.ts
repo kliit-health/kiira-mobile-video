@@ -21,6 +21,7 @@ import {
   updateUnreadCount,
   checkQuestionStatus,
   sendChatUpdateNotification,
+  sendSms,
 } from '~/utils/firebase';
 import auth from '@react-native-firebase/auth';
 import {
@@ -32,11 +33,10 @@ import {
   checkExpertStatusSuccess,
   checkQuestionStatusSuccess,
 } from './action';
-import { getUser, updateUser } from '~/redux/actions';
+import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
 import { displayConsole } from '~/utils/helper';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import { tables } from '~/utils/constants';
 import { clearQuestionValue } from '../../ask/action';
 import moment from 'moment';
 
@@ -49,10 +49,11 @@ let delayTime = 100;
 function* setQuestion({ data, dispatch }) {
   const lang = yield select(state => state.language);
   try {
-    yield put(showApiLoader(lang.apiLoader.loadingText));
+    yield put(showApiLoader());
     const state = yield select();
-    const userData = state.user.data;
     const { userInfo, expertInfo, question } = data;
+    const message = 'You have a new question on Kiira';
+    const title = 'New message received';
     const setQuestionParams = {
       question,
       isResolved: false,
@@ -130,6 +131,11 @@ function* setQuestion({ data, dispatch }) {
         };
         yield delay(delayTime);
         yield loadMessagesOfUser(payloadData);
+        if (expertInfo.profileInfo.phoneNumber.length) {
+          yield sendSms(message, expertInfo.profileInfo.phoneNumber);
+        }
+
+        yield sendChatUpdateNotification(expertInfo.uid, title, message);
       } else {
         yield delay(500);
         yield put(hideApiLoader());
@@ -150,10 +156,13 @@ function* setQuestion({ data, dispatch }) {
 
 function* sendMessageToUser({ data }) {
   const lang = yield select(state => state.language);
+
   try {
     const { messageParams, imageParams, id, lastMessage, questionId } = data;
+    const message = 'A question on Kiira has been updated';
+    const title = 'Question Update';
     if (imageParams) {
-      yield put(showApiLoader(lang.apiLoader.loadingText));
+      yield put(showApiLoader());
       yield delay(delayTime);
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
@@ -162,7 +171,7 @@ function* sendMessageToUser({ data }) {
         const state = yield select();
         const expertStatusData = state.chat.expertStatusData;
         const userData = state.user.data;
-        const toUserId = expertStatusData.toUserId;
+        const uid = expertStatusData.uid;
         const questionData = Object.assign({}, state.chat.questionData);
 
         var unreadCount = questionData.unreadCount
@@ -197,7 +206,10 @@ function* sendMessageToUser({ data }) {
         };
 
         yield put(chatMessageSuccess(dataResponse));
-        yield sendChatUpdateNotification({ toUserId });
+        yield sendChatUpdateNotification(uid, title, message);
+        if (expertStatusData.profileInfo.phoneNumber.length) {
+          yield sendSms(message, expertStatusData.profileInfo.phoneNumber);
+        }
       } else {
         yield put(
           showOrHideModal(
@@ -210,7 +222,7 @@ function* sendMessageToUser({ data }) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
-      const toUserId = expertStatusData.toUserId;
+      const uid = expertStatusData.uid;
       const userData = state.user.data;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
@@ -237,13 +249,16 @@ function* sendMessageToUser({ data }) {
       };
 
       yield sendMessage(params);
+      if (expertStatusData.profileInfo.phoneNumber.length) {
+        yield sendSms(message, expertStatusData.profileInfo.phoneNumber);
+      }
       questionData.expertUnreadCount = unreadCount;
       const dataResponse = {
         questionData,
       };
 
       yield put(chatMessageSuccess(dataResponse));
-      yield sendChatUpdateNotification({ toUserId });
+      yield sendChatUpdateNotification(uid, title, message);
     }
   } catch (error) {
     yield put(hideApiLoader());
@@ -255,7 +270,7 @@ function* sendMessageToUser({ data }) {
 function* loadMessagesOfUser({ data, dispatch }) {
   const lang = yield select(state => state.language);
   try {
-    yield put(showApiLoader(lang.apiLoader.loadingText));
+    yield put(showApiLoader());
     let isFirstTime = true;
     loadMessagesObserver = yield loadMessages(
       data,
@@ -304,6 +319,7 @@ function* setExpertRating({ data: { questionId, userRating, expertId: uid } }) {
 }
 
 function* checkExpertStatus({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
     const { expertInfo, questionData } = data;
     checkStatusObserver = yield checkStatus(

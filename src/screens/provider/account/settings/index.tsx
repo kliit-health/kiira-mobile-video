@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,53 +8,54 @@ import {
   PermissionsAndroid,
   StatusBar,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styles from './styles';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';
-import {Avatar} from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import CustomInputText from '~/components/customInputText';
 import CustomSelectModal from '~/components/customselectModal';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
-import {updateExpertDataToFirebase} from './actions';
-import {showOrHideModal} from '~/components/customModal/action';
+import { updateExpertDataToFirebase } from './actions';
+import { showOrHideModal } from '~/components/customModal/action';
 
 class SettingsExpert extends PureComponent {
-	public props: any;
-	public state: any;
-	public setState: any;
-	public userData: any;
-	public lang: any;
-	public navigation: any;
-	public showHideErrorModal: any;
-	public updateUserData: any;
-	public bio: any;
-	public city: any;
-	public clinicInfo: any;
-	public credits: any;
-	public dob: any;
-	public email: any;
-	public file: any;
-	public filepath: any;
-	public firstName: any;
-	public gender: any;
-	public imageUri: any;
-	public languages: any;
-	public lastName: any;
-	public license: any;
-	public location: any;
-	public profession: any;
-	public profileInfo: any;
-	public pronounsArr: any;
-	public selectedState: any;
-	public staticImages: any;
-	public imageSrc: any;
-	public showSelectStateModal: any;
+  public props: any;
+  public state: any;
+  public setState: any;
+  public userData: any;
+  public lang: any;
+  public navigation: any;
+  public showHideErrorModal: any;
+  public updateUserData: any;
+  public bio: any;
+  public city: any;
+  public clinicInfo: any;
+  public credits: any;
+  public dob: any;
+  public email: any;
+  public file: any;
+  public filepath: any;
+  public firstName: any;
+  public gender: any;
+  public imageUri: any;
+  public languages: any;
+  public lastName: any;
+  public license: any;
+  public location: any;
+  public phoneNumber: string;
+  public profession: any;
+  public profileInfo: any;
+  public pronounsArr: any;
+  public selectedState: any;
+  public staticImages: any;
+  public imageSrc: any;
+  public showSelectStateModal: any;
 
   constructor(props) {
     super(props);
-    const {userData, lang} = this.props;
+    const { userData, lang } = this.props;
     this.state = {
       bio: userData.profileInfo.bio,
       city: userData.profileInfo.city,
@@ -71,6 +72,7 @@ class SettingsExpert extends PureComponent {
       lastName: userData.profileInfo.lastName,
       license: userData.clinicInfo.license,
       location: userData.clinicInfo.name,
+      phoneNumber: userData.profileInfo.phoneNumber,
       profession: userData.profileInfo.profession,
       profileInfo: userData.profileInfo,
       selectedState: userData.profileInfo.state,
@@ -109,7 +111,7 @@ class SettingsExpert extends PureComponent {
 
   isPronounSelected(pronounsArr) {
     let isSelected = false;
-    pronounsArr.forEach((element) => {
+    pronounsArr.forEach(element => {
       if (element.selected) {
         isSelected = true;
       }
@@ -119,7 +121,7 @@ class SettingsExpert extends PureComponent {
 
   getSelectedPronoun(pronounsArr) {
     let selectedValue = '';
-    pronounsArr.forEach((element) => {
+    pronounsArr.forEach(element => {
       if (element.selected) {
         selectedValue = element.title;
       }
@@ -128,13 +130,8 @@ class SettingsExpert extends PureComponent {
   }
 
   renderHeaderView() {
-    const {
-      navigation,
-      showHideErrorModal,
-      updateUserData,
-      userData,
-      lang,
-    } = this.props;
+    const { navigation, showHideErrorModal, updateUserData, userData, lang } =
+      this.props;
     const {
       bio,
       city,
@@ -151,6 +148,7 @@ class SettingsExpert extends PureComponent {
       lastName,
       license,
       location,
+      phoneNumber,
       profession,
       profileInfo,
       pronounsArr,
@@ -161,7 +159,8 @@ class SettingsExpert extends PureComponent {
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
-          }}>
+          }}
+        >
           <CustomText style={styles.cancelTextStyle}>
             {lang.setting.cancel}
           </CustomText>
@@ -202,6 +201,7 @@ class SettingsExpert extends PureComponent {
                   city,
                   languages,
                   profession,
+                  phoneNumber,
                 },
                 navigation,
               };
@@ -229,7 +229,8 @@ class SettingsExpert extends PureComponent {
 
               updateUserData(payloadData);
             }
-          }}>
+          }}
+        >
           <CustomText style={styles.doneTextStyle}>
             {lang.setting.done}
           </CustomText>
@@ -272,13 +273,13 @@ class SettingsExpert extends PureComponent {
         path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log('You cancelled image picker');
+        console.log('You canceled image picker');
       } else if (response.error) {
         alert('And error occured: ' + JSON.stringify(response));
       } else {
-        const source = {uri: response.uri};
+        const source = { uri: response.uri };
         this.setState({
           imageSrc: response.uri,
           imageUri: response.uri,
@@ -290,13 +291,13 @@ class SettingsExpert extends PureComponent {
   };
 
   renderProfileImageView() {
-    const {staticImages} = Constant.App;
-    const {imageSrc} = this.state;
-    const {lang} = this.props;
+    const { staticImages } = Constant.App;
+    const { imageSrc } = this.state;
+    const { lang } = this.props;
     return (
       <View style={styles.profileImgViewStyle}>
         <Avatar
-          containerStyle={{alignSelf: 'center'}}
+          containerStyle={{ alignSelf: 'center' }}
           renderPlaceholderContent={
             <Image
               style={{
@@ -309,14 +310,15 @@ class SettingsExpert extends PureComponent {
           }
           size={120}
           rounded
-          source={{uri: imageSrc ? imageSrc : ''}}
+          source={{ uri: imageSrc ? imageSrc : '' }}
           activeOpacity={0.7}
         />
         {Platform.OS === 'ios' && (
           <TouchableOpacity
             onPress={() => {
               this.requestCameraPermission();
-            }}>
+            }}
+          >
             <CustomText style={styles.changeProfileTextStyle}>
               {lang.setting.changePhoto}
             </CustomText>
@@ -335,22 +337,23 @@ class SettingsExpert extends PureComponent {
       selectedState,
       license,
       location,
+      phoneNumber,
     } = this.state;
-    const {lang} = this.props;
-    const {staticImages} = Constant.App;
+    const { lang } = this.props;
+    const { staticImages } = Constant.App;
     return (
       <View style={styles.inputTextParentContainerStyle}>
         <View style={styles.inputTextContainerStyle}>
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({firstName: value})}
+              onChangeText={value => this.setState({ firstName: value })}
               placeholder={lang.addProfileData.firstName}
               value={firstName}
               style={
                 firstName
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
@@ -359,13 +362,13 @@ class SettingsExpert extends PureComponent {
             <CustomInputText
               multiline
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({lastName: value})}
+              onChangeText={value => this.setState({ lastName: value })}
               placeholder={lang.addProfileData.lastName}
               value={lastName}
               style={
                 lastName
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
@@ -376,13 +379,13 @@ class SettingsExpert extends PureComponent {
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({location: value})}
+              onChangeText={value => this.setState({ location: value })}
               placeholder={'Location'}
               value={location}
               style={
                 location
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
@@ -390,30 +393,46 @@ class SettingsExpert extends PureComponent {
           <View style={styles.inputTextFirstNameContainerStyle}>
             <CustomInputText
               autoCapitalize="words"
-              onChangeText={(value) => this.setState({license: value})}
+              onChangeText={value => this.setState({ license: value })}
               placeholder={'License'}
               value={license}
               style={
                 license
                   ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, {fontWeight: '100'}]
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
               }
               placeholderTextColor={Constant.App.colors.blackColor}
             />
           </View>
         </View>
 
+        <View style={styles.inputTextContainerStyle}>
+          <View style={styles.inputTextFirstNameContainerStyle}>
+            <CustomInputText
+              autoCapitalize="words"
+              onChangeText={value => this.setState({ phoneNumber: value })}
+              placeholder="Phone Number"
+              value={phoneNumber}
+              style={
+                phoneNumber
+                  ? styles.inputTypeStyle
+                  : [styles.inputTypeStyle, { fontWeight: '100' }]
+              }
+              placeholderTextColor={Constant.App.colors.blackColor}
+            />
+          </View>
+        </View>
         <View style={styles.inputTextBioContainer}>
           <CustomInputText
             autoCapitalize="words"
             multiline
-            onChangeText={(value) => this.setState({bio: value})}
+            onChangeText={value => this.setState({ bio: value })}
             placeholder={'Bio'}
             value={bio}
             style={
               bio
                 ? styles.inputTypeBio
-                : [styles.inputTypeBio, {fontWeight: '100'}]
+                : [styles.inputTypeBio, { fontWeight: '100' }]
             }
             placeholderTextColor={Constant.App.colors.blackColor}
           />
@@ -421,10 +440,11 @@ class SettingsExpert extends PureComponent {
 
         <View style={styles.stateDropDownContainerStyle}>
           <TouchableOpacity
-            style={{flexDirection: 'row'}}
+            style={{ flexDirection: 'row' }}
             onPress={() => {
-              this.setState({showSelectStateModal: !showSelectStateModal});
-            }}>
+              this.setState({ showSelectStateModal: !showSelectStateModal });
+            }}
+          >
             <CustomText style={styles.stateDropDownTextStyle}>
               {selectedState
                 ? selectedState.value
@@ -442,9 +462,9 @@ class SettingsExpert extends PureComponent {
   }
 
   renderPronounsView() {
-    const {staticImages} = Constant.App;
-    const {pronounsArr} = this.state;
-    const {lang} = this.props;
+    const { staticImages } = Constant.App;
+    const { pronounsArr } = this.state;
+    const { lang } = this.props;
     return (
       <View style={styles.pronounsParentContainerStyle}>
         <CustomText style={styles.pronounsTitleTextStyle}>
@@ -463,7 +483,8 @@ class SettingsExpert extends PureComponent {
               this.setState({
                 pronounsArr: Object.assign([], [], pronounsArr),
               });
-            }}>
+            }}
+          >
             <View style={styles.pronounsContainerStyle}>
               <Image
                 resizeMode="contain"
@@ -485,13 +506,14 @@ class SettingsExpert extends PureComponent {
   }
 
   renderButtonView() {
-    const {navigation, lang} = this.props;
+    const { navigation, lang } = this.props;
     return (
       <TouchableOpacity
         style={styles.btnContainerStyle}
         onPress={() => {
           navigation.navigate(Constant.App.screenNames.ChangePasswordExpert);
-        }}>
+        }}
+      >
         <CustomText style={styles.btnTextStyle}>
           {lang.setting.changePassword}
         </CustomText>
@@ -500,14 +522,15 @@ class SettingsExpert extends PureComponent {
   }
 
   render() {
-    const {showSelectStateModal} = this.state;
+    const { showSelectStateModal } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
         {this.renderHeaderView()}
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+        >
           {this.renderProfileImageView()}
           {this.renderInputTextView()}
           {this.renderPronounsView()}
@@ -515,7 +538,7 @@ class SettingsExpert extends PureComponent {
           {showSelectStateModal ? (
             <CustomSelectModal
               data={this.state.states}
-              onSelection={(item) => {
+              onSelection={item => {
                 console.log('---onSelection CustomSelectModal---', item);
                 this.setState({
                   selectedState: item,
@@ -537,14 +560,14 @@ class SettingsExpert extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   userData: state.user.data,
   lang: state.language,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  updateUserData: (value) => dispatch(updateExpertDataToFirebase(value)),
-  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
+const mapDispatchToProps = dispatch => ({
+  updateUserData: value => dispatch(updateExpertDataToFirebase(value)),
+  showHideErrorModal: value => dispatch(showOrHideModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsExpert);

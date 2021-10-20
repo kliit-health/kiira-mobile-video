@@ -6,9 +6,12 @@ import { NavigationService } from '~/navigation';
 import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
 import { sendAppointmentNotification, sendSms } from '~/utils/firebase';
+import moment from 'moment';
 
 function* setAppointment(data) {
-  const { phoneNumber } = yield select(state => state.user.data.profileInfo);
+  const { phoneNumber, enableText } = yield select(
+    state => state.user.data.profileInfo,
+  );
   const {
     data: {
       time,
@@ -34,8 +37,11 @@ function* setAppointment(data) {
       yield updateCredits(-credits, data);
       yield put(getUser());
       yield sendAppointmentNotification(uid, time);
-      if (phoneNumber.length) {
-        yield sendSms(uid, time, phoneNumber);
+      if (phoneNumber.length && enableText) {
+        const message = `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
+          time,
+        ).format('llll')}`;
+        yield sendSms(message, phoneNumber);
       }
     }
   } catch (error) {

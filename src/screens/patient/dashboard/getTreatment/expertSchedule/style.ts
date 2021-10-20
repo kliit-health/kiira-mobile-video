@@ -1,11 +1,10 @@
-import {StyleSheet} from 'react-native';
-import metrics, {smallScreen} from '~/utils/metrices';
+import { StyleSheet } from 'react-native';
+import metrics, { smallScreen } from '~/utils/metrices';
 import Constant from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
 let titlePaddingValue = metrics.width * 0.05;
-
 
 const styles = StyleSheet.create({
   backContainerStyle: {
@@ -348,7 +347,7 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderWidth: 1,
     height: 40,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowColor: '#000000',
     shadowOpacity: 1,
     shadowRadius: 7,
@@ -368,7 +367,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderColor: 'lightgrey',
     borderWidth: 1,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowColor: '#000000',
     shadowOpacity: 1,
     shadowRadius: 7,

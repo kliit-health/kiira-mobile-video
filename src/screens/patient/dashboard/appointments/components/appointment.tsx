@@ -41,7 +41,7 @@ const Appointment = ({ visit, date, navigation }) => {
   const handleSameDay = () =>
     dispatch(
       showOrHideModal(
-        'Appointments can not be cancelled or rescheduled if your appointment is within 24 hours.',
+        'Appointments can not be canceled or rescheduled if your appointment is within 24 hours.',
       ),
     );
 
@@ -121,7 +121,7 @@ const Appointment = ({ visit, date, navigation }) => {
               visit,
             });
           }}
-          text="View Details"
+          text="Begin Visit"
         />
 
         <CustomButton

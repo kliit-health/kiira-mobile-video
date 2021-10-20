@@ -3,7 +3,7 @@ export default [
     title: 'Birth Control',
   },
   {
-    title: 'General Medical Advise',
+    title: 'General Medical Advice',
   },
   {
     title: 'LGBTQ',

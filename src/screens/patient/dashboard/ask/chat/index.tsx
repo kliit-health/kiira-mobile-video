@@ -138,11 +138,14 @@ class Chat extends React.PureComponent {
       };
       setId(ids);
       loadUserMessages(payloadData);
-    }
-    if (questionValue && questionValue.isResolved && !questionValue.isRated) {
-      this.setState({
-        showRatingModal: true,
-      });
+
+      if (questionValue && questionValue.isResolved && !questionValue.isRated) {
+        setTimeout(() => {
+          this.setState({
+            showRatingModal: true,
+          });
+        }, 500);
+      }
     }
   }
 
@@ -229,7 +232,7 @@ class Chat extends React.PureComponent {
 
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log('You cancelled image picker');
+        console.log('You canceled image picker');
       } else if (response.error) {
         alert('And error occured: ' + JSON.stringify(response));
       } else {
@@ -276,6 +279,9 @@ class Chat extends React.PureComponent {
     } = this.props;
     const userRating = [...expertDetails.userRating, { rating, uid }];
     rateExpert({ questionId, userRating, expertId: expertDetails.uid });
+    this.setState({
+      showRatingModal: false,
+    });
   };
 
   render() {

@@ -10,6 +10,7 @@ import {
   checkQuestionStatus,
   resolvedQuestion,
   sendChatUpdateNotification,
+  sendSms,
 } from '~/utils/firebase';
 import {
   loadExpertMessagesSuccess,
@@ -42,19 +43,23 @@ function* sendMessageToUser({ data }) {
   const lang = yield select(state => state.language);
   try {
     const { messageParams, imageParams, id, lastMessage, questionId } = data;
+    const state = yield select();
+    const userStatusData = state.chatExpert.userStatusData;
+    const userData = state.user.data;
+    const { phoneNumber, enableText } = userStatusData.profileInfo;
+    const questionData = Object.assign({}, state.chatExpert.questionData);
+    const message = 'Your question has been updated on Kiira';
+    const title = 'Question Update';
+    var unreadCount = questionData.userUnreadCount
+      ? questionData.userUnreadCount
+      : 0;
+
     if (imageParams) {
-      yield put(showApiLoader(lang.apiLoader.loadingText));
+      yield put(showApiLoader());
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
         const { downloadURL } = responseImage.data;
         messageParams.image = downloadURL;
-        const state = yield select();
-        const userStatusData = state.chatExpert.userStatusData;
-        const userData = state.user.data;
-        const questionData = Object.assign({}, state.chatExpert.questionData);
-        var unreadCount = questionData.userUnreadCount
-          ? questionData.userUnreadCount
-          : 0;
         if (
           userStatusData &&
           userStatusData.isActive &&
@@ -75,6 +80,10 @@ function* sendMessageToUser({ data }) {
         };
         yield put(hideApiLoader());
         yield sendMessage(params);
+        if (phoneNumber.length && enableText) {
+          const message = 'Your question has been updated on Kiira';
+          yield sendSms(message, phoneNumber);
+        }
         questionData.userUnreadCount = unreadCount;
         const dataResponse = {
           questionData,
@@ -90,13 +99,6 @@ function* sendMessageToUser({ data }) {
         );
       }
     } else {
-      const state = yield select();
-      const userStatusData = state.chatExpert.userStatusData;
-      const userData = state.user.data;
-      const questionData = Object.assign({}, state.chatExpert.questionData);
-      var unreadCount = questionData.userUnreadCount
-        ? questionData.userUnreadCount
-        : 0;
       if (
         userStatusData &&
         userStatusData.isActive &&
@@ -116,12 +118,15 @@ function* sendMessageToUser({ data }) {
         },
       };
       yield sendMessage(params);
+      if (phoneNumber.length && enableText) {
+        yield sendSms(message, phoneNumber);
+      }
       questionData.userUnreadCount = unreadCount;
       const dataResponse = {
         questionData,
       };
       yield put(chatMessageExpertSuccess(dataResponse));
-      yield sendChatUpdateNotification({ toUserId: userData.uid });
+      yield sendChatUpdateNotification(userData.uid, title, message);
     }
   } catch (error) {
     yield put(chatMessageExpertError());

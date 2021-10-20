@@ -220,7 +220,7 @@ export async function getAppointmentDatesAsync(data) {
     };
 
     let response = [];
-    
+
     await fetch(urls.dev.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
@@ -1660,9 +1660,17 @@ export async function sendAppointmentNotification(uid: String, time) {
   }
 }
 
-export async function sendChatUpdateNotification(uid: String) {
+export async function sendChatUpdateNotification(
+  uid: String,
+  title: String,
+  body: String,
+) {
   try {
-    await functions().httpsCallable('sendPushNotificationChat')({ uid });
+    await functions().httpsCallable('sendPushNotificationChat')({
+      uid,
+      title,
+      body,
+    });
     return;
   } catch (error) {
     console.log(error);
@@ -1685,13 +1693,12 @@ export async function addClaimsToUser(
   }
 }
 
-
 export async function sendNotificationOnJoin(uid: string) {
   try {
     await functions().httpsCallable('sendPushNotificationOnExpertJoin')({
       uid,
-    })
-    } catch (error) {
+    });
+  } catch (error) {
     console.log(error);
   }
 }
@@ -1705,13 +1712,10 @@ export async function usePromoCode(code: string) {
   }
 }
 
-export async function sendSms(uid: string, time: string, phone: string) {
+export async function sendSms(message: string, phone: string) {
   try {
     await functions().httpsCallable('sendSms')({
-      uid,
-      message: `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
-        time,
-      ).format('llll')}`,
+      message,
       phoneNumber: phone,
     });
     return;

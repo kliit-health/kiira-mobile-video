@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState } from 'react';
+import { View, ScrollView, TextInput, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomButton from '~/components/customButton';
 import ExpertHeader from '~/components/expertHeader';
-import {updateMedicalHistoryExpert} from '../actions';
+import { updateMedicalHistoryExpert } from '../actions';
 
 import styles from './style';
 
-const PhysicalExam = ({navigation}) => {
-  const {physical} = useSelector((state) => state.medicalHistory);
+const PhysicalExam = ({ navigation }) => {
+  const { physical } = useSelector(state => state.medicalHistory);
   const [notes, setNotes] = useState(physical.notes);
   const dispatch = useDispatch();
 
@@ -22,10 +22,10 @@ const PhysicalExam = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ExpertHeader title="Physical Exam" />
-      <Text style={styles.question}>What are your physical observations?</Text>
+      <Text style={styles.question}> physical observations?</Text>
       <ScrollView>
         <TextInput
-          onChangeText={(text) => setNotes(text)}
+          onChangeText={text => setNotes(text)}
           style={styles.input}
           value={notes}
           multiline

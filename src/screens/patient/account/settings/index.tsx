@@ -85,7 +85,7 @@ class Setting extends PureComponent {
       ethnicity: userData.profileInfo.ethnicity,
       lang: 'en',
       phoneNumber: userData.profileInfo.phoneNumber,
-      enableText: userData.profileInfo.enableText ?? false,
+      enableText: userData.profileInfo.enableText ?? true,
       pronounsArr: [
         {
           title: lang.addProfileData.sheHer,
