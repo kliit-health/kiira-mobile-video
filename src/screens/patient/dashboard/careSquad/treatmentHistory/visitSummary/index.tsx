@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Text} from 'react-native';
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { View, ScrollView, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
-import {Header, Container} from '~/components';
+import { Header, Container } from '~/components';
 import styles from './styles';
 
 const initialState = {
@@ -23,17 +23,17 @@ const initialState = {
   },
 };
 
-const VisitSummary = ({navigation}) => {
-  const {id} = navigation.state.params;
+const VisitSummary = ({ navigation }) => {
+  const { id } = navigation.state.params;
   const [summary, setSummary] = useState(initialState);
-  const data = useSelector((state) => state.clientMedicalHistory.data);
-  const lang = useSelector((state) => state.language);
+  const data = useSelector(state => state.clientMedicalHistory.data);
+  const lang = useSelector(state => state.language);
 
   useEffect(() => {
-    const {appointment, summary, plan, lockTime} = data.find(
-      (item) => item.appointment.visit.id === id,
+    const { appointment, summary, plan, lockTime } = data.find(
+      item => item.appointment.visit.id === id,
     );
-    console.log(appointment.visit.locked)
+    console.log(appointment.visit.locked);
     setSummary({
       patient: {
         firstName: appointment.visit.firstName,
@@ -69,7 +69,12 @@ const VisitSummary = ({navigation}) => {
     title,
   } = lang.visitSummary;
 
-  const {patient, visit, expert} = summary;
+  const { patient, visit, expert } = summary;
+
+  const chiefConcern =
+    typeof visit.reason !== 'string' && visit.reason
+      ? visit.reason.title
+      : visit.reason;
 
   return (
     <Container unformatted>
@@ -94,9 +99,8 @@ const VisitSummary = ({navigation}) => {
           <View style={styles.textContainer}>
             <Text style={styles.detailsTitle}>{`${provider}: `}</Text>
             <Text
-              style={
-                styles.detailsDescription
-              }>{`${expert.firstName} ${expert.lastName}`}</Text>
+              style={styles.detailsDescription}
+            >{`${expert.firstName} ${expert.lastName}`}</Text>
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.detailsTitle}>{`${locked}`}</Text>
@@ -105,7 +109,7 @@ const VisitSummary = ({navigation}) => {
         </View>
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>{chiefComplaint}</Text>
-          <Text style={styles.detailsDescription}>{visit.reason}</Text>
+          <Text style={styles.detailsDescription}>{chiefConcern}</Text>
         </View>
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>{assessmentPlan}</Text>

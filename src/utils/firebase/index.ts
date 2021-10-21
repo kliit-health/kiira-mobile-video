@@ -1660,23 +1660,6 @@ export async function sendAppointmentNotification(uid: String, time) {
   }
 }
 
-export async function sendChatUpdateNotification(
-  uid: String,
-  title: String,
-  body: String,
-) {
-  try {
-    await functions().httpsCallable('sendPushNotificationChat')({
-      uid,
-      title,
-      body,
-    });
-    return;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function addClaimsToUser(
   organizationId: string,
   uid: string,
@@ -1693,11 +1676,18 @@ export async function addClaimsToUser(
   }
 }
 
-export async function sendNotificationOnJoin(uid: string) {
+export async function sendNotification(
+  uid: String,
+  title: String,
+  body: String,
+) {
   try {
-    await functions().httpsCallable('sendPushNotificationOnExpertJoin')({
+    await functions().httpsCallable('sendPushNotificationMobile')({
       uid,
+      title,
+      body,
     });
+    return;
   } catch (error) {
     console.log(error);
   }

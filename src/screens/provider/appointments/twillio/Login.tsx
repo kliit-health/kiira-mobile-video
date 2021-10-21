@@ -17,7 +17,7 @@ import {
 import Container from '~/components/container';
 import Header from '~/components/header';
 import { ActivityIndicator } from 'react-native-paper';
-import { sendNotificationOnJoin } from '~/utils/firebase';
+import { sendNotification } from '~/utils/firebase';
 
 import {
   checkMultiple,
@@ -109,6 +109,9 @@ const ExpertTwillioLogin = ({ navigation }) => {
   }, []);
 
   const sessionStart = () => {
+    const title = 'Kiira Health Visit';
+    const body =
+      'Your provider has join your video session please return the App select Appointments to Begin your visit';
     setLoaderVisible(true);
     dispatch(
       setExpertCallConfig({
@@ -117,7 +120,7 @@ const ExpertTwillioLogin = ({ navigation }) => {
         roomName: uid,
       }),
     );
-    sendNotificationOnJoin(uid);
+    sendNotification(uid, title, body);
     checkPermissions(() => {
       setLoaderVisible(false);
       dispatch(getExpertCallToken({ navigation, euid }));

@@ -20,7 +20,7 @@ import {
   updateReadMessageStatus,
   updateUnreadCount,
   checkQuestionStatus,
-  sendChatUpdateNotification,
+  sendNotification,
   sendSms,
 } from '~/utils/firebase';
 import auth from '@react-native-firebase/auth';
@@ -135,7 +135,7 @@ function* setQuestion({ data, dispatch }) {
           yield sendSms(message, expertInfo.profileInfo.phoneNumber);
         }
 
-        yield sendChatUpdateNotification(expertInfo.uid, title, message);
+        yield sendNotification(expertInfo.uid, title, message);
       } else {
         yield delay(500);
         yield put(hideApiLoader());
@@ -206,7 +206,7 @@ function* sendMessageToUser({ data }) {
         };
 
         yield put(chatMessageSuccess(dataResponse));
-        yield sendChatUpdateNotification(uid, title, message);
+        yield sendNotification(uid, title, message);
         if (expertStatusData.profileInfo.phoneNumber.length) {
           yield sendSms(message, expertStatusData.profileInfo.phoneNumber);
         }
@@ -258,7 +258,7 @@ function* sendMessageToUser({ data }) {
       };
 
       yield put(chatMessageSuccess(dataResponse));
-      yield sendChatUpdateNotification(uid, title, message);
+      yield sendNotification(uid, title, message);
     }
   } catch (error) {
     yield put(hideApiLoader());
