@@ -1,13 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  View,
-  Alert,
-  BackHandler,
-  AppState,
-  LogBox,
-  Platform,
-} from 'react-native';
+import { View, Alert, BackHandler, AppState, LogBox } from 'react-native';
 import AppNavigator from './src/navigation';
 import { Messaging } from './src/services';
 import { showOrHideModal } from './src/components/customModal/action';
@@ -15,6 +8,7 @@ import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
+import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import analytics from '@react-native-firebase/analytics';
 import { signOut } from './src/screens/patient/account/action';
@@ -41,7 +35,6 @@ const App = () => {
   useEffect(async () => {
     LogBox.ignoreAllLogs();
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-
     AppState.addEventListener('change', _handleAppStateChange);
 
     const authStatus = await messaging().requestPermission();
@@ -50,17 +43,37 @@ const App = () => {
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
     if (enabled) {
-      messaging().setBackgroundMessageHandler(notify => {
-        console.log('Message handled in the background!');
+      notifee.createChannel({
+        id: 'kiira-health',
+        name: 'Kiira Health',
+        importance: AndroidImportance.HIGH,
+        bypassDnd: true,
+        description: 'Kiira Health Description',
+        sound: 'default',
       });
 
-      if (Platform.OS === 'android') {
-        messaging().onMessage(notify => {
-          notify.android.setChannelId('kiira-app');
-          messaging().displayNotification(notify);
-          messaging.NotificationAndroidPriority.PRIORITY_MAX;
-        });
-      }
+      const onMessageReceived = async message => {
+        const notification = JSON.parse(message.data.notifee);
+        console.log('MESSAGE RECIEVED', notification);
+        notification.android.channelId = 'kiira-health';
+        notifee.displayNotification(notification);
+        await notifee.incrementBadgeCount();
+      };
+
+      notifee.onBackgroundEvent(async ({ type, detail }) => {
+        const { notification, pressAction } = detail;
+        console.log('NOTIFEE BG', notifee);
+        if (
+          type === EventType.ACTION_PRESS &&
+          pressAction.id === 'mark-as-read'
+        ) {
+          await notifee.decrementBadgeCount();
+          await notifee.cancelNotification(notification.id);
+        }
+      });
+
+      messaging().onMessage(onMessageReceived);
+      messaging().setBackgroundMessageHandler(onMessageReceived);
     }
   }, []);
 
@@ -80,25 +93,25 @@ const App = () => {
     );
   });
 
-  useEffect(() => {
-    (async () => {
-      const enabled = await messaging().hasPermission();
-      if (enabled) {
-        messaging().setBackgroundMessageHandler(async remoteMessage => {
-          console.log('Message handled in the background!', remoteMessage);
-        });
-      } else {
-        try {
-          await messaging().requestPermission();
-          messaging().setBackgroundMessageHandler(async remoteMessage => {
-            console.log('Message handled in the background!', remoteMessage);
-          });
-        } catch (error) {
-          console.log('permission rejected');
-        }
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const enabled = await messaging().hasPermission();
+  //     if (enabled) {
+  //       messaging().setBackgroundMessageHandler(async remoteMessage => {
+  //         console.log('Message handled in the background!', remoteMessage);
+  //       });
+  //     } else {
+  //       try {
+  //         await messaging().requestPermission();
+  //         messaging().setBackgroundMessageHandler(async remoteMessage => {
+  //           console.log('Message handled in the background!', remoteMessage);
+  //         });
+  //       } catch (error) {
+  //         console.log('permission rejected');
+  //       }
+  //     }
+  //   })();
+  // }, []);
 
   const _handleAppStateChange = nextAppState => {
     let timeoutId;

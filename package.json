@@ -17,6 +17,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "@notifee/react-native": "^3.0.2",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.0.1",
