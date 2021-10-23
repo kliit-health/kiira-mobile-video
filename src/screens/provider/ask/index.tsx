@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import * as actions from '~/redux/actions';
+import DeviceInfo from 'react-native-device-info';
 import {SearchBar, TextButton, Header, Container} from '~/components';
 import {
   getActiveQuestions,
@@ -67,6 +69,17 @@ const AskExpert = ({navigation}) => {
   useEffect(() => {
     dispatch(getUser());
   }, []);
+
+  useEffect(() => {
+    const device = {
+      manufacturer: DeviceInfo.getManufacturerSync(),
+      model: DeviceInfo.getModel(),
+      osVersion: DeviceInfo.getSystemVersion(),
+      appVersion: DeviceInfo.getVersion(),
+    };
+    dispatch(actions.updateUser({ device }));
+  }, []);
+
 
   const handleSearch = (value) => {
     setValue(value);

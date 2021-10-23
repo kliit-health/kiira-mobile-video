@@ -185,7 +185,7 @@ export async function getAppointmentsByDayAsync(data, isToday) {
 
   try {
     const times = {};
-    await fetch(urls.dev.appointmentGetByDay, obj)
+    await fetch(urls.prod.appointmentGetByDay, obj)
       .then(res => res.json())
       .then(data => {
         isToday ? (times.today = data) : (times.current = data);
@@ -221,7 +221,7 @@ export async function getAppointmentDatesAsync(data) {
 
     let response = [];
 
-    await fetch(urls.dev.appointmentGetByMonth, obj)
+    await fetch(urls.prod.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
         response = [...response, ...data];
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
       }),
     };
 
-    await fetch(urls.dev.appointmentGetByMonth, obj)
+    await fetch(urls.prod.appointmentGetByMonth, obj)
       .then(res => res.json())
       .then(data => {
         response = [...response, ...data];
@@ -302,7 +302,7 @@ export async function makeAppointment({ data }) {
     };
 
     let response;
-    let checkTime = await fetch(urls.dev.appointmentCheckTime, obj)
+    let checkTime = await fetch(urls.prod.appointmentCheckTime, obj)
       .then(res => res.json())
       .then(data => data)
       .catch(error => {
@@ -310,7 +310,7 @@ export async function makeAppointment({ data }) {
       });
 
     if (checkTime.valid) {
-      await fetch(urls.dev.appointmentMake, obj)
+      await fetch(urls.prod.appointmentMake, obj)
         .then(res => res.json())
         .then(res => {
           response = {
@@ -389,7 +389,7 @@ export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   };
 
   try {
-    return await fetch(urls.dev.appointmentCancel, obj)
+    return await fetch(urls.prod.appointmentCancel, obj)
       .then(res => {
         let response = res.json();
         return response;
@@ -454,7 +454,7 @@ export async function changeAppointmentAsync({ data }) {
   };
 
   try {
-    return await fetch(urls.dev.appointmentChange, obj)
+    return await fetch(urls.prod.appointmentChange, obj)
       .then(res => res.json())
       .then(async res => {
         if (res.body.error) {

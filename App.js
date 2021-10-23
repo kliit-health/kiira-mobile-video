@@ -8,7 +8,7 @@ import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
-import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
+import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import analytics from '@react-native-firebase/analytics';
 import { signOut } from './src/screens/patient/account/action';
@@ -32,49 +32,10 @@ const App = () => {
     },
   ]);
 
-  useEffect(async () => {
+  useEffect(() => {
     LogBox.ignoreAllLogs();
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     AppState.addEventListener('change', _handleAppStateChange);
-
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      notifee.createChannel({
-        id: 'kiira-health',
-        name: 'Kiira Health',
-        importance: AndroidImportance.HIGH,
-        bypassDnd: true,
-        description: 'Kiira Health Description',
-        sound: 'default',
-      });
-
-      const onMessageReceived = async message => {
-        const notification = JSON.parse(message.data.notifee);
-        console.log('MESSAGE RECIEVED', notification);
-        notification.android.channelId = 'kiira-health';
-        notifee.displayNotification(notification);
-        await notifee.incrementBadgeCount();
-      };
-
-      notifee.onBackgroundEvent(async ({ type, detail }) => {
-        const { notification, pressAction } = detail;
-        console.log('NOTIFEE BG', notifee);
-        if (
-          type === EventType.ACTION_PRESS &&
-          pressAction.id === 'mark-as-read'
-        ) {
-          await notifee.decrementBadgeCount();
-          await notifee.cancelNotification(notification.id);
-        }
-      });
-
-      messaging().onMessage(onMessageReceived);
-      messaging().setBackgroundMessageHandler(onMessageReceived);
-    }
   }, []);
 
   useEffect(() => {
@@ -93,29 +54,9 @@ const App = () => {
     );
   });
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const enabled = await messaging().hasPermission();
-  //     if (enabled) {
-  //       messaging().setBackgroundMessageHandler(async remoteMessage => {
-  //         console.log('Message handled in the background!', remoteMessage);
-  //       });
-  //     } else {
-  //       try {
-  //         await messaging().requestPermission();
-  //         messaging().setBackgroundMessageHandler(async remoteMessage => {
-  //           console.log('Message handled in the background!', remoteMessage);
-  //         });
-  //       } catch (error) {
-  //         console.log('permission rejected');
-  //       }
-  //     }
-  //   })();
-  // }, []);
-
-  const _handleAppStateChange = nextAppState => {
+  const _handleAppStateChange = async nextAppState => {
     let timeoutId;
-
+    await notifee.setBadgeCount(0);
     if (nextAppState === 'active') {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);

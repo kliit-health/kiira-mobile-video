@@ -13,6 +13,7 @@ export default {
     prepaid: 0,
     profileInfo: {
       dob: '',
+      enableText: true,
       enrollment: '',
       ethnicity: {
         value: '',
@@ -88,6 +89,7 @@ export default {
       city: '',
       dob: '',
       email: '',
+      enableText: true,
       firstName: '',
       gender: '',
       languages: [],
