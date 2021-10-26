@@ -1,7 +1,7 @@
-import {StyleSheet, Platform} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Constant from '~/utils/constants';
 import metrices from '~/utils/metrices';
-import {getStatusBarHeight} from '~/components/iPhoneXHelper';
+import { getStatusBarHeight } from '~/components/iPhoneXHelper';
 
 let parentPaddingValue = metrices.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
     marginTop: metrices.height * 0.02,
     width: metrices.width - parentPadding,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   pronounsTextStyle: {
@@ -201,6 +201,31 @@ const styles = StyleSheet.create({
     fontFamily: Constant.App.fontFamily.bodyRegular,
     textAlign: 'left',
     alignSelf: 'center',
+    width: metrices.width - parentPadding - metrices.width * 0.05,
+  },
+
+  textTitleTextStyle: {
+    color: Constant.App.colors.blackColor,
+    fontSize: Constant.App.textSize.Medium,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    textAlign: 'left',
+    width: metrices.width - parentPadding,
+  },
+
+  textContainerStyle: {
+    marginTop: metrices.height * 0.01,
+    width: metrices.width - parentPadding,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  textTextStyle: {
+    paddingLeft: 10,
+    color: Constant.App.colors.blackColor,
+    fontSize: Constant.App.textSize.Medium,
+    fontFamily: Constant.App.fontFamily.bodyRegular,
+    textAlign: 'left',
     width: metrices.width - parentPadding - metrices.width * 0.05,
   },
 

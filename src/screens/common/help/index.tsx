@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Linking, Text} from 'react-native';
-import {useSelector} from 'react-redux';
-import {Header, Container, TextButton} from '~/components';
+import { View, Linking, Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import { Header, Container, TextButton } from '~/components';
 import Image from 'react-native-fast-image';
-import {screenNames} from '~/utils/constants';
-import styles, {modifiers} from './styles';
+import { screenNames } from '~/utils/constants';
+import styles, { modifiers } from './styles';
 
-const Help = ({navigation}) => {
-  // const {appScreen} = useSelector((state) => state.authLoading);
-  const lang = useSelector((state) => state.language);
+const Help = ({ navigation }) => {
+  const { appScreen } = useSelector(state => state.navigator);
+  const lang = useSelector(state => state.language);
 
   const handleBack = () => {
     navigation.goBack();

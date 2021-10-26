@@ -1,6 +1,6 @@
 import React from 'react';
-import {Platform, AppState} from 'react-native';
-import {connect} from 'react-redux';
+import { Platform, AppState } from 'react-native';
+import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {
   loadMessages,
@@ -14,39 +14,39 @@ import {
   stopObserverChat,
 } from './action';
 import moment from 'moment';
-import {Container, Header, RatingModal} from '~/components';
-import {MessageList, Footer} from './sections';
-import {screenNames} from '~/utils/constants';
+import { Container, Header, RatingModal } from '~/components';
+import { MessageList, Footer } from './sections';
+import { screenNames } from '~/utils/constants';
 class Chat extends React.PureComponent {
-	public state: any;
-	public props: any;
-	public setState: any;
-	public navigation: any;
-	public toggleStatus: any;
-	public userData: any;
-	public expertDetails: any;
-	public questionData: any;
-	public questionValue: any;
-	public loadUserMessages: any;
-	public question: any;
-	public addQuestion: any;
-	public setId: any;
-	public checkStatus: any;
-	public clearState: any;
-	public stopObervers: any;
-	public sendMessageUser: any;
-	public messageId: any;
-	public questionId: any;
-	public message: any;
-	public imageUri: any;
-	public filename: any;
-	public path: any;
-	public rateExpert: any;
-	public showRatingModal: any;
-	public profileInfo: any;
-	public firstName: any;
-	public lastName: any;
-	public profileImageUrl: any;
+  public state: any;
+  public props: any;
+  public setState: any;
+  public navigation: any;
+  public toggleStatus: any;
+  public userData: any;
+  public expertDetails: any;
+  public questionData: any;
+  public questionValue: any;
+  public loadUserMessages: any;
+  public question: any;
+  public addQuestion: any;
+  public setId: any;
+  public checkStatus: any;
+  public clearState: any;
+  public stopObervers: any;
+  public sendMessageUser: any;
+  public messageId: any;
+  public questionId: any;
+  public message: any;
+  public imageUri: any;
+  public filename: any;
+  public path: any;
+  public rateExpert: any;
+  public showRatingModal: any;
+  public profileInfo: any;
+  public firstName: any;
+  public lastName: any;
+  public profileImageUrl: any;
 
   constructor(props) {
     super(props);
@@ -62,8 +62,8 @@ class Chat extends React.PureComponent {
   }
 
   initStatus(status) {
-    const {navigation, toggleStatus, userData} = this.props;
-    const {expertDetails, questionData} = navigation.state.params;
+    const { navigation, toggleStatus, userData } = this.props;
+    const { expertDetails, questionData } = navigation.state.params;
     const payloadToggleStatus = {
       userInfo: userData,
       toggleStatusParams: {
@@ -83,12 +83,18 @@ class Chat extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {questionValue} = this.props;
+    const { questionValue } = this.props;
 
     if (questionValue && questionValue.isResolved && !questionValue.isRated) {
       setTimeout(() => {
         this.setState({
           showRatingModal: true,
+        });
+      }, 500);
+    } else {
+      setTimeout(() => {
+        this.setState({
+          showRatingModal: false,
         });
       }, 500);
     }
@@ -106,7 +112,7 @@ class Chat extends React.PureComponent {
       questionValue,
     } = this.props;
 
-    const {expertDetails, questionData} = navigation.state.params;
+    const { expertDetails, questionData } = navigation.state.params;
     this.initStatus(true);
     const payloadCheckStatus = {
       expertInfo: expertDetails ? expertDetails : questionData.expertInfo,
@@ -132,24 +138,27 @@ class Chat extends React.PureComponent {
       };
       setId(ids);
       loadUserMessages(payloadData);
-    }
-    if (questionValue && questionValue.isResolved && !questionValue.isRated) {
-      this.setState({
-        showRatingModal: true,
-      });
+
+      if (questionValue && questionValue.isResolved && !questionValue.isRated) {
+        setTimeout(() => {
+          this.setState({
+            showRatingModal: true,
+          });
+        }, 500);
+      }
     }
   }
 
   componentWillUnmount() {
-    const {clearState, stopObervers} = this.props;
+    const { clearState, stopObervers } = this.props;
     this.initStatus(false);
     clearState();
     stopObervers();
   }
 
   handleSend() {
-    const {sendMessageUser, messageId, questionId} = this.props;
-    const {message, imageUri, filename, path} = this.state;
+    const { sendMessageUser, messageId, questionId } = this.props;
+    const { message, imageUri, filename, path } = this.state;
     var encrypted = '';
     var payloadData = {};
     if (message && imageUri) {
@@ -221,9 +230,9 @@ class Chat extends React.PureComponent {
       },
     };
 
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
-        console.log('You cancelled image picker');
+        console.log('You canceled image picker');
       } else if (response.error) {
         alert('And error occured: ' + JSON.stringify(response));
       } else {
@@ -244,7 +253,7 @@ class Chat extends React.PureComponent {
   }
 
   handleBackPress = () => {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     navigation.goBack();
   };
 
@@ -257,27 +266,30 @@ class Chat extends React.PureComponent {
     });
   };
 
-  handleTextChange = (value) => {
+  handleTextChange = value => {
     this.setState({
       message: value,
     });
   };
 
-  handleRatingSubmit = ({rating, questionId, expertDetails}) => {
+  handleRatingSubmit = ({ rating, questionId, expertDetails }) => {
     const {
       rateExpert,
-      userData: {uid},
+      userData: { uid },
     } = this.props;
-    const userRating = [...expertDetails.userRating, {rating, uid}];
-    rateExpert({questionId, userRating, expertId: expertDetails.uid});
+    const userRating = [...expertDetails.userRating, { rating, uid }];
+    rateExpert({ questionId, userRating, expertId: expertDetails.uid });
+    this.setState({
+      showRatingModal: false,
+    });
   };
 
   render() {
-    const {navigation, questionId} = this.props;
-    const {questionData, expertDetails} = navigation.state.params;
-    const {imageUri, showRatingModal} = this.state;
-    const {profileInfo} = expertDetails;
-    const {firstName, lastName, profileImageUrl} = profileInfo;
+    const { navigation, questionId } = this.props;
+    const { questionData, expertDetails } = navigation.state.params;
+    const { imageUri, showRatingModal } = this.state;
+    const { profileInfo } = expertDetails;
+    const { firstName, lastName, profileImageUrl } = profileInfo;
     const fullName = `${firstName} ${lastName}`;
 
     return (
@@ -292,7 +304,7 @@ class Chat extends React.PureComponent {
         <Footer
           message={this.state.message}
           onSendPress={() => this.handleSend()}
-          onChangeText={(value) => this.handleTextChange(value)}
+          onChangeText={value => this.handleTextChange(value)}
           onPickerPress={() => this.handlePicker()}
           onPickerCancel={() => this.handlePickerCancel()}
           imageUri={imageUri}
@@ -303,7 +315,7 @@ class Chat extends React.PureComponent {
           title="Your question has been resolved!"
           description={`Rate your conversation with ${fullName}`}
           avatarUrl={profileImageUrl}
-          onSubmit={(rating) =>
+          onSubmit={rating =>
             this.handleRatingSubmit({
               rating: rating * 2,
               questionId,
@@ -316,7 +328,7 @@ class Chat extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   question: state.ask.question,
   userData: state.user.data,
   messages: state.chat.messages,
@@ -328,15 +340,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadUserMessages: (value) => dispatch(loadMessages(value, dispatch)),
-  sendMessageUser: (value) => dispatch(sendMessage(value)),
-  addQuestion: (value) => dispatch(setQuestion(value, dispatch)),
+  loadUserMessages: value => dispatch(loadMessages(value, dispatch)),
+  sendMessageUser: value => dispatch(sendMessage(value)),
+  addQuestion: value => dispatch(setQuestion(value, dispatch)),
   clearState: () => dispatch(clearChatState()),
-  setId: (value) => dispatch(setQuestionId(value)),
-  rateExpert: (value) =>
-    dispatch(setExpertRating({...value, navigation: ownProps.navigation})),
-  checkStatus: (value) => dispatch(checkExpertStatus(value, dispatch)),
-  toggleStatus: (value) => dispatch(toggleUserStatus(value)),
+  setId: value => dispatch(setQuestionId(value)),
+  rateExpert: value =>
+    dispatch(setExpertRating({ ...value, navigation: ownProps.navigation })),
+  checkStatus: value => dispatch(checkExpertStatus(value, dispatch)),
+  toggleStatus: value => dispatch(toggleUserStatus(value)),
   stopObervers: () => dispatch(stopObserverChat()),
 });
 

@@ -1,36 +1,35 @@
-import {put, takeEvery, select} from 'redux-saga/effects';
-import {hideApiLoader} from '~/components/customLoader/action';
+import { put, takeEvery, select } from 'redux-saga/effects';
+import { hideApiLoader } from '~/components/customLoader/action';
 import {
   getRecentExpertsData,
   getQuestionsData,
   updateRefrealcodeForAllUsers,
   getDataFromTable,
 } from '~/utils/firebase';
-import {showOrHideModal} from '~/components/customModal/action';
+import { showOrHideModal } from '~/components/customModal/action';
 import {
   getRecentExpertsDataSuccess,
   getQuestionDataSuccess,
   getPreviousQuestionDataSuccess,
 } from './action';
-import {GET_QUESTION_DATA, UPDATE_USER_DATA} from '~/redux/types';
-import {displayConsole} from '~/utils/helper';
+import { GET_QUESTION_DATA, UPDATE_USER_DATA } from '~/redux/types';
 import auth from '@react-native-firebase/auth';
-import {tables} from '~/utils/constants';
+import { tables } from '~/utils/constants';
 
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+const delay = ms => new Promise(res => setTimeout(res, ms));
 let delayTime = 100;
 
-function* updateNewKeyToUserTable({id, data}) {
+function* updateNewKeyToUserTable({ id, data }) {
   console.log('updateNewKeyToUserTable*******', id);
   yield updateRefrealcodeForAllUsers(id, data);
 }
 
-function* getQuestions({data, dispatch}) {
-  const lang = yield select((state) => state.language);
+function* getQuestions({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
-    const {expertsParams, questionParams, previousQuestionParams} = data;
+    const { expertsParams, questionParams, previousQuestionParams } = data;
     const user = auth().currentUser;
-    const {uid} = user;
+    const { uid } = user;
     const obj = {
       tableName: tables.users,
       uid,
@@ -38,7 +37,7 @@ function* getQuestions({data, dispatch}) {
     const userData = yield getDataFromTable(obj);
     yield getQuestionsData(
       questionParams,
-      (querySnapshot) => {
+      querySnapshot => {
         dispatch(
           getQuestionDataSuccess(
             querySnapshot.docs && querySnapshot.docs.length > 0
@@ -47,8 +46,8 @@ function* getQuestions({data, dispatch}) {
           ),
         );
       },
-      (error) => {
-        const {message, code} = error;
+      error => {
+        const { message, code } = error;
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
@@ -71,11 +70,11 @@ function* getQuestions({data, dispatch}) {
 }
 
 function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
-  const lang = yield select((state) => state.language);
+  const lang = yield select(state => state.language);
   try {
     yield getRecentExpertsData(
       expertsParams,
-      (querySnapshot) => {
+      querySnapshot => {
         dispatch(
           getRecentExpertsDataSuccess(
             querySnapshot.docs && querySnapshot.docs.length > 0
@@ -84,8 +83,8 @@ function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
           ),
         );
       },
-      (error) => {
-        const {message, code} = error;
+      error => {
+        const { message, code } = error;
         if (code && code !== 'firestore/permission-denied') {
           dispatch(hideApiLoader());
           dispatch(
@@ -107,16 +106,16 @@ function* getRecentExperts(expertsParams, previousQuestionParams, dispatch) {
 }
 
 function* getPreviousQuestions(previousQuestionParams, dispatch) {
-  const lang = yield select((state) => state.language);
+  const lang = yield select(state => state.language);
   try {
     yield getQuestionsData(
       previousQuestionParams,
-      (querySnapshot) => {
+      querySnapshot => {
         dispatch(getPreviousQuestionDataSuccess(querySnapshot.docs));
         dispatch(hideApiLoader());
       },
-      (error) => {
-        const {message, code} = error;
+      error => {
+        const { message, code } = error;
         dispatch(hideApiLoader());
         if (code && code !== 'firestore/permission-denied') {
           dispatch(

@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import {TimeDisplay} from '~/components';
-import {updateMedicalHistoryExpert} from '../patientProfile/actions';
-import {getUserData} from '~/utils/firebase';
+import { TimeDisplay } from '~/components';
+import { updateMedicalHistoryExpert } from '../patientProfile/actions';
+import { getUserData } from '~/utils/firebase';
 import Constant from '~/utils/constants';
 import styles from './styles';
 
-const Visit = (props) => {
-  const {firstName, lastName, reason, time, onPress, visit} = props;
-  const lang = useSelector((state) => state.language);
+const Visit = props => {
+  const { onPress, visit } = props;
+  const { firstName, lastName, reason, time } = visit;
+  const chiefComplaint = typeof reason === 'string' ? reason : reason.reason;
+  const lang = useSelector(state => state.language);
   const dispatch = useDispatch();
   const [patientInfo, setPatientInfo] = useState(null);
 
@@ -36,11 +38,11 @@ const Visit = (props) => {
       };
       getUserData(
         obj,
-        (querySnapshot) => {
+        querySnapshot => {
           const data = querySnapshot.data();
           setPatientInfo(data);
         },
-        (error) => {
+        error => {
           console.log(error);
         },
       );
@@ -55,7 +57,8 @@ const Visit = (props) => {
     <TouchableOpacity
       activeOpacity={0.9}
       style={styles.card}
-      onPress={handlePress}>
+      onPress={handlePress}
+    >
       <View style={styles.outerContainer}>
         <View>
           <Text style={styles.title}>
@@ -68,7 +71,7 @@ const Visit = (props) => {
             {lang.expertAppointments.subject}
           </Text>
           <Text numberOfLines={1} style={styles.subtitle}>
-            {reason}
+            {chiefComplaint}
           </Text>
         </View>
       </View>

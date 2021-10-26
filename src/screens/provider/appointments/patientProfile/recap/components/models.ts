@@ -60,8 +60,12 @@ export const socialModel = {
       title: 'Drinks alcohol',
     },
     {
+      key: 'caffeine',
+      title: 'Drinks caffeine',
+    },
+    {
       key: 'caffine',
-      title: 'Drinks caffine',
+      title: 'Drinks caffeine',
     },
   ],
 

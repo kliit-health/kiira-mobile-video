@@ -1,52 +1,56 @@
-import React, {Fragment, useEffect} from 'react';
-import {View, Text, Pressable, FlatList} from 'react-native';
+import React, { Fragment, useEffect } from 'react';
+import { View, Text, Pressable, FlatList } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {withNavigation} from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 import PatientCard from '../components/patientCard';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ExpertHeader from '~/components/expertHeader';
-import {getMedicalHistory} from '../actions';
+import { getMedicalHistory } from '../actions';
 import moment from 'moment';
 
 import styles from './style';
 
-const PreviousVisits = ({navigation}) => {
-  const {visit, patientInfo} = navigation.state.params;
+const PreviousVisits = ({ navigation }) => {
+  const { visit, patientInfo } = navigation.state.params;
   const dispatch = useDispatch();
-  const medicalHistory = useSelector((state) => state.medicalHistory);
+  const medicalHistory = useSelector(state => state.medicalHistory);
 
-  const {history} = medicalHistory;
+  const { history } = medicalHistory;
 
   useEffect(() => {
     dispatch(getMedicalHistory(visit.uid));
   }, []);
 
-  const Visit = ({item}) => {
+  const Visit = ({ item }) => {
     const {
-      appointment: {visit},
+      appointment: { visit },
     } = item;
+
+    const chiefComplaint =
+      typeof visit.reason === 'string' ? visit.reason : visit.reason.title;
 
     return (
       <Fragment>
         <View style={styles.infoContainer}>
           <FastImage
             defaultSource={require('../../../../../../assets/profile_img_placeholder.png')}
-            containerStyle={{alignSelf: 'center'}}
+            containerStyle={{ alignSelf: 'center' }}
             style={styles.image}
-            source={{uri: visit.expert.imageUrl}}
+            source={{ uri: visit.expert.imageUrl }}
             activeOpacity={0.7}
           />
           <View style={styles.detailsContainer}>
             <Text>{`Provider: ${visit.expert.firstName} ${visit.expert.lastName}`}</Text>
-            <Text>{`CC: ${visit.reason}`}</Text>
+            <Text>{`CC: ${chiefComplaint}`}</Text>
             <Text>{`${moment(visit.time).format('llll')}`}</Text>
             <View style={styles.buttonContainer}>
               <Pressable
                 style={styles.button}
                 onPress={() =>
-                  navigation.navigate('Recap', {item, title: 'Recap'})
-                }>
-                <Text style={{...styles.textStyle, color: '#2196F3'}}>
+                  navigation.navigate('Recap', { item, title: 'Recap' })
+                }
+              >
+                <Text style={{ ...styles.textStyle, color: '#2196F3' }}>
                   Full Notes
                 </Text>
               </Pressable>
@@ -58,8 +62,9 @@ const PreviousVisits = ({navigation}) => {
                     short: true,
                     title: 'Summary',
                   })
-                }>
-                <Text style={{...styles.textStyle, color: '#2196F3'}}>
+                }
+              >
+                <Text style={{ ...styles.textStyle, color: '#2196F3' }}>
                   Summary
                 </Text>
               </Pressable>

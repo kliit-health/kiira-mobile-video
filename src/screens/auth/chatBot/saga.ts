@@ -67,7 +67,7 @@ function* updateNewUserData({ data }) {
     yield put(updateUser({ uid: user.uid, ...userInfo }));
     yield put(hideApiLoader());
 
-    navigation.navigate(Constant.App.screenNames.home);
+    navigation.navigate(Constant.App.screenNames.NewUser);
   } catch (error) {
     console.error(error);
     yield put(hideApiLoader());

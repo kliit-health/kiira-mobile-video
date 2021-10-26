@@ -1,26 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import {ScrollView, View, FlatList, Text, StatusBar} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, View, FlatList, Text, StatusBar } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomText from '~/components/customText';
-import {Header, Container, SearchBar} from '~/components';
+import { Header, Container, SearchBar } from '~/components';
 import CustomButton from '~/components/customButton';
 import Constant from '~/utils/constants';
 import ErrorBoundary from 'react-native-error-boundary';
-import {getAppointmentsList} from './action';
+import { getAppointmentsList } from './action';
 import Visit from './components/visit';
-import {generateDateInfo, getDateRange} from '~/utils/helper';
-import {clearMedicalHistory} from './patientProfile/actions';
-import {screenNames} from '~/utils/constants';
+import { generateDateInfo, getDateRange } from '~/utils/helper';
+import { clearMedicalHistory } from './patientProfile/actions';
+import { screenNames } from '~/utils/constants';
 import moment from 'moment';
 import _ from 'lodash';
-import styles, {modifiers} from './styles';
+import styles, { modifiers } from './styles';
 
-const ExpertAppointments = ({navigation}) => {
+const ExpertAppointments = ({ navigation }) => {
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state.language);
-  const uid = useSelector((state) => state.user.data.uid);
-  const visitData = useSelector((state) => state.expertAppointments.history);
-  const screens = useSelector((state) => state.navigator);
+  const lang = useSelector(state => state.language);
+  const uid = useSelector(state => state.user.data.uid);
+  const visitData = useSelector(state => state.expertAppointments.history);
+  const screens = useSelector(state => state.navigator);
 
   const [visits, setVisits] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -83,7 +83,7 @@ const ExpertAppointments = ({navigation}) => {
         );
       });
 
-      filtered = filtered.filter((visit) => {
+      filtered = filtered.filter(visit => {
         return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
       });
       setVisits([...filtered]);
@@ -94,7 +94,7 @@ const ExpertAppointments = ({navigation}) => {
     }
   }, [visitData, selectedDate]);
 
-  const handleVisitPress = (details) => {
+  const handleVisitPress = details => {
     navigation.navigate(screenNames.patientProfile, {
       expert: details.expert,
       visit: details.visit,
@@ -104,13 +104,13 @@ const ExpertAppointments = ({navigation}) => {
     });
   };
 
-  const handleSearch = (term) => {
+  const handleSearch = term => {
     setSearch(term);
 
     let filtered = [...visits];
 
     if (term) {
-      filtered = filtered.filter(({firstName, lastName}) => {
+      filtered = filtered.filter(({ firstName, lastName }) => {
         if (firstName.includes(term) || lastName.includes(term)) return true;
       });
     }
@@ -144,7 +144,7 @@ const ExpertAppointments = ({navigation}) => {
           horizontal={true}
           decelerationRate={'fast'}
           extraData={selectedDate}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             item = generateDateInfo(item);
             return (
               <View
@@ -153,13 +153,15 @@ const ExpertAppointments = ({navigation}) => {
                   flexDirection: 'column',
                   alignItems: 'center',
                   margin: 15,
-                }}>
+                }}
+              >
                 <CustomText
                   style={
                     selectedDate === item.date
-                      ? {color: Constant.App.colors.blueColor}
-                      : {color: 'black'}
-                  }>
+                      ? { color: Constant.App.colors.blueColor }
+                      : { color: 'black' }
+                  }
+                >
                   {item.month}
                 </CustomText>
                 <CustomButton
@@ -181,9 +183,10 @@ const ExpertAppointments = ({navigation}) => {
                 <CustomText
                   style={
                     selectedDate === item.date
-                      ? {color: Constant.App.colors.blueColor}
-                      : {color: 'black'}
-                  }>
+                      ? { color: Constant.App.colors.blueColor }
+                      : { color: 'black' }
+                  }
+                >
                   {item.dow}
                 </CustomText>
               </View>
@@ -201,17 +204,17 @@ const ExpertAppointments = ({navigation}) => {
             data={search}
             decelerationRate={'fast'}
             extraData={selectedDate}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <ErrorBoundary FallbackComponent={FallBack}>
                 <Visit
                   key={item.uid}
                   onPress={handleVisitPress}
                   visit={item}
-                  {...item}
+                  // {...item}
                 />
               </ErrorBoundary>
             )}
-            keyExtractor={(index) => `${index.id}`}
+            keyExtractor={index => `${index.id}`}
             contentContainerStyle={styles.appointmentsList}
           />
         ) : (

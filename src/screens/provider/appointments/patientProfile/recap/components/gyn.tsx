@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import CheckItem from './common/checkItem';
-import {convertCamelCase} from '~/utils/helper';
-import {gynModel} from './models';
+import { convertCamelCase } from '~/utils/helper';
+import { gynModel } from './models';
 
 import styles from '../style';
 
-const GYN = ({gyn}) => {
+const GYN = ({ gyn }) => {
   return (
     <View>
       <View style={styles.heading}>
@@ -24,7 +24,8 @@ const GYN = ({gyn}) => {
           : 'More than 42 days'
       }`}</Text>
       <Text
-        style={styles.info}>{`Age of Menarche: ${gyn.menarche.notes}`}</Text>
+        style={styles.info}
+      >{`Age of Menarche: ${gyn.menarche.notes}`}</Text>
       <Text style={styles.info}>{`Last PAP Smear: ${gyn.papDate.notes}`}</Text>
 
       <CheckItem
@@ -61,7 +62,7 @@ const GYN = ({gyn}) => {
       />
 
       <Text style={styles.subheading}>Sexual History</Text>
-      {gynModel.sexualHistory.map((item) => {
+      {gynModel.sexualHistory.map(item => {
         return (
           <CheckItem
             key={item.key}
@@ -73,7 +74,7 @@ const GYN = ({gyn}) => {
       })}
 
       <Text style={styles.subheading}>Past contraception methods</Text>
-      {Object.keys(gyn.contraceptions).map((key) => {
+      {Object.keys(gyn.contraceptions).map(key => {
         return (
           <CheckItem
             key={key}
@@ -84,7 +85,7 @@ const GYN = ({gyn}) => {
       })}
 
       <Text style={styles.subheading}>Current Status</Text>
-      {gynModel.currentStatus.map((item) => {
+      {gynModel.currentStatus.map(item => {
         return (
           <CheckItem
             key={item.type ? item.type : item.key}

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   setExpertCallConfig,
   getExpertCallToken,
@@ -16,7 +16,8 @@ import {
 
 import Container from '~/components/container';
 import Header from '~/components/header';
-import {ActivityIndicator} from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
+import { sendNotification } from '~/utils/firebase';
 
 import {
   checkMultiple,
@@ -28,14 +29,14 @@ import {
 
 import styles from './styles';
 
-const ExpertTwillioLogin = ({navigation}) => {
+const ExpertTwillioLogin = ({ navigation }) => {
   const dispatch = useDispatch();
-  const callConfig = useSelector((state) => state.twillio);
-  const {visit} = useSelector((state) => state.visit);
+  const callConfig = useSelector(state => state.twillio);
+  const { visit } = useSelector(state => state.visit);
   const [loaderVisible, setLoaderVisible] = useState(false);
-  const {expert, uid} = visit;
+  const { expert, uid } = visit;
   const euid = expert.uid;
-  const checkPermissions = (callback) => {
+  const checkPermissions = callback => {
     const iosPermissions = [PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.MICROPHONE];
     const androidPermissions = [
       PERMISSIONS.ANDROID.CAMERA,
@@ -43,7 +44,7 @@ const ExpertTwillioLogin = ({navigation}) => {
     ];
     checkMultiple(
       Platform.OS === 'ios' ? iosPermissions : androidPermissions,
-    ).then((statuses) => {
+    ).then(statuses => {
       const [CAMERA, AUDIO] =
         Platform.OS === 'ios' ? iosPermissions : androidPermissions;
       if (
@@ -69,7 +70,7 @@ const ExpertTwillioLogin = ({navigation}) => {
         ) {
           requestMultiple(
             Platform.OS === 'ios' ? iosPermissions : androidPermissions,
-          ).then((newStatuses) => {
+          ).then(newStatuses => {
             if (
               newStatuses[CAMERA] === RESULTS.GRANTED &&
               newStatuses[AUDIO] === RESULTS.GRANTED
@@ -84,7 +85,7 @@ const ExpertTwillioLogin = ({navigation}) => {
           statuses[AUDIO] === RESULTS.DENIED
         ) {
           request(statuses[CAMERA] === RESULTS.DENIED ? CAMERA : AUDIO).then(
-            (result) => {
+            result => {
               if (result === RESULTS.GRANTED) {
                 callback && callback();
               } else {
@@ -108,6 +109,8 @@ const ExpertTwillioLogin = ({navigation}) => {
   }, []);
 
   const sessionStart = () => {
+    const title = 'Kiira Health Visit';
+    const body = 'Your provider has joined your video session.';
     setLoaderVisible(true);
     dispatch(
       setExpertCallConfig({
@@ -116,9 +119,10 @@ const ExpertTwillioLogin = ({navigation}) => {
         roomName: uid,
       }),
     );
+    sendNotification(uid, title, body);
     checkPermissions(() => {
       setLoaderVisible(false);
-      dispatch(getExpertCallToken({navigation, euid}));
+      dispatch(getExpertCallToken({ navigation, euid }));
     });
   };
 
@@ -129,7 +133,7 @@ const ExpertTwillioLogin = ({navigation}) => {
         <View style={styles.inputsContainer}>
           <Image
             resizeMode="contain"
-            style={[{height: 150, width: '90%', alignSelf: 'center'}]}
+            style={[{ height: 150, width: '90%', alignSelf: 'center' }]}
             source={require('../../../../../assets/logo-sm.png')}
           />
           <View style={styles.textlayout}>
@@ -141,7 +145,8 @@ const ExpertTwillioLogin = ({navigation}) => {
             <TouchableOpacity
               style={styles.SubmitButtonStyle}
               activeOpacity={0.5}
-              onPress={sessionStart}>
+              onPress={sessionStart}
+            >
               <Text style={styles.TextStyle}> START </Text>
             </TouchableOpacity>
           </View>

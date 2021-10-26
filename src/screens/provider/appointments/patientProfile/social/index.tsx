@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
-import {View, ScrollView, TextInput, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState } from 'react';
+import { View, ScrollView, TextInput, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomButton from '~/components/customButton';
 import ExpertHeader from '~/components/expertHeader';
 import PolarButton from '~/components/polarButton';
-import {CheckBox} from 'react-native-elements';
-import {questions} from './questions';
-import {updateMedicalHistoryExpert} from '../actions';
+import { CheckBox } from 'react-native-elements';
+import { questions } from './questions';
+import { updateMedicalHistoryExpert } from '../actions';
 
 import styles from './style';
 
-const SocialHistory = ({navigation}) => {
+const SocialHistory = ({ navigation }) => {
   const {
     smoke,
     alcohol,
     drugs,
-    caffine,
+    caffeine,
     safe,
     abuse,
     currentAbuse,
@@ -23,7 +23,7 @@ const SocialHistory = ({navigation}) => {
     education,
     exercise,
     diet,
-  } = useSelector((state) => state.medicalHistory.social);
+  } = useSelector(state => state.medicalHistory.social);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch();
 
@@ -41,9 +41,9 @@ const SocialHistory = ({navigation}) => {
       history: drugs.history,
       notes: drugs.notes,
     },
-    caffine: {
-      history: caffine.history,
-      notes: caffine.notes,
+    caffeine: {
+      history: caffeine.history,
+      notes: caffeine.notes,
     },
     safe: {
       history: safe.history,
@@ -88,24 +88,23 @@ const SocialHistory = ({navigation}) => {
     },
   };
 
-  const toggleSelection = (key) => {
-    let answerToSet = {...answers};
+  const toggleSelection = key => {
+    let answerToSet = { ...answers };
 
     answerToSet[key].history = !answerToSet[key].history;
     setAnswers(answerToSet);
   };
 
-  const setAnswer = (option) => {
-    let answerToSet = {...answers};
+  const setAnswer = option => {
+    let answerToSet = { ...answers };
 
-    answerToSet[option.section][option.key] = !answerToSet[option.section][
-      option.key
-    ];
+    answerToSet[option.section][option.key] =
+      !answerToSet[option.section][option.key];
     setAnswers(answerToSet);
   };
 
   const setNotes = (key, text) => {
-    let answerToSet = {...answers};
+    let answerToSet = { ...answers };
 
     answerToSet[key].notes = text;
     setAnswers(answerToSet);
@@ -117,7 +116,7 @@ const SocialHistory = ({navigation}) => {
       <ScrollView>
         <Text style={styles.question}>{questions[progress].question}</Text>
         {questions[progress].options ? (
-          questions[progress].options.map((option) => {
+          questions[progress].options.map(option => {
             return (
               <CheckBox
                 key={option.title}
@@ -144,7 +143,7 @@ const SocialHistory = ({navigation}) => {
               />
             </View>
             <TextInput
-              onChangeText={(text) => setNotes(questions[progress].key, text)}
+              onChangeText={text => setNotes(questions[progress].key, text)}
               style={styles.input}
               value={answers[questions[progress].key].notes}
               multiline

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors, text} from '~/utils/constants';
+import { StyleSheet } from 'react-native';
+import { colors, text } from '~/utils/constants';
 
 const styles = StyleSheet.create({
   resolvedText: {
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   },
   messageInput: {
     flex: 1,
+    color: colors.black,
     fontSize: text.size.regular,
     fontFamily: text.fontFamily.poppinsMedium,
     paddingBottom: 3,

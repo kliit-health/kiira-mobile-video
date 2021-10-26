@@ -10,8 +10,8 @@ import {
   SET_MEDICAL_HISTORY,
   CLEAR_MEDICAL_HISTORY,
 } from '~/redux/types';
-import {createReducer} from '@reduxjs/toolkit';
-import {isArray} from 'lodash';
+import { createReducer } from '@reduxjs/toolkit';
+import { isArray } from 'lodash';
 
 const initialState = {
   loading: false,
@@ -65,7 +65,7 @@ const initialState = {
       history: false,
       notes: '',
     },
-    caffine: {
+    caffeine: {
       history: false,
       notes: '',
     },
@@ -318,55 +318,58 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-  [GET_PATIENT_DETAILS_PENDING]: (state) => ({
+  [GET_PATIENT_DETAILS_PENDING]: state => ({
     ...state,
     error: null,
     loading: true,
   }),
-  [GET_PATIENT_DETAILS_REJECTED]: (_, {data: details}) => ({
+  [GET_PATIENT_DETAILS_REJECTED]: (_, { data: details }) => ({
     ...state,
     error: 'Failed to get data.',
     details,
   }),
-  [GET_PATIENT_DETAILS_FULFILLED]: (state, {data}) => ({
+  [GET_PATIENT_DETAILS_FULFILLED]: (state, { data }) => ({
     ...state,
     data: {
       ...state.data,
       ...data,
     },
   }),
-  [UPDATE_PATIENT_DETAILS_PENDING]: (state) => {
+  [UPDATE_PATIENT_DETAILS_PENDING]: state => {
     state.error = null;
     state.loading = true;
   },
-  [UPDATE_PATIENT_DETAILS_REJECTED]: (_, {data: details}) => ({
+  [UPDATE_PATIENT_DETAILS_REJECTED]: (_, { data: details }) => ({
     ...state,
     error: 'Failed to update details.',
     details,
   }),
-  [UPDATE_PATIENT_DETAILS_FULFILLED]: (state, {data: {updates, dataKey}}) => ({
+  [UPDATE_PATIENT_DETAILS_FULFILLED]: (
+    state,
+    { data: { updates, dataKey } },
+  ) => ({
     ...state,
     data: {
       ...state.data,
       [dataKey]: isArray(updates)
         ? [...state.data[dataKey], ...updates]
-        : {...state.data[dataKey], ...updates},
+        : { ...state.data[dataKey], ...updates },
     },
   }),
-  [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, {payload}) => ({
+  [UPDATE_MEDICAL_HISTORY_EXPERT]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [LOCK_VISIT]: (state, {payload}) => ({
+  [LOCK_VISIT]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [SET_MEDICAL_HISTORY]: (state, {payload}) => ({
+  [SET_MEDICAL_HISTORY]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [CLEAR_MEDICAL_HISTORY]: (state) => {
-    const {appointment} = state;
+  [CLEAR_MEDICAL_HISTORY]: state => {
+    const { appointment } = state;
     return {
       ...initialState,
       ...appointment,

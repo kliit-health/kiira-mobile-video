@@ -8,6 +8,7 @@ import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
+import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import analytics from '@react-native-firebase/analytics';
 import { signOut } from './src/screens/patient/account/action';
@@ -21,37 +22,28 @@ const App = () => {
   const dispatch = useDispatch();
   let navigationRef = useRef();
 
-  const spinner = useSelector((state) => state.loader);
-  const toast = useSelector((state) => state.toast);
-  const { showModalError, errorMessage } = useSelector((state) => state.modal);
+  const spinner = useSelector(state => state.loader);
+  const toast = useSelector(state => state.toast);
+  const { showModalError, errorMessage } = useSelector(state => state.modal);
 
   FastImage.preload([
     {
-        uri: 'https://firebasestorage.googleapis.com/v0/b/kliit-health-app.appspot.com/o/Kliit%2F158453698551228C511E5-726E-4A6A-B48F-5789FB54A554.jpg?alt=media&token=0e896a21-1c3e-4fb8-b401-a3724d60339b',
+      uri: 'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fcandice.png?alt=media&token=3b7e91cf-edbf-4a21-a377-64bbb573a11f',
     },
-])
+    {
+      uri: 'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf',
+    },
+  ]);
 
-  useEffect(async () => {
+  useEffect(() => {
     LogBox.ignoreAllLogs();
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-
     AppState.addEventListener('change', _handleAppStateChange);
-
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      messaging().setBackgroundMessageHandler(async remoteMessage => {
-        console.log('Message handled in the background!', remoteMessage);
-      });
-    }
   }, []);
 
   useEffect(() => {
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      const {title, body} = remoteMessage.notification;
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      const { title, body } = remoteMessage.notification;
       Alert.alert(title, body);
     });
 
@@ -65,41 +57,19 @@ const App = () => {
     );
   });
 
-  useEffect(() => {
-    (async () => {
-      const enabled = await messaging().hasPermission();
-      if (enabled) {
-        messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-          console.log('Message handled in the background!', remoteMessage);
-        });
-      } else {
-        try {
-          await messaging().requestPermission();
-          messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-            console.log('Message handled in the background!', remoteMessage);
-          });
-        } catch (error) {
-          console.log('permission rejected');
-        }
-      }
-    })();
-  }, []);
-
-  const _handleAppStateChange = (nextAppState) => {
+  const _handleAppStateChange = async nextAppState => {
     let timeoutId;
-    
+    await notifee.setBadgeCount(0);
     if (nextAppState === 'active') {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
-      
     } else {
       if (timeoutId) {
         BackgroundTimer.clearTimeout(timeoutId);
       }
 
       timeoutId = BackgroundTimer.setTimeout(() => {
-        
         const payload = {
           isLoaderShow: false,
         };
@@ -107,7 +77,7 @@ const App = () => {
         Alert.alert(
           'Log Out',
           'For your security, you have been logged out due to inactivity.',
-          [{ text: 'OK', onPress: () => { } }],
+          [{ text: 'OK', onPress: () => {} }],
           { cancelable: false },
         );
       }, Constant.App.logoutInterval);
@@ -139,7 +109,7 @@ const App = () => {
     return true;
   };
 
-  const getCurrentRouteName = (navigationState) => {
+  const getCurrentRouteName = navigationState => {
     if (!navigationState) return null;
 
     const route = navigationState.routes[navigationState.index];
@@ -153,7 +123,7 @@ const App = () => {
   return (
     <View style={{ flex: 1 }}>
       <AppNavigator
-        ref={(nav) => {
+        ref={nav => {
           navigationRef = nav;
           NavigationService.navigator = nav;
         }}
@@ -164,7 +134,7 @@ const App = () => {
           if (prevScreen !== currentScreen) {
             await analytics().logScreenView({
               screen_name: currentScreen,
-              screen_class: currentScreen
+              screen_class: currentScreen,
             });
           }
 

@@ -1,7 +1,3 @@
-/**
- * @format
- */
-
 import React, {PureComponent} from 'react';
 import {AppRegistry} from 'react-native';
 import {Provider} from 'react-redux';
@@ -14,8 +10,62 @@ import {
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
 
+import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+
+(async () => {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  await notifee.setBadgeCount(0);
+  
+  if (enabled) {
+    notifee.createChannel({
+      id: 'kiira-health',
+      name: 'Kiira Health',
+      importance: AndroidImportance.HIGH,
+      bypassDnd: true,
+      description: 'Kiira Health Description',
+      sound: 'default',
+    });
+
+    const onMessageReceived = async message => {
+      const android = {
+        channelId: 'kiira-health',
+        smallIcon: 'notification',
+        color: '#223ad6',
+        pressAction: {
+          id: 'open-kiira',
+          launchActivity: 'default',
+        },
+      }
+
+      const notification = JSON.parse(message.data.notifee);
+      notification.android = android;
+      notifee.displayNotification(notification);
+      await notifee.incrementBadgeCount();
+    };
+
+    notifee.onBackgroundEvent(async ({ type, detail }) => {
+      const { notification, pressAction } = detail;
+      if (
+        type === EventType.ACTION_PRESS &&
+        pressAction.id === 'mark-as-read'
+      ) {
+        await notifee.decrementBadgeCount();
+        await notifee.cancelNotification(notification.id);
+      }
+    });
+
+    messaging().onMessage(onMessageReceived);
+    messaging().setBackgroundMessageHandler(onMessageReceived);
+  }
+})();
+
 const store = configStore();
 class Kiira extends PureComponent {
+  
   render() {
     return (
       <Provider store={store}>

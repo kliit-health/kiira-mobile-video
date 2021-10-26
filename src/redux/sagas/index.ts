@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import account from '../../screens/patient/account/saga';
 import addProfile from '../../screens/patient/account/settings/addProfileData/saga';
 import agreements from './agreements';
+import agreeToTerms from '../../screens/auth/newUser/saga';
 import appointments from '../../screens/patient/dashboard/appointments/saga';
 import ask from '../../screens/patient/dashboard/ask/saga';
 import askExpert from '../../screens/provider/ask/saga';
@@ -46,6 +47,7 @@ export default function* rootSaga() {
     account(),
     addProfile(),
     agreements(),
+    agreeToTerms(),
     appointments(),
     askExpert(),
     ask(),

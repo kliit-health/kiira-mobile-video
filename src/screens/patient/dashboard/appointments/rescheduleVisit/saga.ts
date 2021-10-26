@@ -5,26 +5,26 @@ import {
   GET_APPOINTMENTS_FOR_TODAY,
   UPDATE_APPOINTMENT,
 } from '~/redux/types';
-import {put, takeEvery, select} from 'redux-saga/effects';
-import {
-  showApiLoader,
-  hideApiLoader,
-} from '~/components/customLoader/action';
+import { put, takeEvery, select } from 'redux-saga/effects';
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import {
   getDataFromTable,
   getAppointmentsByDayAsync,
   getAppointmentDatesAsync,
   changeAppointmentAsync,
+  sendSms,
+  sendNotification,
 } from '~/utils/firebase';
-import {getAppointmentsList} from '../action';
-import {showOrHideModal} from '~/components/customModal/action';
-import {updateUser} from '~/redux/actions';
-import {setTimes, setAppointmentDates} from './action';
+import { getAppointmentsList } from '../action';
+import { showOrHideModal } from '~/components/customModal/action';
+import { updateUser } from '~/redux/actions';
+import { setTimes, setAppointmentDates } from './action';
+import moment from 'moment';
 
-function* getExperts({data}) {
-  const lang = yield select((state) => state.language);
+function* getExperts({ data }) {
+  const lang = yield select(state => state.language);
   try {
-    const {expertsParams} = data;
+    const { expertsParams } = data;
     yield put(showApiLoader(lang.apiLoader.loadingText));
     yield getDataFromTable(expertsParams);
     yield put(hideApiLoader());
@@ -34,8 +34,8 @@ function* getExperts({data}) {
   }
 }
 
-function* getAppointmentsForToday({data}) {
-  const lang = yield select((state) => state.language);
+function* getAppointmentsForToday({ data }) {
+  const lang = yield select(state => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentsByDayAsync(data);
@@ -49,8 +49,8 @@ function* getAppointmentsForToday({data}) {
   }
 }
 
-function* getAppointmentsByDay({data}) {
-  const lang = yield select((state) => state.language);
+function* getAppointmentsByDay({ data }) {
+  const lang = yield select(state => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentsByDayAsync(data);
@@ -63,8 +63,8 @@ function* getAppointmentsByDay({data}) {
   }
 }
 
-function* getAppointmentDates({data}) {
-  const lang = yield select((state) => state.language);
+function* getAppointmentDates({ data }) {
+  const lang = yield select(state => state.language);
   try {
     yield put(showApiLoader(lang.apiLoader.loadingText));
     const response = yield getAppointmentDatesAsync(data);
@@ -77,9 +77,20 @@ function* getAppointmentDates({data}) {
   }
 }
 
-function* updateAppointment({data, data: {data: {time, appointmentType}, navigation}}) {
-  const {assessment} = yield select((state) => state.user.data);
-  
+function* updateAppointment({
+  data,
+  data: {
+    data: { time, appointmentType },
+    navigation,
+  },
+}) {
+  const { assessment, profileInfo, uid, enableText } = yield select(
+    state => state.user.data,
+  );
+  const title = 'Reschedule';
+  const message = `Your appointment has been rescheduled \n\n ${moment(
+    time,
+  ).format('llll')}`;
   try {
     yield put(showApiLoader());
     let appointment = yield changeAppointmentAsync(data);
@@ -87,15 +98,22 @@ function* updateAppointment({data, data: {data: {time, appointmentType}, navigat
 
     if (appointment && !appointment.availible) {
       yield put(
-        showOrHideModal('Appointment is unavailable please select a different time.'),
+        showOrHideModal(
+          'Appointment is unavailable please select a different time.',
+        ),
       );
       navigation.navigate('Appointments');
     }
-    if(assessment && appointmentType.title === "Health Check") {
-      yield put(updateUser({assessment: {...assessment, time}}))
+    if (assessment && appointmentType.title === 'Health Check') {
+      yield put(updateUser({ assessment: { ...assessment, time } }));
     }
     yield showOrHideModal('Your appointment has been sucessfully rescheduled.');
-    yield put(getAppointmentsList({uid: data.data.uid}));
+    yield put(getAppointmentsList({ uid: data.data.uid }));
+    if (profileInfo.phoneNumber.length && enableText) {
+      yield sendSms(message, profileInfo.phoneNumber);
+    }
+
+    yield sendNotification(uid, title, message);
 
     navigation.navigate('Appointments');
   } catch (error) {

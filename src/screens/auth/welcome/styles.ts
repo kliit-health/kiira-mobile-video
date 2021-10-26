@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import metrics from '~/utils/metrices';
-import {text, colors} from '~/utils/constants';
+import { text, colors } from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
@@ -22,7 +22,7 @@ const style = StyleSheet.create({
 
   buttonText: {
     textAlign: 'center',
-    fontSize: text.size.normal,
+    fontSize: text.size.regular,
     fontFamily: text.fontFamily.poppinsRegular,
     color: colors.white,
   },
@@ -54,7 +54,41 @@ const style = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: text.fontFamily.poppinsBold,
-    margin: 30,
+    margin: 20,
+  },
+
+  heading: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: text.fontFamily.poppinsBold,
+    marginTop: 20,
+  },
+
+  bodyText: {
+    textAlign: 'center',
+    fontSize: 14,
+    fontFamily: text.fontFamily.poppinsRegular,
+    margin: 10,
+  },
+
+  inputTypeStyle: {
+    color: colors.black,
+    fontSize: text.size.regular,
+    fontFamily: text.fontFamily.poppinsRegular,
+    textAlign: 'left',
+    width: metrics.width - childPadding,
+    backgroundColor: colors.offWhite,
+  },
+
+  inputTextContainerStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: metrics.width - childPadding,
+    paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
+    borderBottomColor: colors.black,
+    borderBottomWidth: 0.5,
   },
 });
 

@@ -1,10 +1,10 @@
-import React, {Fragment, useState} from 'react';
-import {useSelector, shallowEqual} from 'react-redux';
-import {View, Text, SectionList} from 'react-native';
+import React, { Fragment, useState } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import { View, Text, SectionList } from 'react-native';
 import moment from 'moment';
-import {screenNames, videoHistory} from '~/utils/constants';
-import {ListItem, TextButton, Modal} from '~/components';
-import {getSections, formatTime} from './helpers';
+import { screenNames, videoHistory } from '~/utils/constants';
+import { ListItem, TextButton, Modal } from '~/components';
+import { getSections, formatTime } from './helpers';
 import {
   listStyles,
   itemFutureStyles,
@@ -16,21 +16,21 @@ import {
   messageModifiers,
 } from './styles';
 
-const VideoHistory = ({navigation, expertDetails}) => {
+const VideoHistory = ({ navigation, expertDetails }) => {
   const [visible, setVisible] = useState(false);
-  const {visits} = useSelector(
-    (state) => state.treatmentHistory.videoHistory,
+  const { visits } = useSelector(
+    state => state.treatmentHistory.videoHistory,
     shallowEqual,
   );
 
-  const handleFutureItemPress = (visit) => {
+  const handleFutureItemPress = visit => {
     navigation.navigate(screenNames.visit, {
       uid: expertDetails.uid,
       visit,
     });
   };
 
-  const handlePastItemPress = ({id, locked}) => {
+  const handlePastItemPress = ({ id, locked }) => {
     if (locked) {
       navigation.navigate(screenNames.visitSummary, {
         id,
@@ -50,14 +50,14 @@ const VideoHistory = ({navigation, expertDetails}) => {
         showsVerticalScrollIndicator={false}
         style={listStyles.root}
         ListEmptyComponent={() => <Fallback />}
-        keyExtractor={({visit}, index) => `${visit.id} ${index}`}
+        keyExtractor={({ visit }, index) => `${visit.id} ${index}`}
         sections={getSections(
-          visits.filter((visit) => visit.expert.uid === expertDetails.uid),
+          visits.filter(visit => visit.expert.uid === expertDetails.uid),
         )}
-        renderSectionHeader={({section}) => (
+        renderSectionHeader={({ section }) => (
           <SectionSeparator key={section.title} {...section} />
         )}
-        renderItem={({item: {visit, isUpcoming}, index}) => {
+        renderItem={({ item: { visit, isUpcoming }, index }) => {
           return isUpcoming ? (
             <ItemFuture
               key={visit.id}
@@ -79,9 +79,20 @@ const VideoHistory = ({navigation, expertDetails}) => {
   );
 };
 
-const ItemFuture = (props) => {
-  const {reason, time, expert, onPress, index, appointmentType: {duration}} = props;
-  const {firstName, lastName} = expert;
+const ItemFuture = props => {
+  const {
+    reason,
+    time,
+    expert,
+    onPress,
+    index,
+    appointmentType = null,
+  } = props;
+  const { firstName, lastName } = expert;
+  const duration =
+    typeof appointmentType !== 'string' && appointmentType
+      ? appointmentType.duration
+      : reason.sessionType.duration;
 
   const handlePress = () => {
     if (onPress) {
@@ -90,7 +101,7 @@ const ItemFuture = (props) => {
   };
 
   return (
-    <View style={{...itemFutureStyles.root, marginTop: index === 0 ? 10 : 0}}>
+    <View style={{ ...itemFutureStyles.root, marginTop: index === 0 ? 10 : 0 }}>
       <View style={itemFutureStyles.headerContainer}>
         <Text style={itemFutureStyles.title}>
           {`${videoHistory.visitWith}${firstName} ${lastName}`}
@@ -101,7 +112,7 @@ const ItemFuture = (props) => {
         </View>
       </View>
       <View style={itemFutureStyles.timeContainer}>
-        {formatTime(time,duration).map(({primary, secondary}) => (
+        {formatTime(time, duration).map(({ primary, secondary }) => (
           <View key={primary} style={itemFutureStyles.timeItem}>
             <Text style={itemFutureStyles.primaryText}>{primary}</Text>
             <Text style={itemFutureStyles.secondaryText}>{secondary}</Text>
@@ -115,9 +126,11 @@ const ItemFuture = (props) => {
   );
 };
 
-const ItemPast = (props) => {
-  const lang = useSelector((state) => state.language);
-  const {reason, time, id, onPress} = props;
+const ItemPast = props => {
+  const lang = useSelector(state => state.language);
+  const { reason, time, id, onPress } = props;
+  const chiefConcern =
+    typeof reason !== 'string' && reason ? reason.sessionType.title : reason;
 
   const handlePress = () => {
     if (onPress) {
@@ -130,7 +143,7 @@ const ItemPast = (props) => {
       <View>
         <View style={itemPastStyles.subtitleContainer}>
           <Text style={itemPastStyles.subject}>{videoHistory.subject}</Text>
-          <Text style={itemPastStyles.subtitle}>{reason}</Text>
+          <Text style={itemPastStyles.subtitle}>{chiefConcern}</Text>
         </View>
         <View style={itemPastStyles.subtitleContainer}>
           <Text style={itemPastStyles.subject}>
@@ -141,21 +154,21 @@ const ItemPast = (props) => {
       </View>
       <View style={itemPastStyles.subtitleContainer}>
         <Text style={itemPastStyles.dateText}>
-          {moment.unix(time).format("MM/DD/YY")}
+          {moment.unix(time).format('MM/DD/YY')}
         </Text>
       </View>
     </ListItem>
   );
 };
 
-const SectionSeparator = ({title}) => (
+const SectionSeparator = ({ title }) => (
   <View style={separatorStyles.container}>
     <Text style={separatorStyles.title}>{title}</Text>
   </View>
 );
 
 const Fallback = () => {
-  const lang = useSelector((state) => state.language);
+  const lang = useSelector(state => state.language);
 
   return (
     <View style={fallbackStyles.container}>
@@ -164,15 +177,16 @@ const Fallback = () => {
   );
 };
 
-const ModalMessage = ({onClose, ...rest}) => {
-  const lang = useSelector((state) => state.language);
+const ModalMessage = ({ onClose, ...rest }) => {
+  const lang = useSelector(state => state.language);
 
   return (
     <Modal
       animationIn="fadeInUp"
       animationOut="fadeOutDown"
       styles={messageModifiers}
-      {...rest}>
+      {...rest}
+    >
       <View style={messageStyles.card}>
         <Text style={messageStyles.messageText}>
           {lang.videoHistory.afterVisit}

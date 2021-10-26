@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import { View, Image, Text } from 'react-native';
 import moment from 'moment';
 import CustomButton from '~/components/customButton';
 import styles from '../styles';
-import {withNavigation} from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
-const VisitDetails = ({navigation, visit}) => {
+const VisitDetails = ({ navigation, visit }) => {
   let today = moment().startOf('day');
   let appointment =
     typeof visit.time === 'number'
@@ -14,16 +14,18 @@ const VisitDetails = ({navigation, visit}) => {
   let daysUntilVisit = Math.abs(
     moment.duration(today.diff(appointment)).asDays(),
   );
-  const {appointmentType: {duration}} = visit;
+  const {
+    appointmentType: { duration },
+  } = visit;
 
   // To test video after booking
   // let daysUntilVisit = 0;
 
   return (
-    <View style={{alignSelf: 'center'}}>
+    <View style={{ alignSelf: 'center' }}>
       <View style={styles.visitDetailsParentContainer}>
         <Text style={styles.visitDetailsTitle}>Your Next Appointment</Text>
-        <View style={{flexDirection: 'row', margin: 26}}>
+        <View style={{ flexDirection: 'row', margin: 26 }}>
           <View style={styles.expertImageContainer}>
             <Image
               style={styles.locationImage}
@@ -34,7 +36,9 @@ const VisitDetails = ({navigation, visit}) => {
               <Text style={styles.informationTitle}>
                 Location: Virtual Visit
               </Text>
-              <Text style={styles.informationTitle}>{`Duration: ${duration} Minutes`}</Text>
+              <Text
+                style={styles.informationTitle}
+              >{`Duration: ${duration} Minutes`}</Text>
               <Text style={styles.informationText}>
                 {`Your visit should be starting\n${
                   daysUntilVisit > 0
@@ -57,8 +61,8 @@ const VisitDetails = ({navigation, visit}) => {
               ? styles.noTextDisabledStyle
               : styles.noTextStyle
           }
-          onPress={() => navigation.navigate('TwillioLogin', {visit})}
-          text="Begin Visit"
+          onPress={() => navigation.navigate('TwillioLogin', { visit })}
+          text="Join Call"
         />
       </View>
     </View>

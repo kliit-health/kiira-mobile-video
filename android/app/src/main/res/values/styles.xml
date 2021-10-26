@@ -7,5 +7,5 @@
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:textColor">#000000</item>
     </style>
-
+    <color name="kiira_blue">#008AFC</color>
 </resources>

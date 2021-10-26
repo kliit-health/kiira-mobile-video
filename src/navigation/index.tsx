@@ -53,6 +53,7 @@ import MedicationsHistory from '../screens/provider/appointments/patientProfile/
 import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
 import MedicalHistoryExpert from '../screens/provider/appointments/patientProfile/medicalHistory';
 import NeedsPresciption from '../screens/patient/dashboard/getTreatment/needsPrescription';
+import NewUser from '../screens/auth/newUser';
 import Confirm from '../screens/provider/appointments/patientProfile/confirm';
 import Patients from '../screens/provider/patients';
 import PatientProfile from '../screens/provider/appointments/patientProfile';
@@ -484,6 +485,7 @@ const MainAppStack = createStackNavigator(
     Medications: { screen: Medications },
     MedicalHistory: { screen: MedicalHistory },
     NeedsPresciption: { screen: NeedsPresciption },
+    NewUser: { screen: NewUser },
     PaymentMethods: { screen: PaymentMethods },
     PayPalApproval: { screen: PayPalApproval },
     PregnancyAndChildren: { screen: Pregnancy },

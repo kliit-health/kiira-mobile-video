@@ -1,9 +1,8 @@
-import React from 'react';
-import {shape, object, bool, string, func, number, oneOf} from 'prop-types';
-import {View, TouchableOpacity, Image} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import {mergeStyles} from '../../utils/functions';
-import defaultStyles, {modifiers} from './styles';
+import React, { useState, useEffect } from 'react';
+import { shape, object, bool, string, func, number, oneOf } from 'prop-types';
+import { View, TouchableOpacity, Image } from 'react-native';
+import { mergeStyles } from '../../utils/functions';
+import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';
 
 const Avatar = ({
@@ -19,6 +18,14 @@ const Avatar = ({
   online,
   deleteMode,
 }) => {
+  useEffect(() => {
+    (async () => {
+      await Image.prefetch(source);
+      setLoading(false);
+    })();
+  }, []);
+
+  const [loading, setLoading] = useState(true);
   const styles = {
     image: mergeStyles([
       modifiers[size].image,
@@ -46,7 +53,7 @@ const Avatar = ({
     ]),
   };
 
-  const handleLayout = (event) => {
+  const handleLayout = event => {
     const layout = event.nativeEvent.layout;
     onLayout(layout);
   };
@@ -54,12 +61,14 @@ const Avatar = ({
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
       <View onLayout={handleLayout} style={styles.root}>
-        <FastImage
+        <Image
           style={styles.image}
-          source={{uri: source ? source : null}}
-          fallback={true}
+          source={
+            loading
+              ? require('../../../assets/placeholder.png')
+              : { uri: source }
+          }
           resizeMode={resizeMode}
-          defaultSource={require('../../../assets/profile_img_placeholder.png')}
         />
         <View style={styles.status} />
         {deleteMode && (

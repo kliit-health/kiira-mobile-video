@@ -73,7 +73,7 @@ function* loginFirebase({data}) {
           const hasExpertRole = role === "Expert"
           const isUser = role === "User";
           const isNewUser = !agreeToTerms || firstLogin;
-          
+
           if (isStudent || isSubscriber || isUser) {
             if (!isNewUser) {
                 navigation.navigate(Constant.App.stack.AppStack);

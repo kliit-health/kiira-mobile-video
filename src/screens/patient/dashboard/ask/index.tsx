@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import {
   View,
   ScrollView,
@@ -6,46 +6,46 @@ import {
   FlatList,
   Platform,
   Image,
-  Modal
+  Modal,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CustomText from '~/components/customText';
 import styles from './style';
-import Constant, {screenNames} from '~/utils/constants';
+import Constant, { screenNames } from '~/utils/constants';
 import InputText from '~/components/customInputText/simpleInputText';
 import CustomButton from '~/components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {getQuestionData, updateQuestion, setTopic} from './action';
+import { getQuestionData, updateQuestion, setTopic } from './action';
 import moment from 'moment';
-import {withNavigation} from 'react-navigation';
-import {Header} from '~/components';
+import { withNavigation } from 'react-navigation';
+import { Header } from '~/components';
 import FastImage from 'react-native-fast-image';
-import {setuser} from './action';
+import { setuser } from './action';
 import auth from '@react-native-firebase/auth';
-import {getUserData} from '~/utils/firebase';
-import {showOrHideModal} from '~/components/customModal/action';
-import {topics} from '~/models';
+import { getUserData } from '~/utils/firebase';
+import { showOrHideModal } from '~/components/customModal/action';
+import { topics } from '~/models';
 
 class Ask extends PureComponent {
-	public state: any;
-	public props: any;
-	public setState: any;
-	public focusListener: any;
-	public question: string;
-	public setQuestionText: any;
-	public getQuestion: any;
-	public user: any;
-	public questionData: any;
-	public lang: any;
-	public firstName: string;
-	public profileImageUrl: any;
-	public staticImages: any;
-	public questionText: string;
-	public navigation: any;
-	public showHideErrorModal: any;
-	public recentExpertData: any;
-	public previousQuestionData: any;
-	public experts: any;
+  public state: any;
+  public props: any;
+  public setState: any;
+  public focusListener: any;
+  public question: string;
+  public setQuestionText: any;
+  public getQuestion: any;
+  public user: any;
+  public questionData: any;
+  public lang: any;
+  public firstName: string;
+  public profileImageUrl: any;
+  public staticImages: any;
+  public questionText: string;
+  public navigation: any;
+  public showHideErrorModal: any;
+  public recentExpertData: any;
+  public previousQuestionData: any;
+  public experts: any;
   public showActionModal: boolean;
 
   constructor(props) {
@@ -60,7 +60,7 @@ class Ask extends PureComponent {
   }
 
   async componentDidMount() {
-    const {question} = this.props;
+    const { question } = this.props;
     if (question) {
       this.setState({
         questionText: question,
@@ -82,14 +82,14 @@ class Ask extends PureComponent {
           };
           getUserData(
             obj,
-            (querySnapshot) => {
+            querySnapshot => {
               const data = querySnapshot.data();
               this.setState({
                 questions: data.questions,
                 credits: data.credits,
               });
             },
-            (error) => {
+            error => {
               console.log(error);
             },
           );
@@ -101,7 +101,7 @@ class Ask extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {question} = this.props;
+    const { question } = this.props;
     if (question) {
       this.setState({
         questionText: question,
@@ -118,8 +118,8 @@ class Ask extends PureComponent {
     this.focusListener.remove();
   }
 
-  onChangeText = (value) => {
-    const {setQuestionText, question} = this.props;
+  onChangeText = value => {
+    const { setQuestionText, question } = this.props;
     this.setState({
       questionText: value,
     });
@@ -127,7 +127,7 @@ class Ask extends PureComponent {
   };
 
   fetchData() {
-    const {getQuestion, user} = this.props;
+    const { getQuestion, user } = this.props;
     const params = {
       questionParams: {
         tableName: Constant.App.firebaseTableNames.questions,
@@ -157,9 +157,9 @@ class Ask extends PureComponent {
   }
 
   renderHeadingProfileView() {
-    const {user, questionData, lang} = this.props;
-    const {firstName, profileImageUrl} = user.profileInfo;
-    const {staticImages} = Constant.App;
+    const { user, questionData, lang } = this.props;
+    const { firstName, profileImageUrl } = user.profileInfo;
+    const { staticImages } = Constant.App;
     return (
       <View style={styles.headingProfileImageParentContainer}>
         <View style={styles.headingTextContainerStyle}>
@@ -183,7 +183,7 @@ class Ask extends PureComponent {
               borderRadius: 50,
             }}
             defaultSource={staticImages.profilePlaceholderImg}
-            source={{uri: profileImageUrl}}
+            source={{ uri: profileImageUrl }}
             activeOpacity={0.7}
           />
         </View>
@@ -202,8 +202,8 @@ class Ask extends PureComponent {
   }
 
   renderInputTextView() {
-    const {question, lang} = this.props;
-    const {questionText} = this.state;
+    const { question, lang } = this.props;
+    const { questionText } = this.state;
     return (
       <View style={styles.inputTextContainerStyle}>
         <InputText
@@ -216,7 +216,7 @@ class Ask extends PureComponent {
           style={
             question
               ? styles.inputTypeStyle
-              : [styles.inputTypeStyle, {lineHeight: 25}]
+              : [styles.inputTypeStyle, { lineHeight: 25 }]
           }
           placeholderTextColor={Constant.App.colors.lightGrey}
         />
@@ -225,36 +225,48 @@ class Ask extends PureComponent {
   }
 
   renderTopicButton() {
-    const {question,lang} = this.props;
+    const { question, lang } = this.props;
     return (
       <CustomButton
         disabled={question ? false : true}
-        buttonStyle={question ? styles.buttonContainerStyle : [styles.buttonContainerStyle, styles.disabled]}
+        buttonStyle={
+          question
+            ? styles.buttonContainerStyle
+            : [styles.buttonContainerStyle, styles.disabled]
+        }
         textStyle={styles.buttonTextStyle}
-        onPress={() => this.setState({ showActionModal: true})}
+        onPress={() => this.setState({ showActionModal: true })}
         text={lang.askUser.selectTopic}
       />
     );
   }
 
   renderAskButton() {
-    const {navigation, reason, lang} = this.props;
+    const { navigation, reason, lang } = this.props;
     return (
       <CustomButton
         disabled={reason ? false : true}
-        buttonStyle={reason ? styles.buttonContainerStyle : [styles.buttonContainerStyle, styles.disabled]}
+        buttonStyle={
+          reason
+            ? styles.buttonContainerStyle
+            : [styles.buttonContainerStyle, styles.disabled]
+        }
         textStyle={styles.buttonTextStyle}
-        onPress={() => navigation.navigate(Constant.App.screenNames.ChooseExpert)}
+        onPress={() =>
+          navigation.navigate(Constant.App.screenNames.ChooseExpert)
+        }
         text={lang.askUser.btnText}
       />
     );
   }
 
   renderRecentExpertView() {
-    const {staticImages} = Constant.App;
-    const {navigation, recentExpertData, lang} = this.props;
-    const chatEnabled = recentExpertData.filter((expert) => expert.data().chatEnabled);
-  
+    const { staticImages } = Constant.App;
+    const { navigation, recentExpertData, lang } = this.props;
+    const chatEnabled = recentExpertData.filter(
+      expert => expert.data().chatEnabled,
+    );
+
     return (
       <View style={styles.recentExpertParentContainerStyle}>
         <CustomText style={styles.myRecentExpertTitleTextStyle}>
@@ -266,7 +278,7 @@ class Ask extends PureComponent {
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
           data={chatEnabled}
           horizontal={true}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             item = item.data();
             return (
               <View
@@ -276,7 +288,8 @@ class Ask extends PureComponent {
                     : index === recentExpertData.length - 1
                     ? styles.myRecentExpertContainer2Style
                     : styles.myRecentExpertContainer1Style
-                }>
+                }
+              >
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate(
@@ -286,15 +299,17 @@ class Ask extends PureComponent {
                         uid: item.uid,
                       },
                     );
-                  }}>
+                  }}
+                >
                   <View
                     style={{
                       width: 100,
                       height: 100,
                       alignSelf: 'center',
-                    }}>
+                    }}
+                  >
                     <FastImage
-                      containerStyle={{alignSelf: 'center'}}
+                      containerStyle={{ alignSelf: 'center' }}
                       style={{
                         width: 100,
                         height: 100,
@@ -336,9 +351,8 @@ class Ask extends PureComponent {
                     )}
                   </View>
                   <CustomText
-                    style={
-                      styles.expertNameTextStyle
-                    }>{`${item.profileInfo.firstName} ${item.profileInfo.lastName}`}</CustomText>
+                    style={styles.expertNameTextStyle}
+                  >{`${item.profileInfo.firstName} ${item.profileInfo.lastName}`}</CustomText>
                   <CustomText style={styles.expertProfTextStyle}>
                     {item.profileInfo.profession.fullName}
                   </CustomText>
@@ -353,7 +367,7 @@ class Ask extends PureComponent {
   }
 
   renderPreviousQuestionView() {
-    const {navigation, previousQuestionData, experts, lang} = this.props;
+    const { navigation, previousQuestionData, experts, lang } = this.props;
     return (
       <View style={styles.myPrevQuestionParentContainerStyle}>
         <CustomText style={styles.myPrevQuestionTitleTextStyle}>
@@ -364,19 +378,20 @@ class Ask extends PureComponent {
           keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
           keyboardShouldPersistTaps={Platform.OS === 'ios' ? 'never' : 'always'}
           data={previousQuestionData}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
               <TouchableOpacity
                 onPress={() => {
                   const expertDetails = experts.find(
-                    (expert) => expert.uid === item.expertInfo.uid,
+                    expert => expert.uid === item.expertInfo.uid,
                   );
 
                   navigation.navigate(Constant.App.screenNames.Chat, {
                     questionData: item,
                     expertDetails,
                   });
-                }}>
+                }}
+              >
                 <View style={styles.myPrevQuestionContainerStyle}>
                   <CustomText style={styles.myPrevQuestionTextStyle}>
                     {item.question}
@@ -391,9 +406,10 @@ class Ask extends PureComponent {
                             uid: item.expertInfo.uid,
                           },
                         );
-                      }}>
+                      }}
+                    >
                       <FastImage
-                        containerStyle={{alignSelf: 'center'}}
+                        containerStyle={{ alignSelf: 'center' }}
                         style={{
                           width: 50,
                           height: 50,
@@ -427,42 +443,45 @@ class Ask extends PureComponent {
   }
 
   renderAskedQuestionView() {
-    const {questionData, navigation, experts, lang} = this.props;
+    const { questionData, navigation, experts, lang } = this.props;
 
     return (
       <TouchableOpacity
         onPress={() => {
           const expertDetails = experts.find(
-            (expert) => expert.uid === questionData.expertInfo.uid,
+            expert => expert.uid === questionData.expertInfo.uid,
           );
           navigation.navigate(Constant.App.screenNames.Chat, {
             questionData,
             expertDetails,
           });
-        }}>
+        }}
+      >
         <View
           style={
             questionData.userUnreadCount
               ? styles.askedQuestionContainerStyle
               : [
                   styles.askedQuestionContainerStyle,
-                  {backgroundColor: Constant.App.colors.greyBgAsk},
+                  { backgroundColor: Constant.App.colors.greyBgAsk },
                 ]
-          }>
+          }
+        >
           <CustomText
             style={
               questionData.userUnreadCount
                 ? styles.askedQuestionTextStyle
                 : [
                     styles.askedQuestionTextStyle,
-                    {color: Constant.App.colors.blackColor},
+                    { color: Constant.App.colors.blackColor },
                   ]
-            }>
+            }
+          >
             {questionData.question}
           </CustomText>
           <View style={styles.expertInfoContainerStyle}>
             <FastImage
-              containerStyle={{alignSelf: 'center'}}
+              containerStyle={{ alignSelf: 'center' }}
               style={{
                 width: 50,
                 height: 50,
@@ -481,9 +500,10 @@ class Ask extends PureComponent {
                   ? styles.askedQuestionExpertInfoTextStyle
                   : [
                       styles.askedQuestionExpertInfoTextStyle,
-                      {color: Constant.App.colors.blackColor},
+                      { color: Constant.App.colors.blackColor },
                     ]
-              }>
+              }
+            >
               {`${lang.askUser.asking} ${questionData.expertInfo.profileInfo.firstName} ${questionData.expertInfo.profileInfo.lastName}, ${questionData.expertInfo.profileInfo.profession.shortName}`}
             </CustomText>
           </View>
@@ -493,7 +513,7 @@ class Ask extends PureComponent {
   }
 
   renderEmptyCreditView() {
-    const {lang} = this.props;
+    const { lang } = this.props;
     return (
       <View style={styles.emptyCreditsContainerStyle}>
         <CustomText style={styles.emptyCreditsTextStyle}>
@@ -504,27 +524,29 @@ class Ask extends PureComponent {
   }
 
   renderActionModal() {
-    const {showActionModal} = this.state;
-    const {lang, setTopic} = this.props;
+    const { showActionModal } = this.state;
+    const { lang, setTopic } = this.props;
 
     return (
       <Modal
         animationType="fade"
         onRequestClose={() => {}}
         transparent
-        isVisible={showActionModal}>
+        isVisible={showActionModal}
+      >
         <View style={styles.actionModalParentContainerStyle}>
           <View style={styles.actionModalInnerContainerStyle}>
             <CustomText style={styles.actionModalTitleTextStyle}>
               {'Category:'}
             </CustomText>
-            {topics.map(({title}) => (
+            {topics.map(({ title }) => (
               <TouchableOpacity
                 key={title}
                 onPress={() => {
                   setTopic(title);
-                  this.setState({ showActionModal: false })
-                }}>
+                  this.setState({ showActionModal: false });
+                }}
+              >
                 <CustomText style={styles.actionModalBlueTextStyle}>
                   {title}
                 </CustomText>
@@ -547,14 +569,10 @@ class Ask extends PureComponent {
   }
 
   render() {
-    const {showActionModal} = this.state
+    const { showActionModal } = this.state;
 
-    const {
-      recentExpertData,
-      previousQuestionData,
-      questionData,
-      navigation,
-    } = this.props;
+    const { recentExpertData, previousQuestionData, questionData, navigation } =
+      this.props;
 
     return (
       <View style={styles.container}>
@@ -564,7 +582,8 @@ class Ask extends PureComponent {
         />
         <ScrollView
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+        >
           {this.renderHeadingProfileView()}
           {this.renderCreditView()}
           {questionData
@@ -590,7 +609,7 @@ class Ask extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.user.data,
   reason: state.ask.reason,
   recentExpertData: state.ask.recentExpertData,
@@ -601,12 +620,12 @@ const mapStateToProps = (state) => ({
   lang: state.language,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setData: (data) => dispatch(setuser(data)),
-  setTopic: (data) => dispatch(setTopic(data)),
-  getQuestion: (value) => dispatch(getQuestionData(value, dispatch)),
-  setQuestionText: (value) => dispatch(updateQuestion(value)),
-  showHideErrorModal: (value) => dispatch(showOrHideModal(value)),
+const mapDispatchToProps = dispatch => ({
+  setData: data => dispatch(setuser(data)),
+  setTopic: data => dispatch(setTopic(data)),
+  getQuestion: value => dispatch(getQuestionData(value, dispatch)),
+  setQuestionText: value => dispatch(updateQuestion(value)),
+  showHideErrorModal: value => dispatch(showOrHideModal(value)),
 });
 
 export default connect(

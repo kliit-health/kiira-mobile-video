@@ -1,5 +1,5 @@
 import stripe from 'tipsi-stripe';
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 stripe.setOptions({
   publishableKey: 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K',
@@ -27,7 +27,7 @@ const payWithNativeModule = async (credits, amount) => {
 
     amount = String(amount);
 
-    const token = await stripe.paymentRequestWithNativePay({},[
+    const token = await stripe.paymentRequestWithNativePay({}, [
       {
         label: `${credits} Credits`,
         amount,
@@ -40,12 +40,12 @@ const payWithNativeModule = async (credits, amount) => {
 
     stripe.completeNativePayRequest();
 
-    return {ok: true, token};
+    return { ok: true, token };
   } catch (err) {
     // TODO: Handle different error codes with user-friendly messages
     stripe.cancelNativePayRequest();
     let status = err.code || 'internal';
-    return status !== 'cancelled' ? {ok: false, status} : null;
+    return status !== 'canceled' ? { ok: false, status } : null;
   }
 };
 

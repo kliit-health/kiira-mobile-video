@@ -1,4 +1,4 @@
-import {put, takeEvery, select} from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 import {
   CHAT_MESSAGE_SENDING,
   CHAT_MESSAGE_LOADING,
@@ -20,7 +20,8 @@ import {
   updateReadMessageStatus,
   updateUnreadCount,
   checkQuestionStatus,
-  sendChatUpdateNotification
+  sendNotification,
+  sendSms,
 } from '~/utils/firebase';
 import auth from '@react-native-firebase/auth';
 import {
@@ -32,30 +33,27 @@ import {
   checkExpertStatusSuccess,
   checkQuestionStatusSuccess,
 } from './action';
-import {getUser, updateUser} from '~/redux/actions';
-import {showOrHideModal} from '~/components/customModal/action';
-import {displayConsole} from '~/utils/helper';
-import {
-  showApiLoader,
-  hideApiLoader,
-} from '~/components/customLoader/action';
-import {tables} from '~/utils/constants';
-import {clearQuestionValue} from '../../ask/action';
+import { getUser } from '~/redux/actions';
+import { showOrHideModal } from '~/components/customModal/action';
+import { displayConsole } from '~/utils/helper';
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
+import { clearQuestionValue } from '../../ask/action';
 import moment from 'moment';
 
 let loadMessagesObserver;
 let checkStatusObserver;
 let checkQuestionStatusObserver;
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+const delay = ms => new Promise(res => setTimeout(res, ms));
 let delayTime = 100;
 
-function* setQuestion({data, dispatch}) {
-  const lang = yield select((state) => state.language);
+function* setQuestion({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
-    yield put(showApiLoader(lang.apiLoader.loadingText));
+    yield put(showApiLoader());
     const state = yield select();
-    const userData = state.user.data;
-    const {userInfo, expertInfo, question} = data;
+    const { userInfo, expertInfo, question } = data;
+    const message = 'You have a new question on Kiira';
+    const title = 'New message received';
     const setQuestionParams = {
       question,
       isResolved: false,
@@ -69,7 +67,7 @@ function* setQuestion({data, dispatch}) {
       lastMessage: question,
       isRated: false,
       uid: userInfo.uid,
-      reason: state.ask.reason
+      reason: state.ask.reason,
     };
     const responseSaveQuestion = yield saveQuestion(setQuestionParams);
     if (responseSaveQuestion.success) {
@@ -105,7 +103,7 @@ function* setQuestion({data, dispatch}) {
           displayConsole('getUserData  error ', error);
         }
         yield delay(delayTime);
-        yield checkQuestStatus({data: {questionData}, dispatch});
+        yield checkQuestStatus({ data: { questionData }, dispatch });
         const sendMessageParams = {
           id: responseSaveQuestion.data.messageId,
           messageParams: {
@@ -133,6 +131,11 @@ function* setQuestion({data, dispatch}) {
         };
         yield delay(delayTime);
         yield loadMessagesOfUser(payloadData);
+        if (expertInfo.profileInfo.phoneNumber.length) {
+          yield sendSms(message, expertInfo.profileInfo.phoneNumber);
+        }
+
+        yield sendNotification(expertInfo.uid, title, message);
       } else {
         yield delay(500);
         yield put(hideApiLoader());
@@ -151,21 +154,24 @@ function* setQuestion({data, dispatch}) {
   }
 }
 
-function* sendMessageToUser({data}) {
-  const lang = yield select((state) => state.language);
+function* sendMessageToUser({ data }) {
+  const lang = yield select(state => state.language);
+
   try {
-    const {messageParams, imageParams, id, lastMessage, questionId} = data;
+    const { messageParams, imageParams, id, lastMessage, questionId } = data;
+    const message = 'A question on Kiira has been updated';
+    const title = 'Question Update';
     if (imageParams) {
-      yield put(showApiLoader(lang.apiLoader.loadingText));
+      yield put(showApiLoader());
       yield delay(delayTime);
       const responseImage = yield uploadImage(imageParams);
       if (responseImage.success) {
-        const {downloadURL} = responseImage.data;
+        const { downloadURL } = responseImage.data;
         messageParams.image = downloadURL;
         const state = yield select();
         const expertStatusData = state.chat.expertStatusData;
         const userData = state.user.data;
-        const toUserId = expertStatusData.toUserId;
+        const uid = expertStatusData.uid;
         const questionData = Object.assign({}, state.chat.questionData);
 
         var unreadCount = questionData.unreadCount
@@ -200,7 +206,10 @@ function* sendMessageToUser({data}) {
         };
 
         yield put(chatMessageSuccess(dataResponse));
-        yield sendChatUpdateNotification({toUserId})
+        yield sendNotification(uid, title, message);
+        if (expertStatusData.profileInfo.phoneNumber.length) {
+          yield sendSms(message, expertStatusData.profileInfo.phoneNumber);
+        }
       } else {
         yield put(
           showOrHideModal(
@@ -213,7 +222,7 @@ function* sendMessageToUser({data}) {
     } else {
       const state = yield select();
       const expertStatusData = state.chat.expertStatusData;
-      const toUserId = expertStatusData.toUserId;
+      const uid = expertStatusData.uid;
       const userData = state.user.data;
       const questionData = Object.assign({}, state.chat.questionData);
       var unreadCount = questionData.expertUnreadCount
@@ -240,13 +249,16 @@ function* sendMessageToUser({data}) {
       };
 
       yield sendMessage(params);
+      if (expertStatusData.profileInfo.phoneNumber.length) {
+        yield sendSms(message, expertStatusData.profileInfo.phoneNumber);
+      }
       questionData.expertUnreadCount = unreadCount;
       const dataResponse = {
         questionData,
       };
 
       yield put(chatMessageSuccess(dataResponse));
-      yield sendChatUpdateNotification({toUserId})
+      yield sendNotification(uid, title, message);
     }
   } catch (error) {
     yield put(hideApiLoader());
@@ -255,15 +267,14 @@ function* sendMessageToUser({data}) {
   }
 }
 
-function* loadMessagesOfUser({data, dispatch}) {
-  const lang = yield select((state) => state.language);
+function* loadMessagesOfUser({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
-    yield put(showApiLoader(lang.apiLoader.loadingText));
+    yield put(showApiLoader());
     let isFirstTime = true;
     loadMessagesObserver = yield loadMessages(
       data,
-      (querySnapshot) => {
-        displayConsole('inside loadMessagesOfUser message', querySnapshot.docs);
+      querySnapshot => {
         const response = {
           success: true,
           messages: querySnapshot.docs,
@@ -279,13 +290,9 @@ function* loadMessagesOfUser({data, dispatch}) {
           updateReadMessageStatus(obj);
           isFirstTime = false;
         }
-        displayConsole('data loadMessagesOfUser', data);
-        displayConsole(
-          '--------------**** loadMessagesOfUser end ********-----------\n\n',
-        );
       },
-      (error) => {
-        const {message} = error;
+      error => {
+        const { message } = error;
 
         const data = {
           success: false,
@@ -293,10 +300,6 @@ function* loadMessagesOfUser({data, dispatch}) {
         };
         dispatch(hideApiLoader());
         dispatch(loadMessagesError(data.message));
-        displayConsole('data loadMessagesOfUser', data);
-        displayConsole(
-          '--------------**** loadMessagesOfUser end ********-----------\n\n',
-        );
       },
     );
   } catch (error) {
@@ -306,52 +309,39 @@ function* loadMessagesOfUser({data, dispatch}) {
   }
 }
 
-function* setExpertRating({
-  data: {questionId, userRating, expertId: uid, navigation},
-}) {
+function* setExpertRating({ data: { questionId, userRating, expertId: uid } }) {
   try {
-    yield updateQuestion({isRated: true}, questionId);
-    yield updateUserData({userRating}, uid);
-    // yield getExpertsDetailsAsync();
+    yield updateQuestion({ isRated: true }, questionId);
+    yield updateUserData({ userRating }, uid);
   } catch (error) {
     console.error(error);
   }
-
-  navigation.goBack();
 }
 
-function* checkExpertStatus({data, dispatch}) {
+function* checkExpertStatus({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
-    displayConsole('data', data);
-    const {expertInfo, questionData} = data;
+    const { expertInfo, questionData } = data;
     checkStatusObserver = yield checkStatus(
       {
         id: expertInfo.uid,
       },
-      (querySnapshot) => {
-        displayConsole('inside checkExpertStatus', querySnapshot.data());
+      querySnapshot => {
         dispatch(checkExpertStatusSuccess(querySnapshot.data()));
-        displayConsole(
-          '--------------**** checkExpertStatus end ********-----------\n\n',
-        );
       },
-      (error) => {
-        const {message} = error;
+      error => {
+        const { message } = error;
 
         const data = {
           success: false,
           message: message,
         };
         dispatch(loadMessagesError(data.message));
-        displayConsole('data', data);
-        displayConsole(
-          '--------------**** checkExpertStatus end ********-----------\n\n',
-        );
       },
     );
     if (questionData) {
       yield delay(delayTime);
-      yield checkQuestStatus({data: {questionData}, dispatch});
+      yield checkQuestStatus({ data: { questionData }, dispatch });
     }
   } catch (error) {
     displayConsole('checkExpertStatus  error ', error);
@@ -359,33 +349,25 @@ function* checkExpertStatus({data, dispatch}) {
   }
 }
 
-function* checkQuestStatus({data, dispatch}) {
-  const lang = yield select((state) => state.language);
+function* checkQuestStatus({ data, dispatch }) {
+  const lang = yield select(state => state.language);
   try {
-    displayConsole('data', data);
-    const {questionData} = data;
+    const { questionData } = data;
     checkQuestionStatusObserver = yield checkQuestionStatus(
       {
         id: questionData.questionId,
       },
-      (querySnapshot) => {
-        displayConsole('inside checkQuestStatus', querySnapshot.data());
+      querySnapshot => {
         dispatch(checkQuestionStatusSuccess(querySnapshot.data()));
-        displayConsole(
-          '--------------**** checkQuestStatus end ********-----------\n\n',
-        );
       },
-      (error) => {
-        const {message} = error;
+      error => {
+        const { message } = error;
 
         const data = {
           success: false,
           message: message,
         };
         displayConsole('data', data);
-        displayConsole(
-          '--------------**** checkQuestStatus end ********-----------\n\n',
-        );
       },
     );
   } catch (error) {
@@ -394,9 +376,9 @@ function* checkQuestStatus({data, dispatch}) {
   }
 }
 
-function* toggleUserStatus({data}) {
+function* toggleUserStatus({ data }) {
   try {
-    const {toggleStatusParams, questionData} = data;
+    const { toggleStatusParams, questionData } = data;
     yield updateStatus(toggleStatusParams);
     if (questionData) {
       const params = {

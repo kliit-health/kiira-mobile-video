@@ -4,27 +4,27 @@ import {
   CANCEL_APPOINTMENT,
   RATE_VISIT,
 } from '~/redux/types';
-import {getUser} from '~/redux/actions';
-import {put, takeEvery} from 'redux-saga/effects';
+import { getUser } from '~/redux/actions';
+import { put, takeEvery } from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
   updateCredits,
   setVideoVisitRating,
+  sendSms,
+  sendNotification,
 } from '~/utils/firebase';
-import {
-  showApiLoader,
-  hideApiLoader,
-} from '~/components/customLoader/action';
-import {showOrHideModal} from '~/components/customModal/action';
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
+import { showOrHideModal } from '~/components/customModal/action';
 import { updateUser } from '../../../../redux/actions';
 
-function* getAppointments({data}) {
+function* getAppointments({ data }) {
   try {
     yield put(showApiLoader());
     const appointments = yield getAppointmentsAsync(data.uid);
 
-    if (appointments) yield put({type: FETCH_APPOINTMENTS, data: appointments});
+    if (appointments)
+      yield put({ type: FETCH_APPOINTMENTS, data: appointments });
 
     yield put(hideApiLoader());
   } catch (error) {
@@ -34,8 +34,11 @@ function* getAppointments({data}) {
 
 function* cancelAppointment(data) {
   const {
-    data: {uid, credits},
+    data: { uid, credits, expert },
   } = data;
+
+  const title = 'Cancellation';
+  const message = 'An appointment has been canceled';
 
   try {
     yield put(showApiLoader());
@@ -48,14 +51,19 @@ function* cancelAppointment(data) {
         ),
       );
     } else {
-      if(credits === 0) {
-        yield put(updateUser({assessment: null}))
+      if (credits === 0) {
+        yield put(updateUser({ assessment: null }));
       }
 
       yield updateCredits(credits, data);
       yield put(getUser());
+      if (expert.profileInfo.phoneNumber.length) {
+        yield sendSms(message, expert.profileInfo.phoneNumber);
+      }
+
+      yield sendNotification(expert.uid, title, message);
     }
-    yield put({type: FETCH_APPOINTMENTS, data: appointments});
+    yield put({ type: FETCH_APPOINTMENTS, data: appointments });
     yield put(hideApiLoader());
   } catch (error) {
     yield put(hideApiLoader());
@@ -63,8 +71,8 @@ function* cancelAppointment(data) {
   }
 }
 
-function* setExpertRating({data}) {
-  const {navigation} = data;
+function* setExpertRating({ data }) {
+  const { navigation } = data;
   try {
     yield setVideoVisitRating(data);
   } catch (error) {
