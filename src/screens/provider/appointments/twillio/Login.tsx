@@ -110,8 +110,7 @@ const ExpertTwillioLogin = ({ navigation }) => {
 
   const sessionStart = () => {
     const title = 'Kiira Health Visit';
-    const body =
-      'Your provider has join your video session please return the App select Appointments to Begin your visit';
+    const body = 'Your provider has joined your video session.';
     setLoaderVisible(true);
     dispatch(
       setExpertCallConfig({

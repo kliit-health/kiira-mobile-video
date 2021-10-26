@@ -1,6 +1,6 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import ExpertHeader from '../../../../../components/expertHeader';
-import {ScrollView, View} from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Pregnancy from './components/pregnancy';
 import GYN from './components/gyn';
 import PMH from './components/pmh';
@@ -14,11 +14,11 @@ import Plan from './components/plan';
 import Summary from './components/summary';
 import styles from './style';
 
-const Recap = (props) => {
+const Recap = props => {
   const {
     navigation: {
       state: {
-        params: {item, short, title},
+        params: { item, short, title },
       },
     },
   } = props;

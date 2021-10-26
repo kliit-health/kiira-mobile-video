@@ -28,7 +28,10 @@ const App = () => {
 
   FastImage.preload([
     {
-      uri: 'https://firebasestorage.googleapis.com/v0/b/kliit-health-app.appspot.com/o/Kliit%2F158453698551228C511E5-726E-4A6A-B48F-5789FB54A554.jpg?alt=media&token=0e896a21-1c3e-4fb8-b401-a3724d60339b',
+      uri: 'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fcandice.png?alt=media&token=3b7e91cf-edbf-4a21-a377-64bbb573a11f',
+    },
+    {
+      uri: 'https://firebasestorage.googleapis.com/v0/b/kiira-health-app.appspot.com/o/Kiira%2Fplaceholder.png?alt=media&token=ea401fa3-3f5c-4c29-9109-f1d0e4bbffdf',
     },
   ]);
 
