@@ -12,7 +12,7 @@ const NoProviders = () => {
             />
             <Text style={styles.title}>No Providers found</Text>
             <Text style={styles.subtitle}>
-                We'll notifiy you when providers are available in your area
+                We'll notify you when providers are available in your area.
             </Text>
         </View>
     );

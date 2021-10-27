@@ -95,7 +95,7 @@ export default {
         weAreSorry: "We're sorry to hear this.",
         youAreNotAlone: 'Many folks experience this. You are not alone.',
         expertsNetwork:
-            'Kiira network of expertsis available to support you throught this difficult time.',
+            'Kiira network of experts is available to support you throught this difficult time.',
     },
     birth: {
         title: 'I Have Given Birth',
@@ -232,7 +232,7 @@ export default {
         genderFilterTitle: 'Show me experts who are…',
     },
     errorMessage: {
-        serverError: 'Something went wrong please try after some time',
+        serverError: 'Something went wrong, please try again later.',
         noDataAvailable: 'No data available',
         userNotExist: 'User does not exist',
         invalidSecretKey: 'Invalid secret key.',
@@ -255,7 +255,7 @@ export default {
         Title: 'Forgot Password',
         Subtitle: 'Please enter your registered email to reset your password',
         resetEmailSentMessage:
-            'A password reset message sent to your email address. Please click the link in that message to reset your password.',
+            'A password reset message has been sent to your email address. Please click the link in that message to reset your password.',
     },
     lifestyle: {
         title: 'Lifestyle',
@@ -287,7 +287,7 @@ export default {
         viewDetails: 'View Details',
         videoWith: 'Video visit with',
         afterVisit:
-            'After visit summary has not been provided by your expert. Check again later.',
+            'Your after visit summary has not been provided by your expert. Please check back later.',
     },
     basicInfo: {
         title: 'Basic Information',

@@ -59,8 +59,26 @@ const Future = ({ test, visit, date, navigation }) => {
     const callConfig = useSelector((state: RootState) => state.twillio);
     const { staticImages } = constants.App;
 
-    const { uid, calendarID, reason, id, expert, prepaid } = visit;
-    const { credits, duration } = reason.sessionType;
+    const {
+        uid,
+        calendarID,
+        appointmentType = null,
+        reason,
+        id,
+        expert,
+        prepaid,
+    } = visit;
+
+    const credits =
+        typeof appointmentType !== 'string' && appointmentType
+            ? appointmentType.credits
+            : reason.sessionType.credits;
+
+    const duration =
+        typeof appointmentType !== 'string' && appointmentType
+            ? appointmentType.duration
+            : reason.sessionType.duration;
+
     const data = {
         uid,
         id,
@@ -158,7 +176,7 @@ const Future = ({ test, visit, date, navigation }) => {
     const handleSameDay = () =>
         dispatch(
             showOrHideModal(
-                'Appointments can not be cancelled or rescheduled if your appointment is within 24 hours.',
+                'Appointments cannot be canceled or rescheduled if your appointment is within 24 hours.',
             ),
         );
 

@@ -30,8 +30,11 @@ const {
 } = globalStyles;
 
 export const Past = ({ visit, date }) => {
-    const { expert, reason, locked } = visit;
-    const { duration } = reason.sessionType;
+    const { expert, appointmentType = null, reason, locked } = visit;
+    const duration =
+        typeof appointmentType !== 'string' && appointmentType
+            ? appointmentType.duration
+            : reason.sessionType.duration;
 
     const handleVisitSummary = () => {
         navigation.navigate('VisitOverView', { visit });
