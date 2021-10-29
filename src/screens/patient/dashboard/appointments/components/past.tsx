@@ -5,7 +5,7 @@ import { Text, Row, Line, Column, Conditional } from '~/components';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from '../style';
 import { default as globalStyles } from '~/components/styles';
-import { colors, screenNames } from '~/utils/constants';
+import { colors } from '~/utils/constants';
 
 const {
     pad_b,

@@ -22,7 +22,6 @@ import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import Book from '../screens/patient/dashboard/book';
 import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
-import BuyingCredit from '../screens/patient/dashboard/getTreatment/payment/buyingCredit';
 import Calendar from '../screens/patient/dashboard/book/screens/calendar';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
@@ -136,20 +135,6 @@ const AuthStack = createStackNavigator(
     {
         headerMode: 'none',
         initialRouteName: 'Landing',
-        defaultNavigationOptions: {
-            ...TransparentStyle,
-        },
-    },
-);
-
-const PaymentStack = createStackNavigator(
-    {
-        [screenNames.BuyingCredit]: { screen: BuyingCredit },
-    },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-        initialRouteName: screenNames.BuyingCredit,
         defaultNavigationOptions: {
             ...TransparentStyle,
         },
@@ -540,7 +525,6 @@ const AppStackExpert = createStackNavigator(
         MedicalHistoryExpert: { screen: MedicalHistoryExpert },
         Confirm: { screen: Confirm },
         PatientProfile: { screen: PatientProfile },
-        // Payment: { screen: Payment },
         PersonalMedicalHistory: { screen: PersonalMedicalHistory },
         PhysicalExam: { screen: PhysicalExam },
         Plan: { screen: Plan },
@@ -643,7 +627,6 @@ const MainAppStack = createStackNavigator(
 const AppStack = createStackNavigator(
     {
         MainApp: MainAppStack,
-        // Payment: PaymentStack,
     },
     {
         mode: 'modal',
@@ -672,30 +655,30 @@ const AppNavigator = createSwitchNavigator(
 const prevGetStateForActionHomeStack = AuthStack.router.getStateForAction;
 
 AuthStack.router.getStateForAction = (action, state) => {
-    // if (state && action.type === 'Navigation/REPLACE') {
-    //     const routes = state.routes.slice(0, state.routes.length - 1);
-    //     routes.push(action);
-    //     return {
-    //         ...state,
-    //         index: routes.length - 1,
-    //         routes,
-    //     };
-    // }
+    if (state && action.type === 'Navigation/REPLACE') {
+        const routes = state.routes.slice(0, state.routes.length - 1);
+        routes.push(action);
+        return {
+            ...state,
+            index: routes.length - 1,
+            routes,
+        };
+    }
     return prevGetStateForActionHomeStack(action, state);
 };
 
 const prevGetStateForActionAppStack = AppStack.router.getStateForAction;
 
 AppStack.router.getStateForAction = (action, state) => {
-    // if (state && action.type === 'Navigation/REPLACE') {
-    //     const routes = state.routes.slice(0, state.routes.length - 1);
-    //     routes.push(action);
-    //     return {
-    //         ...state,
-    //         index: routes.length - 1,
-    //         routes,
-    //     };
-    // }
+    if (state && action.type === 'Navigation/REPLACE') {
+        const routes = state.routes.slice(0, state.routes.length - 1);
+        routes.push(action);
+        return {
+            ...state,
+            index: routes.length - 1,
+            routes,
+        };
+    }
     return prevGetStateForActionAppStack(action, state);
 };
 
