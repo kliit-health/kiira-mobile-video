@@ -57,7 +57,7 @@ const Payment = () => {
         insurance,
     } = user.profileInfo;
 
-    const { email, uid, organizationId, plan, visits } = user;
+    const { email, uid, organizationId, plan, visits, prepaid } = user;
     const { visit } = appointments;
     const { expert } = visit;
 
@@ -91,7 +91,7 @@ const Payment = () => {
             uid: expert.uid,
         },
         visits,
-        prepaid: null,
+        prepaid,
     };
 
     const bookVisit = () => {
@@ -99,10 +99,11 @@ const Payment = () => {
     };
 
     const calculateTotal = () => {
-        if (appointments.visit.details.price <= visits * 60) {
+        const total = visits + prepaid;
+        if (appointments.visit.details.price <= total * 60) {
             return 0;
         } else {
-            return appointments.visit.details.price - visits * 60;
+            return appointments.visit.details.price - total * 60;
         }
     };
 
@@ -157,7 +158,7 @@ const Payment = () => {
             if (confirmError) {
                 console.log(confirmError);
             } else {
-                // bookVisit();
+                bookVisit();
             }
         }
     };
@@ -220,12 +221,12 @@ const Payment = () => {
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Kiira.Text options={[pad_h, large]}>
-                        {` -$${appointments.visit.details.price} credit ($${
-                            visits * 60
-                        } available)`}
+                        {` -$${appointments.visit.details.price} ($${
+                            (visits + prepaid) * 60
+                        } credit available)`}
                     </Kiira.Text>
                 </Kiira.Row>
-                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
+
                 <Kiira.Conditional if={balance > 0}>
                     <>
                         <CardField

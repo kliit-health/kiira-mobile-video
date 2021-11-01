@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, FlatList } from 'react-native';
+import { TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAppointmentExpert } from '~/redux/reducers/appointments';
@@ -33,6 +33,7 @@ const {
     radius_sm,
     hide_overflow,
     no_pad_v,
+    pad_v,
 } = select_provider;
 
 const SelectProvider = () => {
@@ -103,7 +104,6 @@ const SelectProvider = () => {
                     <FastImage
                         testID={expertName}
                         style={[pad_h, image_md]}
-                        resizeMode="contain"
                         source={{
                             uri: profileImageUrl,
                             priority: FastImage.priority.normal,
@@ -135,7 +135,6 @@ const SelectProvider = () => {
         >
             <FastImage
                 style={[pad_h, image_lg, white_br, center, { marginTop: -50 }]}
-                resizeMode="contain"
                 source={{
                     uri: expert.profileInfo.profileImageUrl,
                     priority: FastImage.priority.normal,
@@ -175,22 +174,24 @@ const SelectProvider = () => {
                         }}
                     />
                 </Kiira.Row>
-                <Kiira.Text options={[pad_h, xLarge]}>Bio</Kiira.Text>
-                <Kiira.Text options={[pad]}>
-                    {expert.profileInfo.bio}
-                </Kiira.Text>
-                <Kiira.Text options={[pad_h, xLarge]}>Languages</Kiira.Text>
-                <Kiira.Row options={[pad]}>
-                    {expert.profileInfo.languages.map(lang => (
-                        <Kiira.Text
-                            key={lang.value}
-                        >{`${lang.value}  `}</Kiira.Text>
-                    ))}
-                </Kiira.Row>
+                <ScrollView>
+                    <Kiira.Text options={[pad_h, xLarge]}>Bio</Kiira.Text>
+                    <Kiira.Text options={[pad]}>
+                        {expert.profileInfo.bio}
+                    </Kiira.Text>
+                    <Kiira.Text options={[pad_h, xLarge]}>Languages</Kiira.Text>
+                    <Kiira.Row options={[pad]}>
+                        {expert.profileInfo.languages.map(lang => (
+                            <Kiira.Text
+                                key={lang.value}
+                            >{`${lang.value}  `}</Kiira.Text>
+                        ))}
+                    </Kiira.Row>
+                </ScrollView>
                 <Kiira.Button
                     testID="See Availability"
                     onPress={handlePress}
-                    style={{ container: [pad_h, sm_pad_v] }}
+                    style={{ container: [pad_h, pad_v] }}
                     title="See Availability"
                 />
             </Kiira.Column>

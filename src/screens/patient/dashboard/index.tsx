@@ -36,7 +36,7 @@ const Dashboard = ({ navigation }) => {
             appVersion: DeviceInfo.getVersion(),
         };
         dispatch(actions.updateUser({ device }));
-        dispatch(getAppointmentsList({ uid: user.uid }));
+        dispatch(getAppointmentsList(user.uid));
     }, []);
 
     useDidMount(() => {

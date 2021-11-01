@@ -393,7 +393,7 @@ export async function makeAppointment(data) {
     }
 }
 
-export async function cancelAppointmentAsync({ id, uid, expert }) {
+export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
 
@@ -1406,35 +1406,42 @@ export async function payAmountWithToken(tokenID, amount) {
 }
 
 export async function updateCredits(
-    visits: number,
     payload: object,
-    prepaid?: boolean,
+    credits: object,
+    addition: boolean,
 ) {
-    const { uid } = payload;
+    const { uid } = payload.data;
+    const {
+        required,
+        monthly,
+        prepaid,
+        redeemPurchased,
+        redeemMonthly,
+        isPrepaid,
+    } = credits;
 
     try {
-        const docData = await firestore().collection('users').doc(uid).get();
-        const user = docData.data();
-
-        if (!prepaid) {
-            await firestore()
-                .collection('users')
-                .doc(uid)
-                .update({ visits: user.visits + visits });
-
-            return { ok: true };
-        } else {
-            const purchased = payload.prepaid.amount;
-            const monthlyCredit =
-                payload.reason.sessionType.credits - payload.prepaid.amount;
+        if (addition) {
             await firestore()
                 .collection('users')
                 .doc(uid)
                 .update({
-                    visits: user.visits + monthlyCredit,
-                    prepaid: user.prepaid + purchased,
+                    visits: monthly + redeemMonthly,
+                    prepaid: isPrepaid
+                        ? prepaid + redeemPurchased
+                        : prepaid + required,
                 });
-
+            return { ok: true };
+        } else {
+            await firestore()
+                .collection('users')
+                .doc(uid)
+                .update({
+                    visits: monthly - redeemMonthly,
+                    prepaid: isPrepaid
+                        ? prepaid - redeemPurchased
+                        : prepaid - required,
+                });
             return { ok: true };
         }
     } catch (err) {
@@ -1519,7 +1526,7 @@ export const updateUserData = (updates, uid, merge = true) =>
         })(),
     );
 
-export async function getAppointments(uid) {
+export async function getAppointments(uid: string) {
     try {
         const document = firestore().collection('appointments').doc(uid);
         const appointments = await document.get();

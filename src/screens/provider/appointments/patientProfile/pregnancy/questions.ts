@@ -18,14 +18,14 @@ export const questions = [
         type: 'picker',
     },
     {
-        question: 'How many times has patient had an aborton?',
+        question: 'How many times has patient had an abortion?',
         textPrompt: 'Number of abortions',
         key: 'abortions',
         type: 'picker',
     },
     {
-        question: 'How many times has patient had a cesarean section?',
-        textPrompt: 'Number of cesarean sections',
+        question: 'How many times has patient had a Cesarean section?',
+        textPrompt: 'Number of Cesarean sections',
         key: 'cesarean',
         type: 'picker',
     },

@@ -44,7 +44,7 @@ const Appointments = ({ navigation }) => {
             setPast(past);
             setFuture(future);
         }
-    }, [visitData]);
+    }, [history]);
 
     const handleTabSelect = () => {
         setPastSelected(!pastSelected);

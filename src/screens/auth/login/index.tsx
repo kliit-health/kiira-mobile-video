@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { loginApi, resetLoginState } from '~/redux/reducers/login';
 import { CustomText, CustomInputText, CustomButton } from '~/components';
+import FastImage from 'react-native-fast-image';
 import { showOrHideModal } from '../../../components/customModal/action';
 import { isEmail } from '../../../utils/helper';
 import {
@@ -31,8 +32,8 @@ const Login = ({ navigation }) => {
         (state: RootState) => state.login.loginFailure,
     );
 
-    const [email, setEmail] = useState('aaron@kiira.io');
-    const [password, setPassword] = useState('Test1234!');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [biometricType, setBiometricType] = useState('');
 
     useEffect(() => {
@@ -108,7 +109,7 @@ const Login = ({ navigation }) => {
                     navigation.goBack();
                 }}
             >
-                <Image
+                <FastImage
                     resizeMode="contain"
                     source={icons.cross}
                     style={styles.backIcon}
@@ -120,12 +121,12 @@ const Login = ({ navigation }) => {
     const Logo = () => {
         return (
             <View style={styles.contentContainer}>
-                <Image
+                <FastImage
                     resizeMode="contain"
                     source={images.kiiraLogo}
                     style={styles.logo}
                 />
-                <Image
+                <FastImage
                     resizeMode="contain"
                     source={images.kiiraLogo2}
                     style={styles.logo2}
@@ -184,7 +185,7 @@ const Login = ({ navigation }) => {
                 disabled={biometricType === ''}
                 onPress={loginWithBiometrics}
             >
-                <Image
+                <FastImage
                     resizeMode="contain"
                     source={
                         biometricType === 'FaceID'
