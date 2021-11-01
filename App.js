@@ -8,6 +8,7 @@ import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
 import CustomToast from './src/components/customToast';
+import notifee from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import analytics from '@react-native-firebase/analytics';
 import { signOut } from '~/redux/reducers/account';
@@ -31,7 +32,7 @@ const App = () => {
         },
     ]);
 
-    useEffect(async () => {
+    useEffect(() => {
         LogBox.ignoreAllLogs();
         BackHandler.addEventListener(
             'hardwareBackPress',
@@ -39,20 +40,6 @@ const App = () => {
         );
 
         AppState.addEventListener('change', _handleAppStateChange);
-
-        const authStatus = await messaging().requestPermission();
-        const enabled =
-            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-        if (enabled) {
-            messaging().setBackgroundMessageHandler(async remoteMessage => {
-                console.log(
-                    'Message handled in the background!',
-                    remoteMessage,
-                );
-            });
-        }
     }, []);
 
     useEffect(() => {
@@ -71,35 +58,8 @@ const App = () => {
         );
     });
 
-    useEffect(() => {
-        (async () => {
-            const enabled = await messaging().hasPermission();
-            if (enabled) {
-                messaging().setBackgroundMessageHandler(async remoteMessage => {
-                    console.log(
-                        'Message handled in the background!',
-                        remoteMessage,
-                    );
-                });
-            } else {
-                try {
-                    await messaging().requestPermission();
-                    messaging().setBackgroundMessageHandler(
-                        async remoteMessage => {
-                            console.log(
-                                'Message handled in the background!',
-                                remoteMessage,
-                            );
-                        },
-                    );
-                } catch (error) {
-                    console.log('permission rejected');
-                }
-            }
-        })();
-    }, []);
-
-    const _handleAppStateChange = nextAppState => {
+    const _handleAppStateChange = async nextAppState => {
+        await notifee.setBadgeCount(0);
         let timeoutId;
 
         if (nextAppState === 'active') {
