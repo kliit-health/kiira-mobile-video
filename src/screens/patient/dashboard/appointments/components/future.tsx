@@ -19,7 +19,7 @@ import { showOrHideModal } from '~/components/customModal/action';
 import styles from '../style';
 import { useDispatch } from 'react-redux';
 import { cancelAppointment, setVisit } from '~/redux/reducers/appointments';
-import constants, { text } from '~/utils/constants';
+import constants from '~/utils/constants';
 import moment from 'moment';
 import { CameraBlack } from '~/svgs';
 
