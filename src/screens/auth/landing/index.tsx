@@ -7,17 +7,13 @@ import {
     RESULTS,
 } from 'react-native-permissions';
 import SplashScreen from 'react-native-smart-splash-screen';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import VersionCheck from 'react-native-version-check';
-import Logo from '~/svgs/logo.svg';
 import { Carousel, PageIndicator } from '~/components';
-import { Page, Controls } from './sections';
+import { Page } from './sections';
 import styles, { indicatorStyles } from './styles';
 import { pages } from './model';
 
 const Landing = () => {
-    const insets = useSafeAreaInsets();
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             checkMultiple([
@@ -68,12 +64,8 @@ const Landing = () => {
     }, []);
 
     return (
-        <View
-            testID="Landing"
-            style={[styles.root, { paddingTop: insets.top > 0 ? 50 : 20 }]}
-        >
+        <View testID="Landing" style={[styles.root]}>
             <StatusBar hidden />
-            <Logo />
             <Carousel
                 pageIndicator={props => (
                     <PageIndicator styles={indicatorStyles} {...props} />
@@ -83,7 +75,6 @@ const Landing = () => {
                     <Page key={props.title} {...props} />
                 ))}
             </Carousel>
-            <Controls />
         </View>
     );
 };

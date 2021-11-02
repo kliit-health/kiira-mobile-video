@@ -1,38 +1,64 @@
 import { StyleSheet } from 'react-native';
-import { text } from '~/utils/constants';
+import { text, colors } from '~/utils/constants';
 
 export default StyleSheet.create({
-    root: {
-        flex: 1,
-        margin: 10,
-        height: '100%',
+    activate: {
+        color: colors.primaryBlue,
+        backgroundColor: colors.white,
+        width: '70%',
+        padding: 10,
+        textAlign: 'center',
+        borderRadius: 20,
+        overflow: 'hidden',
     },
-    image: {
-        width: '100%',
-        height: 300,
-    },
-    imageContainer: {
+
+    activateContainer: {
         alignItems: 'center',
-        justifyContent: 'center',
-        flex: 2,
     },
+
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-    title: {
-        fontFamily: text.fontFamily.poppinsRegular,
-        fontSize: 22,
-        fontWeight: '400',
-        textAlign: 'center',
-        padding: 10,
-    },
+
     description: {
-        fontFamily: text.fontFamily.poppinsLight,
-        fontSize: 16,
-        padding: 10,
-        textAlign: 'center',
-        marginBottom: 40,
+        color: colors.white,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.large,
+        padding: 20,
+    },
+
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+
+    imageContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 2,
+    },
+
+    login: {
+        color: colors.white,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.large,
+        alignSelf: 'flex-end',
+        paddingTop: 30,
+        paddingRight: 20,
+    },
+
+    root: {
+        flex: 1,
+        height: '100%',
+    },
+
+    title: {
+        color: colors.white,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.xxxLarge,
+        fontWeight: '400',
+        paddingHorizontal: 20,
     },
 });

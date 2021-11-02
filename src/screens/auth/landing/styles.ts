@@ -5,13 +5,12 @@ export default StyleSheet.create({
     root: {
         backgroundColor: colors.white,
         alignItems: 'center',
-        padding: 10,
         flex: 1,
     },
 });
 
 export const indicatorStyles = StyleSheet.create({
     indicatorContainer: {
-        bottom: Dimensions.get('screen').height / 9,
+        bottom: Dimensions.get('screen').height / 2.75,
     },
 });
