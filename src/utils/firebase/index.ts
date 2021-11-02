@@ -1782,15 +1782,6 @@ export async function sendAppointmentNotification(uid: String, time) {
     }
 }
 
-export async function sendChatUpdateNotification(uid: String) {
-    try {
-        await functions().httpsCallable('sendPushNotificationChat')({ uid });
-        return;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export async function addClaimsToUser(
     organizationId: string,
     uid: string,
@@ -1804,5 +1795,43 @@ export async function addClaimsToUser(
         });
     } catch (error) {
         console.log(error);
+    }
+}
+
+export async function sendNotification(
+    uid: String,
+    title: String,
+    body: String,
+) {
+    try {
+        await functions().httpsCallable('sendPushNotificationMobile')({
+            uid,
+            title,
+            body,
+        });
+        return;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function usePromoCode(code: string) {
+    try {
+        await functions().httpsCallable('usePromoCode')({ code });
+        return;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function sendSms(message: string, phone: string) {
+    try {
+        await functions().httpsCallable('sendSms')({
+            message,
+            phoneNumber: phone,
+        });
+        return;
+    } catch (error) {
+        console.log('SMS ERROR:', error);
     }
 }

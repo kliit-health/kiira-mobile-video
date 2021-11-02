@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { shape, object, bool, string, func, number, oneOf } from 'prop-types';
-import { View, TouchableOpacity } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';
@@ -19,6 +18,13 @@ const Avatar = ({
     online,
     deleteMode,
 }) => {
+    useEffect(() => {
+        (async () => {
+            await Image.prefetch(source);
+            setLoading(false);
+        })();
+    }, []);
+
     const [loading, setLoading] = useState(true);
 
     const styles = {
@@ -53,23 +59,15 @@ const Avatar = ({
         onLayout(layout);
     };
 
-    const handleEndLoad = () => {
-        setLoading(false);
-    };
-
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
             <View onLayout={handleLayout} style={styles.root}>
-                <FastImage
+                <Image
                     style={styles.image}
-                    onLoadEnd={handleEndLoad}
                     source={
                         loading
                             ? require('../../../assets/profile_img_placeholder.png')
-                            : {
-                                  uri: source,
-                                  priority: FastImage.priority.normal,
-                              }
+                            : { uri: source }
                     }
                     resizeMode={resizeMode}
                 />
