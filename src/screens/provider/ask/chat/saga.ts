@@ -9,6 +9,8 @@ import {
     updateUnreadCount,
     checkQuestionStatus,
     resolvedQuestion,
+    sendNotification,
+    sendSms,
 } from '~/utils/firebase';
 import {
     loadExpertMessagesSuccess,
@@ -42,22 +44,23 @@ function* sendMessageToUser({ data }) {
     try {
         const { messageParams, imageParams, id, lastMessage, questionId } =
             data;
+        const state = yield select();
+        const userStatusData = state.chatExpert.userStatusData;
+        const userData = state.user.data;
+        const { phoneNumber, enableText } = userStatusData.profileInfo;
+        const questionData = Object.assign({}, state.chatExpert.questionData);
+        const message = 'Your question has been updated on Kiira';
+        const title = 'Question Update';
+        var unreadCount = questionData.userUnreadCount
+            ? questionData.userUnreadCount
+            : 0;
+
         if (imageParams) {
-            yield put(showApiLoader(lang.apiLoader.loadingText));
+            yield put(showApiLoader());
             const responseImage = yield uploadImage(imageParams);
             if (responseImage.success) {
                 const { downloadURL } = responseImage.data;
                 messageParams.image = downloadURL;
-                const state = yield select();
-                const userStatusData = state.chatExpert.userStatusData;
-                const userData = state.user.data;
-                const questionData = Object.assign(
-                    {},
-                    state.chatExpert.questionData,
-                );
-                var unreadCount = questionData.userUnreadCount
-                    ? questionData.userUnreadCount
-                    : 0;
                 if (
                     userStatusData &&
                     userStatusData.isActive &&
@@ -76,14 +79,18 @@ function* sendMessageToUser({ data }) {
                         userUnreadCount: unreadCount,
                     },
                 };
-                console.log('QUESTION PARAMS', params);
                 yield put(hideApiLoader());
                 yield sendMessage(params);
+                if (phoneNumber.length && enableText) {
+                    const message = 'Your question has been updated on Kiira';
+                    yield sendSms(message, phoneNumber);
+                }
                 questionData.userUnreadCount = unreadCount;
                 const dataResponse = {
                     questionData,
                 };
                 yield put(chatMessageExpertSuccess(dataResponse));
+                yield sendNotification(userStatusData.uid, title, message);
             } else {
                 yield put(
                     showOrHideModal(
@@ -122,22 +129,26 @@ function* sendMessageToUser({ data }) {
                     userUnreadCount: unreadCount,
                 },
             };
-            console.log('QUESTION PARAMS', params);
             yield sendMessage(params);
+            if (phoneNumber.length && enableText) {
+                yield sendSms(message, phoneNumber);
+            }
             questionData.userUnreadCount = unreadCount;
             const dataResponse = {
                 questionData,
             };
             yield put(chatMessageExpertSuccess(dataResponse));
+            yield sendNotification(userStatusData.uid, title, message);
         }
     } catch (error) {
         yield put(chatMessageExpertError());
     }
 }
+
 function* loadMessagesOfExpert({ data, dispatch }) {
     const lang = yield select(state => state.language);
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         let isFirstTime = true;
         loadMessagesObserver = yield loadMessages(
             data,

@@ -14,7 +14,6 @@ export default StyleSheet.create({
         paddingBottom: 45,
         marginLeft: 90,
         marginRight: 90,
-        backgroundColor: 'white',
     },
 
     parentContainerStyle: {

@@ -16,7 +16,6 @@ import Constant from '~/utils/constants';
 import { Avatar } from 'react-native-elements';
 import CustomInputText from '~/components/customInputText';
 import CustomSelectModal from '~/components/customselectModal';
-import DatePicker from '~/components/datePicker';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
 import { updateAccount } from '~/redux/reducers/account';
@@ -464,17 +463,6 @@ class Setting extends PureComponent {
                 </View>
 
                 <View style={styles.birthDayContainerStyle}>
-                    {/* <DatePicker
-                        selectedDate={dob}
-                        placeHolder={lang.addProfileData.yourBirthDay}
-                        textStyle={styles.birthDayTextStyle}
-                        onSelection={date => {
-                            console.log('---onSelection DatePicker---', date);
-                            this.setState({
-                                dob: date,
-                            });
-                        }}
-                    /> */}
                     <CustomInputText
                         onChangeText={value => this.setState({ dob: value })}
                         placeholder={'DOB'}

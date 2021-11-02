@@ -30,8 +30,11 @@ import {
     setVideoVisitRating,
     getDataFromTable,
     makeAppointment,
-    sendAppointmentNotification,
+    sendSms,
+    sendNotification,
 } from '~/utils/firebase';
+
+import moment from 'moment';
 
 function* getExperts({ payload }) {
     const lang = yield select(state => state.language);
@@ -94,15 +97,23 @@ function* getAllAppointmentDates({ payload }) {
     }
 }
 
-function* updateAppointment({ payload }) {
-    const {
-        data: { time, reason, uid },
+function* updateAppointment({
+    data,
+    data: {
+        data: { time, appointmentType },
         navigation,
-    } = payload;
-    const { assessment } = yield select(state => state.user.data);
+    },
+}) {
+    const { assessment, profileInfo, uid, enableText } = yield select(
+        state => state.user.data,
+    );
+    const title = 'Reschedule';
+    const message = `Your appointment has been rescheduled \n\n ${moment(
+        time,
+    ).format('llll')}`;
     try {
         yield put(showApiLoader());
-        let appointment = yield changeAppointmentAsync(payload);
+        let appointment = yield changeAppointmentAsync(data);
         yield put(hideApiLoader());
 
         if (appointment && !appointment.availible) {
@@ -114,14 +125,19 @@ function* updateAppointment({ payload }) {
             navigation.navigate('Appointments');
         }
 
-        if (assessment && reason.title === 'Health Check') {
+        if (assessment && appointmentType.title === 'Health Check') {
             yield put(updateUser({ assessment: { ...assessment, time } }));
         }
 
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
         );
+        yield put(getAppointmentsList({ uid: data.data.uid }));
+        if (profileInfo.phoneNumber.length && enableText) {
+            yield sendSms(message, profileInfo.phoneNumber);
+        }
 
+        yield sendNotification(uid, title, message);
         yield put(getAppointmentsList(uid));
 
         navigation.navigate('Appointments');
@@ -142,8 +158,13 @@ function* getAppointments() {
     }
 }
 
-function* cancelTheAppointment({ payload }) {
-    const { credits } = payload.data;
+function* cancelTheAppointment(data) {
+    const {
+        data: { uid, credits, expert },
+    } = data;
+
+    const title = 'Cancellation';
+    const message = 'An appointment has been canceled';
 
     const totals = {
         creditsRequired: 1,
@@ -169,8 +190,13 @@ function* cancelTheAppointment({ payload }) {
                 yield put(updateUser({ assessment: null }));
             }
 
-            yield updateCredits(payload, totals, true);
+            yield updateCredits(data, totals, true);
             yield put(getUser());
+            if (expert.profileInfo.phoneNumber.length) {
+                yield sendSms(message, expert.profileInfo.phoneNumber);
+            }
+
+            yield sendNotification(expert.uid, title, message);
         }
         yield getAppointments();
         yield put(hideApiLoader());
