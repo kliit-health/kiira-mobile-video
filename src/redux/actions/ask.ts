@@ -8,7 +8,6 @@ import {
     CLEAR_QUESTION_VALUE,
     UPDATE_USER_DATA,
     SET_QUESTION_TOPIC,
-    CLEAR_QUESTION_TOPIC,
 } from '~/redux/types';
 
 export const getRecentExpertsDataSuccess = data => ({

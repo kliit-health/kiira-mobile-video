@@ -11,7 +11,6 @@ const initialState = {
             image: '',
         },
     ],
-    messages: [],
     loadMessagesError: null,
     imageUrl: '',
     messageId: '',

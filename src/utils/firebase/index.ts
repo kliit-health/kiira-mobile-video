@@ -1771,17 +1771,6 @@ export async function authorizeVideo(uid) {
     }
 }
 
-export async function sendAppointmentNotification(uid: String, time) {
-    try {
-        await functions().httpsCallable(
-            'sendPushNotificationAppointmentCreate',
-        )({ uid, time });
-        return;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export async function addClaimsToUser(
     organizationId: string,
     uid: string,
@@ -1818,6 +1807,20 @@ export async function sendNotification(
 export async function usePromoCode(code: string) {
     try {
         await functions().httpsCallable('usePromoCode')({ code });
+        return;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function sendAppointmentNotification(uid: String, time) {
+    try {
+        await functions().httpsCallable(
+            'sendPushNotificationAppointmentCreate',
+        )({
+            uid,
+            time,
+        });
         return;
     } catch (error) {
         console.log(error);

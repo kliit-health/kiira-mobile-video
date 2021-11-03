@@ -6,7 +6,7 @@ import {
     getExpertsDataSuccess,
     getProfessionsDataSuccess,
     getLanguagesDataSuccess,
-} from './action';
+} from '~/redux/actions/chooseExpert';
 import { GET_EXPERTS_DATA } from '~/redux/types';
 import Constant from '~/utils/constants';
 import { displayConsole } from '~/utils/helper';

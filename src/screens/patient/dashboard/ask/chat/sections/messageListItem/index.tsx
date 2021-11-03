@@ -22,8 +22,10 @@ class MessageListItem extends React.PureComponent {
     }
 
     renderView(item, index, key, lastIndex) {
+        console.log('ITEM: ', item);
         const { staticImages } = Constant.App;
         item = item.data();
+
         if (item.type === 'User' || item.type === 'user') {
             return index === lastIndex - 1 ? (
                 <View>

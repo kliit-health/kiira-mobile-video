@@ -32,12 +32,12 @@ import {
     setQuestionId,
     checkExpertStatusSuccess,
     checkQuestionStatusSuccess,
-} from './action';
+} from '../actions/chat';
 import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
 import { displayConsole } from '~/utils/helper';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import { clearQuestionValue } from '../../ask/action';
+import { clearQuestionValue } from '../actions/ask';
 import moment from 'moment';
 
 let loadMessagesObserver;

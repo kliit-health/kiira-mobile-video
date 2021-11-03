@@ -16,7 +16,7 @@ export const navItems: Item[] = [
     {
         title: 'chat.primaryCare.title',
         description: 'chat.primaryCare.description',
-        destination: route.requestVisit,
+        destination: route.ask,
         icon: MedCross,
     },
     {
@@ -28,7 +28,7 @@ export const navItems: Item[] = [
     {
         title: 'chat.mentalHealth.title',
         description: 'chat.mentalHealth.description',
-        destination: route.appointments,
+        destination: route.ask,
         icon: Happy,
     },
     {

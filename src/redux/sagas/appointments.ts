@@ -32,6 +32,7 @@ import {
     makeAppointment,
     sendSms,
     sendNotification,
+    sendAppointmentNotification,
 } from '~/utils/firebase';
 
 import moment from 'moment';
@@ -217,6 +218,9 @@ function* setExpertRating({ payload }) {
 }
 
 function* setAppointment({ payload }) {
+    const { phoneNumber, enableText } = yield select(
+        state => state.user.data.profileInfo,
+    );
     const { time, reason, expert, visits, prepaid } = payload;
 
     const {
@@ -241,7 +245,6 @@ function* setAppointment({ payload }) {
     };
 
     if (payload.prepaidInfo.isPrePaid) {
-        console.log('isPrepaid');
         yield updateCredits({ data: payload }, totals, true);
         yield put(getUser());
     }
@@ -264,6 +267,12 @@ function* setAppointment({ payload }) {
             yield put(getUser());
             yield getAppointments();
             yield sendAppointmentNotification(uid, time);
+            if (phoneNumber.length && enableText) {
+                const message = `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
+                    time,
+                ).format('llll')}`;
+                yield sendSms(message, phoneNumber);
+            }
             navigation.navigate('Home');
             yield put(hideApiLoader());
         }

@@ -9,7 +9,10 @@ import {
     ScrollView,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { getExpertsData, clearChooseExpertState } from './action';
+import {
+    getExpertsData,
+    clearChooseExpertState,
+} from '~/redux/actions/chooseExpert';
 import styles from './style';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';
@@ -17,7 +20,7 @@ import { Rating } from 'react-native-elements';
 import CustomButton from '~/components/customButton';
 import InputText from '~/components/customInputText/simpleInputText';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { updateQuestion } from '../../ask/action';
+import { updateQuestion } from '~/redux/actions/ask';
 class ChooseExpert extends Component {
     public state: any;
     public props: any;

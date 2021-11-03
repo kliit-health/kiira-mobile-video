@@ -843,6 +843,7 @@ export enum route {
     healthAssesmentSchedule = 'HealthAssessmentSchedule',
     healthHistory = 'HealthHistory',
     requestVisit = 'RequestVisit',
+    chooseExpert = 'ChooseExpert',
 }
 
 export enum feature {

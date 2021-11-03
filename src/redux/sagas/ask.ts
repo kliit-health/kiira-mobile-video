@@ -11,9 +11,8 @@ import {
     getRecentExpertsDataSuccess,
     getQuestionDataSuccess,
     getPreviousQuestionDataSuccess,
-} from './action';
+} from '../actions/ask';
 import { GET_QUESTION_DATA, UPDATE_USER_DATA } from '~/redux/types';
-import { displayConsole } from '~/utils/helper';
 import auth from '@react-native-firebase/auth';
 import { tables } from '~/utils/constants';
 

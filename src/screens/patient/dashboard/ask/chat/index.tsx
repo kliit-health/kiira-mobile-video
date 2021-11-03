@@ -12,7 +12,7 @@ import {
     checkExpertStatus,
     toggleUserStatus,
     stopObserverChat,
-} from './action';
+} from '~/redux/actions/chat';
 import moment from 'moment';
 import { Container, Header, RatingModal } from '~/components';
 import { MessageList, Footer } from './sections';
