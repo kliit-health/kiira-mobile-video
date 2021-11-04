@@ -5,13 +5,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import { Image, View, StyleSheet } from 'react-native';
 import { Text } from '~/components';
-
 import Account from '../screens/patient/account';
 import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
 import AccountSupport from '../screens/support/account';
 import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addChild';
-import AddCreditOrDebitCard from '../screens/patient/dashboard/getTreatment/payment/AddCreditOrDebitCard';
 import Allergies from '../screens/patient/dashboard/healthHistory/allergies';
 import AllergiesHistory from '../screens/provider/appointments/patientProfile/allergies';
 import Appointments from '../screens/patient/dashboard/appointments';
@@ -21,7 +19,6 @@ import AskSupport from '../screens/support/ask';
 import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
 import Birth from '../screens/patient/dashboard/healthHistory/pregnancy/birth';
 import Book from '../screens/patient/dashboard/book';
-import BookVisit from '../screens/patient/dashboard/getTreatment/bookVisit';
 import Calendar from '../screens/patient/dashboard/book/screens/calendar';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
@@ -38,7 +35,6 @@ import Dashboard from '../screens/patient/dashboard';
 import DueDate from '../screens/patient/dashboard/healthHistory/pregnancy/dueDate';
 import ExpertAppointments from '../screens/provider/appointments';
 import ExpertProfile from '../screens/patient/dashboard/appointments/expertProfile';
-import ExpertSchedule from '../screens/patient/dashboard/getTreatment/expertSchedule';
 import ExpertTwillioLogin from '../screens/provider/appointments/twillio/Login';
 import ExpertTwillioCalling from '../screens/provider/appointments/twillio/Callling';
 import ExpertVisit from '../screens/provider/appointments/visit';
@@ -46,7 +42,6 @@ import FamilyHistory from '../screens/provider/appointments/patientProfile/famil
 import ForgotPassword from '../screens/auth/forgotPassword';
 import GynHistory from '../screens/provider/appointments/patientProfile/gyn';
 import HealthHistory from '../screens/patient/dashboard/healthHistory';
-import GetTreatment from '../screens/patient/dashboard/getTreatment';
 import HealthAssessmentConfirmation from '../screens/patient/dashboard/healthAssesment/confirmation';
 import HealthAssessmentSchedule from '../screens/patient/dashboard/healthAssesment/scheduleModal';
 import Help from '../screens/common/help';
@@ -58,14 +53,11 @@ import Medications from '../screens/patient/dashboard/healthHistory/medications'
 import MedicationsHistory from '../screens/provider/appointments/patientProfile/medications';
 import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
 import MedicalHistoryExpert from '../screens/provider/appointments/patientProfile/medicalHistory';
-import NeedsPresciption from '../screens/patient/dashboard/getTreatment/needsPrescription';
 import NewUser from '../screens/auth/newUser';
 import Confirm from '../screens/provider/appointments/patientProfile/confirm';
 import Patients from '../screens/provider/patients';
 import PatientProfile from '../screens/provider/appointments/patientProfile';
 import Payment from '../screens/patient/dashboard/book/screens/payment';
-import PaymentMethods from '../screens/patient/dashboard/getTreatment/payment/paymentMethods';
-import PayPalApproval from '../screens/patient/dashboard/getTreatment/payment/buyingCredit/paypal';
 import PersonalMedicalHistory from '../screens/provider/appointments/patientProfile/pmh';
 import PhysicalExam from '../screens/provider/appointments/patientProfile/physical';
 import Plan from '../screens/provider/appointments/patientProfile/plan';
@@ -78,9 +70,6 @@ import VideoRating from '../screens/patient/dashboard/appointments/twillio/ratin
 import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
-import RequestVisit from '../screens/patient/dashboard/getTreatment/requestVisit';
-import SelectCareType from '../screens/patient/dashboard/getTreatment/selectCareType';
-import SelectExpert from '../screens/patient/dashboard/getTreatment/selectExpert';
 import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvider';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
@@ -564,17 +553,14 @@ const MainAppStack = createStackNavigator(
     {
         Ask: { screen: Ask },
         AddChild: { screen: AddChild },
-        AddCreditOrDebitCard: { screen: AddCreditOrDebitCard },
         Allergies: { screen: Allergies },
         Appointments: { screen: Appointments },
         BasicInfo: { screen: BasicInfo },
         Birth: { screen: Birth },
         Book: { screen: Book },
-        BookVisit: { screen: BookVisit },
         BottomTab: { screen: BottomTab },
         Calendar: { screen: Calendar },
         CareSquad: { screen: CareSquad },
-        GetTreatment: { screen: GetTreatment },
         TreatmentHistory: { screen: TreatmentHistory },
         ChangePassword: { screen: ChangePassword },
         Chat: { screen: Chat },
@@ -583,7 +569,6 @@ const MainAppStack = createStackNavigator(
         ChooseExpert: { screen: ChooseExpert },
         DueDate: { screen: DueDate },
         ExpertProfile: { screen: ExpertProfile },
-        ExpertSchedule: { screen: ExpertSchedule },
         HealthHistory: { screen: HealthHistory },
         HealthAssessmentConfirmation: { screen: HealthAssessmentConfirmation },
         HealthAssessmentSchedule: { screen: HealthAssessmentSchedule },
@@ -593,20 +578,14 @@ const MainAppStack = createStackNavigator(
         Loss: { screen: Loss },
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
-        NeedsPresciption: { screen: NeedsPresciption },
         NewUser: { screen: NewUser },
         Payment: { screen: Payment },
-        PaymentMethods: { screen: PaymentMethods },
-        PayPalApproval: { screen: PayPalApproval },
         PregnancyAndChildren: { screen: Pregnancy },
         PregnancyCurrent: { screen: CurrentPregnancy },
         PregnancyHistory: { screen: PregnancyHistory },
         PrivacyPolicy: { screen: PrivacyPolicy },
         ReferFriend: { screen: ReferFriend },
         RescheduleVisit: { screen: RescheduleVisit },
-        RequestVisit: { screen: RequestVisit },
-        SelectCareType: { screen: SelectCareType },
-        SelectExpert: { screen: SelectExpert },
         SelectProvider: { screen: SelectProvider },
         Settings: { screen: Settings },
         TermsConditions: { screen: TermsConditions },

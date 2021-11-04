@@ -23,7 +23,6 @@ import login from './login';
 import messaging from './messaging';
 import newUser from '../../screens/auth/chatBot/saga';
 import patientDetails from '../../screens/provider/appointments/patientProfile/saga';
-import payment from '../../screens/patient/dashboard/getTreatment/payment/saga';
 import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
@@ -62,7 +61,6 @@ export default function* rootSaga() {
         messaging(),
         newUser(),
         patientDetails(),
-        payment(),
         plan(),
         plans(),
         privacyPolicy(),

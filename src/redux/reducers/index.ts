@@ -27,7 +27,6 @@ import medicalHistory from '../../screens/provider/appointments/patientProfile/r
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';
 import newUser from '../../screens/auth/newUser/reducer';
-import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
 import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
@@ -73,7 +72,6 @@ export const rootReducer = combineReducers({
     modal,
     navigator,
     newUser,
-    payment,
     plan,
     plans,
     privacyPolicy,
