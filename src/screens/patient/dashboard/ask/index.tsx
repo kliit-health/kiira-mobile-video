@@ -17,7 +17,6 @@ import CustomButton from '~/components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { getQuestionData, updateQuestion, setTopic } from '~/redux/actions/ask';
 import { setData } from '~/redux/actions/chat';
-import { setuser } from './action';
 import moment from 'moment';
 import { withNavigation } from 'react-navigation';
 import { Header } from '~/components';

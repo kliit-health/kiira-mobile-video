@@ -393,7 +393,8 @@ export async function makeAppointment(data) {
     }
 }
 
-export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
+export async function cancelAppointmentAsync(data) {
+    const { id, uid, expert } = data;
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
 
@@ -1406,11 +1407,11 @@ export async function payAmountWithToken(tokenID, amount) {
 }
 
 export async function updateCredits(
-    payload: object,
+    data: object,
     credits: object,
     addition: boolean,
 ) {
-    const { uid } = payload.data;
+    const { uid } = data;
     const {
         required,
         monthly,

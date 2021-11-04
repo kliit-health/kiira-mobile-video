@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     activeIndicator: {
         position: 'absolute',
-        backgroundColor: '#008AFC',
+        backgroundColor: '#fff',
     },
     indicatorContainer: {
         position: 'absolute',

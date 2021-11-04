@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { State } from 'react-native-gesture-handler';
 
 const initialState = {
     prepaid: false,
@@ -124,6 +123,7 @@ export const appointmentsSlice = createSlice({
             return state;
         },
         fetchAppointments: (state, action: PayloadAction<object>) => {
+            console.log(action.payload);
             return {
                 ...state,
                 history: [...action.payload.history],

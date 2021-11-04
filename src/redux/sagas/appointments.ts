@@ -159,10 +159,8 @@ function* getAppointments() {
     }
 }
 
-function* cancelTheAppointment(data) {
-    const {
-        data: { uid, credits, expert },
-    } = data;
+function* cancelTheAppointment({ payload: { data } }) {
+    const { credits, expert } = data;
 
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
@@ -178,7 +176,7 @@ function* cancelTheAppointment(data) {
 
     try {
         yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(payload);
+        const result = yield cancelAppointmentAsync(data);
 
         if (result) {
             yield put(
@@ -193,8 +191,8 @@ function* cancelTheAppointment(data) {
 
             yield updateCredits(data, totals, true);
             yield put(getUser());
-            if (expert.profileInfo.phoneNumber.length) {
-                yield sendSms(message, expert.profileInfo.phoneNumber);
+            if (expert.phoneNumber.length) {
+                yield sendSms(message, expert.phoneNumber);
             }
 
             yield sendNotification(expert.uid, title, message);
@@ -244,11 +242,6 @@ function* setAppointment({ payload }) {
         amount: totals.purchased,
     };
 
-    if (payload.prepaidInfo.isPrePaid) {
-        yield updateCredits({ data: payload }, totals, true);
-        yield put(getUser());
-    }
-
     try {
         yield put(hideApiLoader());
         yield put(showApiLoader());
@@ -263,8 +256,13 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            yield updateCredits({ data: payload }, totals, false);
-            yield put(getUser());
+            if (payload.prepaidInfo.isPrePaid) {
+                yield updateCredits({ data: payload }, totals, true);
+                yield put(getUser());
+            } else {
+                yield updateCredits({ data: payload }, totals, false);
+                yield put(getUser());
+            }
             yield getAppointments();
             yield sendAppointmentNotification(uid, time);
             if (phoneNumber.length && enableText) {
