@@ -221,15 +221,15 @@ export default {
         success: 'Password has been updated successfully',
     },
     chooseExpert: {
-        questionTitle: 'Choose an expert to answer…',
+        questionTitle: 'Choose an Expert',
         edit: 'Edit',
         cancel: 'Cancel',
         save: 'Save',
         filterTitle: 'Discovery Settings',
         done: 'Done',
-        languageFilterTitle: 'Show me experts who speak…',
+        languageFilterTitle: 'Show me experts who speak:',
         professionFilterTitle: 'Show me:',
-        genderFilterTitle: 'Show me experts who are…',
+        genderFilterTitle: 'Show me experts who are:',
     },
     errorMessage: {
         serverError: 'Something went wrong, please try again later.',

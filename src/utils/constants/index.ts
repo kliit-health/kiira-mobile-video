@@ -61,24 +61,6 @@ export default {
 
         disclaimerTextForChat:
             'By opening and reading this, you agree to be bound to the following terms and conditions: Kiira is not a healthcare provider and does not substitute for a primary care physician, medical advice or professional services. The information provided through <a target="_blank" href="https://www.kiira.io/">kiira.io</a> is made for educational and informational purposes only and should not be used as a professional diagnosis or a treatment plan. No physician-patient relationship is created by this site or its use. If you have or suspect you may have, a health condition, you should consult your healthcare provider for specific medical advice.',
-        firebaseTableNames: {
-            users: 'users',
-            questions: 'questions',
-            questionList: 'questionList',
-            professions: 'professions',
-            languages: 'languages',
-            messages: 'messagesNew',
-        },
-
-        firebaseTableKeyValuesNames: {
-            expertsConditionKey: 'role',
-            expertsConditionValue: 'Expert',
-            questionConditionKey: 'isResolved',
-            questionUserConditionKey: 'userInfo.uid',
-            questionExpertConditionKey: 'expertInfo.uid',
-            filterConditionGenderKey: 'profileInfo.gender',
-            filterConditionProfessionKey: 'profileInfo.profession.fullName',
-        },
 
         fontFamily: {
             headerRegular: 'Poppins-Regular',
@@ -688,10 +670,11 @@ export const icons = {
     bandAid: require('../../../assets/bandaid.png'),
     blog: require('../../../assets/blog.png'),
     blogActive: require('../../../assets/blog-active.png'),
-    camera: require('../../../assets/camera_grey.png'),
+    camera: require('../../../assets/camera_blue.png'),
     cameraWhiteImg: require('../../../assets/camera_white.png'),
     cardIcon: require('../../../assets/card.png'),
     chat: require('../../../assets/chat.png'),
+    chatIcon: require('../../../assets/chat_icon_blue.png'),
     checkBoxIcon: require('../../../assets/uncheck.png'),
     checkBoxSelectedIcon: require('../../../assets/check.png'),
     checkGreenIcon: require('../../../assets/check_green.png'),
@@ -700,7 +683,7 @@ export const icons = {
     cross: require('../../../assets/cross.png'),
     clipboard: require('../../../assets/clipboard.png'),
     downArrow: require('../../../assets/down_arrow.png'),
-    filterIcon: require('../../../assets/filter.png'),
+    filterIcon: require('../../../assets/filter_gray.png'),
     home: require('../../../assets/home.png'),
     homeActive: require('../../../assets/home-active.png'),
     greyDownArrow: require('../../../assets/grey_down_arrow.png'),
@@ -723,7 +706,7 @@ export const icons = {
     readMsgIcon: require('../../../assets/read_msg_icon.png'),
     reminders: require('../../../assets/reminders.png'),
     rightChevronIcon: require('../../../assets/right_chevron.png'),
-    send: require('../../../assets/send.png'),
+    send: require('../../../assets/send_message.png'),
     shareIcon: require('../../../assets/share.png'),
     sos: require('../../../assets/sos.png'),
     squad: require('../../../assets/squad.png'),
@@ -764,7 +747,6 @@ export const screenNames = {
     CareSquad: 'CareSquad',
     ChangePassword: 'ChangePassword',
     ChangePasswordExpert: 'ChangePasswordExpert',
-    Chat: 'Chat',
     ChatExpert: 'ChatExpert',
     Children: 'Children',
     ChooseExpert: 'ChooseExpert',
@@ -783,6 +765,7 @@ export const screenNames = {
     Loss: 'Loss',
     MedicalHistory: 'MedicalHistory',
     Medications: 'Medications',
+    Messages: 'Messages',
     NeedsPresciption: 'NeedsPresciption',
     NewUser: 'NewUser',
     PaymentMethods: 'PaymentMethods',
@@ -835,14 +818,15 @@ export const screenNames = {
 
 export enum route {
     appointments = 'Appointments',
-    ask = 'Ask',
+    chatProvider = 'SelectChatProvider',
     book = 'Book',
     careSquad = 'CareSquad',
-    chat = 'NewChat',
+    chat = 'Chat',
     healthAssessmentConfirmation = 'HealthAssessmentConfirmation',
     healthAssesmentSchedule = 'HealthAssessmentSchedule',
     healthHistory = 'HealthHistory',
     requestVisit = 'RequestVisit',
+    chooseExpert = 'ChooseExpert',
 }
 
 export enum feature {
@@ -1999,4 +1983,23 @@ export const tables = {
 export const app = {
     version: `v ${VersionCheck.getCurrentVersion()}`,
     name: 'Kiira',
+};
+
+export const firebaseCollections = {
+    users: 'users',
+    questions: 'questions',
+    questionList: 'questionList',
+    professions: 'professions',
+    languages: 'languages',
+    messages: 'messagesNew',
+};
+
+export const firebaseConditionals = {
+    roleKey: 'role',
+    roleExpert: 'Expert',
+    questionResolved: 'isResolved',
+    questionUser: 'userInfo.uid',
+    questionExpert: 'expertInfo.uid',
+    expertGender: 'profileInfo.gender',
+    expertProfession: 'profileInfo.profession.fullName',
 };

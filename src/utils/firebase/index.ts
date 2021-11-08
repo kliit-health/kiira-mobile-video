@@ -4,7 +4,7 @@ import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
 import { displayConsole } from '../helper';
 import moment from 'moment';
-import Constant, { collections, urls } from '../constants';
+import { collections, urls, firebaseCollections } from '../constants';
 import { Login } from '~/typescript/types';
 
 var voucher_codes = require('voucher-code-generator');
@@ -393,7 +393,8 @@ export async function makeAppointment(data) {
     }
 }
 
-export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
+export async function cancelAppointmentAsync(data) {
+    const { id, uid, expert } = data;
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
 
@@ -856,7 +857,7 @@ export function changePassword(newPassword) {
 export const sendMessage = obj => {
     try {
         firestore()
-            .collection(Constant.App.firebaseTableNames.messages)
+            .collection(firebaseCollections.messages)
             .doc(obj.id)
             .collection('chat')
             .doc()
@@ -869,7 +870,7 @@ export const sendMessage = obj => {
             expertUnreadCount: expertUnreadCount || 0,
         };
         firestore()
-            .collection(Constant.App.firebaseTableNames.questions)
+            .collection(firebaseCollections.questions)
             .doc(obj.questionId)
             .update(updateData);
     } catch (error) {
@@ -879,7 +880,7 @@ export const sendMessage = obj => {
 
 export const loadMessages = (obj, success, error) => {
     let ref = firestore()
-        .collection(Constant.App.firebaseTableNames.messages)
+        .collection(firebaseCollections.messages)
         .doc(`${obj.id}`)
         .collection('chat')
         .orderBy('createdAt', 'desc');
@@ -893,7 +894,7 @@ export const checkStatus = (obj, success, error) => {
 
 export const checkQuestionStatus = (obj, success, error) => {
     let ref = firestore()
-        .collection(Constant.App.firebaseTableNames.questions)
+        .collection(firebaseCollections.questions)
         .doc(`${obj.id}`);
     return ref.onSnapshot(success, error);
 };
@@ -901,7 +902,7 @@ export const checkQuestionStatus = (obj, success, error) => {
 export function resolvedQuestion(obj) {
     try {
         return firestore()
-            .collection(Constant.App.firebaseTableNames.questions)
+            .collection(firebaseCollections.questions)
             .doc(`${obj.questionId}`)
             .set(obj)
             .then(
@@ -957,7 +958,7 @@ export const updateStatus = obj => {
 
 export const updateUnreadCount = obj => {
     firestore()
-        .collection(Constant.App.firebaseTableNames.questions)
+        .collection(firebaseCollections.questions)
         .doc(obj.questionData.questionId)
         .update(obj.updateData);
 };
@@ -965,14 +966,14 @@ export const updateUnreadCount = obj => {
 export function saveQuestion(obj) {
     try {
         return firestore()
-            .collection(Constant.App.firebaseTableNames.questions)
+            .collection(firebaseCollections.questions)
             .add(obj)
             .then(
                 function (success) {
                     obj.messageId = `${success.id}${obj.userInfo.uid}${obj.expertInfo.uid}`;
                     obj.questionId = success.id;
                     return firestore()
-                        .collection(Constant.App.firebaseTableNames.questions)
+                        .collection(firebaseCollections.questions)
                         .doc(success.id)
                         .set(obj)
                         .then(
@@ -1034,7 +1035,7 @@ export function updateReadMessageStatus(obj) {
     try {
         let batch = firestore().batch();
         let questionDocRef = firestore()
-            .collection(Constant.App.firebaseTableNames.messages)
+            .collection(firebaseCollections.messages)
             .doc(obj.id)
             .collection('chat')
             .where(obj.key, '==', obj.value)
@@ -1406,11 +1407,11 @@ export async function payAmountWithToken(tokenID, amount) {
 }
 
 export async function updateCredits(
-    payload: object,
+    data: object,
     credits: object,
     addition: boolean,
 ) {
-    const { uid } = payload.data;
+    const { uid } = data;
     const {
         required,
         monthly,
@@ -1771,17 +1772,6 @@ export async function authorizeVideo(uid) {
     }
 }
 
-export async function sendAppointmentNotification(uid: String, time) {
-    try {
-        await functions().httpsCallable(
-            'sendPushNotificationAppointmentCreate',
-        )({ uid, time });
-        return;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export async function addClaimsToUser(
     organizationId: string,
     uid: string,
@@ -1818,6 +1808,20 @@ export async function sendNotification(
 export async function usePromoCode(code: string) {
     try {
         await functions().httpsCallable('usePromoCode')({ code });
+        return;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function sendAppointmentNotification(uid: String, time) {
+    try {
+        await functions().httpsCallable(
+            'sendPushNotificationAppointmentCreate',
+        )({
+            uid,
+            time,
+        });
         return;
     } catch (error) {
         console.log(error);

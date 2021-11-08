@@ -4,12 +4,12 @@ import activate from './activate';
 import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
 import appointments from './appointments';
-import ask from '../../screens/patient/dashboard/ask/saga';
+import ask from './ask';
 import askExpert from '../../screens/provider/ask/saga';
 import assessment from './assessment';
-import chat from '../../screens/patient/dashboard/ask/chat/saga';
+import chat from './chat';
 import chatExpert from '../../screens/provider/ask/chat/saga';
-import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/saga';
+import chooseExpert from './chooseExpert';
 import clientMedicalHistory from './medicalHistory';
 import expertAppointments from '../../screens/provider/appointments/saga';
 import expertPatients from '../../screens/provider/patients/saga';
@@ -23,7 +23,6 @@ import login from './login';
 import messaging from './messaging';
 import newUser from '../../screens/auth/chatBot/saga';
 import patientDetails from '../../screens/provider/appointments/patientProfile/saga';
-import payment from '../../screens/patient/dashboard/getTreatment/payment/saga';
 import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
@@ -62,7 +61,6 @@ export default function* rootSaga() {
         messaging(),
         newUser(),
         patientDetails(),
-        payment(),
         plan(),
         plans(),
         privacyPolicy(),

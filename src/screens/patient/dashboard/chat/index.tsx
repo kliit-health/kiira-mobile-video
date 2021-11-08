@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '~/redux/actions';
+import { RootState } from '~/redux/reducers';
 import { Screen, Header, NavItem, Column, Text, Tabs } from '~/components';
 import {
     handleBack,
     handleNavigation,
 } from '~/utils/functions/handleNavigation';
+import {
+    getExpertsData,
+    clearChooseExpertState,
+} from '~/redux/actions/chooseExpert';
+import { firebaseCollections, firebaseConditionals } from '~/utils/constants';
 import { default as globalStyles } from '~/components/styles';
+import { Show } from './components/questions';
 import { chatTabs, navItems } from './model';
 
 const {
@@ -20,7 +29,36 @@ const {
 } = globalStyles;
 
 const Chat = () => {
-    const [pastSelected, setPastSelected] = useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user.data);
+    const { resolved, unresolved } = useSelector(
+        (state: RootState) => state.questions,
+    );
+
+    const [pastQuestions, setPastQuestions] = useState(false);
+
+    const handleTabSelect = () => {
+        setPastQuestions(!pastQuestions);
+    };
+
+    useEffect(() => {
+        dispatch(actions.getResolvedQuestion({ uid: user.uid }));
+        dispatch(actions.getUnresolvedQuestions({ uid: user.uid }));
+    }, []);
+
+    useEffect(() => {
+        const params = {
+            expertsParams: {
+                tableName: firebaseCollections.users,
+                roleKey: firebaseConditionals.roleKey,
+                roleValue: firebaseConditionals.roleExpert,
+            },
+        };
+        dispatch(getExpertsData(params, dispatch));
+        return () => {
+            dispatch(clearChooseExpertState());
+        };
+    }, []);
 
     return (
         <Screen test="Chat Screen">
@@ -33,32 +71,32 @@ const Chat = () => {
             </Text>
             <Column options={[white_bg]}>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={navItems}
                     renderItem={({ item }) => (
                         <NavItem
                             key={item.title}
                             {...item}
-                            onPress={handleNavigation}
+                            onPress={() =>
+                                handleNavigation(item.destination, {
+                                    type: item.type,
+                                })
+                            }
                         />
                     )}
                 />
             </Column>
-            <Tabs
-                options={[blue_bg]}
-                list={chatTabs}
-                active={pastSelected}
-                setActive={setPastSelected}
-            />
             <Column options={[white_bg]}>
-                <FlatList
-                    data={navItems}
-                    renderItem={({ item }) => (
-                        <NavItem
-                            key={item.title}
-                            {...item}
-                            onPress={handleNavigation}
-                        />
-                    )}
+                <Tabs
+                    options={[blue_bg]}
+                    list={chatTabs}
+                    active={pastQuestions}
+                    setActive={handleTabSelect}
+                />
+                <Show
+                    pastSelected={pastQuestions}
+                    resolved={resolved}
+                    unresolved={unresolved}
                 />
             </Column>
         </Screen>

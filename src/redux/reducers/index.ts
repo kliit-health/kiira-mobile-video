@@ -6,11 +6,11 @@ import agreements from './agreements';
 import addNewProfile from '../../screens/auth/chatBot/reducer';
 import appointments from './appointments';
 import assessment from '../reducers/assessment';
-import ask from '../../screens/patient/dashboard/ask/reducer';
+import ask from './ask';
 import askExpert from '../../screens/provider/ask/reducer';
-import chat from '../../screens/patient/dashboard/ask/chat/reducer';
+import chat from './chat';
 import chatExpert from '../../screens/provider/ask/chat/reducer';
-import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
+import chooseExpert from './chooseExpert';
 import clientMedicalHistory from './medicalHistory';
 import expertAppointments from '../../screens/provider/appointments/reducer';
 import expertPatients from '../../screens/provider/patients/reducer';
@@ -27,7 +27,6 @@ import medicalHistory from '../../screens/provider/appointments/patientProfile/r
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';
 import newUser from '../../screens/auth/newUser/reducer';
-import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
 import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
@@ -73,7 +72,6 @@ export const rootReducer = combineReducers({
     modal,
     navigator,
     newUser,
-    payment,
     plan,
     plans,
     privacyPolicy,

@@ -20,7 +20,6 @@ const ActiveQuestions = ({ data, navigation, visible }) => {
             ListEmptyComponent={() => <Fallback />}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => {
-                console.log(item);
                 return <ListItem {...item} onPress={handleItemPress} />;
             }}
         />

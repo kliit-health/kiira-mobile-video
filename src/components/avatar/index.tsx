@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { shape, object, bool, string, func, number, oneOf } from 'prop-types';
 import { View, TouchableOpacity, Image } from 'react-native';
-import { mergeStyles } from '../../utils/functions';
+import { mergeStyles } from '~/utils/functions';
 import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';
 

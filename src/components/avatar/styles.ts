@@ -80,20 +80,20 @@ export const modifiers = {
     border: {
         small: {
             root: {
-                padding: 2,
-                borderWidth: 1,
+                padding: 0,
+                borderWidth: 2,
             },
         },
         medium: {
             root: {
-                padding: 3,
-                borderWidth: 2,
+                padding: 0,
+                borderWidth: 3,
             },
         },
         large: {
             root: {
-                padding: 4,
-                borderWidth: 3,
+                padding: 0,
+                borderWidth: 4,
             },
         },
     },

@@ -239,9 +239,9 @@ export default {
         save: 'Spanish Save',
         filterTitle: 'Spanish Discovery Settings',
         done: 'Spanish Done',
-        languageFilterTitle: 'Spanish Show me experts who speak…',
+        languageFilterTitle: 'Spanish Show me experts who speak:',
         professionFilterTitle: 'Spanish Show me:',
-        genderFilterTitle: 'Spanish Show me experts who are…',
+        genderFilterTitle: 'Spanish Show me experts who are:',
     },
 
     errorMessage: {

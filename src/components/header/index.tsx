@@ -11,6 +11,8 @@ const Header = ({
     title,
     onBack,
     onEditPress,
+    onFilterPress,
+    onHomePress,
     editState,
     styles: customStyles,
     children,
@@ -37,6 +39,8 @@ const Header = ({
         editButton: {
             root: defaultStyles.editButton,
         },
+        filterButton: defaultStyles.filterButton,
+        homeButton: defaultStyles.homeButton,
     };
 
     return (
@@ -64,6 +68,24 @@ const Header = ({
                 >
                     {disableEdit ? 'Edit' : editState ? 'Done' : 'Edit'}
                 </TextButton>
+            )}
+            {onFilterPress && (
+                <IconButton
+                    test="Chat Filter Button"
+                    styles={{ image: styles.filterButton }}
+                    source={icons.filterIcon}
+                    onPress={onFilterPress}
+                    boxed={themed}
+                />
+            )}
+            {onHomePress && (
+                <IconButton
+                    test="Chat Home Button"
+                    styles={{ image: styles.homeButton }}
+                    source={icons.home}
+                    onPress={onHomePress}
+                    boxed={themed}
+                />
             )}
         </View>
     );

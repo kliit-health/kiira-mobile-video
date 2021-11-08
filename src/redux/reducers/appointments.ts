@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { State } from 'react-native-gesture-handler';
 
 const initialState = {
     prepaid: false,

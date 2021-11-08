@@ -46,5 +46,4 @@
         android:resource="@color/kiira_blue"
         tools:replace="android:resource" />
     </application>
-
 </manifest>

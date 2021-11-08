@@ -89,6 +89,7 @@ const Payment = () => {
             imageUrl: expert.profileInfo.profileImageUrl,
             rating: expert.rating,
             uid: expert.uid,
+            phoneNumber: expert.profileInfo.phoneNumber,
         },
         visits,
         prepaid,

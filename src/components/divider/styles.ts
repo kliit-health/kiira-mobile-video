@@ -5,6 +5,6 @@ export default StyleSheet.create({
     root: {
         flex: 1,
         maxHeight: 0.5,
-        backgroundColor: colors.gray,
+        backgroundColor: colors.primaryBlue,
     },
 });
