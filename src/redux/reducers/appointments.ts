@@ -123,7 +123,6 @@ export const appointmentsSlice = createSlice({
             return state;
         },
         fetchAppointments: (state, action: PayloadAction<object>) => {
-            console.log(action.payload);
             return {
                 ...state,
                 history: [...action.payload.history],

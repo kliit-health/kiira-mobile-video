@@ -58,6 +58,7 @@ class Chat extends React.PureComponent {
             name: '',
             filename: '',
             path: '',
+            loading: true,
         };
     }
 
@@ -95,6 +96,12 @@ class Chat extends React.PureComponent {
                     showRatingModal: true,
                 });
             }, 500);
+        } else {
+            setTimeout(() => {
+                this.setState({
+                    showRatingModal: false,
+                });
+            }, 500);
         }
     }
 
@@ -122,7 +129,7 @@ class Chat extends React.PureComponent {
                 userInfo: userData,
                 expertInfo: expertDetails,
                 questionEncrypted: '',
-                question,
+                question: question || 'Send a message to your provider',
             };
             addQuestion(payloadData);
         } else {
@@ -142,9 +149,17 @@ class Chat extends React.PureComponent {
             questionValue.isResolved &&
             !questionValue.isRated
         ) {
-            this.setState({
-                showRatingModal: true,
-            });
+            setTimeout(() => {
+                this.setState({
+                    showRatingModal: true,
+                });
+            }, 500);
+        } else {
+            setTimeout(() => {
+                this.setState({
+                    showRatingModal: false,
+                });
+            }, 500);
         }
     }
 
@@ -294,10 +309,15 @@ class Chat extends React.PureComponent {
                 <Header
                     title={fullName}
                     onBack={() => this.handleBackPress()}
-                    onClose={() => navigation.navigate(screenNames.BottomTab)}
+                    onHomePress={() =>
+                        navigation.navigate(screenNames.BottomTab)
+                    }
                 />
 
-                <MessageList messages={this.props.messages} />
+                <MessageList
+                    expertProfile={profileImageUrl}
+                    messages={this.props.messages}
+                />
                 <Footer
                     message={this.state.message}
                     onSendPress={() => this.handleSend()}

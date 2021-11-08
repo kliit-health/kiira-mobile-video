@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 import { default as MessageListItem } from '../messageListItem';
 import styles from './styles';
 
-const MessageView = ({ messages, ...rest }) => {
+const MessageView = ({ messages, expertProfile, ...rest }) => {
     const handleKeyExtractor = () => generateIdentifier();
 
     return (
@@ -14,7 +14,11 @@ const MessageView = ({ messages, ...rest }) => {
             keyExtractor={handleKeyExtractor}
             showsVerticalScrollIndicator={false}
             renderItem={props => (
-                <MessageListItem {...props} lastIndex={messages.length} />
+                <MessageListItem
+                    {...props}
+                    expertProfile={expertProfile}
+                    lastIndex={messages.length}
+                />
             )}
             inverted={true}
             contentContainerStyle={styles.contentContainer}

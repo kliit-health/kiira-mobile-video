@@ -5,6 +5,7 @@ export type Item = {
     title: string;
     description: string;
     destination: route | undefined;
+    type: string;
     icon: any;
 };
 
@@ -16,25 +17,29 @@ export const navItems: Item[] = [
     {
         title: 'chat.primaryCare.title',
         description: 'chat.primaryCare.description',
-        destination: route.ask,
+        destination: route.chatProvider,
+        type: 'Primary Care',
         icon: MedCross,
     },
     {
         title: 'chat.womensHealth.title',
         description: 'chat.womensHealth.description',
-        destination: route.ask,
+        destination: route.chatProvider,
+        type: "Women's Care",
         icon: Femme,
     },
     {
         title: 'chat.mentalHealth.title',
         description: 'chat.mentalHealth.description',
-        destination: route.ask,
+        destination: route.chatProvider,
+        type: 'Mental Health',
         icon: Happy,
     },
     {
         title: 'chat.techSupport.title',
         description: 'chat.techSupport.description',
         destination: undefined,
+        type: 'Tech Support',
         icon: MobilePhone,
     },
 ];

@@ -2,25 +2,24 @@ import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
 
 const styles = StyleSheet.create({
-    resolvedText: {
-        margin: 14,
-        color: colors.lightGrey,
-        textAlign: 'center',
-        fontSize: text.size.regular,
-        fontFamily: text.fontFamily.poppinsRegular,
-    },
-
-    mainContainer: {
-        flexDirection: 'column',
-        padding: 14,
-        borderTopWidth: 1,
-        borderTopColor: colors.pinkGrey,
-    },
-
     cancelIcon: {
         width: 18,
         height: 18,
         marginBottom: 5,
+    },
+
+    cameraContainer: {
+        alignSelf: 'center',
+        marginRight: 8,
+        borderColor: colors.pinkGrey,
+        borderWidth: 1,
+        borderRadius: 25,
+        padding: 10,
+    },
+
+    cameraIcon: {
+        width: 25,
+        height: 25,
     },
 
     importedImageContainer: {
@@ -40,22 +39,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 
-    cameraContainer: {
-        alignSelf: 'center',
-        marginRight: 8,
-    },
-
-    cameraIcon: {
-        width: 25,
-        height: 25,
+    mainContainer: {
+        flexDirection: 'column',
+        padding: 14,
+        borderTopWidth: 1,
+        borderTopColor: colors.pinkGrey,
     },
 
     messageContainer: {
         flex: 1,
         flexDirection: 'row',
         borderColor: colors.pinkGrey,
-        borderWidth: 2,
-        borderRadius: 5,
+        borderWidth: 1,
+        borderRadius: 25,
         alignItems: 'center',
     },
 
@@ -63,10 +59,18 @@ const styles = StyleSheet.create({
         flex: 1,
         color: colors.black,
         fontSize: text.size.regular,
-        fontFamily: text.fontFamily.poppinsMedium,
+        fontFamily: text.fontFamily.poppinsRegular,
         paddingBottom: 3,
-        marginHorizontal: 5,
-        marginVertical: 2,
+        marginHorizontal: 10,
+        marginVertical: 5,
+    },
+
+    resolvedText: {
+        margin: 14,
+        color: colors.black,
+        textAlign: 'center',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
     },
 
     sendContainer: {
@@ -75,8 +79,8 @@ const styles = StyleSheet.create({
     },
 
     sendIcon: {
-        height: 20,
-        width: 20,
+        height: 40,
+        width: 40,
     },
 });
 export default styles;

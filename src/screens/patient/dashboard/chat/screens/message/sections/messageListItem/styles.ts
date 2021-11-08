@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Constant from '~/utils/constants';
+import Constant, { colors, text } from '~/utils/constants';
 import metrics from '~/utils/metrices';
 
 let parentPaddingValue = metrics.width * 0.05;
@@ -13,54 +13,64 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
+
     rowRightContainerView: {
-        backgroundColor: Constant.App.colors.chatHighLightedBgColor,
+        backgroundColor: colors.blueLight,
         borderRadius: 10,
+        borderBottomRightRadius: 0,
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginRight: 5,
         padding: 5,
     },
-    messagesRightTextStyle: {
+
+    messagesRightText: {
         alignSelf: 'flex-end',
         backgroundColor: 'transparent',
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        padding: 10,
+        color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        padding: 5,
     },
+
     rowLeftParentContainerStyle: {
         flexDirection: 'row',
         marginRight: 70,
         marginTop: 10,
-        marginBottom: 10,
+        // marginBottom: 10,
     },
+
     rowLeftContainerStyle: {
-        backgroundColor: Constant.App.colors.greyBgAsk,
+        backgroundColor: colors.greyAccent,
         borderRadius: 10,
+        borderBottomLeftRadius: 0,
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginLeft: 5,
         padding: 5,
     },
-    messagesLeftTextStyle: {
+
+    messagesLeftText: {
         alignSelf: 'flex-start',
         backgroundColor: 'transparent',
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
-        padding: 10,
+        color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        padding: 5,
     },
+
     staticTextContainerStyle: {
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
+
     staticTextStyle: {
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Normal,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
     },
+
     dateContainerStyle: {
         flexDirection: 'row',
         alignSelf: 'flex-end',
@@ -68,21 +78,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
     dateTextStyle: {
         alignSelf: 'center',
         backgroundColor: 'transparent',
-        color: Constant.App.colors.blackColor,
-        fontSize: Constant.App.textSize.Small,
-        fontFamily: Constant.App.fontFamily.bodyRegular,
+        color: colors.black,
+        fontSize: text.size.small,
+        fontFamily: text.fontFamily.poppinsRegular,
         padding: 5,
     },
+
     chatInputParentContainer: {
         flexDirection: 'column',
         width: metrics.width,
         padding: parentPaddingValue,
-        backgroundColor: Constant.App.colors.whiteColor,
+        backgroundColor: colors.white,
         borderTopWidth: 1,
-        borderTopColor: Constant.App.colors.greyBgAsk,
+        borderTopColor: colors.gray,
     },
 
     sendButtonContainerStyle: {

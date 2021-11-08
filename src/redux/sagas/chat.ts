@@ -300,10 +300,6 @@ function* loadMessagesOfUser({ data, dispatch }) {
                     updateReadMessageStatus(obj);
                     isFirstTime = false;
                 }
-                displayConsole('data loadMessagesOfUser', data);
-                displayConsole(
-                    '--------------**** loadMessagesOfUser end ********-----------\n\n',
-                );
             },
             error => {
                 const { message } = error;
@@ -314,10 +310,6 @@ function* loadMessagesOfUser({ data, dispatch }) {
                 };
                 dispatch(hideApiLoader());
                 dispatch(loadMessagesError(data.message));
-                displayConsole('data loadMessagesOfUser', data);
-                displayConsole(
-                    '--------------**** loadMessagesOfUser end ********-----------\n\n',
-                );
             },
         );
     } catch (error) {
@@ -333,7 +325,6 @@ function* setExpertRating({
     try {
         yield updateQuestion({ isRated: true }, questionId);
         yield updateUserData({ userRating }, uid);
-        // yield getExpertsDetailsAsync();
     } catch (error) {
         console.error(error);
     }
@@ -350,14 +341,7 @@ function* checkExpertStatus({ data, dispatch }) {
                 id: expertInfo.uid,
             },
             querySnapshot => {
-                displayConsole(
-                    'inside checkExpertStatus',
-                    querySnapshot.data(),
-                );
                 dispatch(checkExpertStatusSuccess(querySnapshot.data()));
-                displayConsole(
-                    '--------------**** checkExpertStatus end ********-----------\n\n',
-                );
             },
             error => {
                 const { message } = error;
@@ -368,9 +352,6 @@ function* checkExpertStatus({ data, dispatch }) {
                 };
                 dispatch(loadMessagesError(data.message));
                 displayConsole('data', data);
-                displayConsole(
-                    '--------------**** checkExpertStatus end ********-----------\n\n',
-                );
             },
         );
         if (questionData) {
@@ -393,11 +374,7 @@ function* checkQuestStatus({ data, dispatch }) {
                 id: questionData.questionId,
             },
             querySnapshot => {
-                displayConsole('inside checkQuestStatus', querySnapshot.data());
                 dispatch(checkQuestionStatusSuccess(querySnapshot.data()));
-                displayConsole(
-                    '--------------**** checkQuestStatus end ********-----------\n\n',
-                );
             },
             error => {
                 const { message } = error;
@@ -407,9 +384,6 @@ function* checkQuestStatus({ data, dispatch }) {
                     message: message,
                 };
                 displayConsole('data', data);
-                displayConsole(
-                    '--------------**** checkQuestStatus end ********-----------\n\n',
-                );
             },
         );
     } catch (error) {

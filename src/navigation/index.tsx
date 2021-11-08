@@ -13,7 +13,6 @@ import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addCh
 import Allergies from '../screens/patient/dashboard/healthHistory/allergies';
 import AllergiesHistory from '../screens/provider/appointments/patientProfile/allergies';
 import Appointments from '../screens/patient/dashboard/appointments';
-import Ask from '../screens/patient/dashboard/ask';
 import AskExpert from '../screens/provider/ask';
 import AskSupport from '../screens/support/ask';
 import BasicInfo from '../screens/patient/dashboard/healthHistory/basicInfo';
@@ -23,12 +22,10 @@ import Calendar from '../screens/patient/dashboard/book/screens/calendar';
 import CareSquad from '../screens/patient/dashboard/careSquad';
 import ChangePassword from '../screens/patient/account/settings/changePassword';
 import ChangePasswordExpert from '../screens/provider/account/settings/changePassword';
-import Chat from '../screens/patient/dashboard/ask/chat';
-import NewChat from '../screens/patient/dashboard/chat';
+import Chat from '../screens/patient/dashboard/chat';
 import ChatBot from '../screens/auth/chatBot';
 import ChatExpert from '../screens/provider/ask/chat';
 import Children from '../screens/patient/dashboard/healthHistory/pregnancy/children';
-import ChooseExpert from '../screens/patient/dashboard/ask/chooseExpert';
 import Consent from '../screens/provider/appointments/patientProfile/consent';
 import CurrentPregnancy from '../screens/patient/dashboard/healthHistory/pregnancy/pregnancyCurrent';
 import Dashboard from '../screens/patient/dashboard';
@@ -53,6 +50,7 @@ import Medications from '../screens/patient/dashboard/healthHistory/medications'
 import MedicationsHistory from '../screens/provider/appointments/patientProfile/medications';
 import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
 import MedicalHistoryExpert from '../screens/provider/appointments/patientProfile/medicalHistory';
+import Messages from '../screens/patient/dashboard/chat/screens/message';
 import NewUser from '../screens/auth/newUser';
 import Confirm from '../screens/provider/appointments/patientProfile/confirm';
 import Patients from '../screens/provider/patients';
@@ -70,6 +68,7 @@ import VideoRating from '../screens/patient/dashboard/appointments/twillio/ratin
 import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
+import SelectChatProvider from '~/screens/patient/dashboard/chat/screens/selectProvider';
 import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvider';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
@@ -78,7 +77,6 @@ import SurgicalHistory from '../screens/provider/appointments/patientProfile/sur
 import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing';
 import TermsConditions from '../screens/common/termsAndConditions';
-import TreatmentBot from '../screens/patient/dashboard/treatmentBot';
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
@@ -91,11 +89,10 @@ import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 import VisitOverView from '../screens/patient/dashboard/appointments/visitSummary';
 
-import Constant, { colors, icons } from '../utils/constants';
+import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
 
 let tabIconSize = 25;
-const screenNames = Constant.App.screenNames;
 
 const TransparentStyle = StyleSheet.create({
     cardStyle: {
@@ -551,7 +548,6 @@ const AppStackSupport = createStackNavigator(
 
 const MainAppStack = createStackNavigator(
     {
-        Ask: { screen: Ask },
         AddChild: { screen: AddChild },
         Allergies: { screen: Allergies },
         Appointments: { screen: Appointments },
@@ -564,9 +560,7 @@ const MainAppStack = createStackNavigator(
         TreatmentHistory: { screen: TreatmentHistory },
         ChangePassword: { screen: ChangePassword },
         Chat: { screen: Chat },
-        NewChat: { screen: NewChat },
         Children: { screen: Children },
-        ChooseExpert: { screen: ChooseExpert },
         DueDate: { screen: DueDate },
         ExpertProfile: { screen: ExpertProfile },
         HealthHistory: { screen: HealthHistory },
@@ -578,6 +572,7 @@ const MainAppStack = createStackNavigator(
         Loss: { screen: Loss },
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
+        Messages: { screen: Messages },
         NewUser: { screen: NewUser },
         Payment: { screen: Payment },
         PregnancyAndChildren: { screen: Pregnancy },
@@ -586,10 +581,10 @@ const MainAppStack = createStackNavigator(
         PrivacyPolicy: { screen: PrivacyPolicy },
         ReferFriend: { screen: ReferFriend },
         RescheduleVisit: { screen: RescheduleVisit },
+        SelectChatProvider: { screen: SelectChatProvider },
         SelectProvider: { screen: SelectProvider },
         Settings: { screen: Settings },
         TermsConditions: { screen: TermsConditions },
-        TreatmentBot: { screen: TreatmentBot },
         Visit: { screen: Visit },
         VisitOverView: { screen: VisitOverView },
         VisitSummary: { screen: VisitSummary },

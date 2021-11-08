@@ -1,59 +1,89 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { useSelector, shallowEqual } from 'react-redux';
-import { RootState } from '~/redux/reducers';
-import { get } from 'lodash';
-import { route, feature, colors, text } from '~/utils/constants';
-import { ChevronRight } from '~/svgs';
+import { Row, Column, Avatar, Dot } from '~/components';
+import { route, colors, text } from '~/utils/constants';
 
 const { fontFamily, size } = text;
 
 export type QuestionProps = {
-    question: string;
+    expertInfo: object;
     questionId: string;
-    resolvedDate: number;
+    time: number;
     destination: route;
+    lastMessage: string;
     onPress?: (destination: route) => void;
+    userUnreadCount: number;
 };
 
 const Question = ({
-    question,
     questionId,
-    resolvedDate,
+    time,
     destination,
+    lastMessage,
     onPress,
+    expertInfo,
+    userUnreadCount,
 }: QuestionProps) => {
     return (
-        <TouchableOpacity
-            testID={questionId}
-            activeOpacity={0.8}
-            style={styles.root}
-            onPress={() => onPress(destination)}
-        >
-            <View style={styles.container}>
-                <Text style={styles.title}>{question}</Text>
-                <Text style={styles.description}>{questionId}</Text>
-            </View>
-            <View style={styles.chevron}>
-                <ChevronRight color={colors.gray} />
-            </View>
-        </TouchableOpacity>
+        <>
+            <Row>
+                <TouchableOpacity
+                    testID={questionId}
+                    activeOpacity={0.8}
+                    style={styles.root}
+                    onPress={() => onPress(destination)}
+                >
+                    {userUnreadCount > 0 && <Dot />}
+                    <Avatar
+                        styles={{
+                            image: { height: 50, width: 50, paddingRight: 10 },
+                        }}
+                        source={expertInfo.profileInfo.profileImageUrl}
+                    />
+                    <View style={styles.container}>
+                        <Text style={styles.title}>
+                            {expertInfo.expertName}
+                        </Text>
+                        <Text numberOfLines={2} style={styles.description}>
+                            {lastMessage}
+                        </Text>
+                    </View>
+                    <Column options={[styles.date]}>
+                        <Text style={styles.time}>{time}</Text>
+                    </Column>
+                </TouchableOpacity>
+            </Row>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    root: {
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderTopWidth: 0.4,
-        borderColor: colors.gray,
-        flexDirection: 'row',
-        width: '100%',
-    },
     container: {
         flex: 1,
         marginHorizontal: 20,
     },
+
+    chevron: {
+        alignSelf: 'center',
+        marginHorizontal: 'auto',
+    },
+
+    date: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
+        marginHorizontal: 20,
+    },
+
+    description: {
+        fontFamily: fontFamily.poppinsRegular,
+        fontWeight: '400',
+        fontSize: size.medium,
+        color: colors.gray,
+        lineHeight: 22,
+        width: '220%',
+    },
+
     icon: {
         height: 44,
         width: 44,
@@ -63,6 +93,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderColor: colors.primaryBlue,
     },
+
+    root: {
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderTopWidth: 0.4,
+        borderColor: colors.gray,
+        flexDirection: 'row',
+        width: '100%',
+    },
+
     title: {
         fontFamily: fontFamily.poppinsRegular,
         fontWeight: '500',
@@ -70,16 +110,13 @@ const styles = StyleSheet.create({
         color: colors.black,
         lineHeight: 24,
     },
-    description: {
+
+    time: {
         fontFamily: fontFamily.poppinsRegular,
         fontWeight: '400',
         fontSize: size.medium,
         color: colors.gray,
         lineHeight: 22,
-    },
-    chevron: {
-        alignSelf: 'center',
-        marginHorizontal: 'auto',
     },
 });
 

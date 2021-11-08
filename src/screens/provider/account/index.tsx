@@ -49,15 +49,13 @@ const ExpertAccount = ({ navigation }) => {
                         alignSelf: 'center',
                     }}
                 >{`v ${VersionCheck.getCurrentVersion()}`}</Text>
-                <View style={styles.logoutContainer}>
-                    <TextButton
-                        onPress={handleSignOut}
-                        styles={modifiers.button}
-                        link
-                    >
-                        {language.expertAccount.logout}
-                    </TextButton>
-                </View>
+                <TextButton
+                    onPress={handleSignOut}
+                    styles={modifiers.button}
+                    link
+                >
+                    {language.expertAccount.logout}
+                </TextButton>
             </ScrollView>
         </Container>
     );

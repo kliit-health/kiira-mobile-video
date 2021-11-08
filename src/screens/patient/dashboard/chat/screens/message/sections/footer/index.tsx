@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { icons, colors } from '~/utils/constants';
 import styles from './styles';
+import { pure } from 'recompose';
 
 const Footer = ({
     message,
@@ -60,28 +61,29 @@ const Footer = ({
                             </View>
                         ) : null}
                         <View style={styles.inputContainer}>
-                            {/* {Platform.OS === 'ios' && (
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={styles.cameraContainer}
-                  onPress={onPickerPress}>
-                  <Image
-                    style={styles.cameraIcon}
-                    resizeMode="contain"
-                    source={icons.camera}
-                  />
-                </TouchableOpacity>
-              )} */}
+                            {Platform.OS === 'ios' && (
+                                <TouchableOpacity
+                                    activeOpacity={0.7}
+                                    style={styles.cameraContainer}
+                                    onPress={onPickerPress}
+                                >
+                                    <Image
+                                        style={styles.cameraIcon}
+                                        resizeMode="contain"
+                                        source={icons.camera}
+                                    />
+                                </TouchableOpacity>
+                            )}
                             <View style={styles.messageContainer}>
                                 <TextInput
-                                    maxHeight={100}
+                                    maxHeight={200}
                                     multiline={true}
                                     autoCapitalize="sentences"
                                     onChangeText={onChangeText}
                                     placeholder={lang.chat.enterMessage}
                                     value={message}
                                     style={styles.messageInput}
-                                    placeholderTextColor={colors.lightGrey}
+                                    placeholderTextColor={colors.gray}
                                 />
                                 <TouchableOpacity
                                     activeOpacity={0.7}
@@ -103,4 +105,4 @@ const Footer = ({
     );
 };
 
-export default Footer;
+export default pure(Footer);

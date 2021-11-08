@@ -26,6 +26,14 @@ export default StyleSheet.create({
         marginLeft: '42%',
         flex: 0,
     },
+    filterButton: {
+        height: 35,
+        width: 35,
+    },
+    homeButton: {
+        height: 25,
+        width: 25,
+    },
 });
 
 export const modifiers = {

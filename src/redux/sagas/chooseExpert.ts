@@ -1,4 +1,4 @@
-import { put, takeEvery, select } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { getCollectionData, getExpertsData } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
@@ -8,8 +8,7 @@ import {
     getLanguagesDataSuccess,
 } from '~/redux/actions/chooseExpert';
 import { GET_EXPERTS_DATA } from '~/redux/types';
-import Constant from '~/utils/constants';
-import { displayConsole } from '~/utils/helper';
+import { firebaseCollections } from '~/utils/constants';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 var refExpertData;
@@ -109,15 +108,11 @@ function* getExperts(data, dispatch) {
                         getExpertsDataSuccess(arr && arr.length > 0 ? arr : []),
                     );
                 }
-                displayConsole(
-                    '--------------**** getExpertsData end ********-----------\n\n',
-                );
                 delay(1500);
                 dispatch(hideApiLoader());
             },
             error => {
                 const { message, code } = error;
-
                 if (code && code !== 'firestore/permission-denied') {
                     if (!isProfessionLangaugesDataLoaded) {
                         dispatch(hideApiLoader());
@@ -128,9 +123,6 @@ function* getExperts(data, dispatch) {
                         ),
                     );
                 }
-                displayConsole(
-                    '--------------**** getExpertsData end ********-----------\n\n',
-                );
             },
         );
     } catch (error) {
@@ -145,11 +137,11 @@ function* getProfessions({ data, dispatch }) {
     const lang = yield select(state => state.language);
     try {
         const { expertsParams, isProfessionLangaugesDataLoaded } = data;
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         yield delay(500);
         if (expertsParams && !isProfessionLangaugesDataLoaded) {
             const params = {
-                tableName: Constant.App.firebaseTableNames.professions,
+                tableName: firebaseCollections.professions,
             };
             const response = yield getCollectionData(params);
             if (response && response.success) {
@@ -175,7 +167,7 @@ function* getLanguages(data, dispatch) {
     const lang = yield select(state => state.language);
     try {
         const params = {
-            tableName: Constant.App.firebaseTableNames.languages,
+            tableName: firebaseCollections.languages,
         };
         const response = yield getCollectionData(params);
         yield getExperts(data, dispatch);
@@ -197,5 +189,5 @@ function* getLanguages(data, dispatch) {
 }
 
 export default function* chooseExpertSaga() {
-    yield takeEvery(GET_EXPERTS_DATA, getProfessions);
+    yield takeLatest(GET_EXPERTS_DATA, getProfessions);
 }
