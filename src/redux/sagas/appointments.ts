@@ -160,18 +160,21 @@ function* getAppointments() {
 }
 
 function* cancelTheAppointment({ payload: { data } }) {
-    const { credits, expert } = data;
+    const user = yield select(state => state.user.data);
+    const { credits, expert, prepaidInfo } = data;
 
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
 
     const totals = {
-        creditsRequired: 1,
-        monthlyCredits: 0,
-        prepaidCredits: 0,
-        purchasedCredits: 1,
-        redeemCredits: 0,
-        availibleCredits: 1,
+        required: credits,
+        monthly: user.visits,
+        prepaid: user.prepaid,
+        purchased: prepaidInfo.amount,
+        availible: 0,
+        isPrepaid: prepaidInfo.isPrePaid,
+        redeemPrepaid: 0,
+        redeemMonthly: credits - prepaidInfo.amount,
     };
 
     try {
@@ -230,11 +233,17 @@ function* setAppointment({ payload }) {
         required: credits,
         monthly: visits,
         prepaid: prepaid,
-        purchased: credits - (visits + prepaid),
-        redeemPurchased: credits - prepaid,
-        redeemMonthly: credits - (visits + prepaid),
+        purchased: credits - visits,
         availible: visits + prepaid,
         isPrepaid: credits > visits + prepaid,
+        redeemPrepaid:
+            prepaid > 0 && credits - visits > 0 ? credits - visits : 0,
+        redeemMonthly:
+            visits > 0 && credits - prepaid > 0
+                ? credits - prepaid
+                : visits === 0
+                ? 0
+                : credits,
     };
 
     payload.prepaidInfo = {
@@ -245,6 +254,7 @@ function* setAppointment({ payload }) {
     try {
         yield put(hideApiLoader());
         yield put(showApiLoader());
+
         let appointment = yield makeAppointment(payload);
 
         if (appointment && !appointment.availible) {
@@ -256,13 +266,9 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            if (payload.prepaidInfo.isPrePaid) {
-                yield updateCredits({ data: payload }, totals, true);
-                yield put(getUser());
-            } else {
-                yield updateCredits({ data: payload }, totals, false);
-                yield put(getUser());
-            }
+            yield updateCredits({ data: payload }, totals, false);
+            yield put(getUser());
+
             yield getAppointments();
             yield sendAppointmentNotification(uid, time);
             if (phoneNumber.length && enableText) {

@@ -3,6 +3,7 @@ import { text, colors } from '~/utils/constants';
 
 const styles = StyleSheet.create({
     version: {
+        marginTop: 10,
         alignSelf: 'center',
     },
 });
@@ -20,6 +21,7 @@ export const modifiers = {
     },
     button: {
         text: {
+            color: colors.primaryBlue,
             fontSize: text.size.large,
         },
     },

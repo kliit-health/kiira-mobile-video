@@ -1411,41 +1411,40 @@ export async function updateCredits(
     credits: object,
     addition: boolean,
 ) {
-    const { uid } = data;
+    const user = auth().currentUser;
+
     const {
         required,
         monthly,
         prepaid,
-        redeemPurchased,
-        redeemMonthly,
         isPrepaid,
+        purchased,
+        redeemMonthly,
+        redeemPrepaid,
     } = credits;
 
     try {
         if (addition) {
             await firestore()
                 .collection('users')
-                .doc(uid)
+                .doc(user.uid)
                 .update({
                     visits: monthly + redeemMonthly,
-                    prepaid: isPrepaid
-                        ? prepaid + redeemPurchased
-                        : prepaid + required,
+                    prepaid: prepaid + purchased,
                 });
             return { ok: true };
         } else {
             await firestore()
                 .collection('users')
-                .doc(uid)
+                .doc(user.uid)
                 .update({
                     visits: monthly - redeemMonthly,
-                    prepaid: isPrepaid
-                        ? prepaid - redeemPurchased
-                        : prepaid - required,
+                    prepaid: prepaid - redeemPrepaid,
                 });
             return { ok: true };
         }
     } catch (err) {
+        console.log('UPDATE CREDITS ERROR', err);
         return { ok: false, status: 'internal' };
     }
 }

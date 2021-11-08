@@ -10,7 +10,7 @@ import {
     StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './style';
+import styles from './styles';
 import CustomText from '~/components/customText';
 import Constant from '~/utils/constants';
 import { Avatar } from 'react-native-elements';
@@ -54,6 +54,7 @@ class Setting extends PureComponent {
     public imageSrc: any;
     public showSelectStateModal: any;
     public showSelectSexualityModal: any;
+    public enableText: string;
 
     constructor(props) {
         super(props);
@@ -85,6 +86,7 @@ class Setting extends PureComponent {
             ethnicity: userData.profileInfo.ethnicity,
             lang: 'en',
             phoneNumber: userData.profileInfo.phoneNumber,
+            enableText: userData.profileInfo.enableText ?? true,
             pronounsArr: [
                 {
                     title: lang.addProfileData.sheHer,
@@ -166,6 +168,7 @@ class Setting extends PureComponent {
             ethnicity,
             phoneNumber,
             gender,
+            enableText,
         } = this.state;
         return (
             <View style={styles.headerStyle}>
@@ -225,6 +228,7 @@ class Setting extends PureComponent {
                                     phoneNumber,
                                     lang: 'en',
                                     gender,
+                                    enableText,
                                 },
                                 navigation,
                             };
@@ -367,6 +371,8 @@ class Setting extends PureComponent {
             selectedSexuality,
             insurance,
             insurancePlan,
+            phoneNumber,
+            enableText,
         } = this.state;
         const { lang } = this.props;
         const { staticImages } = Constant.App;
@@ -462,6 +468,59 @@ class Setting extends PureComponent {
                     </View>
                 </View>
 
+                <View style={styles.inputTextContainerStyle}>
+                    <View style={styles.inputTextFirstNameContainerStyle}>
+                        <CustomInputText
+                            autoCapitalize="words"
+                            onChangeText={value =>
+                                this.setState({ phoneNumber: value })
+                            }
+                            placeholder="Phone Number"
+                            value={phoneNumber}
+                            style={
+                                phoneNumber
+                                    ? styles.inputTypeStyle
+                                    : [
+                                          styles.inputTypeStyle,
+                                          { fontWeight: '100' },
+                                      ]
+                            }
+                            placeholderTextColor={
+                                Constant.App.colors.blackColor
+                            }
+                        />
+                    </View>
+                    <View style={{ marginLeft: 20 }}>
+                        <CustomText style={styles.textTitleTextStyle}>
+                            Receive text messages
+                        </CustomText>
+
+                        <TouchableOpacity
+                            key="Enable Text"
+                            onPress={() => {
+                                this.setState({
+                                    enableText: !enableText,
+                                });
+                            }}
+                        >
+                            <View style={styles.textContainerStyle}>
+                                <Image
+                                    resizeMode="contain"
+                                    source={
+                                        enableText
+                                            ? staticImages.checkBoxSelectedIcon
+                                            : staticImages.checkBoxIcon
+                                    }
+                                    style={styles.pronounsChecboxIconStyle}
+                                />
+                                <CustomText style={styles.textTextStyle}>
+                                    Enabled
+                                </CustomText>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 <View style={styles.birthDayContainerStyle}>
                     <CustomInputText
                         onChangeText={value => this.setState({ dob: value })}
@@ -526,7 +585,7 @@ class Setting extends PureComponent {
         const { lang } = this.props;
         return (
             <View style={styles.pronounsParentContainerStyle}>
-                <CustomText style={styles.pronounsTitleTextStyle}>
+                <CustomText style={styles.textTitleTextStyle}>
                     {lang.addProfileData.pronounsTitle}
                 </CustomText>
                 {pronounsArr.map((item, key) => (
@@ -544,7 +603,7 @@ class Setting extends PureComponent {
                             });
                         }}
                     >
-                        <View style={styles.pronounsContainerStyle}>
+                        <View style={styles.textContainerStyle}>
                             <Image
                                 resizeMode="contain"
                                 source={

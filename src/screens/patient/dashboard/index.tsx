@@ -55,8 +55,6 @@ const Dashboard = ({ navigation }) => {
     useEffect(() => {
         if (user.uid) {
             dispatch(actions.getHealthHistory({ uid: user.uid }));
-            dispatch(actions.getResolvedQuestion({ uid: user.uid }));
-            dispatch(actions.getUnresolvedQuestions({ uid: user.uid }));
             dispatch(actions.getFavoriteExperts({ uid: user.uid }));
         }
     }, [user]);

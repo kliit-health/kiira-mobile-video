@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginRight: 70,
         marginTop: 10,
-        // marginBottom: 10,
     },
 
     rowLeftContainerStyle: {

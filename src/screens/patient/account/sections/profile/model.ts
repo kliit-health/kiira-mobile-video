@@ -1,15 +1,25 @@
-export const cardDetails = [
+import { icons } from '~/utils/constants';
+
+export type Details = {
+    icon: any;
+    value: string;
+};
+
+export const cardDetails: Details[] = [
     {
-        title: `account.born`,
-        dataKey: 'dob',
+        icon: icons.location,
+        value: 'state.value',
     },
     {
-        title: `account.pronouns`,
-        dataKey: 'pronouns',
+        icon: icons.cake,
+        value: 'dob',
     },
     {
-        title: `account.sexuality`,
-        dataKey: 'sexuality',
-        secondaryKey: 'value',
+        icon: icons.genders,
+        value: 'pronouns',
+    },
+    {
+        icon: icons.heart,
+        value: 'sexuality.value',
     },
 ];

@@ -14,6 +14,7 @@ export { default as ExpertHeader } from './expertHeader';
 export { default as FooterNavigation } from './footerNavigation';
 export { default as Header } from './header';
 export { default as Heading } from './heading';
+export { default as Icon } from './icon';
 export { default as IconButton } from './iconButton';
 export { default as Input } from './input';
 export { default as Line } from './line';
