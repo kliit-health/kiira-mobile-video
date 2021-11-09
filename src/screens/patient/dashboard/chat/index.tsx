@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
+import { Show } from './components/questions';
+import { Screen, Header, NavItem, Column, Text, Tabs } from '~/components';
+import { chatTabs, navItems } from './model';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '~/redux/actions';
 import { RootState } from '~/redux/reducers';
-import { Screen, Header, NavItem, Column, Text, Tabs } from '~/components';
+import { firebaseCollections, firebaseConditionals } from '~/utils/constants';
 import {
     handleBack,
     handleNavigation,
@@ -12,10 +15,8 @@ import {
     getExpertsData,
     clearChooseExpertState,
 } from '~/redux/actions/chooseExpert';
-import { firebaseCollections, firebaseConditionals } from '~/utils/constants';
+
 import { default as globalStyles } from '~/components/styles';
-import { Show } from './components/questions';
-import { chatTabs, navItems } from './model';
 
 const {
     blue_bg,

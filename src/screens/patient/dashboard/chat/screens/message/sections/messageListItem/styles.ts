@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
 
     rowLeftContainerStyle: {
-        backgroundColor: colors.greyAccent,
+        backgroundColor: colors.greyLight,
         borderRadius: 10,
         borderBottomLeftRadius: 0,
         flexWrap: 'wrap',

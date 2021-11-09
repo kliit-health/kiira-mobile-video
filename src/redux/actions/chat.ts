@@ -22,6 +22,7 @@ import {
     CLEAR_CHOOSE_EXPERT_STATE,
     GET_PROFESSIONS_DATA_SUCCESS,
     GET_LANGUAGES_DATA_SUCCESS,
+    RESOLVE_QUESTION,
 } from '~/redux/types';
 
 export const setQuestion = (data, dispatch) => ({
@@ -120,4 +121,9 @@ export const getLanguagesDataSuccess = data => ({
 
 export const clearChooseExpertState = () => ({
     type: CLEAR_CHOOSE_EXPERT_STATE,
+});
+
+export const resolveQuestion = data => ({
+    type: RESOLVE_QUESTION,
+    data,
 });

@@ -58,8 +58,8 @@ export const checkQuestionExpertStatusSuccess = data => ({
     data,
 });
 
-export const resolveQuestion = data => ({
-    type: types.RESOLVE_QUESTION,
+export const resolveQuestionExpert = data => ({
+    type: types.RESOLVE_QUESTION_EXPERT,
     data,
 });
 

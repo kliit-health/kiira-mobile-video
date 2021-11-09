@@ -710,6 +710,7 @@ export const icons = {
     radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
     readMsgIcon: require('../../../assets/read_msg_icon.png'),
     reminders: require('../../../assets/reminders.png'),
+    resolve: require('../../../assets/resolve.png'),
     rightChevronIcon: require('../../../assets/right_chevron.png'),
     send: require('../../../assets/send_message.png'),
     shareIcon: require('../../../assets/share.png'),

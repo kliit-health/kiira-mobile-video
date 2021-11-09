@@ -23,13 +23,13 @@ import {
 import { showOrHideModal } from '~/components/customModal/action';
 import { displayConsole } from '~/utils/helper';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
-import Constant from '../../../../utils/constants';
+import Constant from '~/utils/constants';
 import {
     CHAT_MESSAGE_EXPERT_LOADING,
     CHAT_MESSAGE_EXPERT_SENDING,
     CHECK_USER_STATUS,
     TOGGLE_EXPERT_STATUS,
-    RESOLVE_QUESTION,
+    RESOLVE_QUESTION_EXPERT,
     STOP_OBSERVER_CHAT,
 } from '~/redux/types';
 
@@ -346,6 +346,6 @@ export default function* chatExpertSaga() {
     yield takeEvery(CHAT_MESSAGE_EXPERT_SENDING, sendMessageToUser);
     yield takeEvery(CHECK_USER_STATUS, checkUserStatus);
     yield takeEvery(TOGGLE_EXPERT_STATUS, toggleExpertStatus);
-    yield takeEvery(RESOLVE_QUESTION, resolveQuestion);
+    yield takeEvery(RESOLVE_QUESTION_EXPERT, resolveQuestion);
     yield takeEvery(STOP_OBSERVER_CHAT, stopObserver);
 }
