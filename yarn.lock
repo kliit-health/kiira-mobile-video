@@ -7386,10 +7386,10 @@ react-native-svg@^12.1.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-swipeable-item@^1.5.7:
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/react-native-swipeable-item/-/react-native-swipeable-item-1.5.7.tgz#3ed3e530ae746316c0a336a1929792b36b02cc7f"
-  integrity sha512-Uz29C0g4jDPZpkywPtbfFcAawJTxJ4ouFU03ni7pw+G8t4fTb1vi6QqDVnlqnlFYXcZcFXqVvn+SwT1elvV2/g==
+react-native-swipe-item@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-swipe-item/-/react-native-swipe-item-0.4.0.tgz#228c346d4f63c213d7849c5faf7fc262d6290c96"
+  integrity sha512-peCdR26NCES/ZBLiHBcpUxz53uzolOs6KmnsG6MKoujZtG36qDmwyUWZSUM5l4vd7/kUpQK2GwL/9uHiLeRVXw==
 
 react-native-tab-view@^2.15.2:
   version "2.16.0"

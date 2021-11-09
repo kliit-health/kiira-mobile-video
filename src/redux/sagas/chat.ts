@@ -7,6 +7,7 @@ import {
     CHECK_EXPERT_STATUS,
     TOGGLE_USER_STATUS,
     STOP_OBSERVER_CHAT,
+    RESOLVE_QUESTION,
 } from '~/redux/types';
 import {
     sendMessage,
@@ -22,6 +23,7 @@ import {
     checkQuestionStatus,
     sendNotification,
     sendSms,
+    resolvedQuestion,
 } from '~/utils/firebase';
 import auth from '@react-native-firebase/auth';
 import {
@@ -35,6 +37,7 @@ import {
 } from '../actions/chat';
 import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
+import * as actions from '~/redux/actions';
 import { displayConsole } from '~/utils/helper';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { clearQuestionValue } from '../actions/ask';
@@ -411,6 +414,35 @@ function* toggleUserStatus({ data }) {
     }
 }
 
+function* resolveQuestion({ data }) {
+    const lang = yield select(state => state.language);
+    const user = yield select(state => state.user.data);
+
+    try {
+        const { resolveQuestionParams } = data;
+        const responseResolvedQuestion = yield resolvedQuestion(
+            resolveQuestionParams,
+        );
+
+        if (responseResolvedQuestion.success) {
+            yield put(actions.getResolvedQuestion({ uid: user.uid }));
+            yield put(actions.getUnresolvedQuestions({ uid: user.uid }));
+        } else {
+            yield put(
+                showOrHideModal(
+                    responseResolvedQuestion.message
+                        ? responseResolvedQuestion.message
+                        : lang.errorMessage.serverError,
+                ),
+            );
+        }
+    } catch (error) {
+        displayConsole('setExpertRating  error ', error);
+        yield put(hideApiLoader());
+        yield put(showOrHideModal(lang.errorMessage.serverError));
+    }
+}
+
 function* stopOberver() {
     try {
         if (checkQuestionStatusObserver) {
@@ -434,5 +466,6 @@ export default function* chatSaga() {
     yield takeEvery(SET_QUESTION, setQuestion);
     yield takeEvery(CHECK_EXPERT_STATUS, checkExpertStatus);
     yield takeEvery(TOGGLE_USER_STATUS, toggleUserStatus);
+    yield takeEvery(RESOLVE_QUESTION, resolveQuestion);
     yield takeEvery(STOP_OBSERVER_CHAT, stopOberver);
 }

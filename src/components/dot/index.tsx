@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
 
     dot: {
         backgroundColor: colors.primaryBlue,
-        height: 5,
-        width: 5,
+        height: 8,
+        width: 8,
         marginLeft: -15,
         borderRadius: 3,
     },
