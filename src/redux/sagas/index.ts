@@ -1,12 +1,10 @@
 import { all } from 'redux-saga/effects';
 import account from './account';
 import activate from './activate';
-import agreeToTerms from '../../screens/auth/newUser/saga';
 import agreements from './agreements';
 import appointments from './appointments';
 import ask from './ask';
 import askExpert from '../../screens/provider/ask/saga';
-import assessment from './assessment';
 import chat from './chat';
 import chatExpert from '../../screens/provider/ask/chat/saga';
 import chooseExpert from './chooseExpert';
@@ -39,12 +37,10 @@ export default function* rootSaga() {
     yield all([
         account(),
         activate(),
-        agreeToTerms(),
         agreements(),
         appointments(),
         askExpert(),
         ask(),
-        assessment(),
         chat(),
         chatExpert(),
         chooseExpert(),

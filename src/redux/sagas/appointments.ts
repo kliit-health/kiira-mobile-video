@@ -229,6 +229,12 @@ function* setAppointment({ payload }) {
     } = reason;
     const { uid } = expert;
 
+    const details = {
+        time,
+        complete: false,
+        expert,
+    };
+
     const totals = {
         required: credits,
         monthly: visits,
@@ -267,6 +273,9 @@ function* setAppointment({ payload }) {
             navigation.goBack();
         } else {
             yield updateCredits({ data: payload }, totals, false);
+            if (credits === 0) {
+                yield put(updateUser({ assessment: details }));
+            }
             yield put(getUser());
 
             yield getAppointments();
@@ -277,7 +286,9 @@ function* setAppointment({ payload }) {
                 ).format('llll')}`;
                 yield sendSms(message, phoneNumber);
             }
-            navigation.navigate('Home');
+            navigation.navigate('Success', {
+                time: moment(time).format('llll'),
+            });
             yield put(hideApiLoader());
         }
     } catch (error) {

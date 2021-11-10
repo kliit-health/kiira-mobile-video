@@ -1,6 +1,7 @@
 export default {
     user: {
         agreeToTerms: false,
+        acceptedTreatmentTerms: false,
         chats: '',
         consentAgreements: [],
         displayName: '',
@@ -115,5 +116,8 @@ export default {
         userRating: [],
         id: '',
         videoEnabled: false,
+    },
+    agreements: {
+        contract: '',
     },
 };

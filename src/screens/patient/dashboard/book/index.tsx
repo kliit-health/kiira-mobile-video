@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, ActivityIndicator } from 'react-native';
 import * as Kiira from '~/components';
+import Agreements from '~/components/agreements';
 import { RootState } from '~/redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAppointmentDetails } from '~/redux/reducers/appointments';
@@ -73,6 +74,23 @@ const Book = ({ navigation }) => {
         })();
     }, []);
 
+    useEffect(() => {
+        (async () => {
+            const types = await getAllDocumentsFromCollection(
+                `appointmentTypes`,
+            );
+
+            if (Array.isArray(types)) {
+                const result = types.reduce((acc, item) => {
+                    acc[item.id] = item;
+                    return acc;
+                }, {});
+
+                setAppointmentTypes(result);
+            }
+        })();
+    }, []);
+
     const handleTabSelect = (label: string) => {
         setActiveTab(label);
         setData(catagories[label]);
@@ -84,6 +102,7 @@ const Book = ({ navigation }) => {
     };
 
     const handleSelection = item => {
+        console.log(item);
         setLoading(true);
         setSelection(item);
         dispatch(
@@ -97,6 +116,7 @@ const Book = ({ navigation }) => {
 
     return (
         <Kiira.Screen test="Book Screen">
+            <Agreements navigation={navigation} />
             <Kiira.Header title="Book Visit" onBack={handleBack} />
             <Kiira.Heading>
                 Please select the main reason for your visit:

@@ -42,6 +42,7 @@ const SelectProvider = () => {
     const [showModal, setShowModal] = useState(false);
     const [expert, setExpert] = useState(null);
     const experts = useSelector((state: RootState) => state.experts.data);
+    const { visit } = useSelector((state: RootState) => state.appointments);
     const userProfile = useSelector(
         (state: RootState) => state.user.data.profileInfo,
     );
@@ -65,7 +66,7 @@ const SelectProvider = () => {
                     },
                 }) => {
                     return specialities.some(specialty => {
-                        return specialty.includes('Birth Control');
+                        return specialty.includes(visit.reason);
                     });
                 },
             );
