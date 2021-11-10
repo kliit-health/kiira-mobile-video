@@ -39,8 +39,6 @@ import FamilyHistory from '../screens/provider/appointments/patientProfile/famil
 import ForgotPassword from '../screens/auth/forgotPassword';
 import GynHistory from '../screens/provider/appointments/patientProfile/gyn';
 import HealthHistory from '../screens/patient/dashboard/healthHistory';
-import HealthAssessmentConfirmation from '../screens/patient/dashboard/healthAssesment/confirmation';
-import HealthAssessmentSchedule from '../screens/patient/dashboard/healthAssesment/scheduleModal';
 import Help from '../screens/common/help';
 import Learn from '../screens/patient/blog';
 import Lifestyle from '../screens/patient/dashboard/healthHistory/lifestyle';
@@ -51,7 +49,6 @@ import MedicationsHistory from '../screens/provider/appointments/patientProfile/
 import MedicalHistory from '../screens/patient/dashboard/healthHistory/medicalHistory';
 import MedicalHistoryExpert from '../screens/provider/appointments/patientProfile/medicalHistory';
 import Messages from '../screens/patient/dashboard/chat/screens/message';
-import NewUser from '../screens/auth/newUser';
 import Confirm from '../screens/provider/appointments/patientProfile/confirm';
 import Patients from '../screens/provider/patients';
 import PatientProfile from '../screens/provider/appointments/patientProfile';
@@ -73,6 +70,7 @@ import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvi
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
+import Success from '../screens/patient/dashboard/book/screens/success';
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing';
@@ -557,15 +555,12 @@ const MainAppStack = createStackNavigator(
         BottomTab: { screen: BottomTab },
         Calendar: { screen: Calendar },
         CareSquad: { screen: CareSquad },
-        TreatmentHistory: { screen: TreatmentHistory },
         ChangePassword: { screen: ChangePassword },
         Chat: { screen: Chat },
         Children: { screen: Children },
         DueDate: { screen: DueDate },
         ExpertProfile: { screen: ExpertProfile },
         HealthHistory: { screen: HealthHistory },
-        HealthAssessmentConfirmation: { screen: HealthAssessmentConfirmation },
-        HealthAssessmentSchedule: { screen: HealthAssessmentSchedule },
         Help: { screen: Help },
         Learn: { screen: Learn },
         Lifestyle: { screen: Lifestyle },
@@ -573,7 +568,6 @@ const MainAppStack = createStackNavigator(
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
         Messages: { screen: Messages },
-        NewUser: { screen: NewUser },
         Payment: { screen: Payment },
         PregnancyAndChildren: { screen: Pregnancy },
         PregnancyCurrent: { screen: CurrentPregnancy },
@@ -584,7 +578,9 @@ const MainAppStack = createStackNavigator(
         SelectChatProvider: { screen: SelectChatProvider },
         SelectProvider: { screen: SelectProvider },
         Settings: { screen: Settings },
+        Success: { screen: Success },
         TermsConditions: { screen: TermsConditions },
+        TreatmentHistory: { screen: TreatmentHistory },
         Visit: { screen: Visit },
         VisitOverView: { screen: VisitOverView },
         VisitSummary: { screen: VisitSummary },

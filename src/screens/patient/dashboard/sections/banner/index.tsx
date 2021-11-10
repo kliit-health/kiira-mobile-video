@@ -13,22 +13,22 @@ enum Action {
 }
 
 const Banner = () => {
-    const assesment = useSelector(state => state.user.data.assesment);
+    const assessment = useSelector(state => state.user.data.assessment);
     const [action, setAction] = useState<Action | undefined>(Action.Schedule);
 
     useEffect(() => {
-        if (!assesment) {
+        if (!assessment) {
             setAction(Action.Schedule);
         }
 
-        if (assesment && !assesment.complete) {
+        if (assessment && !assessment.complete) {
             setAction(Action.Reminder);
         }
 
-        if (assesment && assesment.complete) {
+        if (assessment && assessment.complete) {
             setAction(Action.Book);
         }
-    }, [assesment]);
+    }, [assessment]);
 
     return (
         <View style={styles.container}>

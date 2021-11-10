@@ -2,13 +2,15 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Button } from '~/components';
 import { shallowEqual, useSelector } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import styles, { buttonStyles } from './styles';
+import { screenNames } from '~/utils/constants';
 
-const Book = () => {
+const Book = ({ navigation }) => {
     const lang = useSelector(state => state.language.book, shallowEqual);
 
-    const handleSchedule = (id: string) => {
-        console.log(id);
+    const handleSchedule = () => {
+        navigation.navigate(screenNames.Book);
     };
 
     return (
@@ -38,4 +40,4 @@ const Book = () => {
     );
 };
 
-export default Book;
+export default withNavigation(Book);

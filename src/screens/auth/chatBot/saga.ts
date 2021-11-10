@@ -2,7 +2,7 @@ import { UPDATE_NEW_USER_DETAIL_DATA } from '~/redux/types';
 import { put, takeEvery, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { showOrHideModal } from '~/components/customModal/action';
-import Constant from '~/utils/constants';
+import Constant, { screenNames } from '~/utils/constants';
 import { updateUser } from '~/redux/actions/user';
 
 const defaultImage =
@@ -11,9 +11,10 @@ const defaultImage =
 function* updateNewUserData({ data }) {
     const lang = yield select(state => state.language);
     const user = yield select(state => state.user.data);
+    const { userParams, navigation } = data;
+
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
-        const { userParams, navigation } = data;
+        yield put(showApiLoader());
 
         const userInfo = {
             ...(userParams.address && { address: userParams.address }),
@@ -77,7 +78,7 @@ function* updateNewUserData({ data }) {
         yield put(updateUser({ uid: user.uid, ...userInfo }));
         yield put(hideApiLoader());
 
-        navigation.navigate(Constant.App.screenNames.NewUser);
+        navigation.navigate(screenNames.Home);
     } catch (error) {
         console.error(error);
         yield put(hideApiLoader());

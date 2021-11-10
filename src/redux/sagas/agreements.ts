@@ -5,20 +5,16 @@ import {
     GET_AGREEMENTS_REJECTED,
 } from '../types';
 import { put, takeEvery } from 'redux-saga/effects';
-import { firebaseFetch } from '../../utils/firebase';
-import { orderBy } from 'lodash';
+import { firebaseSingleFetch } from '../../utils/firebase';
 
 function* getAgreements() {
     try {
         yield put({ type: GET_AGREEMENTS_PENDING });
-        const condition = [
-            { key: 'category', operator: '==', value: 'treatment' },
-        ];
-        const agreements = yield firebaseFetch('agreements', condition);
+        const agreements = yield firebaseSingleFetch('agreements', 'treatment');
 
         yield put({
             type: GET_AGREEMENTS_FULFILLED,
-            data: orderBy(agreements, 'index', 'asc'),
+            data: agreements,
         });
     } catch (error) {
         yield put({ type: GET_AGREEMENTS_REJECTED, data: error });
