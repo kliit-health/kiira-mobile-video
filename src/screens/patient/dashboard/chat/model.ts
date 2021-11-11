@@ -38,7 +38,7 @@ export const navItems: Item[] = [
     {
         title: 'chat.techSupport.title',
         description: 'chat.techSupport.description',
-        destination: undefined,
+        destination: route.chooseSupport,
         type: 'Tech Support',
         icon: MobilePhone,
     },
