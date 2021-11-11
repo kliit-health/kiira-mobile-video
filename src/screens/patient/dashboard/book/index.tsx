@@ -102,7 +102,6 @@ const Book = ({ navigation }) => {
     };
 
     const handleSelection = item => {
-        console.log(item);
         setLoading(true);
         setSelection(item);
         dispatch(
