@@ -2,6 +2,7 @@ export default {
     account: {
         logout: 'Spanish Logout',
         settings: 'Spanish My Profile',
+        billingAndInsurance: 'Spanish Billing & Insurance',
         termsAndConditions: 'Spanish Terms & Conditions',
         privacyPolicies: 'Spanish Privacy Policies',
         help: 'Spanish Help',
@@ -457,6 +458,7 @@ export default {
     expertAccount: {
         logout: 'Spanish Logout',
         settings: 'Spanish My Profile',
+        billingAndInsurance: 'Spanish Billing & Insurance',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Spanish Privacy Policies',
         updateAvailability: 'Spanish Update Availability',

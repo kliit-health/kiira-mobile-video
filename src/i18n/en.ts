@@ -2,6 +2,7 @@ export default {
     account: {
         logout: 'Logout',
         settings: 'My Profile',
+        billingAndInsurance: 'Billing & Insurance',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Privacy Policies',
         help: 'Help',
@@ -427,6 +428,7 @@ export default {
     expertAccount: {
         logout: 'Logout',
         settings: 'My Profile',
+        billingAndInsurance: 'Billing & Insurance',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Privacy Policies',
         updateAvailability: 'Update Availability',

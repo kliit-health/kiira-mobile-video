@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { get } from 'lodash';
 import model from './model';
 import { ListItem } from '~/components';
@@ -11,14 +11,28 @@ export default ({ onItemPress }) => {
 
     return (
         <View>
-            {model.map(({ title, destination }) => (
+            {model.map(({ title, destination, content, icon }) => (
                 <ListItem
                     key={title}
                     id={destination}
                     onPress={onItemPress}
                     displayChevron
                 >
-                    <Text style={styles.title}>{get(language, title)}</Text>
+                    <View style={styles.listContainer}>
+                    {icon && (
+                        <Image
+                            style={styles.icon}
+                            resizeMode="contain"
+                            source={icon}
+                        />
+                    )}
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>{get(language, title)}</Text>
+                        {content && ( 
+                            <Text style={styles.content}>{content}</Text>
+                        )}
+                    </View>
+                    </View>
                 </ListItem>
             ))}
         </View>
