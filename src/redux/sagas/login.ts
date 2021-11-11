@@ -59,7 +59,7 @@ function* loginFirebase({ payload }) {
             yield put(getTermsAndConditions());
             const userData = yield select(state => state.user.data);
             yield delay(500);
-            const { agreeToTerms, firstLogin, role } = userData;
+            const { firstLogin, role } = userData;
             yield delay(1000);
 
             yield auth()
@@ -70,8 +70,8 @@ function* loginFirebase({ payload }) {
                     const isExpert = claims.role && claims.role.expert;
                     const hasExpertRole = role === 'Expert';
                     const isUser = role === 'User';
-                    const isNewUser = !agreeToTerms || firstLogin;
-                    const isSupport = role === 'support';
+                    const isNewUser = firstLogin;
+                    const isSupport = role === 'Support';
 
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
