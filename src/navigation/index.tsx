@@ -73,8 +73,9 @@ import SocialHistory from '../screens/provider/appointments/patientProfile/socia
 import Success from '../screens/patient/dashboard/book/screens/success';
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
-import Landing from '../screens/auth/landing';
-import TermsConditions from '../screens/common/termsAndConditions';
+import Landing from '../screens/auth/landing'; 
+import BillingInsurance from '../screens/common/billingAndInsurance'; 
+import TermsConditions from '../screens/common/termsAndConditions'; 
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
@@ -520,6 +521,7 @@ const AppStackExpert = createStackNavigator(
         SettingsExpert: { screen: SettingsExpert },
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
+        BillingInsurance : {screen: BillingInsurance},
         TermsConditions: { screen: TermsConditions },
         UpdateAvailablity: { screen: UpdateAvailablity },
         PersonalInformation: { screen: PersonalInformation },
@@ -579,6 +581,7 @@ const MainAppStack = createStackNavigator(
         SelectProvider: { screen: SelectProvider },
         Settings: { screen: Settings },
         Success: { screen: Success },
+        BillingInsurance: {screen: BillingInsurance},
         TermsConditions: { screen: TermsConditions },
         TreatmentHistory: { screen: TreatmentHistory },
         Visit: { screen: Visit },

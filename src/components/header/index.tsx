@@ -13,6 +13,8 @@ const Header = ({
     onEditPress,
     onFilterPress,
     onHomePress,
+    onEditBilling,
+    OnSettingPress,
     editState,
     styles: customStyles,
     children,
@@ -41,6 +43,9 @@ const Header = ({
         },
         filterButton: defaultStyles.filterButton,
         homeButton: defaultStyles.homeButton,
+        billingButton: defaultStyles.billingButton,
+        settingButton:  defaultStyles.settingButton,
+        
     };
 
     return (
@@ -87,6 +92,25 @@ const Header = ({
                     boxed={themed}
                 />
             )}
+            {onEditBilling && (
+                <IconButton
+                    test="Chat Billing Button"
+                    styles={{ image: styles.billingButton }}
+                    source={icons.editBilling}
+                    onPress={onEditBilling}
+                    boxed={themed}
+                />
+            )}
+             {OnSettingPress && (
+                <IconButton
+                    test="Chat Setting Button"
+                    styles={{ image: styles.settingButton }}
+                    source={icons.settings}
+                    onPress={OnSettingPress}
+                    boxed={themed}
+                />
+            )}
+            
         </View>
     );
 };

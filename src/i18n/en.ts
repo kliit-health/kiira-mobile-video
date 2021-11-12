@@ -1,3 +1,5 @@
+import BillingAndInsurance from "~/screens/common/billingAndInsurance";
+
 export default {
     account: {
         logout: 'Logout',
@@ -388,6 +390,14 @@ export default {
         getStarted: 'Get Started',
         agree: 'Agree',
         finish: 'Finish',
+    },
+    billingAndInsurance: {
+        title: 'Billing & Insurance',
+        insuranceCompany: 'Insurance Company',
+        insurance: 'Insurance:',
+        memberId: 'Member ID:',
+        pastBills: 'Past Bills',
+        noBills: 'You don\'t currently have any bills.'
     },
     termsAndConditions: {
         title: 'Terms and Conditions',

@@ -7,7 +7,10 @@ export default StyleSheet.create({
         paddingHorizontal: '10%',
         paddingVertical: 20,
     },
-
+    headerStyle:{
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1,  
+    },
     root: {
         backgroundColor: colors.white,
         borderRadius: 16,

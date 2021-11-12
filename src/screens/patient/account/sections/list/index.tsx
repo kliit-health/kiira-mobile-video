@@ -8,7 +8,7 @@ import styles from './styles';
 
 export default ({ onItemPress }) => {
     const language = useSelector(state => state.language, shallowEqual);
-
+    console.log('model', model);
     return (
         <View>
             {model.map(({ title, destination, content, icon }) => (
@@ -19,20 +19,21 @@ export default ({ onItemPress }) => {
                     displayChevron
                 >
                     <View style={styles.listContainer}>
-                    {icon && (
-                        <Image
-                            style={styles.icon}
-                            resizeMode="contain"
-                            source={icon}
-                        />
-                    )}
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{get(language, title)}</Text>
-                        {content && ( 
-                            <Text style={styles.content}>{content}</Text>
+                        {icon && (
+                            <Image
+                                style={styles.icon}
+                                resizeMode="contain"
+                                source={icon}
+                            />
                         )}
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>{get(language, title)}</Text>
+                            {content && ( 
+                                <Text style={styles.content}>{content}</Text>
+                            )}
+                        </View>
                     </View>
-                    </View>
+                    
                 </ListItem>
             ))}
         </View>

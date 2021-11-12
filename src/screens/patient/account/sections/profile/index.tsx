@@ -5,12 +5,26 @@ import { cardDetails } from './model';
 import { Avatar, Icon, Header, Screen } from '~/components';
 import styles, { modifiers } from './styles';
 
-export default ({ profileInfo }) => {
+export default ({ profileInfo, navigation }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
+
+    const handleOnBackPress = () => {
+         
+    }; 
+
+    const handleSetting = () => {
+         
+    }; 
 
     return (
         <Screen>
-            <Header title="Profile" />
+            <View style={styles.headerStyle}>
+                <Header 
+                    title="Profile" 
+                    onBack={handleOnBackPress}
+                    OnSettingPress={handleSetting}
+                />
+            </View>
             <Avatar
                 source={profileImageUrl}
                 size="large"
