@@ -1,16 +1,22 @@
 import { StyleSheet } from 'react-native';
-import { text } from '~/utils/constants';
+import { colors, text } from '~/utils/constants';
 
 export default StyleSheet.create({
-    title: {
+    title: { 
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
-    },
+    }, 
+    paneTitle: {
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.xLarge, 
+    }, 
     listContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',  
     },
     titleContainer: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        justifyContent: 'center',
+
     },
     content: {
         fontSize: text.size.medium,

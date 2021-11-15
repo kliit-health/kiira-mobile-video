@@ -80,21 +80,16 @@ const BillingAndInsurance = ({ navigation }) => {
                             ]}>
                         {lang.billingAndInsurance.insurance}
                     </Text>
-                    <Text style={ 
-                            insurance
-                            ? styles.inputTypeStyle
-                            : [
-                                styles.inputEmptyTypeStyle,
-                                { fontWeight: '100' },
-                            ]
-                        }>
-                        {insurance ? insurance : lang.billingAndInsurance.insuranceCompany}
-                    </Text> 
+                    <View style={ insurance ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }> 
+                        <Text style={  insurance ? styles.textStyle : styles.textEmptyStyle }>
+                            {insurance ? insurance : lang.billingAndInsurance.insuranceCompany}
+                        </Text>
+                    </View> 
                 </View>
                 {insurance ? <View style={styles.underLineStyle}/> : null}
                 <View style={styles.inputTextContainerStyle}>
                     <Text style={
-                        insurance
+                        memberId
                         ? styles.titleTextStyle
                         : [
                             styles.titleTextStyle,
@@ -103,23 +98,21 @@ const BillingAndInsurance = ({ navigation }) => {
                         >
                             {lang.billingAndInsurance.memberId}
                     </Text>
-                    <Text style={ 
-                            memberId
-                            ? styles.inputTypeStyle
-                            : [
-                                styles.inputEmptyTypeStyle,
-                                { fontWeight: '100' },
-                            ]
-                        }
-                    >
-                        {memberId ? memberId : lang.billingAndInsurance.memberId}
-                    </Text> 
+                    <View style={ memberId ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }>
+                        <Text style={  memberId ? styles.textStyle : styles.textEmptyStyle }>
+                            {memberId ? memberId : lang.billingAndInsurance.memberIdHint}
+                        </Text>
+                    </View>  
                 </View>
-                <View style={styles.pastBillsContainerStyle}>
-                    <Text style={styles.pastBillStyle}>{lang.billingAndInsurance.pastBills}</Text>
-                    <Text style={styles.noBillStyle}>{(insurance == null || insurance == '') ? lang.billingAndInsurance.noBills : ''}</Text>
-                    {(insurance != null && insurance != '') && <BillModel billDate={billDate}/>}
-                </View>
+                {insurance ? <View style={styles.pastBillsContainerStyle}>
+                        <Text style={styles.pastBillStyle}>{lang.billingAndInsurance.pastBills}</Text>
+                        <BillModel billDate={billDate}/>
+                    </View> :
+                    <View style={styles.pastBillsContainerStyle}>
+                        <Text style={styles.pastBillStyle}>{lang.billingAndInsurance.pastBills}</Text>
+                        <Text style={styles.noBillStyle}>{lang.billingAndInsurance.noBills}</Text>
+                    </View>
+                }
             </View>
             
             )}

@@ -8,15 +8,16 @@ import styles from './styles';
 
 export default ({ onItemPress }) => {
     const language = useSelector(state => state.language, shallowEqual);
-    console.log('model', model);
+    const user = useSelector(state => state.user.data); 
     return (
         <View>
-            {model.map(({ title, destination, content, icon }) => (
+            {model.map(({ title, destination, content, icon, pane, noBorder}) => (
                 <ListItem
                     key={title}
                     id={destination}
                     onPress={onItemPress}
-                    displayChevron
+                    displayChevron={!pane}
+                    displayBorder={!noBorder} 
                 >
                     <View style={styles.listContainer}>
                         {icon && (
@@ -27,13 +28,24 @@ export default ({ onItemPress }) => {
                             />
                         )}
                         <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{get(language, title)}</Text>
-                            {content && ( 
-                                <Text style={styles.content}>{content}</Text>
+                            <Text style={pane ? styles.paneTitle : styles.title}>{get(language, title)}</Text>
+                            { content == `Add Insurance` && ( 
+                                <Text style={styles.content}>{
+                                    user.profileInfo && user.profileInfo.insurance ? user.profileInfo.insurance : content 
+                                }</Text>
                             )}
-                        </View>
-                    </View>
-                    
+                            { content == `Please Select` && ( 
+                                <Text style={styles.content}>{
+                                    user.profileInfo && user.profileInfo.pharmacy ? user.profileInfo.pharmacy : content 
+                                }</Text>
+                            )}
+                             { content == `Please Add a Contact` && ( 
+                                <Text style={styles.content}>{
+                                    user.profileInfo && user.profileInfo.emergencyContact ? user.profileInfo.emergencyContact : content 
+                                }</Text>
+                            )}
+                        </View> 
+                    </View>  
                 </ListItem>
             ))}
         </View>

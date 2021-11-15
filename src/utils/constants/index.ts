@@ -671,6 +671,14 @@ export const icons = {
     basket: require('../../../assets/basket.png'),
     bandAid: require('../../../assets/bandaid.png'),
     billing: require('../../../assets/billing.png'),
+    pharmacy: require('../../../assets/pharmacy.png'),
+    emergencyContact: require('../../../assets/emergencyContact.png'),
+    labResults: require('../../../assets/labResults.png'),
+    medications: require('../../../assets/medications.png'),
+    vaccines: require('../../../assets/vaccines.png'),
+    allergies: require('../../../assets/allergies_circle.png'),
+    healthHistory: require('../../../assets/healthHistory.png'),
+    pastVisits: require('../../../assets/pastVisits.png'),
     blog: require('../../../assets/blog.png'),
     blogActive: require('../../../assets/blog-active.png'),
     cake: require('../../../assets/cake.png'),
@@ -732,6 +740,8 @@ export const icons = {
     tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
     unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
     xCloseIcon: require('../../../assets/xclose.png'),
+    downChevron: require('../../../assets/downChevron.png'),
+
 };
 
 export const stack = {
@@ -812,6 +822,14 @@ export const screenNames = {
     bottomTab: 'BottomTab',
     settings: 'Settings',
     billingAndInsurance: 'BillingInsurance',
+    pharmacy: 'Pharmacy',
+    emergencyContact: 'EmergencyContact',
+    labResults: 'Lab Results',
+    medications: 'Medications',
+    vaccines: 'Vaccines',
+    allergies: 'Allergies',
+    health_History: 'Health History',
+    pastVisits: 'Past Visits',
     termsAndConditions: 'TermsConditions',
     privacyPolicies: 'PrivacyPolicy',
     help: 'Help',

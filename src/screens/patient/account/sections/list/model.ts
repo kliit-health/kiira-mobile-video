@@ -1,6 +1,6 @@
 import { screenNames } from '~/utils/constants';
-import { icons } from '../../../../../utils/constants';
-
+import { icons } from '../../../../../utils/constants'; 
+ 
 export default [
     {
         title: `account.billingAndInsurance`,
@@ -9,19 +9,50 @@ export default [
         content: `Add Insurance`,
     },
     {
-        title: `account.settings`,
-        destination: screenNames.settings,
+        title: `account.pharmacy`,
+        destination: screenNames.pharmacy,
+        icon: icons.pharmacy,
+        content: `Please Select`,
     },
     {
-        title: `account.termsAndConditions`,
+        title: `account.emergencyContact`,
+        destination: screenNames.emergencyContact,
+        icon: icons.emergencyContact,
+        content: `Please Add a Contact`,
+    }, 
+    {
+        title: `account.myHealth`,     
+        pane: true
+    },
+    {
+        title: `labResults.title`,
         destination: screenNames.termsAndConditions,
+        icon: icons.labResults,
+        noBorder: true
     },
     {
-        title: `account.privacyPolicies`,
-        destination: screenNames.privacyPolicies,
+        title: `medications.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.medications,  
     },
     {
-        title: `account.help`,
-        destination: screenNames.help,
+        title: `vaccines.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.vaccines,  
+    },
+    {
+        title: `allergies.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.allergies,  
+    },
+    {
+        title: `healthHistory.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.healthHistory, 
+    },
+    {
+        title: `pastVisits.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.pastVisits,  
     },
 ];

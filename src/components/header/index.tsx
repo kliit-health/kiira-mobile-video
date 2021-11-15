@@ -15,6 +15,7 @@ const Header = ({
     onHomePress,
     onEditBilling,
     OnSettingPress,
+    onListPress,
     editState,
     styles: customStyles,
     children,
@@ -45,7 +46,7 @@ const Header = ({
         homeButton: defaultStyles.homeButton,
         billingButton: defaultStyles.billingButton,
         settingButton:  defaultStyles.settingButton,
-        
+        listButton:  defaultStyles.listButton,
     };
 
     return (
@@ -60,9 +61,18 @@ const Header = ({
                 />
             )}
             {onClose && <IconButton source={icons.cross} onPress={onClose} />}
-            <Text pointerEvents="none" style={styles.title}>
+            <Text pointerEvents="none" style={onListPress ? [styles.title, {paddingRight:25}] : styles.title}>
                 {title}
             </Text>
+            {onListPress && (
+                <IconButton
+                    test="Chat Setting Button"
+                    styles={{ image: styles.listButton }}
+                    source={icons.downChevron}
+                    onPress={onListPress}
+                    boxed={themed}
+                />
+            )}
             {children}
             {onEditPress && (
                 <TextButton
@@ -100,16 +110,16 @@ const Header = ({
                     onPress={onEditBilling}
                     boxed={themed}
                 />
-            )}
+            )} 
              {OnSettingPress && (
                 <IconButton
-                    test="Chat Setting Button"
+                    test="Chat Plan Button"
                     styles={{ image: styles.settingButton }}
                     source={icons.settings}
                     onPress={OnSettingPress}
                     boxed={themed}
                 />
-            )}
+            )} 
             
         </View>
     );
@@ -120,6 +130,8 @@ Header.propTypes = {
     onBack: func,
     onEdit: func,
     onClose: func,
+    OnSettingPress: func,
+    onListPress: func,
     disableEdit: bool,
     children: node,
     editState: bool,

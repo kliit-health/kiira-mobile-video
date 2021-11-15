@@ -3,6 +3,12 @@ export default {
         logout: 'Spanish Logout',
         settings: 'Spanish My Profile',
         billingAndInsurance: 'Spanish Billing & Insurance',
+        addInsurance: 'Spanish Add Insurance',
+        pharmacy: 'Spanish Pharmacy',
+        pleaseSelect: 'Spanish Please Select',
+        emergencyContact: 'Spanish Emergency Contact',
+        myHealth: 'Spanish My Health', 
+        pleaseAddAContact: 'Spanish Please Add a Contact',
         termsAndConditions: 'Spanish Terms & Conditions',
         privacyPolicies: 'Spanish Privacy Policies',
         help: 'Spanish Help',
@@ -58,6 +64,19 @@ export default {
     medications: {
         title: 'Spanish Medications',
         save: 'Spanish Save',
+    },
+
+    labResults: {
+        title: 'Spanish Lab Results', 
+    },
+    vaccines: {
+        title: 'Spanish Vaccines',
+    },
+    healthHistory: {
+        title: 'Spanish Health History',
+    },
+    pastVisits: {
+        title: 'Spanish Past Visits',
     },
 
     pregnancy: {
@@ -418,6 +437,21 @@ export default {
         getStarted: 'Spanish Get Started',
         agree: 'Spanish Agree',
         finish: 'Spanish Finish',
+    },
+    billingAndInsurance: {
+        title: 'Spanish Billing & Insurance',
+        insuranceCompany: 'Spanish Insurance Company',
+        memberIdHint: 'Spanish Member ID',
+        insurance: 'Spanish Insurance:',
+        memberId: 'Spanish Member ID:',
+        pastBills: 'Spanish Past Bills',
+        noBills: 'Spanish You don\'t currently have any bills.'
+    },
+    pharmacy: {
+        title: 'Spanish Pharmacy', 
+    },
+    emergencyContact: {
+        title: 'Spanish Emergency Contact', 
     },
     termsAndConditions: {
         title: 'Spanish Terms and Conditions',

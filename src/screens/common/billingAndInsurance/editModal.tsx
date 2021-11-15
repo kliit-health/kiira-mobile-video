@@ -61,7 +61,7 @@ const EditModal = ({ show, lang, company, memberId, billDate, toggleModal}) => {
                                 setMember(value);
                             }
                             }
-                            placeholder={lang.billingAndInsurance.memberId}
+                            placeholder={lang.billingAndInsurance.memberIdHint}
                             value={member}
                             style={ 
                                 member

@@ -42,6 +42,11 @@ export default StyleSheet.create({
         height: 25,
         width: 25, 
     },
+    listButton: {  
+        height: 12,
+        width: 12,    
+        left: 55, 
+    }, 
     
 });
 

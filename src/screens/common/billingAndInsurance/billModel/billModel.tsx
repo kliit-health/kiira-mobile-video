@@ -16,8 +16,7 @@ const BillModel = ({ billDate}) => {
 
     useEffect(() => { 
         setDiff(moment.unix(billDate / 1000).fromNow(true));
-    }, []);
- 
+    }, []); 
 
     return (
         <View style={styles.headerStyle}>

@@ -9,6 +9,7 @@ let parentPadding = parentPaddingValue * 2;
 export default StyleSheet.create({ 
     headerStyle:{  
         marginHorizontal: parentPaddingValue,  
+        marginTop: metrics.height * 0.03,  
         flexDirection:'row', 
     }, 
     dateStyle: { 

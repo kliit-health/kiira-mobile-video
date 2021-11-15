@@ -5,6 +5,12 @@ export default {
         logout: 'Logout',
         settings: 'My Profile',
         billingAndInsurance: 'Billing & Insurance',
+        addInsurance: 'Add Insurance',
+        pharmacy: 'Pharmacy',
+        pleaseSelect: 'Please Select',
+        emergencyContact: 'Emergency Contact',
+        myHealth: 'My Health', 
+        pleaseAddAContact: 'Please Add a Contact',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Privacy Policies',
         help: 'Help',
@@ -54,6 +60,18 @@ export default {
     medications: {
         title: 'Medications',
         save: 'Save',
+    },
+    labResults: {
+        title: 'Lab Results', 
+    },
+    vaccines: {
+        title: 'Vaccines',
+    },
+    healthHistory: {
+        title: 'Health History',
+    },
+    pastVisits: {
+        title: 'Past Visits',
     },
     pregnancy: {
         title: 'Pregnancy and Children',
@@ -394,10 +412,17 @@ export default {
     billingAndInsurance: {
         title: 'Billing & Insurance',
         insuranceCompany: 'Insurance Company',
+        memberIdHint: 'Member ID',
         insurance: 'Insurance:',
         memberId: 'Member ID:',
         pastBills: 'Past Bills',
         noBills: 'You don\'t currently have any bills.'
+    },
+    pharmacy: {
+        title: 'Pharmacy', 
+    },
+    emergencyContact: {
+        title: 'Emergency Contact', 
     },
     termsAndConditions: {
         title: 'Terms and Conditions',

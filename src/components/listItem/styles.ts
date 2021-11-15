@@ -11,6 +11,10 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginBottom: 1,
     },
+    borderStyle: {
+        borderColor: colors.greyAccent,
+        borderTopWidth:1
+    },
     chevron: {
         height: 14,
         width: 14,

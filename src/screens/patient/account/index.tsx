@@ -27,16 +27,7 @@ const Account = ({ navigation }) => {
                 {!!subscription.data.id && (
                     <Plan subscription={subscription} user={user} />
                 )}
-                <List onItemPress={handleNavigation} />
-                <Text style={styles.version}>{app.version}</Text>
-                <TextButton
-                    test="Logout"
-                    onPress={handleSignOut}
-                    styles={modifiers.button}
-                    link
-                >
-                    {lang.account.logout}
-                </TextButton>
+                <List onItemPress={handleNavigation} /> 
             </ScrollView>
         </Screen>
     );

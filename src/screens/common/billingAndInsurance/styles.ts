@@ -9,11 +9,12 @@ let parentPadding = parentPaddingValue * 2;
 export default StyleSheet.create({ 
     headerStyle:{
         borderBottomColor: colors.greyAccent,
-        borderBottomWidth: 1,  
+        borderBottomWidth: 1,   
     },
     inputTextParentContainerStyle: {  
         width: metrics.width, 
-        marginTop: metrics.height * 0.02,   
+        paddingTop: metrics.height * 0.01,   
+        backgroundColor: colors.white 
     },
     underLineStyle : {
         width: '100%',
@@ -26,7 +27,7 @@ export default StyleSheet.create({
         marginLeft: parentPaddingValue,
         marginRight: parentPaddingValue,
         width: metrics.width - parentPadding,
-        marginVertical: metrics.height * 0.01,    
+        marginVertical: metrics.height * 0.01, 
     },
     inputEmptyTypeStyle: {
         color: colors.black,
@@ -39,6 +40,16 @@ export default StyleSheet.create({
         paddingHorizontal: metrics.height * 0.02,    
         paddingTop: metrics.height * 0.015, 
         paddingBottom: metrics.height * 0.015,  
+    },
+    textStyle: {
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        backgroundColor: colors.white, 
+    },
+    textEmptyStyle: {
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontWeight:'100', 
     },
     titleTextStyle: {
         color: colors.black,
@@ -67,20 +78,28 @@ export default StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: metrics.height * 0.02,    
         paddingTop: metrics.height * 0.008, 
-        paddingBottom: metrics.height * 0.008, 
+        paddingBottom: metrics.height * 0.008,  
     },
     pastBillsContainerStyle: {
         flexDirection: 'column',   
         borderTopColor: colors.greyAccent, 
         borderTopWidth: 1, 
-        marginTop: metrics.height * 0.01, 
+        marginTop: metrics.height * 0.01,   
+        height:'100%'
+    },
+    pastBillsStyle: {
+        flexDirection: 'column',   
+        borderTopColor: colors.greyAccent, 
+        borderTopWidth: 1,  
     },
     pastBillStyle: { 
         fontSize: text.size.xLarge,
         fontFamily: text.fontFamily.poppinsRegular,
-        marginLeft: parentPaddingValue,
-        marginRight: parentPaddingValue,
-        marginTop: metrics.height * 0.02, 
+        paddingLeft: parentPaddingValue,
+        paddingRight: parentPaddingValue,
+        paddingTop: metrics.height * 0.02, 
+        paddingBottom: metrics.height * 0.02, 
+        backgroundColor: colors.babyBlue
     },
     noBillStyle: { 
         fontSize: text.size.xLarge,

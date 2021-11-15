@@ -9,6 +9,7 @@ const ListItem = props => {
         styles: customStyles,
         onPress,
         displayChevron,
+        displayBorder,
         children,
         activeOpacity,
         id,
@@ -28,8 +29,10 @@ const ListItem = props => {
     return (
         <TouchableOpacity
             activeOpacity={activeOpacity}
-            style={styles.root}
-            onPress={handlePress}
+            style={
+                displayBorder ? [styles.root, defaultStyles.borderStyle, !displayChevron ? {backgroundColor:'#ECFCFF'} : {}] : styles.root
+            }
+            onPress={handlePress} 
         >
             {children}
             {displayChevron && (
@@ -50,6 +53,7 @@ ListItem.propTypes = {
     }),
     onPress: func,
     displayChevron: bool,
+    displayBorder: bool,
     activeOpacity: number,
 };
 
