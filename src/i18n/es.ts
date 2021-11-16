@@ -448,7 +448,11 @@ export default {
         noBills: 'Spanish You don\'t currently have any bills.'
     },
     pharmacy: {
-        title: 'Spanish Pharmacy', 
+        title: 'Spanish Pharmacy',  
+        nameOfPharmacy: 'Spanish Name of Pharmacy',
+        phoneNumber: 'Spanish Phone Number',
+        address: 'Spanish Address',
+        bartells: 'Spanish Bartells' 
     },
     emergencyContact: {
         title: 'Spanish Emergency Contact', 

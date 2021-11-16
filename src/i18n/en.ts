@@ -420,6 +420,10 @@ export default {
     },
     pharmacy: {
         title: 'Pharmacy', 
+        nameOfPharmacy: 'Name of Pharmacy',
+        phoneNumber: 'Phone Number',
+        address: 'Address',
+        bartells: 'Bartells'        
     },
     emergencyContact: {
         title: 'Emergency Contact', 
