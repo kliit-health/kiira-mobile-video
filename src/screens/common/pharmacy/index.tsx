@@ -40,12 +40,7 @@ const Pharmacy = ({ navigation }) => {
         if(pharmacy == null){
             setShowEdit(false);
             return;
-        }
-
-        if(!pharmacy || !phoneNumber || !address){
-            Alert.alert("Please fill the blank filed!"); 
-            return;
-        }
+        } 
 
         if(!phoneNumberValidation(phoneNumber)){ 
             return;
@@ -86,9 +81,9 @@ const Pharmacy = ({ navigation }) => {
             )}
             {!showEdit && (<View style={styles.inputTextParentContainerStyle}>
                 <View style={styles.bartellsStyle}> 
-                    <View style={ pharmacy ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }> 
+                    <View style={ pharmacy ? styles.inputTypeStyle : (phoneNumber ? styles.noStyle : styles.inputEmptyTypeStyle) }> 
                         <Text style={  pharmacy ? [styles.textStyle, {fontSize: 28}]: styles.textEmptyStyle }>
-                            {pharmacy ? pharmacy : lang.pharmacy.nameOfPharmacy}
+                            {pharmacy ? pharmacy : (phoneNumber ? "" : lang.pharmacy.nameOfPharmacy)}
                         </Text>
                     </View> 
                 </View> 
@@ -100,9 +95,9 @@ const Pharmacy = ({ navigation }) => {
                     </View>  
                 </View> 
                 <View style={styles.inputTextContainerStyle}> 
-                    <View style={ address ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }>
+                    <View style={ address ? styles.inputTypeStyle : (phoneNumber ? styles.noStyle : styles.inputEmptyTypeStyle) }>
                         <Text style={  address ? [styles.textStyle, {color:'#000B1E'} ] : styles.textEmptyStyle }>
-                            {address ? address : lang.pharmacy.address}
+                            {address ? address : (phoneNumber ? "" : lang.pharmacy.address)}
                         </Text>
                     </View>  
                 </View> 

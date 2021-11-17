@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Modal, TouchableOpacity, Image, Text } from 'react-native'; 
+import { View, Modal, TouchableOpacity, Image, Text, Alert } from 'react-native'; 
 import { Header, Screen, Button, Column, Row } from '~/components';
 import CustomInputText from '~/components/customInputText';
 import Constant from '~/utils/constants'; 
@@ -7,23 +7,24 @@ import styles from './styles';
 
 const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) => {
      
+    const pattern = new RegExp(/^[0-9\-\b]+$/);
     const [lPharmacy, setPharmacy] = useState(pharmacy);
     const [lPhoneNumber, setPhoneNumber] = useState(phoneNumber); 
     const [lAddress, setAddress] = useState(address); 
+    const [disabled, setDisabled] = useState(false)
 
-    useEffect(() => {
-         
-    }, []);
+    useEffect(() => { 
 
-    const setValidPhoneNumber = (value) =>{
-        var pattern = new RegExp(/^[0-9\-\b]+$/);
+    }, []); 
+
+    const setValidPhoneNumber = (value) =>{ 
         if (!pattern.test(value)) {  
-            setPhoneNumber(value.substr(0, value.length - 1));
+            setPhoneNumber(value.substr(0, value.length - 1)); 
             return;
         } 
 
         if(value.length > 12){
-            setPhoneNumber(value.substr(0, 12));
+            setPhoneNumber(value.substr(0, 12)); 
             return;
         } 
 
@@ -38,7 +39,15 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
         if((value.length == 3 || value.length == 7) && lPhoneNumber.substr(lPhoneNumber.length - 1, 1) != '-'){
             value = value + "-";
         }
+          
+        if(value.length == 12){
+            setDisabled(false);
+        }
+        else{
+            setDisabled(true);
+        }
         setPhoneNumber(value); 
+        
     }
 
     return (
@@ -62,7 +71,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                         <CustomInputText
                             autoCapitalize="words"
                             onChangeText={value =>{
-                                setPharmacy(value);
+                                setPharmacy(value); 
                             }
                             }
                             placeholder={lang.pharmacy.nameOfPharmacy}
@@ -72,30 +81,30 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                                 ? styles.inputEditTypeStyle
                                 : [
                                     styles.inputEmptyTypeStyle,
-                                    { fontWeight: '100' },
+                                    { fontWeight: '300' },
                                 ]
                             }
                             placeholderTextColor={
-                                Constant.App.colors.blackColor
+                                "#868992"
                             }
                         />
                     </View>
                     <View style={styles.inputTextContainerStyle}>
                         <CustomInputText
                             autoCapitalize="words" 
-                            onChangeText={value =>setValidPhoneNumber(value)}
-                            placeholder={"555-555-5555"}
+                            onChangeText={value => setValidPhoneNumber(value)}
+                            placeholder={lang.pharmacy.phoneNumber}
                             value={lPhoneNumber}
                             style={ 
                                 lPhoneNumber
                                 ? styles.inputEditTypeStyle
                                 : [
                                     styles.inputEmptyTypeStyle,
-                                    { fontWeight: '100' },
+                                    { fontWeight: '300' },
                                 ]
                             }
                             placeholderTextColor={
-                                Constant.App.colors.blackColor
+                                "#868992"
                             }
                         />
                     </View> 
@@ -103,7 +112,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                         <CustomInputText
                             autoCapitalize="words" 
                             onChangeText={value =>{
-                                setAddress(value);
+                                setAddress(value); 
                             }
                             }
                             placeholder={lang.pharmacy.address}
@@ -113,11 +122,11 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                                 ? styles.inputEditTypeStyle
                                 : [
                                     styles.inputEmptyTypeStyle,
-                                    { fontWeight: '100' },
+                                    { fontWeight: '300' },
                                 ]
                             }
                             placeholderTextColor={
-                                Constant.App.colors.blackColor
+                                "#868992"
                             }
                         />
                     </View>  
@@ -127,9 +136,10 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                     onPress={() => {  
                         toggleModal(false, lPharmacy, lPhoneNumber, lAddress);
                     }} 
-                    
-                    style={{container:
-                        styles.searchButton}}
+                    disabled={disabled}
+                    style={!disabled ? {container:
+                        styles.searchButton} : {container:
+                            [styles.searchButtonDisabled]}}
                     title={`Confirm`}
                 />
             </Screen>

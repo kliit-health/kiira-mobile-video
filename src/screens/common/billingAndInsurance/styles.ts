@@ -38,8 +38,8 @@ export default StyleSheet.create({
         backgroundColor: colors.greyLight, 
         borderRadius :8,  
         paddingHorizontal: metrics.height * 0.02,    
-        paddingTop: metrics.height * 0.015, 
-        paddingBottom: metrics.height * 0.015,  
+        paddingTop: metrics.height * 0.01, 
+        paddingBottom: metrics.height * 0.01,  
     },
     textStyle: {
         fontSize: text.size.regular,
@@ -49,7 +49,8 @@ export default StyleSheet.create({
     textEmptyStyle: {
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
-        fontWeight:'100', 
+        fontWeight:'300', 
+        color:colors.greyDark
     },
     titleTextStyle: {
         color: colors.black,

@@ -51,6 +51,17 @@ export default StyleSheet.create({
         paddingTop: metrics.height * 0.01, 
         paddingBottom: metrics.height * 0.01,  
     },
+    noStyle: {
+        color: colors.black, 
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'left',     
+        backgroundColor: colors.white, 
+        borderRadius :8,  
+        paddingHorizontal: metrics.height * 0.02,    
+        paddingTop: metrics.height * 0.01, 
+        paddingBottom: metrics.height * 0.01,  
+    },
     inputEditTypeStyle: {
         color: colors.black, 
         fontSize: text.size.regular,
@@ -73,7 +84,7 @@ export default StyleSheet.create({
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         fontWeight:'100', 
-    },
+    }, 
     titleTextStyle: {
         color: colors.black,
         fontSize: text.size.regular,
@@ -126,6 +137,14 @@ export default StyleSheet.create({
         marginVertical: metrics.height * 0.02,  
         alignSelf: 'center',
         borderRadius: 22,  
+         
+    },
+    searchButtonDisabled: { 
+        width: metrics.width - metrics.height * 0.08,
+        marginVertical: metrics.height * 0.02,  
+        alignSelf: 'center',
+        borderRadius: 22,  
+        backgroundColor: colors.gray
          
     },
     buttonContainer:{ 

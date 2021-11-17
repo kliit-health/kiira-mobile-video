@@ -45,12 +45,12 @@ const EditModal = ({ show, lang, company, memberId, billDate, toggleModal}) => {
                                 insurance
                                 ? styles.inputEditTypeStyle
                                 : [
-                                    styles.inputEditTypeStyle,
-                                    { fontWeight: '100' },
+                                    styles.inputEmptyTypeStyle,
+                                    { fontWeight: '300' },
                                 ]
                             }
                             placeholderTextColor={
-                                Constant.App.colors.blackColor
+                                "#868992"
                             }
                         />
                     </View>
@@ -67,12 +67,12 @@ const EditModal = ({ show, lang, company, memberId, billDate, toggleModal}) => {
                                 member
                                 ? styles.inputEditTypeStyle
                                 : [
-                                    styles.inputEditTypeStyle,
-                                    { fontWeight: '100' },
+                                    styles.inputEmptyTypeStyle,
+                                    { fontWeight: '300' },
                                 ]
                             }
                             placeholderTextColor={
-                                Constant.App.colors.blackColor
+                                "#868992"
                             }
                         />
                     </View> 
