@@ -41,7 +41,7 @@ export default ({ onItemPress }) => {
                             )}
                              { content == `Please Add a Contact` && ( 
                                 <Text style={styles.content}>{
-                                    user.profileInfo && user.profileInfo.emergencyContact ? user.profileInfo.emergencyContact : content 
+                                    user.profileInfo && user.profileInfo.emergencyContactInfo && user.profileInfo.emergencyContactInfo.relationship ? user.profileInfo.emergencyContactInfo.relationship : content 
                                 }</Text>
                             )}
                         </View> 

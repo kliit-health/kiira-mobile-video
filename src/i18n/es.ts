@@ -456,6 +456,10 @@ export default {
     },
     emergencyContact: {
         title: 'Spanish Emergency Contact', 
+        firstLastName: 'Spanish First & Last Name*',
+        phoneNumber: 'Spanish Phone Number*',
+        secondaryPhoneNumber: 'Spanish Secondary Phone Number',
+        relationshipToYou: 'Spanish Relationship to You'
     },
     termsAndConditions: {
         title: 'Spanish Terms and Conditions',

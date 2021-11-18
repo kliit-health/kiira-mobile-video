@@ -76,6 +76,7 @@ import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing'; 
 import BillingInsurance from '../screens/common/billingAndInsurance'; 
 import Pharmacy from '../screens/common/pharmacy'; 
+import EmergencyContact from '../screens/common/emergencyContact';  
 import TermsConditions from '../screens/common/termsAndConditions'; 
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
@@ -524,7 +525,7 @@ const AppStackExpert = createStackNavigator(
         SurgicalHistory: { screen: SurgicalHistory },
         BillingInsurance : {screen: BillingInsurance},
         Pharmacy : {screen: Pharmacy},
-        EmergencyContact : {screen: BillingInsurance},
+        EmergencyContact : {screen: EmergencyContact},
         TermsConditions: { screen: TermsConditions },
         UpdateAvailablity: { screen: UpdateAvailablity },
         PersonalInformation: { screen: PersonalInformation },
@@ -586,7 +587,7 @@ const MainAppStack = createStackNavigator(
         Success: { screen: Success },
         BillingInsurance: {screen: BillingInsurance},
         Pharmacy : {screen: Pharmacy},
-        EmergencyContact : {screen: BillingInsurance},
+        EmergencyContact : {screen: EmergencyContact},
         TermsConditions: { screen: TermsConditions },
         TreatmentHistory: { screen: TreatmentHistory },
         Visit: { screen: Visit },

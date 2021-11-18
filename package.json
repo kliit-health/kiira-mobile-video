@@ -14,7 +14,7 @@
         "ios-sim": "react-native run-ios --simulator",
         "clean": "npx react-native-clean-project",
         "show-ios": "xcrun simctl list devices",
-        "test": "jest --coverage"
+        "test": "snyk test && jest --coverage"
     },
     "dependencies": {
         "@notifee/react-native": "^3.0.3",
@@ -147,6 +147,7 @@
         "react-native-codegen": "^0.0.7",
         "react-native-svg-transformer": "^0.14.3",
         "react-test-renderer": "^17.0.2",
+        "snyk": "^1.764.0",
         "yarn": "^1.17.3"
     },
     "resolutions": {

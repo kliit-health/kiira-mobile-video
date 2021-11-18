@@ -427,6 +427,10 @@ export default {
     },
     emergencyContact: {
         title: 'Emergency Contact', 
+        firstLastName: 'First & Last Name*',
+        phoneNumber: 'Phone Number*',
+        secondaryPhoneNumber: 'Secondary Phone Number',
+        relationshipToYou: 'Relationship to You'
     },
     termsAndConditions: {
         title: 'Terms and Conditions',
