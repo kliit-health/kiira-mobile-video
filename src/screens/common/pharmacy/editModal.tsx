@@ -17,6 +17,15 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
 
     }, []); 
 
+    const canConfirm = (phr, phone, addr) => {
+        if(phr && phone.length == 12 && addr){
+            setDisabled(false);
+        }
+        else{
+            setDisabled(true);
+        }
+    }
+
     const setValidPhoneNumber = (value) =>{ 
         if (!pattern.test(value)) {  
             setPhoneNumber(value.substr(0, value.length - 1)); 
@@ -39,13 +48,8 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
         if((value.length == 3 || value.length == 7) && lPhoneNumber.substr(lPhoneNumber.length - 1, 1) != '-'){
             value = value + "-";
         }
-          
-        if(value.length == 12){
-            setDisabled(false);
-        }
-        else{
-            setDisabled(true);
-        }
+
+        canConfirm(lPharmacy, value, lAddress);
         setPhoneNumber(value); 
         
     }
@@ -72,6 +76,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                             autoCapitalize="words"
                             onChangeText={value =>{
                                 setPharmacy(value); 
+                                canConfirm(value, lPhoneNumber, lAddress);
                             }
                             }
                             placeholder={lang.pharmacy.nameOfPharmacy}
@@ -94,7 +99,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                             autoCapitalize="words" 
                             onChangeText={value => setValidPhoneNumber(value)}
                             placeholder={lang.pharmacy.phoneNumber}
-                            value={lPhoneNumber}
+                            value={lPhoneNumber}   
                             style={ 
                                 lPhoneNumber
                                 ? styles.inputEditTypeStyle
@@ -113,6 +118,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                             autoCapitalize="words" 
                             onChangeText={value =>{
                                 setAddress(value); 
+                                canConfirm(lPharmacy, lPhoneNumber, value);
                             }
                             }
                             placeholder={lang.pharmacy.address}
