@@ -5,7 +5,7 @@ import moment from 'moment';
 import { TimeDisplay } from '~/components';
 import { updateMedicalHistoryExpert } from '../patientProfile/actions';
 import { getUserData } from '~/utils/firebase';
-import Constant from '~/utils/constants';
+import {tables} from '~/utils/constants';  
 import styles from './styles';
 
 const Visit = props => {
@@ -29,9 +29,9 @@ const Visit = props => {
     };
 
     useEffect(() => {
-        try {
+        try { 
             const obj = {
-                tableName: Constant.App.firebaseTableNames.users,
+                tableName: tables.users,
                 uid: visit.uid,
             };
             getUserData(

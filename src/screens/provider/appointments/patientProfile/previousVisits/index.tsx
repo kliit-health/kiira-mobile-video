@@ -38,7 +38,7 @@ const PreviousVisits = ({ navigation }) => {
                     />
                     <View style={styles.detailsContainer}>
                         <Text>{`Provider: ${visit.expert.firstName} ${visit.expert.lastName}`}</Text>
-                        <Text>{`CC: ${visit.reason}`}</Text>
+                        <Text>{`CC: ${visit.reason ? visit.reason.reason: ""}`}</Text>
                         <Text>{`${moment(visit.time).format('llll')}`}</Text>
                         <View style={styles.buttonContainer}>
                             <Pressable

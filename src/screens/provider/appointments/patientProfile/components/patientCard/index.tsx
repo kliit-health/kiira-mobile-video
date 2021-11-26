@@ -21,7 +21,7 @@ const PatientCard = ({ visit, patientInfo }) => {
                     {`${visit.firstName} ${visit.lastName}`}
                 </Text>
                 <Text style={styles.reason}>Chief Complaint:</Text>
-                <Text style={styles.reason}>{`${visit.reason}`}</Text>
+                <Text style={styles.reason}>{`${visit.reason ? visit.reason.reason: ""}`}</Text>
             </View>
         </View>
     );

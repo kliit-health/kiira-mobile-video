@@ -295,7 +295,7 @@ class SettingsExpert extends PureComponent {
             if (response.didCancel) {
                 console.log('You cancelled image picker');
             } else if (response.error) {
-                alert('And error occured: ' + JSON.stringify(response));
+                Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
                 const source = { uri: response.uri };
                 this.setState({

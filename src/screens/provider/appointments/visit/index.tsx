@@ -5,15 +5,14 @@ import { withNavigation } from 'react-navigation';
 import { ExpertHeader } from '~/components';
 import { PatientDetails, VisitDetails } from './components';
 import { getExpertsData } from '~/redux/reducers/appointments';
-import Constant from '~/utils/constants';
+import Constant, { tables } from '~/utils/constants';
 
 const ExpertVisit = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { visit, patientInfo } = navigation.state.params;
-
+    const { visit, patientInfo } = navigation.state.params; 
     const params = {
         expertsParams: {
-            tableName: Constant.App.firebaseTableNames.users,
+            tableName: tables.users,
             uid: visit.uid,
         },
     };

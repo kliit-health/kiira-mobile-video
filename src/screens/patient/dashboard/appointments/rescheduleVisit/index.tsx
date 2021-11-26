@@ -10,8 +10,8 @@ import {
     getAppointmentsForToday,
 } from '~/redux/reducers/appointments';
 import { generateDateInfo } from '~/utils/helper';
-import styles from './style';
-import Constant from '~/utils/constants';
+import styles from './style'; 
+import Constant, { tables } from '~/utils/constants'; 
 import moment from 'moment';
 import {
     ExpertInfo,
@@ -40,12 +40,12 @@ const RescheduleVisit = props => {
 
     useEffect(() => {
         const obj = {
-            expertsParams: {
-                tableName: Constant.App.firebaseTableNames.users,
+            expertsParams: { 
+                tableName: tables.users, 
                 uid: expert.uid,
             },
         };
-        let addMonth = moment(`${current.year}-${current.monthNumber}`);
+        var addMonth = moment(`${current.year}-${current.monthNumber}`);
         addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
 
         dispatch(getExpertsData(obj));
