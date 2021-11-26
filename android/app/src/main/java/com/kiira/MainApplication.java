@@ -7,13 +7,15 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.shell.MainReactPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecomponent.splashscreen.RCTSplashScreenPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.soloader.SoLoader;
+import com.facebook.soloader.SoLoader; 
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -37,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
 
       // Packages that cannot be autolinked yet can be added manually here, for example:
       packages.add(new TwilioPackage());
+      packages.add(new RNGestureHandlerPackage());
       return packages;
     }
 

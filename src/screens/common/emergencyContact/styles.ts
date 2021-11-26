@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native'; 
 import { text, colors } from '~/utils/constants'; 
 import metrics, { smallScreen } from '~/utils/metrices'; 
 

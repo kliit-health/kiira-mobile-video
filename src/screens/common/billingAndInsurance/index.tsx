@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, Alert } from 'react-native';
-import Image from 'react-native-fast-image'; 
+import { View, ScrollView, Text, Alert } from 'react-native'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers'; 
-import { Header, Screen } from '~/components';
-import { icons } from '~/utils/constants';
-import CustomInputText from '~/components/customInputText';
-import Constant from '~/utils/constants';
+import Header from '../../../components/header';  
+import Screen from '~/components/screen';  
 import EditModal from './editModal';
 import BillModel from './billModel/billModel' 
-import * as actions from '~/redux/actions';
-import moment from 'moment'; 
-import styles from './styles';
-
+import * as actions from '~/redux/actions'; 
+import styles from './styles';      
+ 
 const BillingAndInsurance = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector((state: RootState) => state.language);
-    const user = useSelector((state: RootState) => state.user.data);
+    const lang = useSelector((state: RootState) => state.language); 
+    const user : any = useSelector((state: RootState) => state.user.data); 
     const [insurance, setInsurance] = useState((user.profileInfo && user.profileInfo.insurance) ? user.profileInfo.insurance : '');
     const [memberId, setMemberId] = useState((user.profileInfo && user.profileInfo.insurancePlan) ? user.profileInfo.insurancePlan : '');
     const [billDate, setBillDate] = useState((user.profileInfo && user.profileInfo.billDate) ? user.profileInfo.billDate : new Date());
@@ -44,7 +40,7 @@ const BillingAndInsurance = ({ navigation }) => {
                 billDate: billDate
             };
  
-            dispatch(actions.updateUser({ profileInfo }));
+            dispatch(actions.updateUser({ profileInfo })); 
         }
          
         setShowEdit(false);

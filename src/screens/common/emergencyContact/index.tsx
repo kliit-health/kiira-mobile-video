@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Alert } from 'react-native'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers'; 
-import { Header, Screen } from '~/components'; 
+import Header from '../../../components/header';  
+import Screen from '~/components/screen';  
 import EditModal from './editModal'; 
 import * as actions from '~/redux/actions'; 
 import styles from './styles';
@@ -10,7 +11,7 @@ import styles from './styles';
 const EmergencyContact = ({ navigation }) => {
     const dispatch = useDispatch();
     const lang = useSelector((state: RootState) => state.language);
-    const user = useSelector((state: RootState) => state.user.data);
+    const user:any = useSelector((state: RootState) => state.user.data);
     const [emergencyContactInfo, setEmergencyContactInfo] = useState(user.profileInfo ? user.profileInfo.emergencyContactInfo : null);
     const [firstName, setFirstName] = useState((emergencyContactInfo && emergencyContactInfo.firstName) ? emergencyContactInfo.firstName : '');
     const [lastName, setLastName] = useState((emergencyContactInfo && emergencyContactInfo.lastName) ? emergencyContactInfo.lastName : '');
@@ -39,8 +40,7 @@ const EmergencyContact = ({ navigation }) => {
         return true;
     }
 
-    const toggleModal = (toggle, emergencyContactInfo) =>{ 
-        console.log(emergencyContactInfo)
+    const toggleModal = (toggle, emergencyContactInfo) =>{  
         if(!emergencyContactInfo){
             setShowEdit(false);
             return;

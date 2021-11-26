@@ -15,7 +15,7 @@ import {
 } from '~/redux/reducers/appointments';
 import styles from './style';
 import CustomText from '~/components/customText';
-import Constant from '~/utils/constants';
+import Constant, {tables} from '~/utils/constants'; 
 import { Rating } from 'react-native-elements';
 import CustomButton from '~/components/customButton';
 import FastImage from 'react-native-fast-image';
@@ -34,7 +34,7 @@ const ExpertProfile = props => {
         const { uid } = navigation.state.params;
         const obj = {
             expertsParams: {
-                tableName: Constant.App.firebaseTableNames.users,
+                tableName: tables.users,
                 uid: uid,
             },
         };

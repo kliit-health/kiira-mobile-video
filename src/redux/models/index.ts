@@ -29,6 +29,7 @@ export default {
             },
             insurance: '',
             insurancePlan: '',
+            billDate: '',
             lang: 'en',
             isActive: false,
             lastName: '',

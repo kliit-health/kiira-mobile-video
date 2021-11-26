@@ -24,10 +24,11 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
         if(phone1.length == 12 && phone2.length == 12 && first && 
             (first.indexOf('&') <= first.length - 2) && first.indexOf('&') > 0 && relation){
             setDisabled(false); 
-            
+            return false;
         }
         else{
             setDisabled(true); 
+            return true;
         }  
     }
 
@@ -39,7 +40,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
             else{
                 setPhoneNumber(value.substr(0, value.length - 1)); 
             }
-            return;
+            return false;
         } 
 
         if(value.length > 12){
@@ -49,7 +50,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
             else{
                 setPhoneNumber(value.substr(0, 12)); 
             } 
-            return;
+            return false;
         } 
 
         if(value.length > 3 && value.substr(3,1) != '-'){
@@ -90,6 +91,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
         else{
             setPhoneNumber(value); 
         } 
+        return true;
     }
 
     return (
@@ -97,7 +99,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
             animationType="slide"
             onRequestClose={() => {}}
             transparent
-            isVisible={show}
+            visible={show}
         >
             <Screen>
                 <View style={styles.headerStyle}>

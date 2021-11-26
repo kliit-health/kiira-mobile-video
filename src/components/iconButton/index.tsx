@@ -5,53 +5,53 @@ import defaultStyles, { modifiers } from './styles';
 import { TouchableOpacity } from 'react-native';
 import Image from 'react-native-fast-image';
 
-const IconButton = ({
-    styles: customStyles,
-    source,
-    resizeMode,
-    children,
-    disabled,
-    activeOpacity,
-    onPress,
-    boxed,
-    test,
-    ...rest
-}) => {
+interface iconButton{
+    styles: any,
+    source: any,
+    resizeMode?: any,
+    children?: any,
+    disabled?: boolean,
+    activeOpacity?: any,
+    onPress: any,
+    boxed?:any,
+    test?: any,  
+}
+
+const IconButton = (props: iconButton) => {
     const styles = {
         root: mergeStyles([
             defaultStyles.root,
-            [modifiers.boxed.root, boxed],
-            customStyles.root,
+            [modifiers.boxed.root, props.boxed],
+            props.styles.root,
         ]),
         image: mergeStyles([
             defaultStyles.image,
-            [modifiers.boxed.image, boxed],
-            customStyles.image,
+            [modifiers.boxed.image, props.boxed],
+            props.styles.image,
         ]),
     };
 
     const handlePress = event => {
         event.preventDefault();
-        onPress();
+        props.onPress();
     };
 
     return (
         <TouchableOpacity
-            test={test}
-            disabled={disabled}
-            activeOpacity={activeOpacity}
+            testID={props.test}
+            disabled={props.disabled}
+            activeOpacity={props.activeOpacity}
             onPress={handlePress}
-            style={styles.root}
-            {...rest}
+            style={styles.root}  
         >
-            {source ? (
+            {props.source ? (
                 <Image
-                    source={source}
+                    source={props.source}
                     style={styles.image}
-                    resizeMode={resizeMode}
+                    resizeMode={props.resizeMode}
                 />
             ) : (
-                cloneElement(children)
+                cloneElement(props.children)
             )}
         </TouchableOpacity>
     );

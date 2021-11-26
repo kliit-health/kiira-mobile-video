@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Modal, TouchableOpacity, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Header, Screen, Button, Column, Row } from '~/components';
+import {Header} from '../../../components';
+import { Screen, Button } from '~/components';
 import CustomInputText from '~/components/customInputText';
 import Constant from '~/utils/constants';
 import BillModel from './billModel/billModel' 
@@ -20,7 +21,7 @@ const EditModal = ({ show, lang, company, memberId, billDate, toggleModal}) => {
             animationType="slide"
             onRequestClose={() => {}}
             transparent
-            isVisible={show}
+            visible={show}
         >
             <Screen>
                 <View style={styles.headerStyle}>

@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import { Image, View, StyleSheet } from 'react-native';
-import { Text } from '~/components';
+import { Text } from '../components';
 import Account from '../screens/patient/account';
 import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
@@ -231,8 +231,8 @@ const BottomTab = createBottomTabNavigator(
     },
     {
         initialRouteName: 'Home',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        //tabBarposition: 'bottom',
+        //swipeEnabled: true,
 
         defaultNavigationOptions: {
             tabBarTestID: 'Patient',
@@ -386,12 +386,12 @@ const BottomTabExpert = createBottomTabNavigator(
     },
     {
         initialRouteName: 'AskExpert',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        // tabBarposition: 'bottom',
+        // swipeEnabled: true,
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
-            showLabel: false,
+            showLabel: false, 
             style: {
                 backgroundColor: 'white',
                 borderRadius: 12,
@@ -472,8 +472,8 @@ const BottomTabSupport = createBottomTabNavigator(
     },
     {
         initialRouteName: 'AskSupport',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        // tabBarposition: 'bottom',
+        // swipeEnabled: true,
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
@@ -626,7 +626,7 @@ const AppNavigator = createSwitchNavigator(
     },
     {
         initialRouteName: 'Auth',
-        headerMode: 'none',
+        backBehavior: 'none',
         ...TransparentStyle,
     },
 );
@@ -665,7 +665,7 @@ const prevGetStateForActionAppStackExpert =
     AppStackExpert.router.getStateForAction;
 
 AppStackExpert.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'ReplaceCurrentScreen') {
+    if (state && action.type === 'Navigation/REPLACE') {
         const routes = state.routes.slice(0, state.routes.length - 1);
         routes.push(action);
         return {

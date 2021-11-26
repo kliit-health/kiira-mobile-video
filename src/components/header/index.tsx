@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { shape, object, func, string, node, bool } from 'prop-types';
 import IconButton from '../iconButton';
 import TextButton from '../textButton';
@@ -7,37 +7,39 @@ import { icons } from '../../utils/constants';
 import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 
-const Header = ({
-    title,
-    onBack,
-    onEditPress,
-    onFilterPress,
-    onHomePress,
-    onEditBilling,
-    OnSettingPress,
-    onListPress,
-    editState,
-    styles: customStyles,
-    children,
-    disableEdit,
-    onClose,
-    themed,
-}) => {
+interface header{
+    title: string;
+    onBack?: any;
+    onEditPress?: any;
+    onFilterPress?: any;
+    onHomePress?: any;
+    onEditBilling?: any;
+    OnSettingPress?: any;
+    onListPress?: any;
+    editState?: any,
+    styles: any;
+    children?: ReactNode;
+    disableEdit?: boolean;
+    onClose?: any;
+    themed?: any,
+}
+
+const Header = (props: header) => { 
     const styles = {
         root: mergeStyles([
             defaultStyles.root,
-            [modifiers.themed.root, themed],
-            customStyles.root,
+            [modifiers.themed.root, props.themed],
+            props.themed.root,
         ]),
         backButton: mergeStyles([
             modifiers.backButton,
-            [modifiers.themed.backButton, themed],
-            customStyles.backButton,
+            [modifiers.themed.backButton, props.themed],
+            props.themed.backButton,
         ]),
         title: mergeStyles([
             defaultStyles.title,
-            [modifiers.themed.title, themed],
-            customStyles.title,
+            [modifiers.themed.title, props.themed],
+            props.themed.title,
         ]),
         editButton: {
             root: defaultStyles.editButton,
@@ -51,73 +53,73 @@ const Header = ({
 
     return (
         <View style={styles.root}>
-            {onBack && (
+            {props.onBack && (
                 <IconButton
                     test="Back Button"
                     styles={styles.backButton}
                     source={icons.chevron}
-                    onPress={onBack}
-                    boxed={themed}
+                    onPress={props.onBack}
+                    boxed={props.themed} 
                 />
             )}
-            {onClose && <IconButton source={icons.cross} onPress={onClose} />}
-            <Text pointerEvents="none" style={onListPress ? [styles.title, {paddingRight:25}] : styles.title}>
-                {title}
+            {props.onClose && <IconButton source={icons.cross} onPress={props.onClose} />}
+            <Text style={props.onListPress ? [styles.title, {paddingRight:25}] : styles.title}>
+                {props.title}
             </Text>
-            {onListPress && (
+            {props.onListPress && (
                 <IconButton
                     test="Chat Setting Button"
                     styles={{ image: styles.listButton }}
                     source={icons.downChevron}
-                    onPress={onListPress}
-                    boxed={themed}
+                    onPress={props.onListPress}
+                    boxed={props.themed}
                 />
             )}
-            {children}
-            {onEditPress && (
+            {props.children}
+            {props.onEditPress && (
                 <TextButton
-                    disabled={disableEdit}
+                    disabled={props.disableEdit}
                     styles={styles.editButton}
                     link
-                    onPress={onEditPress}
+                    onPress={props.onEditPress}
                 >
-                    {disableEdit ? 'Edit' : editState ? 'Done' : 'Edit'}
+                    {props.disableEdit ? 'Edit' : props.editState ? 'Done' : 'Edit'}
                 </TextButton>
             )}
-            {onFilterPress && (
+            {props.onFilterPress && (
                 <IconButton
                     test="Chat Filter Button"
                     styles={{ image: styles.filterButton }}
                     source={icons.filterIcon}
-                    onPress={onFilterPress}
-                    boxed={themed}
+                    onPress={props.onFilterPress}
+                    boxed={props.themed}
                 />
             )}
-            {onHomePress && (
+            {props.onHomePress && (
                 <IconButton
                     test="Chat Home Button"
                     styles={{ image: styles.homeButton }}
                     source={icons.home}
-                    onPress={onHomePress}
-                    boxed={themed}
+                    onPress={props.onHomePress}
+                    boxed={props.themed}
                 />
             )}
-            {onEditBilling && (
+            {props.onEditBilling && (
                 <IconButton
                     test="Chat Billing Button"
                     styles={{ image: styles.billingButton }}
                     source={icons.editBilling}
-                    onPress={onEditBilling}
-                    boxed={themed}
+                    onPress={props.onEditBilling}
+                    boxed={props.themed}
                 />
             )} 
-             {OnSettingPress && (
+             {props.OnSettingPress && (
                 <IconButton
                     test="Chat Plan Button"
                     styles={{ image: styles.settingButton }}
                     source={icons.settings}
-                    onPress={OnSettingPress}
-                    boxed={themed}
+                    onPress={props.OnSettingPress}
+                    boxed={props.themed}
                 />
             )} 
             
