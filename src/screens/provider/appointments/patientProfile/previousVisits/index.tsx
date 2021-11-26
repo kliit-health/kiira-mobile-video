@@ -11,9 +11,10 @@ import moment from 'moment';
 import styles from './style';
 
 const PreviousVisits = ({ navigation }) => {
+    const defaultImage = require('../../../../../../assets/profile_img_placeholder.png')
     const { visit, patientInfo } = navigation.state.params;
     const dispatch = useDispatch();
-    const medicalHistory = useSelector(state => state.medicalHistory);
+    const medicalHistory = useSelector((state: any) => state.medicalHistory);
 
     const { history } = medicalHistory;
 
@@ -28,13 +29,11 @@ const PreviousVisits = ({ navigation }) => {
 
         return (
             <Fragment>
-                <View style={styles.infoContainer}>
-                    <FastImage
-                        defaultSource={require('../../../../../../assets/profile_img_placeholder.png')}
-                        containerStyle={{ alignSelf: 'center' }}
-                        style={styles.image}
-                        source={{ uri: visit.expert.imageUrl }}
-                        activeOpacity={0.7}
+                <View style={styles.infoContainer}> 
+                    <FastImage 
+                        resizeMode='center' 
+                        style={[styles.image, {opacity: 0.7}]}
+                        source={{ uri: visit.expert.imageUrl ? visit.expert.imageUrl : defaultImage}} 
                     />
                     <View style={styles.detailsContainer}>
                         <Text>{`Provider: ${visit.expert.firstName} ${visit.expert.lastName}`}</Text>

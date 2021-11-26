@@ -82,9 +82,9 @@ const ExpertProfile = props => {
                         width: 120,
                         height: 120,
                         borderRadius: 60,
+                        opacity: 0.7
                     }}
-                    source={{ uri: expertDetails.profileInfo.profileImageUrl }}
-                    activeOpacity={0.7}
+                    source={{ uri: expertDetails.profileInfo.profileImageUrl }} 
                 />
                 {expertDetails.isOnline ? (
                     <View

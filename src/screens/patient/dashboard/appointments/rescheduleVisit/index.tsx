@@ -27,8 +27,8 @@ const RescheduleVisit = props => {
     const { navigation, visit } = props.navigation.state.params;
     const { calendarID, expert, uid, id, appointmentTypeID } = visit;
 
-    const expertData = useSelector(state => state.appointments.expertData);
-    const appointmentData = useSelector(state => state.appointments);
+    const expertData = useSelector((state:any) => state.appointments.expertData);
+    const appointmentData = useSelector((state:any) => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(null);
@@ -45,8 +45,8 @@ const RescheduleVisit = props => {
                 uid: expert.uid,
             },
         };
-        var addMonth = moment(`${current.year}-${current.monthNumber}`);
-        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+        const curMonth = moment(`${current.year}-${current.monthNumber}`);
+        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM');
 
         dispatch(getExpertsData(obj));
         dispatch(setCalendarID(calendarID));

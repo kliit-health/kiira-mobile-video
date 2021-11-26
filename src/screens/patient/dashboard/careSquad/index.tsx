@@ -17,11 +17,11 @@ const CareSquad = ({ navigation }) => {
     const [searchData, setSearchData] = useState([]);
     const [availbleExperts, setAvailableExperts] = useState([]);
 
-    const user = useSelector(state => state.user.data);
-    const experts = useSelector(state => state.experts.data);
-    const favorites = useSelector(state => state.favoriteExperts.data);
-    const currentRoute = useSelector(state => state.navigator.currentRoute);
-    const lang = useSelector(state => state.language);
+    const user = useSelector((state:any) => state.user.data);
+    const experts = useSelector((state:any) => state.experts.data);
+    const favorites = useSelector((state:any) => state.favoriteExperts.data);
+    const currentRoute = useSelector((state:any) => state.navigator.currentRoute);
+    const lang = useSelector((state:any) => state.language);
 
     useEffect(() => {
         dispatch(getChatHistoryAsync());
@@ -70,7 +70,7 @@ const CareSquad = ({ navigation }) => {
 
     const handleCardPress = details => {
         navigation.navigate(screenNames.getTreatment, {
-            navigator,
+            navigation,
             details,
         });
     };
@@ -97,7 +97,7 @@ const CareSquad = ({ navigation }) => {
                   }),
               )
             : navigation.navigate(screenNames.getTreatment, {
-                  navigator,
+                  navigation,
                   details,
               });
     };
@@ -128,6 +128,7 @@ const CareSquad = ({ navigation }) => {
                 deleteMode={deleteMode}
             />
             <SearchBar
+                styles={{}}
                 onChange={handleSearch}
                 placeholder={lang.careSquad.search}
             />

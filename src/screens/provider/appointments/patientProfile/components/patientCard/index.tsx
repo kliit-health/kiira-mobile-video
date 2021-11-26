@@ -1,20 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import FastImage from 'react-native-fast-image';
-
-import styles from './style';
+import FastImage from 'react-native-fast-image'; 
+import styles from './style'; 
 
 const PatientCard = ({ visit, patientInfo }) => {
+    const defaultImage = require('../../../../../../../assets/profile_img_placeholder.png')
     return (
         <View style={styles.profileContainer}>
-            <FastImage
-                defaultSource={require('../../../../../../../assets/profile_img_placeholder.png')}
-                containerStyle={{ alignSelf: 'center' }}
-                style={styles.profileImage}
+            <FastImage  
+                resizeMode='center'
+                style={[styles.profileImage, {opacity: 0.7}]}
                 source={{
-                    uri: patientInfo ? visit.profile : '',
-                }}
-                activeOpacity={0.7}
+                    uri: patientInfo && visit && visit.profile ? visit.profile : defaultImage,
+                }} 
             />
             <View>
                 <Text style={styles.name}>
