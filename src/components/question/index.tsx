@@ -35,6 +35,7 @@ const Question = ({
                 >
                     {userUnreadCount > 0 && <Dot />}
                     <Avatar
+                        resizeMode="contain"
                         styles={{
                             image: { height: 50, width: 50, paddingRight: 10 },
                         }}
@@ -42,7 +43,7 @@ const Question = ({
                     />
                     <View style={styles.container}>
                         <Text style={styles.title}>
-                            {expertInfo.expertName}
+                            {expertInfo.expertName || expertInfo.displayName}
                         </Text>
                         <Text numberOfLines={2} style={styles.description}>
                             {lastMessage}
