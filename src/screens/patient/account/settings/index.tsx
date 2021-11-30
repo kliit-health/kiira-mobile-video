@@ -219,13 +219,13 @@ class Setting extends PureComponent {
                   imageUri.lastIndexOf('/') + 1,
                   imageUri.length,
                 );
-                const ext = file.type.split('/').pop(); // Extract image extension
+                const ext = imageUri.split('/').pop(); // Extract image extension
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
                     : `${Math.floor(Date.now())}${name}.${ext}`;
               } else if (userData.profileInfo.profileImageUrl) {
-                payloadData.userParams.profileImageUrl =
+                payloadData.userParams.imageUri =
                   userData.profileInfo.profileImageUrl;
               }
 
@@ -273,7 +273,7 @@ class Setting extends PureComponent {
     }
   };
 
-  pickImage = () => {
+  pickImage = () => { 
     const options = {
       title: 'Select Avatar',
       storageOptions: {
@@ -281,6 +281,7 @@ class Setting extends PureComponent {
         path: 'images',
       },
     };
+
     ImagePicker.showImagePicker(options, response => {
       console.log('RESPONSE BEGINING', response);
       if (response.error) {

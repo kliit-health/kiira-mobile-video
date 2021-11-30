@@ -401,7 +401,7 @@ class AddProfileData extends PureComponent {
                                 imageUri.lastIndexOf('/') + 1,
                                 imageUri.length,
                             );
-                            const ext = file.type.split('/').pop(); // Extract image extension
+                            const ext = imageUri.split('/').pop(); // Extract image extension
                             const filename =
                                 Platform.OS === 'ios'
                                     ? `${Math.floor(Date.now())}${name}`
