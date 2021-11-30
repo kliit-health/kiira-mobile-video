@@ -1,5 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
+import metrics, { smallScreen } from '~/utils/metrices'; 
+
+let parentPaddingValue = metrics.width * 0.01;
+let parentPadding = parentPaddingValue * 2;
 
 export default StyleSheet.create({
     container: {
@@ -7,10 +11,13 @@ export default StyleSheet.create({
         paddingHorizontal: '10%',
         paddingVertical: 20,
     },
-
+    headerStyle:{
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1,  
+    },
     root: {
         backgroundColor: colors.white,
-        borderRadius: 16,
+        borderRadius: 12,
         width: '90%',
         alignSelf: 'center',
         flexDirection: 'row',
@@ -18,6 +25,8 @@ export default StyleSheet.create({
         justifyContent: 'space-evenly',
         padding: 5,
         marginBottom: 20,
+        borderWidth: 1,
+        borderColor: colors.greyAccent, 
     },
 
     detailsContainer: {
@@ -31,21 +40,33 @@ export default StyleSheet.create({
     },
 
     icon: {
-        marginRight: 5,
+        marginRight: 5, 
+        alignSelf:'center'
     },
 
     itemContainer: {
         flexDirection: 'row',
-        width: '40%',
+        paddingLeft: parentPaddingValue * 2,
+        width: '45%',
         justifyContent: 'space-between',
-        padding: 5,
+        marginVertical: parentPaddingValue * 2,
+        padding: 5, 
     },
 
     itemTitle: {
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
-        color: colors.charcoal,
-        marginBottom: 3,
+        color: colors.black, 
+        marginLeft: parentPaddingValue,
+        width: metrics.width * 0.4
+    },
+
+    itemEmptyTitle: {
+        fontFamily: text.fontFamily.poppinsLight,
+        fontSize: text.size.regular,
+        color: colors.greyDark, 
+        marginLeft: parentPaddingValue,
+        width: metrics.width * 0.4
     },
 
     itemValue: {

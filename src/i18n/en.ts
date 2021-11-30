@@ -1,7 +1,16 @@
+import BillingAndInsurance from "~/screens/common/billingAndInsurance";
+
 export default {
     account: {
         logout: 'Logout',
         settings: 'My Profile',
+        billingAndInsurance: 'Billing & Insurance',
+        addInsurance: 'Add Insurance',
+        pharmacy: 'Pharmacy',
+        pleaseSelect: 'Please Select',
+        emergencyContact: 'Emergency Contact',
+        myHealth: 'My Health', 
+        pleaseAddAContact: 'Please Add a Contact',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Privacy Policies',
         help: 'Help',
@@ -51,6 +60,18 @@ export default {
     medications: {
         title: 'Medications',
         save: 'Save',
+    },
+    labResults: {
+        title: 'Lab Results', 
+    },
+    vaccines: {
+        title: 'Vaccines',
+    },
+    healthHistory: {
+        title: 'Health History',
+    },
+    pastVisits: {
+        title: 'Past Visits',
     },
     pregnancy: {
         title: 'Pregnancy and Children',
@@ -388,6 +409,29 @@ export default {
         agree: 'Agree',
         finish: 'Finish',
     },
+    billingAndInsurance: {
+        title: 'Billing & Insurance',
+        insuranceCompany: 'Insurance Company',
+        memberIdHint: 'Member ID',
+        insurance: 'Insurance:',
+        memberId: 'Member ID:',
+        pastBills: 'Past Bills',
+        noBills: 'You don\'t currently have any bills.'
+    },
+    pharmacy: {
+        title: 'Pharmacy', 
+        nameOfPharmacy: 'Name of Pharmacy',
+        phoneNumber: 'Phone Number',
+        address: 'Address',
+        bartells: 'Bartells'        
+    },
+    emergencyContact: {
+        title: 'Emergency Contact', 
+        firstLastName: 'First & Last Name*',
+        phoneNumber: 'Phone Number*',
+        secondaryPhoneNumber: 'Secondary Phone Number',
+        relationshipToYou: 'Relationship to You'
+    },
     termsAndConditions: {
         title: 'Terms and Conditions',
     },
@@ -427,6 +471,7 @@ export default {
     expertAccount: {
         logout: 'Logout',
         settings: 'My Profile',
+        billingAndInsurance: 'Billing & Insurance',
         termsAndConditions: 'Terms & Conditions',
         privacyPolicies: 'Privacy Policies',
         updateAvailability: 'Update Availability',

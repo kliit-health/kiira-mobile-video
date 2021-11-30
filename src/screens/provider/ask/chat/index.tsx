@@ -7,6 +7,7 @@ import {
     Image,
     Modal,
     AppState,
+    Alert
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { connect } from 'react-redux';
@@ -209,7 +210,7 @@ class ChatExpert extends React.PureComponent {
             if (response.didCancel) {
                 console.log('You cancelled image picker');
             } else if (response.error) {
-                alert('And error occured: ' + JSON.stringify(response));
+                Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
                 let name = response.uri.substring(
                     response.uri.lastIndexOf('/') + 1,

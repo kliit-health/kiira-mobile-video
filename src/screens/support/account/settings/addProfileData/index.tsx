@@ -7,6 +7,7 @@ import {
     PermissionsAndroid,
     Platform,
     Linking,
+    Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import CustomText from '~/components/customText';
@@ -129,7 +130,7 @@ class AddProfileData extends PureComponent {
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
             } else if (response.error) {
-                alert('And error occured: ' + JSON.stringify(response));
+                Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
                 const source = { uri: response.uri };
                 this.setState({

@@ -19,6 +19,13 @@ export default StyleSheet.create({
         position: 'absolute',
         borderRadius: 1000,
     },
+    editImage: { 
+        position: 'absolute',
+        bottom:8,
+        right:5,
+        width: 30,
+        height: 30,
+    },
 });
 
 export const modifiers = {

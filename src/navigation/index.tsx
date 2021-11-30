@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import { Image, View, StyleSheet } from 'react-native';
-import { Text } from '~/components';
+import { Text } from '../components';
 import Account from '../screens/patient/account';
 import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
@@ -74,8 +74,11 @@ import SocialHistory from '../screens/provider/appointments/patientProfile/socia
 import Success from '../screens/patient/dashboard/book/screens/success';
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
-import Landing from '../screens/auth/landing';
-import TermsConditions from '../screens/common/termsAndConditions';
+import Landing from '../screens/auth/landing'; 
+import BillingInsurance from '../screens/common/billingAndInsurance'; 
+import Pharmacy from '../screens/common/pharmacy'; 
+import EmergencyContact from '../screens/common/emergencyContact';  
+import TermsConditions from '../screens/common/termsAndConditions'; 
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
 import Visit from '../screens/patient/dashboard/appointments/visit/index';
 import VisitExpert from '../screens/provider/appointments/visit';
@@ -229,8 +232,8 @@ const BottomTab = createBottomTabNavigator(
     },
     {
         initialRouteName: 'Home',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        //tabBarposition: 'bottom',
+        //swipeEnabled: true,
 
         defaultNavigationOptions: {
             tabBarTestID: 'Patient',
@@ -383,12 +386,12 @@ const BottomTabExpert = createBottomTabNavigator(
     },
     {
         initialRouteName: 'AskExpert',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        // tabBarposition: 'bottom',
+        // swipeEnabled: true,
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
-            showLabel: false,
+            showLabel: false, 
             style: {
                 backgroundColor: 'white',
                 borderRadius: 12,
@@ -469,8 +472,8 @@ const BottomTabSupport = createBottomTabNavigator(
     },
     {
         initialRouteName: 'AskSupport',
-        tabBarposition: 'bottom',
-        swipeEnabled: true,
+        // tabBarposition: 'bottom',
+        // swipeEnabled: true,
         tabBarOptions: {
             activeTintColor: 'black',
             inactiveTintColor: 'black',
@@ -520,6 +523,9 @@ const AppStackExpert = createStackNavigator(
         SettingsExpert: { screen: SettingsExpert },
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
+        BillingInsurance : {screen: BillingInsurance},
+        Pharmacy : {screen: Pharmacy},
+        EmergencyContact : {screen: EmergencyContact},
         TermsConditions: { screen: TermsConditions },
         UpdateAvailablity: { screen: UpdateAvailablity },
         PersonalInformation: { screen: PersonalInformation },
@@ -580,6 +586,9 @@ const MainAppStack = createStackNavigator(
         SelectSupport: { screen: SelectSupport },
         Settings: { screen: Settings },
         Success: { screen: Success },
+        BillingInsurance: {screen: BillingInsurance},
+        Pharmacy : {screen: Pharmacy},
+        EmergencyContact : {screen: EmergencyContact},
         TermsConditions: { screen: TermsConditions },
         TreatmentHistory: { screen: TreatmentHistory },
         Visit: { screen: Visit },
@@ -618,7 +627,7 @@ const AppNavigator = createSwitchNavigator(
     },
     {
         initialRouteName: 'Auth',
-        headerMode: 'none',
+        backBehavior: 'none',
         ...TransparentStyle,
     },
 );
@@ -657,7 +666,7 @@ const prevGetStateForActionAppStackExpert =
     AppStackExpert.router.getStateForAction;
 
 AppStackExpert.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'ReplaceCurrentScreen') {
+    if (state && action.type === 'Navigation/REPLACE') {
         const routes = state.routes.slice(0, state.routes.length - 1);
         routes.push(action);
         return {

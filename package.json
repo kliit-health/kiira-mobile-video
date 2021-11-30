@@ -14,7 +14,7 @@
         "ios-sim": "react-native run-ios --simulator",
         "clean": "npx react-native-clean-project",
         "show-ios": "xcrun simctl list devices",
-        "test": "jest --coverage"
+        "test": "snyk test && jest --coverage"
     },
     "dependencies": {
         "@notifee/react-native": "^3.0.3",
@@ -69,8 +69,8 @@
         "react-native-exit-app": "^1.1.0",
         "react-native-fast-image": "^8.3.2",
         "react-native-fix-image": "^2.1.0",
-        "react-native-gesture-handler": "^1.9.0",
-        "react-native-image-picker": "^2.3.1",
+        "react-native-gesture-handler": "^1.10.3",
+        "react-native-image-picker": "^4.3.0",
         "react-native-image-progress": "^1.1.1",
         "react-native-keep-awake": "^4.0.0",
         "react-native-keyboard-spacer": "^0.4.1",
@@ -83,7 +83,7 @@
         "react-native-popup-menu": "^0.15.9",
         "react-native-progress": "^4.1.2",
         "react-native-rate": "^1.2.1",
-        "react-native-reanimated": "^2.2.0",
+        "react-native-reanimated": "^2.2.4",
         "react-native-render-html": "^4.1.2",
         "react-native-rsa": "0.0.3",
         "react-native-safe-area-context": "^3.1.9",
@@ -112,7 +112,7 @@
         "redux-saga-effects": "^1.1.0",
         "rn-fetch-blob": "^0.12.0",
         "styled-components": "^5.1.1",
-        "ts-jest": "^26.5.3",
+        "ts-jest": "^27.0.7",
         "tslint": "^6.1.3",
         "tslint-eslint-rules": "^5.4.0",
         "tslint-react": "^5.0.0",
@@ -147,6 +147,7 @@
         "react-native-codegen": "^0.0.7",
         "react-native-svg-transformer": "^0.14.3",
         "react-test-renderer": "^17.0.2",
+        "snyk": "^1.764.0",
         "yarn": "^1.17.3"
     },
     "resolutions": {
@@ -154,9 +155,17 @@
     },
     "jest": {
         "preset": "react-native",
+        "setupFiles": [
+            "./src/__tests__/setup/setup.ts"
+        ],
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },
+        "transformIgnorePatterns": [
+            "/node_modules/(?!@react-native|react-native|react-navigation|react-native-gesture-handler|NativeEventEmitter)"
+        ],
+        "verbose": true,
+        "bail": 1,
         "testRegex": "(/src/.*\\.(test|spec))\\.(jsx?|tsx?)$",
         "moduleFileExtensions": [
             "ts",
@@ -165,6 +174,10 @@
             "jsx",
             "json",
             "node"
+        ],
+        "moduleDirectories": [
+            "node_modules",
+            "src"
         ]
     },
     "preset": "react-native",
