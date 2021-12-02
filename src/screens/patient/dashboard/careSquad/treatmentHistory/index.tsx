@@ -56,7 +56,7 @@ const TreatmentHistory = ({navigation}) => {
     <Container unformatted>
       <Header styles={modifiers.header} onBack={handleOnBackPress} />
       <View style={styles.profileContainer}>
-        <Avatar border source={profileImageUrl} />
+        <Avatar border source={profileImageUrl != null ? profileImageUrl : ''} />
         <View style={styles.detailsContainer}>
           <Text style={styles.nameText}>{`${firstName} ${lastName}`}</Text>
           <Text style={styles.titleText}>{fullName}</Text>

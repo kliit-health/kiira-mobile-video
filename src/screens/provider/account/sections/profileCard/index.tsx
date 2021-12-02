@@ -12,7 +12,7 @@ const ProfileCard = ({profileInfo}) => {
 
   return (
     <View style={styles.root}>
-      <Avatar source={profileImageUrl} size="large" styles={modifiers.avatar} />
+      <Avatar source={profileImageUrl != null ? profileImageUrl : ''} size="large" styles={modifiers.avatar} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
       </View>

@@ -42,7 +42,7 @@ const FavoritesItem = (props) => {
         deleteMode={deleteMode}
         onPress={() => handleItemPress(props)}
         size="small"
-        source={profileImageUrl}
+        source={profileImageUrl != null ? profileImageUrl : ''}
         border
       />
       <Text style={styles.favoritesItemText}>{lastName}</Text>

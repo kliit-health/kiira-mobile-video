@@ -34,7 +34,7 @@ class Setting extends PureComponent {
   public dob: any;
   public email: string;
   public pronounsArr: any;
-  public imageUri: any;
+  public profileImageUrl: any;
   public file: any;
   public filepath: any;
   public selectedState: any;
@@ -63,7 +63,7 @@ class Setting extends PureComponent {
       lastName: userData.profileInfo.lastName,
       imageSrc: userData.profileInfo.profileImageUrl,
       email: userData.profileInfo.email,
-      imageUri: '',
+      profileImageUrl: userData.profileInfo.profileImageUrl,
       filepath: '',
       file: '',
       showIosDateModal: false,
@@ -144,7 +144,7 @@ class Setting extends PureComponent {
       dob,
       email,
       pronounsArr,
-      imageUri,
+      profileImageUrl,
       file,
       filepath,
       selectedState,
@@ -208,33 +208,28 @@ class Setting extends PureComponent {
                   foodSecure,
                   ethnicity,
                   phoneNumber,
+                  profileImageUrl,
                   lang: 'en',
                   gender,
                   enableText,
                 },
-                navigation,
+                navigation, 
               };
-              if (imageUri) {
-                let name = imageUri.substring(
-                  imageUri.lastIndexOf('/') + 1,
-                  imageUri.length,
+              if (profileImageUrl) {
+                let name = profileImageUrl.substring(
+                  profileImageUrl.lastIndexOf('/') + 1,
+                  profileImageUrl.length,
                 );
-                const ext = imageUri.split('/').pop(); // Extract image extension
+                const ext = profileImageUrl.split('/').pop(); // Extract image extension
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
                     : `${Math.floor(Date.now())}${name}.${ext}`;
+                payloadData.userParams.profileImageUrl = profileImageUrl;
               } else if (userData.profileInfo.profileImageUrl) {
-                payloadData.userParams.imageUri =
+                payloadData.userParams.profileImageUrl =
                   userData.profileInfo.profileImageUrl;
-              }
-
-              if (filename) {
-                payloadData.imageParams = {
-                  file: Platform.OS == 'ios' ? imageUri : filepath,
-                  filename,
-                };
-              }
+              } 
               updateUserData(payloadData);
             }
           }}
@@ -282,17 +277,15 @@ class Setting extends PureComponent {
       },
     };
 
-    ImagePicker.showImagePicker(options, response => {
-      console.log('RESPONSE BEGINING', response);
+    ImagePicker.showImagePicker(options, response => { 
       if (response.error) {
         console.log('RESPONSE ERROR', response);
         alert('And error occured: ' + JSON.stringify(response));
-      } else {
-        console.log('RESPONSE', response);
+      } else { 
         const source = { uri: response.uri };
         this.setState({
           imageSrc: response.uri,
-          imageUri: response.uri,
+          profileImageUrl: response.uri,
           filepath: response.path,
           file: response,
         });
