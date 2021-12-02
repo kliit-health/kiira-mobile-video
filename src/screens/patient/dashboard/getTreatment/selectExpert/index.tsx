@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {Header, Container} from '~/components';
 import NoProviders from '~/components/noProviders';
 import {screenNames} from '~/utils/constants';
+import Constant from '~/utils/constants';
 import {List} from './sections';
 import styles from './style';
 
@@ -12,6 +13,7 @@ const SelectExpert = ({ navigation }) => {
   const userProfile = useSelector((state) => state.user.data.profileInfo);
   const visit = useSelector((state) => state.expertSchedule);
   const lang = useSelector((state) => state.language);
+
 
   useEffect(() => {
     if (experts.length && userProfile) {
@@ -30,7 +32,15 @@ const SelectExpert = ({ navigation }) => {
           profileInfo: {
             profession: { specialities },
           },
-        }) => {
+        }) => { 
+          if(userState == "CA"){ 
+            if(visit.reason == Constant.App.specialities.heavyPainfulIrregularPeriods ||
+              visit.reason == Constant.App.specialities.generalHealth ||
+              visit.reason == Constant.App.specialities.heavyPanfulPerds)
+            {
+              return specialities
+            }
+          }
           return specialities.some((specialty) =>
             specialty.includes(visit.reason),
           );
