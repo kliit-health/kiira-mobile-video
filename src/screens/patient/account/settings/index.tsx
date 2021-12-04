@@ -63,7 +63,7 @@ class Setting extends PureComponent {
       lastName: userData.profileInfo.lastName,
       imageSrc: userData.profileInfo.profileImageUrl,
       email: userData.profileInfo.email,
-      profileImageUrl: userData.profileInfo.profileImageUrl,
+      profileImageUrl: '',
       filepath: '',
       file: '',
       showIosDateModal: false,
@@ -224,11 +224,16 @@ class Setting extends PureComponent {
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
-                    : `${Math.floor(Date.now())}${name}.${ext}`;
-                payloadData.userParams.profileImageUrl = profileImageUrl;
+                    : `${Math.floor(Date.now())}${name}.${ext}`; 
               } else if (userData.profileInfo.profileImageUrl) {
                 payloadData.userParams.profileImageUrl =
                   userData.profileInfo.profileImageUrl;
+              } 
+              if (filename) { 
+                payloadData.imageParams = {
+                  file: Platform.OS == 'ios' ? profileImageUrl : filepath,
+                  filename,
+                };
               } 
               updateUserData(payloadData);
             }
@@ -275,6 +280,8 @@ class Setting extends PureComponent {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth:300,
+      maxHeight:300,
     };
 
     ImagePicker.showImagePicker(options, response => { 
@@ -296,7 +303,7 @@ class Setting extends PureComponent {
   renderProfileImageView() {
     const { staticImages } = Constant.App;
     const { imageSrc } = this.state;
-    const { lang } = this.props;
+    const {lang} = this.props; 
     return (
       <View style={styles.profileImgViewStyle}>
         <Avatar
@@ -317,6 +324,17 @@ class Setting extends PureComponent {
           activeOpacity={0.7}
         />
         {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={() => {
+              this.requestCameraPermission();
+            }}
+          >
+            <CustomText style={styles.changeProfileTextStyle}>
+              {lang.setting.changePhoto}
+            </CustomText>
+          </TouchableOpacity>
+        )}
+        {Platform.OS === 'android' && (
           <TouchableOpacity
             onPress={() => {
               this.requestCameraPermission();
