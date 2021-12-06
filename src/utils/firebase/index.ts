@@ -459,7 +459,7 @@ export async function cancelAppointmentAsync(data) {
     }
 }
 
-export async function changeAppointmentAsync(data) {
+export async function changeAppointmentAsync({ data }) {
     const { id, time, uid, expert } = data;
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
@@ -472,8 +472,8 @@ export async function changeAppointmentAsync(data) {
         }),
         body: JSON.stringify({
             data: {
-                id,
-                time,
+                id: id,
+                time: time,
             },
         }),
     };

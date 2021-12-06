@@ -58,7 +58,7 @@ const ListItem = props => {
             title={fullName}
             rating={calculateRating(rating)}
             tags={specialities.slice(0, 3)}
-            avatar={profileImageUrl}
+            avatar={profileImageUrl ? profileImageUrl : ''}
             online={isOnline}
             onPress={handleCardPress}
             prescriber={isPrescriber}

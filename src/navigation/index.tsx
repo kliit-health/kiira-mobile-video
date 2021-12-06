@@ -67,7 +67,6 @@ import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
 import SelectChatProvider from '~/screens/patient/dashboard/chat/screens/selectProvider';
 import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvider';
-import SelectSupport from '~/screens/patient/dashboard/chat/screens/selectSupport';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
@@ -244,6 +243,7 @@ const BottomTab = createBottomTabNavigator(
             showLabel: false,
             style: {
                 backgroundColor: 'white',
+                height: 40,
                 shadowColor: colors.black,
                 shadowOffset: { width: 1, height: 1 },
                 shadowRadius: 5,
@@ -583,7 +583,6 @@ const MainAppStack = createStackNavigator(
         RescheduleVisit: { screen: RescheduleVisit },
         SelectChatProvider: { screen: SelectChatProvider },
         SelectProvider: { screen: SelectProvider },
-        SelectSupport: { screen: SelectSupport },
         Settings: { screen: Settings },
         Success: { screen: Success },
         BillingInsurance: {screen: BillingInsurance},

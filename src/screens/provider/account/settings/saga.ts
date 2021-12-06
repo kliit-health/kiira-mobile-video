@@ -5,6 +5,7 @@ import { uploadImage } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
 import { getUser, updateUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
+import { Platform } from 'react-native';
 
 function* updateExpertData({ data }) {
     const lang = yield select(state => state.language);
@@ -13,12 +14,16 @@ function* updateExpertData({ data }) {
         const { userParams, imageParams, navigation } = data;
         yield put(showApiLoader(lang.apiLoader.loadingText));
 
-        if (imageParams) {
-            const responseImage = yield uploadImage(imageParams);
+        if (imageParams) { 
+            const responseImage = yield uploadImage(imageParams); 
 
             if (responseImage.success) {
-                const { name } = responseImage.data.metadata;
-                const url = yield storage().ref(name).getDownloadURL();
+                const { name } = responseImage.data.metadata; 
+                var refStorage = name;
+                if(Platform.OS === 'android'){
+                  refStorage = 'Kiira/' + name;;
+                }
+                const url = yield storage().ref(refStorage).getDownloadURL(); 
 
                 const userInfo = {
                     ...user,
@@ -36,7 +41,7 @@ function* updateExpertData({ data }) {
                         profileImageUrl: url ? url : '',
                         pronouns: userParams.pronouns,
                         state: userParams.state,
-                    },
+                    }, 
                 };
 
                 yield put(updateUser({ uid: user.uid, ...userInfo }));
@@ -54,7 +59,7 @@ function* updateExpertData({ data }) {
                 );
             }
         } else {
-            yield put(showApiLoader(lang.apiLoader.loadingText));
+            yield put(showApiLoader(lang.apiLoader.loadingText)); 
             const userInfo = {
                 ...user,
                 clinicInfo: {
@@ -70,11 +75,13 @@ function* updateExpertData({ data }) {
                     lastName: userParams.lastName,
                     pronouns: userParams.pronouns,
                     state: userParams.state,
-                },
-            };
+                    profileImageUrl: userParams.profileImageUrl
+                }, 
+            }; 
 
             yield put(updateUser({ uid: user.uid, ...userInfo }));
             yield put(getUser());
+            
             yield put(hideApiLoader());
             navigation.goBack();
         }

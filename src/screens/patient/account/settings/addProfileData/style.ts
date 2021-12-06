@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     parentContainerStyle: {
         flex: 1,
-        marginTop: getStatusBarHeight(),
+        marginTop: getStatusBarHeight(null),
     },
 
     profileImgViewStyle: {

@@ -5,7 +5,7 @@ export default StyleSheet.create({
     activate: {
         color: colors.primaryBlue,
         backgroundColor: colors.white,
-        width: '90%',
+        width: '70%',
         padding: 10,
         textAlign: 'center',
         borderRadius: 20,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
     description: {
         color: colors.white,
         fontFamily: text.fontFamily.poppinsRegular,
-        fontSize: text.size.regular,
+        fontSize: text.size.large,
         padding: 20,
     },
 

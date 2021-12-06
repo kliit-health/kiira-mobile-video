@@ -19,7 +19,7 @@ const Success = ({ navigation }) => {
                     style={[height_50, width_50]}
                     source={icons.kiiraLogo}
                 />
-                <Text options={[h1]}>You're all set!</Text>
+                <Text options={[h1]}>Your all set!</Text>
             </Column>
             <Column options={[white_bg]}>
                 <Text options={[h2]}>{time}</Text>

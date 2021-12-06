@@ -13,7 +13,7 @@ const ProfileCard = ({ profileInfo }) => {
     return (
         <View style={styles.root}>
             <Avatar
-                source={profileImageUrl}
+                source={profileImageUrl ? profileImageUrl : ''}
                 size="large"
                 styles={modifiers.avatar}
             />

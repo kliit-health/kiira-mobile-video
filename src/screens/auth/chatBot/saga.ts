@@ -18,6 +18,7 @@ function* updateNewUserData({ data }) {
 
         const userInfo = {
             ...(userParams.address && { address: userParams.address }),
+            agreeToTerms: false,
             chats: userParams.chats,
             ...(userParams.customer && { customer: userParams.customer }),
             displayName: user.displayName,

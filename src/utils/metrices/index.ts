@@ -11,7 +11,7 @@ const { height, width } = Dimensions.get('window');
 export default {
     height: IS_ANDROID
         ? height - StatusBar.currentHeight
-        : height - getStatusBarHeight(),
+        : height - getStatusBarHeight(null),
     width: width,
     BOTTOM_SAVE_AREA: getBottomSpace(),
 };

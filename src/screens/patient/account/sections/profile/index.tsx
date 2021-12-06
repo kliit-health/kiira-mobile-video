@@ -50,7 +50,7 @@ export default ({ profileInfo, navigation }) => {
                 />
             </View>
             <Avatar
-                source={profileImageUrl}
+                source={profileImageUrl ? profileImageUrl : ''}
                 size="large"
                 styles={modifiers.avatar}
             />

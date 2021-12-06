@@ -7,6 +7,7 @@ import {
     ScrollView,
     PermissionsAndroid,
     StatusBar,
+    Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
@@ -20,9 +21,66 @@ import ImagePicker from 'react-native-image-picker';
 import { updateExpertDataToFirebase } from './actions';
 import { showOrHideModal } from '~/components/customModal/action';
 
-class SettingsExpert extends PureComponent {
-    public props: any;
-    public state: any;
+interface props{
+    setState: any;
+    userData: any;
+    lang: any;
+    navigation: any;
+    showHideErrorModal: any;
+    updateUserData: any;
+    bio: any;
+    city: any;
+    clinicInfo: any;
+    credits: any;
+    dob: any;
+    email: any;
+    file: any;
+    filepath: any;
+    firstName: any;
+    gender: any;
+    profileImageUrl: any;
+    languages: any;
+    lastName: any;
+    license: any;
+    location: any;
+    profession: any;
+    profileInfo: any;
+    pronounsArr: any;
+    selectedState: any;
+    staticImages: any;
+    imageSrc: any;
+    showSelectStateModal: any;
+    state:any;
+}
+
+interface myState{
+    bio: any;
+    city: any;
+    clinicInfo: any;
+    credits: any;
+    dob: any;
+    email: any;
+    file: any;
+    filepath: any;
+    firstName: any;
+    gender: any;
+    imageUri: any;
+    languages: any;
+    lastName: any;
+    license: any;
+    location: any;
+    profession: any;
+    profileInfo: any;
+    pronounsArr: any;
+    selectedState: any;
+    imageSrc: any;
+    showIosDateModal: boolean;
+    showSelectStateModal: boolean;
+    showSelectSexualityModal: boolean;
+    states: any;
+}
+
+class SettingsExpert extends PureComponent<props, myState> { 
     public setState: any;
     public userData: any;
     public lang: any;
@@ -50,7 +108,7 @@ class SettingsExpert extends PureComponent {
     public selectedState: any;
     public staticImages: any;
     public imageSrc: any;
-    public showSelectStateModal: any;
+    public showSelectStateModal: any; 
 
     constructor(props) {
         super(props);
@@ -61,8 +119,9 @@ class SettingsExpert extends PureComponent {
             clinicInfo: userData.clinicInfo,
             dob: userData.profileInfo.dob,
             email: userData.profileInfo.email,
-            filepath: '',
+            filepath: null,
             file: '',
+            credits: '',
             firstName: userData.profileInfo.firstName,
             gender: userData.profileInfo.gender,
             imageSrc: userData.profileInfo.profileImageUrl,
@@ -142,7 +201,7 @@ class SettingsExpert extends PureComponent {
             bio,
             city,
             clinicInfo,
-            credits,
+            credits, 
             dob,
             email,
             file,
@@ -157,7 +216,7 @@ class SettingsExpert extends PureComponent {
             profession,
             profileInfo,
             pronounsArr,
-            selectedState,
+            selectedState, 
         } = this.state;
         return (
             <View style={styles.headerStyle}>
@@ -214,16 +273,18 @@ class SettingsExpert extends PureComponent {
                                     profileInfo,
                                     city,
                                     languages,
-                                    profession,
-                                },
+                                    imageUri,
+                                    profession
+                                }, 
                                 navigation,
+                                imageParams: null,
                             };
                             if (imageUri) {
                                 let name = imageUri.substring(
                                     imageUri.lastIndexOf('/') + 1,
                                     imageUri.length,
                                 );
-                                const ext = file.type.split('/').pop(); // Extract image extension
+                                const ext = imageUri.split('/').pop(); // Extract image extension
                                 filename =
                                     Platform.OS === 'ios'
                                         ? `${Math.floor(Date.now())}${name}`
@@ -233,19 +294,20 @@ class SettingsExpert extends PureComponent {
                             } else if (userData.profileInfo.profileImageUrl) {
                                 payloadData.userParams.profileImageUrl =
                                     userData.profileInfo.profileImageUrl;
-                            }
-
+                            } 
                             if (filename) {
+                                
                                 payloadData.imageParams = {
                                     file:
                                         Platform.OS == 'ios'
                                             ? imageUri
                                             : filepath,
                                     filename,
-                                };
+                                }; 
                             }
 
                             updateUserData(payloadData);
+                            
                         }
                     }}
                 >
@@ -290,6 +352,8 @@ class SettingsExpert extends PureComponent {
                 skipBackup: true,
                 path: 'images',
             },
+            maxWidth: 300,
+            maxHeight:300,
         };
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
@@ -297,10 +361,11 @@ class SettingsExpert extends PureComponent {
             } else if (response.error) {
                 Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
-                const source = { uri: response.uri };
+                const source = { uri: response.uri };  
                 this.setState({
-                    imageSrc: response.uri,
                     imageUri: response.uri,
+                    imageSrc: response.uri,
+                    profileImageUrl: response.uri,
                     filepath: response.path,
                     file: response,
                 });
@@ -332,6 +397,17 @@ class SettingsExpert extends PureComponent {
                     activeOpacity={0.7}
                 />
                 {Platform.OS === 'ios' && (
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.requestCameraPermission();
+                        }}
+                    >
+                        <CustomText style={styles.changeProfileTextStyle}>
+                            {lang.setting.changePhoto}
+                        </CustomText>
+                    </TouchableOpacity>
+                )}
+                {Platform.OS === 'android' && (
                     <TouchableOpacity
                         onPress={() => {
                             this.requestCameraPermission();
