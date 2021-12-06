@@ -224,7 +224,7 @@ class Setting extends PureComponent {
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
-                    : `${Math.floor(Date.now())}${name}.${ext}`; 
+                    : `${Math.floor(Date.now())}${name}`; 
               } else if (userData.profileInfo.profileImageUrl) {
                 payloadData.userParams.profileImageUrl =
                   userData.profileInfo.profileImageUrl;
@@ -288,8 +288,8 @@ class Setting extends PureComponent {
       if (response.error) {
         console.log('RESPONSE ERROR', response);
         alert('And error occured: ' + JSON.stringify(response));
-      } else { 
-        const source = { uri: response.uri };
+      } else if (!response.didCancel) { 
+        const source = { uri: response.uri }; 
         this.setState({
           imageSrc: response.uri,
           profileImageUrl: response.uri,
