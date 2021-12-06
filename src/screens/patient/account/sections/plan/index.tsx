@@ -24,7 +24,7 @@ export default ({subscription, user}) => {
   };
 
   const handleChangePlan = () => {
-    Linking.openURL('mailto:support@kiira.io?subject=Kiira Plan Change');
+    Linking.openURL('mailto:hello@kiira.io?subject=Kiira Plan Change');
   };
 
   const handleCancel = () => {
