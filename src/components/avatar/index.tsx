@@ -10,7 +10,7 @@ import { showOrHideModal } from '../../components/customModal/action';
 import * as actions from '~/redux/actions';
 import defaultStyles, { modifiers } from './styles';
 import Remove from '../../svgs/remove.svg';  
-import * as ImagePicker from "react-native-image-picker"
+import ImagePicker from "react-native-image-picker"
 import { uploadImage } from '~/utils/firebase'; 
 
 const Avatar = ({
@@ -99,28 +99,23 @@ const Avatar = ({
         }
     };
 
-    const pickImage = () => {
+    const pickImage = () => {   
         const options = {
-            mediaType: 'photo',
-            includeBase64: false,
-        };   
-
-        ImagePicker.launchImageLibrary(
-            {
-              mediaType: 'photo',
-              includeBase64: false,
-              maxHeight: 200,
-              maxWidth: 200,
+            title: 'photo',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
             },
-            (response :any) => {
-                if (response.error) {
-                    console.log('RESPONSE ERROR', response);
-                    Alert.alert('And error occured: ' + JSON.stringify(response));
-                } else {
-                    console.log('RESPONSE', response);  
-                }
-            },
-        )
+        };
+ 
+        ImagePicker.showImagePicker(options, response => {
+            if (response.didCancel) {
+                console.log('You cancelled image picker');
+            } else if (response.error) {
+                Alert.alert('And error occured: ' + JSON.stringify(response));
+            } else { 
+            }
+        });
     };
 
     return (

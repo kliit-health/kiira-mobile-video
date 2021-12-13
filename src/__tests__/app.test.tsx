@@ -17,6 +17,8 @@ import PreviousVisits from '../screens/provider/appointments/patientProfile/prev
 import VisitInfo from '../screens/provider/appointments/patientProfile/recap/components/visitInfo';  
 import PatientDetails from '../screens/provider/appointments/visit/components/patientDetails';  
 import AppointmentVisit from '../screens/provider/appointments/visit';  
+import ASK from '../screens/provider/ask';  
+import ChatExpert from '../screens/provider/ask/chat';  
 
 
 test('renders correctly', () => {
@@ -166,9 +168,21 @@ describe('Testing Appointment and Patient for 181', () => {
     const AppointmentVisitTree = renderer.create(<AppointmentVisit/>);
     test('appointmentVisit', () => {
         expect(AppointmentVisitTree).toBeDefined();
-    });
+    }); 
 
-    
 });
 
+
+describe('Testing Active Chat for 178', () => {  
+    const AskTree = renderer.create(<ASK navigation/>);
+    test('ask', () => {
+        expect(AskTree).toBeDefined();
+    });
+
+    const ChatExpertTree = renderer.create(<ChatExpert path setState flatList navigation
+         message imageUri filename staticImages showActionModal/>);
+    test('chatExpert', () => {
+        expect(ChatExpertTree).toBeDefined();
+    });
  
+});

@@ -76,7 +76,7 @@ const RescheduleVisit = props => {
         dispatch(getExpertsData(obj));
         dispatch(setCalendarID(calendarID));
         dispatch(
-            getAppointmentsForToday({
+            getAppointmentDates({
                 ...current,
                 calendarID,
                 appointmentTypeID: visit.appointmentTypeID,

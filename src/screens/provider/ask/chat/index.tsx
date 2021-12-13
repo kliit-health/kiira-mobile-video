@@ -26,18 +26,52 @@ import {
     clearChatExpertState,
     checkUserStatus,
     toggleExpertStatus,
-    resolveQuestion,
+    resolveQuestionExpert,
 } from './action';
 import { getChatItems } from './selectors';
 import moment from 'moment';
 import CustomButton from '~/components/customButton';
 import { stopObserverChat } from './action';
-import { topics } from '~/models';
-
+import { topics } from '~/models'; 
 let key;
-class ChatExpert extends React.PureComponent {
-    public state: any;
-    public props: any;
+interface Props {
+    setState: any;
+    flatList: any;
+    navigation: any;
+    toggleStatus: any;
+    userData: any;
+    questionData: any;
+    loadUserMessages: any;
+    setId: any;
+    checkStatus: any;
+    clearState: any;
+    stopObervers: any;
+    sendMessageUser: any;
+    messageId: any;
+    questionId: any;
+    message: any;
+    imageUri: any;
+    filename: any;
+    path: any;
+    staticImages: any;
+    lang: any;
+    messages: any;
+    showActionModal: any;
+    resolve: any;
+}
+
+interface myState {
+    message: any,
+    showActionModal: boolean,
+    appState: any,
+    imageUri: any,
+    name: any,
+    filename: any,
+    path: any,
+    rating: any,
+};
+
+class ChatExpert extends React.PureComponent<Props, myState> { 
     public setState: any;
     public flatList: any;
     public navigation: any;
@@ -254,19 +288,14 @@ class ChatExpert extends React.PureComponent {
                         source={staticImages.backIcon}
                     />
                 </TouchableOpacity>
-                <View style={styles.profileHeaderStyle}>
-                    <FastImage
-                        containerStyle={{ alignSelf: 'center' }}
-                        style={{
-                            width: 50,
-                            height: 50,
-                            borderRadius: 50,
-                        }}
+                <View style={styles.profileHeaderStyle}> 
+                    <FastImage 
+                        resizeMode='center'
+                        style={[styles.image, {opacity: 0.7}]}
                         source={{
                             uri: questionData.userInfo.profileInfo
                                 .profileImageUrl,
-                        }}
-                        activeOpacity={0.7}
+                        }} 
                     />
                     <CustomText style={styles.titleTextStyle}>
                         {`${questionData.userInfo.profileInfo.firstName} ${questionData.userInfo.profileInfo.lastName}`}
@@ -449,7 +478,7 @@ class ChatExpert extends React.PureComponent {
             const payloadData = {
                 resolveQuestionParams: questionRef,
                 navigation,
-            };
+            }; 
             resolve(payloadData);
         };
 
@@ -458,7 +487,7 @@ class ChatExpert extends React.PureComponent {
                 animationType="fade"
                 onRequestClose={() => {}}
                 transparent
-                isVisible={showActionModal}
+                visible={showActionModal}
             >
                 <View style={styles.actionModalParentContainerStyle}>
                     <View style={styles.actionModalInnerContainerStyle}>
@@ -532,7 +561,7 @@ const mapDispatchToProps = dispatch => ({
     clearState: () => dispatch(clearChatExpertState()),
     checkStatus: value => dispatch(checkUserStatus(value, dispatch)),
     toggleStatus: value => dispatch(toggleExpertStatus(value)),
-    resolve: value => dispatch(resolveQuestion(value)),
+    resolve: value => dispatch(resolveQuestionExpert(value)), 
     stopObervers: () => dispatch(stopObserverChat()),
 });
 
