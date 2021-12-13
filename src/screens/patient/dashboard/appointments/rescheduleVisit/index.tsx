@@ -12,8 +12,8 @@ import {
 } from '~/redux/reducers/appointments';
 import { handleBack } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
-import { colors } from '~/utils/constants';
-import metrices from '~/utils/metrices';
+import styles from './style'; 
+import Constant, { tables } from '~/utils/constants'; 
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
@@ -40,6 +40,12 @@ const RescheduleVisit = ({ navigation }) => {
         black,
     } = globalStyles;
 
+const RescheduleVisit = props => {
+    const { navigation, visit } = props.navigation.state.params;
+    const { calendarID, expert, uid, id, appointmentTypeID } = visit;
+
+    const expertData = useSelector((state:any) => state.appointments.expertData);
+    const appointmentData = useSelector((state:any) => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
@@ -50,14 +56,22 @@ const RescheduleVisit = ({ navigation }) => {
     useEffect(() => {
         const { calendarID, uid } = visit;
         const obj = {
-            expertsParams: {
-                tableName: 'users',
-                uid,
+            expertsParams: { 
+                tableName: tables.users, 
+                uid: expert.uid,
             },
         };
+        const curMonth = moment(`${current.year}-${current.monthNumber}`);
+        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM');
 
-        let addMonth = moment(`${current.year}-${current.monthNumber}`);
-        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
+        dispatch(
+            getAppointmentDates({
+                ...current,
+                calendarID,
+                addMonth,
+                appointmentTypeID: visit.appointmentTypeID,
+            }),
+        );
 
         dispatch(
             getAppointmentDates({

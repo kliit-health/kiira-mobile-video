@@ -129,7 +129,7 @@ class AddProfileData extends PureComponent {
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
             } else if (response.error) {
-                alert('And error occured: ' + JSON.stringify(response));
+                Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
                 const source = { uri: response.uri };
                 this.setState({

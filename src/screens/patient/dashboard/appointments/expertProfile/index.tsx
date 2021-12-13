@@ -14,14 +14,14 @@ import {
 } from '~/redux/reducers/appointments';
 import styles from './style';
 import CustomText from '~/components/customText';
-import Constant from '~/utils/constants';
+import Constant, { tables } from '~/utils/constants';
 import { Rating } from 'react-native-elements';
 import CustomButton from '~/components/customButton';
 import FastImage from 'react-native-fast-image';
 
 const ExpertProfile = props => {
-    const expertDetails = useSelector(state => state.appointments.expertData);
-    const lang = useSelector(state => state.language);
+    const expertDetails = useSelector((state:any) => state.appointments.expertData); 
+    const lang = useSelector((state:any) => state.language);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const ExpertProfile = props => {
         const { uid } = navigation.state.params;
         const obj = {
             expertsParams: {
-                tableName: Constant.App.firebaseTableNames.users,
+                tableName: tables.users,
                 uid: uid,
             },
         };
@@ -77,9 +77,9 @@ const ExpertProfile = props => {
                         width: 120,
                         height: 120,
                         borderRadius: 60,
+                        opacity: 0.7
                     }}
-                    source={{ uri: expertDetails.profileInfo.profileImageUrl }}
-                    activeOpacity={0.7}
+                    source={{ uri: expertDetails.profileInfo.profileImageUrl }} 
                 />
                 {expertDetails.isOnline ? (
                     <View
@@ -146,7 +146,7 @@ const ExpertProfile = props => {
                 <Rating
                     imageSize={20}
                     readonly
-                    startingValue={parseFloat(expertDetails.rating / 2)}
+                    startingValue={parseFloat(expertDetails.rating) / 2}
                 />
                 {isFrom && isFrom === Constant.App.screenNames.ChooseExpert && (
                     <CustomButton

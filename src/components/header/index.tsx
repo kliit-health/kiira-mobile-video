@@ -3,8 +3,8 @@ import { shape, object, func, string, node, bool } from 'prop-types';
 import IconButton from '../iconButton';
 import TextButton from '../textButton';
 import { View, Text } from 'react-native';
-import { icons } from '../../utils/constants';
-import { mergeStyles } from '../../utils/functions';
+import { icons } from '~/utils/constants';
+import { mergeStyles } from '~/utils/functions'; 
 import defaultStyles, { modifiers } from './styles';
 
 interface header{

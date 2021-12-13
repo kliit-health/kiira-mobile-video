@@ -7,7 +7,7 @@ import { ExpertInfo, VisitDetails } from './components';
 import { getExpertsData } from '~/redux/reducers/appointments';
 import { setVisit } from './actions';
 import ErrorBoundary from 'react-native-error-boundary';
-import Constant from '~/utils/constants';
+import Constant, { tables } from '~/utils/constants';
 import styles from './styles';
 
 const Visit = props => {
@@ -18,7 +18,7 @@ const Visit = props => {
 
     const params = {
         expertsParams: {
-            tableName: Constant.App.firebaseTableNames.users,
+            tableName: tables.users,
             uid,
         },
     };

@@ -1,9 +1,6 @@
-export type Tab = {
-    title: string;
-    label?: string;
-};
-
-export const tabs: Tab[] = [
+import { Tab as TabType } from '~/screens/patient/dashboard/book/model';
+  
+export const tabs: TabType[] = [
     {
         title: 'UPCOMING VISITS',
         label: 'UPCOMING VISITS',

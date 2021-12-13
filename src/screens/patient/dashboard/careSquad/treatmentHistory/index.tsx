@@ -11,7 +11,7 @@ import { getMedicalHistory } from '~/redux/actions';
 import { useDidMount } from '~/utils/hooks';
 
 const TreatmentHistory = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state:any) => state.language);
 
     const dispatch = useDispatch();
     const expertDetails = navigation.getParam('details');
@@ -24,15 +24,15 @@ const TreatmentHistory = ({ navigation }) => {
 
     useDidMount(() => {
         dispatch(getChatHistoryAsync());
-    }, []);
+    }); 
 
     useDidMount(() => {
         dispatch(getVideoHistoryAsync());
-    }, []);
+    });
 
     useDidMount(() => {
         dispatch(getMedicalHistory());
-    }, []);
+    });
 
     const handleOnBackPress = () => {
         navigation.goBack();

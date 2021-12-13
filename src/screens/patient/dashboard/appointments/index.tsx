@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { Column, Header, Screen, Tabs } from '~/components';
+import Header from '../../../../components/header'
+import { Column, Screen, Tabs } from '~/components';
 import { Show } from './components';
 import { tabs } from './models';
 import moment from 'moment';
 
 const Appointments = ({ navigation }) => {
-    const visitData = useSelector((state: RootState) => state.appointments);
+    const visitData:any= useSelector((state: RootState) => state.appointments);
     const [past, setPast] = useState([]);
     const [future, setFuture] = useState([]);
     const [pastSelected, setPastSelected] = useState(false);

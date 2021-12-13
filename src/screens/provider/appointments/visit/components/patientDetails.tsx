@@ -5,18 +5,16 @@ import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import styles from '../styles';
 
-const PatientDetails = ({ navigation }) => {
-    const { visit } = navigation.state.params;
+const PatientDetails = ({ navigation, visit, patientInfo}) => { 
     const { firstName, lastName, profile } = visit;
 
     return (
         <View style={styles.expertInfoParentContainerStyle}>
             <View style={styles.expertImageContainer}>
                 <FastImage
-                    style={styles.expertImage}
+                    style={[styles.expertImage,{opacity:0.7}]}
                     resizeMode="cover"
-                    source={{ uri: profile }}
-                    activeOpacity={0.7}
+                    source={{ uri: profile }} 
                 />
                 <View>
                     <View style={styles.myRecentExpertContainerStyle}>
@@ -32,7 +30,7 @@ const PatientDetails = ({ navigation }) => {
                         </View>
                         <View style={styles.expertProfession}>
                             <Text style={styles.expertProfessionTextStyle}>
-                                {visit.reason}
+                                {visit.reason ? visit.reason.reason : ""}
                             </Text>
                         </View>
                         <View style={{ marginTop: 5 }}>

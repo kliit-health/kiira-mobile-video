@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, AppState } from 'react-native';
+import { Platform, AppState, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {
@@ -260,7 +260,7 @@ class Chat extends React.PureComponent {
             if (response.didCancel) {
                 console.log('You cancelled image picker');
             } else if (response.error) {
-                alert('And error occured: ' + JSON.stringify(response));
+                Alert.alert('And error occured: ' + JSON.stringify(response));
             } else {
                 let name = response.uri.substring(
                     response.uri.lastIndexOf('/') + 1,

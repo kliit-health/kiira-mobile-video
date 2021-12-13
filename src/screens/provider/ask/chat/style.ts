@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     },
 
     headerStyle: {
-        paddingTop: getStatusBarHeight() + parentPaddingValue * 0.5,
+        paddingTop: getStatusBarHeight(null) + parentPaddingValue * 0.5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -129,6 +129,13 @@ const styles = StyleSheet.create({
     imageCrossStyle: {
         width: 16,
         height: 16,
+    },
+
+    image: {
+        marginRight: 5,
+        width: 60,
+        height: 60,
+        borderRadius: 50,
     },
 
     imageParentContainerStyle: {
