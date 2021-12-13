@@ -13,7 +13,7 @@ export default ({displayName, profileImageUrl}) => {
         style={
           styles.title
         }>{`${lang.dashboard.helloName}${displayName}!`}</Text>
-      <Avatar size="small" source={profileImageUrl} />
+      <Avatar size="small" source={profileImageUrl != null ? profileImageUrl : ''} />
     </View>
   );
 };

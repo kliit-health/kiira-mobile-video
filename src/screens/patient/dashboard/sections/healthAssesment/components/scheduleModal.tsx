@@ -48,7 +48,7 @@ const ScheduleModal = ({ navigation }) => {
   const { consentAgreements } = useSelector(state => state.user.data);
 
   const agreements = useSelector(state => state.agreements);
-  const hasSigned = consentAgreements.length > 0;
+  const hasSigned = consentAgreements && consentAgreements.length > 0;
 
   useEffect(() => {
     dispatch(

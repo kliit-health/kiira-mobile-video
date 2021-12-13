@@ -5,6 +5,9 @@ import { uploadImage } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
 import { getUser, updateUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
+import { 
+  Platform, 
+} from 'react-native';
 
 function* updateUserData({ data }) {
   const lang = yield select(state => state.language);
@@ -14,11 +17,15 @@ function* updateUserData({ data }) {
     yield put(showApiLoader(lang.apiLoader.loadingText));
 
     if (imageParams) {
-      const responseImage = yield uploadImage(imageParams);
+      const responseImage = yield uploadImage(imageParams); 
 
-      if (responseImage.success) {
-        const { name } = responseImage.data.metadata;
-        const url = yield storage().ref(name).getDownloadURL();
+      if (responseImage.success) { 
+        const { name } = responseImage.data.metadata;  
+        var refStorage = name;
+        if(Platform.OS === 'android'){
+          refStorage = 'Kiira/' + name;;
+        }
+        const url = yield storage().ref(refStorage).getDownloadURL(); 
 
         const userUpdate = {
           ...user,
@@ -43,7 +50,7 @@ function* updateUserData({ data }) {
             phoneNumber: userParams.phoneNumber,
             enableText: userParams.enableText,
           },
-        };
+        }; 
 
         yield put(updateUser({ uid: user.uid, ...userUpdate }));
         yield put(getUser());

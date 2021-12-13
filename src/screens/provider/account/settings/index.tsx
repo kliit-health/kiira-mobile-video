@@ -210,13 +210,13 @@ class SettingsExpert extends PureComponent {
                   imageUri.lastIndexOf('/') + 1,
                   imageUri.length,
                 );
-                const ext = file.type.split('/').pop(); // Extract image extension
+                const ext = imageUri.split('/').pop(); // Extract image extension
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
                     : `${Math.floor(Date.now())}${name}.${ext}`;
               } else if (userData.profileInfo.profileImageUrl) {
-                payloadData.userParams.profileImageUrl =
+                payloadData.userParams.imageUri =
                   userData.profileInfo.profileImageUrl;
               }
 

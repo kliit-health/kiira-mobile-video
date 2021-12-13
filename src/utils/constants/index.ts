@@ -69,6 +69,12 @@ export default {
       messages: 'messagesNew',
     },
 
+    specialities:{
+      heavyPainfulIrregularPeriods:'Heavy/Painful/Irregular periods',
+      heavyPanfulPerds:'Heavy or Painful Periods',
+      generalHealth:'General Health',
+    },
+
     firebaseTableKeyValuesNames: {
       expertsConditionKey: 'role',
       expertsConditionValue: 'Expert',

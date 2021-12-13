@@ -34,7 +34,7 @@ class Setting extends PureComponent {
   public dob: any;
   public email: string;
   public pronounsArr: any;
-  public imageUri: any;
+  public profileImageUrl: any;
   public file: any;
   public filepath: any;
   public selectedState: any;
@@ -63,7 +63,7 @@ class Setting extends PureComponent {
       lastName: userData.profileInfo.lastName,
       imageSrc: userData.profileInfo.profileImageUrl,
       email: userData.profileInfo.email,
-      imageUri: '',
+      profileImageUrl: '',
       filepath: '',
       file: '',
       showIosDateModal: false,
@@ -144,7 +144,7 @@ class Setting extends PureComponent {
       dob,
       email,
       pronounsArr,
-      imageUri,
+      profileImageUrl,
       file,
       filepath,
       selectedState,
@@ -208,33 +208,33 @@ class Setting extends PureComponent {
                   foodSecure,
                   ethnicity,
                   phoneNumber,
+                  profileImageUrl,
                   lang: 'en',
                   gender,
                   enableText,
                 },
-                navigation,
+                navigation, 
               };
-              if (imageUri) {
-                let name = imageUri.substring(
-                  imageUri.lastIndexOf('/') + 1,
-                  imageUri.length,
+              if (profileImageUrl) {
+                let name = profileImageUrl.substring(
+                  profileImageUrl.lastIndexOf('/') + 1,
+                  profileImageUrl.length,
                 );
-                const ext = file.type.split('/').pop(); // Extract image extension
+                const ext = profileImageUrl.split('/').pop(); // Extract image extension
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
-                    : `${Math.floor(Date.now())}${name}.${ext}`;
+                    : `${Math.floor(Date.now())}${name}`; 
               } else if (userData.profileInfo.profileImageUrl) {
                 payloadData.userParams.profileImageUrl =
                   userData.profileInfo.profileImageUrl;
-              }
-
-              if (filename) {
+              } 
+              if (filename) { 
                 payloadData.imageParams = {
-                  file: Platform.OS == 'ios' ? imageUri : filepath,
+                  file: Platform.OS == 'ios' ? profileImageUrl : filepath,
                   filename,
                 };
-              }
+              } 
               updateUserData(payloadData);
             }
           }}
@@ -273,25 +273,26 @@ class Setting extends PureComponent {
     }
   };
 
-  pickImage = () => {
+  pickImage = () => { 
     const options = {
       title: 'Select Avatar',
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth:300,
+      maxHeight:300,
     };
-    ImagePicker.showImagePicker(options, response => {
-      console.log('RESPONSE BEGINING', response);
+
+    ImagePicker.showImagePicker(options, response => { 
       if (response.error) {
         console.log('RESPONSE ERROR', response);
         alert('And error occured: ' + JSON.stringify(response));
-      } else {
-        console.log('RESPONSE', response);
-        const source = { uri: response.uri };
+      } else if (!response.didCancel) { 
+        const source = { uri: response.uri }; 
         this.setState({
           imageSrc: response.uri,
-          imageUri: response.uri,
+          profileImageUrl: response.uri,
           filepath: response.path,
           file: response,
         });
@@ -302,7 +303,7 @@ class Setting extends PureComponent {
   renderProfileImageView() {
     const { staticImages } = Constant.App;
     const { imageSrc } = this.state;
-    const { lang } = this.props;
+    const {lang} = this.props; 
     return (
       <View style={styles.profileImgViewStyle}>
         <Avatar
@@ -323,6 +324,17 @@ class Setting extends PureComponent {
           activeOpacity={0.7}
         />
         {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            onPress={() => {
+              this.requestCameraPermission();
+            }}
+          >
+            <CustomText style={styles.changeProfileTextStyle}>
+              {lang.setting.changePhoto}
+            </CustomText>
+          </TouchableOpacity>
+        )}
+        {Platform.OS === 'android' && (
           <TouchableOpacity
             onPress={() => {
               this.requestCameraPermission();

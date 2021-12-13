@@ -26,6 +26,7 @@ function* agreeToTerms({payload: {userData}}) {
       insurance,
       income,
       enrollment,
+      profileImageUrl,
       zipcode,
       homeSecure,
       foodSecure,

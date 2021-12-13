@@ -15,7 +15,7 @@ export default ({profileInfo}) => {
       <View style={styles.curtain} />
       <View style={styles.root}>
         <Avatar
-          source={profileImageUrl}
+          source={profileImageUrl != null ? profileImageUrl : ''}
           size="large"
           styles={modifiers.avatar}
         />

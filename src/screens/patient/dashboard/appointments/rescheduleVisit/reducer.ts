@@ -15,6 +15,7 @@ const initialState = {
   appointmentTypeID: 16299344,
   time: null,
   date: null,
+  dates: [],
   appointments: {
     today: [],
     future: [],
