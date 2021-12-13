@@ -26,7 +26,7 @@ const OpenQuestions = ({ data }) => {
         );
 
         navigation.navigate(screenNames.Messages, {
-            expertDetails,
+            expertDetails: expertDetails,
             questionData: item,
         });
     };
@@ -50,6 +50,7 @@ const OpenQuestions = ({ data }) => {
                 data={data}
                 renderItem={({ item }) => {
                     const time = convertModifiedTime(item);
+                    console.log('THE ITEM', item);
                     return (
                         <SwipeItem
                             disableSwipeIfNoButton

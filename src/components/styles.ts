@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
 
+    sm_pad_t: {
+        marginTop: 10,
+    },
+
     pad_h: {
         marginHorizontal: 20,
     },
@@ -109,10 +113,6 @@ const styles = StyleSheet.create({
 
     pad_r: {
         marginRight: 20,
-    },
-
-    sm_pad_t: {
-        marginTop: 10,
     },
 
     pad_t: {
@@ -160,9 +160,7 @@ const styles = StyleSheet.create({
     },
 
     pad_bottom: {
-        marginTop: 30,
-        marginBottom: 5,
-        paddingBottom: 20,
+        paddingBottom: 5,
     },
 
     pad: {
@@ -274,6 +272,7 @@ const styles = StyleSheet.create({
 
     none: {
         borderColor: 'transparent',
+        borderTopWidth: 0,
     },
 
     //Background Colors

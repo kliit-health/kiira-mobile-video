@@ -1,6 +1,5 @@
 export default {
     user: {
-        agreeToTerms: false,
         acceptedTreatmentTerms: false,
         chats: '',
         consentAgreements: [],

@@ -121,14 +121,14 @@ const ForgotPassword = ({ navigation }) => {
     return (
         <View style={styles.parentContainer}>
             <ScrollView
-                keyboardShouldPersistTaps="handled"
+                keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
             >
                 <CrossIcon />
                 <View style={styles.contentContainer}>
                     <Logo />
                     <Title />
-                    <InputText />
+                    {InputText()}
                     <Button />
                 </View>
             </ScrollView>
