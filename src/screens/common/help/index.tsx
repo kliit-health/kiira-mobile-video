@@ -16,7 +16,7 @@ const Help = ({ navigation }) => {
 
   const handleAsk = () => {
     // if (appScreen && appScreen.currentScreen === screenNames.Help) {
-    Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
+    Linking.openURL('mailto:hello@kiira.io?subject=Kiira Support');
     setTimeout(() => {
       navigation.navigate(
         appScreen.prevScreen ? appScreen.prevScreen : screenNames.Help,
