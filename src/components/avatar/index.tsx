@@ -36,8 +36,7 @@ const Avatar = ({
 
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
-    const [loading, setLoading] = useState(true);
-    const [imageUrl, setImageUrl] = useState(source);
+    const [loading, setLoading] = useState(true); 
 
     const styles = {
         image: mergeStyles([
@@ -116,7 +115,7 @@ const Avatar = ({
             } else { 
             }
         });
-    };
+    }; 
 
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity}>
@@ -126,7 +125,7 @@ const Avatar = ({
                     source={
                         loading
                             ? require('../../../assets/profile_img_placeholder.png')
-                            : { uri: imageUrl }
+                            : { uri: source }
                     }
                     resizeMode={resizeMode}
                 />

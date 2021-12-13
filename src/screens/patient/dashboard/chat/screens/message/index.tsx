@@ -13,10 +13,6 @@ import {
     toggleUserStatus,
     stopObserverChat,
 } from '~/redux/actions/chat';
-import {
-    getResolvedQuestion,
-    getUnresolvedQuestions,
-} from '~/redux/actions/questions';
 import moment from 'moment';
 import { Container, Header, RatingModal } from '~/components';
 import { MessageList, Footer } from './sections';
@@ -93,20 +89,19 @@ class Chat extends React.PureComponent {
         if (
             questionValue &&
             questionValue.isResolved &&
-            !questionValue.isRated &&
-            questionValue.expertInfo.role !== 'Support'
+            !questionValue.isRated
         ) {
             setTimeout(() => {
                 this.setState({
                     showRatingModal: true,
                 });
-            }, 0);
+            }, 500);
         } else {
             setTimeout(() => {
                 this.setState({
                     showRatingModal: false,
                 });
-            }, 0);
+            }, 500);
         }
     }
 
@@ -120,8 +115,6 @@ class Chat extends React.PureComponent {
             setId,
             checkStatus,
             questionValue,
-            getResolvedQuestion,
-            getUnresolvedQuestions,
         } = this.props;
 
         const { expertDetails, questionData } = navigation.state.params;
@@ -134,11 +127,9 @@ class Chat extends React.PureComponent {
         if (expertDetails && !questionData) {
             const payloadData = {
                 userInfo: userData,
-                expertInfo: expertDetails
-                    ? expertDetails
-                    : questionData.expertInfo,
+                expertInfo: expertDetails,
                 questionEncrypted: '',
-                question: question || 'Send your first message',
+                question: question || 'Send a message to your provider',
             };
             addQuestion(payloadData);
         } else {
@@ -156,23 +147,20 @@ class Chat extends React.PureComponent {
         if (
             questionValue &&
             questionValue.isResolved &&
-            !questionValue.isRated &&
-            questionValue.expertInfo.role !== 'Support'
+            !questionValue.isRated
         ) {
             setTimeout(() => {
                 this.setState({
                     showRatingModal: true,
                 });
-            }, 0);
+            }, 500);
         } else {
             setTimeout(() => {
                 this.setState({
                     showRatingModal: false,
                 });
-            }, 0);
+            }, 500);
         }
-        getResolvedQuestion({ uid: userData.uid });
-        getUnresolvedQuestions({ uid: userData.uid });
     }
 
     componentWillUnmount() {
@@ -312,9 +300,7 @@ class Chat extends React.PureComponent {
         const { navigation, questionId } = this.props;
         const { questionData, expertDetails } = navigation.state.params;
         const { imageUri, showRatingModal } = this.state;
-        const { profileInfo } = questionData
-            ? questionData.expertInfo
-            : expertDetails;
+        const { profileInfo } = expertDetails;
         const { firstName, lastName, profileImageUrl } = profileInfo;
         const fullName = `${firstName} ${lastName}`;
 
@@ -383,8 +369,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     checkStatus: value => dispatch(checkExpertStatus(value, dispatch)),
     toggleStatus: value => dispatch(toggleUserStatus(value)),
     stopObervers: () => dispatch(stopObserverChat()),
-    getResolvedQuestion: value => dispatch(getResolvedQuestion(value)),
-    getUnresolvedQuestions: value => dispatch(getUnresolvedQuestions(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

@@ -29,7 +29,7 @@ export default createReducer(initialState, {
     [GET_USER_FULFILLED]: (state, { data }) => {
         state.loading = false;
         state.error = null;
-        state.data = merge(models.user, data);
+        state.data = merge(models.user, data); 
     },
     [GET_USER_REJECTED]: (state, { data }) => {
         state.loading = false;
@@ -43,8 +43,9 @@ export default createReducer(initialState, {
     },
     [UPDATE_USER_FULFILLED]: (state, { data }) => {
         state.loading = false;
-        state.error = null;
-        state.data = merge(state.data, data);
+        state.error = null; 
+        state.data = merge(models.user, data); 
+
     },
     [UPDATE_USER_REJECTED]: (state, { data }) => {
         state.loading = false;

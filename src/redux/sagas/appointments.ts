@@ -98,12 +98,13 @@ function* getAllAppointmentDates({ payload }) {
     }
 }
 
-function* updateAppointment({ payload }) {
-    const {
-        data,
+function* updateAppointment({
+    data,
+    data: {
         data: { time, appointmentType },
-    } = payload;
-
+        navigation,
+    },
+}) {
     const { assessment, profileInfo, uid, enableText } = yield select(
         state => state.user.data,
     );
@@ -117,7 +118,6 @@ function* updateAppointment({ payload }) {
         yield put(hideApiLoader());
 
         if (appointment && !appointment.availible) {
-            console.log('APPOINTMENT', appointment);
             yield put(
                 showOrHideModal(
                     'Appointment is unavailable please select a different time.',
@@ -133,7 +133,7 @@ function* updateAppointment({ payload }) {
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
         );
-        yield put(getAppointmentsList({ uid: data.uid }));
+        yield put(getAppointmentsList({ uid: data.data.uid }));
         if (profileInfo.phoneNumber.length && enableText) {
             yield sendSms(message, profileInfo.phoneNumber);
         }

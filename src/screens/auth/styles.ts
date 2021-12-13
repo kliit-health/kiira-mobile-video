@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     parentContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: getStatusBarHeight(),
+        alignItems: 'center', 
+        marginTop: getStatusBarHeight(null), 
         backgroundColor: colors.white,
         borderRadius: 35,
         overflow: 'hidden',

@@ -340,9 +340,9 @@ const Future = ({ test, visit, date, navigation }) => {
             </Column>
             <Disclaimer />
             <CustomButton
-                disabled={!sameDay}
+                disabled={!checked}
                 buttonStyle={
-                    sameDay ? styles.active : [styles.active, styles.disabled]
+                    checked ? styles.active : [styles.active, styles.disabled]
                 }
                 textStyle={styles.activeText}
                 onPress={handleVisitStart}

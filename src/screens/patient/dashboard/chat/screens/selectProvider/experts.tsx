@@ -48,7 +48,7 @@ const Experts = ({ experts, navigation }) => {
                                 styles={{
                                     image: styles.expertProfile,
                                 }}
-                                source={profileImageUrl}
+                                source={profileImageUrl ? profileImageUrl : ''}
                             />
 
                             <View

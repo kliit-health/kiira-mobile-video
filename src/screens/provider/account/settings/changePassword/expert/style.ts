@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.whiteColor,
-        marginTop: getStatusBarHeight(),
+        marginTop: getStatusBarHeight(null),
     },
 
     headerStyle: {

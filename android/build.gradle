@@ -32,3 +32,11 @@ allprojects {
         maven { url "$rootDir/../node_modules/@notifee/react-native/android/libs" }
     }
 }
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force 'com.facebook.react:react-native:0.65.1'
+        }
+    }
+}
