@@ -101,9 +101,8 @@ function* getAllAppointmentDates({ payload }) {
 function* updateAppointment({ payload }) {
     const {
         data,
-        data: { time, appointmentType },
+        data: { time, reason },
     } = payload;
-
     const { assessment, profileInfo, uid, enableText } = yield select(
         state => state.user.data,
     );
@@ -114,10 +113,10 @@ function* updateAppointment({ payload }) {
     try {
         yield put(showApiLoader());
         let appointment = yield changeAppointmentAsync(data);
+        
         yield put(hideApiLoader());
 
         if (appointment && !appointment.availible) {
-            console.log('APPOINTMENT', appointment);
             yield put(
                 showOrHideModal(
                     'Appointment is unavailable please select a different time.',
@@ -126,7 +125,7 @@ function* updateAppointment({ payload }) {
             navigation.navigate('Appointments');
         }
 
-        if (assessment && appointmentType.title === 'Health Check') {
+        if (assessment && reason.sessionType.title === 'Health Check') {
             yield put(updateUser({ assessment: { ...assessment, time } }));
         }
 

@@ -12,21 +12,14 @@ import {
 } from '~/redux/reducers/appointments';
 import { handleBack } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
-<<<<<<< HEAD
 import { colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
-=======
 import styles from './style'; 
 import Constant, { tables } from '~/utils/constants'; 
->>>>>>> Tech-165
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
 const { width } = metrices;
-
-const RescheduleVisit = ({ navigation }) => {
-    const appointments = useSelector((state: RootState) => state.appointments);
-    const { visit } = navigation.state.params;
     const {
         pad,
         medium,
@@ -45,15 +38,12 @@ const RescheduleVisit = ({ navigation }) => {
         black,
     } = globalStyles;
 
-<<<<<<< HEAD
-=======
 const RescheduleVisit = props => {
     const { navigation, visit } = props.navigation.state.params;
     const { calendarID, expert, uid, id, appointmentTypeID } = visit;
 
     const expertData = useSelector((state:any) => state.appointments.expertData);
     const appointmentData = useSelector((state:any) => state.appointments);
->>>>>>> Tech-165
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
@@ -64,16 +54,6 @@ const RescheduleVisit = props => {
     useEffect(() => {
         const { calendarID, uid } = visit;
         const obj = {
-<<<<<<< HEAD
-            expertsParams: {
-                tableName: 'users',
-                uid,
-            },
-        };
-
-        let addMonth = moment(`${current.year}-${current.monthNumber}`);
-        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
-=======
             expertsParams: { 
                 tableName: tables.users, 
                 uid: expert.uid,
@@ -81,7 +61,6 @@ const RescheduleVisit = props => {
         };
         const curMonth = moment(`${current.year}-${current.monthNumber}`);
         var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM');
->>>>>>> Tech-165
 
         dispatch(
             getAppointmentDates({
@@ -122,7 +101,6 @@ const RescheduleVisit = props => {
             }),
         );
     };
-
     return (
         <Kiira.Screen>
             <Kiira.Header onBack={handleBack} title="Reschedule Visit" />
@@ -132,7 +110,7 @@ const RescheduleVisit = props => {
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     keyExtractor={({ date }) => date}
-                    data={appointments.dates}
+                    data={appointmentData.dates}
                     ListEmptyComponent={() => (
                         <ActivityIndicator
                             style={{ marginLeft: width / 2 - 30 }}
@@ -171,10 +149,10 @@ const RescheduleVisit = props => {
             </Kiira.Text>
             <FlatList
                 numColumns={3}
-                initialNumToRender={appointments.appointments.current.length}
+                initialNumToRender={appointmentData.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointments.appointments.current}
+                data={appointmentData.appointments.current}
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
