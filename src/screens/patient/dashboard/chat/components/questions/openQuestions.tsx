@@ -17,11 +17,12 @@ const OpenQuestions = ({ data }) => {
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
-        const today = new Date();
+        let today = new Date();
         const yesterday = new Date(today);
-       return dt === today
+        yesterday.setDate(yesterday.getDate() - 1)
+       return dt.toLocaleDateString() === today.toLocaleDateString()
             ? moment(dt).format('hh:mm a')
-            : dt === yesterday
+            : dt.toLocaleDateString() === yesterday.toLocaleDateString()
             ? 'Yesterday'
             : moment(dt).format('MM/D/YY h:mm a');     
     };
