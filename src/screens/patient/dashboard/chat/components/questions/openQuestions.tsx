@@ -17,7 +17,13 @@ const OpenQuestions = ({ data }) => {
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
-        return moment(dt).format('MM/D/YY h:mm a');
+        const today = new Date();
+        const yesterday = new Date(today);
+       return dt === today
+            ? moment(dt).format('hh:mm a')
+            : dt === yesterday
+            ? 'Yesterday'
+            : moment(dt).format('MM/D/YY h:mm a');     
     };
 
     const handleNavigation = item => {
@@ -79,9 +85,10 @@ const OpenQuestions = ({ data }) => {
                             <Question
                                 key={item.questionId}
                                 {...item}
-                                time={time}
+                                 time={time}
                                 onPress={() => handleNavigation(item)}
                             />
+                           
                         </SwipeItem>
                     );
                 }}

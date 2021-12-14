@@ -21,7 +21,7 @@ const ClosedQuestions = ({ data }) => {
             questionData: item,
         });
     };
-
+ 
     return (
         <Column options={[white_bg]}>
             <FlatList
