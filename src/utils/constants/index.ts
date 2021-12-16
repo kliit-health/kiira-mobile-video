@@ -530,6 +530,7 @@ export default {
 export const colors = {
     azure: '#0253E2',
     black: '#000B1E',
+    disableButtonColor:'#ccc',
     babyBlue: '#ECFCFF',
     blue: '#0089FF',
     blueGrey: '#8e8e93',
