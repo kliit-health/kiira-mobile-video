@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { TouchableOpacity, FlatList, ScrollView, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAppointmentExpert } from '~/redux/reducers/appointments';
@@ -10,6 +10,9 @@ import {
     handleNavigation,
 } from '~/utils/functions/handleNavigation';
 import { select_provider } from '~/components/styles';
+import { h1, h2, h3, default as globalStyles } from '~/components/styles';
+import Constant, { colors, icons } from '~/utils/constants';
+const { staticImages } = Constant.App;
 
 const {
     medium,
@@ -35,6 +38,8 @@ const {
     no_pad_v,
     pad_v,
 } = select_provider;
+const { height_50, width_50, align_items_c, justify_c, } =
+    globalStyles;
 
 const SelectProvider = () => {
     const dispatch = useDispatch();
@@ -198,7 +203,7 @@ const SelectProvider = () => {
             </Kiira.Column>
         </Kiira.Modal>
     );
-
+    console.log('----AVAILABLE EXPERTS-----',availableExperts)
     return (
         <Kiira.Screen test="Book Screen">
             <Kiira.Header title="Book Visit" onBack={handleBack} />
@@ -212,6 +217,42 @@ const SelectProvider = () => {
                     return <ExpertDetails expert={item} />;
                 }}
             />
+       {availableExperts.length === 0 && 
+       <Kiira.Screen><Kiira.Column options={[align_items_c, justify_c]}>
+                <Image
+                    resizeMode="contain"
+                    style={[height_50, width_50]}
+                    source={staticImages.penguin}
+                />
+                
+            </Kiira.Column></Kiira.Screen>}
+            
+            <Kiira.Column options={[white_bg]}>
+            <Kiira.Text options={[h1]}>Uh oh! It looks like there aren't any providers available.</Kiira.Text>
+                {/* <Text options={[h2]}>{time}</Text>
+                <Text options={[h3, sm_pad_v]}>
+                    Please follow the appointments button in the dashboard 5
+                    minutes before your visit in order to start your
+                    appointment.
+                </Text>
+                <Text options={[h3, sm_pad_v]}>
+                    Should you need to cancel, please do so at least 24 hours in
+                    advance.
+                </Text>
+                <Text options={[h3, sm_pad_v]}>
+                    Please fill out your health intake form prior to the
+                    session.
+                </Text> */}
+            </Kiira.Column>
+            {/* <Kiira.Column options={[styles.buttonContainer]}>
+                <Kiira.Button
+                    onPress={() => navigation.navigate(screenNames.Home)}
+                    title="Go Home"
+                    style={{
+                        container: styles.homeButton,
+                        title: styles.homeButtonTitle,
+                    }}
+                /> */}
             {showModal && <ExpertModal />}
         </Kiira.Screen>
     );
