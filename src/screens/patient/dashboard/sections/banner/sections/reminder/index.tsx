@@ -22,6 +22,7 @@ const Reminder = ({ navigation }) => {
     );
 
     const sortedDataByDate = _.sortBy(visitData, 'time');
+
     const handleView = () => {
         navigation.navigate(route.appointments);
     };
@@ -30,9 +31,9 @@ const Reminder = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.description}>{lang.nexAppointment}</Text>
             <View style={styles.appointment}>
-                {assessment && (
+                { visitData && sortedDataByDate && (
                     <Text style={styles.time}>
-                        {moment(sortedDataByDate[0].time).format('llll')}
+                        {sortedDataByDate ? moment(sortedDataByDate  && sortedDataByDate[0] ? sortedDataByDate[0].time : null).format('llll') : null}
                     </Text>
                 )}
                 <Button
