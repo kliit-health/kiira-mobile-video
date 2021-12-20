@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, FlatList, ScrollView, Image, StyleSheet, Modal, View, Text, Pressable } from 'react-native';
+import {
+    TouchableOpacity,
+    FlatList,
+    ScrollView,
+    Image,
+    StyleSheet,
+    Modal,
+    View,
+    Text,
+    Pressable,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAppointmentExpert } from '~/redux/reducers/appointments';
@@ -11,13 +21,12 @@ import {
 } from '~/utils/functions/handleNavigation';
 import { select_provider } from '~/components/styles';
 import { h1, h2, h3, default as globalStyles } from '~/components/styles';
-import { icons,colors, images } from '~/utils/constants';
+import { icons, colors, images } from '~/utils/constants';
 import { positional } from 'yargs';
 import Constant from '~/utils/constants';
 import metrices from '~/utils/metrices';
 
 const { textSize } = Constant.App;
-
 
 const {
     medium,
@@ -43,8 +52,7 @@ const {
     no_pad_v,
     pad_v,
 } = select_provider;
-const { height_50, width_50, align_items_c, justify_c, } =
-    globalStyles;
+const { height_50, width_50, align_items_c, justify_c } = globalStyles;
 
 const SelectProvider = () => {
     const dispatch = useDispatch();
@@ -94,7 +102,6 @@ const SelectProvider = () => {
         setShowUpdateModal(!showUpdateModal);
     };
 
-
     const handleSelection = expert => {
         const { uid, calendarID, profileInfo, expertName } = expert;
         setExpert(expert);
@@ -139,24 +146,24 @@ const SelectProvider = () => {
         );
     };
 
-    const ErrorModal = () =>(
-        <Modal 
-        transparent={true}
-            visible={showUpdateModal}
-        >
-            <View style ={{flex: 2,
-    backgroundColor: 'rgba(0,0,0,0.5)'}}>
-            <View style={styles.centeredView}>
+    const ErrorModal = () => (
+        <Modal transparent={true} visible={showUpdateModal}>
+            <View style={{ flex: 2, backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.title}>Thank you for reaching out!</Text>
+                        <Text style={styles.title}>
+                            Thank you for reaching out!
+                        </Text>
                         <Text style={styles.subtitle}>
-                        We want to ensure that you are able to get the care you need. Please check your email for an update. You should receive a message shortly.
+                            We want to ensure that you are able to get the care
+                            you need. Please check your email for an update. You
+                            should receive a message shortly.
                         </Text>
 
-                 <Pressable
+                        <Pressable
                             style={styles.homeButton}
-                            onPress={()=>{
-                                toggleUpdateModal
+                            onPress={() => {
+                                toggleUpdateModal;
                                 handleNavigation('Home');
                             }}
                         >
@@ -167,49 +174,45 @@ const SelectProvider = () => {
                             >
                                 Go to home
                             </Text>
-                        </Pressable>        
-        
-                        </View>
-                      
-                        </View>
-                        </View>
-     
-       
-                
+                        </Pressable>
+                    </View>
+                </View>
+            </View>
         </Modal>
-        
-    )
-const ErrorState = () => (
-    <Kiira.Screen test="Book Screen" options={[white_bg]}>
-         <Kiira.Header title="Select Provider" onBack={handleBack} />
-        <Kiira.Column options={[align_items_c, justify_c, blue_bg]}>
-        <Image
+    );
+    const ErrorState = () => (
+        <Kiira.Screen test="Book Screen" options={[white_bg]}>
+            <Kiira.Header title="Select Provider" onBack={handleBack} />
+            <Kiira.Column options={[align_items_c, justify_c, blue_bg]}>
+                <Image
                     style={styles.logo}
                     resizeMode="contain"
                     source={images.penguin_g}
                 />
-            
-        </Kiira.Column>
-        <Kiira.Column options={[white_bg,{flex:2}]} >
-        <Kiira.Text options={[h1,{marginTop:'10%'}]}>Uh oh! It looks like there aren't any providers available.</Kiira.Text>
-           
-            <Kiira.Text options={[h3, sm_pad_v,{flex:3.7,marginBottom:'10%'}]}>
-                Due to licensing, video visits are currently limited to covered locations.Please let us know if you would like an update on availability in your area.
-            </Kiira.Text>
-            {showUpdateModal && <ErrorModal />} 
+            </Kiira.Column>
+            <Kiira.Column options={[white_bg, { flex: 2 }]}>
+                <Kiira.Text options={[h1, { marginTop: '10%' }]}>
+                    Uh oh! It looks like there aren't any providers available.
+                </Kiira.Text>
 
-        </Kiira.Column>
-        <Kiira.Column options={[styles.buttonContainer]}>
-            <Kiira.Button
-                onPress={toggleUpdateModal}
-                title="Request Update"
-                style={{ container: [sm_pad_v, pad_h], title: [] }}
-            />
-                 </Kiira.Column>
-                 
-    
-                 </Kiira.Screen>
-)
+                <Kiira.Text
+                    options={[h3, sm_pad_v, { flex: 3.7, marginBottom: '10%' }]}
+                >
+                    Due to licensing, video visits are currently limited to
+                    covered locations.Please let us know if you would like an
+                    update on availability in your area.
+                </Kiira.Text>
+                {showUpdateModal && <ErrorModal />}
+            </Kiira.Column>
+            <Kiira.Column options={[styles.buttonContainer]}>
+                <Kiira.Button
+                    onPress={toggleUpdateModal}
+                    title="Request Update"
+                    style={{ container: [sm_pad_v, pad_h], title: [] }}
+                />
+            </Kiira.Column>
+        </Kiira.Screen>
+    );
     const ExpertModal = () => (
         <Kiira.Modal
             styles={{
@@ -285,24 +288,23 @@ const ErrorState = () => (
             </Kiira.Column>
         </Kiira.Modal>
     );
-    return (
-        availableExperts.length !== 0 ?    
+    return availableExperts.length !== 0 ? (
         <Kiira.Screen test="Book Screen">
             <Kiira.Header title="Select Provider" onBack={handleBack} />
-           <Kiira.Heading options={[text_align_c]}>
+            <Kiira.Heading options={[text_align_c]}>
                 Please choose a provider
-            </Kiira.Heading>   
+            </Kiira.Heading>
             <FlatList
                 data={availableExperts}
                 keyExtractor={item => item.expertName}
                 renderItem={({ item }) => {
                     return <ExpertDetails expert={item} />;
                 }}
-            />   
-            {showModal && <ExpertModal /> } 
-            
-           
-        </Kiira.Screen> : <ErrorState />
+            />
+            {showModal && <ExpertModal />}
+        </Kiira.Screen>
+    ) : (
+        <ErrorState />
     );
 };
 
@@ -313,21 +315,18 @@ const styles = StyleSheet.create({
         margin: 0,
         flex: 0,
         backgroundColor: colors.white,
-
     },
     logo: {
         width: 150,
         height: 150,
         alignSelf: 'center',
-        justifyContent:'center',
-
+        justifyContent: 'center',
     },
     centeredView: {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '100%',
-        flex:1
-
+        flex: 1,
     },
     modalView: {
         backgroundColor: 'white',
@@ -349,7 +348,6 @@ const styles = StyleSheet.create({
         width: metrices.width * 0.85,
         fontSize: textSize.Large,
         padding: 25,
-
     },
 
     textStyle: {
@@ -364,7 +362,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         padding: 10,
     },
-    homeButton:{
+    homeButton: {
         backgroundColor: colors.primaryBlue,
         borderColor: colors.primaryBlue,
         borderWidth: 2,
@@ -378,7 +376,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        marginTop:'5%'
-    }
-    
+        marginTop: '5%',
+    },
 });
