@@ -144,6 +144,8 @@ const SelectProvider = () => {
         transparent={true}
             visible={showUpdateModal}
         >
+            <View style ={{flex: 2,
+    backgroundColor: 'rgba(0,0,0,0.5)'}}>
             <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <Text style={styles.title}>Thank you for reaching out!</Text>
@@ -170,6 +172,7 @@ const SelectProvider = () => {
                         </View>
                       
                         </View>
+                        </View>
      
        
                 
@@ -177,24 +180,24 @@ const SelectProvider = () => {
         
     )
 const ErrorState = () => (
-    <Kiira.Screen test="Book Screen">
+    <Kiira.Screen test="Book Screen" options={[white_bg]}>
          <Kiira.Header title="Select Provider" onBack={handleBack} />
-        <Kiira.Column options={[align_items_c, justify_c]}>
+        <Kiira.Column options={[align_items_c, justify_c, blue_bg]}>
         <Image
                     style={styles.logo}
                     resizeMode="contain"
-                    source={images.kiiraLogo}
+                    source={images.penguin_g}
                 />
             
         </Kiira.Column>
-        <Kiira.Column options={[white_bg,{flex:2}]}>
-        <Kiira.Text options={[h1]}>Uh oh! It looks like there aren't any providers available.</Kiira.Text>
+        <Kiira.Column options={[white_bg,{flex:2}]} >
+        <Kiira.Text options={[h1,{marginTop:'10%'}]}>Uh oh! It looks like there aren't any providers available.</Kiira.Text>
            
-            <Kiira.Text options={[h3, sm_pad_v]}>
+            <Kiira.Text options={[h3, sm_pad_v,{flex:3.7,marginBottom:'10%'}]}>
                 Due to licensing, video visits are currently limited to covered locations.Please let us know if you would like an update on availability in your area.
             </Kiira.Text>
             {showUpdateModal && <ErrorModal />} 
-           
+
         </Kiira.Column>
         <Kiira.Column options={[styles.buttonContainer]}>
             <Kiira.Button
@@ -204,7 +207,7 @@ const ErrorState = () => (
             />
                  </Kiira.Column>
                  
-               
+    
                  </Kiira.Screen>
 )
     const ExpertModal = () => (
@@ -320,17 +323,17 @@ const styles = StyleSheet.create({
 
     },
     centeredView: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
+        marginTop: '100%',
+        flex:1
+
     },
     modalView: {
-        margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
         paddingHorizontal: 5,
-        paddingVertical: 70,
+        paddingVertical: 40,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
@@ -346,7 +349,7 @@ const styles = StyleSheet.create({
         width: metrices.width * 0.85,
         fontSize: textSize.Large,
         padding: 25,
-        textAlign:'center'
+
     },
 
     textStyle: {
@@ -356,10 +359,9 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        width: metrices.width * 0.85,
+        width: metrices.width * 0.78,
         fontSize: textSize.xxLarge,
         fontWeight: 'bold',
-        textAlign: 'center',
         padding: 10,
     },
     homeButton:{
@@ -370,6 +372,13 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 2,
         width: 250,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        marginTop:'5%'
     }
     
 });
