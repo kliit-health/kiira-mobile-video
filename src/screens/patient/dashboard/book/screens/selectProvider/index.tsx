@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, FlatList, ScrollView, Image, StyleSheet, Modal } from 'react-native';
+import { TouchableOpacity, FlatList, ScrollView, Image, StyleSheet, Modal, View, Text, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAppointmentExpert } from '~/redux/reducers/appointments';
@@ -13,6 +13,10 @@ import { select_provider } from '~/components/styles';
 import { h1, h2, h3, default as globalStyles } from '~/components/styles';
 import { icons,colors, images } from '~/utils/constants';
 import { positional } from 'yargs';
+import Constant from '~/utils/constants';
+import metrices from '~/utils/metrices';
+
+const { textSize } = Constant.App;
 
 
 const {
@@ -136,28 +140,41 @@ const SelectProvider = () => {
     };
 
     const ErrorModal = () =>(
-        <Kiira.Modal 
-        styles={{
-            
-        }}
+        <Modal 
+        transparent={true}
             visible={showUpdateModal}
-            onBackdropPress={toggleUpdateModal}
         >
-            <Kiira.Column options={[white_bg]}>
-        <Kiira.Text options={[h1]}>Thank you for reaching out!</Kiira.Text>
-            <Kiira.Text options={[h3, sm_pad_v]}>
-                We want to ensure that you are able to get the care you need. Please check your email for an update. You should receive a message shortly.
-            </Kiira.Text>
-           
-        </Kiira.Column>
-        <Kiira.Column options={[styles.buttonContainer]}>
-            <Kiira.Button
-                onPress={toggleUpdateModal}
-                title="Go to home"
-                style={{ container: [sm_pad_v, pad_h], title: [] }}
-            />
-                 </Kiira.Column>
-        </Kiira.Modal>
+            <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.title}>Thank you for reaching out!</Text>
+                        <Text style={styles.subtitle}>
+                        We want to ensure that you are able to get the care you need. Please check your email for an update. You should receive a message shortly.
+                        </Text>
+
+                 <Pressable
+                            style={styles.homeButton}
+                            onPress={()=>{
+                                toggleUpdateModal
+                                handleNavigation('Home');
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    ...styles.textStyle,
+                                }}
+                            >
+                                Go to home
+                            </Text>
+                        </Pressable>        
+        
+                        </View>
+                      
+                        </View>
+     
+       
+                
+        </Modal>
+        
     )
 const ErrorState = () => (
     <Kiira.Screen test="Book Screen">
@@ -176,6 +193,7 @@ const ErrorState = () => (
             <Kiira.Text options={[h3, sm_pad_v]}>
                 Due to licensing, video visits are currently limited to covered locations.Please let us know if you would like an update on availability in your area.
             </Kiira.Text>
+            {showUpdateModal && <ErrorModal />} 
            
         </Kiira.Column>
         <Kiira.Column options={[styles.buttonContainer]}>
@@ -185,7 +203,8 @@ const ErrorState = () => (
                 style={{ container: [sm_pad_v, pad_h], title: [] }}
             />
                  </Kiira.Column>
-                 {showUpdateModal && <ErrorModal />}
+                 
+               
                  </Kiira.Screen>
 )
     const ExpertModal = () => (
@@ -263,7 +282,6 @@ const ErrorState = () => (
             </Kiira.Column>
         </Kiira.Modal>
     );
-    console.log('----AVAILABLE EXPERTS-----',availableExperts)
     return (
         availableExperts.length !== 0 ?    
         <Kiira.Screen test="Book Screen">
@@ -278,7 +296,8 @@ const ErrorState = () => (
                     return <ExpertDetails expert={item} />;
                 }}
             />   
-            {showModal && <ExpertModal /> }  
+            {showModal && <ExpertModal /> } 
+            
            
         </Kiira.Screen> : <ErrorState />
     );
@@ -300,5 +319,57 @@ const styles = StyleSheet.create({
         justifyContent:'center',
 
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingHorizontal: 5,
+        paddingVertical: 70,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
 
+    subtitle: {
+        width: metrices.width * 0.85,
+        fontSize: textSize.Large,
+        padding: 25,
+        textAlign:'center'
+    },
+
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+
+    title: {
+        width: metrices.width * 0.85,
+        fontSize: textSize.xxLarge,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        padding: 10,
+    },
+    homeButton:{
+        backgroundColor: colors.primaryBlue,
+        borderColor: colors.primaryBlue,
+        borderWidth: 2,
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        width: 250,
+    }
+    
 });
