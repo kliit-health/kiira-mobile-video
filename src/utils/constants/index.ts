@@ -2006,6 +2006,10 @@ export const videoHistory = {
     viewDetails: 'View Details',
 };
 
+export const days = {
+     yesterday:'Yesterday'
+}
+
 export const tables = {
     users: 'users',
     questions: 'questions',

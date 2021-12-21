@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Column, Line, Question, Text, Icon } from '~/components';
 import { SwipeItem, SwipeButtonsContainer } from 'react-native-swipe-item';
 import { NavigationService as navigation } from '~/navigation';
-import { screenNames, icons, colors, text } from '~/utils/constants';
+import { screenNames, icons, colors, text, days } from '~/utils/constants';
 import { resolveQuestion } from '~/redux/actions/chat';
 import { default as globalStyles } from '~/components/styles';
 import moment from 'moment';
@@ -23,7 +23,7 @@ const OpenQuestions = ({ data }) => {
        return dt.toLocaleDateString() === today.toLocaleDateString()
             ? moment(dt).format('hh:mm a')
             : dt.toLocaleDateString() === yesterday.toLocaleDateString()
-            ? 'Yesterday'
+            ? days.yesterday
             : moment(dt).format('MM/D/YY h:mm a');     
     };
 
