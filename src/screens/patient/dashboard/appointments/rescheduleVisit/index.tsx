@@ -49,7 +49,7 @@ const RescheduleVisit = props => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const { calendarID, uid } = visit;
+        const { calendarID } = visit;
         const obj = {
             expertsParams: { 
                 tableName: tables.users, 
