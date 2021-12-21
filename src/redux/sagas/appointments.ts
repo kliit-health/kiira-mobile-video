@@ -113,7 +113,7 @@ function* updateAppointment({ payload }) {
     try {
         yield put(showApiLoader());
         let appointment = yield changeAppointmentAsync(data);
-        
+
         yield put(hideApiLoader());
 
         if (appointment && !appointment.availible) {
@@ -124,11 +124,11 @@ function* updateAppointment({ payload }) {
             );
             navigation.navigate('Appointments');
         }
+       
 
-        if (assessment && reason.sessionType.title === 'Health Check') {
+        if (assessment && reason && reason.sessionType && reason.sessionType.title === 'Health Check') {
             yield put(updateUser({ assessment: { ...assessment, time } }));
         }
-
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
         );

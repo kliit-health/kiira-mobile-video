@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '~/redux/reducers';
 import {
     getAppointmentDates,
     getExpertsData,
@@ -14,8 +13,7 @@ import { handleBack } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
 import { colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
-import styles from './style'; 
-import Constant, { tables } from '~/utils/constants'; 
+import { tables } from '~/utils/constants'; 
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
@@ -39,10 +37,8 @@ const { width } = metrices;
     } = globalStyles;
 
 const RescheduleVisit = props => {
-    const { navigation, visit } = props.navigation.state.params;
-    const { calendarID, expert, uid, id, appointmentTypeID } = visit;
-
-    const expertData = useSelector((state:any) => state.appointments.expertData);
+    const {  visit } = props.navigation.state.params;
+    const {  expert,  } = visit;
     const appointmentData = useSelector((state:any) => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
