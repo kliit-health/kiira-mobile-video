@@ -8,12 +8,11 @@ import { uploadImage, updateUserData } from '~/utils/firebase';
 import { getUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 import { changePassword, reAunthenticate } from '~/utils/firebase';
-import { default as navigation } from '~/navigation/navigationService';
+import { default as navigation } from '~/navigation/navigationService'; 
 
 function* signout() {
     const lang = yield select(state => state.language);
-    const userData = yield select(state => state.user.data);
-
+    const userData = yield select(state => state.user.data); 
     try {
         yield put(showApiLoader());
 
@@ -26,7 +25,7 @@ function* signout() {
         yield updateStatus(updateStatusParams);
         yield put(clearAskState());
         yield logout();
-        yield put(hideApiLoader());
+        yield put(hideApiLoader()); 
         navigation.navigate('Landing');
     } catch (error) {
         navigation.navigate('Landing');
