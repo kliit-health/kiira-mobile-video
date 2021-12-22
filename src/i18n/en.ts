@@ -339,7 +339,7 @@ export default {
         EmptyPasswordMsg: 'Password is a required field.',
         Verify: 'Get Activation Link',
         Activation:
-            'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+            'You should receive an email shortly.\n\nIf you do not receive an email, please contact hello@kiira.io',
         NoBiometrics: 'Please login with email and password to enable.',
     },
     paymentMethods: {
