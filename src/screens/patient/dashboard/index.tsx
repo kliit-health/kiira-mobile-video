@@ -117,7 +117,7 @@ const Dashboard = ({ navigation }) => {
 
     return (
         <Screen options={[styles.white_bg]} test="DashBoard">
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}> 
                 <Welcome displayName={firstName} />
                 <Banner />
                 {model.map(item => (
@@ -127,7 +127,7 @@ const Dashboard = ({ navigation }) => {
                         {...item}
                         onPress={handleNavigation}
                     />
-                ))}
+                ))} 
             </ScrollView>
         </Screen>
     );
