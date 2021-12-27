@@ -61,4 +61,8 @@ export default StyleSheet.create({
         fontWeight: '400',
         paddingHorizontal: 20,
     },
+
+    linearGradient: {
+        height: 89,
+    },
 });

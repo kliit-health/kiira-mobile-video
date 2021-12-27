@@ -1,5 +1,6 @@
 import React from 'react';
 import { handleNavigation } from '~/utils/functions';
+import LinearGradient from 'react-native-linear-gradient'
 import {
     View,
     Text,
@@ -28,9 +29,15 @@ const Page = ({ title, description, imageUrl, backgroundUrl }: PageProps) => (
                 style={styles.image}
                 source={imageUrl}
             >
-                <TouchableOpacity onPress={() => handlePress('Login')}>
-                    <Text style={styles.login}>Login</Text>
-                </TouchableOpacity>
+                <LinearGradient
+                    start={{x: 0.0, y: 0.0}} end={{x: 0.0, y: 1.0}} 
+                    colors={['rgba(0, 0, 0, 1.0)', 'rgba(0, 0, 0, 0.0)']}
+                    style={styles.linearGradient}
+                >
+                    <TouchableOpacity onPress={() => handlePress('Login')}>
+                        <Text style={styles.login}>Login</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
             </ImageBackground>
         </View>
         <View style={styles.container}>
@@ -38,7 +45,7 @@ const Page = ({ title, description, imageUrl, backgroundUrl }: PageProps) => (
                 source={backgroundUrl}
                 resizeMode="cover"
                 style={styles.image}
-            >
+            > 
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.description}>{description}</Text>
                 <TouchableOpacity
