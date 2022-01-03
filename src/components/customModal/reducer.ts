@@ -1,5 +1,6 @@
 import {
     SHOW_OR_HIDE_ERROR_MODAL,
+    SHOW_OR_HIDE_MEMEBER_MODAL,
     SHOW_OR_HIDE_DEDUCT_CONFIRMATION_MODAL,
 } from '../../redux/types';
 
@@ -27,6 +28,13 @@ const modalReducer = (state = initialState, action) => {
                 ...state,
                 showModalError: !state.showModalError,
                 errorMessage: action.errorMessage,
+            };
+        case SHOW_OR_HIDE_MEMEBER_MODAL:
+            return {
+                ...state,
+                showModalError: !state.showModalError,
+                errorMessage: action.errorMessage,
+                memberMessage: action.memberMessage,
             };
         case SHOW_OR_HIDE_DEDUCT_CONFIRMATION_MODAL:
             return {
