@@ -340,6 +340,7 @@ export default {
         Verify: 'Get Activation Link',
         Activation:
             'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+        MemberHelp: 'Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
         NoBiometrics: 'Please login with email and password to enable.',
     },
     paymentMethods: {

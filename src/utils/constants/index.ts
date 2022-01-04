@@ -505,6 +505,8 @@ export default {
             tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
             unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
             xCloseIcon: require('../../../assets/xclose.png'), 
+            xxIcon: require('../../../assets/xxIcon.png'),  
+            backgroundUrl: require('../../assets/back-drop.png'),  
         },
 
         Toast: {
