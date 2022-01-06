@@ -111,7 +111,7 @@ const Login = ({ navigation }) => {
             >
                 <FastImage
                     resizeMode="contain"
-                    source={icons.cross}
+                    source={icons.chevron}
                     style={styles.backIcon}
                 />
             </TouchableOpacity>
@@ -126,12 +126,7 @@ const Login = ({ navigation }) => {
                     source={images.kiiraLogo}
                     style={styles.logo}
                 />
-                <FastImage
-                    resizeMode="contain"
-                    source={images.kiiraLogo2}
-                    style={styles.logo2}
-                />
-                <Text style={styles.version}>{app.version}</Text>
+                <Text style={styles.welcomeText}>Welcome back to Kiira!</Text>
             </View>
         );
     };
@@ -187,13 +182,10 @@ const Login = ({ navigation }) => {
             >
                 <FastImage
                     resizeMode="contain"
-                    source={
-                        biometricType === 'FaceID'
-                            ? images.faceID
-                            : images.fingerprint
-                    }
+                    source={images.faceID}
                     style={styles.biometrics}
                 />
+                <Text style={styles.version}>{app.version}</Text>
             </TouchableOpacity>
         );
     };
@@ -249,8 +241,8 @@ const Login = ({ navigation }) => {
                     <Logo />
                     {InputText()}
                     <BiometricLogin />
-                    <Button />
                     <ForgotPassword />
+                    <Button />
                 </View>
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}
