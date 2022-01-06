@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '~/redux/reducers';
 import {
     getAppointmentDates,
     getExpertsData,
@@ -11,10 +10,9 @@ import {
     updateVisit,
 } from '~/redux/reducers/appointments';
 import { handleBack } from '~/utils/functions/handleNavigation';
-import { generateDateInfo } from '~/utils/helper';
+import { generateDateInfo } from '~/utils/helper'; 
 import { colors } from '~/utils/constants';
-import metrices from '~/utils/metrices';
-import  { tables } from '~/utils/constants'; 
+import metrices from '~/utils/metrices'; 
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
@@ -38,10 +36,7 @@ const { width } = metrices;
     } = globalStyles;
 
 const RescheduleVisit = props => {
-    const { navigation, visit } = props.navigation.state.params;
-    const { calendarID, expert, uid, id, appointmentTypeID } = visit;
-
-    const expertData = useSelector((state:any) => state.appointments.expertData);
+    const {  visit } = props.navigation.state.params;
     const appointmentData = useSelector((state:any) => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
@@ -52,14 +47,15 @@ const RescheduleVisit = props => {
 
     useEffect(() => {
         const { calendarID, uid } = visit;
-        const obj = {
-            expertsParams: { 
-                tableName: tables.users, 
-                uid: expert.uid,
+        const obj = { 
+            expertsParams: {
+                tableName: 'users',
+                uid,
             },
         };
+
         const curMonth = moment(`${current.year}-${current.monthNumber}`);
-        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM');
+        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM'); 
 
         dispatch(
             getAppointmentDates({
