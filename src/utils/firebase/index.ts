@@ -118,7 +118,8 @@ export function getPlanDetails(planDetails) {
 export async function sendEmailVerification(obj) {
   try {
     const { email } = obj.params;
-    await functions().httpsCallable('sendActivationLink')(email);
+    const data = {data: email};
+    await functions().httpsCallable('sendActivationLink')(data);
     return { ok: true, data: null };
   } catch (err) {
     let status = err.status ? err.status : 'internal';
@@ -369,7 +370,7 @@ export async function makeAppointment({ data }) {
     console.error(error);
     return { availible: false };
   }
-}
+} 
 
 export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   let user = auth().currentUser;
