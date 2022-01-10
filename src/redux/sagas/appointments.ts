@@ -178,9 +178,8 @@ function* cancelTheAppointment({ payload: { data } }) {
     };
 
     try {
-        yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(data);
-
+        yield put(showApiLoader());  
+        const result = yield cancelAppointmentAsync(data); 
         if (result) {
             yield put(
                 showOrHideModal(
