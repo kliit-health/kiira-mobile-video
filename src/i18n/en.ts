@@ -341,6 +341,7 @@ export default {
         Activation:
             'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
         NoBiometrics: 'Please login with email and password to enable.',
+        Member: 'Become a member',
     },
     paymentMethods: {
         title: 'Payment Methods',
