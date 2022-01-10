@@ -5,6 +5,8 @@ import {
     Image,
     TouchableOpacity,
     Platform,
+    ImageBackground,
+    TextInput
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { CustomInputText, CustomButton } from '~/components/';
@@ -15,30 +17,33 @@ import { showOrHideModal } from '~/components/customModal/action';
 import Constant, { colors, icons } from '~/utils/constants';
 import { isEmail } from '~/utils/helper';
 import styles from '../styles';
+import { Text } from 'react-native-animatable'; 
+ 
 
-const Activate = ({ navigation }) => {
-    const dispatch = useDispatch();
+const Activate = ({ navigation }) => { 
     const { staticImages } = Constant.App;
     const [email, setEmail] = useState('');
     const login = useSelector((state: RootState) => {
         return state.language.login;
     });
+    const dispatch = useDispatch();
 
     const InputText = () => {
         return (
-            <View style={styles.inputTextParentContainer}>
-                <View style={styles.inputTextContainer}>
-                    <CustomInputText
-                        autoCapitalize="none"
-                        onChangeText={value => setEmail(value)}
-                        placeholder={login.Email}
+            <View style={styles.inputTextActiveContainer}>
+                <View style={styles.inputTextActive}>
+                    <TextInput
+                        autoCapitalize="none" 
+                        autoCorrect={false}
+                        onChangeText={text => setEmail(text)}
+                        placeholder={login.EnterEmail}
                         value={email}
                         style={
                             email
-                                ? styles.inputType
-                                : [styles.inputType, { fontWeight: '100' }]
+                                ? [styles.activeInpute, { fontWeight: '400'}]
+                                : [styles.activeInpute, { fontWeight: '300'}]
                         }
-                        placeholderTextColor={colors.black}
+                        placeholderTextColor={colors.greyAccent}
                     />
                 </View>
             </View>
@@ -53,29 +58,53 @@ const Activate = ({ navigation }) => {
                     navigation.goBack();
                 }}
             >
-                <Image
-                    resizeMode="contain"
-                    source={icons.cross}
-                    style={styles.backIcon}
-                />
+                <Text  
+                    style={styles.backText} 
+                >
+                    {'Back'}
+                </Text>
             </TouchableOpacity>
         );
     };
 
-    const LogoView = () => {
+    const HelloView = () => {
         return (
-            <View style={styles.contentContainer}>
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo}
-                    style={styles.logo}
-                />
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo2}
-                    style={styles.logo2}
-                />
-            </View>
+            <Text  
+                style={styles.helloStyle} 
+            >
+                {'Hello New Member!'}
+            </Text>
+        );
+    };
+
+
+    const TitleView = () => {
+        return (
+            <Text  
+                style={styles.titleStyle} 
+            >
+                {'To get started please activate your acount below.'}
+            </Text>
+        );
+    };
+
+    const InfoView = () => {
+        return (
+            <Text  
+                style={styles.infoStyle} 
+            >
+                {'Please use the same email address you used when you became a member.'}
+            </Text>
+        );
+    };
+
+    const ContentView = () => {
+        return (
+            <Text  
+                style={styles.contentStyle} 
+            >
+                {'If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu'}
+            </Text>
         );
     };
 
@@ -84,8 +113,8 @@ const Activate = ({ navigation }) => {
             <CustomButton
                 test="Get Activation Link"
                 disabled={false}
-                buttonStyle={styles.loginButton}
-                textStyle={styles.loginButtonText}
+                buttonStyle={styles.activeButton}
+                textStyle={styles.activeButtonText}
                 onPress={() => {
                     if (!email.trim()) {
                         dispatch(showOrHideModal(login.EmptyEmailMsg));
@@ -103,21 +132,28 @@ const Activate = ({ navigation }) => {
         );
     };
 
-    return (
-        <View style={styles.parentContainer}>
+    return ( 
+        <ImageBackground
+                resizeMode="stretch"
+                style={styles.imageContainer}
+                source={staticImages.backgroundUrl}
+            >
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
-            >
+            > 
                 <CrossIcon />
-                <View style={styles.contentContainer}>
-                    <LogoView />
+                <View style={styles.activateContainer}>
+                    <HelloView />
+                    <TitleView />
                     <InputText />
                     <Button />
-                </View>
+                    <InfoView />
+                    <ContentView />
+                </View> 
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </View>
+        </ImageBackground>
     );
 };
 

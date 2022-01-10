@@ -250,7 +250,7 @@ const Carousel = (props: CarouselProps) => {
                     style={[
                         styles.animated,
                         {
-                            width: pageSize * childrenLength,
+                            width: pageSize * (childrenLength + 1),
                             transform: [{ translateX }],
                         },
                     ]}
