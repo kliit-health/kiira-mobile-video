@@ -332,16 +332,19 @@ export default {
         Expert: 'Expert',
         or: 'or',
         Email: 'Your email',
+        EnterEmail: 'Enter email adress here',
         Password: 'Password',
         EmptyEmailMsg: 'Email is a required field.',
         InvalidEmailMsg:
             'Enter a valid email address. For example abc@domain.com.',
         EmptyPasswordMsg: 'Password is a required field.',
-        Verify: 'Get Activation Link',
+        Verify: 'Activate Account',
+        Member: 'Become a member',
         Activation:
             'You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
         MemberHelp: 'Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
         NoBiometrics: 'Please login with email and password to enable.',
+        Welcome: 'Welcome back to Kiira!',
     },
     paymentMethods: {
         title: 'Payment Methods',
