@@ -102,7 +102,7 @@ const Welcome = ({ navigation }) => {
 
     return ( 
         <ImageBackground
-                resizeMode="stretch"
+                resizeMode="cover"
                 style={styles.imageContainer}
                 source={staticImages.backgroundUrl}
             >
