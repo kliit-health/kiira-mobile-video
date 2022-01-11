@@ -17,113 +17,46 @@ const { size, fontFamily } = text;
 
 const { height_50, width_50, align_items_c, justify_c, sm_pad_v, white_bg } =
     globalStyles;
-
-const intakeData = [
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    },
-    { 
-        label: "",
-        name: "",
-        type: controlType.RadioType,
-    }, 
-    {
-        label: [],
-        name: "",
-        type: controlType.CheckType,
-    },
-    {
-        label: [],
-        name: "",
-        type: controlType.CheckType,
-    },
-    {
-        label: "",
-        name: "",
-        type: controlType.TextType,
-    },
-    {
-        label: [],
-        name: "",
-        type: controlType.CheckType,
-    },
-    {
-        label: "",
-        name: "",
-        type: controlType.TextType,
-    },
-    {
-        label: "",
-        name: "",
-        type: controlType.TextType,
-    },
-]; 
-
-const selectItems = []; 
-
+ 
+ 
 const Intake = ({ navigation }) => {   
-
+ 
     const dispatch = useDispatch();
     const { appointmentDetails } = navigation.state.params;
     const [queryIndex, setQueryIndex] = useState(0); 
     const [data, setData] = useState(healthIntakeQuerying[queryIndex].kind); 
     const [type, setType] = useState(healthIntakeQuerying[queryIndex].type); 
+    const [intakeData, setIntakeData] = useState([]);
+    const selectItems = [];  
  
+    const getIntakeObject = (index) =>{
+        if(index < 12){
+            return {
+                label: "",
+                name: "",
+                type: controlType.RadioType,
+            };
+        }
+        else if(index == 12 || index == 13 || index == 15){
+            return {
+                label: "",
+                name: "",
+                type: controlType.CheckType,
+            };
+        }
+        else{
+            return {
+                label: "",
+                name: "",
+                type: controlType.TextType,
+            };
+        }
+    }
      
-    useEffect(() => {
-         
+    useEffect(() => {  
+        for(let ni = 0; ni < 18; ni++){
+            intakeData.push(getIntakeObject(ni)); 
+        } 
     }, []);
 
     const onIntakeFinish = () => {  
@@ -134,7 +67,8 @@ const Intake = ({ navigation }) => {
         dispatch(updateIntakeData(data));  
     }
 
-    const handleSelection = item => {  
+    const handleSelection = item => {   
+
         if(healthIntakeQuerying[queryIndex].type == controlType.RadioType){
             intakeData[queryIndex].label = item.label;
             intakeData[queryIndex].name = item.name;
