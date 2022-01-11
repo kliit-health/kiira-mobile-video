@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, View, Image, Pressable, Text} from 'react-native';
+import {Modal, View, Image, Pressable, Text, Alert} from 'react-native';
 import {cancelAppointment} from '../../../appointments/action';
 import {useDispatch} from 'react-redux';
 import {withNavigation} from 'react-navigation';
@@ -7,14 +7,14 @@ import {withNavigation} from 'react-navigation';
 import styles from '../styles';
 
 const CancelModal = ({visit, setVisible, visible, navigation}) => {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch(); 
   const data = {
     uid: visit.uid,
     id: visit.id,
     expert: visit.expert,
-    prepaid: visit.prepaid,
-  };
+    prepaid: visit.prepaid, 
+    credits: 1, 
+}; 
 
   return (
     <Modal

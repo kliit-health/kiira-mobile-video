@@ -128,7 +128,7 @@ const ExpertAppointments = ({ navigation }) => {
         onChange={handleSearch}
         placeholder="Search"
       />
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <FlatList
           showsHorizontalScrollIndicator={false}
           initialScrollIndex={12}
@@ -216,13 +216,14 @@ const ExpertAppointments = ({ navigation }) => {
             )}
             keyExtractor={index => `${index.id}`}
             contentContainerStyle={styles.appointmentsList}
+            style={styles.appointViewStyle}
           />
         ) : (
           <Text style={styles.title}>
             {lang.expertAppointments.noVisitsToday}
           </Text>
         )}
-      </ScrollView>
+      </View>
     </Container>
   );
 };
