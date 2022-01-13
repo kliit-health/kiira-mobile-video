@@ -1,7 +1,7 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { showOrHideModal } from '~/components/customModal/action';
-import { signOut, updateAccount, updatePassword } from '../reducers/account';
+import { signOut, updateAccount, updatePassword, updateActiveAt } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';
 import { uploadImage, updateUserData } from '~/utils/firebase';
@@ -190,8 +190,25 @@ function* changeUserPassword({ payload }) {
     }
 }
 
+function* updateActive({ payload }) {
+ 
+    const { isActive } = payload; 
+    try { 
+        const user = yield select(state => state.user.data);  
+        const userUpdate = {
+            ...user,
+            isActive: isActive
+        } 
+        yield updateUserData(userUpdate, user.uid);
+        yield put(getUser());
+    } catch (error) {
+        console.error(error); 
+    }
+}
+
 export default function* accountSaga() {
     yield takeEvery(signOut, signout);
     yield takeEvery(updateAccount, updateUser);
     yield takeEvery(updatePassword, changeUserPassword);
+    yield takeEvery(updateActiveAt, updateActive);
 }
