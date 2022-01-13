@@ -372,6 +372,61 @@ export async function makeAppointment({ data }) {
   }
 } 
 
+export async function cancelAppointmentData(data, message) {
+  try {  
+      const { id, uid, expert, credits } = data; 
+
+      const userDoc = firestore()
+                  .collection('users')
+                  .doc(uid);
+      const resData = await userDoc.get();
+      let userData = resData.data(); 
+      let visits = credits;   
+ 
+      const document = firestore()
+                  .collection('appointments')
+                  .doc(uid);
+      const response = await document.get();
+      let appointments = response.data();
+      appointments.history = appointments.history.filter(
+          item => item.id !== id,
+      );
+
+      await document.set(
+          { history: [...(appointments.history || [])] },
+          { merge: true },
+      );
+
+      const paymentType = data.prepaid
+        ? { prepaid: userData.prepaid + visits }
+        : { visits: userData.visits + visits };
+      await firestore().collection('users').doc(uid).update(paymentType);
+       
+
+      const expertDocument = firestore()
+          .collection('appointments')
+          .doc(expert.uid);
+      const expertResponse = await expertDocument.get();
+      let expertAppointments = expertResponse.data();
+      let filtered = expertAppointments.history[uid].filter(item => {
+          return item.id !== id ? item : false;
+      });
+
+      await expertDocument.set(
+          { history: { [uid]: [...(filtered || [])] } },
+          { merge: true },
+      ); 
+      
+      if (userData.profileInfo.phoneNumber.length) {
+          await sendSms(message, userData.profileInfo.phoneNumber);
+      }
+
+  } catch (error) {
+      console.log('Cancel Error', error);
+      return error;
+  }
+}
+
 export async function cancelAppointmentAsync({ data: { id, uid, expert } }) {
   let user = auth().currentUser;
   let jwtToken = await user.getIdToken();
