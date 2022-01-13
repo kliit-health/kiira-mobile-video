@@ -1,7 +1,6 @@
 import React from 'react';
 import { handleNavigation } from '~/utils/functions';
 import LinearGradient from 'react-native-linear-gradient'
-import { Column } from '~/components';
 import {
     View,
     Text,

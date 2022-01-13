@@ -89,4 +89,8 @@ export default StyleSheet.create({
     linearGradient: {
         height: 89,
     },
+
+    linearGradient: {
+        height: 89,
+    },
 });
