@@ -8,7 +8,7 @@ import {
     ImageBackground,
     TouchableOpacity,
 } from 'react-native';
-import styles from './styles';
+import styles from './styles'; 
 
 export type PageProps = {
     title: string;
@@ -39,7 +39,7 @@ const Page = ({ title, description, imageUrl, backgroundUrl }: PageProps) => (
                     </TouchableOpacity>
                 </LinearGradient>
             </ImageBackground>
-        </View>
+        </View> 
         <View style={styles.container}>
             <ImageBackground
                 source={backgroundUrl}
@@ -47,12 +47,17 @@ const Page = ({ title, description, imageUrl, backgroundUrl }: PageProps) => (
                 style={styles.image}
             > 
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.description}>{description}</Text>
+                <TouchableOpacity
+                    style={styles.kiiraContainer}
+                    onPress={() => handlePress('Welcome')}
+                >
+                    <Text style={styles.kiiraHelp}>{'What is Kiira?'}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.activateContainer}
                     onPress={() => handlePress('Activate')}
                 >
-                    <Text style={styles.activate}>First Time Here?</Text>
+                    <Text style={styles.activate}>{'I am a new member'}</Text>
                 </TouchableOpacity>
             </ImageBackground>
         </View>

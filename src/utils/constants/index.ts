@@ -368,6 +368,7 @@ export default {
         rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
+        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',         
 
         screenNames: {
             Activate: 'Activate',
@@ -505,6 +506,8 @@ export default {
             tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
             unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
             xCloseIcon: require('../../../assets/xclose.png'), 
+            xxIcon: require('../../../assets/xxIcon.png'),  
+            backgroundUrl: require('../../assets/back-drop.png'),  
         },
 
         Toast: {
@@ -658,7 +661,7 @@ export const images = {
     tutorialImageThree: require('../../../assets/Onboarding-3-1.jpg'),
     tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
     unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
-    xCloseIcon: require('../../../assets/xclose.png'),
+    xCloseIcon: require('../../../assets/xclose.png'),  
 };
 
 export const icons = {
@@ -668,6 +671,7 @@ export const icons = {
     addIcon: require('../../../assets/add_icon.png'),
     applePayIcon: require('../../../assets/apple_pay.png'),
     backIcon: require('../../../assets/back.png'),
+    backArrow: require('../../../assets/backArrow.png'),
     basket: require('../../../assets/basket.png'),
     bandAid: require('../../../assets/bandaid.png'),
     billing: require('../../../assets/billing.png'),
