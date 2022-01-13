@@ -1137,6 +1137,13 @@
   dependencies:
     deep-assign "^3.0.0"
 
+"@react-native-community/blur@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/blur/-/blur-3.6.0.tgz#31c9e0f2770519c9b5c4f99418f192246f0d4db8"
+  integrity sha512-GtDBhpX2pQcjl4VopOC8FktrVufrEfYRwVeMQ2WWckqKIv2BdwvlvWvj88L1WmEdBr9UNcm3rtgz+d+YXkmirA==
+  dependencies:
+    prop-types "^15.5.10"
+
 "@react-native-community/cli-debugger-ui@^6.0.0-rc.0":
   version "6.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-6.0.0-rc.0.tgz#774378626e4b70f5e1e2e54910472dcbaffa1536"
@@ -8234,10 +8241,9 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-snyk@^1.764.0:
-  version "1.799.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.799.0.tgz#4988d828f0314d22e3179f8db622392b80eece20"
-  integrity sha512-wLUnJvRtwfd1AvSVOK0zUmYHa4OtdNaRRrwhd6c2aNa4aA8kYPSJoc4WRBwUnBE64pNuJ7AsTfB31rnk803v3g==
+  version "1.816.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.816.0.tgz#60a9493244a815d3cdcc3d28faa2962751a325fb"
+  integrity sha512-EoTI/2UdfNYO1m+NvZe7sPQAEtRZIEpHlDOckDXMKpcTwAOUj1ilfwYf9exFZgHWDIXr2fQRLy/HgQyFHOETQg==
 
 source-map-resolve@^0.5.0:
   version "0.5.3"

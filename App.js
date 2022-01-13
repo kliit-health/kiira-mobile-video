@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Alert, BackHandler, AppState, LogBox } from 'react-native';
+import { View, Alert, BackHandler, AppState, LogBox, Linking } from 'react-native';
 import AppNavigator from './src/navigation';
 import { Messaging } from './src/services';
-import { showOrHideModal } from './src/components/customModal/action';
+import { showOrHideModal, showMemberModal } from './src/components/customModal/action';
 import Conditional from './src/components/conditional';
 import CustomLoader from './src/components/customLoader';
 import CustomModal from './src/components/customModal';
@@ -18,13 +18,14 @@ import FastImage from 'react-native-fast-image';
 import { NavigationService } from './src/navigation/';
 import { setCurrentRoute, setPreviousRoute } from './src/redux/actions';
 
+
 const App = () => {
     const dispatch = useDispatch();
-
+    const { screenNames } = Constant.App;
     let navigationRef = useRef();
     const spinner = useSelector(state => state.loader);
     const toast = useSelector(state => state.toast);
-    const { showModalError, errorMessage } = useSelector(state => state.modal);
+    const { showModalError, errorMessage, memberMessage } = useSelector(state => state.modal);
 
     FastImage.preload([
         {
@@ -151,8 +152,11 @@ const App = () => {
             <Conditional if={showModalError}>
                 <CustomModal
                     onPressErrorButtonOk={() => dispatch(showOrHideModal())}
+                    onEmailSupport={() => dispatch(showOrHideModal())}
+                    onBecomeMember={() => {Linking.openURL(Constant.App.becomeAMemeberUrl), dispatch(showOrHideModal())}}
                     showLoader={showModalError}
                     errorMsg={errorMessage}
+                    memberMsg={memberMessage}
                 />
             </Conditional>
             <Conditional if={spinner.showLoader}>

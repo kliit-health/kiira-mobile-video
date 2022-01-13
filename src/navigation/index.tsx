@@ -1,6 +1,6 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack'; 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import NavigationService from './navigationService';
 import { Image, View, StyleSheet } from 'react-native';
@@ -129,6 +129,7 @@ const AuthStack = createStackNavigator(
         },
     },
 );
+  
 
 const BottomTab = createBottomTabNavigator(
     {
@@ -588,6 +589,7 @@ const MainAppStack = createStackNavigator(
         Settings: { screen: Settings },
         Success: { screen: Success },
         Intake: { screen: Intake },  
+        Landing: { screen: Landing }, 
         BillingInsurance: {screen: BillingInsurance},
         Pharmacy : {screen: Pharmacy},
         EmergencyContact : {screen: EmergencyContact},

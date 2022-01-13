@@ -8,18 +8,19 @@
         "start": "react-native start",
         "lint": "eslint .",
         "prettier": "prettier \"./**/*.js\" --write",
-        "postinstall": "npx jetify && cd ios && pod install && npx react-native-fix-image",
+        "postinstall": "patch-package && npx jetify && cd ios && pod install && npx react-native-fix-image",
         "ios-device": "react-native run-ios --device",
         "ios-udid": "react-native run-ios --udid",
         "ios-sim": "react-native run-ios --simulator",
         "clean": "npx react-native-clean-project",
         "show-ios": "xcrun simctl list devices",
-        "test": "snyk test && jest --coverage"
+        "test": "jest --coverage"
     },
     "dependencies": {
         "@notifee/react-native": "^3.0.3",
         "@react-native-community/art": "^1.2.0",
         "@react-native-community/async-storage": "^1.12.1",
+        "@react-native-community/blur": "^3.6.0",
         "@react-native-community/datetimepicker": "^3.5.2",
         "@react-native-community/masked-view": "^0.1.10",
         "@react-native-community/toolbar-android": "^0.2.1",
@@ -51,6 +52,8 @@
         "jail-monkey": "^2.6.0",
         "lodash": "^4.17.20",
         "moment": "^2.24.0",
+        "patch-package": "^6.4.7",
+        "postinstall-postinstall": "^2.1.0",
         "querystring": "^0.2.0",
         "random-id": "^1.0.4",
         "react": "17.0.2",
@@ -149,7 +152,6 @@
         "react-native-codegen": "^0.0.7",
         "react-native-svg-transformer": "^0.14.3",
         "react-test-renderer": "^17.0.2",
-        "snyk": "^1.764.0",
         "yarn": "^1.17.3"
     },
     "resolutions": {

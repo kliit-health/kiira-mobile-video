@@ -139,10 +139,11 @@ export function getPlanDetails(planDetails) {
 }
 
 export async function sendEmailVerification(email: string) {
-    try {
-        await functions().httpsCallable('sendActivationLink')(email);
+    try { 
+        const data = {data: email};
+        await functions().httpsCallable('sendActivationLink')(data);
         return { ok: true, data: null };
-    } catch (err) {
+    } catch (err) { 
         let status = err.status ? err.status : 'internal';
         return { ok: false, status };
     }

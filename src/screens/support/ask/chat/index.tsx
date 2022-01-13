@@ -85,6 +85,7 @@ class ChatExpert extends React.PureComponent {
                 uid: userData.uid,
                 updatedData: {
                     isActive: status,
+                    activeTime: moment().unix(),
                     toUserId:
                         questionData && questionData.userInfo.uid
                             ? questionData.userInfo.uid

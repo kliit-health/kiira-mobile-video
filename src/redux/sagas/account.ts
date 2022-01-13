@@ -1,19 +1,18 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { showOrHideModal } from '~/components/customModal/action';
-import { signOut, updateAccount, updatePassword, updateIntakeData } from '../reducers/account';
+import { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';
 import { uploadImage, updateUserData } from '~/utils/firebase';
 import { getUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 import { changePassword, reAunthenticate } from '~/utils/firebase';
-import { default as navigation } from '~/navigation/navigationService';
+import { default as navigation } from '~/navigation/navigationService'; 
 
 function* signout() {
     const lang = yield select(state => state.language);
-    const userData = yield select(state => state.user.data);
-
+    const userData = yield select(state => state.user.data); 
     try {
         yield put(showApiLoader());
 
@@ -26,7 +25,7 @@ function* signout() {
         yield updateStatus(updateStatusParams);
         yield put(clearAskState());
         yield logout();
-        yield put(hideApiLoader());
+        yield put(hideApiLoader()); 
         navigation.navigate('Landing');
     } catch (error) {
         navigation.navigate('Landing');
@@ -193,7 +192,7 @@ function* changeUserPassword({ payload }) {
 
 function* updateIntake({ payload }) {
  
-    const { intakeData, navigation } = payload; 
+    const { intakeData, navigation } = payload;
     try { 
         const user = yield select(state => state.user.data);  
         const userUpdate = {
@@ -213,9 +212,27 @@ function* updateIntake({ payload }) {
     }
 }
 
+function* updateActive({ payload }) {
+ 
+    const { isActive } = payload; 
+
+    try { 
+        const user = yield select(state => state.user.data);  
+        const userUpdate = {
+            ...user,
+            isActive: isActive
+        } 
+        yield updateUserData(userUpdate, user.uid);
+        yield put(getUser());
+    } catch (error) {
+        console.error(error); 
+    }
+}
+
 export default function* accountSaga() {
     yield takeEvery(signOut, signout);
     yield takeEvery(updateAccount, updateUser);
     yield takeEvery(updatePassword, changeUserPassword);
     yield takeEvery(updateIntakeData, updateIntake);
+    yield takeEvery(updateActiveAt, updateActive);
 }
