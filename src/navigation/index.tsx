@@ -72,6 +72,7 @@ import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
 import Success from '../screens/patient/dashboard/book/screens/success';
+import Intake from '../screens/patient/dashboard/book/screens/intake';
 import SurgicalHistory from '../screens/provider/appointments/patientProfile/surgical';
 import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing'; 
@@ -166,7 +167,7 @@ const BottomTab = createBottomTabNavigator(
             },
         },
         Home: {
-            screen: Dashboard,
+            screen: Dashboard,  
             navigationOptions: {
                 tabBarIcon: ({ focused }) => (
                     <View
@@ -586,7 +587,8 @@ const MainAppStack = createStackNavigator(
         SelectProvider: { screen: SelectProvider },
         SelectSupport: { screen: SelectSupport },
         Settings: { screen: Settings },
-        Success: { screen: Success }, 
+        Success: { screen: Success },
+        Intake: { screen: Intake },  
         Landing: { screen: Landing }, 
         BillingInsurance: {screen: BillingInsurance},
         Pharmacy : {screen: Pharmacy},
