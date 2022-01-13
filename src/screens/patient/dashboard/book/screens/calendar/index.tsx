@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, Alert } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
@@ -18,6 +18,7 @@ import {
 import { generateDateInfo } from '~/utils/helper';
 import { colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
+import { bookVisitText } from '~/utils/constants';
 
 import moment from 'moment';
 
@@ -100,6 +101,10 @@ const Calendar = () => {
     };
 
     const handleConfirm = () => {
+        if(time == null){
+            Alert.alert(bookVisitText.message);   
+            return;
+        }
         dispatch(setAppointmentDayAndTime({ day, time }));
         handleNavigation('Payment');
     };
@@ -148,7 +153,7 @@ const Calendar = () => {
                 />
             </Kiira.Row>
             <Kiira.Text options={[pad]}>
-                Please select an appointment time
+                { bookVisitText.message }
             </Kiira.Text>
             <FlatList
                 numColumns={3}

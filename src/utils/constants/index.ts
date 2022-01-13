@@ -2014,6 +2014,10 @@ export const videoHistory = {
     viewDetails: 'View Details',
 };
 
+export const bookVisitText = {
+    message: 'Please select an appointment time'
+};
+
 export const tables = {
     users: 'users',
     questions: 'questions',
