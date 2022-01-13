@@ -75,6 +75,7 @@ class Chat extends React.PureComponent {
                 uid: userData.uid,
                 updatedData: {
                     isActive: status,
+                    activeTime: moment().unix(),
                     toUserId: status
                         ? expertDetails
                             ? expertDetails.uid
@@ -309,8 +310,9 @@ class Chat extends React.PureComponent {
     };
 
     render() {
-        const { navigation, questionId } = this.props;
+        const { navigation, questionId, expertStatusData } = this.props;
         const { questionData, expertDetails } = navigation.state.params;
+        const { activeTime } = expertDetails;
         const { imageUri, showRatingModal } = this.state;
         const { profileInfo } = questionData
             ? questionData.expertInfo
@@ -326,6 +328,9 @@ class Chat extends React.PureComponent {
                     onHomePress={() =>
                         navigation.navigate(screenNames.BottomTab)
                     }
+                    isChatView={true}
+                    activeTime={activeTime}
+                    profileImageUrl={profileImageUrl}
                 />
 
                 <MessageList

@@ -355,12 +355,19 @@ export default {
         Expert: 'Spanish Expert',
         or: 'Spanish or',
         Email: 'Spanish Your email',
+        EnterEmail: 'Spanish Enter email adress here',
         Password: 'Spanish Password',
         EmptyEmailMsg: 'Spanish Email is a required field.',
         InvalidEmailMsg:
             'Spanish Enter a valid email address. For example abc@domain.com.',
         EmptyPasswordMsg: 'Spanish Password is a required field.',
-        Verify: 'Spanish Get Activation Link',
+        Verify: 'Spanish Activate Account',
+        Member: 'Spanish Become a member',
+        Activation:
+            'Spanish You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+        MemberHelp: 'Spanish Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
+        NoBiometrics: 'Spanish Please login with email and password to enable.',
+        Welcome: 'Spanish Welcome back to Kiira!',
     },
 
     paymentMethods: {

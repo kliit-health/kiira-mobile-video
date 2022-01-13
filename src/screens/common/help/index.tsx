@@ -17,7 +17,7 @@ const Help = ({ navigation }) => {
     };
 
     const handleAsk = () => {
-        Linking.openURL('mailto:support@kiira.io?subject=Kiira Support');
+        Linking.openURL('mailto:hello@kiira.io?subject=Kiira Support');
         setTimeout(() => {
             navigation.navigate(screenNames.Help);
         }, 200);

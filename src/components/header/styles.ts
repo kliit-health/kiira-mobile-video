@@ -30,9 +30,9 @@ export default StyleSheet.create({
         height: 35,
         width: 35,
     },
-    homeButton: {
+    homeButton: {   
         height: 25,
-        width: 25,
+        width: 25, 
     },
     billingButton: {
         height: 25,
@@ -42,12 +42,49 @@ export default StyleSheet.create({
         height: 25,
         width: 25, 
     },
+    chatViewStyle: { 
+        height: 36,
+        width: 36, 
+        borderRadius:18,  
+    },
     listButton: {  
         height: 12,
         width: 12,    
         left: 55, 
     }, 
-    
+    backArea: {
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1, 
+    },
+    profileStyle: {
+        height: 36,
+        width: 36,
+        borderRadius:18,
+        marginLeft: 15,
+    },
+    headerAvatar: {
+        flexDirection: 'column', 
+        marginLeft:10,
+        width: 200,  
+    },
+    nameStyle: {  
+        left: 0,
+        right: 0,
+        color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsBold,
+        fontWeight: '500',
+    },
+    timeStyle: {
+        left: 0,
+        right: 0,
+        color: colors.greyDark,
+        fontSize: text.size.small,
+        fontFamily: text.fontFamily.poppinsLight,
+        fontWeight: '400',
+    },
 });
 
 export const modifiers = {

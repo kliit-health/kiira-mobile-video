@@ -368,6 +368,7 @@ export default {
         rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
+        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',         
 
         screenNames: {
             Activate: 'Activate',
@@ -505,6 +506,8 @@ export default {
             tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
             unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
             xCloseIcon: require('../../../assets/xclose.png'), 
+            xxIcon: require('../../../assets/xxIcon.png'),  
+            backgroundUrl: require('../../assets/back-drop.png'),  
         },
 
         Toast: {
@@ -659,6 +662,8 @@ export const images = {
     tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
     unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
     xCloseIcon: require('../../../assets/xclose.png'),
+    circleBackButton: require('../../../assets/circleBackButton.png'), 
+    circleNextButton: require('../../../assets/circleNextButton.png'), 
 };
 
 export const icons = {
@@ -668,6 +673,7 @@ export const icons = {
     addIcon: require('../../../assets/add_icon.png'),
     applePayIcon: require('../../../assets/apple_pay.png'),
     backIcon: require('../../../assets/back.png'),
+    backArrow: require('../../../assets/backArrow.png'),
     basket: require('../../../assets/basket.png'),
     bandAid: require('../../../assets/bandaid.png'),
     billing: require('../../../assets/billing.png'),
@@ -706,7 +712,7 @@ export const icons = {
     greyDownArrow: require('../../../assets/grey_down_arrow.png'),
     kliitCredit: require('../../../assets/kliit_credits.png'),
     lockIcon: require('../../../assets/npLock.png'),
-    kiiraLogo: require('../../../assets/logo.png'),
+    kiiraLogo: require('../../../assets/logo.png'), 
     location: require('../../../assets/location_black.png'),
     loginLogoImage2: require('../../../assets/logo2.png'),
     logoHorizontal: require('../../../assets/logo-sm.png'),
@@ -780,6 +786,8 @@ export const screenNames = {
     HealthHistory: 'HealthHistory',
     Help: 'Help',
     Home: 'Home',
+    Intake: 'Intake',
+    Success: 'Success',
     Insurance: 'Insurance',
     Learn: 'Learn',
     LearnExpert: 'LearnExpert',
@@ -2042,3 +2050,287 @@ export const firebaseConditionals = {
     expertGender: 'profileInfo.gender',
     expertProfession: 'profileInfo.profession.fullName',
 };
+ 
+export const controlType = {
+    RadioType: 0,
+    CheckType: 1, 
+    TextType: 2,
+    CompleteType: 3,
+}
+    
+export const queryTypes = {
+    queryTypeIncredible: [
+        {
+            name: "Incredible!",
+            label: "5 - Incredible!",
+            type: 0,
+        },
+        {
+            name: "Mostly good",
+            label: "4 - Mostly good",
+            type: 0,
+        },
+        {
+            name: "Ok, could be better",
+            label: "3 - Ok, could be better",
+            type: 0,
+        },
+        {
+            name: "Not great",
+            label: "2 - Not great",
+            type: 0,
+        },
+        {
+            name: "Very bad",
+            label: "1 - Very bad",
+            type: 0,
+        }, 
+    ], 
+    queryTypeEveryday: [
+        {
+            name: "Nearly everyday",
+            label: "3 -  Nearly everyday",
+            type: 0,
+        },
+        {
+            name: "More than half the days",
+            label: "2 - More than half the days",
+            type: 0,
+        },
+        {
+            name: "Several Days",
+            label: "1 - Several Days",
+            type: 0,
+        },
+        {
+            name: "Not at all",
+            label: "0 - Not at all",
+            type: 0,
+        }, 
+    ], 
+    queryTypeDaily: [
+        {
+            name: "Daily / Almost Daily",
+            label: "4 - Daily / Almost Daily",
+            type: 0,
+        },
+        {
+            name: "Weekly",
+            label: "3 -  Weekly",
+            type: 0,
+        },
+        {
+            name: "Monthly",
+            label: "2 - Monthly",
+            type: 0,
+        },
+        {
+            name: "Once or twice",
+            label: "1 - Once or twice",
+            type: 0,
+        },
+        {
+            name: "Never",
+            label: "0 - Never",
+            type: 0,
+        }, 
+    ], 
+    queryTypeAgo: [
+        {
+            name: "More than 5 years ago",
+            label: "More than 5 years ago",
+            type: 0,
+        },
+        {
+            name: "2 - 5 years ago",
+            label: "2 - 5 years ago",
+            type: 0,
+        },
+        {
+            name: "1 - 2 years ago",
+            label: "1 - 2 years ago",
+            type: 0,
+        },
+        {
+            name: "Within the last year",
+            label: "Within the last year",
+            type: 0,
+        }, 
+    ],
+    queryCheckCond: [
+        "none",
+        "High Blood Pressure",
+        "Diabetes",
+        "High Cholesterol",
+        "Asthma",
+        "Depression",
+        "Anxiety",
+        "ADD/ADHD",
+        "Thyroid disorder",
+        "Breast Cancer",
+        "Ovarian Cancer",
+        "Colon Cancer",
+        "Uterine cancer",
+        "Polycystic ovarian syndrome/PCOS",
+        "Fibroids",
+        "Ovarian cysts",
+        "Abnormal Pap smear/HPV",
+        "Gonorrhea",
+        "Chlamydia",
+        "Syphylis",
+        "Herpes",
+        "Hepatitis C",
+        "Endometriosis",
+        "Pre-Diabetes",
+        "Arthritis",
+        "Lupus",
+        "Infertility",
+        "Other", 
+    ],
+    queryCheckProcedure: [
+        "none",
+        "Oral/Dental surgery",
+        "Removal of appendix (appendectomy)",
+        "removal of gallbladder (cholecystectomy)",
+        "Removal of tonsils (tonsillectomy)",
+        "removal of adenoids (adenoidectomy)",
+        "emoval of ovarian cyst",
+        "removal of ovaries",
+        "removal of fallopian tube",
+        "removal of fibroids",
+        "thyroid surgery",
+        "breast biopsy or removal of breast tumor",
+        "joint (knee/hip/shoulder) surgery",
+        "colonoscopy* endoscopy",
+        "other", 
+    ],
+    queryCheckVaccin: [
+        "Measles",
+        "Mumps", 
+        "Rubella", 
+        "Hepatitis B", 
+        "Tetanus", 
+        "HPV", 
+        "Chicken Pox/Varicella", 
+        "Pneumonia", 
+        "Whoopong cough/ Pertusussis", 
+        "COVID-19", 
+    ], 
+}; 
+
+export const healthIntakeQuerying = [
+    {
+        name: "How would you rate your overall health?",
+        hint: "",
+        kind: queryTypes.queryTypeIncredible,
+        type: controlType.RadioType
+    },
+    {
+        name: "How do rate your mental health?",
+        hint: "",
+        kind: queryTypes.queryTypeIncredible,
+        type: controlType.RadioType
+    },
+    {
+        name: "How do you rate your sexual/reproductive health?",
+        hint: "",
+        kind: queryTypes.queryTypeIncredible,
+        type: controlType.RadioType
+    },
+    {
+        name: "Over the last 2 weeks, how often have you felt little interest or pleasure in doing things?",
+        hint: "",
+        kind: queryTypes.queryTypeEveryday,
+        type: controlType.RadioType
+    },
+    {
+        name: "Over the last 2 weeks, how often have you been bothered by feeling down, depressed, or hopeless?",
+        hint: "",
+        kind: queryTypes.queryTypeEveryday,
+        type: controlType.RadioType
+    },
+    {
+        name: "In the past year how often have you had more than 3 drinks of alcohol?",
+        hint: "",
+        kind: queryTypes.queryTypeDaily,
+        type: controlType.RadioType
+    }, 
+    {
+        name: "In the past year how often have you used tobacco?",
+        hint: "",
+        kind: queryTypes.queryTypeDaily,
+        type: controlType.RadioType
+    },
+    {
+        name: "In the past year how often have you used prescription drugs for non-medical reasons?",
+        hint: "",
+        kind: queryTypes.queryTypeDaily,
+        type: controlType.RadioType
+    },
+    {
+        name: "In the past year how often have you used non-prescribed drugs?",
+        hint: "",
+        kind: queryTypes.queryTypeDaily,
+        type: controlType.RadioType
+    },
+    {
+        name: "When did you last see a  Primary Care Doctor?",
+        hint: "",
+        kind: queryTypes.queryTypeAgo,
+        type: controlType.RadioType
+    },
+    {
+        name: "When did you last see a  Gynecologist?",
+        hint: "",
+        kind: queryTypes.queryTypeAgo,
+        type: controlType.RadioType
+    },
+    {
+        name: "When was your last pap smear (cervical cancer screening)?",
+        hint: "",
+        kind: queryTypes.queryTypeAgo,
+        type: controlType.RadioType
+    },
+    {
+        name: "Have you ever been diagnosed with any of the following medical conditions?",
+        hint: "",
+        kind: queryTypes.queryCheckCond,
+        type: controlType.CheckType
+    },
+    {
+        name: "Have you had any of the following surgical procedure(s)?",
+        hint: "",
+        kind: queryTypes.queryCheckProcedure,
+        type: controlType.CheckType
+    },
+    {
+        name: "Please list any allergies to medications.",
+        hint: "Ex: Penecillin",
+        kind: null,
+        type: controlType.TextType
+    },
+    {
+        name: "Have you been vaccinated against any of the following?",
+        hint: "",
+        kind: queryTypes.queryCheckVaccin,
+        type: controlType.CheckType
+    },
+    {
+        name: "List any medications, vitamins or supplements you take frequently.",
+        hint: "Ex: Birth control, Vitamin D",
+        kind: null,
+        type: controlType.TextType
+    },
+    {
+        name: "Anything you would like to add? ",
+        hint: "I am concerned about...",
+        kind: null,
+        type: controlType.TextType
+    }, 
+    {
+        name: "You’re all set!",
+        hint: "Thanks for completing your intake form.",
+        kind: null,
+        type: controlType.CompleteType
+    }, 
+];
