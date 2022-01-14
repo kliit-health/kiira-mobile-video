@@ -494,6 +494,7 @@ export default {
             plusIcon: require('../../../assets/plus.png'),
             pregnancy: require('../../../assets/pregnancy.png'),
             profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
+            // profileCreateImg: require('../../../assets/profileCret')
             radioCheckBlueIcon: require('../../../assets/check_blue.png'),
             radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
             readMsgIcon: require('../../../assets/read_msg_icon.png'),

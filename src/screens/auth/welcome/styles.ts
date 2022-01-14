@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import metrics from '~/utils/metrices';
-import { text, colors } from '~/utils/constants';
+import Constant, { text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 import { color } from 'react-native-reanimated';
 
@@ -10,7 +10,7 @@ let parentPadding = parentPaddingValue * 2;
 let childPaddingValue = metrics.width * 0.03;
 let childPadding = parentPadding + childPaddingValue * 2;
 
-export const AVATAR_SIZE = 111;
+
 
 const style = StyleSheet.create({
     buttonContainer: {
@@ -21,6 +21,14 @@ const style = StyleSheet.create({
         backgroundColor: colors.primaryBlue,
         marginTop: metrics.height * 0.01,
     },
+    disabledButton:{
+        alignSelf: 'center',
+        borderRadius: 20,
+        padding: 10,
+        width: metrics.width - childPadding,
+        backgroundColor: colors.greyAccent,
+        marginTop: metrics.height * 0.01,   
+    },
     
     buttonText: {
         textAlign: 'center',
@@ -30,16 +38,11 @@ const style = StyleSheet.create({
     },
 
     container: {
-        height:254,
+        height:270,
         width:375,
         backgroundColor: colors.babyBlue,
-        
     },
 
-   
-   
-
-  
     title:{
         textAlign: 'center',
         fontSize: text.size.large,
@@ -52,29 +55,24 @@ const style = StyleSheet.create({
         margin: 15,
         color:colors.greyDark
     },
-    avatar:{
-        marginTop: 10,
-        alignSelf:'center'
-    },
-    textInput: {
+  
+    namesTextInput: {
         marginTop:20,
-     
         flex:1,
         paddingHorizontal: 15,
-        paddingVertical:12,
+        paddingVertical:10,
         borderRadius:5,
        width:'50%',
-
        marginHorizontal:20,
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         backgroundColor: colors.greyLight,
        
     },
-    textInput1: {
+    otherTextInput: {
         marginTop:30,
         paddingHorizontal: 15,
-        paddingVertical:12,
+        paddingVertical:10,
         borderRadius:5,
         marginHorizontal:20,
         fontFamily: text.fontFamily.poppinsRegular,
@@ -82,16 +80,37 @@ const style = StyleSheet.create({
         backgroundColor: colors.greyLight,
       
     },
-    textInputOnChange:{
-       borderBottomColor:colors.greyDark,
-            marginTop:30,
-            paddingHorizontal: 15,
-            paddingVertical:12,
-            borderRadius:5,
-            marginHorizontal:20,
-            fontFamily: text.fontFamily.poppinsRegular,
-            fontSize: text.size.regular,
-           backgroundColor: colors.greyLight,  
+    nameTextInputOnChange:{
+       borderBottomColor:colors.greyAccent,
+       borderBottomWidth:1,
+       marginTop:20,
+       flex:1,
+       paddingHorizontal: 15,
+       paddingVertical:10,
+       borderRadius:5,
+       width:'50%',
+       marginHorizontal:20,
+       fontFamily: text.fontFamily.poppinsRegular,
+       fontSize: text.size.regular,
+       backgroundColor: colors.white, 
+      
+    },
+    AddEditImage:{
+        position:'absolute',
+        right:2,
+        bottom:3
+    },
+    OtherTextInputOnChange: {
+        borderBottomColor:colors.greyAccent,
+       borderBottomWidth:1,
+        marginTop:30,
+        paddingHorizontal: 15,
+        paddingVertical:10,
+        borderRadius:5,
+        marginHorizontal:20,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.regular,
+        backgroundColor: colors.white,
       
     },
     imageBackground:{
@@ -106,12 +125,12 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal:10,
-        paddingVertical:15,
+        paddingVertical:10,
         marginTop: metrices.height * 0.03,
-        borderColor: colors.lightGrey,
-        borderWidth: 0.5,
+        borderColor: colors.greyAccent,
+        borderWidth: 1,
         borderRadius:5,
-        backgroundColor:colors.lightGrey,
+        backgroundColor:colors.white,
     },
     stateDropDownTextStyle: {
         color: colors.greyDark,
@@ -133,10 +152,15 @@ const style = StyleSheet.create({
       
             height: metrics.width * 0.04,
             width: metrics.width * 0.04,
-            opacity:0.3
-       
-       
+            opacity:0.3      
     },
+    pageNumber:{
+        color: colors.greyDark,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'center',
+        alignSelf: 'center',marginTop:5
+    }
 });
 export const modifiers = {
     avatar: {
