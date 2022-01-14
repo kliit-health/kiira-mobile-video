@@ -38,7 +38,7 @@ const style = StyleSheet.create({
     },
 
     container: {
-        height:270,
+        height:254,
         width:375,
         backgroundColor: colors.babyBlue,
     },
@@ -96,9 +96,14 @@ const style = StyleSheet.create({
       
     },
     AddEditImage:{
-        position:'absolute',
-        right:2,
-        bottom:3
+        position: 'absolute',
+        right:'1%',
+        bottom:'2%'
+    },
+    imageView:{
+        flex:1,
+         justifyContent:'center',
+         alignItems:'center'
     },
     OtherTextInputOnChange: {
         borderBottomColor:colors.greyAccent,
@@ -114,12 +119,17 @@ const style = StyleSheet.create({
       
     },
     imageBackground:{
+        display:'flex',
         backgroundColor:colors.white,
-         borderRadius:100,
+         borderRadius:120,
          width:120,
-         height:200,
+         height:120,
+         justifyContent:'center',
          alignContent:'center',
-         alignSelf: 'center'
+         alignSelf: 'center',
+         padding:20,
+         position:'absolute',
+         top:-50
     },
     stateDropDownContainerStyle: {
         alignItems: 'center',
@@ -162,16 +172,5 @@ const style = StyleSheet.create({
         alignSelf: 'center',marginTop:5
     }
 });
-export const modifiers = {
-    avatar: {
-        root: {
-             marginTop: 10,
-            alignSelf: 'center',
-            
-           
-         
-        },
-    },
-};
 
 export default style;

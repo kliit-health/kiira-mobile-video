@@ -13,7 +13,7 @@ import Constant, { colors, icons } from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
 import { CustomText, Icon } from '~/components';
-import { TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
 import ImagePicker from 'react-native-image-picker';
 import { Avatar } from 'react-native-elements';
@@ -221,9 +221,8 @@ const Welcome = ({ navigation }) => {
         }
     };
 
-
     return (
-        <View style={{ backgroundColor: 'white' }}>
+        <ScrollView style={{ backgroundColor: 'white' }}>
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Icon
@@ -239,40 +238,38 @@ const Welcome = ({ navigation }) => {
                     We will need this information to match you with clinicians
                     and get your proper care
                 </Text>
+            </View>
+            <View>
                 <View style={styles.imageBackground}>
-                    <Avatar
-                        containerStyle={{ alignSelf: 'center', marginTop: 20 }}
-                        renderPlaceholderContent={
-                            <Image
-                                style={{
-                                    width: 90,
-                                    height: 90,
-                                }}
-                                resizeMode="stretch"
-                                source={staticImages.profilePlaceholderImg}
-                            />
-                        }
-                        size={90}
-                        rounded
-                        source={{
-                            uri: userProfileData.imageSrc
-                                ? userProfileData.imageSrc
-                                : '',
+                    <TouchableOpacity
+                        style={styles.imageView}
+                        onPress={() => {
+                            requestCameraPermission();
                         }}
-                        activeOpacity={0.7}
-                    />
-                    {Platform.OS === 'ios' && (
-                        <TouchableOpacity
-                            onPress={() => {
-                                requestCameraPermission();
+                    >
+                        <Avatar
+                            renderPlaceholderContent={
+                                <Image
+                                    style={{
+                                        width: 120,
+                                        height: 120,
+                                    }}
+                                    resizeMode="stretch"
+                                    source={staticImages.profilePlaceholderImg}
+                                />
+                            }
+                            size={90}
+                            rounded
+                            source={{
+                                uri: userProfileData.imageSrc
+                                    ? userProfileData.imageSrc
+                                    : '',
                             }}
-                        >
+                            activeOpacity={0.7}
+                        />
+
+                        <TouchableOpacity style={styles.AddEditImage}>
                             <Image
-                                style={{
-                                    position: 'absolute',
-                                    right: 2,
-                                    bottom: 3,
-                                }}
                                 source={
                                     userProfileData.imageSrc
                                         ? require('../../../../assets/profileEdit.png')
@@ -280,11 +277,9 @@ const Welcome = ({ navigation }) => {
                                 }
                             />
                         </TouchableOpacity>
-                    )}
+                    </TouchableOpacity>
                 </View>
-            </View>
-            <View>
-                <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                <View style={{ flexDirection: 'row', marginTop: '13%' }}>
                     <TextInput
                         testID="firstName"
                         style={
@@ -387,7 +382,7 @@ const Welcome = ({ navigation }) => {
                     text="Continue"
                 />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
