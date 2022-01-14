@@ -361,6 +361,16 @@ export default {
                 { value: 'Two or more', code: 'Two or more' },
                 { value: 'Prefer not to say', code: 'Prefer not to say' },
             ],
+            Pronouns:[
+                {
+                  value:'He/Him',code: 'He'  
+                },
+                {
+                    value:'She/Her',code: 'Her'  
+                  },{
+                    value:'They/Them',code: 'They'  
+                  },
+            ]
         },
 
         privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
