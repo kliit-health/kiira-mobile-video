@@ -129,7 +129,7 @@ const ExpertAppointments = ({ navigation }) => {
                 onChange={handleSearch}
                 placeholder="Search"
             />
-            <ScrollView style={styles.container}>
+            <View style={styles.container}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     initialScrollIndex={12}
@@ -137,10 +137,10 @@ const ExpertAppointments = ({ navigation }) => {
                         length: 1400,
                         offset: 40 * index,
                         index,
-                    })}
-                    onScrollToIndexFailed={0}
-                    data={dates}
-                    horizontal={true}
+                    })} 
+                    onScrollToIndexFailed={0} 
+                    data={dates} 
+                    horizontal={true} 
                     decelerationRate={'fast'}
                     extraData={selectedDate}
                     renderItem={({ item, index }) => {
@@ -204,7 +204,7 @@ const ExpertAppointments = ({ navigation }) => {
                         showsVerticalScrollIndicator={false}
                         data={search}
                         decelerationRate={'fast'}
-                        extraData={selectedDate}
+                        extraData={selectedDate} 
                         renderItem={({ item, index }) => (
                             <ErrorBoundary FallbackComponent={FallBack}>
                                 <Visit
@@ -217,13 +217,14 @@ const ExpertAppointments = ({ navigation }) => {
                         )}
                         keyExtractor={index => `${index.id}`}
                         contentContainerStyle={styles.appointmentsList}
+                        style={styles.appointViewStyle}
                     />
                 ) : (
                     <Text style={styles.title}>
-                        {lang.expertAppointments.noVisitsToday}
+                        {lang.expertAppointments.noVisitsToday} 
                     </Text>
                 )}
-            </ScrollView>
+            </View>
         </Container>
     );
 };

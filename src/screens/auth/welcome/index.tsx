@@ -8,7 +8,6 @@ import {
     PermissionsAndroid,
     Alert,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import Constant, { colors, icons } from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
@@ -19,6 +18,7 @@ import ImagePicker from 'react-native-image-picker';
 import { Avatar } from 'react-native-elements';
 
 const Welcome = ({ navigation }) => {
+
     const { staticImages, screenNames } = Constant.App;
 
     const [showStateModal, setShowStateModal] = useState(false);
@@ -386,4 +386,4 @@ const Welcome = ({ navigation }) => {
     );
 };
 
-export default withNavigation(Welcome);
+export default Welcome;

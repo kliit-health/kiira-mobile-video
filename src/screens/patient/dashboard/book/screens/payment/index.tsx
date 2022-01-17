@@ -92,10 +92,12 @@ const Payment = () => {
             phoneNumber: expert.profileInfo.phoneNumber,
         },
         visits,
-        prepaid,
+        prepaid, 
+        intakeData: null,
     };
 
     const bookVisit = () => {
+        appointmentDetails.intakeData = '';
         dispatch(bookAppointment(appointmentDetails));
     };
 

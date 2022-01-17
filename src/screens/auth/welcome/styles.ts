@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
 import metrics from '~/utils/metrices';
-import Constant, { text, colors } from '~/utils/constants';
+import { text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
-import { color } from 'react-native-reanimated';
 
 let parentPaddingValue = metrics.width * 0.1;
 let parentPadding = parentPaddingValue * 2;
