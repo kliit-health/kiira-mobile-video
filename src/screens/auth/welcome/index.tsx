@@ -239,7 +239,7 @@ const Welcome = ({ navigation }) => {
                     and get your proper care
                 </Text>
             </View>
-            <View>
+            <View style={{margin:'6%'}}>
                 <View style={styles.imageBackground}>
                     <TouchableOpacity
                         style={styles.imageView}
@@ -315,7 +315,7 @@ const Welcome = ({ navigation }) => {
                         }
                     />
                 </View>
-                <View>
+                <View style={{marginBottom:'2%'}}>
                     <TextInput
                         testID="lastName"
                         style={
@@ -358,21 +358,21 @@ const Welcome = ({ navigation }) => {
                 <CustomText style={styles.pageNumber}>1 of 2</CustomText>
                 <CustomButton
                     disabled={
-                        !userProfileData.firstName &&
-                        !userProfileData.nickName &&
-                        !userProfileData.lastName &&
-                        !userProfileData.birthday &&
-                        !userProfileData.selectedState.value &&
-                        !userProfileData.selectedGender.value &&
+                        !userProfileData.firstName ||
+                        !userProfileData.nickName ||
+                        !userProfileData.lastName ||
+                        !userProfileData.birthday ||
+                        !userProfileData.selectedState.value ||
+                        !userProfileData.selectedGender.value ||
                         !userProfileData.selectedPronoun.value
                     }
                     buttonStyle={
-                        !userProfileData.firstName &&
-                        !userProfileData.nickName &&
-                        !userProfileData.lastName &&
-                        !userProfileData.birthday &&
-                        !userProfileData.selectedState.value &&
-                        !userProfileData.selectedGender.value &&
+                        !userProfileData.firstName ||
+                        !userProfileData.nickName ||
+                        !userProfileData.lastName ||
+                        !userProfileData.birthday ||
+                        !userProfileData.selectedState.value ||
+                        !userProfileData.selectedGender.value ||
                         !userProfileData.selectedPronoun.value
                             ? styles.disabledButton
                             : styles.buttonContainer
