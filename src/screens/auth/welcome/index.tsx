@@ -315,7 +315,7 @@ const Welcome = ({ navigation }) => {
                         }
                     />
                 </View>
-                <View>
+                <View style={{marginBottom:'3%'}}>
                     <TextInput
                         testID="lastName"
                         style={
