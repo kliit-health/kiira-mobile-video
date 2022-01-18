@@ -18,8 +18,9 @@ const style = StyleSheet.create({
         padding: 10,
         width: metrics.width - childPadding,
         backgroundColor: colors.primaryBlue,
-        marginTop: metrics.height * 0.01,
+        marginTop: metrics.height * 0.005,
     },
+   
     disabledButton:{
         alignSelf: 'center',
         borderRadius: 20,
@@ -54,6 +55,21 @@ const style = StyleSheet.create({
         margin: 15,
         color:colors.greyDark
     },
+    AdditionalInformationText: {
+        textAlign: 'center',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+       marginHorizontal:'3%',
+        color:colors.greyDark
+    },
+    skipText: {
+        textAlign: 'center',
+        marginTop: metrics.height * 0.08,
+        color: colors.primaryBlue,
+        fontSize: text.size.large,
+        fontFamily: text.fontFamily.poppinsRegular,
+        marginBottom: metrics.height * 0.02,
+    },
   
     namesTextInput: {
         marginTop:20,
@@ -62,7 +78,7 @@ const style = StyleSheet.create({
         paddingVertical:10,
         borderRadius:5,
        width:'50%',
-       marginHorizontal:20,
+       marginHorizontal:'6%',
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         backgroundColor: colors.greyLight,
@@ -72,11 +88,12 @@ const style = StyleSheet.create({
         marginTop:30,
         paddingHorizontal: 15,
         paddingVertical:10,
+        marginHorizontal:'6%',
         borderRadius:5,
-        marginHorizontal:20,
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         backgroundColor: colors.greyLight,
+        width:'90%',
       
     },
     nameTextInputOnChange:{
@@ -133,12 +150,13 @@ const style = StyleSheet.create({
     stateDropDownContainerStyle: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal:10,
-        paddingVertical:10,
+        marginHorizontal:'6%',
+        paddingVertical:'3%',
         marginTop: metrices.height * 0.03,
         borderColor: colors.greyAccent,
         borderWidth: 1,
         borderRadius:5,
+        width:'90%',
         backgroundColor:colors.white,
     },
     stateDropDownTextStyle: {
@@ -157,8 +175,7 @@ const style = StyleSheet.create({
         alignSelf: 'center',
         width: metrices.width - parentPadding - metrices.width * 0.05,
     },
-    dropDownIconStyle: {
-      
+    dropDownIconStyle: {   
             height: metrics.width * 0.04,
             width: metrics.width * 0.04,
             opacity:0.3      
@@ -168,7 +185,8 @@ const style = StyleSheet.create({
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         textAlign: 'center',
-        alignSelf: 'center',marginTop:5
+        alignSelf: 'center',
+        marginTop:20
     }
 });
 

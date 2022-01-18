@@ -83,6 +83,24 @@ export default {
                 { value: 'Male', code: 'M' },
                 { value: 'Female', code: 'F' },
             ],
+            pharmacy:[
+                {
+                    value: 'Walgreens',
+                },
+                {
+                    value: 'CVS Health',
+                },
+                {
+                    value: 'Walmart',
+                },
+                {
+                    value: 'Rite Aid',
+                },
+                {
+                    value: 'Other',
+                },
+
+            ],
             income: [
                 { value: '0 - 35,000', code: '0 - 35,000' },
                 { value: '35,001 - 60,000', code: '35,001 - 60,000' },
@@ -93,6 +111,32 @@ export default {
                 { value: '150,001 - 175,000', code: '150,001 - 175,000' },
                 { value: '175,001 - 200,000', code: '175,001 - 200,000' },
                 { value: '200,000+', code: '200,000+' },
+            ],
+            insurance:[
+                {
+                   value:'Aetan Health'
+                },
+                {
+                    value:'Blue Cross/Blue Shield'
+                 },
+                 {
+                    value:'Cigna'
+                 },
+                 {
+                    value:'Kaiser'
+                 },
+                 {
+                    value:'United Health'
+                 },
+                 {
+                    value:'Wellpoint'
+                 },
+                 {
+                    value:'Other'
+                 },
+                 {
+                    value:'None'
+                 },
             ],
             states: [
                 {
@@ -383,6 +427,7 @@ export default {
         screenNames: {
             Activate: 'Activate',
             AddChild: 'AddChild',
+            AdditionalInformation: 'AdditionalInformation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
             Allergies: 'Allergies',
             Appointments: 'Appointments',
