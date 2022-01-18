@@ -59,6 +59,7 @@ const style = StyleSheet.create({
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
        marginHorizontal:'3%',
+       marginVertical:'3%',
         color:colors.greyDark
     },
     skipText: {
