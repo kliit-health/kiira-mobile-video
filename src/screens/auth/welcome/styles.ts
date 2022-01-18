@@ -56,23 +56,23 @@ const style = StyleSheet.create({
     },
   
     namesTextInput: {
-        marginTop:20,
+        marginTop:'6%',
         flex:1,
         paddingHorizontal: 15,
         paddingVertical:10,
         borderRadius:5,
        width:'50%',
-       marginHorizontal:20,
+       marginHorizontal:'5%',
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         backgroundColor: colors.greyLight,
        
     },
-    otherTextInput: {
-        marginTop:30,
+    otherTextInput: {  
+        alignSelf:'center',
+        marginTop:'8%',
         paddingHorizontal: 15,
         paddingVertical:10,
-        marginHorizontal:'6%',
         borderRadius:5,
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
@@ -106,7 +106,7 @@ const style = StyleSheet.create({
     },
     OtherTextInputOnChange: {
         borderBottomColor:colors.greyAccent,
-       borderBottomWidth:1,
+        borderBottomWidth:1,
         marginTop:'6%',
         paddingHorizontal: 15,
         paddingVertical:10,
@@ -118,8 +118,8 @@ const style = StyleSheet.create({
       
     },
     imageBackground:{
-        display:'flex',
-        backgroundColor:colors.white,
+         display:'flex',
+         backgroundColor:colors.white,
          borderRadius:120,
          width:120,
          height:120,
@@ -132,8 +132,8 @@ const style = StyleSheet.create({
     },
     stateDropDownContainerStyle: {
         alignItems: 'center',
+        alignSelf:'center',
         justifyContent: 'center',
-        marginHorizontal:'6%',
         width:'90%',
         paddingVertical:10,
         marginTop: metrices.height * 0.03,
@@ -159,10 +159,9 @@ const style = StyleSheet.create({
         width: metrices.width - parentPadding - metrices.width * 0.05,
     },
     dropDownIconStyle: {
-      
-            height: metrics.width * 0.04,
-            width: metrics.width * 0.04,
-            opacity:0.3      
+        height: metrics.width * 0.04,
+        width: metrics.width * 0.04,
+        opacity:0.3      
     },
     pageNumber:{
         color: colors.greyDark,
