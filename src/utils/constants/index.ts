@@ -428,6 +428,8 @@ export default {
             Activate: 'Activate',
             AddChild: 'AddChild',
             AdditionalInformation: 'AdditionalInformation',
+            InformedConsent: 'InformedConsent',
+            ConsentConfirmation: 'ConsentConfirmation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
             Allergies: 'Allergies',
             Appointments: 'Appointments',
@@ -816,6 +818,9 @@ export const stack = {
 export const screenNames = {
     Activate: 'Activate',
     AddChild: 'AddChild',
+    AdditionalInformation: 'AdditionalInformation',
+    InformedConsent: 'InformedConsent',
+    ConsentConfirmation: 'ConsentConfirmation',
     AddCreditOrDebitCard: 'AddCreditOrDebitCard',
     AddProfileData: 'AddProfileData',
     Allergies: 'Allergies',

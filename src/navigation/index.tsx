@@ -95,6 +95,8 @@ import VisitOverView from '../screens/patient/dashboard/appointments/visitSummar
 
 import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
+import InformedConsent from '~/screens/auth/welcome/InformedConsent';
+import ConsentConfirmation from '~/screens/auth/welcome/InformedConsent/consentConfirmation';
 
 let tabIconSize = 25;
 
@@ -121,7 +123,9 @@ const AuthStack = createStackNavigator(
         Landing: { screen: Landing },
         Login: { screen: Login },
         Welcome: { screen: Welcome },
-        AdditionalInformation:{screen: AdditionalInformation}
+        AdditionalInformation:{screen: AdditionalInformation},
+        InformedConsent:{screen: InformedConsent},
+        ConsentConfirmation: {screen: ConsentConfirmation}
     },
     {
         headerMode: 'none',

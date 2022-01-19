@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import metrics from '~/utils/metrices';
-import { text, colors } from '~/utils/constants';
+import Constant, { text, colors } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 
 let parentPaddingValue = metrics.width * 0.1;
@@ -185,7 +185,102 @@ const style = StyleSheet.create({
         textAlign: 'center',
         alignSelf: 'center',
         marginTop:20
-    }
+    },
+    content: {
+                flex: 1,
+                flexDirection: 'column',
+                alignContent: 'center',
+                alignSelf: 'center',
+                paddingHorizontal: 20,
+                
+            },
+    consentTitle:{
+        color: colors.black,
+        fontSize: text.size.xxLarge,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign:'left',
+        left:'4%',
+        marginHorizontal:'8%',
+        marginTop:'20%',
+    },
+    consentContent:{
+        flex: 1,
+                flexDirection: 'column',
+                alignContent: 'center',
+                alignSelf: 'center',
+                // paddingHorizontal: 20,
+                fontSize: text.size.regular,
+                fontFamily: text.fontFamily.poppinsRegular,
+                margin:'8%'
+    },
+    consentContainer: {
+        backgroundColor:colors.white,
+        height:'95%'
+    },
+    confirmationTitle:{
+        marginTop:'30%',
+        textAlign:'center',
+        fontSize: text.size.xxLarge,
+        fontFamily: text.fontFamily.poppinsRegular,
+    },
+    confirmationText:{
+        color:colors.greyDark,
+        fontSize:text.size.large,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign:'center',
+        marginHorizontal:'17%',
+        marginVertical:'10%',
+    },
+    icon:{
+         alignSelf:'center',
+            
+    },    birthDayContainerStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: metrics.width - childPadding,
+        marginTop: metrics.height * 0.03,
+        borderBottomColor: Constant.App.colors.blackColor,
+        borderBottomWidth: 0.5,
+        paddingBottom: metrics.height * 0.01,
+    },
+
+    birthDayTextStyle: {
+        color: Constant.App.colors.blackColor,
+        fontSize: Constant.App.textSize.Normal,
+        fontFamily: Constant.App.fontFamily.bodyRegular,
+        textAlign: 'left',
+        alignSelf: 'center',
+        width: metrics.width - childPadding,
+    },
+
+        
+            
 });
+
+
+export const buttonStyles = StyleSheet.create({
+    root: {
+        margin:'8%',
+        backgroundColor: colors.primaryBlue,
+    },
+});
+
+
+
+
+export const containerStyles = StyleSheet.create({
+    root: {
+        overflow: 'hidden',
+    },
+
+    container: {
+        padding: 0,
+        backgroundColor:colors.white,
+    },
+});
+
+
+
 
 export default style;

@@ -257,7 +257,7 @@ const AdditionalInformation = ({ navigation }) => {
                             : styles.disabledButton
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => console.log('')}
+                    onPress={() => navigation.navigate(screenNames.InformedConsent)}
                     text="Finish"
                 />
             </View>

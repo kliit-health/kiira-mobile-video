@@ -8,6 +8,7 @@ import {
     PermissionsAndroid,
     Alert,
 } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 import Constant, { colors, icons } from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
@@ -16,9 +17,9 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
 import ImagePicker from 'react-native-image-picker';
 import { Avatar } from 'react-native-elements';
+import moment from 'moment';
 
 const Welcome = ({ navigation }) => {
-
     const { staticImages, screenNames } = Constant.App;
 
     const [showStateModal, setShowStateModal] = useState(false);
@@ -239,7 +240,7 @@ const Welcome = ({ navigation }) => {
                     and get your proper care
                 </Text>
             </View>
-            <View style={{margin:'6%'}}>
+            <View style={{ margin: '6%' }}>
                 <View style={styles.imageBackground}>
                     <TouchableOpacity
                         style={styles.imageView}
@@ -315,7 +316,7 @@ const Welcome = ({ navigation }) => {
                         }
                     />
                 </View>
-                <View style={{marginBottom:'2%'}}>
+                <View style={{ marginBottom: '2%' }}>
                     <TextInput
                         testID="lastName"
                         style={
@@ -333,8 +334,7 @@ const Welcome = ({ navigation }) => {
                             })
                         }
                     />
-                    <TextInput
-                        testID="birthday"
+                    <TextInputMask
                         style={
                             !userProfileData.birthday
                                 ? styles.otherTextInput
@@ -343,12 +343,13 @@ const Welcome = ({ navigation }) => {
                         placeholderTextColor={colors.greyDark}
                         placeholder="Birthday MM/DD/YYYY"
                         value={userProfileData.birthday}
-                        onChangeText={e =>
+                        onChangeText={(formatted, extracted) => {
                             setUserProfileData({
                                 ...userProfileData,
-                                birthday: e,
-                            })
-                        }
+                                birthday: formatted,
+                            });
+                        }}
+                        mask={'[00]{/}[00]{/}[0000]'}
                     />
                 </View>
                 {showStateModal && <RenderStateModalView />}
@@ -378,7 +379,11 @@ const Welcome = ({ navigation }) => {
                             : styles.buttonContainer
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => navigation.navigate(Constant.App.screenNames.AdditionalInformation)}
+                    onPress={() =>
+                        navigation.navigate(
+                            Constant.App.screenNames.AdditionalInformation,
+                        )
+                    }
                     text="Continue"
                 />
             </View>
