@@ -4,8 +4,10 @@ import { TextButton, CustomText, Icon } from '~/components';
 import { updateUser } from '~/redux/actions';
 import styles, { buttonStyles } from '../styles';
 import { colors, icons, screenNames } from '~/utils/constants';
+import { useDispatch } from 'react-redux';
 
 const InformedConsent = ({ navigation }) => {
+    const dispatch = useDispatch();
     const handleAction = () => {
         // dispatch(
         //     updateUser({
@@ -16,7 +18,7 @@ const InformedConsent = ({ navigation }) => {
     };
 
     const handleCancel = () => {
-        navigation.goBack();
+        navigation.navigate('Home')
     };
 
     return (
@@ -62,3 +64,5 @@ const InformedConsent = ({ navigation }) => {
 };
 
 export default InformedConsent;
+
+

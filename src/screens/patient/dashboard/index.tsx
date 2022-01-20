@@ -11,10 +11,12 @@ import model from './model';
 import i18n from '~/i18n';
 import DeviceInfo from 'react-native-device-info';
 import styles from '~/components/styles';
+import { screenNames } from '~/utils/constants';
 
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
+    console.log('USER',user)
 
     const firstName = user.profileInfo.firstName;
     const subscription = useSelector(
@@ -92,7 +94,10 @@ const Dashboard = ({ navigation }) => {
         if (features === 'urgent') {
             const isAndroid = Platform.OS != 'ios';
             Linking.openURL(isAndroid ? 'tel:${911}' : 'telprompt:${911}');
-        } else {
+        }else if(features === 'video' && !user.acceptedTreatmentTerms){
+           navigation.navigate(screenNames.InformedConsent)
+        }
+         else {
             if (features === 'video' && !videoEnabled) {
                 dispatch(
                     actions.showMessage({
