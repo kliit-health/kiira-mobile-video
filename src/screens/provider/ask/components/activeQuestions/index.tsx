@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { FlatList } from 'react-native';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { TimeDisplay } from '~/components';
+import { Alert, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { TimeDisplay, Column } from '~/components';
 import { screenNames } from '~/utils/constants';
+import { default as globalStyles } from '~/components/styles';  
 import styles from './styles';
+import BlueDot from '../../../../../svgs/blue_dot.svg';
 
 const ActiveQuestions = ({ data, navigation, visible }) => {
+ 
     const handleItemPress = questionData => {
         navigation.navigate(screenNames.expertChat, { questionData });
-    };
-
-    return visible ? (
+    }; 
+    return visible ? ( 
         <FlatList
             data={data}
             keyExtractor={item => item.uid}
@@ -22,15 +24,24 @@ const ActiveQuestions = ({ data, navigation, visible }) => {
             renderItem={({ item, index }) => {
                 return <ListItem {...item} onPress={handleItemPress} />;
             }}
-        />
+        /> 
     ) : (
         <View />
     );
 };
 
 const ListItem = props => {
+
+    useEffect(() => {
+        (async () => {
+            await Image.prefetch(profileImageUrl);
+            setLoading(false); 
+        })(); 
+    }, []); 
+
+    const [loading, setLoading] = useState(true);  
     const { userInfo, lastMessage, modifiedDate, onPress } = props;
-    const { firstName, lastName } = userInfo.profileInfo;
+    const { firstName, lastName, profileImageUrl } = userInfo.profileInfo;
     const lang = useSelector(state => state.language);
 
     const handlePress = () => {
@@ -55,28 +66,35 @@ const ListItem = props => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            style={styles.item.card}
+            style={[styles.item.card, {borderBottomWidth:1}]}
             onPress={handlePress}
         >
+            
+            <View style={styles.item.imageContainer}> 
+                <BlueDot/>
+                <Image
+                    style={styles.item.image}
+                    source={
+                        loading
+                            ? require('../../../../../../assets/profile_img_placeholder.png')
+                            : { uri: profileImageUrl }
+                    }
+                    resizeMode={'contain'}
+                />
+            </View>
             <View style={styles.item.outerContainer}>
-                <View>
-                    <Text style={styles.item.title}>
-                        {lang.expertChats.patientName}
-                    </Text>
+                <View> 
                     <Text
                         style={styles.item.subtitle}
                     >{`${firstName} ${lastName}`}</Text>
                 </View>
-                <View style={styles.item.innerContainer}>
+                <View style={styles.item.innerContainer}> 
                     <Text numberOfLines={1} style={styles.item.title}>
-                        {lang.expertChats.lastMessage}
-                    </Text>
-                    <Text numberOfLines={1} style={styles.item.subtitle}>
                         {lastMessage}
                     </Text>
                 </View>
             </View>
-            <TimeDisplay time={time} />
+            <Text  style={styles.item.time}>{time}</Text>
         </TouchableOpacity>
     );
 };

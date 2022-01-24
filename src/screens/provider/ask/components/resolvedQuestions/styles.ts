@@ -36,15 +36,36 @@ export default {
             color: colors.black,
             margin: 0,
         },
+        imageContainer: {
+            justifyContent: 'center',
+            alignItems: 'center', 
+            marginLeft: -5,
+            flexDirection:'row', 
+        },
         outerContainer: {
             justifyContent: 'space-between',
             alignItems: 'flex-start',
             flex: 1,
-            marginRight: 10,
+            marginRight: 10, 
         },
         innerContainer: {
             marginTop: 5,
         },
+        image: {
+            justifyContent: 'center',
+            marginLeft: 10,
+            marginRight: 20,
+            width: 40,
+            height: 40,
+        },
+        time:{ 
+            fontFamily: text.fontFamily.poppinsRegular,
+            fontSize: text.size.xSmall,
+            fontWeight: '400',
+            color: colors.greyDark, 
+            backgroundColor: colors.white,
+            marginTop:5,
+        }
     }),
     fallBack: StyleSheet.create({
         container: {

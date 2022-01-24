@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchBar, TextButton, Header, Container } from '~/components';
+import { SearchBar, Column, Header, Container, Tabs } from '~/components';
 import {
     getActiveQuestions,
     getResolvedQuestions,
@@ -11,16 +11,17 @@ import {
     getTermsAndConditions,
     getPrivacyPolicy,
     getUser,
-} from '~/redux/actions';
-import { ActiveQuestions, ResolvedQuestions } from './components';
-import styles, { modifiers } from './styles';
+} from '~/redux/actions'; 
+import { Show } from './components/'
+import { chatTabs } from './model';
+import styles, { modifiers } from './styles'; 
 
 const AskExpert = ({ navigation }) => {
     const dispatch = useDispatch();
     const [active, setActive] = useState(true);
     const [searching, setSearching] = useState(false);
     const [value, setValue] = useState('');
-
+    const [pastSelected, setPastSelected] = useState(false);
     const lang = useSelector((state:any) => state.language);
     const expertDetails = useSelector((state:any) => state.user.data);
     const activeQuestions = useSelector((state:any) => state.askExpert.active);
@@ -79,44 +80,31 @@ const AskExpert = ({ navigation }) => {
         setSearching(Boolean(value));
     };
 
+    const handleTabSelect = () => {
+        setPastSelected(!pastSelected);
+    }; 
+
     return (
-        <Container themed unformatted>
+        <Container unformatted styles={modifiers.container}>
             <StatusBar barStyle="light-content" translucent={true} />
-            <Header themed title={lang.expertChats.title} />
+            <Header title={lang.expertChats.title}/>
             <SearchBar
                 styles={modifiers.searchBar}
                 onChange={handleSearch}
-                placeholder={lang.expertChats.searchName}
+                placeholder={'Search'}
             />
-            <View style={styles.buttonsContainer}>
-                <TextButton
-                    styles={modifiers.button}
-                    disabled={active}
-                    activeOpacity={1}
-                    onPress={toggleActive}
-                >
-                    {lang.expertChats.active}
-                </TextButton>
-                <TextButton
-                    outlined
-                    styles={modifiers.button}
-                    disabled={!active}
-                    activeOpacity={1}
-                    onPress={toggleActive}
-                >
-                    {lang.expertChats.resolved}
-                </TextButton>
-            </View>
-            <ActiveQuestions
-                visible={active}
-                data={searching ? activeSearchResult : activeQuestions}
+            <Tabs 
+                list={chatTabs}
+                active={pastSelected}
+                setActive={handleTabSelect}
+                options={[styles.tabContainer]}
+            />
+            <Show 
+                pastSelected={pastSelected} 
+                activeData={searching ? activeSearchResult : activeQuestions}
+                resolveData={searching ? resolvedSearchResult : resolvedQuestions}
                 navigation={navigation}
-            />
-            <ResolvedQuestions
-                visible={!active}
-                data={searching ? resolvedSearchResult : resolvedQuestions}
-                navigation={navigation}
-            />
+            /> 
         </Container>
     );
 };

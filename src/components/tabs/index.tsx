@@ -29,17 +29,18 @@ export type TabsType = {
 const Tabs = ({ list, setActive, active, options = null }: TabsType) => {
     const [selected, setSelected] = useState(list[0].title);
 
-    const line = [{ borderTopWidth: 0 }, sm_pad_h, none, small, width_auto];
-    const text = [{ height: 20 }, inactive, tiny, regular, text_space];
+    const line = [{ borderTopWidth: 0, marginBottom:5 }, sm_pad_h, none, small, width_auto];
+    const text = [{ height: 25 }, inactive, tiny, regular, text_space];
 
     const lineSelected = [
-        { borderTopWidth: 0 },
+        { borderTopWidth: 0, paddingHorizontal:5, marginBottom:5 },
         sm_pad_h,
         blue_br_b,
         small,
-        width_auto,
+        width_auto, 
+
     ];
-    const textSelected = [{ height: 20 }, blue, tiny, regular, text_space];
+    const textSelected = [{ height: 25}, blue, tiny, regular, text_space];
 
     const handlePress = (title: string, label: string, list) => {
         setSelected(title);
@@ -82,8 +83,9 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         paddingTop: 15,
+        paddingHorizontal:15
     },
 });
 

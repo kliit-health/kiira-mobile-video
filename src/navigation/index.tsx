@@ -94,6 +94,12 @@ import VisitOverView from '../screens/patient/dashboard/appointments/visitSummar
 
 import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
+import Chats from '../svgs/chats.svg'; 
+import Chats_active from '../svgs/chats_active.svg'; 
+import Home from '../svgs/home.svg'; 
+import Home_active from '../svgs/home_active.svg'; 
+import Calendars from '../svgs/calendar.svg'; 
+import Calendars_active from '../svgs/calendar_active.svg'; 
 
 let tabIconSize = 25;
 
@@ -257,37 +263,8 @@ const BottomTab = createBottomTabNavigator(
 );
 
 const BottomTabExpert = createBottomTabNavigator(
-    {
-        AccountExpert: {
-            screen: AccountExpert,
-            navigationOptions: {
-                tabBarIcon: ({ tintColor, focused }) => (
-                    <View
-                        testID="Expert Profile Tab"
-                        style={{
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: focused ? '#e4fdfd' : '',
-                            padding: focused ? 10 : 0,
-                            marginTop: 5,
-                            borderRadius: 20,
-                        }}
-                    >
-                        <Image
-                            resizeMode={'contain'}
-                            style={{ width: tabIconSize, height: tabIconSize }}
-                            source={
-                                focused
-                                    ? require('../../assets/me-active.png')
-                                    : require('../../assets/me.png')
-                            }
-                        />
-                    </View>
-                ),
-            },
-        },
-        AskExpert: {
+    { 
+        Chats: {
             screen: AskExpert,
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
@@ -299,27 +276,30 @@ const BottomTabExpert = createBottomTabNavigator(
                             alignItems: 'center',
                             backgroundColor: focused ? '#e4fdfd' : '',
                             padding: focused ? 10 : 0,
-                            marginTop: 5,
+                            marginTop: 15,
                             borderRadius: 20,
                         }}
                     >
-                        <Image
-                            resizeMode={'contain'}
+                        {focused && <Chats_active  
                             style={{
                                 width: tabIconSize,
                                 height: tabIconSize,
                             }}
-                            source={
-                                focused
-                                    ? require('../../assets/chat-new-active.png')
-                                    : require('../../assets/chat-new.png')
-                            }
-                        />
+                        />}
+                        {!focused && <Chats  
+                            style={{
+                                width: tabIconSize,
+                                height: tabIconSize,
+                            }}
+                        />}
+                        <Text options={focused ? selected : notSelected}>
+                            Chats
+                        </Text>
                     </View>
                 ),
             },
         },
-        ExpertAppointments: {
+        Home: {
             screen: ExpertAppointments,
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
@@ -331,29 +311,32 @@ const BottomTabExpert = createBottomTabNavigator(
                             alignItems: 'center',
                             backgroundColor: focused ? '#e4fdfd' : '',
                             padding: focused ? 10 : 0,
-                            marginTop: 5,
+                            marginTop: 15,
                             borderRadius: 20,
                         }}
                     >
-                        <Image
-                            resizeMode={'contain'}
+                        {focused && <Home_active  
                             style={{
                                 width: tabIconSize,
                                 height: tabIconSize,
                             }}
-                            source={
-                                focused
-                                    ? require('../../assets/doctor-active.png')
-                                    : require('../../assets/doctor.png')
-                            }
-                        />
+                        />}
+                        {!focused && <Home  
+                            style={{
+                                width: tabIconSize,
+                                height: tabIconSize,
+                            }}
+                        />} 
+                        <Text options={focused ? selected : notSelected}>
+                            Home
+                        </Text>
                     </View>
                 ),
             },
         },
-        Community: {
-            screen: Patients,
-            navigationOptions: {
+        Calendar: {
+            screen: ExpertAppointments,
+            navigationOptions: { 
                 tabBarIcon: ({ focused }) => {
                     return (
                         <View
@@ -364,22 +347,25 @@ const BottomTabExpert = createBottomTabNavigator(
                                 alignItems: 'center',
                                 backgroundColor: focused ? '#e4fdfd' : '',
                                 padding: focused ? 10 : 0,
-                                marginTop: 5,
+                                marginTop: 15,
                                 borderRadius: 20,
                             }}
                         >
-                            <Image
-                                resizeMode={'contain'}
+                            {focused && <Calendars_active  
                                 style={{
                                     width: tabIconSize,
                                     height: tabIconSize,
                                 }}
-                                source={
-                                    focused
-                                        ? require('../../assets/history-active.png')
-                                        : require('../../assets/history.png')
-                                }
-                            />
+                            />}
+                            {!focused && <Calendars  
+                                style={{
+                                    width: tabIconSize,
+                                    height: tabIconSize,
+                                }}
+                            />} 
+                            <Text options={focused ? selected : notSelected}>
+                                Calendar
+                            </Text>
                         </View>
                     );
                 },
@@ -387,7 +373,7 @@ const BottomTabExpert = createBottomTabNavigator(
         },
     },
     {
-        initialRouteName: 'AskExpert',
+        initialRouteName: 'Chats',
         // tabBarposition: 'bottom',
         // swipeEnabled: true,
         tabBarOptions: {
@@ -396,15 +382,15 @@ const BottomTabExpert = createBottomTabNavigator(
             showLabel: false, 
             style: {
                 backgroundColor: 'white',
-                borderRadius: 12,
+                borderRadius: 3,
                 borderColor: 'lightgrey',
                 borderWidth: 1,
-                marginHorizontal: 5,
-                height: 40,
-                shadowOffset: { width: 0, height: 2 },
-                shadowColor: '#000000',
+                marginHorizontal: 1,
+                height: 60,
+                shadowOffset: { width: 0, height: -4 },
+                shadowColor: 'rgba(0, 11, 30, 0.16)',
                 shadowOpacity: 1,
-                shadowRadius: 7,
+                shadowRadius: 20, 
             },
         },
     },

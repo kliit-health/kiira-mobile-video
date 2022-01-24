@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import moment from 'moment';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { TimeDisplay } from '~/components';
 import { screenNames } from '~/utils/constants';
+import BlueDot from '../../../../../svgs/blue_dot.svg';
 import styles from './styles';
 
 const ResolvedQuestions = ({ data, navigation, visible }) => {
     const handleItemPress = questionData => {
         navigation.navigate(screenNames.expertChat, { questionData });
-    };
-
+    }; 
     return visible ? (
         <FlatList
             data={data}
@@ -30,8 +30,16 @@ const ResolvedQuestions = ({ data, navigation, visible }) => {
 };
 
 const ListItem = props => {
+    useEffect(() => {
+        (async () => {
+            await Image.prefetch(profileImageUrl);
+            setLoading(false); 
+        })(); 
+    }, []); 
+
+    const [loading, setLoading] = useState(true);  
     const { userInfo, lastMessage, modifiedDate, onPress } = props;
-    const { firstName, lastName } = userInfo.profileInfo;
+    const { firstName, lastName, profileImageUrl } = userInfo.profileInfo;
     const lang = useSelector(state => state.language);
     const handlePress = () => {
         if (onPress) {
@@ -42,28 +50,35 @@ const ListItem = props => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            style={styles.item.card}
+            style={[styles.item.card, {borderBottomWidth:1}]}
             onPress={handlePress}
         >
+            
+            <View style={styles.item.imageContainer}> 
+                <BlueDot/>
+                <Image
+                    style={styles.item.image}
+                    source={
+                        loading
+                            ? require('../../../../../../assets/profile_img_placeholder.png')
+                            : { uri: profileImageUrl }
+                    }
+                    resizeMode={'contain'}
+                />
+            </View>
             <View style={styles.item.outerContainer}>
-                <View>
-                    <Text style={styles.item.title}>
-                        {lang.expertChats.patientName}
-                    </Text>
+                <View> 
                     <Text
                         style={styles.item.subtitle}
                     >{`${firstName} ${lastName}`}</Text>
                 </View>
-                <View style={styles.item.innerContainer}>
+                <View style={styles.item.innerContainer}> 
                     <Text numberOfLines={1} style={styles.item.title}>
-                        {lang.expertChats.lastMessage}
-                    </Text>
-                    <Text numberOfLines={1} style={styles.item.subtitle}>
                         {lastMessage}
                     </Text>
                 </View>
-            </View>
-            <TimeDisplay time={moment(modifiedDate).format('hh:mm A')} />
+            </View> 
+            <Text  style={styles.item.time}>{moment(modifiedDate).format('hh:mm A')}</Text>
         </TouchableOpacity>
     );
 };

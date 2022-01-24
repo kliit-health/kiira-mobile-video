@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '~/utils/constants';
+import { StyleSheet } from 'react-native'; 
+import { text, colors } from '~/utils/constants'; 
 
 export default StyleSheet.create({
     buttonsContainer: {
@@ -8,16 +8,33 @@ export default StyleSheet.create({
         paddingVertical: 10,
         backgroundColor: colors.white,
     },
+    tabContainer: { 
+        marginTop: 25,
+        height: 40,
+        backgroundColor: colors.white,
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1,
+        justifyContent: 'flex-end',
+    },
 });
 
 export const modifiers = {
     container: {
-        root: {},
+        root: {
+            backgroundColor: colors.white,
+        },
     },
     searchBar: {
         root: {
-            marginTop: 10,
-        },
+            backgroundColor:'#F6F7FA',
+            marginHorizontal: 20,
+            borderRadius:8,
+        }, 
+        textInput:{
+            backgroundColor:'#F6F7FA',
+            fontSize: text.size.regular,
+            fontFamily: text.fontFamily.poppinsLight,
+        }
     },
     button: {
         root: {
@@ -25,3 +42,4 @@ export const modifiers = {
         },
     },
 };
+
