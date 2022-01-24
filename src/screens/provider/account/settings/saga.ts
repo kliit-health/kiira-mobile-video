@@ -5,6 +5,9 @@ import { uploadImage } from '~/utils/firebase';
 import { showOrHideModal } from '~/components/customModal/action';
 import { getUser, updateUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
+import { 
+  Platform, 
+} from 'react-native';
 
 function* updateExpertData({ data }) {
   const lang = yield select(state => state.language);
@@ -17,8 +20,8 @@ function* updateExpertData({ data }) {
       const responseImage = yield uploadImage(imageParams);
 
       if (responseImage.success) {
-        const { name } = responseImage.data.metadata;
-        const url = yield storage().ref(name).getDownloadURL();
+        const { name } = responseImage.data.metadata;    
+        const url = yield storage().ref('Kiira/' + name).getDownloadURL(); 
 
         const userInfo = {
           ...user,

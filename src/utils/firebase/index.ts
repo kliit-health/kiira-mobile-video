@@ -129,16 +129,17 @@ export async function sendEmailVerification(obj) {
 
 export function uploadImage(obj, success?, error?) {
   try {
-    const result = storage().ref(`Kiira/${obj.filename}`).putFile(obj.file);
+    const result = storage().ref(`Kiira/${obj.filename}`).putFile(obj.file); 
+
     return result
-      .then(data => {
+      .then(data => { 
         const obj = {
           success: true,
           data,
         };
         return obj;
       })
-      .catch(error => {
+      .catch(error => { 
         const { message } = error;
         displayConsole('---message--', message);
         const obj = {
@@ -696,7 +697,7 @@ export function getExpertQuestionsData(obj, success, error) {
   }
 }
 
-export function logout() {
+export function logout() { 
   try {
     return auth()
       .signOut()

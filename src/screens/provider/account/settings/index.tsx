@@ -7,6 +7,7 @@ import {
   ScrollView,
   PermissionsAndroid,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
@@ -55,7 +56,7 @@ class SettingsExpert extends PureComponent {
 
   constructor(props) {
     super(props);
-    const { userData, lang } = this.props;
+    const { userData, lang } = this.props; 
     this.state = {
       bio: userData.profileInfo.bio,
       city: userData.profileInfo.city,
@@ -210,7 +211,7 @@ class SettingsExpert extends PureComponent {
                   imageUri.lastIndexOf('/') + 1,
                   imageUri.length,
                 );
-                const ext = imageUri.split('/').pop(); // Extract image extension
+                const ext = imageUri.split('/').pop(); // Extract image extension 
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
@@ -218,7 +219,7 @@ class SettingsExpert extends PureComponent {
               } else if (userData.profileInfo.profileImageUrl) {
                 payloadData.userParams.imageUri =
                   userData.profileInfo.profileImageUrl;
-              }
+              }  
 
               if (filename) {
                 payloadData.imageParams = {
@@ -312,8 +313,7 @@ class SettingsExpert extends PureComponent {
           rounded
           source={{ uri: imageSrc ? imageSrc : '' }}
           activeOpacity={0.7}
-        />
-        {Platform.OS === 'ios' && (
+        /> 
           <TouchableOpacity
             onPress={() => {
               this.requestCameraPermission();
@@ -322,8 +322,7 @@ class SettingsExpert extends PureComponent {
             <CustomText style={styles.changeProfileTextStyle}>
               {lang.setting.changePhoto}
             </CustomText>
-          </TouchableOpacity>
-        )}
+          </TouchableOpacity> 
       </View>
     );
   }

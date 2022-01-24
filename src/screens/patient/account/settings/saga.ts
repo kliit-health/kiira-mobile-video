@@ -20,12 +20,8 @@ function* updateUserData({ data }) {
       const responseImage = yield uploadImage(imageParams); 
 
       if (responseImage.success) { 
-        const { name } = responseImage.data.metadata;  
-        var refStorage = name;
-        if(Platform.OS === 'android'){
-          refStorage = 'Kiira/' + name;;
-        }
-        const url = yield storage().ref(refStorage).getDownloadURL(); 
+        const { name } = responseImage.data.metadata;   
+        const url = yield storage().ref('Kiira/' + name).getDownloadURL(); 
 
         const userUpdate = {
           ...user,

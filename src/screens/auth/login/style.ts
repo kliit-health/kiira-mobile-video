@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import Constant, {text, colors} from '~/utils/constants';
 import metrics, {smallScreen} from '~/utils/metrices';
 import {getStatusBarHeight} from '~/components/iPhoneXHelper';
@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
     width: metrics.width - parentPadding,
     fontSize: text.size.normal,
     fontFamily: text.fontFamily.poppinsRegular,
-    textAlign: 'left',
-    width: metrics.width - childPadding,
+    textAlign: 'left', 
   },
 
   inputTypePasswordStyle: {
     color: colors.black,
     fontSize: text.size.normal,
     textAlign: 'left',
+    fontFamily: text.fontFamily.poppinsRegular,
     width: metrics.width - childPadding - metrics.width * 0.05,
   },
 
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: getStatusBarHeight(),
+    marginTop: getStatusBarHeight(0),
     backgroundColor: colors.white,
     borderRadius: 35,
     overflow: 'hidden',
