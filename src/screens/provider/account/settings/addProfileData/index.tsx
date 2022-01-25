@@ -125,6 +125,8 @@ class AddProfileData extends PureComponent {
                 skipBackup: true,
                 path: 'images',
             },
+            maxWidth:300,
+            maxHeight:300,
         };
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {

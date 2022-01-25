@@ -14,14 +14,16 @@ function* updateExpertData({ data }) {
   const user = yield select(state => state.user.data);
   try {
     const { userParams, imageParams, navigation } = data;
-    yield put(showApiLoader(lang.apiLoader.loadingText));
-
-    if (imageParams) {
-      const responseImage = yield uploadImage(imageParams);
-
+    yield put(showApiLoader(lang.apiLoader.loadingText)); 
+    if (imageParams) { 
+      const responseImage = yield uploadImage(imageParams); 
       if (responseImage.success) {
-        const { name } = responseImage.data.metadata;    
-        const url = yield storage().ref('Kiira/' + name).getDownloadURL(); 
+        const { name } = responseImage.data.metadata;     
+        var refStorage = name;
+        if(Platform.OS === 'android'){
+          refStorage = 'Kiira/' + name;;
+        }
+        const url = yield storage().ref(refStorage).getDownloadURL();  
 
         const userInfo = {
           ...user,

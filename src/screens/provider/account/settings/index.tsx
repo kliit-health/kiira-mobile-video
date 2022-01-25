@@ -40,7 +40,7 @@ class SettingsExpert extends PureComponent {
   public filepath: any;
   public firstName: any;
   public gender: any;
-  public imageUri: any;
+  public profileImageUrl: any;
   public languages: any;
   public lastName: any;
   public license: any;
@@ -68,7 +68,7 @@ class SettingsExpert extends PureComponent {
       firstName: userData.profileInfo.firstName,
       gender: userData.profileInfo.gender,
       imageSrc: userData.profileInfo.profileImageUrl,
-      imageUri: '',
+      profileImageUrl: '',
       languages: userData.profileInfo.languages,
       lastName: userData.profileInfo.lastName,
       license: userData.clinicInfo.license,
@@ -144,7 +144,7 @@ class SettingsExpert extends PureComponent {
       filepath,
       firstName,
       gender,
-      imageUri,
+      profileImageUrl,
       languages,
       lastName,
       license,
@@ -200,34 +200,34 @@ class SettingsExpert extends PureComponent {
                   clinicInfo,
                   profileInfo,
                   city,
+                  profileImageUrl,
                   languages,
                   profession,
                   phoneNumber,
                 },
                 navigation,
               };
-              if (imageUri) {
-                let name = imageUri.substring(
-                  imageUri.lastIndexOf('/') + 1,
-                  imageUri.length,
+              if (profileImageUrl) {
+                let name = profileImageUrl.substring(
+                  profileImageUrl.lastIndexOf('/') + 1,
+                  profileImageUrl.length,
                 );
-                const ext = imageUri.split('/').pop(); // Extract image extension 
+                const ext = profileImageUrl.split('/').pop(); // Extract image extension 
                 filename =
                   Platform.OS === 'ios'
                     ? `${Math.floor(Date.now())}${name}`
                     : `${Math.floor(Date.now())}${name}.${ext}`;
               } else if (userData.profileInfo.profileImageUrl) {
-                payloadData.userParams.imageUri =
+                payloadData.userParams.profileImageUrl =
                   userData.profileInfo.profileImageUrl;
               }  
 
               if (filename) {
                 payloadData.imageParams = {
-                  file: Platform.OS == 'ios' ? imageUri : filepath,
+                  file: Platform.OS == 'ios' ? profileImageUrl : filepath,
                   filename,
                 };
-              }
-
+              }  
               updateUserData(payloadData);
             }
           }}
@@ -273,6 +273,8 @@ class SettingsExpert extends PureComponent {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth:300,
+      maxHeight:300,
     };
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
@@ -283,7 +285,7 @@ class SettingsExpert extends PureComponent {
         const source = { uri: response.uri };
         this.setState({
           imageSrc: response.uri,
-          imageUri: response.uri,
+          profileImageUrl: response.uri,
           filepath: response.path,
           file: response,
         });

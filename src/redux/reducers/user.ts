@@ -43,8 +43,13 @@ export default createReducer((state = initialState), {
   },
   [UPDATE_USER_FULFILLED]: (state, {data}) => {
     state.loading = false;
-    state.error = null;
-    state.data = merge(state.data, data);
+    state.error = null; 
+    if(data.fcmToken){
+      state.data = merge(models.user, data)  
+    }
+    else{
+      state.data = merge(state.data, data); 
+    } 
     
   },
   [UPDATE_USER_REJECTED]: (state, {data}) => {

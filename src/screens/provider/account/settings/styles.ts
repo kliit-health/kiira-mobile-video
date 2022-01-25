@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    elevation: 3,
+    elevation: 3, 
+    paddingTop: Platform.OS === 'android' ? 0 : 30,
+    paddingBottom: Platform.OS === 'android' ? 0 : 5,
   },
 
   changeProfileTextStyle: {
@@ -72,7 +74,9 @@ const styles = StyleSheet.create({
   },
 
   doneTextStyle: {
-    padding: 5,
+    paddingHorizontal: 5, 
+    paddingTop: Platform.OS === 'android' ? 0 : 30,
+    paddingBottom: Platform.OS === 'android' ? 0 : 5,
     textAlign: 'left',
     color: Constant.App.colors.blueColor,
     fontSize: Constant.App.textSize.Medium,
@@ -208,8 +212,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Large,
-    fontFamily: Constant.App.fontFamily.headerBold,
-  },
+    fontFamily: Constant.App.fontFamily.headerBold, 
+    paddingTop: Platform.OS === 'android' ? 0 : 30,
+    paddingBottom: Platform.OS === 'android' ? 0 : 5,
+  }, 
 });
 
 export default styles;

@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.twiliorn.library.TwilioPackage;
+import com.imagepicker.ImagePickerPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -36,7 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
       List<ReactPackage> packages = new PackageList(this).getPackages();
 
       // Packages that cannot be autolinked yet can be added manually here, for example:
-      packages.add(new TwilioPackage());
+      packages.add(new TwilioPackage()); 
       return packages;
     }
 

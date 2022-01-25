@@ -228,6 +228,8 @@ class Chat extends React.PureComponent {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth:300,
+      maxHeight:300,
     };
 
     ImagePicker.showImagePicker(options, response => {
