@@ -145,8 +145,7 @@ class AddProfileData extends PureComponent {
             activeOpacity={0.7}
           />
         )}
-        {Platform.OS === 'ios' && (
-          <TouchableOpacity
+        <TouchableOpacity
             style={styles.cameraIconContainerStyle}
             onPress={() => {
               this.requestCameraPermission();
@@ -158,7 +157,6 @@ class AddProfileData extends PureComponent {
               style={styles.cameraIconStyle}
             />
           </TouchableOpacity>
-        )}
       </View>
     );
   }
