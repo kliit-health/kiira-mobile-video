@@ -103,6 +103,7 @@ const AskExpert = ({ navigation }) => {
                 pastSelected={pastSelected} 
                 activeData={searching ? activeSearchResult : activeQuestions}
                 resolveData={searching ? resolvedSearchResult : resolvedQuestions}
+                isSearched={searching}
                 navigation={navigation}
             /> 
         </Container>

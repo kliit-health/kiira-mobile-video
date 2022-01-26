@@ -4,8 +4,7 @@ import { Alert, FlatList } from 'react-native';
 import moment from 'moment';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { TimeDisplay } from '~/components';
-import { screenNames } from '~/utils/constants';
-import BlueDot from '../../../../../svgs/blue_dot.svg';
+import { screenNames } from '~/utils/constants'; 
 import styles from './styles';
 
 const ResolvedQuestions = ({ data, navigation, visible }) => {
@@ -54,8 +53,7 @@ const ListItem = props => {
             onPress={handlePress}
         >
             
-            <View style={styles.item.imageContainer}> 
-                <BlueDot/>
+            <View style={styles.item.imageContainer}>  
                 <Image
                     style={styles.item.image}
                     source={
@@ -63,7 +61,7 @@ const ListItem = props => {
                             ? require('../../../../../../assets/profile_img_placeholder.png')
                             : { uri: profileImageUrl }
                     }
-                    resizeMode={'contain'}
+                    resizeMode={'stretch'}
                 />
             </View>
             <View style={styles.item.outerContainer}>

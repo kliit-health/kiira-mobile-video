@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
         fontSize: size.xxLarge,
     },
 
+    xxxLarge: {
+        fontSize: size.xxxLarge,
+    },
+
     //FONTS
 
     light: {
@@ -37,6 +41,12 @@ const styles = StyleSheet.create({
     regular: {
         fontFamily: fontFamily.poppinsRegular,
         fontWeight: '300',
+    },
+
+    poppins: {
+        fontFamily: fontFamily.poppinsMedium,
+        fontWeight: '400',
+        color: colors.black
     },
 
     medium: {

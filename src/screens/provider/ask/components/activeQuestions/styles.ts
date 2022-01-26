@@ -60,6 +60,7 @@ export default {
             marginRight: 20,
             width: 40,
             height: 40,
+            borderRadius:20,
         },
         time:{ 
             fontFamily: text.fontFamily.poppinsRegular,

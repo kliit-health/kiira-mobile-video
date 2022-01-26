@@ -10,19 +10,18 @@ export default {
         },
     }),
     item: StyleSheet.create({
-        card: {
+        card: { 
             backgroundColor: colors.white,
             borderRadius: 10,
-            shadowColor: colors.black,
-            shadowOffset: { width: 1, height: 1 },
-            shadowRadius: 5,
-            shadowOpacity: 0.1,
-            padding: 10,
-            paddingLeft: 12,
-            justifyContent: 'space-between',
+            shadowColor: colors.black, 
+            paddingHorizontal: 10, 
+            paddingTop:10,
+            paddingBottom:20,
+            justifyContent: 'space-between', 
             flexDirection: 'row',
             marginHorizontal: 10,
-            marginVertical: 5,
+            marginVertical: 10, 
+            borderColor: colors.greyAccent
         },
         title: {
             fontSize: text.size.medium,
@@ -57,6 +56,7 @@ export default {
             marginRight: 20,
             width: 40,
             height: 40,
+            borderRadius:20
         },
         time:{ 
             fontFamily: text.fontFamily.poppinsRegular,

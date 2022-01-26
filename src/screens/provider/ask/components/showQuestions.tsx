@@ -5,7 +5,7 @@ import { Conditional } from '~/components';
 import styles from '../styles';
 import { None, ActiveQuestions, ResolvedQuestions } from '.'; 
 
-export const Show = ({ pastSelected, activeData, resolveData, navigation }) => {
+export const Show = ({ pastSelected, activeData, isSearched, resolveData, navigation }) => {
     const questions = pastSelected ? activeData : resolveData; 
  
     return (
@@ -27,7 +27,7 @@ export const Show = ({ pastSelected, activeData, resolveData, navigation }) => {
                 </Conditional>
             </Conditional>
             <Conditional if={!questions.length}>
-                <None past={pastSelected} />
+                <None isSearched={isSearched} past={pastSelected}/>
             </Conditional>
         </>
     );

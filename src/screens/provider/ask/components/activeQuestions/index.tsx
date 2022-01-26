@@ -79,7 +79,7 @@ const ListItem = props => {
                             ? require('../../../../../../assets/profile_img_placeholder.png')
                             : { uri: profileImageUrl }
                     }
-                    resizeMode={'contain'}
+                    resizeMode={'stretch'}
                 />
             </View>
             <View style={styles.item.outerContainer}>
