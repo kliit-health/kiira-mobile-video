@@ -35,6 +35,7 @@ const Activate = ({ navigation }) => {
                     <TextInput
                         autoCapitalize="none" 
                         autoCorrect={false}
+                        autoFocus={true}
                         onChangeText={text => setEmail(text)}
                         placeholder={login.EnterEmail}
                         value={email}
@@ -44,7 +45,7 @@ const Activate = ({ navigation }) => {
                                 : [styles.activeInpute, { fontWeight: '300'}]
                         }
                         placeholderTextColor={colors.greyAccent}
-                    />
+                    /> 
                 </View>
             </View>
         );
@@ -61,7 +62,7 @@ const Activate = ({ navigation }) => {
                 <Text  
                     style={styles.backText} 
                 >
-                    {'Back'}
+                    {login.Back}
                 </Text>
             </TouchableOpacity>
         );
@@ -72,7 +73,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.helloStyle} 
             >
-                {'Hello New Member!'}
+                {login.HelloNewMember}
             </Text>
         );
     };
@@ -83,7 +84,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.titleStyle} 
             >
-                {'To get started please activate your acount below.'}
+                {login.ActivateBelow}
             </Text>
         );
     };
@@ -93,7 +94,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.infoStyle} 
             >
-                {'Please use the same email address you used when you became a member.'}
+                {login.UseSameEmail}
             </Text>
         );
     };
@@ -103,7 +104,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.contentStyle} 
             >
-                {'If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu'}
+                {login.OrganizationPlan}
             </Text>
         );
     };
