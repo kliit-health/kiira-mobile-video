@@ -368,7 +368,8 @@ export default {
         rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
-        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',         
+        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',       
+        emailSupportUrl: 'mailto:hello@kiira.io?subject=Kiira Activate Account',  
 
         screenNames: {
             Activate: 'Activate',

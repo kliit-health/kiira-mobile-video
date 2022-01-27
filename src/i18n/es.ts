@@ -368,6 +368,12 @@ export default {
         MemberHelp: 'Spanish Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
         NoBiometrics: 'Spanish Please login with email and password to enable.',
         Welcome: 'Spanish Welcome back to Kiira!',
+        Back: 'Spanish Back',
+        HelloNewMember: 'Spanish Hello New Member!',
+        ActivateBelow: 'Spanish To get started please activate your account below.',
+        UseSameEmail: 'Spanish Please use the same email address you used when you became a member.',
+        OrganizationPlan: 'Spanish If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu',
+
     },
 
     paymentMethods: {
