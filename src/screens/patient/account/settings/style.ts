@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
     color: Constant.App.colors.blackColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    elevation: 3,
+    elevation: 3, 
+    paddingHorizontal: Platform.OS === 'android' ? 0 : 5,
+    paddingVertical: Platform.OS === 'android' ? 0 : 10,
   },
 
   changeProfileTextStyle: {
@@ -72,12 +74,13 @@ const styles = StyleSheet.create({
   },
 
   doneTextStyle: {
-    padding: 5,
+    paddingHorizontal: Platform.OS === 'android' ? 0 : 5,
+    paddingVertical: Platform.OS === 'android' ? 0 : 10,
     textAlign: 'left',
     color: Constant.App.colors.blueColor,
     fontSize: Constant.App.textSize.Medium,
     fontFamily: Constant.App.fontFamily.bodyRegular,
-    elevation: 3,
+    elevation: 3,  
   },
 
   dropDownIconStyle: {

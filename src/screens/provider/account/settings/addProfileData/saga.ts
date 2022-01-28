@@ -8,6 +8,9 @@ import {uploadImage} from '~/utils/firebase';
 import {showOrHideModal} from '~/components/customModal/action';
 import storage from '@react-native-firebase/storage';
 import {getUser, updateUser} from '~/redux/actions';
+import { 
+  Platform, 
+} from 'react-native';
 
 // TODO: Refactor this function in order to clean code and remove redundant code
 function* uploadUserData({data, dispatch}) {
@@ -20,9 +23,13 @@ function* uploadUserData({data, dispatch}) {
     if (imageParams) {
       const responseImage = yield uploadImage(imageParams);
 
-      if (responseImage.success) {
-        const {name} = responseImage.data.metadata;
-        const url = yield storage().ref(name).getDownloadURL();
+      if (responseImage.success) {  
+        const { name } = responseImage.data.metadata;     
+        var refStorage = name;
+        if(Platform.OS === 'android'){
+          refStorage = 'Kiira/' + name;;
+        }
+        const url = yield storage().ref(refStorage).getDownloadURL();  
 
         const userInfo = {
           ...user,

@@ -117,7 +117,7 @@ const Login = props => {
                         }
                         placeholderTextColor={Constant.App.colors.blackColor}
                     />
-                </View>
+                </View>  
                 <View style={styles.inputTextContainerStyle}>
                     <CustomInputText
                         autoCapitalize="none"

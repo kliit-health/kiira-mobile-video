@@ -11,7 +11,7 @@ import DeviceInfo from 'react-native-device-info';
 
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
+    const user = useSelector(state => state.user.data); 
     const subscription = useSelector(state => state.subscription.data);
     const licenses = useSelector(state => state.licenses.data.current);
     const lang = useSelector(state => state.language);
@@ -110,8 +110,7 @@ const Dashboard = ({ navigation }) => {
         >
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Intro
-                    displayName={user.profileInfo.firstName}
-                    profileImageUrl={user.profileInfo.profileImageUrl}
+                    {...user} 
                 />
                 <Items onPress={handleNavigation} />
                 <HealthAssesment />

@@ -23,8 +23,7 @@ const Avatar = ({
       await Image.prefetch(source);
       setLoading(false);
     })();
-  }, []);
-
+  }, [source]); 
   const [loading, setLoading] = useState(true);
   const styles = {
     image: mergeStyles([

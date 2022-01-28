@@ -110,6 +110,8 @@ class AddProfileData extends PureComponent {
         skipBackup: true,
         path: 'images',
       },
+      maxWidth:300,
+      maxHeight:300,
     };
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
@@ -143,8 +145,7 @@ class AddProfileData extends PureComponent {
             activeOpacity={0.7}
           />
         )}
-        {Platform.OS === 'ios' && (
-          <TouchableOpacity
+        <TouchableOpacity
             style={styles.cameraIconContainerStyle}
             onPress={() => {
               this.requestCameraPermission();
@@ -156,7 +157,6 @@ class AddProfileData extends PureComponent {
               style={styles.cameraIconStyle}
             />
           </TouchableOpacity>
-        )}
       </View>
     );
   }
