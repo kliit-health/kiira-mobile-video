@@ -50,7 +50,7 @@ const Welcome = ({ navigation }) => {
             <Text  
                 style={styles.titleStyle} 
             >
-                {'Your one stop shop for care. On the Kiira app you can;'}
+                {'Your one stop shop for care. On the kiira app you can;'}
             </Text>
         );
     };
