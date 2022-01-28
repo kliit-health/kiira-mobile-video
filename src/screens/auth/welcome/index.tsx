@@ -7,6 +7,7 @@ import Constant from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { handleNavigation } from '~/utils/functions';
 
 const Welcome = ({ navigation }) => {
 
@@ -21,7 +22,7 @@ const Welcome = ({ navigation }) => {
             <TouchableOpacity
                 testID="Close Button"
                 onPress={() => {
-                    navigation.goBack();
+                    handleNavigation('Login');
                 }}
             >
                 <Text  
@@ -49,7 +50,7 @@ const Welcome = ({ navigation }) => {
             <Text  
                 style={styles.titleStyle} 
             >
-                {'Your one stop shop for care. On the kiira app you can;'}
+                {'Your one stop shop for care. On the Kiira app you can;'}
             </Text>
         );
     };

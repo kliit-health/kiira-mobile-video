@@ -355,7 +355,7 @@ export default {
         Expert: 'Spanish Expert',
         or: 'Spanish or',
         Email: 'Spanish Your email',
-        EnterEmail: 'Spanish Enter email adress here',
+        EnterEmail: 'Spanish Enter email address here',
         Password: 'Spanish Password',
         EmptyEmailMsg: 'Spanish Email is a required field.',
         InvalidEmailMsg:

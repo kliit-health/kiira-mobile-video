@@ -332,7 +332,7 @@ export default {
         Expert: 'Expert',
         or: 'or',
         Email: 'Your email',
-        EnterEmail: 'Enter email adress here',
+        EnterEmail: 'Enter email address here',
         Password: 'Password',
         EmptyEmailMsg: 'Email is a required field.',
         InvalidEmailMsg:

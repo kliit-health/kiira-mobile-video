@@ -26,30 +26,7 @@ const Activate = ({ navigation }) => {
     const login = useSelector((state: RootState) => {
         return state.language.login;
     });
-    const dispatch = useDispatch();
-
-    const InputText = () => {
-        return (
-            <View style={styles.inputTextActiveContainer}>
-                <View style={styles.inputTextActive}>
-                    <TextInput
-                        autoCapitalize="none" 
-                        autoCorrect={false}
-                        autoFocus={true}
-                        onChangeText={text => setEmail(text)}
-                        placeholder={login.EnterEmail}
-                        value={email}
-                        style={
-                            email
-                                ? [styles.activeInpute, { fontWeight: '400'}]
-                                : [styles.activeInpute, { fontWeight: '300'}]
-                        }
-                        placeholderTextColor={colors.greyAccent}
-                    /> 
-                </View>
-            </View>
-        );
-    };
+    const dispatch = useDispatch(); 
 
     const CrossIcon = () => {
         return (
@@ -147,7 +124,23 @@ const Activate = ({ navigation }) => {
                 <View style={styles.activateContainer}>
                     <HelloView />
                     <TitleView />
-                    <InputText />
+                    <View style={styles.inputTextActiveContainer}>
+                        <View style={styles.inputTextActive}>
+                            <TextInput
+                                autoCapitalize="none" 
+                                autoCorrect={false}
+                                onChangeText={text => setEmail(text)}
+                                value={email}
+                                placeholder={login.EnterEmail}
+                                style={
+                                    email
+                                        ? [styles.activeInpute, { fontWeight: '400'}]
+                                        : [styles.activeInpute, { fontWeight: '300'}]
+                                }
+                                placeholderTextColor={colors.greyAccent}
+                            /> 
+                        </View>
+                    </View>
                     <Button />
                     <InfoView />
                     <ContentView />

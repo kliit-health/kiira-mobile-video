@@ -126,7 +126,7 @@ const style = StyleSheet.create({
         fontSize:size.xsLarge,
         fontFamily: fontFamily.poppinsRegular,
         alignSelf: 'center',
-        textAlign:'center',
+        textAlign:'left',
         marginTop: metrics.height * 0.05, 
         marginHorizontal: 30,
         lineHeight:36,

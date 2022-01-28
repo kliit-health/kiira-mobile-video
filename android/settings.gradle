@@ -7,3 +7,5 @@ project(':react-native-smart-splashscreen').projectDir = new File(rootProject.pr
 include ':react-native-twilio-video-webrtc'
 project(':react-native-twilio-video-webrtc').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-twilio-video-webrtc/android')
 include ':app'
+include ':react-native-image-picker'
+project(':react-native-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-image-picker/android')
