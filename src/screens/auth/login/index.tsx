@@ -161,9 +161,9 @@ const Login = ({ navigation }) => {
                         secureTextEntry
                         style={
                             password
-                                ? styles.inputTypePassword
+                                ? styles.inputType
                                 : [
-                                      styles.inputTypePassword,
+                                      styles.inputType,
                                       { fontWeight: '100' },
                                   ]
                         }
