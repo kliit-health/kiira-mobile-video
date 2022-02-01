@@ -33,9 +33,10 @@ const Avatar = ({
             setLoading(false);
         })();
     }, []);
+
     useEffect(() => {
         if (!source) return
-        setImageSrc(source)
+        setImageSrc(source);
         }, [source])
 
     const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const Avatar = ({
             } else if (response.error) {
                 Alert.alert('And error occured: ' + JSON.stringify(response));
             } else { 
-                 setImageSrc(response.uri)
+                 setImageSrc(response.uri);
             }
         });
     }; 
@@ -129,7 +130,7 @@ const Avatar = ({
                 <Image
                     style={styles.image}
                     source={
-                        loading
+                        loading || !imagesrc
                             ? require('../../../assets/profile_img_placeholder.png')
                             : { uri: imagesrc }
                     }
@@ -138,7 +139,7 @@ const Avatar = ({
                 <TouchableOpacity style={defaultStyles.editImage} 
                 onPress={requestCameraPermission}
                 >
-                    <Image source={imagesrc? require('../../../assets/profileEdit.png') : require('../../../assets/profileCreate.png')}/>
+                    <Image source={imagesrc ? require('../../../assets/profileEdit.png') : require('../../../assets/profileCreate.png')}/>
                 </TouchableOpacity>  
                 <View style={styles.status} />
                 {deleteMode && (
