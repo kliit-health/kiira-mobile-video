@@ -33,10 +33,12 @@ const Avatar = ({
             setLoading(false);
         })();
     }, []);
-
+console.log('SOURCE',source)
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
     const [loading, setLoading] = useState(true); 
+    const [imagesrc,setImageSrc] = useState('');
+    const [imageuri,setImageUri] = useState('')
 
     const styles = {
         image: mergeStyles([
@@ -113,6 +115,8 @@ const Avatar = ({
             } else if (response.error) {
                 Alert.alert('And error occured: ' + JSON.stringify(response));
             } else { 
+                 setImageUri(response.uri)
+                 setImageSrc(response.uri)
             }
         });
     }; 
@@ -125,14 +129,14 @@ const Avatar = ({
                     source={
                         loading
                             ? require('../../../assets/profile_img_placeholder.png')
-                            : { uri: source }
+                            : { uri: imagesrc ? imagesrc :source }
                     }
                     resizeMode={resizeMode}
                 />
                 <TouchableOpacity style={defaultStyles.editImage} 
                 onPress={requestCameraPermission}
                 >
-                    <Image source={source ? require('../../../assets/profileEdit.png') : require('../../../assets/profileCreate.png')}/>
+                    <Image source={imagesrc? require('../../../assets/profileEdit.png') : require('../../../assets/profileCreate.png')}/>
                 </TouchableOpacity>  
                 <View style={styles.status} />
                 {deleteMode && (
