@@ -523,6 +523,7 @@ const AppStackExpert = createStackNavigator(
         Recap: { screen: Recap },
         SocialHistory: { screen: SocialHistory },
         SettingsExpert: { screen: SettingsExpert },
+        Settings:{screen: Settings},
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
         BillingInsurance : {screen: BillingInsurance},
