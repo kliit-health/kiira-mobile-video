@@ -14,7 +14,7 @@ const Welcome = ({ displayName }: WelcomeProps): JSX.Element => {
         <View style={styles.container}>
             <Text
                 style={styles.title}
-            >{`${'Hi,'} ${displayName}`}</Text>
+            >{`${lang.dashboard.hiName} ${displayName}`}</Text>
         </View>
     );
 };
