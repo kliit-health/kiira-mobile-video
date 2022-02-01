@@ -33,12 +33,15 @@ const Avatar = ({
             setLoading(false);
         })();
     }, []);
-console.log('SOURCE',source)
+    useEffect(() => {
+        if (!source) return
+        setImageSrc(source)
+        }, [source])
+
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
     const [loading, setLoading] = useState(true); 
     const [imagesrc,setImageSrc] = useState('');
-    const [imageuri,setImageUri] = useState('')
 
     const styles = {
         image: mergeStyles([
@@ -115,7 +118,6 @@ console.log('SOURCE',source)
             } else if (response.error) {
                 Alert.alert('And error occured: ' + JSON.stringify(response));
             } else { 
-                 setImageUri(response.uri)
                  setImageSrc(response.uri)
             }
         });
@@ -129,7 +131,7 @@ console.log('SOURCE',source)
                     source={
                         loading
                             ? require('../../../assets/profile_img_placeholder.png')
-                            : { uri: imagesrc ? imagesrc :source }
+                            : { uri: imagesrc }
                     }
                     resizeMode={resizeMode}
                 />
