@@ -8,11 +8,12 @@ import {
     PermissionsAndroid,
     SafeAreaView,
     StatusBar,
+    Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './styles';
+import styles, { customStyles } from './styles';
 import CustomText from '~/components/customText';
-import Constant from '~/utils/constants';
+import Constant, { colors } from '~/utils/constants';
 import { Avatar } from 'react-native-elements';
 import CustomInputText from '~/components/customInputText';
 import CustomSelectModal from '~/components/customselectModal';
@@ -20,6 +21,9 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import ImagePicker from 'react-native-image-picker';
 import { updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
+import { Header, ListItem, Screen } from '~/components';
+import { list,listItems } from './model';
+
 
 class Setting extends PureComponent {
     public props: any;
@@ -643,64 +647,132 @@ class Setting extends PureComponent {
 
     render() {
         const { showSelectStateModal, showSelectSexualityModal } = this.state;
+        const { navigation,lang } = this.props;
 
         return (
-            <SafeAreaView style={styles.container}>
-                <StatusBar barStyle="dark-content" translucent={true} />
-                {this.renderHeaderView()}
+            <Screen> 
+            <View style={styles.headerStyle}>
+                <Header 
+                    onBack={()=>navigation.goBack()}
+                    title={'Settings'}
+                    
+                />
+            </View>
+            
+               
                 <ScrollView
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
                 >
-                    {this.renderProfileImageView()}
-                    {this.renderInputTextView()}
-                    {this.renderPronounsView()}
-                    {this.renderButtonView()}
-                    {showSelectStateModal ? (
-                        <CustomSelectModal
-                            data={this.state.states}
-                            onSelection={item => {
-                                console.log(
-                                    '---onSelection CustomSelectModal---',
-                                    item,
-                                );
-                                this.setState({
-                                    selectedState: item,
-                                    showSelectStateModal: false,
-                                });
-                            }}
-                            onClose={() => {
-                                console.log('---onClose CustomSelectModal---');
-                                this.setState({
-                                    showSelectStateModal: false,
-                                });
-                            }}
+                   
+                   <View style={styles.inputTextParentContainerStyle}>
+                    <View style={styles.inputTextContainerStyle}>
+                        <CustomText style={styles.textStyle}>Email: </CustomText>
+                        <CustomInputText
+                     
+                            autoCapitalize="words"
+                            onChangeText={value =>console.log('')
+                            }
+                            placeholder={'Enter your email'}
+                             value={this.lastName}
+                            style={
+                                this.lastName
+                                ? styles.inputEditTypeStyle
+                                : [
+                                    styles.inputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]
+                            }
+                            placeholderTextColor={
+                                "#868992"
+                            }
                         />
-                    ) : null}
-                    {showSelectSexualityModal ? (
-                        <CustomSelectModal
-                            data={this.state.sexuality}
-                            onSelection={item => {
-                                console.log(
-                                    '---onSelection CustomSelectModal---',
-                                    item,
-                                );
-                                this.setState({
-                                    selectedSexuality: item,
-                                    showSelectSexualityModal: false,
-                                });
-                            }}
-                            onClose={() => {
-                                console.log('---onClose CustomSelectModal---');
-                                this.setState({
-                                    showSelectSexualityModal: false,
-                                });
-                            }}
+                        
+                    </View>
+                    <View style={styles.inputTextContainerStyle}>
+                        <CustomText style={styles.textStyle}>Phone: </CustomText>
+                        <CustomInputText
+                            autoCapitalize="words"
+                            onChangeText={value =>console.log('')
+                            }
+                            placeholder={'Enter your number'}
+                             value={this.lastName}
+                            style={
+                                this.lastName
+                                ? styles.inputEditTypeStyle
+                                : [
+                                    styles.inputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]
+                            }
+                            placeholderTextColor={
+                                "#868992"
+                            }
                         />
-                    ) : null}
+                        
+                    </View>
+                    </View>
+                    <View style={{marginTop:'6%'}}>
+            {listItems.map(({ title, destination, content}) => (
+                <ListItem
+                    key={title}
+                    id={destination}
+                    onPress={()=>navigation.navigate(destination)}
+                    displayChevron={true}
+                    displayBorder={true} 
+                >
+                    <View style={styles.listContainer}>
+                        <View style={styles.titleContainer}>
+                            { content == `HIPAA` && ( 
+                                <Text style={styles.content}>{
+                                    content 
+                                }</Text>
+                            )}
+                            { content == `Terms and Conditions` && ( 
+                                <Text style={styles.content}>{
+                                     content 
+                                }</Text>
+                            )}
+                             { content == `Privacy Policy` && ( 
+                                <Text style={styles.content}>{
+                                    content 
+                                }</Text>
+                            )}
+                        </View> 
+                    </View>  
+                </ListItem>
+            ))}
+        </View>
+        <View style={{marginTop:'6%'}}>
+            {list.map(({ title}) => (
+                <TouchableOpacity
+                style={[styles.versionListContainer,styles.borderStyle]}
+                onPress={()=>console.log('')} 
+            >
+               <View >
+                        <View style={{flexDirection:'row',justifyContent: 'space-between',}}>
+                            { title == `App Version` && ( 
+                                <><Text style={styles.content}>{title}</Text><Text style={[styles.content,{left:220,color:colors.greyDark}]}>V 1.3</Text></>
+                            )}
+                            { title == `Face ID` && ( 
+                                <Text style={[styles.content,{borderBottomWidth:1,borderBottomColor:colors.greyAccent}]}>{
+                                     title
+                                }</Text>
+                            )}
+                            
+                        </View> 
+                        </View>
+                
+            </TouchableOpacity>
+            ))}
+        </View>
+        {this.renderButtonView()}
+        <View style={{backgroundColor:colors.white,height:'100%',width:'100%',alignContent:'center'}}>
+        <Text style={[styles.textStyle,{color:'#C3224F',textAlign:'center',marginTop:'10%'}]}>Log Out</Text>
+        </View>
                 </ScrollView>
-                {Platform.OS === 'ios' && <KeyboardSpacer />}
-            </SafeAreaView>
+                
+            </Screen>
         );
     }
 }

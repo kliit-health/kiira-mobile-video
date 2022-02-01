@@ -1,6 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
 import { colors, text } from '~/utils/constants';
 import metrices from '~/utils/metrices';
+import { getStatusBarHeight } from '~/components/iPhoneXHelper';
 
 let parentPaddingValue = metrices.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
@@ -65,9 +66,15 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        flexDirection: 'column',
-        backgroundColor: colors.white,
+         flexDirection: 'column',
+        backgroundColor: colors.babyBlue,
         paddingTop: 35,
+    },
+    headerStyle:{
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1, 
+        textAlign:'center',
+
     },
 
     doneTextStyle: {
@@ -78,22 +85,25 @@ const styles = StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         elevation: 3,
     },
+    inputEditTypeStyle: {
+        color: colors.black, 
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'left',     
+        backgroundColor: colors.white, 
+        borderRadius:8,
+        borderColor: colors.greyAccent,
+        borderWidth: 1,
+        paddingHorizontal: metrices.height * 0.02,    
+        paddingTop: metrices.height * 0.008, 
+        paddingBottom: metrices.height * 0.008,  
+    },
 
     dropDownIconStyle: {
         height: metrices.width * 0.04,
         width: metrices.width * 0.04,
     },
 
-    headerStyle: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: parentPaddingValue * 0.5,
-        backgroundColor: colors.white,
-        borderBottomColor: colors.lightGrey,
-        borderBottomWidth: 3,
-        marginTop: Platform.OS === 'android' ? 35 : 0,
-    },
 
     inputTextParentContainerStyle: {
         backgroundColor: colors.white,
@@ -101,14 +111,75 @@ const styles = StyleSheet.create({
         width: metrices.width,
         paddingLeft: parentPaddingValue,
         paddingRight: parentPaddingValue,
+        marginTop:30,
+        borderBottomColor:colors.greyAccent,
+        borderBottomWidth:1
+    },
+    textStyle: {
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        backgroundColor: colors.white, 
+    },
+    textEmptyStyle: {
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontWeight:'300', 
+        color:colors.greyDark
     },
 
+    inputEmptyTypeStyle: {
+        color: colors.black,
+        width:'100%',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'left',     
+        backgroundColor: colors.white, 
+        borderRadius :8,  
+        paddingHorizontal: metrices.height * 0.02,    
+        paddingTop: metrices.height * 0.01, 
+        paddingBottom: metrices.height * 0.01,
+        borderBottomColor:colors.greyAccent,
+        borderBottomWidth:1 
+       
+    },
+    listContainer: {
+        flexDirection: 'row',
+    },
+    titleContainer: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+
+    },
+    content: {
+        lineHeight: 22,
+        color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        backgroundColor: colors.white, 
+    },
+    versionListContainer: {
+        backgroundColor: colors.white,
+        flexDirection: 'row',
+        padding: 15,
+        paddingVertical: 15,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 1,
+    },
+    borderStyle: {
+        borderColor: colors.greyAccent,
+        borderTopWidth:1
+    },
+  
     inputTextContainerStyle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: metrices.width - parentPadding,
         marginTop: metrices.height * 0.01,
+        backgroundColor:colors.white,
+       
+      
     },
 
     inputTextFirstNameContainerStyle: {
@@ -221,3 +292,4 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
