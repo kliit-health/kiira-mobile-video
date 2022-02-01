@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices'; 
+import Constant from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.01;
 let parentPadding = parentPaddingValue * 2;
@@ -27,6 +28,45 @@ export default StyleSheet.create({
         marginBottom: 20,
         borderWidth: 1,
         borderColor: colors.greyAccent, 
+    },
+    actionModalParentContainerStyle: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: Constant.App.colors.modalBgSemiTransparentColor,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    actionModalInnerContainerStyle: {
+        borderRadius: 10,
+        flexWrap: 'wrap',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        width: metrics.width - 20,
+        backgroundColor: Constant.App.colors.whiteColor,
+    },
+    actionModalOkBtnErrorContainerStyle: {
+        width: metrics.width - 20,
+        padding: 10,
+        backgroundColor: Constant.App.colors.whiteColor,
+        marginTop: 10,
+        borderRadius: 10,
+    },
+    actionModalOkBtnErrorTextStyle: {
+        color: Constant.App.colors.blueColor,
+        textAlign: 'center',
+        fontSize: Constant.App.textSize.Normal,
+        fontFamily: Constant.App.fontFamily.headerBold,
+    },
+    actionModalTitleTextStyle: {
+        width: metrics.width - 20,
+        color: Constant.App.colors.lightGrey,
+        textAlign: 'center',
+        fontSize: Constant.App.textSize.Normal,
+        fontFamily: Constant.App.fontFamily.bodyRegular,
+        padding: 12,
     },
 
     detailsContainer: {
@@ -83,3 +123,21 @@ export const modifiers = {
         },
     },
 };
+export const messageStyles = StyleSheet.create({
+    card: {
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        padding: 30,
+        maxWidth: '80%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        position: 'relative',
+        paddingBottom: 30,
+    },
+    messageText: {
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.regular,
+        color: colors.black,
+    },
+});
