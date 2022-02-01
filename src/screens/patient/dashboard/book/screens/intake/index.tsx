@@ -22,12 +22,11 @@ const { height_50, width_50, align_items_c, justify_c, sm_pad_v, white_bg } =
 const Intake = ({ navigation }) => {   
  
     const dispatch = useDispatch();
-    const { appointmentDetails } = navigation.state.params;
     const [queryIndex, setQueryIndex] = useState(0); 
     const [data, setData] = useState(healthIntakeQuerying[queryIndex].kind); 
     const [type, setType] = useState(healthIntakeQuerying[queryIndex].type); 
     const [intakeData, setIntakeData] = useState([]);
-    const selectItems = [];  
+    const [selectItems, setSelectItems] = useState([]); 
  
     const getIntakeObject = (index) =>{
         if(index < 12){
@@ -55,8 +54,9 @@ const Intake = ({ navigation }) => {
      
     useEffect(() => {  
         for(let ni = 0; ni < 18; ni++){
-            intakeData.push(getIntakeObject(ni)); 
-        } 
+            intakeData.push(getIntakeObject(ni));  
+            selectItems.push(getIntakeObject(ni));  
+        }  
     }, []);
 
     const onIntakeFinish = () => {  
@@ -77,8 +77,8 @@ const Intake = ({ navigation }) => {
             intakeData[queryIndex].name = item;
             intakeData[queryIndex].name = item;
         } 
-
-        selectItems[queryIndex] = item; 
+ 
+        selectItems[queryIndex] = item;  
     };
     
     return (
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
 
     optionStyle: { 
         marginTop: 30,
-        marginHorizontal: 40,  
+        marginHorizontal: 30,  
         flex:0.65,  
     },
 
