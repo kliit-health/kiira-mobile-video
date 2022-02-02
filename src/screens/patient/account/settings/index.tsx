@@ -3,28 +3,20 @@ import {
     View,
     TouchableOpacity,
     Image,
-    Platform,
     ScrollView,
-    PermissionsAndroid,
-    SafeAreaView,
-    StatusBar,
     Text,
-    Switch,
+
 } from 'react-native';
 import { connect } from 'react-redux';
-import styles, { customStyles } from './styles';
+import styles from './styles';
 import CustomText from '~/components/customText';
 import Constant, { colors } from '~/utils/constants';
-import { Avatar } from 'react-native-elements';
 import CustomInputText from '~/components/customInputText';
-import CustomSelectModal from '~/components/customselectModal';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import ImagePicker from 'react-native-image-picker';
 import { signOut, updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
-import { Header, ListItem, Screen } from '~/components';
+import { Header, ListItem } from '~/components';
 import { list, listItems } from './model';
-import { getUser } from '~/redux/actions/user';
+
 
 class Setting extends PureComponent {
     public props: any;
@@ -36,98 +28,21 @@ class Setting extends PureComponent {
     public showHideErrorModal: any;
     public updateUserData: any;
     public handleSignout: any;
-    public firstName: any;
-    public lastName: any;
-    public dob: any;
     public email: any;
-    public pronounsArr: any;
-    public imageUri: any;
-    public file: any;
-    public filepath: any;
-    public selectedState: any;
-    public selectedSexuality: any;
-    public insurance: any;
-    public insurancePlan: any;
-    public getUser:any;
-    public zipcode: any;
-    public enrollment: any;
-    public income: any;
-    public homeSecure: any;
-    public foodSecure: any;
-    public ethnicity: any;
     public phoneNumber: any;
-    public gender: any;
     public staticImages: any;
-    public imageSrc: any;
-    public showSelectStateModal: any;
-    public showSelectSexualityModal: any;
-    public enableText: string;
 
     constructor(props) {
         super(props);
-        const { userData, lang, getUser } = this.props;
+        const { userData, lang } = this.props;
         this.state = {
-            firstName: userData.profileInfo.firstName,
-            lastName: userData.profileInfo.lastName,
-            imageSrc: userData.profileInfo.profileImageUrl,
             email: userData.profileInfo.email,
-            imageUri: '',
-            filepath: '',
-            file: '',
             phoneNumberLength: false,
-            showIosDateModal: false,
-            showSelectStateModal: false,
-            showSelectSexualityModal: false,
-            dob: userData.profileInfo.dob,
-            gender: userData.profileInfo.gender,
-            selectedState: userData.profileInfo.state,
-            selectedSexuality: userData.profileInfo.sexuality,
-            states: Constant.App.Modal.states,
-            sexuality: Constant.App.Modal.sexuality,
-            insurance: userData.profileInfo.insurance,
-            insurancePlan: userData.profileInfo.insurancePlan,
-            zipcode: userData.profileInfo.zipcode,
-            enrollment: userData.profileInfo.enrollment,
-            income: userData.profileInfo.income,
-            homeSecure: userData.profileInfo.homeSecure,
-            foodSecure: userData.profileInfo.foodSecure,
-            ethnicity: userData.profileInfo.ethnicity,
             lang: 'en',
             phoneNumber: userData.profileInfo.phoneNumber,
-            enableText: userData.profileInfo.enableText ?? true,
-            pronounsArr: [
-                {
-                    title: lang.addProfileData.sheHer,
-                    selected:
-                        userData.profileInfo.pronouns &&
-                        userData.profileInfo.pronouns ===
-                            lang.addProfileData.sheHer
-                            ? true
-                            : false,
-                },
-                {
-                    title: lang.addProfileData.heHim,
-                    selected:
-                        userData.profileInfo.pronouns &&
-                        userData.profileInfo.pronouns ===
-                            lang.addProfileData.heHim
-                            ? true
-                            : false,
-                },
-                {
-                    title: lang.addProfileData.theyThem,
-                    selected:
-                        userData.profileInfo.pronouns &&
-                        userData.profileInfo.pronouns ===
-                            lang.addProfileData.theyThem
-                            ? true
-                            : false,
-                },
-            ],
         };
     }
 
-   
     renderButtonView() {
         const { navigation, lang } = this.props;
         return (
@@ -154,59 +69,55 @@ class Setting extends PureComponent {
             return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
         }
         if (phoneNumberLength === 10) {
-           this.setState({phoneNumberLength: true})
-        }  
+            this.setState({ phoneNumberLength: true });
+        }
         return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
             3,
             6,
         )}-${phoneNumber.slice(6, 10)}`;
-          
     };
 
     render() {
-        const { navigation, lang, handleSignout, userData,updateUserData,getUser } = this.props;
-        const { phoneNumber, email, enableText,phoneNumberLength } = this.state;
+        const {
+            navigation,
+            lang,
+            handleSignout,
+            userData,
+            updateUserData,
+            getUser,
+        } = this.props;
+        const { phoneNumber, email, phoneNumberLength } = this.state;
         const { staticImages } = Constant.App;
-        console.log('-----USERDATA----', userData);
-       
-        
-
-      
         return (
             <View style={styles.container}>
                 <ScrollView
-                style={{backgroundColor:colors.babyBlue}}
+                    style={{ backgroundColor: colors.babyBlue }}
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.headerStyle}>
-                    <Header
-                    
-                        onBack={() => navigation.goBack()}
-                        title={'Settings'}
-                    />
-                </View>
+                        <Header
+                            onBack={() => navigation.goBack()}
+                            title={'Settings'}
+                        />
+                    </View>
                     <View style={styles.inputTextParentContainerStyle}>
                         <View style={[styles.inputTextFirstNameContainerStyle]}>
                             <CustomText style={styles.textStyle}>
                                 Email:{' '}
                             </CustomText>
-                            {/* <CustomText style={styles.emailText}>{userData.profileInfo.email}</CustomText> */}
                             <CustomInputText
-                            editable={userData.email ? false : true}
+                                editable={userData.email ? false : true}
                                 autoCapitalize="words"
                                 onChangeText={value =>
                                     this.setState({ email: value })
                                 }
                                 placeholder={'Enter your email'}
                                 value={email}
-                                style={
-                                   
-                                         [
-                                              styles.emailInputEmptyTypeStyle,
-                                              { fontWeight: '300' },
-                                          ]
-                                }
+                                style={[
+                                    styles.emailInputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]}
                                 placeholderTextColor={'#868992'}
                             />
                         </View>
@@ -216,8 +127,8 @@ class Setting extends PureComponent {
                             </CustomText>
 
                             <CustomInputText
-                            keyboardType = 'phone-pad'
-                            textContentType='telephoneNumber'
+                                keyboardType="phone-pad"
+                                textContentType="telephoneNumber"
                                 onChangeText={value => {
                                     const formattedPhoneNumber =
                                         this.formatPhoneNumber(value);
@@ -227,12 +138,10 @@ class Setting extends PureComponent {
                                 }}
                                 placeholder={'Enter your number'}
                                 value={phoneNumber}
-                                style={
-                                    [
-                                              styles.phoneInputEmptyTypeStyle,
-                                              { fontWeight: '300' },
-                                          ]
-                                }
+                                style={[
+                                    styles.phoneInputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]}
                                 placeholderTextColor={'#868992'}
                             />
 
@@ -248,7 +157,7 @@ class Setting extends PureComponent {
                                         source={
                                             phoneNumberLength
                                                 ? staticImages.checkGreenIcon
-                                                : ""
+                                                : ''
                                         }
                                         style={styles.pronounsChecboxIconStyle}
                                     />

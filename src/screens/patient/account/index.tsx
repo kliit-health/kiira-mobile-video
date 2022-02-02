@@ -15,59 +15,54 @@ const Account = ({ navigation }) => {
     const subscription = useSelector((state: RootState) => state.subscription);
     const user = useSelector((state: RootState) => state.user.data);
     const lang = useSelector((state: RootState) => state.language);
-    const [showModal,setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
 
     const handleSignOut = () => {
         dispatch(signOut({ navigation }));
     };
-    const RenderModalView = () =>{
+    const RenderModalView = () => {
         return (
-             <Modal
-           transparent={true}
-           animationType="fade"
-           onRequestClose={() => {}}
-           visible={showModal}
-       >
-            <View style={styles.centeredView}>
-           <View style={styles.modalView}>
-             
-                   <CustomText style={styles.modalText}>
-                       {'These records are currently empty because you have not filled out your health intake form.'}
-                   </CustomText>
-                   
-         
-               <CustomButton
-                   buttonStyle={styles.button}
-                   textStyle={styles.textStyle}
-                   text={'Complete Health Intake'}
-                   onPress={() =>{
-                       setShowModal(false)
-                    navigation.navigate(screenNames.settings)
-                   }}
-               />
-           </View>
-           </View>
-       </Modal>
-       )
-    }
+            <Modal
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => {}}
+                visible={showModal}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <CustomText style={styles.modalText}>
+                            {
+                                'These records are currently empty because you have not filled out your health intake form.'
+                            }
+                        </CustomText>
+
+                        <CustomButton
+                            buttonStyle={styles.button}
+                            textStyle={styles.textStyle}
+                            text={'Complete Health Intake'}
+                            onPress={() => {
+                                setShowModal(false);
+                                navigation.navigate(screenNames.settings);
+                            }}
+                        />
+                    </View>
+                </View>
+            </Modal>
+        );
+    };
     return (
-       
-        <View >
-             
-            <ScrollView showsVerticalScrollIndicator={false} >
-           
-                <Profile {...user} setShowModal={setShowModal}/>
+        <View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Profile {...user} setShowModal={setShowModal} />
                 {!!subscription.data.id && (
                     <Plan subscription={subscription} user={user} />
                 )}
-                <List onItemPress={handleNavigation} /> 
-                <View style={showModal ? styles.ModalContainer: {}}>
-                <RenderModalView />
+                <List onItemPress={handleNavigation} />
+                <View style={showModal ? styles.ModalContainer : {}}>
+                    <RenderModalView />
                 </View>
             </ScrollView>
-            
-            </View>
-        
+        </View>
     );
 };
 
