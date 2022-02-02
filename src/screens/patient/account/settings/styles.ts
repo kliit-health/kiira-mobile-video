@@ -1,7 +1,8 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, StatusBarIOS, StatusBar } from 'react-native';
 import { colors, text } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
+import { withDecay } from 'react-native-reanimated';
 
 let parentPaddingValue = metrices.width * 0.05;
 let parentPadding = parentPaddingValue * 2;
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     },
 
     btnContainerStyle: {
-        marginTop: metrices.height * 0.02,
+        marginTop: metrices.height * 0.03,
         marginBottom: metrices.height * 0.02,
         borderBottomColor: colors.lightGrey,
         borderBottomWidth: 0.5,
@@ -66,14 +67,16 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-         flexDirection: 'column',
-        backgroundColor: colors.babyBlue,
-        paddingTop: 35,
+        flexDirection: 'column',
+        backgroundColor: colors.white,
+        paddingTop:'9%',
+
     },
     headerStyle:{
         borderBottomColor: colors.greyAccent,
         borderBottomWidth: 1, 
         textAlign:'center',
+      
 
     },
 
@@ -96,7 +99,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: metrices.height * 0.02,    
         paddingTop: metrices.height * 0.008, 
-        paddingBottom: metrices.height * 0.008,  
+        paddingBottom: metrices.height * 0.008, 
+         
     },
 
     dropDownIconStyle: {
@@ -108,17 +112,35 @@ const styles = StyleSheet.create({
     inputTextParentContainerStyle: {
         backgroundColor: colors.white,
         flexDirection: 'column',
-        width: metrices.width,
-        paddingLeft: parentPaddingValue,
-        paddingRight: parentPaddingValue,
-        marginTop:30,
+        // width: metrices.width,
+        //  paddingLeft: '5%',
+        // paddingRight: parentPaddingValue,
+        marginTop:'6%',
         borderBottomColor:colors.greyAccent,
         borderBottomWidth:1
     },
     textStyle: {
         fontSize: text.size.regular,
-        fontFamily: text.fontFamily.poppinsRegular,
-        backgroundColor: colors.white, 
+        fontFamily: text.fontFamily.poppinsMedium,
+        backgroundColor: colors.white,
+        paddingLeft:'3%' 
+         
+    },
+    logoutTextStyle:{
+        color:'#C3224F',
+        textAlign:'center',
+        marginTop:'10%',
+        fontSize: text.size.large,
+        fontFamily: text.fontFamily.poppinsMedium,
+        backgroundColor: colors.white,
+
+    },
+    logoutView:{
+        backgroundColor:colors.white,
+        height:'50%',
+        width:'100%',
+        alignContent:'center',
+        marginTop: metrices.height * 0.02,
     },
     textEmptyStyle: {
         fontSize: text.size.regular,
@@ -127,7 +149,7 @@ const styles = StyleSheet.create({
         color:colors.greyDark
     },
 
-    inputEmptyTypeStyle: {
+    phoneInputEmptyTypeStyle: {
         color: colors.black,
         width:'100%',
         fontSize: text.size.regular,
@@ -137,13 +159,35 @@ const styles = StyleSheet.create({
         borderRadius :8,  
         paddingHorizontal: metrices.height * 0.02,    
         paddingTop: metrices.height * 0.01, 
-        paddingBottom: metrices.height * 0.01,
-        borderBottomColor:colors.greyAccent,
-        borderBottomWidth:1 
-       
+        paddingBottom: metrices.height * 0.01, 
     },
+    emailInputEmptyTypeStyle: {
+        color: colors.black,
+        width:'100%',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'left',     
+        backgroundColor: colors.white, 
+        borderRadius :8,  
+        paddingHorizontal: metrices.height * 0.02,    
+        paddingTop: metrices.height * 0.01, 
+        paddingBottom: metrices.height * 0.01,  
+    },
+    // emailText:{
+    //     color: colors.black,
+    //     width:'100%',
+    //     fontSize: text.size.regular,
+    //     fontFamily: text.fontFamily.poppinsRegular,    
+    //     backgroundColor: colors.white, 
+    //     borderRadius :8,  
+    //     paddingHorizontal: metrices.height * 0.02,    
+    //     paddingTop: metrices.height * 0.01, 
+    //     paddingBottom: metrices.height * 0.025,
+        
+    // },
     listContainer: {
         flexDirection: 'row',
+      
     },
     titleContainer: {
         flexDirection: 'column',
@@ -153,6 +197,14 @@ const styles = StyleSheet.create({
     content: {
         lineHeight: 22,
         color: colors.black,
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsMedium,
+        backgroundColor: colors.white, 
+    },
+    version:{
+       marginLeft:'62%',
+        color:colors.greyDark,
+        lineHeight: 22,
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         backgroundColor: colors.white, 
@@ -164,7 +216,8 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 1,
+        borderBottomColor:colors.greyAccent,
+        borderBottomWidth:1
     },
     borderStyle: {
         borderColor: colors.greyAccent,
@@ -176,20 +229,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         width: metrices.width - parentPadding,
-        marginTop: metrices.height * 0.01,
+        // marginTop: metrices.height * 0.01,
         backgroundColor:colors.white,
-       
-      
+        paddingVertical: '1%',
     },
+  
 
     inputTextFirstNameContainerStyle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: (metrices.width - parentPadding) * 0.47,
-        paddingBottom: Platform.OS === 'ios' ? metrices.height * 0.01 : 0,
-        borderBottomColor: colors.lightGrey,
-        borderBottomWidth: 0.5,
+        width: metrices.width ,
+        paddingVertical: '1%',
+        // paddingBottom: Platform.OS === 'ios' ? metrices.height * 0.005 : 0,
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1,
     },
 
     inputTypeStyle: {
@@ -233,11 +287,12 @@ const styles = StyleSheet.create({
     },
 
     textContainerStyle: {
-        marginTop: metrices.height * 0.01,
-        width: metrices.width - parentPadding,
+        // marginTop: metrices.height * 0.01,
+        // width: metrices.width - parentPadding,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        
     },
 
     pronounsTextStyle: {
@@ -250,8 +305,8 @@ const styles = StyleSheet.create({
     },
 
     pronounsChecboxIconStyle: {
-        height: metrices.width * 0.05,
-        width: metrices.width * 0.05,
+        height: metrices.width * 0.08,
+        width: metrices.width * 0.08,
     },
 
     stateDropDownContainerStyle: {
@@ -287,7 +342,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: colors.black,
         fontSize: text.size.large,
-        fontFamily: text.fontFamily.poppinsBold,
+        fontFamily: text.fontFamily.poppinsRegular,
+        backgroundColor:colors.white
     },
 });
 

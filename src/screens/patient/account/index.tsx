@@ -51,7 +51,8 @@ const Account = ({ navigation }) => {
        )
     }
     return (
-        <Screen test="Profile Screen" >
+       
+        <View >
              
             <ScrollView showsVerticalScrollIndicator={false} >
            
@@ -65,7 +66,8 @@ const Account = ({ navigation }) => {
                 </View>
             </ScrollView>
             
-        </Screen>
+            </View>
+        
     );
 };
 

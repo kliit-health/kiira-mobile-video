@@ -15,7 +15,7 @@ export const listItems = [
     },
     {
         title: `Privacy Policy`,
-        destination:  screenNames.termsAndConditions,
+        destination:  screenNames.privacyPolicies,
         content: `Privacy Policy`,
     }, 
    
@@ -25,9 +25,9 @@ export const list = [
      {
         title: `App Version`,     
     },
-    {
-        title: `Face ID`,
+    // {
+    //     title: `Face ID`,
         
-    },
+    // },
 ];
 
