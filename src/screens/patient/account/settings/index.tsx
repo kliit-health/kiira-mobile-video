@@ -16,11 +16,14 @@ import { signOut, updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
 import { Header, ListItem } from '~/components';
 import { list, listItems } from './model';
+import { getUser } from '~/redux/actions';
 
 
 class Setting extends PureComponent {
     public props: any;
     public state: any;
+    public user:any;
+    public getUser: any;
     public setState: any;
     public userData: any;
     public lang: any;
@@ -42,7 +45,9 @@ class Setting extends PureComponent {
             phoneNumber: userData.profileInfo.phoneNumber,
         };
     }
-
+    componentDidMount() {
+        getUser()
+    }
     renderButtonView() {
         const { navigation, lang } = this.props;
         return (
@@ -70,6 +75,8 @@ class Setting extends PureComponent {
         }
         if (phoneNumberLength === 10) {
             this.setState({ phoneNumberLength: true });
+        }else if(phoneNumberLength < 10){
+            this.setState({phoneNumberLength:false})
         }
         return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
             3,
@@ -84,10 +91,12 @@ class Setting extends PureComponent {
             handleSignout,
             userData,
             updateUserData,
-            getUser,
+            user,
         } = this.props;
+        console.log('-----USER---',user)
         const { phoneNumber, email, phoneNumberLength } = this.state;
         const { staticImages } = Constant.App;
+
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -145,24 +154,23 @@ class Setting extends PureComponent {
                                 placeholderTextColor={'#868992'}
                             />
 
-                            <TouchableOpacity
-                                key="Enable Text"
-                                onPress={() => {
-                                    // updateUserData({...userData,phoneNumber})
-                                }}
-                            >
-                                <View style={styles.textContainerStyle}>
-                                    <Image
-                                        resizeMode="contain"
-                                        source={
-                                            phoneNumberLength
-                                                ? staticImages.checkGreenIcon
-                                                : ''
-                                        }
-                                        style={styles.pronounsChecboxIconStyle}
-                                    />
-                                </View>
-                            </TouchableOpacity>
+                           {  phoneNumberLength ? <TouchableOpacity
+                                                key="Enable Text"
+                                                onPress={() => {
+                                                    // updateUserData({...userData,phoneNumber})
+                                                }}
+                                            >
+                                                <View style={styles.textContainerStyle}>
+                                                    <Image
+                                                        resizeMode="contain"
+                                                        source={
+                                                           staticImages.checkGreenIcon
+                                                                
+                                                        }
+                                                        style={styles.pronounsChecboxIconStyle}
+                                                    />
+                                                </View>
+                                            </TouchableOpacity> : null} 
                         </View>
                     </View>
                     <View
@@ -271,11 +279,13 @@ class Setting extends PureComponent {
 }
 
 const mapStateToProps = state => ({
+    user: state.user.data,
     userData: state.user.data,
     lang: state.language,
 });
 
 const mapDispatchToProps = dispatch => ({
+    getUser: () => dispatch(getUser()),
     handleSignout: ({ value }) => dispatch(signOut({ value })),
     updateUserData: value => dispatch(updateAccount(value)),
     showHideErrorModal: value => dispatch(showOrHideModal(value)),

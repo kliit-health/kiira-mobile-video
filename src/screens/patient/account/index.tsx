@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { CustomButton, CustomText, Screen, TextButton } from '~/components';
+import {
+    CustomButton,
+    CustomText,
+} from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { Modal, ScrollView, Text, View } from 'react-native';
-import { app, screenNames } from '~/utils/constants';
+import { ScrollView,  View } from 'react-native';
+import {  screenNames } from '~/utils/constants';
 import { Profile, List, Plan } from './sections';
 import { signOut } from '~/redux/reducers/account';
-import styles, { modifiers } from './styles';
+import styles from './styles';
 import { handleNavigation } from '~/utils/functions';
+import NativeModal from 'react-native-modal';
 
 const Account = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -22,11 +26,11 @@ const Account = ({ navigation }) => {
     };
     const RenderModalView = () => {
         return (
-            <Modal
-                transparent={true}
-                animationType="fade"
-                onRequestClose={() => {}}
-                visible={showModal}
+            <NativeModal
+                backdropColor={'rgba(0, 0, 0, 0.7)'}
+                backdropOpacity={0.5}
+                onBackdropPress={() => setShowModal(false)}
+                isVisible={showModal}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -47,22 +51,20 @@ const Account = ({ navigation }) => {
                         />
                     </View>
                 </View>
-            </Modal>
+            </NativeModal>
         );
     };
     return (
-        <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <Profile {...user} setShowModal={setShowModal} />
-                {!!subscription.data.id && (
-                    <Plan subscription={subscription} user={user} />
-                )}
-                <List onItemPress={handleNavigation} />
-                <View style={showModal ? styles.ModalContainer : {}}>
-                    <RenderModalView />
-                </View>
-            </ScrollView>
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <Profile {...user} setShowModal={setShowModal} />
+            {!!subscription.data.id && (
+                <Plan subscription={subscription} user={user} />
+            )}
+            <List onItemPress={handleNavigation} />
+            <View style={showModal ? styles.ModalContainer : {}}>
+                <RenderModalView />
+            </View>
+        </ScrollView>
     );
 };
 
