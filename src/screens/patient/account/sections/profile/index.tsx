@@ -45,7 +45,6 @@ export default ({ profileInfo, navigation }) => {
                 <Header 
                     title="Basic Plan"  
                     onBack={handleOnBackPress}
-                    onListPress={onListPlan}
                     OnSettingPress={handleSetting}  
                 />
             </View>
