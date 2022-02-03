@@ -378,7 +378,7 @@ const Welcome = ({ navigation }) => {
                             : styles.buttonContainer
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => console.log('')}
+                    onPress={() => navigation.navigate(Constant.App.screenNames.AdditionalInformation)}
                     text="Continue"
                 />
             </View>

@@ -54,6 +54,22 @@ const style = StyleSheet.create({
         margin: 15,
         color:colors.greyDark
     },
+    AdditionalInformationText: {
+        textAlign: 'center',
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+       marginHorizontal:'3%',
+       marginVertical:'3%',
+        color:colors.greyDark
+    },
+    skipText: {
+        textAlign: 'center',
+        marginTop: metrics.height * 0.08,
+        color: colors.primaryBlue,
+        fontSize: text.size.large,
+        fontFamily: text.fontFamily.poppinsRegular,
+        marginBottom: metrics.height * 0.02,
+    },
   
     namesTextInput: {
         marginTop:'6%',
@@ -61,7 +77,7 @@ const style = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical:10,
         borderRadius:5,
-       marginHorizontal:'2%',
+        marginHorizontal:'2%',
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
         backgroundColor: colors.greyLight,
@@ -114,8 +130,7 @@ const style = StyleSheet.create({
         width:'100%',
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
-        backgroundColor: colors.white,
-      
+        backgroundColor: colors.white,  
     },
     imageBackground:{
          display:'flex',
@@ -158,17 +173,18 @@ const style = StyleSheet.create({
         alignSelf: 'center',
         width: metrices.width - parentPadding - metrices.width * 0.05,
     },
-    dropDownIconStyle: {
-        height: metrics.width * 0.04,
-        width: metrics.width * 0.04,
-        opacity:0.3      
+    dropDownIconStyle: {   
+            height: metrics.width * 0.04,
+            width: metrics.width * 0.04,
+            opacity:0.3      
     },
     pageNumber:{
         color: colors.greyDark,
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
         textAlign: 'center',
-        alignSelf: 'center',marginTop:5
+        alignSelf: 'center',
+        marginTop:20
     }
 });
 
