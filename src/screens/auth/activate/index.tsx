@@ -5,6 +5,8 @@ import {
     Image,
     TouchableOpacity,
     Platform,
+    ImageBackground,
+    TextInput
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { CustomInputText, CustomButton } from '~/components/';
@@ -15,35 +17,16 @@ import { showOrHideModal } from '~/components/customModal/action';
 import Constant, { colors, icons } from '~/utils/constants';
 import { isEmail } from '~/utils/helper';
 import styles from '../styles';
+import { Text } from 'react-native-animatable'; 
+ 
 
-const Activate = ({ navigation }) => {
-    const dispatch = useDispatch();
+const Activate = ({ navigation }) => { 
     const { staticImages } = Constant.App;
     const [email, setEmail] = useState('');
     const login = useSelector((state: RootState) => {
         return state.language.login;
     });
-
-    const InputText = () => {
-        return (
-            <View style={styles.inputTextParentContainer}>
-                <View style={styles.inputTextContainer}>
-                    <CustomInputText
-                        autoCapitalize="none"
-                        onChangeText={value => setEmail(value)}
-                        placeholder={login.Email}
-                        value={email}
-                        style={
-                            email
-                                ? styles.inputType
-                                : [styles.inputType, { fontWeight: '100' }]
-                        }
-                        placeholderTextColor={colors.black}
-                    />
-                </View>
-            </View>
-        );
-    };
+    const dispatch = useDispatch(); 
 
     const CrossIcon = () => {
         return (
@@ -53,29 +36,53 @@ const Activate = ({ navigation }) => {
                     navigation.goBack();
                 }}
             >
-                <Image
-                    resizeMode="contain"
-                    source={icons.cross}
-                    style={styles.backIcon}
-                />
+                <Text  
+                    style={styles.backText} 
+                >
+                    {login.Back}
+                </Text>
             </TouchableOpacity>
         );
     };
 
-    const LogoView = () => {
+    const HelloView = () => {
         return (
-            <View style={styles.contentContainer}>
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo}
-                    style={styles.logo}
-                />
-                <Image
-                    resizeMode="contain"
-                    source={staticImages.kiiraLogo2}
-                    style={styles.logo2}
-                />
-            </View>
+            <Text  
+                style={styles.helloStyle} 
+            >
+                {login.HelloNewMember}
+            </Text>
+        );
+    };
+
+
+    const TitleView = () => {
+        return (
+            <Text  
+                style={styles.titleStyle} 
+            >
+                {login.ActivateBelow}
+            </Text>
+        );
+    };
+
+    const InfoView = () => {
+        return (
+            <Text  
+                style={styles.infoStyle} 
+            >
+                {login.UseSameEmail}
+            </Text>
+        );
+    };
+
+    const ContentView = () => {
+        return (
+            <Text  
+                style={styles.contentStyle} 
+            >
+                {login.OrganizationPlan}
+            </Text>
         );
     };
 
@@ -84,8 +91,8 @@ const Activate = ({ navigation }) => {
             <CustomButton
                 test="Get Activation Link"
                 disabled={false}
-                buttonStyle={styles.loginButton}
-                textStyle={styles.loginButtonText}
+                buttonStyle={styles.activeButton}
+                textStyle={styles.activeButtonText}
                 onPress={() => {
                     if (!email.trim()) {
                         dispatch(showOrHideModal(login.EmptyEmailMsg));
@@ -103,21 +110,44 @@ const Activate = ({ navigation }) => {
         );
     };
 
-    return (
-        <View style={styles.parentContainer}>
+    return ( 
+        <ImageBackground
+                resizeMode="stretch"
+                style={styles.imageContainer}
+                source={staticImages.backgroundUrl}
+            >
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
-            >
+            > 
                 <CrossIcon />
-                <View style={styles.contentContainer}>
-                    <LogoView />
-                    <InputText />
+                <View style={styles.activateContainer}>
+                    <HelloView />
+                    <TitleView />
+                    <View style={styles.inputTextActiveContainer}>
+                        <View style={styles.inputTextActive}>
+                            <TextInput
+                                autoCapitalize="none" 
+                                autoCorrect={false}
+                                onChangeText={text => setEmail(text)}
+                                value={email}
+                                placeholder={login.EnterEmail}
+                                style={
+                                    email
+                                        ? [styles.activeInpute, { fontWeight: '400'}]
+                                        : [styles.activeInpute, { fontWeight: '300'}]
+                                }
+                                placeholderTextColor={colors.greyAccent}
+                            /> 
+                        </View>
+                    </View>
                     <Button />
-                </View>
+                    <InfoView />
+                    <ContentView />
+                </View> 
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </View>
+        </ImageBackground>
     );
 };
 

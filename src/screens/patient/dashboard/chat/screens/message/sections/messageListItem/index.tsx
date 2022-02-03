@@ -10,7 +10,7 @@ import { Conditional, Avatar } from '~/components';
 import FastImage from 'react-native-fast-image';
 import Constant from '~/utils/constants';
 import metrices from '~/utils/metrices';
-
+import IconButton from '~/components/iconButton';
 const MessageListItem = ({
     item,
     index,
@@ -18,6 +18,7 @@ const MessageListItem = ({
     lastIndex,
     expertProfile,
 }) => {
+    console.log('expertProfile', expertProfile)
     const renderView = (item, index, key, lastIndex) => {
         item = item.data && item.data() ? item.data() : item;
         const status = item.isRead ? 'Read' : 'Sent';
@@ -26,7 +27,16 @@ const MessageListItem = ({
                 <View>
                     <Conditional if={index === lastIndex - 1}>
                         <View style={styles.rowLeftParentContainerStyle}>
-                            <View style={styles.rowLeftContainerStyle}>
+                            <View style={styles.avatarStyle}> 
+                                <IconButton
+                                    styles={{ image: styles.profileStyle }}
+                                    source={expertProfile ? 
+                                            {uri: expertProfile} : 
+                                            Constant.App.staticImages.profilePlaceholderImg
+                                        }
+                                />
+                            </View>
+                            <View style={styles.rowLeftContainerStyle}> 
                                 <View style={styles.staticTextContainerStyle}>
                                     <HTML
                                         onLinkPress={(evt, href) => {

@@ -5,14 +5,15 @@ export default StyleSheet.create({
         width: 6,
         height: 6,
         borderRadius: 3,
-        marginHorizontal: 5,
-        backgroundColor: 'rgba(0,0,0,.4)',
+        marginHorizontal: 7.5,
+        backgroundColor: '#fff',
     },
-    activeIndicator: {
+    activeIndicator: {  
+        width: 16, 
         position: 'absolute',
         backgroundColor: '#fff',
     },
-    indicatorContainer: {
+    indicatorContainer: {  
         position: 'absolute',
         alignSelf: 'center',
         flexDirection: 'row',

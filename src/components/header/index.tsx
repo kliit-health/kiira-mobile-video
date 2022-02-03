@@ -2,7 +2,8 @@ import React, { ReactNode } from 'react';
 import { shape, object, func, string, node, bool } from 'prop-types';
 import IconButton from '../iconButton';
 import TextButton from '../textButton';
-import { View, Text } from 'react-native';
+import moment from 'moment';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { icons } from '~/utils/constants';
 import { mergeStyles } from '~/utils/functions'; 
 import defaultStyles, { modifiers } from './styles';
@@ -21,7 +22,10 @@ interface header{
     children?: ReactNode;
     disableEdit?: boolean;
     onClose?: any;
-    themed?: any,
+    themed?: any, 
+    isChatView?: boolean,
+    activeTime?: string,
+    profileImageUrl?: string,
 }
 
 const Header = (props: header) => { 
@@ -40,7 +44,7 @@ const Header = (props: header) => {
             defaultStyles.title,
             [modifiers.themed.title, props.themed],
             props.themed.title,
-        ]),
+        ]), 
         editButton: {
             root: defaultStyles.editButton,
         },
@@ -49,23 +53,74 @@ const Header = (props: header) => {
         billingButton: defaultStyles.billingButton,
         settingButton:  defaultStyles.settingButton,
         listButton:  defaultStyles.listButton,
+        chatViewStyle: defaultStyles.chatViewStyle,
+        image: {
+            height: 20,
+            width: 20, 
+        },
+        backArea: mergeStyles([
+            defaultStyles.backArea,
+            [modifiers.themed.backButton, props.themed],
+            props.themed.backButton,
+        ]), 
+        profileStyle: defaultStyles.profileStyle,
+        headerAvatar: defaultStyles.headerAvatar,
+        nameStyle: defaultStyles.nameStyle,
+        timeStyle: defaultStyles.timeStyle,
     };
+
+    const getStringAgo = (timeString) => {
+        if(timeString){
+            return `Active ${moment
+                .unix(timeString)
+                .fromNow(true)} ago`;
+        }
+        return `Active a few days ago`;
+    }
 
     return (
         <View style={styles.root}>
-            {props.onBack && (
-                <IconButton
+            {props.onBack && !props.isChatView  && ( 
+                 <IconButton
                     test="Back Button"
                     styles={styles.backButton}
                     source={icons.chevron}
                     onPress={props.onBack}
                     boxed={props.themed} 
-                />
-            )}
+                />  
+            )} 
+             {props.onBack && props.isChatView  && ( 
+                 <View style={styles.backArea}>
+                     <TouchableOpacity
+                        onPress={props.onBack}
+                     >
+                        <Image
+                            source={icons.chevron}
+                            style={[styles.image, {transform: [{ rotate: '180deg' }]}]} 
+                        />
+                    </TouchableOpacity>
+                    <Image
+                        source={props.profileImageUrl ? { uri: props.profileImageUrl }
+                        : require('../../../assets/profile_img_placeholder.png')}
+                        style={styles.profileStyle} 
+                        resizeMode='contain' 
+                    />
+                    <View style={styles.headerAvatar}>
+                        <Text style={styles.nameStyle}>
+                            {props.title}
+                        </Text>
+                        <Text style={styles.timeStyle}>
+                            {getStringAgo(props.activeTime)}
+                        </Text>
+                    </View>
+                </View> 
+               
+            )} 
+             
             {props.onClose && <IconButton source={icons.cross} onPress={props.onClose} />}
-            <Text style={props.onListPress ? [styles.title, {paddingRight:25}] : styles.title}>
+            {!props.isChatView && <Text style={props.onListPress ? [styles.title, {paddingRight:25}] : styles.title}>
                 {props.title}
-            </Text>
+            </Text>}
             {props.onListPress && (
                 <IconButton
                     test="Chat Setting Button"
@@ -113,7 +168,7 @@ const Header = (props: header) => {
                     boxed={props.themed}
                 />
             )} 
-             {props.OnSettingPress && (
+            {props.OnSettingPress && (
                 <IconButton
                     test="Chat Plan Button"
                     styles={{ image: styles.settingButton }}
@@ -121,8 +176,7 @@ const Header = (props: header) => {
                     onPress={props.OnSettingPress}
                     boxed={props.themed}
                 />
-            )} 
-            
+            )}            
         </View>
     );
 };

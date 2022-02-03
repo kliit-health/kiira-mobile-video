@@ -28,6 +28,7 @@ export { default as PolarButton } from './polarButton';
 export { default as ProfileCard } from './profileCard';
 export { default as RadioButton } from './radioButton';
 export { default as RadioGroup } from './radioGroup';
+export { default as RadioGroupQuery } from './radioGroupQuery';
 export { default as Ratings } from './ratings';
 export { default as RatingModal } from './ratingModal';
 export { default as Row } from './row';

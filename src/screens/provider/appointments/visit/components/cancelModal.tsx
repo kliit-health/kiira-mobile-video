@@ -7,13 +7,14 @@ import { withNavigation } from 'react-navigation';
 import styles from '../styles';
 
 const CancelModal = ({ visit, setVisible, visible, navigation }) => {
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch(); 
     const data = {
         uid: visit.uid,
         id: visit.id,
         expert: visit.expert,
         prepaid: visit.prepaid,
+        prepaidInfo: visit.prepaidInfo, 
+        credits: visit.reason.sessionType.credits, 
     };
 
     return (
@@ -47,7 +48,7 @@ const CancelModal = ({ visit, setVisible, visible, navigation }) => {
                         </Pressable>
                         <Pressable
                             style={styles.modalButton}
-                            onPress={() => {
+                            onPress={() => {  
                                 dispatch(cancelAppointment(data));
                                 setVisible(!visible);
                                 navigation.navigate('BottomTabExpert');

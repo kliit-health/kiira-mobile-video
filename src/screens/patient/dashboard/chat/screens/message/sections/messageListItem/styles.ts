@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     },
 
     rowRightContainerView: {
-        backgroundColor: colors.blueLight,
         borderRadius: 10,
         borderBottomRightRadius: 0,
         flexWrap: 'wrap',
@@ -35,18 +34,25 @@ const styles = StyleSheet.create({
 
     rowLeftParentContainerStyle: {
         flexDirection: 'row',
-        marginRight: 70,
+        marginRight: 70, 
         marginTop: 10,
     },
 
     rowLeftContainerStyle: {
         backgroundColor: colors.greyLight,
         borderRadius: 10,
-        borderBottomLeftRadius: 0,
         flexWrap: 'wrap',
         justifyContent: 'center',
-        marginLeft: 5,
+        marginLeft: 25,
         padding: 5,
+    },
+
+    avatarStyle: {
+        flexDirection:'column-reverse',
+        marginLeft: 5,
+        marginBottom:2,
+        padding: 5, 
+        justifyContent:'space-between'
     },
 
     messagesLeftText: {
@@ -109,6 +115,13 @@ const styles = StyleSheet.create({
             parentPadding -
             30 -
             (metrics.width - parentPadding - 30 - 10 - 44),
+    },
+
+    profileStyle: {
+        height: 36,
+        width: 36, 
+        borderRadius:18,
+        marginLeft: 16, 
     },
 });
 

@@ -23,7 +23,7 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.offWhiteColor,
-        width: metrics.width,
+        width: metrics.width, 
     },
 
     creditButtonStyle: {
@@ -206,12 +206,18 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
 
-    title: {
+    appointViewStyle: { 
+        height: metrics.height * 0.6, 
+        textAlign: 'center',    
+    }, 
+
+    title: { 
+        height: metrics.height * 0.5,
         color: colors.black,
-        fontSize: text.size.xxLarge,
+        fontSize: 38,
         fontFamily: text.fontFamily.poppinsRegular,
-        textAlign: 'center',
-        margin: 20,
+        textAlign: 'center',   
+        margin:20,  
     },
 
     subtitle: {
@@ -301,11 +307,7 @@ export default StyleSheet.create({
         height: 100,
         alignSelf: 'center',
         marginTop: 20,
-    },
-
-    safeArea: {
-        flex: 1,
-    },
+    }, 
 
     searchBar: {
         alignSelf: 'center',
@@ -319,13 +321,13 @@ export default StyleSheet.create({
         borderTopColor: 'transparent',
     },
 
-    title: {
-        textAlign: 'center',
-        fontSize: 40,
-        fontWeight: 'bold',
-        margin: 30,
-        paddingBottom: 200,
-    },
+    // title: {
+    //     textAlign: 'center',
+    //     fontSize: 40,
+    //     fontWeight: 'bold',
+    //     margin: 30,
+    //     paddingBottom: 200,
+    // },
 
     visitContainerStyle: {
         padding: parentPaddingValue,

@@ -37,7 +37,7 @@ const Book = ({ navigation }) => {
     const [selection, setSelection] = useState(null);
     const [catagories, setCatagories] = useState(null);
     const [appointmentTypes, setAppointmentTypes] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         (async () => {
@@ -143,7 +143,7 @@ const Book = ({ navigation }) => {
                             <ActivityIndicator size="large" />
                         </Kiira.Conditional>
                         <Kiira.Conditional if={!loading && selection}>
-                            {visit && (
+                            {visit && visit.details && (
                                 <Kiira.Heading options={[h3]}>
                                     {`${visit.details.title}: ${visit.details.duration} min $${visit.details.price}`}
                                 </Kiira.Heading>

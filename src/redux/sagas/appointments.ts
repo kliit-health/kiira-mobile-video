@@ -176,9 +176,8 @@ function* cancelTheAppointment({ payload: { data } }) {
     };
 
     try {
-        yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(data);
-
+        yield put(showApiLoader());  
+        const result = yield cancelAppointmentAsync(data); 
         if (result) {
             yield put(
                 showOrHideModal(
@@ -284,9 +283,18 @@ function* setAppointment({ payload }) {
                 ).format('llll')}`;
                 yield sendSms(message, phoneNumber);
             }
-            navigation.navigate('Success', {
-                time: moment(time).format('llll'),
-            });
+
+            if(payload.intakeData != null){
+                navigation.navigate('Intake', {
+                    appointmentDetails: payload,
+                });
+            }
+            else{
+                navigation.navigate('Success', {
+                    time: moment(time).format('llll'),
+                });
+            }
+            
             yield put(hideApiLoader());
         }
     } catch (error) {
@@ -304,5 +312,5 @@ export default function* appointmentsSaga() {
     yield takeEvery(getAppointmentsList, getAppointments);
     yield takeEvery(cancelAppointment, cancelTheAppointment);
     yield takeEvery(rateVisit, setExpertRating);
-    yield takeEvery(bookAppointment, setAppointment);
+    yield takeEvery(bookAppointment, setAppointment); 
 }
