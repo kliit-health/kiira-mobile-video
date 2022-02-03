@@ -15,8 +15,7 @@ const styles = StyleSheet.create({
         margin: metrics.height * 0.02,
         height: metrics.width * 0.05,
         width: metrics.width * 0.05,
-        alignSelf: 'flex-start',
-        transform:[{rotate:'180deg'}]
+        alignSelf: 'flex-end',
     },
 
     leftIcon: {
@@ -86,10 +85,9 @@ const styles = StyleSheet.create({
 
     biometrics: {
         alignSelf: 'center',
-        height: metrics.width * 0.15,
-        width: metrics.width * 0.15,
+        height: metrics.width * 0.1,
+        width: metrics.width * 0.1,
         marginTop: metrics.height * 0.05,
-       color:'red'
     },
 
     buttonContainer: {
@@ -118,19 +116,20 @@ const styles = StyleSheet.create({
 
     forgotPasswordText: {
         textAlign: 'center',
-        marginTop: metrics.height * 0.06,
+        marginTop: metrics.height * 0.05,
         color: colors.primaryBlue,
         fontSize: text.size.medium,
         width: metrics.width - parentPadding,
         paddingLeft: childPaddingValue,
         paddingRight: childPaddingValue,
         fontFamily: text.fontFamily.poppinsRegular,
-
+        marginBottom: metrics.height * 0.02,
     },
 
     inputTextParentContainer: {
         flexDirection: 'column',
         width: metrics.width - parentPadding,
+        marginTop: metrics.height * 0.01,
         paddingLeft: childPaddingValue,
         paddingRight: childPaddingValue, 
     },
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
         width: metrics.width - metrics.width * 0.1,
         paddingBottom: Platform.OS === 'ios' ? metrics.height * 0.01 : 0,
         marginTop: metrics.height * 0.01,
-        borderBottomColor: colors.gray,
+        borderBottomColor: colors.white,
         borderBottomWidth: 0.5,
     },
 
@@ -197,6 +196,15 @@ const styles = StyleSheet.create({
         marginTop: metrics.height * 0.02,
     },
 
+    activeButton: {
+        alignSelf: 'center',
+        borderRadius: dimensions.btnBorderRadiusGlobal,
+        padding: dimensions.btnPaddingGlobal,
+        width: metrics.width - 60,
+        backgroundColor: colors.white,
+        marginTop: metrics.height * 0.05, 
+    },
+
     loginButtonText: {
         textAlign: 'center',
         fontSize: text.size.regular,
@@ -213,8 +221,14 @@ const styles = StyleSheet.create({
 
     logo: {
         alignSelf: 'center',
-        height: metrics.width * 0.25,
-        width: metrics.width * 0.25,
+        height: metrics.width * 0.2,
+        width: metrics.width * 0.2,
+    },
+
+    logo2: {
+        alignSelf: 'center',
+        height: metrics.width * 0.35,
+        width: metrics.width * 0.35,
     },
 
     parentContainer: {
@@ -270,15 +284,8 @@ const styles = StyleSheet.create({
 
     version: {
         alignSelf: 'center',
-        color:colors.gray,
-        marginTop:'5%'
-    },
-    welcomeText:{
-        fontSize: size.xxLarge,
-        fontFamily: text.fontFamily.poppinsMedium, 
-        marginHorizontal:'15%',
-        textAlign: 'center',
-        marginTop:'15%'
+        color: colors.greyDark,
+        padding: 20,
     },
 
     welcomeStyle: {

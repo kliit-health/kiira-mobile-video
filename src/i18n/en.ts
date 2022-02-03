@@ -501,14 +501,14 @@ export default {
     },
     expertChats: {
         title: 'Chats',
-        resolved: 'RESOLVED',
-        active: 'OPEN CHATS',
+        resolved: 'Resolved',
+        active: 'Active',
         chats: 'Chats',
         patientName: 'Patient Name',
-        noQuestions: 'You have no open chats.',
+        noQuestions: 'You have not been asked any questions. Check back later.',
         subject: 'Subject',
         lastMessage: 'Last Message',
-        searchName: 'Search ',
+        searchName: 'Search Name',
     },
     visitSummary: {
         title: 'Visit Summary',

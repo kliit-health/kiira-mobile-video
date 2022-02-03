@@ -192,9 +192,8 @@ const Calendar = () => {
             <Kiira.Button
                 test="Confirm Date and Time"
                 onPress={handleConfirm}
-                disabled={ !time}
                 title="Confirm"
-                style={{ container: [sm_pad_v, pad_h,{backgroundColor: !day || !time ? colors.disableButtonColor:colors.primaryBlue}], title: [] }}
+                style={{ container: [sm_pad_v, pad_h], title: [] }}
             />
         </Kiira.Screen>
     );

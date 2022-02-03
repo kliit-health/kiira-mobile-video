@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '~/redux/reducers';
 import {
     getAppointmentDates,
     getExpertsData,
@@ -12,11 +13,17 @@ import {
 import { handleBack } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper'; 
 import { colors } from '~/utils/constants';
-import metrices from '~/utils/metrices';  
+import metrices from '~/utils/metrices'; 
+import styles from './style'; 
+import Constant, { tables } from '~/utils/constants';  
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
 const { width } = metrices;
+
+const RescheduleVisit = ({ navigation }) => {
+    const appointments = useSelector((state: RootState) => state.appointments);
+    const { visit } = navigation.state.params;
     const {
         pad,
         medium,
@@ -34,10 +41,7 @@ const { width } = metrices;
         pad_top_none,
         black,
     } = globalStyles;
-
-const RescheduleVisit = props => {
-    const {  visit } = props.navigation.state.params;
-    const appointmentData = useSelector((state:any) => state.appointments);
+ 
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
@@ -96,6 +100,7 @@ const RescheduleVisit = props => {
             }),
         );
     };
+
     return (
         <Kiira.Screen>
             <Kiira.Header onBack={handleBack} title="Reschedule Visit" />
@@ -105,7 +110,7 @@ const RescheduleVisit = props => {
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     keyExtractor={({ date }) => date}
-                    data={appointmentData.dates}
+                    data={appointments.dates}
                     ListEmptyComponent={() => (
                         <ActivityIndicator
                             style={{ marginLeft: width / 2 - 30 }}
@@ -144,10 +149,10 @@ const RescheduleVisit = props => {
             </Kiira.Text>
             <FlatList
                 numColumns={3}
-                initialNumToRender={appointmentData.appointments.current.length}
+                initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointmentData.appointments.current}
+                data={appointments.appointments.current}
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
@@ -178,10 +183,9 @@ const RescheduleVisit = props => {
             />
             <Kiira.Button
                 test="Confirm Date and Time"
-                disabled={!time}
                 onPress={handleConfirm}
                 title="Confirm"
-                style={{ container: [sm_pad_v, pad_h,{backgroundColor: !day || !time ? colors.disableButtonColor:colors.primaryBlue}], title: [] }}
+                style={{ container: [sm_pad_v, pad_h], title: [] }}
             />
         </Kiira.Screen>
     );

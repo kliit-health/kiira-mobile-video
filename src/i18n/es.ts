@@ -538,10 +538,10 @@ export default {
         chats: 'Spanish Chats',
         patientName: 'Spanish Patient Name',
         noQuestions:
-            'Spanish You have no open chats.',
+            'Spanish You have not been asked any questions. Check back later.',
         subject: 'Spanish Subject',
         lastMessage: 'Spanish Last Message',
-        searchName: 'Spanish Search',
+        searchName: 'Spanish Search Name',
     },
     visitSummary: {
         title: 'Spanish Visit Summary',

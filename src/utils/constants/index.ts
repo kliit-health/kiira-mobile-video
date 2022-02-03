@@ -83,24 +83,6 @@ export default {
                 { value: 'Male', code: 'M' },
                 { value: 'Female', code: 'F' },
             ],
-            pharmacy:[
-                {
-                    value: 'Walgreens',
-                },
-                {
-                    value: 'CVS Health',
-                },
-                {
-                    value: 'Walmart',
-                },
-                {
-                    value: 'Rite Aid',
-                },
-                {
-                    value: 'Other',
-                },
-
-            ],
             income: [
                 { value: '0 - 35,000', code: '0 - 35,000' },
                 { value: '35,001 - 60,000', code: '35,001 - 60,000' },
@@ -111,32 +93,6 @@ export default {
                 { value: '150,001 - 175,000', code: '150,001 - 175,000' },
                 { value: '175,001 - 200,000', code: '175,001 - 200,000' },
                 { value: '200,000+', code: '200,000+' },
-            ],
-            insurance:[
-                {
-                   value:'Aetan Health'
-                },
-                {
-                    value:'Blue Cross/Blue Shield'
-                 },
-                 {
-                    value:'Cigna'
-                 },
-                 {
-                    value:'Kaiser'
-                 },
-                 {
-                    value:'United Health'
-                 },
-                 {
-                    value:'Wellpoint'
-                 },
-                 {
-                    value:'Other'
-                 },
-                 {
-                    value:'None'
-                 },
             ],
             states: [
                 {
@@ -405,16 +361,6 @@ export default {
                 { value: 'Two or more', code: 'Two or more' },
                 { value: 'Prefer not to say', code: 'Prefer not to say' },
             ],
-            Pronouns:[
-                {
-                  value:'He/Him',code: 'He'  
-                },
-                {
-                    value:'She/Her',code: 'Her'  
-                  },{
-                    value:'They/Them',code: 'They'  
-                  },
-            ]
         },
 
         privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
@@ -428,7 +374,6 @@ export default {
         screenNames: {
             Activate: 'Activate',
             AddChild: 'AddChild',
-            AdditionalInformation: 'AdditionalInformation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
             Allergies: 'Allergies',
             Appointments: 'Appointments',
@@ -473,6 +418,7 @@ export default {
             PrivacyPolicy: 'PrivacyPolicy',
             ReferFriend: 'ReferFriend',
             RescheduleVisit: 'RescheduleVisit',
+            RequestVisit: 'RequestVisit',
             SelectCareType: 'SelectCareType',
             Setting: 'Setting',
             SettingExpert: 'SettingExpert',
@@ -518,7 +464,7 @@ export default {
             downArrow: require('../../../assets/down_arrow.png'),
             exam: require('../../../assets/exam.png'),
             family: require('../../../assets/family.png'),
-            faceID: require('../../../assets/faceIDBlue.png'),
+            faceID: require('../../../assets/faceID.png'),
             filterIcon: require('../../../assets/filter.png'),
             fingerprint: require('../../../assets/fingerprint.png'),
             greyDownArrow: require('../../../assets/grey_down_arrow.png'),
@@ -536,12 +482,10 @@ export default {
             passwordInvisibleIcon: require('../../../assets/eye_hide.png'),
             payPalIcon: require('../../../assets/paypal.png'),
             penguin: require('../../../assets/kiira_penguin.png'),
-            penguin_g: require('../../../assets/kiira_penguin_glasses.png'),
             penguin_b: require('../../../assets/kiira_penguin_b.png'),
             plusIcon: require('../../../assets/plus.png'),
             pregnancy: require('../../../assets/pregnancy.png'),
             profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
-            // profileCreateImg: require('../../../assets/profileCret')
             radioCheckBlueIcon: require('../../../assets/check_blue.png'),
             radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
             readMsgIcon: require('../../../assets/read_msg_icon.png'),
@@ -590,7 +534,6 @@ export default {
 export const colors = {
     azure: '#0253E2',
     black: '#000B1E',
-    disableButtonColor:'#ccc',
     babyBlue: '#ECFCFF',
     blue: '#0089FF',
     blueGrey: '#8e8e93',
@@ -677,7 +620,7 @@ export const images = {
     downArrow: require('../../../assets/down_arrow.png'),
     exam: require('../../../assets/exam.png'),
     family: require('../../../assets/family.png'),
-    faceID: require('../../../assets/faceIDBlue.png'),
+    faceID: require('../../../assets/faceID.png'),
     filterIcon: require('../../../assets/filter.png'),
     fingerprint: require('../../../assets/fingerprint.png'),
     greyDownArrow: require('../../../assets/grey_down_arrow.png'),
@@ -696,7 +639,6 @@ export const images = {
     payPalIcon: require('../../../assets/paypal.png'),
     penguin: require('../../../assets/kiira_penguin.png'),
     penguin_b: require('../../../assets/kiira_penguin_b.png'),
-    penguin_g: require('../../../assets/kiira_penguin_glasses.png'),
     plusIcon: require('../../../assets/plus.png'),
     pregnancy: require('../../../assets/pregnancy.png'),
     profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
@@ -2076,9 +2018,6 @@ export const videoHistory = {
 export const bookVisitText = {
     message: 'Please select an appointment time'
 };
-export const days = {
-     yesterday:'Yesterday'
-}
 
 export const tables = {
     users: 'users',

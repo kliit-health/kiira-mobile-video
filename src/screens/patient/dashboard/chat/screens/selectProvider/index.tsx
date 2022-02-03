@@ -10,7 +10,6 @@ import { h2 } from '~/components/styles';
 
 const SelectChatProvider = ({ navigation }) => {
     const { expertData } = useSelector(state => state.chooseExpert);
- 
     const lang = useSelector(state => state.language);
     const [experts, setExperts] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
@@ -24,11 +23,11 @@ const SelectChatProvider = ({ navigation }) => {
         let filtered = expertData.filter(expert =>
             expert.chatTypes.includes(serviceType),
         );
-      setExperts(filtered);
+        setExperts(filtered);
     };
- 
+
     const filterExperts = (gender, languages) => {
-         setInitialExperts();
+        setInitialExperts();
         let experts = expertData.filter(expert =>
             expert.chatTypes.includes(serviceType),
         );
@@ -62,7 +61,7 @@ const SelectChatProvider = ({ navigation }) => {
                     onFilterPress={() => setShowFilter(true)}
                 />
                 <Text options={[h2]}>{`Choose a ${serviceType} Expert`}</Text>
-                {expertData ? <Experts experts={experts} /> : null}
+                {expertData && <Experts experts={experts} />}
                 {showFilter && (
                     <FilterModal
                         show={showFilter}
