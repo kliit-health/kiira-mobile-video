@@ -23,6 +23,5 @@ export const buttonStyles = StyleSheet.create({
     container: {
         margin: 12,
         marginLeft: 'auto',
-        width:300
     },
 });

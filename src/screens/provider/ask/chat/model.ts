@@ -1,8 +1,3 @@
-export type Tab = {
-    title: string;
-};
-
-
 export default [
     {
         title: 'Birth Control',
@@ -24,13 +19,5 @@ export default [
     },
     {
         title: 'STI / STD',
-    },
-];
-export const chatTabs: Tab[] = [
-    {
-        title: 'OPEN CHATS',
-    },
-    {
-        title: 'RESOLVED',
     },
 ];

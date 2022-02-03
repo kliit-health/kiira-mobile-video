@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    SearchBar,
-    Header,
-    Container,
-    Tabs,
-} from '~/components';
+import { SearchBar, TextButton, Header, Container } from '~/components';
 import {
     getActiveQuestions,
     getResolvedQuestions,
@@ -19,9 +14,6 @@ import {
 } from '~/redux/actions';
 import { ActiveQuestions, ResolvedQuestions } from './components';
 import styles, { modifiers } from './styles';
-import { chatTabs } from './chat/model';
-import { default as globalStyles } from '~/components/styles';
-const { blue_bg } = globalStyles;
 
 const AskExpert = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -29,17 +21,15 @@ const AskExpert = ({ navigation }) => {
     const [searching, setSearching] = useState(false);
     const [value, setValue] = useState('');
 
-    const lang = useSelector((state: any) => state.language);
-    const expertDetails = useSelector((state: any) => state.user.data);
-    const activeQuestions = useSelector((state: any) => state.askExpert.active);
-    const resolvedQuestions = useSelector(
-        (state: any) => state.askExpert.resolved,
-    );
+    const lang = useSelector((state:any) => state.language);
+    const expertDetails = useSelector((state:any) => state.user.data);
+    const activeQuestions = useSelector((state:any) => state.askExpert.active);
+    const resolvedQuestions = useSelector((state:any) => state.askExpert.resolved);
     const activeSearchResult = useSelector(
-        (state: any) => state.askExpert.activeSearch,
+        (state:any) => state.askExpert.activeSearch,
     );
     const resolvedSearchResult = useSelector(
-        (state: any) => state.askExpert.resolvedSearch,
+        (state:any) => state.askExpert.resolvedSearch,
     );
 
     useEffect(() => {
@@ -90,24 +80,33 @@ const AskExpert = ({ navigation }) => {
     };
 
     return (
-        <Container unformatted>
+        <Container themed unformatted>
             <StatusBar barStyle="light-content" translucent={true} />
-            <Header
-                title={lang.expertChats.title}
-                onBack={() => navigation.goBack()}
-            />
+            <Header themed title={lang.expertChats.title} />
             <SearchBar
                 styles={modifiers.searchBar}
-                style={styles.searchBar}
                 onChange={handleSearch}
                 placeholder={lang.expertChats.searchName}
             />
-            <Tabs
-                options={[blue_bg]}
-                list={chatTabs}
-                active={active}
-                setActive={toggleActive}
-            />
+            <View style={styles.buttonsContainer}>
+                <TextButton
+                    styles={modifiers.button}
+                    disabled={active}
+                    activeOpacity={1}
+                    onPress={toggleActive}
+                >
+                    {lang.expertChats.active}
+                </TextButton>
+                <TextButton
+                    outlined
+                    styles={modifiers.button}
+                    disabled={!active}
+                    activeOpacity={1}
+                    onPress={toggleActive}
+                >
+                    {lang.expertChats.resolved}
+                </TextButton>
+            </View>
             <ActiveQuestions
                 visible={active}
                 data={searching ? activeSearchResult : activeQuestions}

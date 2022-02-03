@@ -51,7 +51,7 @@ const VisitOverView = ({ navigation }) => {
                     <Heading>Reason for visit:</Heading>
                     <Column options={[justify_fs, grey_br_b_md]}>
                         <Text options={[white_bg, pad, xLarge]}>
-                            {reason.sessionType.title}
+                            {reason.title}
                         </Text>
                     </Column>
                     <Heading>Action Items:</Heading>

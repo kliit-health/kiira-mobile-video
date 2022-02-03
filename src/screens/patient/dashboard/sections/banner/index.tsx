@@ -6,7 +6,6 @@ import { switchCase } from '~/utils/functions';
 import { Reminder, Book, Schedule } from './sections';
 import styles from './styles';
 
-
 enum Action {
     Book,
     Reminder,

@@ -114,6 +114,7 @@ const Dashboard = ({ navigation }) => {
             navigation.navigate(destination);
         }
     };
+
     return (
         <Screen options={[styles.white_bg]} test="DashBoard">
             <ScrollView showsVerticalScrollIndicator={false}> 
