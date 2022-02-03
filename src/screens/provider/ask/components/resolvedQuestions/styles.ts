@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
+import Constant from '~/utils/constants';
+import metrics from '~/utils/metrices';
 
 export default {
     list: StyleSheet.create({
@@ -13,28 +15,31 @@ export default {
         card: {
             backgroundColor: colors.white,
             borderRadius: 10,
-            shadowColor: colors.black,
-            shadowOffset: { width: 1, height: 1 },
-            shadowRadius: 5,
-            shadowOpacity: 0.1,
             padding: 10,
             paddingLeft: 12,
             justifyContent: 'space-between',
             flexDirection: 'row',
             marginHorizontal: 10,
             marginVertical: 5,
+            borderBottomColor: Constant.App.colors.greyBgAsk,
+            borderBottomWidth: 2,
+            width: metrics.width - 20,
         },
-        title: {
+        message: {
             fontSize: text.size.medium,
             color: colors.charcoal,
             padding: 0,
             margin: 0,
         },
         subtitle: {
-            fontFamily: text.fontFamily.poppinsRegular,
-            fontSize: text.size.medium,
+            fontFamily: text.fontFamily.poppinsBold,
+            fontSize: text.size.large,
             color: colors.black,
             margin: 0,
+        },
+        time:{
+            fontSize: text.size.medium,
+            color: colors.charcoal, 
         },
         outerContainer: {
             justifyContent: 'space-between',
