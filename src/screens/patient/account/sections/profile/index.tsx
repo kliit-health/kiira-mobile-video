@@ -17,9 +17,6 @@ export default ({ profileInfo, navigation }) => {
          
     }; 
 
-    const onListPlan = () => {
-         
-    }; 
    
 
     const getFieldNames = (value, fieldName) => { 
