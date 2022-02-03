@@ -2017,6 +2017,9 @@ export const videoHistory = {
 export const bookVisitText = {
     message: 'Please select an appointment time'
 };
+export const days = {
+     yesterday:'Yesterday'
+}
 
 export const tables = {
     users: 'users',
