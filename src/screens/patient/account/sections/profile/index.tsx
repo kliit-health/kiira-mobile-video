@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, } from 'react-native';
 import { get } from 'lodash';
 import { cardDetails } from './model';
 import { Avatar, Icon, Header, Screen } from '~/components';
 import styles, { modifiers } from './styles'; 
 
+
 export default ({ profileInfo, navigation }) => {
-    const { firstName, lastName, profileImageUrl } = profileInfo;
+    const { firstName, lastName,profileImageUrl } = profileInfo;
 
     const handleOnBackPress = () => {
          
@@ -16,9 +17,7 @@ export default ({ profileInfo, navigation }) => {
          
     }; 
 
-    const onListPlan = () => {
-         
-    }; 
+   
 
     const getFieldNames = (value, fieldName) => { 
         console.log(fieldName, value)
@@ -38,6 +37,8 @@ export default ({ profileInfo, navigation }) => {
          }
          return value;
     }
+    
+ 
 
     return (
         <Screen>
@@ -45,7 +46,6 @@ export default ({ profileInfo, navigation }) => {
                 <Header 
                     title="Basic Plan"  
                     onBack={handleOnBackPress}
-                    onListPress={onListPlan}
                     OnSettingPress={handleSetting}  
                 />
             </View>

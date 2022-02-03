@@ -78,6 +78,7 @@ import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing'; 
 import BillingInsurance from '../screens/common/billingAndInsurance'; 
 import Pharmacy from '../screens/common/pharmacy'; 
+import AdditionalInformation from '~/screens/auth/welcome/AdditionalInformation';
 import EmergencyContact from '../screens/common/emergencyContact';  
 import TermsConditions from '../screens/common/termsAndConditions'; 
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
@@ -120,6 +121,7 @@ const AuthStack = createStackNavigator(
         Landing: { screen: Landing },
         Login: { screen: Login },
         Welcome: { screen: Welcome },
+        AdditionalInformation:{screen: AdditionalInformation}
     },
     {
         headerMode: 'none',

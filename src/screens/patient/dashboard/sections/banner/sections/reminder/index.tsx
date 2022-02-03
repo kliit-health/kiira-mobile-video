@@ -6,10 +6,22 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { Button } from '~/components';
 import { route } from '~/utils/constants';
 import styles, { buttonStyles } from './styles';
+import { RootState } from '~/redux/reducers';
+import _ from 'lodash';
 
 const Reminder = ({ navigation }) => {
     const lang = useSelector(state => state.language.reminder, shallowEqual);
     const assessment = useSelector(state => state.user.data.assessment);
+
+    const today = moment().format('YYYY-MM-DD');
+    const visits = useSelector(
+        (state: RootState) => state.appointments.history,
+    );
+    const visitData = visits.filter(item =>
+        moment(today).isBefore(moment(item.time).format('YYYY-MM-DD')),
+    );
+
+    const sortedDataByDate = _.sortBy(visitData, 'time');
 
     const handleView = () => {
         navigation.navigate(route.appointments);
@@ -19,9 +31,9 @@ const Reminder = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.description}>{lang.nexAppointment}</Text>
             <View style={styles.appointment}>
-                {assessment && (
+                { visitData && sortedDataByDate && (
                     <Text style={styles.time}>
-                        {moment(assessment.time).format('llll')}
+                        {sortedDataByDate ? moment(sortedDataByDate  && sortedDataByDate[0] ? sortedDataByDate[0].time : null).format('llll') : null}
                     </Text>
                 )}
                 <Button
