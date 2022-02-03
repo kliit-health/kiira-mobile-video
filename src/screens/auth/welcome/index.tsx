@@ -1,128 +1,388 @@
-import React from 'react';
-import { View, ImageBackground, Text, TouchableOpacity, ScrollView, Platform, Linking } from 'react-native';
-import { useSelector} from 'react-redux';
-import { withNavigation } from 'react-navigation';
-import { RootState } from '~/redux/reducers';
-import Constant from '~/utils/constants';
+import React, { useState } from 'react';
+import {
+    View,
+    Image,
+    Text,
+    TouchableOpacity,
+    Platform,
+    PermissionsAndroid,
+    Alert,
+} from 'react-native';
+import Constant, { colors, icons } from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { handleNavigation } from '~/utils/functions';
+import { CustomText, Icon } from '~/components';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import CustomSelectModal from '~/components/customselectModal';
+import ImagePicker from 'react-native-image-picker';
+import { Avatar } from 'react-native-elements';
 
 const Welcome = ({ navigation }) => {
 
     const { staticImages, screenNames } = Constant.App;
-    const user = useSelector((state: RootState) => state.user.data);  
-    const login = useSelector((state: RootState) => {
-        return state.language.login;
-    }); 
 
-    const CrossIcon = () => {
+    const [showStateModal, setShowStateModal] = useState(false);
+    const [showGenderModal, setShowGenderModal] = useState(false);
+    const [showPronounModal, setShowPronounModal] = useState(false);
+    const [userProfileData, setUserProfileData] = useState({
+        firstName: '',
+        nickName: '',
+        lastName: '',
+        birthday: '',
+        imageSrc: '',
+        imageUri: '',
+        selectedState: { code: '', value: '' },
+        selectedGender: { code: '', value: '' },
+        selectedPronoun: { code: '', value: '' },
+    });
+    const [filePath, setFilePath] = useState('');
+    const [file, setFile] = useState({});
+
+    const RenderStateModalView = () => {
         return (
-            <TouchableOpacity
-                testID="Close Button"
-                onPress={() => {
-                    handleNavigation('Login');
+            <CustomSelectModal
+                data={Constant.App.Modal.states}
+                onSelection={item => {
+                    console.log('---onSelection CustomSelectModal---', item);
+                    setUserProfileData({
+                        ...userProfileData,
+                        selectedState: item,
+                    });
+                    setShowStateModal(false);
                 }}
-            >
-                <Text  
-                    style={styles.backText} 
-                >
-                    {'Back'}
-                </Text>
-            </TouchableOpacity>
-        );
-    };
-
-    const WelcomeView = () => {
-        return (
-            <Text  
-                style={styles.helloStyle} 
-            >
-                {'Welcome to Kiira! '}
-            </Text>
-        );
-    };
-
-
-    const TitleView = () => {
-        return (
-            <Text  
-                style={styles.titleStyle} 
-            >
-                {'Your one stop shop for care. On the kiira app you can;'}
-            </Text>
-        );
-    };
-
-    const InfoView = () => {
-        return (
-            <Text  
-                style={styles.infoStyle} 
-            >
-                {'Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.'}
-            </Text>
-        );
-    };
-
-    const ContentView = () => {
-        return (
-            <Text  
-                style={styles.contentStyle} 
-            >
-                {'Access a personalized team of health providers for women’s health, mental health, and primary care on-demand.'}
-            </Text>
-        );
-    };
-
-    const StageView = () => {
-        return (
-            <Text  
-                style={styles.contentStyle} 
-            >
-                {'Take Kiira with you everywhere you go and get answers specific to every stage of your life.'}
-            </Text>
-        );
-    };
-    
-
-    const Button = () => {
-        return (
-            <CustomButton
-                test="Become a member"
-                disabled={false}
-                buttonStyle={styles.activeButton}
-                textStyle={styles.activeButtonText}
-                onPress={() => {
-                    Linking.openURL(Constant.App.becomeAMemeberUrl);
+                onClose={() => {
+                    console.log('---onClose CustomSelectModal---');
+                    setShowStateModal(false);
                 }}
-                text={login.Member}
+            />
+        );
+    };
+    const RenderGenderModalView = () => {
+        return (
+            <CustomSelectModal
+                data={Constant.App.Modal.gender}
+                onSelection={item => {
+                    console.log('---onSelection CustomSelectModal---', item);
+                    setUserProfileData({
+                        ...userProfileData,
+                        selectedGender: item,
+                    });
+                    setShowGenderModal(false);
+                }}
+                onClose={() => {
+                    console.log('---onClose CustomSelectModal---');
+                    setShowGenderModal(false);
+                }}
+            />
+        );
+    };
+    const RenderPronounModalView = () => {
+        return (
+            <CustomSelectModal
+                data={Constant.App.Modal.Pronouns}
+                onSelection={item => {
+                    console.log('---onSelection CustomSelectModal---', item);
+                    setUserProfileData({
+                        ...userProfileData,
+                        selectedPronoun: item,
+                    });
+                    setShowPronounModal(false);
+                }}
+                onClose={() => {
+                    console.log('---onClose CustomSelectModal---');
+                    setShowPronounModal(false);
+                }}
             />
         );
     };
 
-    return ( 
-        <ImageBackground
-                resizeMode="cover"
-                style={styles.imageContainer}
-                source={staticImages.backgroundUrl}
-            >
-            <ScrollView
-                keyboardShouldPersistTaps="handled"
-                showsVerticalScrollIndicator={false}
-            > 
-                <CrossIcon />
-                <View style={styles.activateContainer}>
-                    <WelcomeView />
-                    <TitleView />  
-                    <InfoView />
-                    <ContentView />
-                    <StageView />
-                    <Button />
-                </View> 
-            </ScrollView>
-            {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </ImageBackground>
+    const RenderDropdownsView = () => {
+        return (
+            <View>
+                <View style={styles.stateDropDownContainerStyle}>
+                    <TouchableOpacity
+                        style={{ flexDirection: 'row' }}
+                        onPress={() => setShowStateModal(true)}
+                    >
+                        <CustomText
+                            style={
+                                userProfileData.selectedState.value
+                                    ? styles.selectedTextStyle
+                                    : styles.stateDropDownTextStyle
+                            }
+                        >
+                            {userProfileData.selectedState.value
+                                ? userProfileData.selectedState.value
+                                : 'Select State of Residency'}
+                        </CustomText>
+                        <Image
+                            resizeMode="contain"
+                            source={staticImages.downArrow}
+                            style={styles.dropDownIconStyle}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.stateDropDownContainerStyle}>
+                    <TouchableOpacity
+                        style={{ flexDirection: 'row' }}
+                        onPress={() => setShowGenderModal(true)}
+                    >
+                        <CustomText
+                            style={
+                                userProfileData.selectedGender.value
+                                    ? styles.selectedTextStyle
+                                    : styles.stateDropDownTextStyle
+                            }
+                        >
+                            {userProfileData.selectedGender.value
+                                ? userProfileData.selectedGender.value
+                                : 'Gender assigned at birth'}
+                        </CustomText>
+                        <Image
+                            resizeMode="contain"
+                            source={staticImages.downArrow}
+                            style={styles.dropDownIconStyle}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.stateDropDownContainerStyle}>
+                    <TouchableOpacity
+                        style={{ flexDirection: 'row' }}
+                        onPress={() => setShowPronounModal(true)}
+                    >
+                        <CustomText
+                            style={
+                                userProfileData.selectedPronoun.value
+                                    ? styles.selectedTextStyle
+                                    : styles.stateDropDownTextStyle
+                            }
+                        >
+                            {userProfileData.selectedPronoun.value
+                                ? userProfileData.selectedPronoun.value
+                                : 'Preferred Pronoun'}
+                        </CustomText>
+                        <Image
+                            resizeMode="contain"
+                            source={staticImages.downArrow}
+                            style={styles.dropDownIconStyle}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    };
+    const pickImage = () => {
+        const options = {
+            title: 'Select Avatar',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+        ImagePicker.showImagePicker(options, response => {
+            if (response.didCancel) {
+                console.log('You cancelled image picker');
+            } else if (response.error) {
+                Alert.alert('And error occured: ' + JSON.stringify(response));
+            } else {
+                setUserProfileData({
+                    ...userProfileData,
+                    imageUri: response.uri,
+                    imageSrc: response.uri,
+                });
+                setFile(response);
+                setFilePath(response.path);
+            }
+        });
+    };
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    const grantedAgain = await PermissionsAndroid.request(
+                        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    );
+                    if (grantedAgain === PermissionsAndroid.RESULTS.GRANTED) {
+                        pickImage();
+                    } else {
+                        pickImage();
+                    }
+                } else {
+                    pickImage();
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            pickImage();
+        }
+    };
+
+    return (
+        <ScrollView style={{ backgroundColor: 'white' }}>
+            <View style={styles.container}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Icon
+                        options={{
+                            transform: [{ rotate: '180deg' }],
+                            margin: 30,
+                        }}
+                        source={icons.chevron}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.title}>Complete your profile</Text>
+                <Text style={styles.informationText}>
+                    We will need this information to match you with clinicians
+                    and get your proper care
+                </Text>
+            </View>
+            <View style={{margin:'6%'}}>
+                <View style={styles.imageBackground}>
+                    <TouchableOpacity
+                        style={styles.imageView}
+                        onPress={() => {
+                            requestCameraPermission();
+                        }}
+                    >
+                        <Avatar
+                            renderPlaceholderContent={
+                                <Image
+                                    style={{
+                                        width: 120,
+                                        height: 120,
+                                    }}
+                                    resizeMode="stretch"
+                                    source={staticImages.profilePlaceholderImg}
+                                />
+                            }
+                            size={90}
+                            rounded
+                            source={{
+                                uri: userProfileData.imageSrc
+                                    ? userProfileData.imageSrc
+                                    : '',
+                            }}
+                            activeOpacity={0.7}
+                        />
+
+                        <TouchableOpacity style={styles.AddEditImage}>
+                            <Image
+                                source={
+                                    userProfileData.imageSrc
+                                        ? require('../../../../assets/profileEdit.png')
+                                        : require('../../../../assets/profileCreate.png')
+                                }
+                            />
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: '13%' }}>
+                    <TextInput
+                        testID="firstName"
+                        style={
+                            !userProfileData.firstName
+                                ? styles.namesTextInput
+                                : styles.nameTextInputOnChange
+                        }
+                        placeholderTextColor={colors.greyDark}
+                        placeholder="First Name"
+                        value={userProfileData.firstName}
+                        onChangeText={e =>
+                            setUserProfileData({
+                                ...userProfileData,
+                                firstName: e,
+                            })
+                        }
+                    />
+                    <TextInput
+                        testID="nickName"
+                        style={
+                            !userProfileData.nickName
+                                ? styles.namesTextInput
+                                : styles.nameTextInputOnChange
+                        }
+                        placeholderTextColor={colors.greyDark}
+                        placeholder="Nick Name"
+                        value={userProfileData.nickName}
+                        onChangeText={e =>
+                            setUserProfileData({
+                                ...userProfileData,
+                                nickName: e,
+                            })
+                        }
+                    />
+                </View>
+                <View style={{marginBottom:'2%'}}>
+                    <TextInput
+                        testID="lastName"
+                        style={
+                            !userProfileData.lastName
+                                ? styles.otherTextInput
+                                : styles.OtherTextInputOnChange
+                        }
+                        placeholderTextColor={colors.greyDark}
+                        placeholder="Last Name"
+                        value={userProfileData.lastName}
+                        onChangeText={e =>
+                            setUserProfileData({
+                                ...userProfileData,
+                                lastName: e,
+                            })
+                        }
+                    />
+                    <TextInput
+                        testID="birthday"
+                        style={
+                            !userProfileData.birthday
+                                ? styles.otherTextInput
+                                : styles.OtherTextInputOnChange
+                        }
+                        placeholderTextColor={colors.greyDark}
+                        placeholder="Birthday MM/DD/YYYY"
+                        value={userProfileData.birthday}
+                        onChangeText={e =>
+                            setUserProfileData({
+                                ...userProfileData,
+                                birthday: e,
+                            })
+                        }
+                    />
+                </View>
+                {showStateModal && <RenderStateModalView />}
+                {showGenderModal && <RenderGenderModalView />}
+                {showPronounModal && <RenderPronounModalView />}
+                <RenderDropdownsView />
+                <CustomText style={styles.pageNumber}>1 of 2</CustomText>
+                <CustomButton
+                    disabled={
+                        !userProfileData.firstName ||
+                        !userProfileData.nickName ||
+                        !userProfileData.lastName ||
+                        !userProfileData.birthday ||
+                        !userProfileData.selectedState.value ||
+                        !userProfileData.selectedGender.value ||
+                        !userProfileData.selectedPronoun.value
+                    }
+                    buttonStyle={
+                        !userProfileData.firstName ||
+                        !userProfileData.nickName ||
+                        !userProfileData.lastName ||
+                        !userProfileData.birthday ||
+                        !userProfileData.selectedState.value ||
+                        !userProfileData.selectedGender.value ||
+                        !userProfileData.selectedPronoun.value
+                            ? styles.disabledButton
+                            : styles.buttonContainer
+                    }
+                    textStyle={styles.buttonText}
+                    onPress={() => console.log('')}
+                    text="Continue"
+                />
+            </View>
+        </ScrollView>
     );
 };
 

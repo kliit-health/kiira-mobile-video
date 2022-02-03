@@ -361,6 +361,16 @@ export default {
                 { value: 'Two or more', code: 'Two or more' },
                 { value: 'Prefer not to say', code: 'Prefer not to say' },
             ],
+            Pronouns:[
+                {
+                  value:'He/Him',code: 'He'  
+                },
+                {
+                    value:'She/Her',code: 'Her'  
+                  },{
+                    value:'They/Them',code: 'They'  
+                  },
+            ]
         },
 
         privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
@@ -486,6 +496,7 @@ export default {
             plusIcon: require('../../../assets/plus.png'),
             pregnancy: require('../../../assets/pregnancy.png'),
             profilePlaceholderImg: require('../../../assets/profile_img_placeholder.png'),
+            // profileCreateImg: require('../../../assets/profileCret')
             radioCheckBlueIcon: require('../../../assets/check_blue.png'),
             radioUnCheckBlueIcon: require('../../../assets/uncheck_blue.png'),
             readMsgIcon: require('../../../assets/read_msg_icon.png'),
