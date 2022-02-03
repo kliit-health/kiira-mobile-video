@@ -11,10 +11,9 @@ import {
     updateVisit,
 } from '~/redux/reducers/appointments';
 import { handleBack } from '~/utils/functions/handleNavigation';
-import { generateDateInfo } from '~/utils/helper';
-import { app, colors } from '~/utils/constants';
-import metrices from '~/utils/metrices';
-import  { tables } from '~/utils/constants'; 
+import { generateDateInfo } from '~/utils/helper'; 
+import { colors } from '~/utils/constants';
+import metrices from '~/utils/metrices'; 
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
@@ -40,9 +39,6 @@ const { width } = metrices;
 
 const RescheduleVisit = props => {
     const {  visit } = props.navigation.state.params;
-    const {  expert } = visit;
-
-    const expertData = useSelector((state:any) => state.appointments.expertData);
     const appointmentData = useSelector((state:any) => state.appointments);
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
@@ -53,14 +49,15 @@ const RescheduleVisit = props => {
 
     useEffect(() => {
         const { calendarID, uid } = visit;
-        const obj = {
-            expertsParams: { 
-                tableName: tables.users, 
-                uid: expert.uid,
+        const obj = { 
+            expertsParams: {
+                tableName: 'users',
+                uid,
             },
         };
+
         const curMonth = moment(`${current.year}-${current.monthNumber}`);
-        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM');
+        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM'); 
 
         dispatch(
             getAppointmentDates({

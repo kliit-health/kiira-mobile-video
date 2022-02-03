@@ -46,7 +46,7 @@ const Success = ({ navigation }) => {
                         title: styles.homeButtonTitle,
                     }}
                 />
-                <Button
+                <Button 
                     onPress={() => navigation.navigate(screenNames.Home)}
                     title="Complete Health Intake"
                     style={{

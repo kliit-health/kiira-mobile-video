@@ -3,14 +3,16 @@ import {
     FETCH_EXPERT_APPOINTMENTS,
     EXPERT_CANCEL_APPOINTMENT,
 } from '~/redux/types';
-import { put, takeEvery } from 'redux-saga/effects';
+
 import {
     getAppointmentsAsync,
-    cancelAppointmentAsync,
-    updateCredits,
+    cancelAppointmentData, 
+    sendNotification,
+    sendSms,
 } from '~/utils/firebase';
-import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 
+import { put, takeEvery, select } from 'redux-saga/effects'; 
+import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';  
 import { showOrHideModal } from '~/components/customModal/action';
 
 function getUserAppointments(data) {
@@ -39,23 +41,17 @@ function* getAppointments({ data }) {
 }
 
 function* cancelAppointment({ data }) {
-    const { expert, prepaid } = data;
+    const lang = yield select(state => state.language); 
+    const { id, uid, expert, credits } = data; 
+        const title = 'Cancellation';
+        const message = 'An appointment has been canceled'; 
+    
     try {
-        yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(data);
+        yield put(showApiLoader());  
+        yield cancelAppointmentData(data, message); 
+        yield sendNotification(uid, title, message); 
         const appointments = yield getAppointmentsAsync(expert.uid);
         const allApponitments = yield getUserAppointments(appointments);
-
-        if (result) {
-            yield put(
-                showOrHideModal(
-                    'Appointments must be canceled at least 24 hours in advance.',
-                ),
-            );
-        } else {
-            yield updateCredits(1, data);
-        }
-
         yield put({ type: FETCH_EXPERT_APPOINTMENTS, data: allApponitments });
         yield put(hideApiLoader());
     } catch (error) {

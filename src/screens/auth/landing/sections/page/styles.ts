@@ -3,23 +3,45 @@ import { text, colors } from '~/utils/constants';
 
 export default StyleSheet.create({
     activate: {
+        marginHorizontal:30, 
+        paddingVertical: 12,
         color: colors.primaryBlue,
         backgroundColor: colors.white,
-        width: '90%',
-        padding: 10,
+        width: '100%', 
         textAlign: 'center',
-        borderRadius: 20,
+        borderRadius: 22,
         overflow: 'hidden',
     },
 
-    activateContainer: {
+    kiiraHelp: { 
+
+        marginHorizontal:30, 
+        paddingVertical: 12,
+         
+        color: colors.primaryBlue,
+        backgroundColor: colors.white,
+        width: '100%', 
+        textAlign: 'center',
+        borderRadius: 22,
+        overflow: 'hidden',
+    },
+
+    kiiraContainer: { 
+        marginHorizontal:30,  
+        marginVertical:10,
+        alignItems: 'center', 
+    },
+
+    activateContainer: { 
         alignItems: 'center',
+        marginVertical:10, 
+        paddingHorizontal: 30,   
     },
 
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start', 
     },
 
     description: {
@@ -59,6 +81,13 @@ export default StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.xxxLarge,
         fontWeight: '400',
-        paddingHorizontal: 20,
+        paddingHorizontal: 30,
+        marginBottom:20,
+        marginTop:30, 
     },
+
+    linearGradient: {
+        height: 89,
+    },
+
 });
