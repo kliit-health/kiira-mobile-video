@@ -4,7 +4,6 @@ import { get } from 'lodash';
 import { cardDetails } from './model';
 import { Avatar, Icon, Header, Screen } from '~/components';
 import styles, { modifiers } from './styles'; 
-import { screenNames } from '~/utils/constants';
 
 export default ({ profileInfo, navigation }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
