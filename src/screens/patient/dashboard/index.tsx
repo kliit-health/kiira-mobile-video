@@ -72,7 +72,7 @@ const Dashboard = ({ navigation }) => {
     }, [subscription]);
 
     useEffect(() => {
-        const includesState = licenses.includes(user.profileInfo.state.code);
+        const includesState = user.profileInfo.state ? licenses.includes( user.profileInfo.state.code ) : false;
         setVideoEnabled(includesState);
     });
 

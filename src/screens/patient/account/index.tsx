@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import {
-    CustomButton,
-    CustomText,
-} from '~/components';
+import { CustomButton, CustomText } from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { ScrollView,  View } from 'react-native';
-import {  screenNames } from '~/utils/constants';
+import { ScrollView, View } from 'react-native';
+import { screenNames } from '~/utils/constants';
 import { Profile, List, Plan } from './sections';
 import { signOut } from '~/redux/reducers/account';
 import styles from './styles';

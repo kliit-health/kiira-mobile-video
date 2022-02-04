@@ -1587,6 +1587,7 @@ export const updateUserData = (updates, uid, merge = true) =>
         (async () => {
             const user = firestore().collection('users').doc(uid);
             try {
+                console.log('UPDATES',updates)
                 await user.set(updates, { merge });
                 resolve(updates);
             } catch (error) {

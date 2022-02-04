@@ -1,12 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-    View,
-    TouchableOpacity,
-    Image,
-    ScrollView,
-    Text,
-
-} from 'react-native';
+import { View, TouchableOpacity, Image, ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
 import CustomText from '~/components/customText';
@@ -16,14 +9,11 @@ import { signOut, updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
 import { Header, ListItem } from '~/components';
 import { list, listItems } from './model';
-import { getUser } from '~/redux/actions';
-
 
 class Setting extends PureComponent {
     public props: any;
     public state: any;
-    public user:any;
-    public getUser: any;
+    public user: any;
     public setState: any;
     public userData: any;
     public lang: any;
@@ -45,9 +35,7 @@ class Setting extends PureComponent {
             phoneNumber: userData.profileInfo.phoneNumber,
         };
     }
-    componentDidMount() {
-        getUser()
-    }
+
     renderButtonView() {
         const { navigation, lang } = this.props;
         return (
@@ -75,8 +63,8 @@ class Setting extends PureComponent {
         }
         if (phoneNumberLength === 10) {
             this.setState({ phoneNumberLength: true });
-        }else if(phoneNumberLength < 10){
-            this.setState({phoneNumberLength:false})
+        } else if (phoneNumberLength < 10) {
+            this.setState({ phoneNumberLength: false });
         }
         return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
             3,
@@ -85,18 +73,11 @@ class Setting extends PureComponent {
     };
 
     render() {
-        const {
-            navigation,
-            lang,
-            handleSignout,
-            userData,
-            updateUserData,
-            user,
-        } = this.props;
-        console.log('-----USER---',user)
+        const { navigation, handleSignout, userData, updateUserData } =
+            this.props;
+
         const { phoneNumber, email, phoneNumberLength } = this.state;
         const { staticImages } = Constant.App;
-
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -111,7 +92,7 @@ class Setting extends PureComponent {
                         />
                     </View>
                     <View style={styles.inputTextParentContainerStyle}>
-                        <View style={[styles.inputTextFirstNameContainerStyle]}>
+                        <View style={[styles.inputTextEmailContainerStyle]}>
                             <CustomText style={styles.textStyle}>
                                 Email:{' '}
                             </CustomText>
@@ -122,7 +103,7 @@ class Setting extends PureComponent {
                                     this.setState({ email: value })
                                 }
                                 placeholder={'Enter your email'}
-                                value={email}
+                                value={userData.email ? userData.email : email}
                                 style={[
                                     styles.emailInputEmptyTypeStyle,
                                     { fontWeight: '300' },
@@ -130,7 +111,7 @@ class Setting extends PureComponent {
                                 placeholderTextColor={'#868992'}
                             />
                         </View>
-                        <View style={styles.inputTextContainerStyle}>
+                        <View style={styles.inputTextPhoneContainerStyle}>
                             <CustomText style={styles.textStyle}>
                                 Phone:{' '}
                             </CustomText>
@@ -154,32 +135,35 @@ class Setting extends PureComponent {
                                 placeholderTextColor={'#868992'}
                             />
 
-                           {  phoneNumberLength ? <TouchableOpacity
-                                                key="Enable Text"
-                                                onPress={() => {
-                                                    // updateUserData({...userData,phoneNumber})
-                                                }}
-                                            >
-                                                <View style={styles.textContainerStyle}>
-                                                    <Image
-                                                        resizeMode="contain"
-                                                        source={
-                                                           staticImages.checkGreenIcon
-                                                                
-                                                        }
-                                                        style={styles.pronounsChecboxIconStyle}
-                                                    />
-                                                </View>
-                                            </TouchableOpacity> : null} 
+                            {phoneNumberLength ? (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        const payload = {
+                                            userParams: {
+                                                ...userData.profileInfo,
+                                                phoneNumber,
+                                                imageParams: null,
+                                                navigation,
+                                            },
+                                        };
+                                        updateUserData(payload);
+                                        this.setState({phoneNumberLength:false})
+                                    }}
+                                >
+                                    <View style={styles.textContainerStyle}>
+                                        <Image
+                                            resizeMode="contain"
+                                            source={
+                                                staticImages.checkGreenBoxIcon
+                                            }
+                                            style={styles.phoneChecboxIconStyle}
+                                        />
+                                    </View>
+                                </TouchableOpacity>
+                            ) : null}
                         </View>
                     </View>
-                    <View
-                        style={{
-                            marginTop: '6%',
-                            borderBottomColor: colors.greyAccent,
-                            borderBottomWidth: 1,
-                        }}
-                    >
+                    <View style={styles.listItemView}>
                         {listItems.map(({ title, destination, content }) => (
                             <ListItem
                                 key={title}
@@ -236,30 +220,6 @@ class Setting extends PureComponent {
                                                 </Text>
                                             </>
                                         )}
-                                        {/* {title == `Face ID` && (
-                                            <>
-                                                <Text style={styles.content}>
-                                                    {title}
-                                                </Text>
-                                                <Switch
-                                                    style={{
-                                                        marginLeft: '70%',
-                                                    }}
-                                                    trackColor={{
-                                                        false: 'gray',
-                                                        true: colors.primaryBlue,
-                                                    }}
-                                                    thumbColor="white"
-                                                    ios_backgroundColor="gray"
-                                                    onValueChange={value =>
-                                                        this.setState({
-                                                            toggle: value,
-                                                        })
-                                                    }
-                                                    value={this.state.toggle}
-                                                />
-                                            </>
-                                        )} */}
                                     </View>
                                 </View>
                             </TouchableOpacity>
@@ -279,13 +239,11 @@ class Setting extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-    user: state.user.data,
     userData: state.user.data,
     lang: state.language,
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUser: () => dispatch(getUser()),
     handleSignout: ({ value }) => dispatch(signOut({ value })),
     updateUserData: value => dispatch(updateAccount(value)),
     showHideErrorModal: value => dispatch(showOrHideModal(value)),
