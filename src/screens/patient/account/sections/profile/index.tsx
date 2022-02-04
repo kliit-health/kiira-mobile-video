@@ -9,7 +9,7 @@ export default ({ profileInfo, navigation }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
 
     const handleOnBackPress = () => {
-         
+        navigation.goBack();
     }; 
 
     const handleSetting = () => {
