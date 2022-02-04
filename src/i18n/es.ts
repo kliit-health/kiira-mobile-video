@@ -538,10 +538,10 @@ export default {
         chats: 'Spanish Chats',
         patientName: 'Spanish Patient Name',
         noQuestions:
-            'Spanish You have not been asked any questions. Check back later.',
+            'Spanish You have no open chats.',
         subject: 'Spanish Subject',
         lastMessage: 'Spanish Last Message',
-        searchName: 'Spanish Search Name',
+        searchName: 'Spanish Search',
     },
     visitSummary: {
         title: 'Spanish Visit Summary',
@@ -569,7 +569,7 @@ export default {
         myHistory: 'Spanish My History',
         reminders: 'Spanish Reminders',
         sos: 'Spanish SOS',
-        helloName: 'Spanish Hello, ',
+        hiName: 'Spanish Hi, ',
         notFeelingSick: `Spanish I'm not feeling sick`,
         nowMention: 'Spanish Now that you mention it',
         kiira: 'Spanish Kiira',

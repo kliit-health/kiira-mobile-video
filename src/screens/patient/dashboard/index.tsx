@@ -72,8 +72,15 @@ const Dashboard = ({ navigation }) => {
     }, [subscription]);
 
     useEffect(() => {
-        const includesState = user.profileInfo.state ? licenses.includes( user.profileInfo.state.code ) : false;
-        setVideoEnabled(includesState);
+        const includesState = licenses.includes(user.profileInfo.state.code); 
+        if(!includesState){ 
+            if(user.profileInfo.state.code == null || user.profileInfo.state.code == ''){
+                setVideoEnabled(true);  
+                return;
+            }
+        }
+        
+        setVideoEnabled(includesState); 
     });
 
     useEffect(() => {
@@ -114,7 +121,6 @@ const Dashboard = ({ navigation }) => {
             navigation.navigate(destination);
         }
     };
-
     return (
         <Screen options={[styles.white_bg]} test="DashBoard">
             <ScrollView showsVerticalScrollIndicator={false}> 

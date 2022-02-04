@@ -9,12 +9,11 @@ export type WelcomeProps = {
 
 const Welcome = ({ displayName }: WelcomeProps): JSX.Element => {
     const lang = useSelector(state => state.language);
-
     return (
         <View style={styles.container}>
             <Text
                 style={styles.title}
-            >{`${lang.dashboard.helloName}${displayName}`}</Text>
+            >{`${lang.dashboard.hiName} ${displayName}`}</Text>
         </View>
     );
 };

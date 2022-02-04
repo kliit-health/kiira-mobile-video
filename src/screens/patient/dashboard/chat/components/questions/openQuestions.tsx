@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Column, Line, Question, Text, Icon } from '~/components';
 import { SwipeItem, SwipeButtonsContainer } from 'react-native-swipe-item';
 import { NavigationService as navigation } from '~/navigation';
-import { screenNames, icons, colors, text } from '~/utils/constants';
+import { screenNames, icons, colors, text, days } from '~/utils/constants';
 import { resolveQuestion } from '~/redux/actions/chat';
 import { default as globalStyles } from '~/components/styles';
 import moment from 'moment';
@@ -17,7 +17,14 @@ const OpenQuestions = ({ data }) => {
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
-        return moment(dt).format('MM/D/YY h:mm a');
+        let today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1)
+       return dt.toLocaleDateString() === today.toLocaleDateString()
+            ? moment(dt).format('hh:mm a')
+            : dt.toLocaleDateString() === yesterday.toLocaleDateString()
+            ? days.yesterday
+            : moment(dt).format('MM/D/YY h:mm a');     
     };
 
     const handleNavigation = item => {
@@ -79,9 +86,10 @@ const OpenQuestions = ({ data }) => {
                             <Question
                                 key={item.questionId}
                                 {...item}
-                                time={time}
+                                 time={time}
                                 onPress={() => handleNavigation(item)}
                             />
+                           
                         </SwipeItem>
                     );
                 }}
