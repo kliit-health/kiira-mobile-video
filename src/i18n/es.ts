@@ -569,7 +569,7 @@ export default {
         myHistory: 'Spanish My History',
         reminders: 'Spanish Reminders',
         sos: 'Spanish SOS',
-        helloName: 'Spanish Hello, ',
+        hiName: 'Spanish Hi, ',
         notFeelingSick: `Spanish I'm not feeling sick`,
         nowMention: 'Spanish Now that you mention it',
         kiira: 'Spanish Kiira',

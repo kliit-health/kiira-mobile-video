@@ -538,7 +538,7 @@ export default {
         getHelp: 'Get help with questions 24/7',
         getTreatment: 'Get Treatment',
         great: `That's great! If that changes let us know.`,
-        helloName: 'Hello, ',
+        hiName: 'Hi, ',
         kiira: 'Kiira',
         mySquad: 'My Squad',
         myHistory: 'My History',

@@ -23,7 +23,7 @@ const Account = ({ navigation }) => {
     return (
         <Screen test="Profile Screen">
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Profile {...user} />
+                <Profile {...user} navigation={navigation} />
                 {!!subscription.data.id && (
                     <Plan subscription={subscription} user={user} />
                 )}
