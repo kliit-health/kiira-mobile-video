@@ -75,7 +75,7 @@ const CareSquad = ({ navigation }) => {
         });
     };
 
-    const handleAddPress = ({ uid }) => {
+    const handleAddPress = ({uid }) => {
         dispatch(
             updateFavoriteExperts({
                 uid: user.uid,
@@ -89,6 +89,7 @@ const CareSquad = ({ navigation }) => {
     };
 
     const handleFavoriteItemPress = details => {
+        console.log('-----DETAILS------',details)
         deleteMode
             ? dispatch(
                   updateFavoriteExperts({

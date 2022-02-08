@@ -30,9 +30,20 @@ const styles = StyleSheet.create({
         paddingTop: metrics.width * 0.03,
         paddingBottom: metrics.width * 0.03,
         flexDirection: 'row',
-        width: metrics.width,
+        width: metrics.width ,
         backgroundColor: colors.white,
         marginVertical: 10,
+        height:130,
+        alignItems:'center'
+    },
+    heartIcon:{
+        borderColor:colors.greyAccent,
+        borderWidth:1,
+        borderRadius:100,
+        alignItems:'center',
+        alignContent:'center',
+        width:40,
+        height:40
     },
 
     expertInfoProfession: {
@@ -65,6 +76,9 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
+        borderWidth:2,
+        borderRadius:1000,
+        borderColor:colors.blue
     },
 
     expertsContainer: {
@@ -123,7 +137,7 @@ const styles = StyleSheet.create({
         left: 35,
         width: 16,
         height: 16,
-        top: 12,
+        top: 25,
         borderRadius: 8,
         backgroundColor: colors.green,
         position: 'absolute',

@@ -5,12 +5,14 @@ import { Header, Text, Screen } from '~/components';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { withNavigation } from 'react-navigation';
 import Experts from './experts';
+import Favorites from './favorites';
 import FilterModal from './filterModal';
-import { h2 } from '~/components/styles';
+import { h3 } from '~/components/styles';
+import { colors } from '~/utils/constants';
 
 const SelectChatProvider = ({ navigation }) => {
     const { expertData } = useSelector(state => state.chooseExpert);
- 
+    const favorites = useSelector((state: any) => state.favoriteExperts.data);
     const lang = useSelector(state => state.language);
     const [experts, setExperts] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
@@ -28,9 +30,9 @@ const SelectChatProvider = ({ navigation }) => {
         });
         setExperts(filtered);
     };
- 
+
     const filterExperts = (gender, languages) => {
-         setInitialExperts();
+        setInitialExperts();
         let experts = expertData.filter(expert =>
             expert.chatTypes.includes(serviceType),
         );
@@ -54,7 +56,24 @@ const SelectChatProvider = ({ navigation }) => {
 
         setExperts(filtered);
     };
+    const getFavoriteExperts = (favorites, experts) => {
+        if (favorites.length > 0 && experts.length > 0) {
+            const fav = experts.filter(experts =>
+                favorites.some(uid => experts.uid === uid),
+            );
+            return fav;
+        }
+        return [];
+    };
 
+    const getNonFavoriteExperts = (favorites, experts) => {
+        const fav = experts.filter(
+            experts => !favorites.some(uid => experts.uid === uid),
+        );
+        return fav;
+
+        return [];
+    };
     return (
         <Screen test="Select Chat Expert">
             <View>
@@ -63,8 +82,26 @@ const SelectChatProvider = ({ navigation }) => {
                     onBack={() => navigation.goBack()}
                     onFilterPress={() => setShowFilter(true)}
                 />
-                <Text options={[h2]}>{`Choose a ${serviceType} Expert`}</Text>
-                {expertData ? <Experts experts={experts} /> : null}
+                {getFavoriteExperts(favorites, experts).length > 0 ? (
+                    <Text
+                        options={[h3, { color: colors.greyDark }]}
+                    >{`Your Squad`}</Text>
+                ) : null}
+                {expertData ? (
+                    <Favorites
+                        experts={getFavoriteExperts(favorites, experts)}
+                    />
+                ) : null}
+                {getNonFavoriteExperts(favorites, experts).length > 0 ? (
+                    <Text
+                        options={[h3, { color: colors.greyDark }]}
+                    >{`All Providers`}</Text>
+                ) : null}
+                {expertData ? (
+                    <Experts
+                        experts={getNonFavoriteExperts(favorites, experts)}
+                    />
+                ) : null}
                 {showFilter && (
                     <FilterModal
                         show={showFilter}

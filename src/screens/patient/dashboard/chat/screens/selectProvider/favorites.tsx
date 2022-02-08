@@ -17,13 +17,16 @@ import { updateFavoriteExperts } from '~/redux/actions';
 
 const { xLarge, medium, gray_dark, blue } = globalStyles;
 
-const Experts = ({ experts, navigation }) => {
+const Favorites = ({ experts, navigation }) => {
     const user = useSelector((state: any) => state.user.data);
     const favorites = useSelector((state: any) => state.favoriteExperts.data);
     const dispatch = useDispatch();
     const [showProfile, setShowProfile] = useState(false);
     const [profile, setProfile] = useState(null);
-
+    const showProfileModal = expert => {
+        setProfile(expert);
+        setShowProfile(true);
+    };
     const ifExists = fav => {
         if (favorites.filter(item => item === fav).length > 0) {
             return true;
@@ -31,10 +34,6 @@ const Experts = ({ experts, navigation }) => {
         return false;
     };
 
-    const showProfileModal = expert => {
-        setProfile(expert);
-        setShowProfile(true);
-    };
     const handleAddPress = uid => {
         dispatch(
             updateFavoriteExperts({
@@ -52,7 +51,6 @@ const Experts = ({ experts, navigation }) => {
             }),
         );
     };
-
 
     return (
         <View style={styles.expertsContainer}>
@@ -74,7 +72,7 @@ const Experts = ({ experts, navigation }) => {
                     } = item;
                     return (
                         <View style={styles.expertInfoContainer}>
-                            <Image
+                           <Image
                                 resizeMode="contain"
                                 style={styles.expertProfile}
                                 source={{
@@ -153,6 +151,7 @@ const Experts = ({ experts, navigation }) => {
                     );
                 }}
             />
+
             {showProfile && (
                 <ProfileModal
                     expert={profile}
@@ -164,4 +163,4 @@ const Experts = ({ experts, navigation }) => {
     );
 };
 
-export default withNavigation(Experts);
+export default withNavigation(Favorites);
