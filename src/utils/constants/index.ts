@@ -75,6 +75,16 @@ export default {
             avenirLight: 'Avenir-Light',
         },
 
+        specialities:{
+            birthControl:'Birth Control',
+            coldAndFlu:'Cold and Flu',
+            sexuallyTransmittedInfections:'Sexually Transmitted Infections',
+            pTSD:'PTSD',
+            asthma:'Asthma',
+            healthWellnessAssessment:'Health & Wellness Assessment',
+            heavyPainfulIrregularPeriods:'Heavy/Painful/Irregular periods',
+        },
+
         helpUrl: 'http://www.kiira.io',
         learnTabUrl: 'https://medium.com/get-kiira',
         logoutInterval: 1000 * 90 * 60,

@@ -6,12 +6,13 @@ import PatientCard from '../components/patientCard';
 import { useSelector, useDispatch } from 'react-redux';
 import ExpertHeader from '~/components/expertHeader';
 import { getMedicalHistory } from '../actions';
+import Constant from '~/utils/constants';
 import moment from 'moment';
 
 import styles from './style';
 
 const PreviousVisits = ({ navigation }) => {
-    const defaultImage = require('../../../../../../assets/profile_img_placeholder.png')
+    const { staticImages } = Constant.App;
     const { visit, patientInfo } = navigation.state.params;
     const dispatch = useDispatch();
     const medicalHistory = useSelector((state: any) => state.medicalHistory);
@@ -31,9 +32,9 @@ const PreviousVisits = ({ navigation }) => {
             <Fragment>
                 <View style={styles.infoContainer}> 
                     <FastImage 
-                        resizeMode='center' 
+                        resizeMode='cover' 
                         style={[styles.image, {opacity: 0.7}]}
-                        source={{ uri: visit.expert.imageUrl ? visit.expert.imageUrl : defaultImage}} 
+                        source={{ uri: visit.expert.imageUrl ? visit.expert.imageUrl : staticImages.profilePlaceholderImg}} 
                     />
                     <View style={styles.detailsContainer}>
                         <Text>{`Provider: ${visit.expert.firstName} ${visit.expert.lastName}`}</Text>

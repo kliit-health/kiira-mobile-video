@@ -83,7 +83,19 @@ const SelectProvider = () => {
                     profileInfo: {
                         profession: { specialities },
                     },
-                }) => {
+                }) => { 
+                    if(userState == "CA"){ 
+                        if(visit.reason == Constant.App.specialities.birthControl ||
+                          visit.reason == Constant.App.specialities.coldAndFlu ||
+                          visit.reason == Constant.App.specialities.sexuallyTransmittedInfections || 
+                          visit.reason == Constant.App.specialities.pTSD || 
+                          visit.reason == Constant.App.specialities.asthma || 
+                          visit.reason == Constant.App.specialities.healthWellnessAssessment || 
+                          visit.reason == Constant.App.specialities.heavyPainfulIrregularPeriods)
+                        {
+                          return specialities
+                        }
+                    }
                     return specialities.some(specialty => {
                         return specialty.includes(visit.reason);
                     });
