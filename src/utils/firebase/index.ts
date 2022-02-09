@@ -32,6 +32,7 @@ export function loginInWithFirebase(obj: Login) {
             .signInWithEmailAndPassword(obj.email, obj.password)
             .then(function (success) {
                 const { user } = success;
+                console.log('------USERSLOGIN---',user)
                 return user;
             })
             .catch(function (error) {
