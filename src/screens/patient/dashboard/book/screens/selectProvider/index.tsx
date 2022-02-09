@@ -83,7 +83,7 @@ const SelectProvider = () => {
                     profileInfo: {
                         profession: { specialities },
                     },
-                }) => {
+                }) => { 
                     return specialities.some(specialty => {
                         return specialty.includes(visit.reason);
                     });
