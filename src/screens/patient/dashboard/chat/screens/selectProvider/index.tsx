@@ -85,7 +85,7 @@ const SelectChatProvider = ({ navigation }) => {
                 {getFavoriteExperts(favorites, experts).length > 0 ? (
                     <Text
                         options={[h3, { color: colors.greyDark }]}
-                    >{`Your Squad`}</Text>
+                    >{lang. expertChatsHeaders.yourSquad}</Text>
                 ) : null}
                 {expertData ? (
                     <Favorites
@@ -95,7 +95,7 @@ const SelectChatProvider = ({ navigation }) => {
                 {getNonFavoriteExperts(favorites, experts).length > 0 ? (
                     <Text
                         options={[h3, { color: colors.greyDark }]}
-                    >{`All Providers`}</Text>
+                    >{lang. expertChatsHeaders.providers}</Text>
                 ) : null}
                 {expertData ? (
                     <Experts

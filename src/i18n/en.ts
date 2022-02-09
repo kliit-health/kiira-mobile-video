@@ -50,6 +50,10 @@ export default {
         title: 'Personal Information',
         save: 'Save',
     },
+    expertChatsHeaders:{
+       providers: 'All Providers',
+       yourSquad: 'Your Squad'
+    },
     consent: {
         title: 'Consent Agreements',
         acceptanceDate: 'Acceptance Date',

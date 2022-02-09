@@ -51,6 +51,11 @@ export default {
         title: 'Spanish Personal Information',
         save: 'Spanish Save',
     },
+    
+    expertChatsHeaders:{
+        providers: 'All Providers',
+        yourSquad: 'Your Squad'
+     },
 
     consent: {
         title: 'Spanish Consent Agreements',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import {
     View,
     FlatList,
@@ -14,6 +14,7 @@ import { default as globalStyles } from '~/components/styles';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFavoriteExperts } from '~/redux/actions';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const { xLarge, medium, gray_dark, blue } = globalStyles;
 
@@ -118,22 +119,16 @@ const Experts = ({ experts, navigation }) => {
                                             : handleAddPress(item.uid);
                                     }}
                                 >
-                                    <Image
-                                        style={{
-                                            width: 30,
-                                            height: 30,
-                                            marginTop: '12%',
-                                        }}
-                                        source={
-                                            ifExists(item.uid)
-                                                ? icons.FavoriteIcon
-                                                : icons.FavoriteIconBlank
-                                        }
-                                    />
+                                    <Ionicons
+                            style={styles.icon}
+                             name={ifExists(item.uid)? "heart" : "heart-outline"}
+                             color={ifExists(item.uid)? "#EB5794" : colors.greyDark}
+                            size={25}
+                        />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
-                                    style={{ marginTop: '50%' }}
+                                    style={styles.chatIcon}
                                     onPress={() => {
                                         navigation.navigate(
                                             screenNames.Messages,

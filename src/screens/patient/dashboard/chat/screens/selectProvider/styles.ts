@@ -41,9 +41,16 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:100,
         alignItems:'center',
-        alignContent:'center',
         width:40,
-        height:40
+        height:40,   
+    },
+    icon:{
+    alignSelf: 'center', 
+    marginTop:'12%'
+    },
+    chatIcon:{
+        alignItems:'center',
+        marginTop:'30%'
     },
 
     expertInfoProfession: {
