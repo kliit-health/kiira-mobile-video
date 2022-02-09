@@ -54,6 +54,9 @@ export default {
        providers: 'All Providers',
        yourSquad: 'Your Squad'
     },
+    profileHeader:{
+        profile:'Profile'
+    },
     consent: {
         title: 'Consent Agreements',
         acceptanceDate: 'Acceptance Date',

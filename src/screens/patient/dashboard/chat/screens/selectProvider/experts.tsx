@@ -15,6 +15,7 @@ import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFavoriteExperts } from '~/redux/actions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { RootState } from '~/redux/reducers';
 
 const { xLarge, medium, gray_dark, blue } = globalStyles;
 
@@ -24,6 +25,7 @@ const Experts = ({ experts, navigation }) => {
     const dispatch = useDispatch();
     const [showProfile, setShowProfile] = useState(false);
     const [profile, setProfile] = useState(null);
+    const lang = useSelector((state:RootState) => state.language);
 
     const ifExists = fav => {
         if (favorites.filter(item => item === fav).length > 0) {
@@ -106,13 +108,13 @@ const Experts = ({ experts, navigation }) => {
                                     onPress={() => showProfileModal(item)}
                                 >
                                     <Text options={[medium, blue]}>
-                                        Profile
+                                    {lang.profileHeader.profile}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 <TouchableOpacity
-                                    style={styles.heartIcon}
+                                     style={styles.heartIconView}
                                     onPress={() => {
                                         ifExists(item.uid)
                                             ? handleDeletePress(item.uid)
@@ -120,13 +122,12 @@ const Experts = ({ experts, navigation }) => {
                                     }}
                                 >
                                     <Ionicons
-                            style={styles.icon}
+                            style={styles.heartIcon}
                              name={ifExists(item.uid)? "heart" : "heart-outline"}
                              color={ifExists(item.uid)? "#EB5794" : colors.greyDark}
                             size={25}
                         />
                                 </TouchableOpacity>
-
                                 <TouchableOpacity
                                     style={styles.chatIcon}
                                     onPress={() => {

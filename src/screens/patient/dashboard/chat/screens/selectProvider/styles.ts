@@ -30,27 +30,29 @@ const styles = StyleSheet.create({
         paddingTop: metrics.width * 0.03,
         paddingBottom: metrics.width * 0.03,
         flexDirection: 'row',
-        width: metrics.width ,
+        width: metrics.width,
         backgroundColor: colors.white,
         marginVertical: 10,
-        height:130,
-        alignItems:'center'
+        height: 130,
+        alignItems: 'center',
     },
-    heartIcon:{
-        borderColor:colors.greyAccent,
-        borderWidth:1,
-        borderRadius:100,
-        alignItems:'center',
-        width:40,
-        height:40,   
+    heartIconView: {
+        borderColor: colors.greyAccent,
+        borderWidth: 1,
+        borderRadius: 100,
+        alignItems: 'center',
+        width: 40,
+        justifyContent: 'center',
+        height: 40,
     },
-    icon:{
-    alignSelf: 'center', 
-    marginTop:'12%'
+
+    heartIcon: {
+        alignSelf: 'center',
     },
-    chatIcon:{
-        alignItems:'center',
-        marginTop:'30%'
+
+    chatIcon: {
+        alignItems: 'center',
+        marginTop: '30%',
     },
 
     expertInfoProfession: {
@@ -83,9 +85,9 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
-        borderWidth:2,
-        borderRadius:1000,
-        borderColor:colors.blue
+        borderWidth: 2,
+        borderRadius: 1000,
+        borderColor: colors.blue,
     },
 
     expertsContainer: {
