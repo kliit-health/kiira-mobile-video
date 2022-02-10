@@ -84,7 +84,6 @@ export default ({ profileInfo, navigation }) => {
                                 : response.path,
                         filename,
                     },
-                    navigation,
                 };
                 response.uri && dispatchAccount(payloadData);
             }

@@ -88,7 +88,6 @@ function* updateUser({ payload }) {
                 yield put(_updateUser({ uid: user.uid, ...userUpdate }));
                 yield put(getUser());
                 yield put(hideApiLoader());
-                navigation.goBack();
             } else {
                 yield put(hideApiLoader());
                 yield put(
