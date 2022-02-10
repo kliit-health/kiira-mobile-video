@@ -25,9 +25,8 @@ const Banner = () => {
             const now = moment();
             var current_time = moment.utc(now, 'YYYY-MM-DD[T]HH:mm[Z]');
             const upcoming = moment.utc(visit.time, 'YYYY-MM-DD[T]HH:mm[Z]').isSameOrAfter(current_time, 'hours');
-            upcoming
-                ? upcomingVisits.data.push({ visit, isUpcoming: true })
-                : null;
+            if(upcoming) upcomingVisits.data.push({ visit, isUpcoming: true })
+            
         });
     
         return upcomingVisits
