@@ -74,9 +74,9 @@ function* loginFirebase({ payload }) {
                     const isSupport = role === 'Support';
 
                     if (isStudent || isSubscriber || isUser) {
-                        if (isNewUser) {
+                        if (!isNewUser) {
                             navigation.navigate(stack.AppStack);
-                        } else  {
+                        } else if(isNewUser) {
                             navigation.navigate(screenNames.Welcome);
                         }
                     } else {
