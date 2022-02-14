@@ -284,7 +284,7 @@ function* setAppointment({ payload }) {
                 yield sendSms(message, phoneNumber);
             }
 
-            if(payload.intakeData === null){
+            if(!payload.intakeData){
                 navigation.navigate('Intake', {
                     appointmentDetails: payload,
                 });
