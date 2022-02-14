@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices'; 
+import Constant from '~/utils/constants';
 
 let parentPaddingValue = metrics.width * 0.01;
 let parentPadding = parentPaddingValue * 2;
@@ -15,6 +16,7 @@ export default StyleSheet.create({
         borderBottomColor: colors.greyAccent,
         borderBottomWidth: 1,  
     },
+    
     root: {
         backgroundColor: colors.white,
         borderRadius: 12,
@@ -28,7 +30,8 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.greyAccent, 
     },
-
+  
+   
     detailsContainer: {
         padding: 5,
         alignItems: 'center',
