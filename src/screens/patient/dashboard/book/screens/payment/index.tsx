@@ -57,7 +57,8 @@ const Payment = () => {
         insurance,
     } = user.profileInfo;
 
-    const { email, uid, organizationId, plan, visits, prepaid } = user;
+    const { email, uid, organizationId, plan, visits, prepaid, intakeData } =
+        user;
     const { visit } = appointments;
     const { expert } = visit;
 
@@ -92,12 +93,11 @@ const Payment = () => {
             phoneNumber: expert.profileInfo.phoneNumber,
         },
         visits,
-        prepaid, 
-        intakeData: null,
+        prepaid,
+        intakeData,
     };
 
     const bookVisit = () => {
-        appointmentDetails.intakeData = '';
         dispatch(bookAppointment(appointmentDetails));
     };
 
