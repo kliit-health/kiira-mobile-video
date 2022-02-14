@@ -186,10 +186,10 @@ export async function getAppointmentsAsync(uid) {
 }
 
 export async function getAppointmentsByDayAsync(data) {
-    const { calendarID, date, appointmentTypeID } = data;
+    const { calendarID, date, appointmentType } = data;
 
     let user = auth().currentUser;
-    let jwtToken = await user.getIdToken();
+    let jwtToken = await user.getIdToken(); 
 
     var obj = {
         method: 'POST',
@@ -201,11 +201,11 @@ export async function getAppointmentsByDayAsync(data) {
             data: {
                 calendarID,
                 date,
-                appointmentTypeID,
+                appointmentTypeID: appointmentType,
             },
         }),
     };
-
+ 
     try {
         const times = {};
         await fetch(urls.dev.appointmentGetByDay, obj)
@@ -222,7 +222,7 @@ export async function getAppointmentDatesAsync(data) {
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
 
-        const { calendarID, monthNumber, addMonth, year, appointmentTypeID } =
+        const { calendarID, monthNumber, addMonth, year, appointmentType } =
             data;
         const currentMonth = `${year}-${monthNumber}`;
 
@@ -234,7 +234,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID,
+                    appointmentTypeID: appointmentType,
                     calendarID: calendarID,
                     month: currentMonth,
                 },
@@ -256,7 +256,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID,
+                    appointmentTypeID: appointmentType,
                     calendarID: calendarID,
                     month: addMonth,
                 },
@@ -268,6 +268,7 @@ export async function getAppointmentDatesAsync(data) {
             .then(data => {
                 response = [...response, ...data];
             });
+        
         return response;
     } catch (error) {
         return error;
@@ -286,7 +287,7 @@ export async function makeAppointment(data) {
             prescription,
             uid,
             expert,
-            appointmentTypeID,
+            appointmentType,
         } = data;
 
         let noPrescription = 'I do not need a prescription,';
@@ -299,6 +300,7 @@ export async function makeAppointment(data) {
 
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
+        const { appointmentTypeID } = appointmentType;
 
         var obj = {
             method: 'POST',
@@ -316,7 +318,7 @@ export async function makeAppointment(data) {
                     reason,
                     prescription,
                     notes,
-                    appointmentTypeID,
+                    appointmentTypeID: appointmentTypeID,
                 },
             }),
         };
@@ -396,7 +398,7 @@ export async function makeAppointment(data) {
 
 export async function cancelAppointmentData(data, message) {
     try {  
-        const { id, uid, expert, credits } = data; 
+        const { id, uid, expert, credits, prepaid } = data; 
 
         const userDoc = firestore()
                     .collection('users')
@@ -404,18 +406,16 @@ export async function cancelAppointmentData(data, message) {
         const resData = await userDoc.get();
         let userData = resData.data(); 
         let visits = (userData.visits && userData.visits != "NaN") ? userData.visits : 0;  
- 
         const totals = {
             required: credits,
             monthly: visits,
             prepaid: userData.prepaid,
-            purchased: data.prepaidInfo.amount,
+            purchased: prepaid,
             availible: 0,
-            isPrepaid: data.prepaidInfo.isPrePaid,
             redeemPrepaid: 0,
-            redeemMonthly: credits - data.prepaidInfo.amount,
+            redeemMonthly: credits,
         };
-
+ 
         const document = firestore()
                     .collection('appointments')
                     .doc(uid);
@@ -435,7 +435,7 @@ export async function cancelAppointmentData(data, message) {
                 .doc(uid)
                 .update({
                     visits: totals.monthly + totals.redeemMonthly,
-                    prepaid: totals.prepaid + totals.purchased,
+                    prepaid: totals.prepaid + totals.redeemPrepaid,
                 }); 
 
         const expertDocument = firestore()
@@ -1486,8 +1486,6 @@ export async function updateCredits(
         required,
         monthly,
         prepaid,
-        isPrepaid,
-        purchased,
         redeemMonthly,
         redeemPrepaid,
     } = credits;
@@ -1499,7 +1497,7 @@ export async function updateCredits(
                 .doc(user.uid)
                 .update({
                     visits: monthly + redeemMonthly,
-                    prepaid: prepaid + purchased,
+                    prepaid: redeemPrepaid + prepaid,
                 });
             return { ok: true };
         } else {

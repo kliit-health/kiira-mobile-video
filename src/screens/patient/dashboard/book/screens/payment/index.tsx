@@ -18,6 +18,7 @@ import {
     presentApplePay,
     confirmApplePayPayment,
 } from '@stripe/stripe-react-native';
+import { Alert } from 'react-native';
 
 const {
     pad_b,
@@ -41,7 +42,7 @@ const Payment = () => {
     const { confirmPayment, loading } = useConfirmPayment();
     const user = useSelector((state: RootState) => state.user.data);
     const appointments = useSelector((state: RootState) => state.appointments);
-
+     
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
     const [balance, setBalance] = useState(null);
@@ -59,7 +60,7 @@ const Payment = () => {
 
     const { email, uid, organizationId, plan, visits, prepaid } = user;
     const { visit } = appointments;
-    const { expert } = visit;
+    const { expert, reason } = visit;
 
     const appointmentDetails = {
         firstName,
@@ -67,11 +68,8 @@ const Payment = () => {
         email,
         calendarID: visit.expert.calendarID,
         time: visit.time.date,
-        reason: {
-            reason: visit.reason,
-            sessionType: visit.details,
-        },
-        appointmentTypeID: visit.details.appointmentType,
+        reason: reason,
+        appointmentType: visit.details,
         uid,
         insurance,
         plan,
