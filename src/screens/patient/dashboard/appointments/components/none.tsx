@@ -22,7 +22,7 @@ export const None = () => {
             />
             <Text style={styles.title}>{lang.appointments.noVisits}</Text>
             <TextButton
-                styles={Platform .OS == 'android' ? { root: { marginTop: 'auto',marginBottom:'3%' } }: { root: { marginTop: 'auto'} }}
+                styles={Platform.OS == 'android' ? { root: { marginTop: 'auto',marginBottom:'3%' } }: { root: { marginTop: 'auto'} }}
                 onPress={() => handleNavigation(screenNames.Book)}
             >
                 {lang.appointments.scheduleAppointment}
