@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { CustomButton, CustomText } from '~/components';
+import { CustomButton, CustomText, Screen, TextButton } from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { screenNames } from '~/utils/constants';
 import { Profile, List, Plan } from './sections';
 import { signOut } from '~/redux/reducers/account';
 import styles from './styles';
 import { handleNavigation } from '~/utils/functions';
 import NativeModal from 'react-native-modal';
+import VersionCheck from 'react-native-version-check';
 
 const Account = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -52,16 +53,31 @@ const Account = ({ navigation }) => {
         );
     };
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <Profile {...user} setShowModal={setShowModal} />
-            {!!subscription.data.id && (
-                <Plan subscription={subscription} user={user} />
-            )}
-            <List onItemPress={handleNavigation} />
-            <View style={showModal ? styles.ModalContainer : {}}>
+        <Screen test="Profile Screen">
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Profile {...user} navigation={navigation} setShowModal={setShowModal}/>
+                {!!subscription.data.id && (
+                    <Plan subscription={subscription} user={user} />
+                )}
+                <List onItemPress={handleNavigation} /> 
+                <View style={{flex: 1, justifyContent: 'center', padding:10}}>
+                    <Text
+                        style={{
+                            alignSelf: 'center',
+                        }}
+                    >{`v ${VersionCheck.getCurrentVersion()}`}</Text>
+                    <TextButton
+                        onPress={handleSignOut} 
+                        link
+                    >
+                        {'Logout'}
+                    </TextButton>
+                </View>
+                <View style={showModal ? styles.ModalContainer : {}}>
                 <RenderModalView />
             </View>
-        </ScrollView>
+            </ScrollView>
+        </Screen>
     );
 };
 

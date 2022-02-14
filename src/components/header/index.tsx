@@ -103,7 +103,7 @@ const Header = (props: header) => {
                         source={props.profileImageUrl ? { uri: props.profileImageUrl }
                         : require('../../../assets/profile_img_placeholder.png')}
                         style={styles.profileStyle} 
-                        resizeMode='contain' 
+                        resizeMode='cover' 
                     />
                     <View style={styles.headerAvatar}>
                         <Text style={styles.nameStyle}>
