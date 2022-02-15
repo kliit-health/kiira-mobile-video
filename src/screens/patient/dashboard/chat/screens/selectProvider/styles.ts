@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
+        borderWidth:2,
+        borderRadius:1000,
+        borderColor:colors.purple
     },
 
     expertsContainer: {

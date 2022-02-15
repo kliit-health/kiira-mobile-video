@@ -43,12 +43,12 @@ const Experts = ({ experts, navigation }) => {
                     } = item;
                     return (
                         <View style={styles.expertInfoContainer}>
-                            <Avatar
-                                border
-                                styles={{
-                                    image: styles.expertProfile,
+                            <Image
+                            resizeMode="contain"
+                                style={styles.expertProfile}
+                                source={{
+                                    uri: profileImageUrl ? profileImageUrl :'',
                                 }}
-                                source={profileImageUrl ? profileImageUrl : ''}
                             />
 
                             <View

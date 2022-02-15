@@ -42,16 +42,18 @@ function* signout() {
 function* updateUser({ payload }) {
     const lang = yield select(state => state.language);
     const user = yield select(state => state.user.data);
+
     try {
         const { userParams, imageParams, navigation } = payload;
         yield put(showApiLoader());
-
+       
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
 
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata;
                 const url = yield storage().ref(name).getDownloadURL();
+       
                 const userUpdate = {
                     ...user,
                     profileInfo: {
@@ -134,7 +136,7 @@ function* updateUser({ payload }) {
             yield updateUserData(userUpdate, user.uid);
             yield put(getUser());
             yield put(hideApiLoader());
-            navigation.goBack();
+            // navigation.goBack();
         }
     } catch (error) {
         console.log(error);

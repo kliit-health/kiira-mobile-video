@@ -18,17 +18,20 @@ import Constant from '~/utils/constants';
 import { updateAccount } from '~/redux/reducers/account';
 import { useDispatch } from 'react-redux';
 
-export default ({ profileInfo, navigation }) => {
+
+
+export default ({ profileInfo, navigation, setShowModal }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
-    const { staticImages } = Constant.App;
+const { staticImages } = Constant.App;
     const dispatch = useDispatch();
     const [imageUri, setImageUri] = useState(profileImageUrl);
-
     const handleOnBackPress = () => {
         navigation.goBack();
     };
 
-    const handleSetting = () => {};
+    const handleSetting = () => {
+        setShowModal(true);
+    };
 
     const getFieldNames = (value, fieldName) => {
         console.log(fieldName, value);
@@ -172,6 +175,7 @@ export default ({ profileInfo, navigation }) => {
                     onPress={() => {}}
                 >{`${firstName} ${lastName}`}</Text>
             </View>
+
             <View style={styles.root}>
                 {cardDetails.map(({ icon, value }) => (
                     <View style={styles.itemContainer}>

@@ -43,7 +43,7 @@ function* loginFirebase({ payload }) {
 
             if (enabled) {
                 token = yield messaging().getToken();
-                yield put(updateUser({ uid, fcmToken: token }));
+                yield put(updateUser({ uid, fcmToken: token ,email}));
                 yield AsyncStorage.setItem('fcmToken', token);
             } else {
                 try {

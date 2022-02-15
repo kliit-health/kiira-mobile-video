@@ -14,6 +14,7 @@ export default StyleSheet.create({
         borderBottomColor: colors.greyAccent,
         borderBottomWidth: 1,
     },
+    
     root: {
         backgroundColor: colors.white,
         borderRadius: 12,
@@ -38,7 +39,8 @@ export default StyleSheet.create({
         left: '1%',
         bottom: '2%',
     },
-
+  
+   
     detailsContainer: {
         padding: 5,
         alignItems: 'center',
