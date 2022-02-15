@@ -12,7 +12,6 @@ const EmergencyContact = ({ navigation }) => {
     const dispatch = useDispatch();
     const lang = useSelector((state: RootState) => state.language);
     const user:any = useSelector((state: RootState) => state.user.data);
-    console.log('USER',user)
     const [emergencyContactInfo, setEmergencyContactInfo] = useState(user.profileInfo ? user.profileInfo.emergencyContactInfo : null);
     const [firstName, setFirstName] = useState((emergencyContactInfo && emergencyContactInfo.firstName) ? emergencyContactInfo.firstName : '');
     const [lastName, setLastName] = useState((emergencyContactInfo && emergencyContactInfo.lastName) ? emergencyContactInfo.lastName : '');
