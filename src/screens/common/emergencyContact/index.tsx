@@ -12,6 +12,7 @@ const EmergencyContact = ({ navigation }) => {
     const dispatch = useDispatch();
     const lang = useSelector((state: RootState) => state.language);
     const user:any = useSelector((state: RootState) => state.user.data);
+    console.log('USER',user)
     const [emergencyContactInfo, setEmergencyContactInfo] = useState(user.profileInfo ? user.profileInfo.emergencyContactInfo : null);
     const [firstName, setFirstName] = useState((emergencyContactInfo && emergencyContactInfo.firstName) ? emergencyContactInfo.firstName : '');
     const [lastName, setLastName] = useState((emergencyContactInfo && emergencyContactInfo.lastName) ? emergencyContactInfo.lastName : '');
@@ -81,35 +82,29 @@ const EmergencyContact = ({ navigation }) => {
                     toggleModal={toggleModal}  
                 />
             )}
-            {!showEdit && (<View style={styles.inputTextParentContainerStyle}>
+            {!showEdit && (<View style={styles.inputTextParentNotEditContainerStyle}>
                 <View style={styles.bartellsStyle}> 
-                    <View style={ firstName ? styles.inputTypeStyle : (firstName ? styles.noStyle : styles.inputEmptyTypeStyle) }> 
-                        <Text style={  firstName ? [styles.textStyle, {fontSize: 28}]: styles.textEmptyStyle }>
+                    <View style={ firstName ? styles.inputTypeStyleNotEdit : (firstName ? styles.noStyle : styles.inputEmptyTypeStyle) }> 
+                        <Text style={  firstName ? [styles.textStyleNotEdit, {fontSize: 28}]: styles.textEmptyStyle }>
                             {firstName ? firstName + ' ' + lastName : (firstName ? "" : lang.emergencyContact.firstLastName)}
                         </Text>
                     </View> 
                 </View> 
                 <View style={styles.inputTextContainerStyle}> 
-                    <View style={ relationship ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }>
-                        <Text style={  relationship ? [styles.textStyle, {color:'#868992', fontSize:20, fontWeight: '400'} ]: styles.textEmptyStyle }>
+                    <View style={ relationship ? styles.inputTypeStyleNotEdit : styles.inputEmptyTypeStyle }>
+                        <Text style={  relationship ? [styles.textStyleNotEdit, {color:'#868992', fontSize:20, fontWeight: '400'} ]: styles.textEmptyStyle }>
                             {relationship ? relationship : lang.emergencyContact.relationshipToYou}
                         </Text>
                     </View>  
                 </View> 
                 <View style={styles.inputTextContainerStyle}> 
-                    <View style={ phoneNumber ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }>
-                        <Text style={  phoneNumber ? [styles.textStyle, {color:'#000B1E', fontWeight:'300'} ]: styles.textEmptyStyle }>
+                    <View style={ phoneNumber ? styles.inputTypeStyleNotEdit : styles.inputEmptyTypeStyle }>
+                        <Text style={  phoneNumber ? [styles.textStyleNotEdit, {color:'#000B1E', fontWeight:'300'} ]: styles.textEmptyStyle }>
                             {phoneNumber ? phoneNumber : lang.emergencyContact.phoneNumber}
                         </Text>
                     </View>  
                 </View> 
-                <View style={styles.inputTextContainerStyle}> 
-                    <View style={ secondNumber ? styles.inputTypeStyle : styles.inputEmptyTypeStyle }>
-                        <Text style={  secondNumber ? [styles.textStyle, {color:'#000B1E', fontWeight:'300'} ]: styles.textEmptyStyle }>
-                            {secondNumber ? secondNumber : lang.emergencyContact.secondaryPhoneNumber}
-                        </Text>
-                    </View>  
-                </View>  
+                  
                  
             </View>
             
