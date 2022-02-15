@@ -38,7 +38,7 @@ class ReferFriend extends PureComponent {
                 message: `Refer a friend and get 10 credits for free! Enter referal code ${
                     userData.referalCode
                 } while registrating in application. You can also download the application from given link ${
-                    Platform.OS == 'android'
+                   Platform.OS == 'android'
                         ? Constant.App.appLiveLink.googlePlay
                         : Constant.App.appLiveLink.appleStore
                 }`,
