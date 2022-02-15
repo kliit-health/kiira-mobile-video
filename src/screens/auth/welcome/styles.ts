@@ -133,8 +133,8 @@ const style = StyleSheet.create({
         backgroundColor: colors.white,  
     },
     imageBackground:{
-         display:'flex',
-         backgroundColor:colors.white,
+        display:'flex',
+        backgroundColor:colors.white,
          borderRadius:120,
          width:120,
          height:120,
