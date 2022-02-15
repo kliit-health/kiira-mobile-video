@@ -15,13 +15,11 @@ const ClosedQuestions = ({ data }) => {
         const expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
-
         navigation.navigate(screenNames.Messages, {
             expertDetails,
             questionData: item,
         });
     };
-
     return (
         <Column options={[white_bg]}>
             <FlatList

@@ -1,67 +1,68 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { get } from 'lodash';
 import { cardDetails } from './model';
 import { Avatar, Icon, Header, Screen } from '~/components';
-import styles, { modifiers } from './styles'; 
+import styles, { modifiers } from './styles';
 
-export default ({ profileInfo, navigation }) => {
+export default ({ profileInfo, navigation, setShowModal }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
 
     const handleOnBackPress = () => {
-         
-    }; 
+        navigation.goBack();
+    };
 
     const handleSetting = () => {
-         
-    }; 
+        setShowModal(true);
+    };
 
-    const onListPlan = () => {
-         
-    }; 
-
-    const getFieldNames = (value, fieldName) => { 
-        console.log(fieldName, value)
-         if(value == null || value == ""){
-            if(fieldName == 'state.value'){
-                return "Location";
+    const getFieldNames = (value, fieldName) => {
+        console.log(fieldName, value);
+        if (value == null || value == '') {
+            if (fieldName == 'state.value') {
+                return 'Location';
+            } else if (fieldName == 'pronouns') {
+                return 'Gender';
+            } else if (fieldName == 'sexuality.value') {
+                return 'Orientation';
+            } else if (fieldName == 'dob') {
+                return 'Birthday';
             }
-            else if(fieldName == 'pronouns'){
-                return "Gender";
-            }
-            else if(fieldName == 'sexuality.value'){
-                return "Orientation";
-            }
-            else if(fieldName == 'dob'){
-                return "Birthday";
-            }
-         }
-         return value;
-    }
+        }
+        return value;
+    };
 
     return (
         <Screen>
             <View style={styles.headerStyle}>
-                <Header 
-                    title="Basic Plan"  
+                <Header
+                    title="Basic Plan"
                     onBack={handleOnBackPress}
-                    onListPress={onListPlan}
-                    OnSettingPress={handleSetting}  
+                    OnSettingPress={handleSetting}
                 />
             </View>
+
             <Avatar
                 source={profileImageUrl ? profileImageUrl : ''}
                 size="large"
                 styles={modifiers.avatar}
             />
+
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
             </View>
+
             <View style={styles.root}>
                 {cardDetails.map(({ icon, value }) => (
                     <View style={styles.itemContainer}>
-                        <Icon options={[styles.icon]} source={icon} /> 
-                        <Text style={get(profileInfo, value) ? styles.itemTitle : styles.itemEmptyTitle}>
+                        <Icon options={[styles.icon]} source={icon} />
+                        <Text
+                            style={
+                                get(profileInfo, value)
+                                    ? styles.itemTitle
+                                    : styles.itemEmptyTitle
+                            }
+                        >
                             {getFieldNames(get(profileInfo, value), value)}
                         </Text>
                     </View>

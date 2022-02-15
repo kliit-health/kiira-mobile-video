@@ -355,7 +355,7 @@ export default {
         Expert: 'Spanish Expert',
         or: 'Spanish or',
         Email: 'Spanish Your email',
-        EnterEmail: 'Spanish Enter email adress here',
+        EnterEmail: 'Spanish Enter email address here',
         Password: 'Spanish Password',
         EmptyEmailMsg: 'Spanish Email is a required field.',
         InvalidEmailMsg:
@@ -368,6 +368,12 @@ export default {
         MemberHelp: 'Spanish Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
         NoBiometrics: 'Spanish Please login with email and password to enable.',
         Welcome: 'Spanish Welcome back to Kiira!',
+        Back: 'Spanish Back',
+        HelloNewMember: 'Spanish Hello New Member!',
+        ActivateBelow: 'Spanish To get started please activate your account below.',
+        UseSameEmail: 'Spanish Please use the same email address you used when you became a member.',
+        OrganizationPlan: 'Spanish If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu',
+
     },
 
     paymentMethods: {
@@ -532,10 +538,10 @@ export default {
         chats: 'Spanish Chats',
         patientName: 'Spanish Patient Name',
         noQuestions:
-            'Spanish You have not been asked any questions. Check back later.',
+            'Spanish You have no open chats.',
         subject: 'Spanish Subject',
         lastMessage: 'Spanish Last Message',
-        searchName: 'Spanish Search Name',
+        searchName: 'Spanish Search',
     },
     visitSummary: {
         title: 'Spanish Visit Summary',
@@ -563,7 +569,7 @@ export default {
         myHistory: 'Spanish My History',
         reminders: 'Spanish Reminders',
         sos: 'Spanish SOS',
-        helloName: 'Spanish Hello, ',
+        hiName: 'Spanish Hi, ',
         notFeelingSick: `Spanish I'm not feeling sick`,
         nowMention: 'Spanish Now that you mention it',
         kiira: 'Spanish Kiira',

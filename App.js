@@ -18,7 +18,6 @@ import FastImage from 'react-native-fast-image';
 import { NavigationService } from './src/navigation/';
 import { setCurrentRoute, setPreviousRoute } from './src/redux/actions';
 
-
 const App = () => {
     const dispatch = useDispatch();
     const { screenNames } = Constant.App;
@@ -152,7 +151,7 @@ const App = () => {
             <Conditional if={showModalError}>
                 <CustomModal
                     onPressErrorButtonOk={() => dispatch(showOrHideModal())}
-                    onEmailSupport={() => dispatch(showOrHideModal())}
+                    onEmailSupport={() => {Linking.openURL(Constant.App.emailSupportUrl), dispatch(showOrHideModal())}}
                     onBecomeMember={() => {Linking.openURL(Constant.App.becomeAMemeberUrl), dispatch(showOrHideModal())}}
                     showLoader={showModalError}
                     errorMsg={errorMessage}

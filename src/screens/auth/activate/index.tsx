@@ -26,29 +26,7 @@ const Activate = ({ navigation }) => {
     const login = useSelector((state: RootState) => {
         return state.language.login;
     });
-    const dispatch = useDispatch();
-
-    const InputText = () => {
-        return (
-            <View style={styles.inputTextActiveContainer}>
-                <View style={styles.inputTextActive}>
-                    <TextInput
-                        autoCapitalize="none" 
-                        autoCorrect={false}
-                        onChangeText={text => setEmail(text)}
-                        placeholder={login.EnterEmail}
-                        value={email}
-                        style={
-                            email
-                                ? [styles.activeInpute, { fontWeight: '400'}]
-                                : [styles.activeInpute, { fontWeight: '300'}]
-                        }
-                        placeholderTextColor={colors.greyAccent}
-                    />
-                </View>
-            </View>
-        );
-    };
+    const dispatch = useDispatch(); 
 
     const CrossIcon = () => {
         return (
@@ -61,7 +39,7 @@ const Activate = ({ navigation }) => {
                 <Text  
                     style={styles.backText} 
                 >
-                    {'Back'}
+                    {login.Back}
                 </Text>
             </TouchableOpacity>
         );
@@ -72,7 +50,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.helloStyle} 
             >
-                {'Hello New Member!'}
+                {login.HelloNewMember}
             </Text>
         );
     };
@@ -83,7 +61,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.titleStyle} 
             >
-                {'To get started please activate your acount below.'}
+                {login.ActivateBelow}
             </Text>
         );
     };
@@ -93,7 +71,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.infoStyle} 
             >
-                {'Please use the same email address you used when you became a member.'}
+                {login.UseSameEmail}
             </Text>
         );
     };
@@ -103,7 +81,7 @@ const Activate = ({ navigation }) => {
             <Text  
                 style={styles.contentStyle} 
             >
-                {'If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu'}
+                {login.OrganizationPlan}
             </Text>
         );
     };
@@ -146,7 +124,23 @@ const Activate = ({ navigation }) => {
                 <View style={styles.activateContainer}>
                     <HelloView />
                     <TitleView />
-                    <InputText />
+                    <View style={styles.inputTextActiveContainer}>
+                        <View style={styles.inputTextActive}>
+                            <TextInput
+                                autoCapitalize="none" 
+                                autoCorrect={false}
+                                onChangeText={text => setEmail(text)}
+                                value={email}
+                                placeholder={login.EnterEmail}
+                                style={
+                                    email
+                                        ? [styles.activeInpute, { fontWeight: '400'}]
+                                        : [styles.activeInpute, { fontWeight: '300'}]
+                                }
+                                placeholderTextColor={colors.greyAccent}
+                            /> 
+                        </View>
+                    </View>
                     <Button />
                     <InfoView />
                     <ContentView />

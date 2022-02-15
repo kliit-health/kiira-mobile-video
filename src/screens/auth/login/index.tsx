@@ -112,8 +112,8 @@ const Login = ({ navigation }) => {
             >
                 <FastImage
                     resizeMode="contain"
-                    source={icons.backArrow}
-                    style={styles.leftIcon}
+                    source={icons.chevron}
+                    style={styles.backIcon}
                 />
             </TouchableOpacity>
         );
@@ -126,8 +126,8 @@ const Login = ({ navigation }) => {
                     resizeMode="contain"
                     source={images.kiiraLogo}
                     style={styles.logo}
-                /> 
-                <Text style={styles.welcomeStyle}>{login.Welcome}</Text>
+                />
+                <Text style={styles.welcomeText}>Welcome back to Kiira!</Text>
             </View>
         );
     };
@@ -161,9 +161,9 @@ const Login = ({ navigation }) => {
                         secureTextEntry
                         style={
                             password
-                                ? styles.inputTypePassword
+                                ? styles.inputType
                                 : [
-                                      styles.inputTypePassword,
+                                      styles.inputType,
                                       { fontWeight: '100' },
                                   ]
                         }
@@ -183,13 +183,10 @@ const Login = ({ navigation }) => {
             >
                 <FastImage
                     resizeMode="contain"
-                    source={
-                        biometricType === 'FaceID'
-                            ? images.faceID
-                            : images.fingerprint
-                    }
+                    source={images.faceID}
                     style={styles.biometrics}
-                /> 
+                />
+                <Text style={styles.version}>{app.version}</Text>
             </TouchableOpacity>
         );
     };
@@ -245,9 +242,8 @@ const Login = ({ navigation }) => {
                     <Logo />
                     {InputText()}
                     <BiometricLogin />
-                    <Text style={styles.version}>{app.version}</Text>
                     <ForgotPassword />
-                    <Button /> 
+                    <Button />
                 </View>
             </ScrollView>
             {Platform.OS === 'ios' && <KeyboardSpacer />}

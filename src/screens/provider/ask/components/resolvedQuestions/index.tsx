@@ -1,11 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FlatList } from 'react-native';
-import moment from 'moment';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { TimeDisplay } from '~/components';
 import { screenNames } from '~/utils/constants';
 import styles from './styles';
+import None from '../none';
 
 const ResolvedQuestions = ({ data, navigation, visible }) => {
     const handleItemPress = questionData => {
@@ -38,7 +37,25 @@ const ListItem = props => {
             onPress(props);
         }
     };
+    const convertModifiedTime = date => {
+        var dt = new Date(date * 1000);
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        var hours = dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours();
+        var AmOrPm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12 || 12;
+        var minutes =
+            dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes();
+        var finalTime = hours + ':' + minutes + ' ' + AmOrPm;
+        return dt === today
+            ? finalTime
+            : dt === yesterday
+            ? 'Yesterday'
+            : dt.toLocaleDateString();
+    };
 
+    const time = convertModifiedTime(modifiedDate);
     return (
         <TouchableOpacity
             activeOpacity={0.9}
@@ -47,34 +64,25 @@ const ListItem = props => {
         >
             <View style={styles.item.outerContainer}>
                 <View>
-                    <Text style={styles.item.title}>
-                        {lang.expertChats.patientName}
-                    </Text>
                     <Text
                         style={styles.item.subtitle}
                     >{`${firstName} ${lastName}`}</Text>
                 </View>
                 <View style={styles.item.innerContainer}>
-                    <Text numberOfLines={1} style={styles.item.title}>
-                        {lang.expertChats.lastMessage}
-                    </Text>
-                    <Text numberOfLines={1} style={styles.item.subtitle}>
+                    <Text numberOfLines={1} style={styles.item.message}>
                         {lastMessage}
                     </Text>
                 </View>
             </View>
-            <TimeDisplay time={moment(modifiedDate).format('hh:mm A')} />
+            <Text style={styles.item.time}>{time}</Text>
         </TouchableOpacity>
     );
 };
 
 const Fallback = () => {
-    const lang = useSelector(state => state.language);
     return (
         <View style={styles.fallBack.container}>
-            <Text style={styles.fallBack.text}>
-                {lang.expertChats.noQuestions}
-            </Text>
+            <None />
         </View>
     );
 };
