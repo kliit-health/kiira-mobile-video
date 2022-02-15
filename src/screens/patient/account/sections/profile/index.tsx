@@ -1,13 +1,30 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import {
+    View,
+    Text,
+    Alert,
+    Platform,
+    PermissionsAndroid,
+    TouchableOpacity,
+    Image,
+} from 'react-native';
 import { get } from 'lodash';
 import { cardDetails } from './model';
-import { Avatar, Icon, Header, Screen } from '~/components';
-import styles, { modifiers } from './styles';
+import { Icon, Header, Screen } from '~/components';
+import styles from './styles';
+import ImagePicker from 'react-native-image-picker';
+import { Avatar } from 'react-native-elements';
+import Constant from '~/utils/constants';
+import { updateAccount } from '~/redux/reducers/account';
+import { useDispatch } from 'react-redux';
+
+
 
 export default ({ profileInfo, navigation, setShowModal }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
-
+const { staticImages } = Constant.App;
+    const dispatch = useDispatch();
+    const [imageUri, setImageUri] = useState(profileImageUrl);
     const handleOnBackPress = () => {
         navigation.goBack();
     };
@@ -31,6 +48,116 @@ export default ({ profileInfo, navigation, setShowModal }) => {
         }
         return value;
     };
+    const dispatchAccount = value => {
+        dispatch(updateAccount(value));
+    };
+    const pickImage = () => {
+        const options = {
+            title: 'Select Avatar',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+        ImagePicker.showImagePicker(options, response => {
+            if (response.didCancel) {
+                console.log('You cancelled image picker');
+            } else if (response.error) {
+                Alert.alert('And error occured: ' + JSON.stringify(response));
+            } else {
+                let name = response.uri.substring(
+                    response.uri.lastIndexOf('/') + 1,
+                    response.uri.length,
+                );
+                const ext = response.uri.split('.').pop();
+                const filename =
+                    Platform.OS === 'ios'
+                        ? `${Math.floor(Date.now())}${name}`
+                        : `${Math.floor(Date.now())}${name}.${ext}`;
+                setImageUri(response.uri);
+
+                const payloadData = {
+                    userParams: {
+                        ...profileInfo,
+                    },
+                    imageParams: {
+                        file:
+                            Platform.OS === 'ios'
+                                ? response.uri
+                                : response.path,
+                        filename,
+                    },
+                };
+                response.uri && dispatchAccount(payloadData);
+            }
+        });
+    };
+    const requestCameraPermission = async () => {
+        if (Platform.OS === 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.CAMERA,
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    const grantedAgain = await PermissionsAndroid.request(
+                        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    );
+                    if (grantedAgain === PermissionsAndroid.RESULTS.GRANTED) {
+                        pickImage();
+                    } else {
+                        pickImage();
+                    }
+                } else {
+                    pickImage();
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            pickImage();
+        }
+    };
+
+    const renderImageView = () => {
+        return (
+            <TouchableOpacity
+                style={styles.imageView}
+                onPress={() => {
+                    requestCameraPermission();
+                }}
+            >
+                <Avatar
+                    renderPlaceholderContent={
+                        <Image
+                            style={{
+                                width: 120,
+                                height: 120,
+                            }}
+                            resizeMode="stretch"
+                            source={staticImages.profilePlaceholderImg}
+                        />
+                    }
+                    size={90}
+                    rounded
+                    source={{
+                        uri: imageUri ? imageUri : '',
+                    }}
+                    activeOpacity={0.7}
+                />
+
+                <TouchableOpacity>
+                    <Image
+                        style={styles.AddEditImage}
+                        source={
+                            imageUri
+                                ? require('../../../../../../assets/profileEdit.png')
+                                : require('../../../../../../assets/profileCreate.png')
+                        }
+                    />
+                </TouchableOpacity>
+            </TouchableOpacity>
+        );
+    };
 
     return (
         <Screen>
@@ -41,15 +168,12 @@ export default ({ profileInfo, navigation, setShowModal }) => {
                     OnSettingPress={handleSetting}
                 />
             </View>
-
-            <Avatar
-                source={profileImageUrl ? profileImageUrl : ''}
-                size="large"
-                styles={modifiers.avatar}
-            />
-
+            {renderImageView()}
             <View style={styles.detailsContainer}>
-                <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
+                <Text
+                    style={styles.title}
+                    onPress={() => {}}
+                >{`${firstName} ${lastName}`}</Text>
             </View>
 
             <View style={styles.root}>

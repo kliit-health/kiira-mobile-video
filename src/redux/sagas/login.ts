@@ -76,7 +76,7 @@ function* loginFirebase({ payload }) {
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
                             navigation.navigate(stack.AppStack);
-                        } else if (isNewUser) {
+                        } else if(isNewUser) {
                             navigation.navigate(screenNames.Welcome);
                         }
                     } else {
