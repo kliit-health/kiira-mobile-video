@@ -191,7 +191,7 @@ function* cancelTheAppointment({ payload: { data } }) {
 
             yield updateCredits(data, totals, true);
             yield put(getUser());
-            if (expert.phoneNumber.length) {
+            if (expert.phoneNumber) {
                 yield sendSms(message, expert.phoneNumber);
             }
 
