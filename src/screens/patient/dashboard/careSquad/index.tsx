@@ -89,7 +89,6 @@ const CareSquad = ({ navigation }) => {
     };
 
     const handleFavoriteItemPress = details => {
-        console.log('-----DETAILS------',details)
         deleteMode
             ? dispatch(
                   updateFavoriteExperts({
