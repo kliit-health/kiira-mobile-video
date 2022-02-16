@@ -16,6 +16,12 @@ export default StyleSheet.create({
         backgroundColor: colors.white, 
         height:'100%'
     },
+    inputTextParentNotEditContainerStyle:{
+        width: metrics.width, 
+        paddingTop: metrics.height * 0.08,   
+        backgroundColor: colors.babyBlue, 
+        height:'100%'
+    },
     underLineStyle : {
         width: '100%',
         borderBottomColor: colors.greyAccent,
@@ -79,6 +85,11 @@ export default StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         backgroundColor: colors.white,  
     },
+    textStyleNotEdit: {
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        backgroundColor: colors.babyBlue,  
+    },
     textEmptyStyle: {
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsRegular,
@@ -98,6 +109,18 @@ export default StyleSheet.create({
         alignItems:'center', 
         width:'100%',
         backgroundColor: colors.white,  
+        paddingHorizontal: metrics.height * 0.02,    
+        paddingTop: metrics.height * 0.005, 
+        paddingBottom: metrics.height * 0.005,   
+    }, 
+    inputTypeStyleNotEdit : {
+        color: colors.black, 
+        fontSize: text.size.regular,
+        fontFamily: text.fontFamily.poppinsRegular,
+        textAlign: 'center',   
+        alignItems:'center', 
+        width:'100%',
+        backgroundColor: colors.babyBlue,  
         paddingHorizontal: metrics.height * 0.02,    
         paddingTop: metrics.height * 0.005, 
         paddingBottom: metrics.height * 0.005,   
