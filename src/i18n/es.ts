@@ -52,6 +52,15 @@ export default {
         save: 'Spanish Save',
     },
 
+    expertChatsHeaders:{
+        providers: 'All Providers',
+        yourSquad: 'Your Squad'
+     },
+
+     profileHeader:{
+        profile:'Profile'
+    },
+
     consent: {
         title: 'Spanish Consent Agreements',
         acceptanceDate: 'Spanish Acceptance Date',
