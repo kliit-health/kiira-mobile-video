@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import metrics from '~/utils/metrices';
 import { colors, text } from '~/utils/constants';
 
@@ -85,8 +85,11 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
+    },
+    imageView: {
         borderWidth: 2,
-        borderRadius: 1000,
+        borderRadius: 100,
+        overflow: 'hidden',
         borderColor: colors.blue,
     },
 

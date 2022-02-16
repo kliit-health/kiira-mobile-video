@@ -3,9 +3,11 @@ import { View, Text } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
+import Constant from '~/utils/constants';
 import styles from '../styles';
 
 const PatientDetails = ({ navigation, visit, patientInfo}) => { 
+    const { staticImages } = Constant.App;
     const { firstName, lastName, profile } = visit;
 
     return (
@@ -13,8 +15,9 @@ const PatientDetails = ({ navigation, visit, patientInfo}) => {
             <View style={styles.expertImageContainer}>
                 <FastImage
                     style={[styles.expertImage,{opacity:0.7}]}
-                    resizeMode="cover"
-                    source={{ uri: profile }} 
+                    resizeMode="cover" 
+                    source={profile ? { uri: profile }
+                        : staticImages.profilePlaceholderImg}
                 />
                 <View>
                     <View style={styles.myRecentExpertContainerStyle}>

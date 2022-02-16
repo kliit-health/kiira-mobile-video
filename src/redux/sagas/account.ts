@@ -1,18 +1,24 @@
 import { put, takeEvery, select } from 'redux-saga/effects';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import { showOrHideModal } from '~/components/customModal/action';
-import { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData } from '../reducers/account';
+import {
+    signOut,
+    updateAccount,
+    updatePassword,
+    updateActiveAt,
+    updateIntakeData,
+} from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';
 import { uploadImage, updateUserData } from '~/utils/firebase';
-import { getUser } from '~/redux/actions';
+import { getUser, updateUser as _updateUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 import { changePassword, reAunthenticate } from '~/utils/firebase';
-import { default as navigation } from '~/navigation/navigationService'; 
+import { default as navigation } from '~/navigation/navigationService';
 
 function* signout() {
     const lang = yield select(state => state.language);
-    const userData = yield select(state => state.user.data); 
+    const userData = yield select(state => state.user.data);
     try {
         yield put(showApiLoader());
 
@@ -25,7 +31,7 @@ function* signout() {
         yield updateStatus(updateStatusParams);
         yield put(clearAskState());
         yield logout();
-        yield put(hideApiLoader()); 
+        yield put(hideApiLoader());
         navigation.navigate('Landing');
     } catch (error) {
         navigation.navigate('Landing');
@@ -36,17 +42,18 @@ function* signout() {
 function* updateUser({ payload }) {
     const lang = yield select(state => state.language);
     const user = yield select(state => state.user.data);
+
     try {
         const { userParams, imageParams, navigation } = payload;
         yield put(showApiLoader());
-
+       
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
 
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata;
                 const url = yield storage().ref(name).getDownloadURL();
-
+       
                 const userUpdate = {
                     ...user,
                     profileInfo: {
@@ -80,11 +87,9 @@ function* updateUser({ payload }) {
                         phoneNumber: userParams.phoneNumber,
                     },
                 };
-
-                yield put(updateUser({ uid: user.uid, ...userUpdate }));
+                yield put(_updateUser({ uid: user.uid, ...userUpdate }));
                 yield put(getUser());
                 yield put(hideApiLoader());
-                navigation.goBack();
             } else {
                 yield put(hideApiLoader());
                 yield put(
@@ -131,7 +136,7 @@ function* updateUser({ payload }) {
             yield updateUserData(userUpdate, user.uid);
             yield put(getUser());
             yield put(hideApiLoader());
-            navigation.goBack();
+            // navigation.goBack();
         }
     } catch (error) {
         console.log(error);
@@ -191,20 +196,19 @@ function* changeUserPassword({ payload }) {
 }
 
 function* updateIntake({ payload }) {
- 
     const { intakeData, navigation } = payload;
-    try { 
-        const user = yield select(state => state.user.data);  
+    try {
+        const user = yield select(state => state.user.data);
         const userUpdate = {
             ...user,
-            intakeData: intakeData
-        }
+            intakeData: intakeData,
+        };
 
-        yield put(showApiLoader()); 
+        yield put(showApiLoader());
         yield updateUserData(userUpdate, user.uid);
         yield put(getUser());
         yield put(hideApiLoader());
-        navigation.navigate('Home'); 
+        navigation.navigate('Home');
         yield put(hideApiLoader());
     } catch (error) {
         console.error(error);
@@ -213,19 +217,18 @@ function* updateIntake({ payload }) {
 }
 
 function* updateActive({ payload }) {
- 
-    const { isActive } = payload; 
+    const { isActive } = payload;
 
-    try { 
-        const user = yield select(state => state.user.data);  
+    try {
+        const user = yield select(state => state.user.data);
         const userUpdate = {
             ...user,
-            isActive: isActive
-        } 
+            isActive: isActive,
+        };
         yield updateUserData(userUpdate, user.uid);
         yield put(getUser());
     } catch (error) {
-        console.error(error); 
+        console.error(error);
     }
 }
 

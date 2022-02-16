@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     FlatList,
@@ -25,7 +25,7 @@ const Experts = ({ experts, navigation }) => {
     const dispatch = useDispatch();
     const [showProfile, setShowProfile] = useState(false);
     const [profile, setProfile] = useState(null);
-    const lang = useSelector((state:RootState) => state.language);
+    const lang = useSelector((state: RootState) => state.language);
 
     const ifExists = fav => {
         if (favorites.filter(item => item === fav).length > 0) {
@@ -56,7 +56,6 @@ const Experts = ({ experts, navigation }) => {
         );
     };
 
-
     return (
         <View style={styles.expertsContainer}>
             <FlatList
@@ -77,13 +76,17 @@ const Experts = ({ experts, navigation }) => {
                     } = item;
                     return (
                         <View style={styles.expertInfoContainer}>
-                            <Image
-                                resizeMode="contain"
-                                style={styles.expertProfile}
-                                source={{
-                                    uri: profileImageUrl ? profileImageUrl : '',
-                                }}
-                            />
+                            <View style={styles.imageView}>
+                                <Image
+                                    resizeMode="contain"
+                                    style={styles.expertProfile}
+                                    source={{
+                                        uri: profileImageUrl
+                                            ? profileImageUrl
+                                            : '',
+                                    }}
+                                />
+                            </View>
                             <View
                                 style={
                                     item.isOnline
@@ -108,13 +111,13 @@ const Experts = ({ experts, navigation }) => {
                                     onPress={() => showProfileModal(item)}
                                 >
                                     <Text options={[medium, blue]}>
-                                    {lang.profileHeader.profile}
+                                        {lang.profileHeader.profile}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 <TouchableOpacity
-                                     style={styles.heartIconView}
+                                    style={styles.heartIconView}
                                     onPress={() => {
                                         ifExists(item.uid)
                                             ? handleDeletePress(item.uid)
@@ -122,11 +125,19 @@ const Experts = ({ experts, navigation }) => {
                                     }}
                                 >
                                     <Ionicons
-                            style={styles.heartIcon}
-                             name={ifExists(item.uid)? "heart" : "heart-outline"}
-                             color={ifExists(item.uid)? "#EB5794" : colors.greyDark}
-                            size={25}
-                        />
+                                        style={styles.heartIcon}
+                                        name={
+                                            ifExists(item.uid)
+                                                ? 'heart'
+                                                : 'heart-outline'
+                                        }
+                                        color={
+                                            ifExists(item.uid)
+                                                ? '#EB5794'
+                                                : colors.greyDark
+                                        }
+                                        size={25}
+                                    />
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.chatIcon}
