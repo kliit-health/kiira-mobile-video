@@ -49,7 +49,7 @@ const Page = ({ title, description, imageUrl, backgroundUrl }: PageProps) => (
                 <Text style={styles.title}>{title}</Text>
                 <TouchableOpacity
                     style={styles.kiiraContainer}
-                    onPress={() => handlePress('Welcome')}
+                    onPress={() => handlePress('KiiraWelcome')}
                 >
                     <Text style={styles.kiiraHelp}>{'What is Kiira?'}</Text>
                 </TouchableOpacity>

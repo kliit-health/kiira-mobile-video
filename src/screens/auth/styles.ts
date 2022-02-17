@@ -41,6 +41,23 @@ const styles = StyleSheet.create({
         fontFamily: fontFamily.poppinsRegular,
         alignSelf: 'flex-end', 
     },
+    becomeMember: { 
+        marginHorizontal:30, 
+        paddingVertical: 12,  
+        color: colors.primaryBlue,
+        backgroundColor: colors.white,
+        width: '100%', 
+        textAlign: 'center',
+        borderRadius: 22,
+        overflow: 'hidden',
+    },
+
+    kiiraContainer: { 
+        marginHorizontal:30,  
+        marginVertical:50,
+        alignItems: 'center', 
+    },
+
 
     helloStyle: {   
         color:'#fff',
@@ -114,6 +131,9 @@ const styles = StyleSheet.create({
 
     activateContainer:{
         padding: 0
+    },
+    welcomKiiraContainer:{
+       padding:'3%',
     },
 
     forgotPasswordText: {
