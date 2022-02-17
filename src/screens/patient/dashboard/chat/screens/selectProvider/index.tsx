@@ -33,9 +33,11 @@ const SelectChatProvider = ({ navigation }) => {
 
     const filterExperts = (gender, languages) => {
         setInitialExperts();
-        let experts = expertData.filter(expert =>
-            expert.chatTypes.includes(serviceType),
-        );
+        let experts = expertData.filter(expert =>{
+            if (expert.chatTypes) {
+                return expert.chatTypes.includes(serviceType);
+            }
+        });
 
         let filtered = experts;
         if (gender.length) {
