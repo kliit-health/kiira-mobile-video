@@ -360,7 +360,7 @@ export default {
     },
     welcomeKiira:{
         welcomeKiira: 'Welcome to Kiira',
-        oneStopTitle: 'Your one stop shop for care. On the Kiira app you can:',
+        oneStopTitle: 'Your one stop shop for care. On the kiira app you can:',
         getVirtualAppointmentsInfo: 'Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.',
         accessPersonalizedTeamInfo: 'Access a personalized team of health providers for women\'s health, mental health, and primary care on-demand.',
         takeKiiraEveryWhereInfo: 'Take Kiira with you everywhere you go and get answers specific to every stage of your life.',
