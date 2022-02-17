@@ -427,6 +427,7 @@ export default {
 
         screenNames: {
             Activate: 'Activate',
+            KiiraWelcome: 'KiiraWelcome',
             AddChild: 'AddChild',
             AdditionalInformation: 'AdditionalInformation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
@@ -820,6 +821,7 @@ export const stack = {
 
 export const screenNames = {
     Activate: 'Activate',
+    KiiraWelcome: 'KiiraWelcome',
     AddChild: 'AddChild',
     AddCreditOrDebitCard: 'AddCreditOrDebitCard',
     AddProfileData: 'AddProfileData',

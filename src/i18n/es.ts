@@ -384,6 +384,15 @@ export default {
         OrganizationPlan: 'Spanish If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu',
 
     },
+    welcomeKiira:{
+        welcomeKiira: ' Spanish Welcome to Kiira',
+        oneStopTitle: 'Spanish Your one stop shop for care. On the kiira app you can:',
+        getVirtualAppointmentsInfo: 'Spanish Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.',
+        accessPersonalizedTeamInfo: 'Spanish Access a personalized team of health providers for women\'s health, mental health, and primary care on-demand.',
+        takeKiiraEveryWhereInfo: 'Spanish Take Kiira with you everywhere you go and get answers specific to every stage of your life.',
+        becomeMember: 'Spanish Become a member',
+        back: 'Spanish Back'
+    },
 
     paymentMethods: {
         title: 'Spanish Payment Methods',
