@@ -386,7 +386,7 @@ export default {
     },
     welcomeKiira:{
         welcomeKiira: ' Spanish Welcome to Kiira',
-        oneStopTitle: 'Spanish Your one stop shop for care. On the Kiira app you can:',
+        oneStopTitle: 'Spanish Your one stop shop for care. On the kiira app you can:',
         getVirtualAppointmentsInfo: 'Spanish Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.',
         accessPersonalizedTeamInfo: 'Spanish Access a personalized team of health providers for women\'s health, mental health, and primary care on-demand.',
         takeKiiraEveryWhereInfo: 'Spanish Take Kiira with you everywhere you go and get answers specific to every stage of your life.',
