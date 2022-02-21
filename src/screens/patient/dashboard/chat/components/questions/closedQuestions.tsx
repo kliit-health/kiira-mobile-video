@@ -9,7 +9,7 @@ import { default as globalStyles } from '~/components/styles';
 
 const { white_bg } = globalStyles;
 
-const ClosedQuestions = ({ data }) => {
+const ClosedQuestions = ({ data, readResolveData }) => {
     const experts = useSelector(state => state.experts.data);
     const handleNavigation = item => {
         const expertDetails = experts.find(
@@ -18,6 +18,7 @@ const ClosedQuestions = ({ data }) => {
         navigation.navigate(screenNames.Messages, {
             expertDetails,
             questionData: item,
+            readResolveData: readResolveData,
         });
     };
     return (
