@@ -419,7 +419,7 @@ export default {
 
         privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
         questionCreditValue: 10,
-        rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
+        rateUsUrl: 'https://kiira-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
         becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',       
@@ -2058,6 +2058,20 @@ export const urls = {
             'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
         appointmentChange:
             'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
+    },
+    staging: {
+        appointmentGetByDay:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net//appointmentGetByDayAuth',
+        appointmentGetByMonth:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
+        appointmentCheckTime:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
+        appointmentMake:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentMakeAuth',
+        appointmentCancel:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCancelAuth',
+        appointmentChange:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentChangeAuth',
     },
 };
 

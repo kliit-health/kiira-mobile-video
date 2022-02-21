@@ -208,7 +208,7 @@ export async function getAppointmentsByDayAsync(data) {
  
     try {
         const times = {};
-        await fetch(urls.dev.appointmentGetByDay, obj)
+        await fetch(urls.staging.appointmentGetByDay, obj)
             .then(res => res.json())
             .then(data => (times.current = data));
         return times;
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
         };
 
         let response = [];
-        await fetch(urls.dev.appointmentGetByMonth, obj)
+        await fetch(urls.staging.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -263,7 +263,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
         };
 
-        await fetch(urls.dev.appointmentGetByMonth, obj)
+        await fetch(urls.staging.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -300,6 +300,7 @@ export async function makeAppointment(data) {
 
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
+        console.log('--_++++_jwtToken++++', jwtToken)
         const { appointmentTypeID } = appointmentType;
 
         var obj = {
@@ -324,7 +325,7 @@ export async function makeAppointment(data) {
         };
 
         let response;
-        let checkTime = await fetch(urls.dev.appointmentCheckTime, obj)
+        let checkTime = await fetch(urls.staging.appointmentCheckTime, obj)
             .then(res => res.json())
             .then(data => data)
             .catch(error => {
@@ -332,7 +333,8 @@ export async function makeAppointment(data) {
             });
 
         if (checkTime.valid) {
-            await fetch(urls.dev.appointmentMake, obj)
+            console.log('_+_+__+checkTime.valid_++_', checkTime.valid);
+            await fetch(urls.staging.appointmentMake, obj)
                 .then(res => res.json())
                 .then(res => {
                     response = {
@@ -481,7 +483,7 @@ export async function cancelAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.dev.appointmentCancel, obj)
+        return await fetch(urls.staging.appointmentCancel, obj)
             .then(res => {
                 let response = res.json();
                 return response;
@@ -548,7 +550,7 @@ export async function changeAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.dev.appointmentChange, obj)
+        return await fetch(urls.staging.appointmentChange, obj)
             .then(res => res.json())
             .then(async res => {
                 if (res.body.error) {
