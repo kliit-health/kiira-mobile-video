@@ -21,6 +21,9 @@ import moment from 'moment';
 import { Container, Header, RatingModal } from '~/components';
 import { MessageList, Footer } from './sections';
 import { screenNames } from '~/utils/constants';
+import { useDispatch } from 'react-redux';
+import * as actions from '~/redux/actions';
+
 class Chat extends React.PureComponent {
     public state: any;
     public props: any;
@@ -239,6 +242,7 @@ class Chat extends React.PureComponent {
             };
         }
         sendMessageUser(payloadData);
+       
         this.setState({
             message: '',
             imageUri: '',
@@ -282,6 +286,11 @@ class Chat extends React.PureComponent {
 
     handleBackPress = () => {
         const { navigation } = this.props;
+        const {readResolveData} = navigation.state.params;
+        if(navigation.state.params.readResolveData){
+            navigation.state.params.readResolveData();
+        }
+        
         navigation.goBack();
     };
 

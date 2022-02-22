@@ -132,7 +132,7 @@ function* updateAppointment({ payload }) {
             'Your appointment has been sucessfully rescheduled.',
         );
         yield put(getAppointmentsList({ uid: data.uid }));
-        if (profileInfo.phoneNumber.length && enableText) {
+        if (profileInfo.phoneNumber && profileInfo.phoneNumber.length && enableText) {
             yield sendSms(message, profileInfo.phoneNumber);
         }
 

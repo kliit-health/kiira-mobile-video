@@ -42,9 +42,13 @@ const Chat = () => {
         setPastQuestions(!pastQuestions);
     };
 
-    useEffect(() => {
+    const readResolveData = () => { 
         dispatch(actions.getResolvedQuestion({ uid: user.uid }));
         dispatch(actions.getUnresolvedQuestions({ uid: user.uid }));
+    }
+
+    useEffect(() => {
+        readResolveData();
     }, []);
 
     useEffect(() => {
@@ -98,6 +102,7 @@ const Chat = () => {
                     pastSelected={pastQuestions}
                     resolved={resolved}
                     unresolved={unresolved}
+                    readResolveData={readResolveData}
                 />
             </Column>
         </Screen>

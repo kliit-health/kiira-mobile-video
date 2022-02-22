@@ -56,7 +56,7 @@ function* cancelAppointment(data) {
       } 
       yield updateCredits(credits, data);
       yield put(getUser());
-      if (expert.profileInfo.phoneNumber.length) {
+      if (expert.profileInfo.phoneNumber && expert.profileInfo.phoneNumber.length) {
         yield sendSms(message, expert.profileInfo.phoneNumber);
       }
 

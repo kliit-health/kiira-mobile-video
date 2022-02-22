@@ -452,7 +452,7 @@ export async function cancelAppointmentData(data, message) {
             { merge: true },
         );
         
-        if (userData.profileInfo.phoneNumber.length) {
+        if (userData.profileInfo.phoneNumber && userData.profileInfo.phoneNumber.length) {
             await sendSms(message, userData.profileInfo.phoneNumber);
         }
 
