@@ -71,7 +71,9 @@ const SelectProvider = () => {
             const userState = userProfile.state.code;
             const stateAvailableExperts = experts.filter(({ profileInfo }) => {
                 const supportedStates = profileInfo.license.states;
-                return supportedStates.some(({ code }) => code === userState);
+                return supportedStates.some(({ code }) => {
+                    return code === userState
+                });
             });
 
             const videoEnabledExperts = stateAvailableExperts.filter(

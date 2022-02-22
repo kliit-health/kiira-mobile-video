@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { handleBack } from '~/utils/functions/handleNavigation';
-import { payIntent } from '~/utils/firebase';
+import { getOrganizationInfo, payIntent } from '~/utils/firebase';
 import moment from 'moment';
 import { default as globalStyles, card, card_title } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
@@ -45,6 +45,7 @@ const Payment = () => {
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
     const [balance, setBalance] = useState(null);
+    const [organizationInfo, setOrganizationInfo] = useState(null);
 
     const {
         firstName,
@@ -173,6 +174,15 @@ const Payment = () => {
         setBalance(calculateTotal());
     }, []);
 
+    useEffect(() => {
+        async function fetchMyAPI() {
+            let response = await getOrganizationInfo(user);
+            setOrganizationInfo(response);
+        }
+
+        fetchMyAPI();
+    }, []);
+
     const VisitRecap = () => {
         return (
             <Kiira.Column options={[card]}>
@@ -204,7 +214,6 @@ const Payment = () => {
             </Kiira.Column>
         );
     };
-
     return (
         <Kiira.Screen test="Appointment Payment">
             <Kiira.Header onBack={handleBack} title="Book Visit" />
@@ -227,9 +236,15 @@ const Payment = () => {
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Kiira.Text options={[pad_h, large]}>
-                        {` -$${appointments.visit.details.price} ($${
-                            (visits + prepaid) * 60
-                        } credit available)`}
+                        {organizationInfo && organizationInfo.unlimited
+                            ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
+                            : visits + prepaid > 0
+                            ? `-$${appointments.visit.details.price} ($${
+                                  (visits + prepaid) * 60
+                              } credit available)`
+                            : `-$${appointments.visit.details.price} (-$${
+                                  Math.abs(visits + prepaid) * 60
+                              } credit available)`}
                     </Kiira.Text>
                 </Kiira.Row>
 
