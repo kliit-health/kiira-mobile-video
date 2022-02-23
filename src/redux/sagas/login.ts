@@ -23,6 +23,7 @@ function* loginFirebase({ payload }) {
 
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
+        console.log('-----RESPONSE----',response)
 
         const { uid } = response;
 
@@ -90,10 +91,11 @@ function* loginFirebase({ payload }) {
                     }
                 });
         } else {
+            const message = response.message.split("]").pop().trim()
             yield put(
                 showOrHideModal(
                     response.message
-                        ? response.message
+                        ? message
                         : lang.errorMessage.serverError,
                 ),
             );
