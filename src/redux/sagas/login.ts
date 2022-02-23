@@ -90,7 +90,13 @@ function* loginFirebase({ payload }) {
                     }
                 });
         } else {
-            yield put(showOrHideModal(lang.errorMessage.serverError));
+            yield put(
+                showOrHideModal(
+                    response.message
+                        ? response.message
+                        : lang.errorMessage.serverError,
+                ),
+            );
             yield put(hideApiLoader());
             yield put(loginFailure());
         }
