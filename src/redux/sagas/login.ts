@@ -23,8 +23,6 @@ function* loginFirebase({ payload }) {
 
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
-        console.log('-----RESPONSE----',response)
-
         const { uid } = response;
 
         if (uid) {
