@@ -13,7 +13,6 @@ import { cardDetails } from './model';
 import { Icon, Header, Screen } from '~/components';
 import styles from './styles';
 import ImagePicker from 'react-native-image-picker';
-import { Avatar } from 'react-native-elements';
 import Constant from '~/utils/constants';
 import { updateAccount } from '~/redux/reducers/account';
 import { useDispatch } from 'react-redux';
