@@ -126,24 +126,11 @@ const { staticImages } = Constant.App;
                     requestCameraPermission();
                 }}
             >
-                <Avatar
-                    renderPlaceholderContent={
-                        <Image
-                            style={{
-                                width: 120,
-                                height: 120,
-                            }}
+                <Image
+                            style={styles.image}
                             resizeMode="stretch"
-                            source={staticImages.profilePlaceholderImg}
+                            source={imageUri ? {uri: imageUri} : staticImages.profilePlaceholderImg}
                         />
-                    }
-                    size={90}
-                    rounded
-                    source={{
-                        uri: imageUri ? imageUri : '',
-                    }}
-                    activeOpacity={0.7}
-                />
 
                 <TouchableOpacity>
                     <Image
