@@ -300,7 +300,6 @@ export async function makeAppointment(data) {
 
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
-        console.log('--_++++_jwtToken++++', jwtToken)
         const { appointmentTypeID } = appointmentType;
 
         var obj = {
@@ -333,7 +332,6 @@ export async function makeAppointment(data) {
             });
 
         if (checkTime.valid) {
-            console.log('_+_+__+checkTime.valid_++_', checkTime.valid);
             await fetch(urls.staging.appointmentMake, obj)
                 .then(res => res.json())
                 .then(res => {
@@ -454,7 +452,7 @@ export async function cancelAppointmentData(data, message) {
             { merge: true },
         );
         
-        if (userData.profileInfo.phoneNumber.length) {
+        if (userData.profileInfo.phoneNumber && userData.profileInfo.phoneNumber.length) {
             await sendSms(message, userData.profileInfo.phoneNumber);
         }
 

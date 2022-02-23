@@ -95,6 +95,7 @@ const Payment = () => {
     };
 
     const bookVisit = () => {
+        
         appointmentDetails.intakeData = '';
         dispatch(bookAppointment(appointmentDetails));
     };

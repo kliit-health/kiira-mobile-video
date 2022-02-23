@@ -35,6 +35,10 @@ import {
     checkExpertStatusSuccess,
     checkQuestionStatusSuccess,
 } from '../actions/chat';
+import {
+    getResolvedQuestion,
+    getUnresolvedQuestions,
+} from '~/redux/actions/questions';
 import { getUser } from '~/redux/actions';
 import { showOrHideModal } from '~/components/customModal/action';
 import * as actions from '~/redux/actions';
@@ -134,7 +138,7 @@ function* setQuestion({ data, dispatch }) {
                 };
                 yield delay(delayTime);
                 yield loadMessagesOfUser(payloadData);
-                if (expertInfo.profileInfo.phoneNumber.length) {
+                if (expertInfo.profileInfo.phoneNumber && expertInfo.profileInfo.phoneNumber.length) {
                     yield sendSms(message, expertInfo.profileInfo.phoneNumber);
                 }
 
@@ -203,6 +207,7 @@ function* sendMessageToUser({ data }) {
 
                 yield put(hideApiLoader());
                 yield sendMessage(params);
+              
                 questionData.expertUnreadCount = unreadCount;
                 const dataResponse = {
                     questionData,
@@ -210,7 +215,7 @@ function* sendMessageToUser({ data }) {
 
                 yield put(chatMessageSuccess(dataResponse));
                 yield sendNotification(uid, title, message);
-                if (expertStatusData.profileInfo.phoneNumber.length) {
+                if (expertStatusData.profileInfo.phoneNumber && expertStatusData.profileInfo.phoneNumber.length) {
                     yield sendSms(
                         message,
                         expertStatusData.profileInfo.phoneNumber,
@@ -254,8 +259,8 @@ function* sendMessageToUser({ data }) {
                 },
             };
 
-            yield sendMessage(params);
-            if (expertStatusData.profileInfo.phoneNumber.length) {
+            yield sendMessage(params); 
+            if (expertStatusData.profileInfo.phoneNumber && expertStatusData.profileInfo.phoneNumber.length) {
                 yield sendSms(
                     message,
                     expertStatusData.profileInfo.phoneNumber,
