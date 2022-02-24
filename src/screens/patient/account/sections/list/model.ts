@@ -43,7 +43,7 @@ export default [
 
     {
         title: `allergies.title`,
-        destination: screenNames.termsAndConditions,
+        destination: screenNames.Allergies,
         icon: icons.allergies,  
     },
     {

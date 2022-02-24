@@ -10,7 +10,7 @@ import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
 import AccountSupport from '../screens/support/account';
 import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addChild';
-import Allergies from '../screens/patient/dashboard/healthHistory/allergies';
+import Allergies from '../screens/patient/account/Allergies';
 import AllergiesHistory from '../screens/provider/appointments/patientProfile/allergies';
 import Appointments from '../screens/patient/dashboard/appointments';
 import AskExpert from '../screens/provider/ask';
