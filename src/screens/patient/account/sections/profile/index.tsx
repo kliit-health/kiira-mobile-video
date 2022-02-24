@@ -14,23 +14,24 @@ import { Icon, Header, Screen } from '~/components';
 import styles from './styles';
 import ImagePicker from 'react-native-image-picker';
 import { Avatar } from 'react-native-elements';
-import Constant from '~/utils/constants';
+import Constant, { screenNames } from '~/utils/constants';
 import { updateAccount } from '~/redux/reducers/account';
 import { useDispatch } from 'react-redux';
 
-
-
-export default ({ profileInfo, navigation, setShowModal }) => {
+export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
-const { staticImages } = Constant.App;
+    const { staticImages } = Constant.App;
     const dispatch = useDispatch();
     const [imageUri, setImageUri] = useState(profileImageUrl);
     const handleOnBackPress = () => {
         navigation.goBack();
     };
-
     const handleSetting = () => {
-        setShowModal(true);
+        if (!intakeData) {
+            setShowModal(true);
+        } else {
+            navigation.navigate(screenNames.settings);
+        }
     };
 
     const getFieldNames = (value, fieldName) => {
