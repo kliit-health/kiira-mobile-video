@@ -38,7 +38,6 @@ const Welcome = ({ navigation }) => {
     });
     const [filePath, setFilePath] = useState('');
     const [file, setFile] = useState({});
-console.log('---------',Constant.App.Modal.states.length)
     const RenderStateModalView = () => {
         return (
             <CustomSelectModal
