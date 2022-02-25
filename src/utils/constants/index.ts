@@ -114,7 +114,7 @@ export default {
             ],
             insurance:[
                 {
-                   value:'Aetan Health'
+                   value:'Aetnan Health'
                 },
                 {
                     value:'Blue Cross/Blue Shield'

@@ -6,13 +6,14 @@ import CustomButton from '~/components/customButton';
 import { CustomText, Icon } from '~/components';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
+import { updateAccount } from '~/redux/reducers/account';
 
-const AdditionalInformation = ({ navigation }) => {
+const AdditionalInformation = ({ navigation,userProfileData }) => {
     const { staticImages, screenNames } = Constant.App;
     const [showSexualityModal, setShowSexualityModal] = useState(false);
     const [showPharmacyModal, setShowPharmacyModal] = useState(false);
     const [showInsuranceModal, setShowInsuranceModal] = useState(false);
-    const [userProfileData, setUserProfileData] = useState({
+    const [userProfileData1, setUserProfileData] = useState({
         pharmacyAddress: '',
         pharmacyPhoneNumber: '',
         memberId: '',
@@ -28,7 +29,7 @@ const AdditionalInformation = ({ navigation }) => {
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
                     setUserProfileData({
-                        ...userProfileData,
+                        ...userProfileData1,
                         selectedSexuality: item,
                     });
                     setShowSexualityModal(false);
@@ -47,7 +48,7 @@ const AdditionalInformation = ({ navigation }) => {
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
                     setUserProfileData({
-                        ...userProfileData,
+                        ...userProfileData1,
                         selectedPharmacy: item,
                     });
                     setShowPharmacyModal(false);
@@ -66,7 +67,7 @@ const AdditionalInformation = ({ navigation }) => {
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
                     setUserProfileData({
-                        ...userProfileData,
+                        ...userProfileData1,
                         selectedInsurance: item,
                     });
                     setShowInsuranceModal(false);
@@ -78,7 +79,19 @@ const AdditionalInformation = ({ navigation }) => {
             />
         );
     };
+   const formatPhoneNumber = value => {
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+        if (phoneNumberLength < 4) return phoneNumber;
 
+        if (phoneNumberLength < 7) {
+            return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+        }
+        return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+            3,
+            6,
+        )}-${phoneNumber.slice(6, 10)}`;
+    };
     return (
         <ScrollView style={{ backgroundColor: colors.white }}>
             <View>
@@ -105,13 +118,13 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedSexuality.value
+                                userProfileData1.selectedSexuality.value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedSexuality.value
-                                ? userProfileData.selectedSexuality.value
+                            {userProfileData1.selectedSexuality.value
+                                ? userProfileData1.selectedSexuality.value
                                 : 'Sexuality'}
                         </CustomText>
                         <Image
@@ -128,13 +141,13 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedPharmacy.value
+                                userProfileData1.selectedPharmacy.value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedPharmacy.value
-                                ? userProfileData.selectedPharmacy.value
+                            {userProfileData1.selectedPharmacy.value
+                                ? userProfileData1.selectedPharmacy.value
                                 : 'Preferred Pharmacy'}
                         </CustomText>
                         <Image
@@ -147,16 +160,16 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="pharmacyAddress"
                     style={
-                        !userProfileData.pharmacyAddress
+                        !userProfileData1.pharmacyAddress
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Pharmacy Address"
-                    value={userProfileData.pharmacyAddress}
+                    value={userProfileData1.pharmacyAddress}
                     onChangeText={e =>
                         setUserProfileData({
-                            ...userProfileData,
+                            ...userProfileData1,
                             pharmacyAddress: e,
                         })
                     }
@@ -164,19 +177,21 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="pharmacyPhoneNumber"
                     style={
-                        !userProfileData.pharmacyPhoneNumber
+                        !userProfileData1.pharmacyPhoneNumber
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Pharmacy Phone Number"
-                    value={userProfileData.pharmacyPhoneNumber}
-                    onChangeText={e =>
-                        setUserProfileData({
-                            ...userProfileData,
-                            pharmacyPhoneNumber: e,
-                        })
-                    }
+                    value={userProfileData1.pharmacyPhoneNumber}
+                    onChangeText={value => {
+                        const formattedPhoneNumber =
+                            formatPhoneNumber(value);
+                            setUserProfileData({
+                                        ...userProfileData1,
+                                        pharmacyPhoneNumber: formattedPhoneNumber,
+                                    })
+                    }}
                 />
                 <View style={styles.stateDropDownContainerStyle}>
                     <TouchableOpacity
@@ -185,13 +200,13 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedInsurance.value
+                                userProfileData1.selectedInsurance.value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedInsurance.value
-                                ? userProfileData.selectedInsurance.value
+                            {userProfileData1.selectedInsurance.value
+                                ? userProfileData1.selectedInsurance.value
                                 : 'Insurance'}
                         </CustomText>
                         <Image
@@ -204,16 +219,16 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="memberID"
                     style={
-                        !userProfileData.memberId
+                        !userProfileData1.memberId
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Member ID"
-                    value={userProfileData.memberId}
+                    value={userProfileData1.memberId}
                     onChangeText={e =>
                         setUserProfileData({
-                            ...userProfileData,
+                            ...userProfileData1,
                             memberId: e,
                         })
                     }
@@ -257,7 +272,15 @@ const AdditionalInformation = ({ navigation }) => {
                             : styles.disabledButton
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => console.log('')}
+                    onPress={() => {
+                        const payload = {
+                            userParams: {
+                                userProfileData,
+                                imageParams: null,
+                                navigation,
+                            },
+                        };
+                    }}
                     text="Finish"
                 />
             </View>
