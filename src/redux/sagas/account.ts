@@ -55,8 +55,11 @@ function* updateUser({ payload }) {
                 const url = yield storage().ref(name).getDownloadURL();
                 const userUpdate = {
                     ...user,
+                    role: userParams?.role ? userParams?.role : user?.role,
+                    signUpDate: userParams?.signUpDate ? userParams?.signUpDate :user?.signUpDate,
+                    updatedDate: userParams.signUpDate,
                     profileInfo: {
-                        profileImageUrl: url ? url : '',
+                        profileImageUrl: url ? url : '', 
                         firstName: userParams.firstName,
                         lastName: userParams.lastName,
                         dob: userParams.dob,

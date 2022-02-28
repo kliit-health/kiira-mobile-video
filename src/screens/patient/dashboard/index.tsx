@@ -15,8 +15,7 @@ import styles from '~/components/styles';
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
-    console.log('-----USER---',user)
-
+  
     const firstName = user.profileInfo.firstName;
     const subscription = useSelector(
         (state: RootState) => state.subscription.data,

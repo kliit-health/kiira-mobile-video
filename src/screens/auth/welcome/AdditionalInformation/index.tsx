@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, Platform } from 'react-native';
-import Constant, { colors, icons, screenNames } from '~/utils/constants';
+import Constant, { colors, icons } from '~/utils/constants';
 import styles from '../styles';
 import CustomButton from '~/components/customButton';
 import { CustomText, Icon } from '~/components';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
-import { updateAccount, updateUserRole } from '~/redux/reducers/account';
-import { useDispatch, useSelector } from 'react-redux';
-import { handleNavigation } from '~/utils/functions';
-import { RootState } from '~/redux/reducers';
-import { updateUserDataToFirebase } from '../action';
+import { updateAccount } from '~/redux/reducers/account';
+import { useDispatch } from 'react-redux';
 
 const AdditionalInformation = ({ navigation }) => {
-    const {userProfileData,filePath} = navigation.state.params;
-    const user : any = useSelector((state: RootState) => state.user.data); 
-    console.log('-----',user)
+    const { userProfileData, filePath } = navigation.state.params;
     const dispatch = useDispatch();
     const { staticImages } = Constant.App;
     const [showSexualityModal, setShowSexualityModal] = useState(false);
@@ -30,7 +25,7 @@ const AdditionalInformation = ({ navigation }) => {
         selectedInsurance: { value: '' },
     });
     const [disabled, setDisabled] = useState(true);
-    console.log('s-----',userProfileAdditionalData.selectedPharmacy)
+
     const RenderSexualityModalView = () => {
         return (
             <CustomSelectModal
@@ -88,7 +83,7 @@ const AdditionalInformation = ({ navigation }) => {
             />
         );
     };
-   const formatPhoneNumber = value => {
+    const formatPhoneNumber = value => {
         const phoneNumber = value.replace(/[^\d]/g, '');
         const phoneNumberLength = phoneNumber.length;
         if (phoneNumberLength < 4) return phoneNumber;
@@ -101,7 +96,7 @@ const AdditionalInformation = ({ navigation }) => {
             6,
         )}-${phoneNumber.slice(6, 10)}`;
     };
-    
+
     return (
         <ScrollView style={{ backgroundColor: colors.white }}>
             <View>
@@ -128,13 +123,15 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileAdditionalData.selectedSexuality.value
+                                userProfileAdditionalData.selectedSexuality
+                                    .value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
                             {userProfileAdditionalData.selectedSexuality.value
-                                ? userProfileAdditionalData.selectedSexuality.value
+                                ? userProfileAdditionalData.selectedSexuality
+                                      .value
                                 : 'Sexuality'}
                         </CustomText>
                         <Image
@@ -157,7 +154,8 @@ const AdditionalInformation = ({ navigation }) => {
                             }
                         >
                             {userProfileAdditionalData.selectedPharmacy.value
-                                ? userProfileAdditionalData.selectedPharmacy.value
+                                ? userProfileAdditionalData.selectedPharmacy
+                                      .value
                                 : 'Preferred Pharmacy'}
                         </CustomText>
                         <Image
@@ -195,12 +193,11 @@ const AdditionalInformation = ({ navigation }) => {
                     placeholder="Pharmacy Phone Number"
                     value={userProfileAdditionalData.pharmacyPhoneNumber}
                     onChangeText={value => {
-                        const formattedPhoneNumber =
-                            formatPhoneNumber(value);
-                            setUserProfileAdditionalData({
-                                        ...userProfileAdditionalData,
-                                        pharmacyPhoneNumber: formattedPhoneNumber,
-                                    })
+                        const formattedPhoneNumber = formatPhoneNumber(value);
+                        setUserProfileAdditionalData({
+                            ...userProfileAdditionalData,
+                            pharmacyPhoneNumber: formattedPhoneNumber,
+                        });
                     }}
                 />
                 <View style={styles.stateDropDownContainerStyle}>
@@ -210,13 +207,15 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileAdditionalData.selectedInsurance.value
+                                userProfileAdditionalData.selectedInsurance
+                                    .value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
                             {userProfileAdditionalData.selectedInsurance.value
-                                ? userProfileAdditionalData.selectedInsurance.value
+                                ? userProfileAdditionalData.selectedInsurance
+                                      .value
                                 : 'Insurance'}
                         </CustomText>
                         <Image
@@ -274,7 +273,8 @@ const AdditionalInformation = ({ navigation }) => {
                             !userProfileAdditionalData.pharmacyAddress &&
                             !userProfileAdditionalData.memberId &&
                             !userProfileAdditionalData.pharmacyPhoneNumber &&
-                            !userProfileAdditionalData.selectedInsurance.value &&
+                            !userProfileAdditionalData.selectedInsurance
+                                .value &&
                             !userProfileAdditionalData.selectedPharmacy.value &&
                             !userProfileAdditionalData.selectedSexuality.value
                         )
@@ -284,66 +284,79 @@ const AdditionalInformation = ({ navigation }) => {
                     textStyle={styles.buttonText}
                     onPress={() => {
                         let filename = null;
-    
-                            const payloadData = {
-                                userParams: {
-                                    ...(user.address && { address: user.address }),
-                                    chats: user.chats,
-                                    displayName: user.displayName,
-                                    email: user.email,
-                                    fcmToken: user.fcmToken,
-                                    invitationDate: user.invitationDate,
-                                    invitationId: user.invitationId,
-                                    organizationId: user.organizationId,
-                                    firstName: userProfileData.firstName.trim(),
-                                    lastName: userProfileData.lastName.trim(),
-                                    dob: userProfileData.birthday ? userProfileData.birthday : '',
-                                    gender: userProfileData.selectedGender.value,
-                                    pharmacy:userProfileAdditionalData.selectedPharmacy.value ? userProfileAdditionalData.selectedPharmacy.value: '',
-                                    pharmacyAddress:userProfileAdditionalData.pharmacyAddress ? userProfileAdditionalData.pharmacyAddress:'' ,
-                                    pharmacyPhoneNumber:userProfileAdditionalData.pharmacyPhoneNumber ? userProfileAdditionalData.pharmacyPhoneNumber :'',
-                                    ...(user.plan && { plan: user.plan }),
-                                    pronouns: userProfileData.selectedPronoun.value,
-                                    state: userProfileData.selectedState,
-                                    signUpDate: Date.now(),
-                                    sexuality: userProfileAdditionalData.selectedSexuality ? userProfileAdditionalData.selectedSexuality: {},
-                                    ...(user.subscription && {
-                                        subscription: { ...user.subscription },
-                                    }),
-                                    prepaid: 0,
-                                    insurance:userProfileAdditionalData.selectedInsurance ? userProfileAdditionalData.selectedInsurance.value : '',
-                                    insurancePlan:userProfileAdditionalData.memberId ? userProfileAdditionalData.memberId.trim() :'',
-                                    lang: 'en',
-                                    phoneNumber: user?.profileInfo?.phoneNumber,
-                                    visits: user.visits,
-                                },
-                                navigation,
-                                imageParams : null
-                            };
-                           
+                        const payloadData = {
+                            userParams: {
+                                firstName: userProfileData.firstName.trim(),
+                                lastName: userProfileData.lastName.trim(),
+                                dob: userProfileData.birthday
+                                    ? userProfileData.birthday
+                                    : '',
+                                gender: userProfileData.selectedGender.value,
+                                pronouns: userProfileData.selectedPronoun.value,
+                                state: userProfileData.selectedState,
+                                imageUri: userProfileData.imageSrc
+                                    ? userProfileData.imageSrc
+                                    : '',
+                                nickName: userProfileData.nickName
+                                    ? userProfileData.nickName
+                                    : '',
+                                sexuality:
+                                    userProfileAdditionalData.selectedSexuality
+                                        ? userProfileAdditionalData.selectedSexuality
+                                        : {},
+                                pharmacy: userProfileAdditionalData
+                                    .selectedPharmacy.value
+                                    ? userProfileAdditionalData.selectedPharmacy
+                                          .value
+                                    : '',
+                                pharmacyAddress:
+                                    userProfileAdditionalData.pharmacyAddress
+                                        ? userProfileAdditionalData.pharmacyAddress
+                                        : '',
+                                pharmacyPhone:
+                                    userProfileAdditionalData.pharmacyPhoneNumber
+                                        ? userProfileAdditionalData.pharmacyPhoneNumber
+                                        : '',
+                                insurance:
+                                    userProfileAdditionalData.selectedInsurance
+                                        ? userProfileAdditionalData
+                                              .selectedInsurance.value
+                                        : '',
+                                insurancePlan:
+                                    userProfileAdditionalData.memberId
+                                        ? userProfileAdditionalData.memberId
+                                        : '',
+                                role: 'User',
+                                signUpDate: Date.now(),
+                            },
+                            navigation,
+                            imageParams: null,
+                        };
+
                         if (userProfileData.imageSrc) {
                             let name = userProfileData.imageSrc.substring(
                                 userProfileData.imageSrc.lastIndexOf('/') + 1,
                                 userProfileData.imageSrc.length,
                             );
-                            const ext = userProfileData.imageSrc.split('/').pop(); // Extract image extension
+                            const ext = userProfileData.imageSrc
+                                .split('/')
+                                .pop(); // Extract image extension
                             filename =
                                 Platform.OS === 'ios'
                                     ? `${Math.floor(Date.now())}${name}`
-                                    : `${Math.floor(
-                                          Date.now(),
-                                      )}${name}.${ext}`;
-                        } 
-                        if (filename) {    
+                                    : `${Math.floor(Date.now())}${name}.${ext}`;
+                        }
+                        if (filename) {
                             payloadData.imageParams = {
                                 file:
                                     Platform.OS == 'ios'
                                         ? userProfileData.imageSrc
                                         : filePath,
                                 filename,
-                            }; 
+                            };
                         }
-                         dispatch(updateUserDataToFirebase(payloadData))
+                        dispatch(updateAccount(payloadData));
+                        navigation.navigate('Home');
                     }}
                     text="Finish"
                 />
