@@ -46,7 +46,7 @@ const Appointments = ({ navigation }) => {
             setFuture(future);
         }
     }, [history]);
-
+    
     const handleTabSelect = () => {
         setPastSelected(!pastSelected);
     };

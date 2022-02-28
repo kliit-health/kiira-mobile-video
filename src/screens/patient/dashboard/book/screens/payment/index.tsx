@@ -107,6 +107,7 @@ const Payment = () => {
 
     const calculateTotal = () => {
         const total = visits + prepaid;
+
         if (appointments.visit.details.price <= total * 60) {
             return 0;
         } else {
@@ -238,7 +239,7 @@ const Payment = () => {
                     <Kiira.Text options={[pad_h, large]}>
                         {organizationInfo && organizationInfo.unlimited
                             ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
-                            : visits + prepaid > 0
+                            : visits + prepaid >= 0
                             ? `-$${appointments.visit.details.price} ($${
                                   (visits + prepaid) * 60
                               } credit available)`
