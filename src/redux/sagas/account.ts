@@ -7,7 +7,7 @@ import {
     updatePassword,
     updateActiveAt,
     updateIntakeData,
-    updateUserRole
+    updateUserRole,
 } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';
@@ -56,10 +56,14 @@ function* updateUser({ payload }) {
                 const userUpdate = {
                     ...user,
                     role: userParams?.role ? userParams?.role : user?.role,
-                    signUpDate: userParams?.signUpDate ? userParams?.signUpDate : user?.signUpDate,
-                    updatedDate: userParams?.signUpDate ? userParams?.signUpDate : user?.updatedDate,
+                    signUpDate: userParams?.signUpDate
+                        ? userParams?.signUpDate
+                        : user?.signUpDate,
+                    updatedDate: userParams?.signUpDate
+                        ? userParams?.signUpDate
+                        : user?.updatedDate,
                     profileInfo: {
-                        profileImageUrl: url ? url : '', 
+                        profileImageUrl: url ? url : '',
                         firstName: userParams.firstName,
                         lastName: userParams.lastName,
                         dob: userParams.dob,
@@ -106,6 +110,13 @@ function* updateUser({ payload }) {
         } else {
             const userUpdate = {
                 ...user,
+                role: userParams?.role ? userParams?.role : user?.role,
+                signUpDate: userParams?.signUpDate
+                    ? userParams?.signUpDate
+                    : user?.signUpDate,
+                updatedDate: userParams?.signUpDate
+                    ? userParams?.signUpDate
+                    : user?.updatedDate,
                 profileInfo: {
                     profileImageUrl: userParams.profileImageUrl,
                     firstName: userParams.firstName,
