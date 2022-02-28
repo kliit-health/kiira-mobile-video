@@ -38,7 +38,7 @@ const style = StyleSheet.create({
 
     container: {
         height:254,
-        width:375,
+        width:'100%',
         backgroundColor: colors.babyBlue,
     },
 
@@ -133,8 +133,8 @@ const style = StyleSheet.create({
         backgroundColor: colors.white,  
     },
     imageBackground:{
-         display:'flex',
-         backgroundColor:colors.white,
+        display:'flex',
+        backgroundColor:colors.white,
          borderRadius:120,
          width:120,
          height:120,

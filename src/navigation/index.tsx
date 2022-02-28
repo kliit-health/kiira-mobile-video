@@ -95,6 +95,7 @@ import VisitOverView from '../screens/patient/dashboard/appointments/visitSummar
 
 import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
+import KiiraWelcome from '~/screens/auth/KiiraWelcome';
 
 let tabIconSize = 25;
 
@@ -116,6 +117,7 @@ const notSelected = [tiny, gray_dark, regular, space_sm];
 const AuthStack = createStackNavigator(
     {
         Activate: { screen: Activate },
+        KiiraWelcome: {screen: KiiraWelcome},
         ChatBot: { screen: ChatBot },
         ForgotPassword: { screen: ForgotPassword },
         Landing: { screen: Landing },
@@ -525,6 +527,7 @@ const AppStackExpert = createStackNavigator(
         Recap: { screen: Recap },
         SocialHistory: { screen: SocialHistory },
         SettingsExpert: { screen: SettingsExpert },
+        Settings:{screen: Settings},
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
         BillingInsurance : {screen: BillingInsurance},

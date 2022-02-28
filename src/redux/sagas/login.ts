@@ -23,7 +23,6 @@ function* loginFirebase({ payload }) {
 
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
-
         const { uid } = response;
 
         if (uid) {
@@ -43,7 +42,7 @@ function* loginFirebase({ payload }) {
 
             if (enabled) {
                 token = yield messaging().getToken();
-                yield put(updateUser({ uid, fcmToken: token }));
+                yield put(updateUser({ uid, fcmToken: token ,email}));
                 yield AsyncStorage.setItem('fcmToken', token);
             } else {
                 try {
@@ -76,7 +75,7 @@ function* loginFirebase({ payload }) {
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
                             navigation.navigate(stack.AppStack);
-                        } else if (isNewUser) {
+                        } else if(isNewUser) {
                             navigation.navigate(screenNames.Welcome);
                         }
                     } else {
@@ -90,10 +89,11 @@ function* loginFirebase({ payload }) {
                     }
                 });
         } else {
+            const message = response.message.split("]").pop().trim()
             yield put(
                 showOrHideModal(
                     response.message
-                        ? response.message
+                        ? message
                         : lang.errorMessage.serverError,
                 ),
             );

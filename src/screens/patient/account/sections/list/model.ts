@@ -24,22 +24,23 @@ export default [
         title: `account.myHealth`,     
         pane: true
     },
-    {
-        title: `labResults.title`,
-        destination: screenNames.termsAndConditions,
-        icon: icons.labResults,
-        noBorder: true
-    },
-    {
-        title: `medications.title`,
-        destination: screenNames.termsAndConditions,
-        icon: icons.medications,  
-    },
-    {
-        title: `vaccines.title`,
-        destination: screenNames.termsAndConditions,
-        icon: icons.vaccines,  
-    },
+    // {
+    //     title: `labResults.title`,
+    //     destination: screenNames.termsAndConditions,
+    //     icon: icons.labResults,
+    //     noBorder: true
+    // },
+    // {
+    //     title: `medications.title`,
+    //     destination: screenNames.termsAndConditions,
+    //     icon: icons.medications,  
+    // },
+    // {
+    //     title: `vaccines.title`,
+    //     destination: screenNames.termsAndConditions,
+    //     icon: icons.vaccines,  
+    // },
+
     {
         title: `allergies.title`,
         destination: screenNames.termsAndConditions,
@@ -49,10 +50,5 @@ export default [
         title: `healthHistory.title`,
         destination: screenNames.termsAndConditions,
         icon: icons.healthHistory, 
-    },
-    {
-        title: `pastVisits.title`,
-        destination: screenNames.termsAndConditions,
-        icon: icons.pastVisits,  
     },
 ];

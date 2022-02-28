@@ -124,21 +124,26 @@ function* updateAppointment({ payload }) {
             );
             navigation.navigate('Appointments');
         }
-       
-        if (assessment && reason && reason.sessionType && reason.sessionType.title === 'Health Check') {
+
+        if (
+            assessment &&
+            reason &&
+            reason.sessionType &&
+            reason.sessionType.title === 'Health Check'
+        ) {
             yield put(updateUser({ assessment: { ...assessment, time } }));
         }
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
         );
         yield put(getAppointmentsList({ uid: data.uid }));
-        if (profileInfo.phoneNumber.length && enableText) {
+        if (profileInfo.phoneNumber && profileInfo.phoneNumber.length && enableText) {
             yield sendSms(message, profileInfo.phoneNumber);
         }
 
         yield sendNotification(uid, title, message);
         yield put(getAppointmentsList(uid));
-        
+
         navigation.navigate('Appointments');
     } catch (error) {
         console.error(error);
@@ -176,8 +181,8 @@ function* cancelTheAppointment({ payload: { data } }) {
     };
 
     try {
-        yield put(showApiLoader());  
-        const result = yield cancelAppointmentAsync(data); 
+        yield put(showApiLoader());
+        const result = yield cancelAppointmentAsync(data);
         if (result) {
             yield put(
                 showOrHideModal(
@@ -191,7 +196,7 @@ function* cancelTheAppointment({ payload: { data } }) {
 
             yield updateCredits(data, totals, true);
             yield put(getUser());
-            if (expert.phoneNumber.length) {
+            if (expert.phoneNumber) {
                 yield sendSms(message, expert.phoneNumber);
             }
 
@@ -248,7 +253,6 @@ function* setAppointment({ payload }) {
                 ? 0
                 : credits,
     };
-
     payload.prepaidInfo = {
         isPrePaid: totals.required > totals.availible,
         amount: totals.purchased,
@@ -288,13 +292,12 @@ function* setAppointment({ payload }) {
                 navigation.navigate('Intake', {
                     appointmentDetails: payload,
                 });
-            }
-            else{
+            } else {
                 navigation.navigate('Success', {
                     time: moment(time).format('llll'),
                 });
             }
-            
+
             yield put(hideApiLoader());
         }
     } catch (error) {
@@ -312,5 +315,5 @@ export default function* appointmentsSaga() {
     yield takeEvery(getAppointmentsList, getAppointments);
     yield takeEvery(cancelAppointment, cancelTheAppointment);
     yield takeEvery(rateVisit, setExpertRating);
-    yield takeEvery(bookAppointment, setAppointment); 
+    yield takeEvery(bookAppointment, setAppointment);
 }

@@ -427,6 +427,7 @@ export default {
 
         screenNames: {
             Activate: 'Activate',
+            KiiraWelcome: 'KiiraWelcome',
             AddChild: 'AddChild',
             AdditionalInformation: 'AdditionalInformation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
@@ -511,6 +512,7 @@ export default {
             checkBoxSelectedIcon: require('../../../assets/check.png'),
             checkGreenIcon: require('../../../assets/check_green.png'),
             checkGreyIcon: require('../../../assets/check_grey.png'),
+            checkGreenBoxIcon: require('../../../assets/check_green_box.png'),
             confirm: require('../../../assets/lock.png'),
             clipboard: require('../../../assets/clipboard.png'),
             creditCard: require('../../../assets/credit_card.png'),
@@ -753,6 +755,7 @@ export const icons = {
     chat: require('../../../assets/chat.png'),
     chatIcon: require('../../../assets/chat_icon_blue.png'),
     checkBoxIcon: require('../../../assets/uncheck.png'),
+    checkGreenBoxIcon: require('../../../assets/check_green_box.png'),
     checkBoxSelectedIcon: require('../../../assets/check.png'),
     checkGreenIcon: require('../../../assets/check_green.png'),
     checkGreyIcon: require('../../../assets/check_grey.png'),
@@ -818,6 +821,7 @@ export const stack = {
 
 export const screenNames = {
     Activate: 'Activate',
+    KiiraWelcome: 'KiiraWelcome',
     AddChild: 'AddChild',
     AddCreditOrDebitCard: 'AddCreditOrDebitCard',
     AddProfileData: 'AddProfileData',

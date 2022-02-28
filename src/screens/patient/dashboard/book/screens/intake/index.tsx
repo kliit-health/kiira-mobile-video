@@ -12,6 +12,7 @@ import { updateIntakeData } from '~/redux/reducers/account';
 import { TouchableOpacity } from 'react-native-gesture-handler'; 
 import { images } from '~/utils/constants';  
 import Logo from '~/svgs/gpenguin.svg';
+import LinearGradient from 'react-native-linear-gradient'
 
 const { size, fontFamily } = text;
 
@@ -129,43 +130,51 @@ const Intake = ({ navigation }) => {
                         onSelect={handleSelection} 
                         data={data} type={type} 
                         styles={styles.radioGropStyle}
+                        scrollPaddingBottom={180}
                         initialValue={ selectItems[queryIndex] } 
                     />
                 </Column>
             } 
             
             {type !== controlType.CompleteType &&
-                <Row options={[styles.buttonContainer]}>
-                    <TouchableOpacity onPress={() => 
-                    {
-                        const index = queryIndex <= 0 ? 0 : queryIndex - 1;
-                        setQueryIndex(index);
-                        setData(healthIntakeQuerying[index].kind); 
-                        setType(healthIntakeQuerying[index].type); 
-                    }}>
-                        <Image
+                <LinearGradient
+                    start={{x: 0.0, y: 0.0}} end={{x: 0.0, y: 0.55}} 
+                    colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1.0)']}
+                    style={styles.linearGradient}
+                >
+                    <Row options={[styles.buttonContainer]}> 
+                        <TouchableOpacity onPress={() => 
+                        {
+                            const index = queryIndex <= 0 ? 0 : queryIndex - 1;
+                            setQueryIndex(index);
+                            setData(healthIntakeQuerying[index].kind); 
+                            setType(healthIntakeQuerying[index].type); 
+                        }}>
+                            <Image
+                                style={styles.icon}
+                                resizeMode="contain"
+                                source={images.circleBackButton}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { 
+                            if(queryIndex >= healthIntakeQuerying.length - 1){
+                                onIntakeFinish();
+                                return;
+                            }
+                            const index = queryIndex + 1; 
+                            setQueryIndex(index);
+                            setData(healthIntakeQuerying[index].kind); 
+                            setType(healthIntakeQuerying[index].type); 
+                        }}>
+                            <Image
                             style={styles.icon}
                             resizeMode="contain"
-                            source={images.circleBackButton}
+                            source={images.circleNextButton}
                         />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { 
-                        if(queryIndex >= healthIntakeQuerying.length - 1){
-                            onIntakeFinish();
-                            return;
-                        }
-                        const index = queryIndex + 1; 
-                        setQueryIndex(index);
-                        setData(healthIntakeQuerying[index].kind); 
-                        setType(healthIntakeQuerying[index].type); 
-                    }}>
-                        <Image
-                        style={styles.icon}
-                        resizeMode="contain"
-                        source={images.circleNextButton}
-                    />
-                    </TouchableOpacity> 
-                </Row>
+                        </TouchableOpacity> 
+                    </Row>
+                </LinearGradient>
+                
             }
             {type === controlType.CompleteType && 
                 <Column options={[styles.finishButton]}>
@@ -188,12 +197,20 @@ export default withNavigation(Intake);
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        padding: 0,
-        margin: 15,
-        flex: 0,
-        backgroundColor: colors.white,
-        paddingBottom: 10,
         alignSelf:'center',  
+        justifyContent:'center',
+    },
+
+    linearGradient: {
+        position:'absolute',
+        width:'100%',
+        paddingBottom:50,
+        paddingTop:60,
+        bottom:0,
+        flex: 0, 
+        alignSelf:'center',  
+        justifyContent:'center',
+        
     },
 
     finishButton: {
@@ -262,7 +279,7 @@ const styles = StyleSheet.create({
     optionStyle: { 
         marginTop: 30,
         marginHorizontal: 30,  
-        flex:0.65,  
+        flex:0.9,   
     },
 
     optionTextStyle: { 
