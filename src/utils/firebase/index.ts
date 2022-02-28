@@ -397,7 +397,7 @@ export async function makeAppointment(data) {
 export async function cancelAppointmentData(data, message) {
     try {  
         const { id, uid, expert, credits } = data; 
-
+  
         const userDoc = firestore()
                     .collection('users')
                     .doc(uid);
@@ -415,7 +415,7 @@ export async function cancelAppointmentData(data, message) {
             redeemPrepaid: 0,
             redeemMonthly: credits - data.prepaidInfo.amount,
         };
-
+ 
         const document = firestore()
                     .collection('appointments')
                     .doc(uid);
@@ -452,7 +452,7 @@ export async function cancelAppointmentData(data, message) {
             { merge: true },
         );
         
-        if (userData.profileInfo.phoneNumber.length) {
+        if (userData.profileInfo.phoneNumber && userData.profileInfo.phoneNumber.length) {
             await sendSms(message, userData.profileInfo.phoneNumber);
         }
 
@@ -1508,7 +1508,7 @@ export async function updateCredits(
                 .doc(user.uid)
                 .update({
                     visits: monthly - redeemMonthly,
-                    prepaid: prepaid - redeemPrepaid,
+                    prepaid: prepaid - redeemPrepaid < 0 ? 0 : prepaid - redeemPrepaid,
                 });
             return { ok: true };
         }

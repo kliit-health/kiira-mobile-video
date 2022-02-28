@@ -41,6 +41,7 @@ const RadioGroupQuery = ({
     onChange,
     boxed,
     horizontal,
+    scrollPaddingBottom = 0,
     onSelect = null, 
 }) => {
     const [selected, setSelected] = useState(undefined);
@@ -52,6 +53,7 @@ const RadioGroupQuery = ({
         if (initialValue) {
             setSelected(initialValue);
         }
+        setSelectedArray([]);
     }, [initialValue]);  
     
 
@@ -150,6 +152,7 @@ const RadioGroupQuery = ({
         <FlatList
             showsVerticalScrollIndicator={false}
             data={data}
+            contentContainerStyle={{paddingBottom:scrollPaddingBottom}}
             keyExtractor={(item, index) => 'group' + index}
             renderItem={({ item, index }) => ( 
                 (type == controlType.RadioType) ? <Column>  

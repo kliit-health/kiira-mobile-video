@@ -7685,6 +7685,11 @@ react-native-tab-view@^2.15.2:
   resolved "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-2.16.0.tgz"
   integrity sha512-ac2DmT7+l13wzIFqtbfXn4wwfgtPoKzWjjZyrK1t+T8sdemuUvD4zIt+UImg03fu3s3VD8Wh/fBrIdcqQyZJWg==
 
+react-native-text-input-mask@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-3.1.4.tgz#9b09d97a910ce8c24024d6187256b07c73e173ac"
+  integrity sha512-XhTPL1/Pv0kyuH8TMJGaxfnq5su9e+4G2PLngiismZ4xbP8+W/1ZEH4KQJQV+QkE2I5Oi+lPJXB2E47s60/OBA==
+
 "react-native-twilio-video-webrtc@https://github.com/blackuy/react-native-twilio-video-webrtc":
   version "2.0.0"
   resolved "https://github.com/blackuy/react-native-twilio-video-webrtc#cf5dc0c5c5d288bc6fd0c159e64824b72a61fcd9"

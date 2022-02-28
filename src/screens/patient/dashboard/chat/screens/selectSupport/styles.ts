@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
 
+    supportImageView:{
+        borderWidth:3,
+        borderRadius:1000,
+        borderColor:colors.purple
+    },
+
     expertInfoProfession: {
         marginTop: 2,
         width: metrics.width - parentPadding - 105,
@@ -65,6 +71,7 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
+       
     },
 
     expertsContainer: {

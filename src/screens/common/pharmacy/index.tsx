@@ -7,6 +7,7 @@ import Screen from '~/components/screen';
 import EditModal from './editModal'; 
 import * as actions from '~/redux/actions'; 
 import styles from './styles';
+import { Conditional } from '~/components';
 
 const Pharmacy = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Pharmacy = ({ navigation }) => {
     const [phoneNumber, setPhoneNumber] = useState((user.profileInfo && user.profileInfo.phoneNumber) ? user.profileInfo.phoneNumber : '');
     const [address, setAddress] = useState((user.profileInfo && user.profileInfo.address) ? user.profileInfo.address : '');
     const [showEdit, setShowEdit] = useState(false);
+    const [editButton, setEditButton] = useState(pharmacy != '');
  
     const sections = useSelector(
         (state: RootState) => state.termsAndConditions.data.sections,
@@ -64,11 +66,19 @@ const Pharmacy = ({ navigation }) => {
     return (
         <Screen test="Select Chat Expert"> 
             <View style={styles.headerStyle}>
-                <Header 
-                    onBack={handleOnBackPress}
-                    title={lang.pharmacy.title}
-                    onEditBilling={() => setShowEdit(true)}
-                />
+                <Conditional if={editButton}>
+                    <Header 
+                        onBack={handleOnBackPress}
+                        title={lang.pharmacy.title}
+                        onEditBilling={() => setShowEdit(true)}
+                    />
+                </Conditional>
+                <Conditional if={!editButton}>
+                    <Header 
+                        onBack={handleOnBackPress}
+                        title={lang.pharmacy.title}
+                    />
+                </Conditional>
             </View>
             {showEdit && (
                 <EditModal
