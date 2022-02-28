@@ -230,6 +230,16 @@ const styles = StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         color: colors.azure, 
     },  
+    activeButton: { 
+        marginHorizontal:'7%',
+        marginVertical:'8%', 
+         paddingVertical: 12, 
+        color: colors.primaryBlue,
+        backgroundColor: colors.white,
+        textAlign: 'center',
+        borderRadius: 22,
+        overflow: 'hidden',
+    },
 
     logo: {
         alignSelf: 'center',
