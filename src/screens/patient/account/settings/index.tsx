@@ -9,6 +9,7 @@ import { signOut, updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
 import { Header, ListItem } from '~/components';
 import { list, listItems } from './model';
+import VersionCheck from 'react-native-version-check';
 
 class Setting extends PureComponent {
     public props: any;
@@ -154,7 +155,7 @@ class Setting extends PureComponent {
                                         <Image
                                             resizeMode="contain"
                                             source={
-                                                staticImages.checkGreenBoxIcon
+                                                staticImages.checkGreenIcon
                                             }
                                             style={styles.phoneChecboxIconStyle}
                                         />
@@ -216,7 +217,7 @@ class Setting extends PureComponent {
                                                     {title}
                                                 </Text>
                                                 <Text style={styles.version}>
-                                                    V 1.3
+                                                {`v ${VersionCheck.getCurrentVersion()}`}
                                                 </Text>
                                             </>
                                         )}
