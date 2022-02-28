@@ -22,9 +22,6 @@ export const account = createSlice({
         updateActiveAt: (state, action: PayloadAction<object>) => {
             return state;
         },
-        updateUserRole: (state, action: PayloadAction<object>) => {
-            return state;
-        },
     },
 });
 

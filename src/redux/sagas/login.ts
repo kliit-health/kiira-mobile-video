@@ -25,8 +25,6 @@ function* loginFirebase({ payload }) {
         const response = yield loginInWithFirebase(payload);
 
         const { uid } = response;
-        console.log('response.message',response.providerData)
-
         if (uid) {
             yield put(getUser());
 
@@ -66,7 +64,6 @@ function* loginFirebase({ payload }) {
             yield auth()
                 .currentUser.getIdTokenResult()
                 .then(({ claims }) => {
-                    console.log('----claims---',claims.role)
                     const isStudent = claims.role && claims.role.student;
                     const isSubscriber = claims.role && claims.role.subscriber;
                     const isExpert = claims.role && claims.role.expert;
@@ -77,10 +74,8 @@ function* loginFirebase({ payload }) {
 
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
-                            console.log('----hello----')
                             navigation.navigate(stack.AppStack);
                         } else if(isNewUser) {
-                            console.log('----hello----')
                             navigation.navigate(screenNames.Welcome);
                         }
                     } else {
@@ -94,13 +89,11 @@ function* loginFirebase({ payload }) {
                     }
                 });
         } else {
-            console.log('response.message',response.message)
             yield put(showOrHideModal(lang.errorMessage.serverError));
             yield put(hideApiLoader());
             yield put(loginFailure());
         }
     } catch (error) {
-        console.log('response.message')
         yield put(hideApiLoader());
         yield put(showOrHideModal(lang.errorMessage.serverError));
     }

@@ -10,6 +10,7 @@ import { updateAccount, updateUserRole } from '~/redux/reducers/account';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleNavigation } from '~/utils/functions';
 import { RootState } from '~/redux/reducers';
+import { updateUserDataToFirebase } from '../action';
 
 const AdditionalInformation = ({ navigation }) => {
     const {userProfileData,filePath} = navigation.state.params;
@@ -29,6 +30,7 @@ const AdditionalInformation = ({ navigation }) => {
         selectedInsurance: { value: '' },
     });
     const [disabled, setDisabled] = useState(true);
+    console.log('s-----',userProfileAdditionalData.selectedPharmacy)
     const RenderSexualityModalView = () => {
         return (
             <CustomSelectModal
@@ -282,27 +284,43 @@ const AdditionalInformation = ({ navigation }) => {
                     textStyle={styles.buttonText}
                     onPress={() => {
                         let filename = null;
-                        const payloadData = {
-                            userParams: {
-                                firstName: userProfileData.firstName.trim(),
-                                lastName: userProfileData.lastName.trim(),
-                                dob: userProfileData.birthday ? userProfileData.birthday : '',
-                                gender:userProfileData.selectedGender.value,
-                                pronouns:userProfileData.selectedPronoun.value,
-                                state: userProfileData.selectedState,
-                                imageUri: userProfileData.imageSrc ? userProfileData.imageSrc : '',
-                                nickName:userProfileData.nickName ? userProfileData.nickName :'',
-                                sexuality:userProfileAdditionalData.selectedSexuality ? userProfileAdditionalData.selectedSexuality: {},
-                                preferredPharmacy:userProfileAdditionalData.selectedPharmacy ?userProfileAdditionalData.selectedPharmacy: {},
-                                pharmacyAddress:userProfileAdditionalData.pharmacyAddress ? userProfileAdditionalData.pharmacyAddress:'' ,
-                                pharmacyPhone:userProfileAdditionalData.pharmacyPhoneNumber ? userProfileAdditionalData.pharmacyPhoneNumber :'',
-                                insurance:userProfileAdditionalData.selectedInsurance ? userProfileAdditionalData.selectedInsurance.value : '' ,
-                                insurancePlan:userProfileAdditionalData.memberId ? userProfileAdditionalData.memberId :''
-
-                            }, 
-                            navigation,
-                            imageParams: null,
-                        };
+    
+                            const payloadData = {
+                                userParams: {
+                                    ...(user.address && { address: user.address }),
+                                    chats: user.chats,
+                                    displayName: user.displayName,
+                                    email: user.email,
+                                    fcmToken: user.fcmToken,
+                                    invitationDate: user.invitationDate,
+                                    invitationId: user.invitationId,
+                                    organizationId: user.organizationId,
+                                    firstName: userProfileData.firstName.trim(),
+                                    lastName: userProfileData.lastName.trim(),
+                                    dob: userProfileData.birthday ? userProfileData.birthday : '',
+                                    gender: userProfileData.selectedGender.value,
+                                    pharmacy:userProfileAdditionalData.selectedPharmacy.value ? userProfileAdditionalData.selectedPharmacy.value: '',
+                                    pharmacyAddress:userProfileAdditionalData.pharmacyAddress ? userProfileAdditionalData.pharmacyAddress:'' ,
+                                    pharmacyPhoneNumber:userProfileAdditionalData.pharmacyPhoneNumber ? userProfileAdditionalData.pharmacyPhoneNumber :'',
+                                    ...(user.plan && { plan: user.plan }),
+                                    pronouns: userProfileData.selectedPronoun.value,
+                                    state: userProfileData.selectedState,
+                                    signUpDate: Date.now(),
+                                    sexuality: userProfileAdditionalData.selectedSexuality ? userProfileAdditionalData.selectedSexuality: {},
+                                    ...(user.subscription && {
+                                        subscription: { ...user.subscription },
+                                    }),
+                                    prepaid: 0,
+                                    insurance:userProfileAdditionalData.selectedInsurance ? userProfileAdditionalData.selectedInsurance.value : '',
+                                    insurancePlan:userProfileAdditionalData.memberId ? userProfileAdditionalData.memberId.trim() :'',
+                                    lang: 'en',
+                                    phoneNumber: user?.profileInfo?.phoneNumber,
+                                    visits: user.visits,
+                                },
+                                navigation,
+                                imageParams : null
+                            };
+                           
                         if (userProfileData.imageSrc) {
                             let name = userProfileData.imageSrc.substring(
                                 userProfileData.imageSrc.lastIndexOf('/') + 1,
@@ -325,9 +343,7 @@ const AdditionalInformation = ({ navigation }) => {
                                 filename,
                             }; 
                         }
-                         dispatch(updateAccount(payloadData))
-                         dispatch(updateUserRole({role:'User'}))
-                         handleNavigation('Home')
+                         dispatch(updateUserDataToFirebase(payloadData))
                     }}
                     text="Finish"
                 />

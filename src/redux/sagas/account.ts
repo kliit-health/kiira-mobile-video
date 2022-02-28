@@ -47,14 +47,12 @@ function* updateUser({ payload }) {
     try {
         const { userParams, imageParams, navigation } = payload;
         yield put(showApiLoader());
-       console.log('---------')
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
 
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata;
                 const url = yield storage().ref(name).getDownloadURL();
-                console.log('USERROLE',user)
                 const userUpdate = {
                     ...user,
                     profileInfo: {
@@ -88,8 +86,7 @@ function* updateUser({ payload }) {
                         phoneNumber: userParams.phoneNumber,
                     },
                 };
-                
-                console.log('-----USERUPDATE---',userUpdate)
+
                 yield put(_updateUser({ uid: user.uid, ...userUpdate }));
                 yield put(getUser());
                 yield put(hideApiLoader());
@@ -135,7 +132,6 @@ function* updateUser({ payload }) {
                     phoneNumber: userParams.phoneNumber,
                 },
             };
-            console.log('-----USERUPDATEElse---',userUpdate)
             yield updateUserData(userUpdate, user.uid);
             yield put(getUser());
             yield put(hideApiLoader());
@@ -234,27 +230,11 @@ function* updateActive({ payload }) {
         console.error(error);
     }
 }
-function* updateRole({ payload }) {
-    const { role} = payload;
-    console.log('----role---',role)
 
-    try {
-        const user = yield select(state => state.user.data);
-        // const userUpdate = {
-        //     ...user,
-        //     role: role,
-        // };
-        // yield updateUserData(userUpdate, user.uid);
-        // yield put(getUser());
-    } catch (error) {
-        console.error(error);
-    }
-}
 export default function* accountSaga() {
     yield takeEvery(signOut, signout);
     yield takeEvery(updateAccount, updateUser);
     yield takeEvery(updatePassword, changeUserPassword);
     yield takeEvery(updateIntakeData, updateIntake);
     yield takeEvery(updateActiveAt, updateActive);
-    yield takeEvery(updateUserRole, updateRole);
 }
