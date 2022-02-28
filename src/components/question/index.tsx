@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Row, Column, Avatar, Dot } from '~/components';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { Row, Column, Dot } from '~/components';
 import { route, colors, text } from '~/utils/constants';
 
 const { fontFamily, size } = text;
@@ -34,12 +34,14 @@ const Question = ({
                     onPress={() => onPress(destination)}
                 >
                     {userUnreadCount > 0 && <Dot />}
-                    <Avatar
+                    <Image
                         resizeMode="contain"
-                        styles={{
-                            image: { height: 50, width: 50, paddingRight: 10 },
+                        style={styles.image}
+                        source={{
+                            uri: expertInfo.profileInfo.profileImageUrl
+                                ? expertInfo.profileInfo.profileImageUrl
+                                : '',
                         }}
-                        source={expertInfo.profileInfo.profileImageUrl}
                     />
                     <View style={styles.container}>
                         <Text style={styles.title}>
@@ -110,6 +112,13 @@ const styles = StyleSheet.create({
         fontSize: text.size.regular,
         color: colors.black,
         lineHeight: 24,
+    },
+
+    image: {
+        height: 50,
+        width: 50,
+        paddingRight: 10,
+        borderRadius: 100,
     },
 
     time: {

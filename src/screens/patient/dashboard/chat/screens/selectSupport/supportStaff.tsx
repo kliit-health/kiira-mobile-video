@@ -30,15 +30,17 @@ const SupportStaff = ({ staff, navigation }) => {
                     } = item;
                     return (
                         <View style={styles.expertInfoContainer}>
-                            <Avatar
-                                resizeMode="contain"
-                                border
-                                styles={{
-                                    image: styles.expertProfile,
-                                }}
-                                source={profileImageUrl}
-                            />
-
+                            <View style={styles.supportImageView}>
+                                <Image
+                                    resizeMode="contain"
+                                    style={styles.expertProfile}
+                                    source={{
+                                        uri: profileImageUrl
+                                            ? profileImageUrl
+                                            : '',
+                                    }}
+                                />
+                            </View>
                             <View
                                 style={
                                     item.isOnline

@@ -56,8 +56,8 @@ function* updateUser({ payload }) {
                 const userUpdate = {
                     ...user,
                     role: userParams?.role ? userParams?.role : user?.role,
-                    signUpDate: userParams?.signUpDate ? userParams?.signUpDate :user?.signUpDate,
-                    updatedDate: userParams.signUpDate,
+                    signUpDate: userParams?.signUpDate ? userParams?.signUpDate : user?.signUpDate,
+                    updatedDate: userParams?.signUpDate ? userParams?.signUpDate : user?.updatedDate,
                     profileInfo: {
                         profileImageUrl: url ? url : '', 
                         firstName: userParams.firstName,

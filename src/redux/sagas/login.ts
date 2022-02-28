@@ -23,7 +23,6 @@ function* loginFirebase({ payload }) {
 
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
-
         const { uid } = response;
         if (uid) {
             yield put(getUser());
@@ -89,7 +88,14 @@ function* loginFirebase({ payload }) {
                     }
                 });
         } else {
-            yield put(showOrHideModal(lang.errorMessage.serverError));
+            const message = response.message.split("]").pop().trim()
+            yield put(
+                showOrHideModal(
+                    response.message
+                        ? message
+                        : lang.errorMessage.serverError,
+                ),
+            );
             yield put(hideApiLoader());
             yield put(loginFailure());
         }
