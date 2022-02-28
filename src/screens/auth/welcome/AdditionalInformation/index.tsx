@@ -286,6 +286,7 @@ const AdditionalInformation = ({ navigation }) => {
                         let filename = null;
                         const payloadData = {
                             userParams: {
+                                firstLogin: false,
                                 firstName: userProfileData.firstName.trim(),
                                 lastName: userProfileData.lastName.trim(),
                                 dob: userProfileData.birthday
@@ -328,6 +329,7 @@ const AdditionalInformation = ({ navigation }) => {
                                         : '',
                                 role: 'User',
                                 signUpDate: Date.now(),
+                                
                             },
                             navigation,
                             imageParams: null,

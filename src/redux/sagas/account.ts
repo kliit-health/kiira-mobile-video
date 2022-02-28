@@ -62,6 +62,9 @@ function* updateUser({ payload }) {
                     updatedDate: userParams?.signUpDate
                         ? userParams?.signUpDate
                         : user?.updatedDate,
+                     firstLogin: userParams?.firstLogin !== undefined
+                        ? userParams?.firstLogin 
+                        : user?.firstLogin,
                     profileInfo: {
                         profileImageUrl: url ? url : '',
                         firstName: userParams.firstName,
@@ -117,6 +120,9 @@ function* updateUser({ payload }) {
                 updatedDate: userParams?.signUpDate
                     ? userParams?.signUpDate
                     : user?.updatedDate,
+                firstLogin: userParams?.firstLogin !== undefined
+                    ? userParams?.firstLogin 
+                    : user?.firstLogin,
                 profileInfo: {
                     profileImageUrl: userParams.profileImageUrl,
                     firstName: userParams.firstName,
