@@ -34,11 +34,17 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginTop: '3%',
     },
+    image:{
+        width: 100,
+        height: 100,
+        borderRadius:1000  
+    },
     AddEditImage: {
         position: 'absolute',
-        left: '1%',
-        bottom: '2%',
+        left: '2%',
+        bottom: '2%'
     },
+
   
    
     detailsContainer: {
