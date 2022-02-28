@@ -16,6 +16,7 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
 import ImagePicker from 'react-native-image-picker';
 import { Avatar } from 'react-native-elements';
+import { handleNavigation } from '~/utils/functions';
 
 const Welcome = ({ navigation }) => {
 
@@ -378,7 +379,7 @@ const Welcome = ({ navigation }) => {
                             : styles.buttonContainer
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => navigation.navigate(Constant.App.screenNames.AdditionalInformation,{userProfileData})}
+                    onPress={() => handleNavigation('AdditionalInformation',{userProfileData,filePath})}
                     text="Continue"
                 />
             </View>

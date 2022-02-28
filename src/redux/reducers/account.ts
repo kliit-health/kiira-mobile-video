@@ -22,10 +22,13 @@ export const account = createSlice({
         updateActiveAt: (state, action: PayloadAction<object>) => {
             return state;
         },
+        updateUserRole: (state, action: PayloadAction<object>) => {
+            return state;
+        },
     },
 });
 
-export const { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData } = account.actions;
+export const { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData, updateUserRole } = account.actions;
 
 export const selectAccount = (state: RootState) => state.account;
 
