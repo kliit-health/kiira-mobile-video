@@ -2373,7 +2373,7 @@ export const healthIntakeQuerying = [
         type: controlType.CheckType
     },
     {
-        name: "Please list any allergies to medications.",
+        name: "Please list any medication allergies or other allergies we should be aware of.",
         hint: "Ex: Penecillin",
         kind: null,
         type: controlType.TextType
