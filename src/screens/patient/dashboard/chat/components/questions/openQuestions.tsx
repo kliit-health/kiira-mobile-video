@@ -11,7 +11,7 @@ import moment from 'moment';
 
 const { white_bg } = globalStyles;
 
-const OpenQuestions = ({ data }) => {
+const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
     const experts = useSelector(state => state.experts.data);
 
@@ -35,6 +35,7 @@ const OpenQuestions = ({ data }) => {
         navigation.navigate(screenNames.Messages, {
             expertDetails: expertDetails,
             questionData: item,
+            readResolveData: readResolveData,
         });
     };
 

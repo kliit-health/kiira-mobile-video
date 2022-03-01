@@ -51,9 +51,4 @@ export default [
         destination: screenNames.termsAndConditions,
         icon: icons.healthHistory, 
     },
-    {
-        title: `pastVisits.title`,
-        destination: screenNames.termsAndConditions,
-        icon: icons.pastVisits,  
-    },
 ];
