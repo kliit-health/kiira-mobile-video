@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux';
 import { switchCase } from '~/utils/functions';
 import { Reminder, Book, Schedule } from './sections';
 import styles from './styles';
-import { RootState } from '~/redux/reducers';
-import moment from 'moment';
+
 
 enum Action {
     Book,
@@ -15,38 +14,22 @@ enum Action {
 }
 
 const Banner = () => {
-    const assessment = useSelector(state => state.user.data);
-    const appointments = useSelector((state:RootState) =>state.appointments)
+    const assessment = useSelector(state => state.user.data.assessment);
     const [action, setAction] = useState<Action | undefined>(Action.Schedule);
 
-     const getUpcomingAppointments = visits => {
-        let upcomingVisits = { title: 'Upcoming Visits', data: [] };   
-        visits.forEach(visit => {
-            const now = moment();
-            var current_time = moment.utc(now, 'YYYY-MM-DD[T]HH:mm[Z]');
-            const upcoming = moment.utc(visit.time, 'YYYY-MM-DD[T]HH:mm[Z]').isSameOrAfter(current_time, 'hours');
-            if(upcoming) upcomingVisits.data.push({ visit, isUpcoming: true })
-            
-        });
-    
-        return upcomingVisits
-    };
-    const upcomingAppointments = getUpcomingAppointments(appointments.history)
-
     useEffect(() => {
-
-        if (appointments.history.length === 0) {
+        if (!assessment) {
             setAction(Action.Schedule);
         }
 
-        if (appointments.history.length !== 0 && upcomingAppointments.data.length !== 0) {
+        if (assessment && !assessment.complete) {
             setAction(Action.Reminder);
         }
 
-        if (upcomingAppointments.data.length === 0) {
+        if (assessment && assessment.complete) {
             setAction(Action.Book);
         }
-    }, [appointments.history]);
+    }, [assessment]);
 
     return (
         <View style={styles.container}>

@@ -18,7 +18,7 @@ const Reminder = ({ navigation }) => {
         (state: RootState) => state.appointments.history,
     );
     const visitData = visits.filter(item =>
-        moment(today).isBefore(moment(item.time).format('YYYY-MM-DD')),
+        moment(today).isSameOrBefore(moment(item.time).format('YYYY-MM-DD')),
     );
 
     const sortedDataByDate = _.sortBy(visitData, 'time');
