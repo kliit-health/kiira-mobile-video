@@ -48,7 +48,7 @@ export default [
     },
     {
         title: `healthHistory.title`,
-        destination: screenNames.termsAndConditions,
+        destination: screenNames.MedicalConditions,
         icon: icons.healthHistory, 
     },
 ];

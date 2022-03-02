@@ -13,6 +13,7 @@ const ListItem = props => {
         children,
         activeOpacity,
         id,
+        marginLeft
     } = props;
 
     const styles = {
@@ -37,7 +38,7 @@ const ListItem = props => {
             {children}
             {displayChevron && (
                 <Image
-                    style={styles.chevron}
+                    style={[styles.chevron,marginLeft ? {marginLeft} : {}]}
                     resizeMode="contain"
                     source={icons.chevron}
                 />

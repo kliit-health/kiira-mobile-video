@@ -96,6 +96,8 @@ import VisitOverView from '../screens/patient/dashboard/appointments/visitSummar
 import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
 import KiiraWelcome from '~/screens/auth/KiiraWelcome';
+import MedicalConditions from '~/screens/patient/account/MedicalConditions';
+import Diagnosis from '~/screens/patient/account/MedicalConditions/Diagnosis';
 
 let tabIconSize = 25;
 
@@ -580,6 +582,8 @@ const MainAppStack = createStackNavigator(
         Loss: { screen: Loss },
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
+        MedicalConditions: {screen: MedicalConditions},
+        Diagnosis: {screen: Diagnosis},
         Messages: { screen: Messages },
         Payment: { screen: Payment },
         PregnancyAndChildren: { screen: Pregnancy },
