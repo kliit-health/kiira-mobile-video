@@ -108,12 +108,18 @@ export default {
     },
 
     allergies: {
-        title: 'Spanish Allergies',
+        title: ' Spanish Allergies',
+        header: 'Spanish All Allergies',
+        noAllergies: 'Spanish You have no allergies on record with Kiira',
         previous: 'Spanish Previous',
         next: 'Spanish Next',
         finish: 'Spanish Finish',
     },
-
+    medicalConditions:{
+       title: 'Spanish History',
+       header: 'Spanish Conditions and Diagnoses',
+       noMedicalConditions: 'Spanish You have no conditions or procedures on record with Kiira'
+    },
     insurance: {
         title: 'Spanish Insurance',
         save: 'Spanish Save',
