@@ -24,7 +24,6 @@ function* loginFirebase({ payload }) {
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
         const { uid } = response;
-
         if (uid) {
             yield put(getUser());
 

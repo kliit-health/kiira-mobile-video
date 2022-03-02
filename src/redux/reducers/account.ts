@@ -25,7 +25,7 @@ export const account = createSlice({
     },
 });
 
-export const { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData } = account.actions;
+export const { signOut, updateAccount, updatePassword, updateActiveAt, updateIntakeData, updateUserRole } = account.actions;
 
 export const selectAccount = (state: RootState) => state.account;
 

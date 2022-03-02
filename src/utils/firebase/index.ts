@@ -1491,7 +1491,6 @@ export async function updateCredits(
         redeemMonthly,
         redeemPrepaid,
     } = credits;
-
     try {
         if (addition) {
             await firestore()
