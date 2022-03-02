@@ -47,7 +47,7 @@ const MedicalConditions = ({ navigation }) => {
                         key={title}
                         displayChevron={true}
                         displayBorder={true}
-                        onPress={() => handleNavigation('Diagnosis',{title})}
+                        onPress={() => handleNavigation('Diagnosis',{title: title.trim()})}
                     >
                         <View style={styles.listContainer}>
                             <View style={styles.titleContainer}>

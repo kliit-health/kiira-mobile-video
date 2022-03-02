@@ -35,20 +35,12 @@ const Allergies = ({ navigation }) => {
                     </Text>
                 </View>
                 {allergiesList.map(title => (
-                    <TouchableOpacity style={styles.allergiesListContainer}>
-                        <View>
-                            <View style={styles.titleView}>
-                                <Text style={styles.title}>{title}</Text>
-                            </View>
+                    <View style={styles.allergiesListContainer}>
+                        <View style={styles.titleView}>
+                            <Text style={styles.title}>{title}</Text>
                         </View>
-                    </TouchableOpacity>
+                    </View>
                 ))}
-                <View
-                    style={{
-                        borderBottomColor: colors.greyAccent,
-                        borderBottomWidth: 1,
-                    }}
-                ></View>
             </View>
         );
     };
@@ -85,6 +77,8 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         justifyContent: 'space-between',
         alignItems: 'center',
+        borderBottomColor: colors.greyAccent,
+        borderBottomWidth: 1,
     },
     allergiesTitle: {
         color: Constant.App.colors.blackColor,
