@@ -44,7 +44,6 @@ const MedicalConditions = ({ navigation }) => {
                 {user.intakeData[12].name.map(title => (
                     <ListItem
                         borderBottom
-                        marginLeft={-10}
                         key={title}
                         displayChevron={true}
                         displayBorder={true}
@@ -52,7 +51,7 @@ const MedicalConditions = ({ navigation }) => {
                     >
                         <View style={styles.listContainer}>
                             <View style={styles.titleContainer}>
-                                <Text style={styles.title}>{title}</Text>
+                                <Text style={styles.title}>{title.trim()}</Text>
                             </View>
                         </View>
                     </ListItem>
@@ -82,7 +81,6 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: text.fontFamily.poppinsMedium,
         fontSize: text.size.regular,
-        marginHorizontal: '2%',
     },
     listContainer: {
         flexDirection: 'row',

@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: text.fontFamily.poppinsMedium,
         fontSize: text.size.regular,
-        marginHorizontal: '2%',
     },
     titleView: {
         flexDirection: 'row',
