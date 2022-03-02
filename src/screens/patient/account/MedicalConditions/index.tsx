@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Container, Header, Screen, ListItem } from '~/components';
+import { Container, Header, ListItem } from '~/components';
 import { View } from 'react-native-animatable';
 import { colors, text } from '~/utils/constants';
 import Constant from '../../../../utils/constants';
+import { handleNavigation } from '~/utils/functions';
 
 const MedicalConditions = ({ navigation }) => {
     const user = useSelector(state => state.user.data);
@@ -30,21 +31,24 @@ const MedicalConditions = ({ navigation }) => {
 
     const ConditionsScreen = () => {
         return (
-            <Screen>
+            <View style={styles.container}>
                 <Header
                     title={lang.medicalConditions.title}
                     onBack={handleBackPress}
                 />
-                <Text style={styles.conditionsTitle}>
-                    {lang.medicalConditions.header}
-                </Text>
+                <View style={{ backgroundColor: colors.babyBlue }}>
+                    <Text style={styles.conditionsTitle}>
+                        {lang.medicalConditions.header}
+                    </Text>
+                </View>
                 {user.intakeData[12].name.map(title => (
                     <ListItem
+                        borderBottom
                         marginLeft={-10}
                         key={title}
                         displayChevron={true}
                         displayBorder={true}
-                        onPress={() => navigation.navigate('Diagnosis')}
+                        onPress={() => handleNavigation('Diagnosis',{title})}
                     >
                         <View style={styles.listContainer}>
                             <View style={styles.titleContainer}>
@@ -53,7 +57,7 @@ const MedicalConditions = ({ navigation }) => {
                         </View>
                     </ListItem>
                 ))}
-            </Screen>
+            </View>
         );
     };
     return user &&
@@ -69,6 +73,12 @@ const MedicalConditions = ({ navigation }) => {
 export default MedicalConditions;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: colors.white,
+        paddingTop: Platform.OS === 'android' ? '3%' : '9%',
+    },
     title: {
         fontFamily: text.fontFamily.poppinsMedium,
         fontSize: text.size.regular,
@@ -87,6 +97,7 @@ const styles = StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         fontWeight: '400',
         margin: 10,
+        backgroundColor: colors.babyBlue,
     },
     noConditionsText: {
         fontFamily: text.fontFamily.poppinsRegular,
