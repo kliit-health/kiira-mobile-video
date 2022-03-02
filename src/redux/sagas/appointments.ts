@@ -137,7 +137,11 @@ function* updateAppointment({ payload }) {
             'Your appointment has been sucessfully rescheduled.',
         );
         yield put(getAppointmentsList({ uid: data.uid }));
-        if (profileInfo.phoneNumber && profileInfo.phoneNumber.length && enableText) {
+        if (
+            profileInfo.phoneNumber &&
+            profileInfo.phoneNumber.length &&
+            enableText
+        ) {
             yield sendSms(message, profileInfo.phoneNumber);
         }
 
@@ -225,12 +229,11 @@ function* setAppointment({ payload }) {
         state => state.user.data.profileInfo,
     );
     const { time, reason, expert, visits, prepaid } = payload;
-
     const {
         sessionType: { credits },
     } = reason;
-    const { uid } = expert;
 
+    const { uid } = expert;
     const details = {
         time,
         complete: false,
@@ -253,10 +256,23 @@ function* setAppointment({ payload }) {
                 ? 0
                 : credits,
     };
+
     payload.prepaidInfo = {
         isPrePaid: totals.required > totals.availible,
         amount: totals.purchased,
     };
+
+    if (totals.availible < totals.required) {
+        let updatedCredit = {
+            ...payload.reason,
+            sessionType: {
+                ...payload.reason.sessionType,
+                credits: totals.required - totals.availible,
+            },
+        };
+
+        payload.reason = updatedCredit;
+    }
 
     try {
         yield put(hideApiLoader());

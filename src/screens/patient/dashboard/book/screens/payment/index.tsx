@@ -107,7 +107,6 @@ const Payment = () => {
 
     const calculateTotal = () => {
         const total = visits + prepaid;
-
         if (appointments.visit.details.price <= total * 60) {
             return 0;
         } else {
@@ -131,7 +130,6 @@ const Payment = () => {
         };
 
         const clientSecret = await fetchPaymentIntentClientSecret();
-
         const { paymentIntent, error } = await confirmPayment(clientSecret, {
             type: 'Card',
             billingDetails,
