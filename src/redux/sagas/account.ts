@@ -7,6 +7,7 @@ import {
     updatePassword,
     updateActiveAt,
     updateIntakeData,
+    updateUserRole,
 } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';
@@ -46,16 +47,24 @@ function* updateUser({ payload }) {
     try {
         const { userParams, imageParams, navigation } = payload;
         yield put(showApiLoader());
-       
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
 
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata;
                 const url = yield storage().ref(name).getDownloadURL();
-       
                 const userUpdate = {
                     ...user,
+                    role: userParams?.role ? userParams?.role : user?.role,
+                    signUpDate: userParams?.signUpDate
+                        ? userParams?.signUpDate
+                        : user?.signUpDate,
+                    updatedDate: userParams?.signUpDate
+                        ? userParams?.signUpDate
+                        : user?.updatedDate,
+                     firstLogin: userParams?.firstLogin !== undefined
+                        ? userParams?.firstLogin 
+                        : user?.firstLogin,
                     profileInfo: {
                         profileImageUrl: url ? url : '',
                         firstName: userParams.firstName,
@@ -87,6 +96,7 @@ function* updateUser({ payload }) {
                         phoneNumber: userParams.phoneNumber,
                     },
                 };
+
                 yield put(_updateUser({ uid: user.uid, ...userUpdate }));
                 yield put(getUser());
                 yield put(hideApiLoader());
@@ -103,6 +113,16 @@ function* updateUser({ payload }) {
         } else {
             const userUpdate = {
                 ...user,
+                role: userParams?.role ? userParams?.role : user?.role,
+                signUpDate: userParams?.signUpDate
+                    ? userParams?.signUpDate
+                    : user?.signUpDate,
+                updatedDate: userParams?.signUpDate
+                    ? userParams?.signUpDate
+                    : user?.updatedDate,
+                firstLogin: userParams?.firstLogin !== undefined
+                    ? userParams?.firstLogin 
+                    : user?.firstLogin,
                 profileInfo: {
                     profileImageUrl: userParams.profileImageUrl,
                     firstName: userParams.firstName,
@@ -132,7 +152,6 @@ function* updateUser({ payload }) {
                     phoneNumber: userParams.phoneNumber,
                 },
             };
-
             yield updateUserData(userUpdate, user.uid);
             yield put(getUser());
             yield put(hideApiLoader());

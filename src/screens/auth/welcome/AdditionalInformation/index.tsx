@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Platform } from 'react-native';
 import Constant, { colors, icons } from '~/utils/constants';
 import styles from '../styles';
 import CustomButton from '~/components/customButton';
 import { CustomText, Icon } from '~/components';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
+import { updateAccount } from '~/redux/reducers/account';
+import { useDispatch } from 'react-redux';
 
 const AdditionalInformation = ({ navigation }) => {
-    const { staticImages, screenNames } = Constant.App;
+    const { userProfileData, filePath } = navigation.state.params;
+    const dispatch = useDispatch();
+    const { staticImages } = Constant.App;
     const [showSexualityModal, setShowSexualityModal] = useState(false);
     const [showPharmacyModal, setShowPharmacyModal] = useState(false);
     const [showInsuranceModal, setShowInsuranceModal] = useState(false);
-    const [userProfileData, setUserProfileData] = useState({
+    const [userProfileAdditionalData, setUserProfileAdditionalData] = useState({
         pharmacyAddress: '',
         pharmacyPhoneNumber: '',
         memberId: '',
@@ -21,14 +25,15 @@ const AdditionalInformation = ({ navigation }) => {
         selectedInsurance: { value: '' },
     });
     const [disabled, setDisabled] = useState(true);
+
     const RenderSexualityModalView = () => {
         return (
             <CustomSelectModal
                 data={Constant.App.Modal.sexuality}
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
-                    setUserProfileData({
-                        ...userProfileData,
+                    setUserProfileAdditionalData({
+                        ...userProfileAdditionalData,
                         selectedSexuality: item,
                     });
                     setShowSexualityModal(false);
@@ -46,8 +51,8 @@ const AdditionalInformation = ({ navigation }) => {
                 data={Constant.App.Modal.pharmacy}
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
-                    setUserProfileData({
-                        ...userProfileData,
+                    setUserProfileAdditionalData({
+                        ...userProfileAdditionalData,
                         selectedPharmacy: item,
                     });
                     setShowPharmacyModal(false);
@@ -65,8 +70,8 @@ const AdditionalInformation = ({ navigation }) => {
                 data={Constant.App.Modal.insurance}
                 onSelection={item => {
                     console.log('---onSelection CustomSelectModal---', item);
-                    setUserProfileData({
-                        ...userProfileData,
+                    setUserProfileAdditionalData({
+                        ...userProfileAdditionalData,
                         selectedInsurance: item,
                     });
                     setShowInsuranceModal(false);
@@ -77,6 +82,19 @@ const AdditionalInformation = ({ navigation }) => {
                 }}
             />
         );
+    };
+    const formatPhoneNumber = value => {
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+        if (phoneNumberLength < 4) return phoneNumber;
+
+        if (phoneNumberLength < 7) {
+            return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+        }
+        return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+            3,
+            6,
+        )}-${phoneNumber.slice(6, 10)}`;
     };
 
     return (
@@ -105,13 +123,15 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedSexuality.value
+                                userProfileAdditionalData.selectedSexuality
+                                    .value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedSexuality.value
-                                ? userProfileData.selectedSexuality.value
+                            {userProfileAdditionalData.selectedSexuality.value
+                                ? userProfileAdditionalData.selectedSexuality
+                                      .value
                                 : 'Sexuality'}
                         </CustomText>
                         <Image
@@ -128,13 +148,14 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedPharmacy.value
+                                userProfileAdditionalData.selectedPharmacy.value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedPharmacy.value
-                                ? userProfileData.selectedPharmacy.value
+                            {userProfileAdditionalData.selectedPharmacy.value
+                                ? userProfileAdditionalData.selectedPharmacy
+                                      .value
                                 : 'Preferred Pharmacy'}
                         </CustomText>
                         <Image
@@ -147,16 +168,16 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="pharmacyAddress"
                     style={
-                        !userProfileData.pharmacyAddress
+                        !userProfileAdditionalData.pharmacyAddress
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Pharmacy Address"
-                    value={userProfileData.pharmacyAddress}
+                    value={userProfileAdditionalData.pharmacyAddress}
                     onChangeText={e =>
-                        setUserProfileData({
-                            ...userProfileData,
+                        setUserProfileAdditionalData({
+                            ...userProfileAdditionalData,
                             pharmacyAddress: e,
                         })
                     }
@@ -164,19 +185,20 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="pharmacyPhoneNumber"
                     style={
-                        !userProfileData.pharmacyPhoneNumber
+                        !userProfileAdditionalData.pharmacyPhoneNumber
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Pharmacy Phone Number"
-                    value={userProfileData.pharmacyPhoneNumber}
-                    onChangeText={e =>
-                        setUserProfileData({
-                            ...userProfileData,
-                            pharmacyPhoneNumber: e,
-                        })
-                    }
+                    value={userProfileAdditionalData.pharmacyPhoneNumber}
+                    onChangeText={value => {
+                        const formattedPhoneNumber = formatPhoneNumber(value);
+                        setUserProfileAdditionalData({
+                            ...userProfileAdditionalData,
+                            pharmacyPhoneNumber: formattedPhoneNumber,
+                        });
+                    }}
                 />
                 <View style={styles.stateDropDownContainerStyle}>
                     <TouchableOpacity
@@ -185,13 +207,15 @@ const AdditionalInformation = ({ navigation }) => {
                     >
                         <CustomText
                             style={
-                                userProfileData.selectedInsurance.value
+                                userProfileAdditionalData.selectedInsurance
+                                    .value
                                     ? styles.selectedTextStyle
                                     : styles.stateDropDownTextStyle
                             }
                         >
-                            {userProfileData.selectedInsurance.value
-                                ? userProfileData.selectedInsurance.value
+                            {userProfileAdditionalData.selectedInsurance.value
+                                ? userProfileAdditionalData.selectedInsurance
+                                      .value
                                 : 'Insurance'}
                         </CustomText>
                         <Image
@@ -204,16 +228,16 @@ const AdditionalInformation = ({ navigation }) => {
                 <TextInput
                     testID="memberID"
                     style={
-                        !userProfileData.memberId
+                        !userProfileAdditionalData.memberId
                             ? styles.otherTextInput
                             : styles.OtherTextInputOnChange
                     }
                     placeholderTextColor={colors.greyDark}
                     placeholder="Member ID"
-                    value={userProfileData.memberId}
+                    value={userProfileAdditionalData.memberId}
                     onChangeText={e =>
-                        setUserProfileData({
-                            ...userProfileData,
+                        setUserProfileAdditionalData({
+                            ...userProfileAdditionalData,
                             memberId: e,
                         })
                     }
@@ -236,28 +260,106 @@ const AdditionalInformation = ({ navigation }) => {
                 <CustomButton
                     disabled={
                         disabled &&
-                        !userProfileData.pharmacyAddress &&
-                        !userProfileData.memberId &&
-                        !userProfileData.pharmacyPhoneNumber &&
-                        !userProfileData.selectedInsurance &&
-                        !userProfileData.selectedPharmacy &&
-                        !userProfileData.selectedSexuality
+                        !userProfileAdditionalData.pharmacyAddress &&
+                        !userProfileAdditionalData.memberId &&
+                        !userProfileAdditionalData.pharmacyPhoneNumber &&
+                        !userProfileAdditionalData.selectedInsurance &&
+                        !userProfileAdditionalData.selectedPharmacy &&
+                        !userProfileAdditionalData.selectedSexuality
                     }
                     buttonStyle={
                         !(
                             disabled &&
-                            !userProfileData.pharmacyAddress &&
-                            !userProfileData.memberId &&
-                            !userProfileData.pharmacyPhoneNumber &&
-                            !userProfileData.selectedInsurance.value &&
-                            !userProfileData.selectedPharmacy.value &&
-                            !userProfileData.selectedSexuality.value
+                            !userProfileAdditionalData.pharmacyAddress &&
+                            !userProfileAdditionalData.memberId &&
+                            !userProfileAdditionalData.pharmacyPhoneNumber &&
+                            !userProfileAdditionalData.selectedInsurance
+                                .value &&
+                            !userProfileAdditionalData.selectedPharmacy.value &&
+                            !userProfileAdditionalData.selectedSexuality.value
                         )
                             ? styles.buttonContainer
                             : styles.disabledButton
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => console.log('')}
+                    onPress={() => {
+                        let filename = null;
+                        const payloadData = {
+                            userParams: {
+                                firstLogin: false,
+                                firstName: userProfileData.firstName.trim(),
+                                lastName: userProfileData.lastName.trim(),
+                                dob: userProfileData.birthday
+                                    ? userProfileData.birthday
+                                    : '',
+                                gender: userProfileData.selectedGender.value,
+                                pronouns: userProfileData.selectedPronoun.value,
+                                state: userProfileData.selectedState,
+                                imageUri: userProfileData.imageSrc
+                                    ? userProfileData.imageSrc
+                                    : '',
+                                nickName: userProfileData.nickName
+                                    ? userProfileData.nickName
+                                    : '',
+                                sexuality:
+                                    userProfileAdditionalData.selectedSexuality
+                                        ? userProfileAdditionalData.selectedSexuality
+                                        : {},
+                                pharmacy: userProfileAdditionalData
+                                    .selectedPharmacy.value
+                                    ? userProfileAdditionalData.selectedPharmacy
+                                          .value
+                                    : '',
+                                pharmacyAddress:
+                                    userProfileAdditionalData.pharmacyAddress
+                                        ? userProfileAdditionalData.pharmacyAddress
+                                        : '',
+                                pharmacyPhone:
+                                    userProfileAdditionalData.pharmacyPhoneNumber
+                                        ? userProfileAdditionalData.pharmacyPhoneNumber
+                                        : '',
+                                insurance:
+                                    userProfileAdditionalData.selectedInsurance
+                                        ? userProfileAdditionalData
+                                              .selectedInsurance.value
+                                        : '',
+                                insurancePlan:
+                                    userProfileAdditionalData.memberId
+                                        ? userProfileAdditionalData.memberId
+                                        : '',
+                                role: 'User',
+                                signUpDate: Date.now(),
+                                
+                            },
+                            navigation,
+                            imageParams: null,
+                        };
+
+                        if (userProfileData.imageSrc) {
+                            let name = userProfileData.imageSrc.substring(
+                                userProfileData.imageSrc.lastIndexOf('/') + 1,
+                                userProfileData.imageSrc.length,
+                            );
+                            const ext = userProfileData.imageSrc
+                                .split('/')
+                                .pop(); // Extract image extension
+                            filename =
+                                Platform.OS === 'ios'
+                                    ? `${Math.floor(Date.now())}${name}`
+                                    : `${Math.floor(Date.now())}${name}.${ext}`;
+                        }
+                        if (filename) {
+                            payloadData.imageParams = {
+                                file:
+                                    Platform.OS == 'ios'
+                                        ? userProfileData.imageSrc
+                                        : filePath,
+                                filename,
+                            };
+                        }
+                        dispatch(updateAccount(payloadData));
+                        navigation.navigate('Home');
+                    }}
                     text="Finish"
                 />
             </View>
