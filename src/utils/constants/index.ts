@@ -462,6 +462,8 @@ export default {
             Login: 'Login',
             Loss: 'Loss',
             MedicalHistory: 'MedicalHistory',
+            MedicalConditions: 'MedicalConditions',
+            Diagnosis: 'Diagnosis',
             Medications: 'Medications',
             NeedsPresciption: 'NeedsPresciption',
             NewUser: 'NewUser',
@@ -858,6 +860,8 @@ export const screenNames = {
     Login: 'Login',
     Loss: 'Loss',
     MedicalHistory: 'MedicalHistory',
+    MedicalConditions: 'MedicalConditions',
+    Diagnosis: 'Diagnosis',
     Medications: 'Medications',
     Messages: 'Messages',
     NeedsPresciption: 'NeedsPresciption',
@@ -2373,7 +2377,7 @@ export const healthIntakeQuerying = [
         type: controlType.CheckType
     },
     {
-        name: "Please list any allergies to medications.",
+        name: "Please list any medication allergies or other allergies we should be aware of.",
         hint: "Ex: Penecillin",
         kind: null,
         type: controlType.TextType

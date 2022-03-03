@@ -97,9 +97,16 @@ export default {
     },
     allergies: {
         title: 'Allergies',
+        header: 'All Allergies',
+        noAllergies: 'You have no allergies on record with Kiira',
         previous: 'Previous',
         next: 'Next',
         finish: 'Finish',
+    },
+    medicalConditions:{
+       title: 'History',
+       header: 'Conditions and Diagnoses',
+       noMedicalConditions: 'You have no conditions or procedures on record with Kiira'
     },
     insurance: {
         title: 'Insurance',

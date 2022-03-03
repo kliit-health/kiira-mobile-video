@@ -43,12 +43,12 @@ export default [
 
     {
         title: `allergies.title`,
-        destination: screenNames.termsAndConditions,
+        destination: screenNames.Allergies,
         icon: icons.allergies,  
     },
     {
         title: `healthHistory.title`,
-        destination: screenNames.termsAndConditions,
+        destination: screenNames.MedicalConditions,
         icon: icons.healthHistory, 
     },
 ];
