@@ -146,6 +146,7 @@ const Experts = ({ experts, navigation }) => {
                                             screenNames.Messages,
                                             {
                                                 expertDetails: item,
+                                                createdMessage: true,
                                             },
                                         );
                                     }}
