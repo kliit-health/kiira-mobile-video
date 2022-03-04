@@ -1506,7 +1506,7 @@ export async function updateCredits(
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    visits: monthly - redeemMonthly,
+                    visits: monthly - redeemMonthly < 0 ? 0 : monthly - redeemMonthly,
                     prepaid: prepaid - redeemPrepaid < 0 ? 0 : prepaid - redeemPrepaid,
                 });
             return { ok: true };
