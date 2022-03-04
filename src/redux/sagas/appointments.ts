@@ -297,7 +297,7 @@ function* setAppointment({ payload }) {
 
             yield getAppointments();
             yield sendAppointmentNotification(uid, time);
-            if (phoneNumber.length && enableText) {
+            if (phoneNumber && phoneNumber.length && enableText) {
                 const message = `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
                     time,
                 ).format('llll')}`;
