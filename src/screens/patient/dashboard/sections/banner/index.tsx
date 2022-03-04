@@ -38,7 +38,7 @@ const Banner = () => {
             setAction(Action.Schedule);
         }
 
-        if (assessment && !assessment.complete || assessment === null  && upcomingAppointments.data.length !== 0) {
+        if (assessment && !assessment.complete || assessment === null  && upcomingAppointments.data.length > 0) {
             setAction(Action.Reminder);
         }
 
