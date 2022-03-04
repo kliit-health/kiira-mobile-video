@@ -303,10 +303,11 @@ const styles = StyleSheet.create({
         width:'100%', 
         height:120,  
         paddingHorizontal : 10,
-        paddingVertical : 8, 
+        paddingVertical : 8,
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsLight,
         borderRadius:8,
+        color:colors.black
     }, 
 
     allSetStyle:{
