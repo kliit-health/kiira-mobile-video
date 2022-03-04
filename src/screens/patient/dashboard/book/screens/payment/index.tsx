@@ -241,8 +241,8 @@ const Payment = () => {
                             ? `-$${appointments.visit.details.price} ($${
                                   (visits + prepaid) * 60
                               } credit available)`
-                            : `-$${appointments.visit.details.price} (-$${
-                                  Math.abs(visits + prepaid) * 60
+                            : `-$${appointments.visit.details.price} ($${
+                                  Math.max(visits + prepaid, 0) * 60
                               } credit available)`}
                     </Kiira.Text>
                 </Kiira.Row>
