@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, View, TextInput, Alert } from 'react-native';
+import { Image, StyleSheet, View, TextInput, Keyboard } from 'react-native';
 import { Screen, Header, Column, Text, Row, Button } from '~/components';
 import { withNavigation } from 'react-navigation';
 import { h1, h2, h3, default as globalStyles } from '~/components/styles';
@@ -98,7 +98,7 @@ const Intake = ({ navigation }) => {
             }
 
             {type !== controlType.CompleteType &&
-                <View style={[styles.queryStyle]}> 
+                <View style={[styles.queryStyle]} onTouchStart={() => Keyboard.dismiss()}> 
                     <Text options={[styles.queryTextStyle]}>{healthIntakeQuerying[queryIndex].name}</Text>
                 </View> 
             }
@@ -113,15 +113,16 @@ const Intake = ({ navigation }) => {
             }
 
             {type === controlType.TextType &&
-                <View style={[styles.optionTextStyle]}> 
-                    <TextInput 
-                        multiline={true}
-                        placeholder={healthIntakeQuerying[queryIndex].hint}  
-                        onChangeText={handleSelection}
-                        style={styles.textStyle} 
-                        placeholderTextColor={'#868992'}
-                    />
-                </View>
+                
+                    <View style={[styles.optionTextStyle]}> 
+                        <TextInput 
+                            multiline={true}
+                            placeholder={healthIntakeQuerying[queryIndex].hint}  
+                            onChangeText={handleSelection}
+                            style={styles.textStyle} 
+                            placeholderTextColor={'#868992'}
+                        />
+                    </View>
             }
              
             {(type === controlType.RadioType || type === controlType.CheckType) && 
