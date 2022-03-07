@@ -99,9 +99,6 @@ const Payment = () => {
     };
 
     const bookVisit = () => {
-        if(appointmentDetails.intakeData){
-            appointmentDetails.intakeData = null;
-        }
         dispatch(bookAppointment(appointmentDetails));
     };
 
