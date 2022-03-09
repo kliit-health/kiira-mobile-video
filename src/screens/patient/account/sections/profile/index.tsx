@@ -69,7 +69,7 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                     response.uri.lastIndexOf('/') + 1,
                     response.uri.length,
                 );
-                const ext = response.uri.split('.').pop();
+                const ext = response.type && response.type.split('/').pop();
                 const filename =
                     Platform.OS === 'ios'
                         ? `${Math.floor(Date.now())}${name}`

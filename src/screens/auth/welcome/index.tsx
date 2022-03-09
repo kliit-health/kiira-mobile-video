@@ -190,7 +190,7 @@ const Welcome = ({ navigation }) => {
                     imageUri: response.uri,
                     imageSrc: response.uri,
                 });
-                setFile(response);
+                response.type && setFile(response.type);
                 setFilePath(response.path);
             }
         });
@@ -365,7 +365,7 @@ const Welcome = ({ navigation }) => {
                             : styles.buttonContainer
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => handleNavigation('AdditionalInformation',{userProfileData,filePath})}
+                    onPress={() => handleNavigation('AdditionalInformation',{userProfileData,filePath,file})}
                     text="Continue"
                 />
             </View>

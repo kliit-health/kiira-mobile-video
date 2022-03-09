@@ -10,7 +10,7 @@ import { updateAccount } from '~/redux/reducers/account';
 import { useDispatch } from 'react-redux';
 
 const AdditionalInformation = ({ navigation }) => {
-    const { userProfileData, filePath } = navigation.state.params;
+    const { userProfileData, filePath,file } = navigation.state.params;
     const dispatch = useDispatch();
     const { staticImages } = Constant.App;
     const [showSexualityModal, setShowSexualityModal] = useState(false);
@@ -340,7 +340,7 @@ const AdditionalInformation = ({ navigation }) => {
                                 userProfileData.imageSrc.lastIndexOf('/') + 1,
                                 userProfileData.imageSrc.length,
                             );
-                            const ext = userProfileData.imageSrc
+                            const ext = file && file
                                 .split('/')
                                 .pop(); // Extract image extension
                             filename =
