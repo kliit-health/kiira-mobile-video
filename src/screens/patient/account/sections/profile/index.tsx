@@ -126,11 +126,17 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                     requestCameraPermission();
                 }}
             >
-                <Image
-                            style={styles.image}
-                            resizeMode="stretch"
-                            source={imageUri ? {uri: imageUri} : staticImages.profilePlaceholderImg}
-                        />
+                <View style={styles.imageStyle}>
+                    <Image
+                        style={styles.image}
+                        resizeMode="stretch"
+                        source={
+                            imageUri
+                                ? { uri: imageUri }
+                                : staticImages.profilePlaceholderImg
+                        }
+                    />
+                </View>
 
                 <TouchableOpacity>
                     <Image
@@ -155,12 +161,11 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                     OnSettingPress={handleSetting}
                 />
             </View>
+
             {renderImageView()}
+
             <View style={styles.detailsContainer}>
-                <Text
-                    style={styles.title}
-                    onPress={() => {}}
-                >{`${firstName} ${lastName}`}</Text>
+                <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
             </View>
 
             <View style={styles.root}>
