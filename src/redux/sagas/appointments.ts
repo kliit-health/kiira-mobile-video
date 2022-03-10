@@ -181,7 +181,7 @@ function* cancelTheAppointment({ payload: { data } }) {
         availible: 0,
         isPrepaid: prepaidInfo.isPrePaid,
         redeemPrepaid: 0,
-        redeemMonthly: credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0),
+        redeemMonthly: prepaidInfo.isPrePaid ? 0 : (credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0)),
     };
     try {
         yield put(showApiLoader());
@@ -230,7 +230,6 @@ function* setAppointment({ payload }) {
     const {
         sessionType: { credits },
     } = reason;
-
     const { uid } = expert;
     const details = {
         time,
@@ -248,7 +247,7 @@ function* setAppointment({ payload }) {
         redeemPrepaid:
             prepaid > 0 && credits - visits > 0 ? credits - visits : 0,
         redeemMonthly:
-            visits > 0 && credits - prepaid > 0
+            visits > 0 && credits - prepaid > 0 && visits < credits
                 ? credits - prepaid
                 : visits === 0
                 ? 0
