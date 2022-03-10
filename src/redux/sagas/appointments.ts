@@ -177,13 +177,12 @@ function* cancelTheAppointment({ payload: { data } }) {
         required: credits,
         monthly: user.visits,
         prepaid: user.prepaid,
-        purchased: prepaidInfo.amount,
+        purchased: prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0,
         availible: 0,
         isPrepaid: prepaidInfo.isPrePaid,
         redeemPrepaid: 0,
-        redeemMonthly: credits - prepaidInfo.amount,
+        redeemMonthly: credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0),
     };
-
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(data);
@@ -203,7 +202,6 @@ function* cancelTheAppointment({ payload: { data } }) {
             if (expert.phoneNumber) {
                 yield sendSms(message, expert.phoneNumber);
             }
-
             yield sendNotification(expert.uid, title, message);
         }
         yield getAppointments();

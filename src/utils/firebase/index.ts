@@ -1862,7 +1862,7 @@ export async function sendNotification(
     body: String,
 ) {
     try {
-        await functions().httpsCallable('sendPushNotificationMobile')({
+        await functions().httpsCallable('sendPushNotification')({
             uid,
             title,
             body,
