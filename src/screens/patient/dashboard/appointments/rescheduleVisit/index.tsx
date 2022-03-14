@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -142,6 +142,7 @@ const RescheduleVisit = props => {
             <Kiira.Text options={[pad]}>
                 Please select an appointment time
             </Kiira.Text>
+            <View style={{alignItems:'center',justifyContent:'center'}}>
             <FlatList
                 numColumns={3}
                 initialNumToRender={appointmentData.appointments.current.length}
@@ -176,6 +177,7 @@ const RescheduleVisit = props => {
                     );
                 }}
             />
+            </View>
             <Kiira.Button
                 test="Confirm Date and Time"
                 disabled={!time}
