@@ -18,6 +18,7 @@ import {
     presentApplePay,
     confirmApplePayPayment,
 } from '@stripe/stripe-react-native';
+import { ScrollView } from 'react-native';
 
 const {
     pad_b,
@@ -212,6 +213,7 @@ const Payment = () => {
     };
     return (
         <Kiira.Screen test="Appointment Payment">
+             <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
             <Kiira.Header onBack={handleBack} title="Book Visit" />
             <VisitRecap />
             <Kiira.Column options={[card]}>
@@ -304,6 +306,7 @@ const Payment = () => {
                 multiline
                 placeholder="You can say something like 'I need new birth control'"
             />
+            </ScrollView>
             {balance === 0 && (
                 <Kiira.Button
                     test="Confirm Appointment"
