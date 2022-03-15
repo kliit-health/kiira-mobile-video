@@ -68,6 +68,7 @@ const Future = ({ test, visit, date, navigation }) => {
         expert,
         prepaid,
         prepaidInfo,
+        visits
     } = visit;
 
     const credits =
@@ -87,6 +88,7 @@ const Future = ({ test, visit, date, navigation }) => {
         prepaid,
         credits,
         prepaidInfo,
+        visits,
     };
 
     let today = moment().local();

@@ -168,8 +168,7 @@ function* getAppointments() {
 
 function* cancelTheAppointment({ payload: { data } }) {
     const user = yield select(state => state.user.data);
-    const { credits, expert, prepaidInfo } = data;
-
+    const { credits, expert, prepaidInfo, visits } = data;
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
 
@@ -181,7 +180,10 @@ function* cancelTheAppointment({ payload: { data } }) {
         availible: 0,
         isPrepaid: prepaidInfo.isPrePaid,
         redeemPrepaid: 0,
-        redeemMonthly: prepaidInfo.isPrePaid ? 0 : (credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0)),
+        redeemMonthly: prepaidInfo.isPrePaid ? 
+                    (visits > 0 ? visits : 0) 
+                    : 
+                    (credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0)),
     };
     try {
         yield put(showApiLoader());
