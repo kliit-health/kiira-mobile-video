@@ -52,6 +52,15 @@ export default {
         save: 'Spanish Save',
     },
 
+    expertChatsHeaders:{
+        providers: 'All Providers',
+        yourSquad: 'Your Squad'
+     },
+
+     profileHeader:{
+        profile:'Profile'
+    },
+
     consent: {
         title: 'Spanish Consent Agreements',
         acceptanceDate: 'Spanish Acceptance Date',
@@ -99,12 +108,18 @@ export default {
     },
 
     allergies: {
-        title: 'Spanish Allergies',
+        title: ' Spanish Allergies',
+        header: 'Spanish All Allergies',
+        noAllergies: 'Spanish You have no allergies on record with Kiira',
         previous: 'Spanish Previous',
         next: 'Spanish Next',
         finish: 'Spanish Finish',
     },
-
+    medicalConditions:{
+       title: 'Spanish History',
+       header: 'Spanish Conditions and Diagnoses',
+       noMedicalConditions: 'Spanish You have no conditions or procedures on record with Kiira'
+    },
     insurance: {
         title: 'Spanish Insurance',
         save: 'Spanish Save',
@@ -374,6 +389,15 @@ export default {
         UseSameEmail: 'Spanish Please use the same email address you used when you became a member.',
         OrganizationPlan: 'Spanish If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu',
 
+    },
+    welcomeKiira:{
+        welcomeKiira: ' Spanish Welcome to Kiira',
+        oneStopTitle: 'Spanish Your one stop shop for care. On the Kiira app you can:',
+        getVirtualAppointmentsInfo: 'Spanish Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.',
+        accessPersonalizedTeamInfo: 'Spanish Access a personalized team of health providers for women\'s health, mental health, and primary care on-demand.',
+        takeKiiraEveryWhereInfo: 'Spanish Take Kiira with you everywhere you go and get answers specific to every stage of your life.',
+        becomeMember: 'Spanish Become a member',
+        back: 'Spanish Back'
     },
 
     paymentMethods: {

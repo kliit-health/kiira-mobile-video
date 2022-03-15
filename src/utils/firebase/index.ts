@@ -399,7 +399,6 @@ export async function makeAppointment(data) {
 export async function cancelAppointmentData(data, message) {
     try {  
         const { id, uid, expert, credits, prepaid } = data; 
-
         const userDoc = firestore()
                     .collection('users')
                     .doc(uid);
@@ -1489,7 +1488,6 @@ export async function updateCredits(
         redeemMonthly,
         redeemPrepaid,
     } = credits;
-
     try {
         if (addition) {
             await firestore()
@@ -1505,8 +1503,8 @@ export async function updateCredits(
                 .collection('users')
                 .doc(user.uid)
                 .update({
-                    visits: monthly - redeemMonthly,
-                    prepaid: prepaid - redeemPrepaid,
+                    visits: monthly - redeemMonthly < 0 ? 0 : monthly - redeemMonthly,
+                    prepaid: prepaid - redeemPrepaid < 0 ? 0 : prepaid - redeemPrepaid,
                 });
             return { ok: true };
         }
@@ -1585,6 +1583,7 @@ export const updateUserData = (updates, uid, merge = true) =>
         (async () => {
             const user = firestore().collection('users').doc(uid);
             try {
+                console.log('UPDATES',updates)
                 await user.set(updates, { merge });
                 resolve(updates);
             } catch (error) {
@@ -1860,7 +1859,7 @@ export async function sendNotification(
     body: String,
 ) {
     try {
-        await functions().httpsCallable('sendPushNotificationMobile')({
+        await functions().httpsCallable('sendPushNotification')({
             uid,
             title,
             body,

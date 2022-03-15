@@ -13,6 +13,8 @@ const ListItem = props => {
         children,
         activeOpacity,
         id,
+        marginLeft,
+        borderBottom
     } = props;
 
     const styles = {
@@ -30,14 +32,14 @@ const ListItem = props => {
         <TouchableOpacity
             activeOpacity={activeOpacity}
             style={
-                displayBorder ? [styles.root, defaultStyles.borderStyle, !displayChevron ? {backgroundColor:'#ECFCFF'} : {}] : styles.root
+                displayBorder && borderBottom ? [styles.root, defaultStyles.borderBottomStyle, !displayChevron ? {backgroundColor:'#ECFCFF'} : {}] : displayBorder ? [styles.root, defaultStyles.borderStyle, !displayChevron ? {backgroundColor:'#ECFCFF'} : {}] : styles.root
             }
             onPress={handlePress} 
         >
             {children}
             {displayChevron && (
                 <Image
-                    style={styles.chevron}
+                    style={[styles.chevron,marginLeft ? {marginLeft} : {}]}
                     resizeMode="contain"
                     source={icons.chevron}
                 />

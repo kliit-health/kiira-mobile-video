@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import metrics from '~/utils/metrices';
 import { colors, text } from '~/utils/constants';
 
@@ -33,6 +33,26 @@ const styles = StyleSheet.create({
         width: metrics.width,
         backgroundColor: colors.white,
         marginVertical: 10,
+        height: 130,
+        alignItems: 'center',
+    },
+    heartIconView: {
+        borderColor: colors.greyAccent,
+        borderWidth: 1,
+        borderRadius: 100,
+        alignItems: 'center',
+        width: 40,
+        justifyContent: 'center',
+        height: 40,
+    },
+
+    heartIcon: {
+        alignSelf: 'center',
+    },
+
+    chatIcon: {
+        alignItems: 'center',
+        marginTop: '30%',
     },
 
     expertInfoProfession: {
@@ -65,6 +85,12 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
+    },
+    imageView: {
+        borderWidth: 2,
+        borderRadius: 100,
+        overflow: 'hidden',
+        borderColor: colors.blue,
     },
 
     expertsContainer: {
@@ -123,7 +149,7 @@ const styles = StyleSheet.create({
         left: 35,
         width: 16,
         height: 16,
-        top: 12,
+        top: 25,
         borderRadius: 8,
         backgroundColor: colors.green,
         position: 'absolute',

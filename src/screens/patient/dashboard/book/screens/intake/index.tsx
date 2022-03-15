@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, View, TextInput, Alert } from 'react-native';
+import { Image, StyleSheet, View, TextInput, Keyboard } from 'react-native';
 import { Screen, Header, Column, Text, Row, Button } from '~/components';
 import { withNavigation } from 'react-navigation';
 import { h1, h2, h3, default as globalStyles } from '~/components/styles';
@@ -12,6 +12,7 @@ import { updateIntakeData } from '~/redux/reducers/account';
 import { TouchableOpacity } from 'react-native-gesture-handler'; 
 import { images } from '~/utils/constants';  
 import Logo from '~/svgs/gpenguin.svg';
+import LinearGradient from 'react-native-linear-gradient'
 
 const { size, fontFamily } = text;
 
@@ -97,7 +98,7 @@ const Intake = ({ navigation }) => {
             }
 
             {type !== controlType.CompleteType &&
-                <View style={[styles.queryStyle]}> 
+                <View style={[styles.queryStyle]} onTouchStart={() => Keyboard.dismiss()}> 
                     <Text options={[styles.queryTextStyle]}>{healthIntakeQuerying[queryIndex].name}</Text>
                 </View> 
             }
@@ -112,15 +113,16 @@ const Intake = ({ navigation }) => {
             }
 
             {type === controlType.TextType &&
-                <View style={[styles.optionTextStyle]}> 
-                    <TextInput 
-                        multiline={true}
-                        placeholder={healthIntakeQuerying[queryIndex].hint}  
-                        onChangeText={handleSelection}
-                        style={styles.textStyle} 
-                        placeholderTextColor={'#868992'}
-                    />
-                </View>
+                
+                    <View style={[styles.optionTextStyle]}> 
+                        <TextInput 
+                            multiline={true}
+                            placeholder={healthIntakeQuerying[queryIndex].hint}  
+                            onChangeText={handleSelection}
+                            style={styles.textStyle} 
+                            placeholderTextColor={'#868992'}
+                        />
+                    </View>
             }
              
             {(type === controlType.RadioType || type === controlType.CheckType) && 
@@ -129,43 +131,51 @@ const Intake = ({ navigation }) => {
                         onSelect={handleSelection} 
                         data={data} type={type} 
                         styles={styles.radioGropStyle}
+                        scrollPaddingBottom={180}
                         initialValue={ selectItems[queryIndex] } 
                     />
                 </Column>
             } 
             
             {type !== controlType.CompleteType &&
-                <Row options={[styles.buttonContainer]}>
-                    <TouchableOpacity onPress={() => 
-                    {
-                        const index = queryIndex <= 0 ? 0 : queryIndex - 1;
-                        setQueryIndex(index);
-                        setData(healthIntakeQuerying[index].kind); 
-                        setType(healthIntakeQuerying[index].type); 
-                    }}>
-                        <Image
+                <LinearGradient
+                    start={{x: 0.0, y: 0.0}} end={{x: 0.0, y: 0.55}} 
+                    colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1.0)']}
+                    style={styles.linearGradient}
+                >
+                    <Row options={[styles.buttonContainer]}> 
+                        <TouchableOpacity onPress={() => 
+                        {
+                            const index = queryIndex <= 0 ? 0 : queryIndex - 1;
+                            setQueryIndex(index);
+                            setData(healthIntakeQuerying[index].kind); 
+                            setType(healthIntakeQuerying[index].type); 
+                        }}>
+                            <Image
+                                style={styles.icon}
+                                resizeMode="contain"
+                                source={images.circleBackButton}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => { 
+                            if(queryIndex >= healthIntakeQuerying.length - 1){
+                                onIntakeFinish();
+                                return;
+                            }
+                            const index = queryIndex + 1; 
+                            setQueryIndex(index);
+                            setData(healthIntakeQuerying[index].kind); 
+                            setType(healthIntakeQuerying[index].type); 
+                        }}>
+                            <Image
                             style={styles.icon}
                             resizeMode="contain"
-                            source={images.circleBackButton}
+                            source={images.circleNextButton}
                         />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { 
-                        if(queryIndex >= healthIntakeQuerying.length - 1){
-                            onIntakeFinish();
-                            return;
-                        }
-                        const index = queryIndex + 1; 
-                        setQueryIndex(index);
-                        setData(healthIntakeQuerying[index].kind); 
-                        setType(healthIntakeQuerying[index].type); 
-                    }}>
-                        <Image
-                        style={styles.icon}
-                        resizeMode="contain"
-                        source={images.circleNextButton}
-                    />
-                    </TouchableOpacity> 
-                </Row>
+                        </TouchableOpacity> 
+                    </Row>
+                </LinearGradient>
+                
             }
             {type === controlType.CompleteType && 
                 <Column options={[styles.finishButton]}>
@@ -188,12 +198,20 @@ export default withNavigation(Intake);
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        padding: 0,
-        margin: 15,
-        flex: 0,
-        backgroundColor: colors.white,
-        paddingBottom: 10,
         alignSelf:'center',  
+        justifyContent:'center',
+    },
+
+    linearGradient: {
+        position:'absolute',
+        width:'100%',
+        paddingBottom:50,
+        paddingTop:60,
+        bottom:0,
+        flex: 0, 
+        alignSelf:'center',  
+        justifyContent:'center',
+        
     },
 
     finishButton: {
@@ -262,7 +280,7 @@ const styles = StyleSheet.create({
     optionStyle: { 
         marginTop: 30,
         marginHorizontal: 30,  
-        flex:0.65,  
+        flex:0.9,   
     },
 
     optionTextStyle: { 
@@ -286,10 +304,11 @@ const styles = StyleSheet.create({
         width:'100%', 
         height:120,  
         paddingHorizontal : 10,
-        paddingVertical : 8, 
+        paddingVertical : 8,
         fontSize: text.size.regular,
         fontFamily: text.fontFamily.poppinsLight,
         borderRadius:8,
+        color:colors.black
     }, 
 
     allSetStyle:{

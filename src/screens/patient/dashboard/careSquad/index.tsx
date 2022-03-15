@@ -75,7 +75,7 @@ const CareSquad = ({ navigation }) => {
         });
     };
 
-    const handleAddPress = ({ uid }) => {
+    const handleAddPress = ({uid }) => {
         dispatch(
             updateFavoriteExperts({
                 uid: user.uid,

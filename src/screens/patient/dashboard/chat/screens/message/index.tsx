@@ -321,7 +321,7 @@ class Chat extends React.PureComponent {
     render() {
         const { navigation, questionId, expertStatusData } = this.props;
         const { questionData, expertDetails } = navigation.state.params;
-        const { activeTime } = expertDetails;
+        const { activeTime } = expertDetails ? expertDetails : '';
         const { imageUri, showRatingModal } = this.state;
         const { profileInfo } = questionData
             ? questionData.expertInfo

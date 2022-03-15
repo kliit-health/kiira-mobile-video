@@ -122,10 +122,8 @@ function* updateAppointment({ payload }) {
                 ),
             );
             navigation.navigate('Appointments');
-        }
-       
-        if (assessment && appointmentType && appointmentType.title === 'Health Check') {
-            yield put(updateUser({ assessment: { ...assessment, time } }));
+        }       
+        if (assessment && appointmentType && appointmentType.title === 'Health Check') {            yield put(updateUser({ assessment: { ...assessment, time } }));
         }
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
@@ -137,7 +135,7 @@ function* updateAppointment({ payload }) {
 
         yield sendNotification(uid, title, message);
         yield put(getAppointmentsList(uid));
-        
+
         navigation.navigate('Appointments');
     } catch (error) {
         console.error(error);
@@ -169,12 +167,10 @@ function* cancelTheAppointment({ payload: { data } }) {
         prepaid: user.prepaid,
         availible: 0,
         redeemPrepaid: 0,
-        redeemMonthly: credits,
     };
-
     try {
-        yield put(showApiLoader());  
-        const result = yield cancelAppointmentAsync(data); 
+        yield put(showApiLoader());
+        const result = yield cancelAppointmentAsync(data);
         if (result) {
             yield put(
                 showOrHideModal(
@@ -188,10 +184,9 @@ function* cancelTheAppointment({ payload: { data } }) {
 
             yield updateCredits(data, totals, true);
             yield put(getUser());
-            if (expert.phoneNumber.length) {
+            if (expert.phoneNumber) {
                 yield sendSms(message, expert.phoneNumber);
             }
-
             yield sendNotification(expert.uid, title, message);
         }
         yield getAppointments();
@@ -222,7 +217,6 @@ function* setAppointment({ payload }) {
         credits,
     } = appointmentType;
     const { uid } = expert;
-
     const details = {
         time,
         complete: false,
@@ -239,7 +233,7 @@ function* setAppointment({ payload }) {
         redeemPrepaid:
             prepaid > 0 && credits - visits > 0 ? credits - visits : 0,
         redeemMonthly:
-            visits > 0 && credits - prepaid > 0
+            visits > 0 && credits - prepaid > 0 && visits < credits
                 ? credits - prepaid
                 : visits === 0
                 ? 0
@@ -250,6 +244,18 @@ function* setAppointment({ payload }) {
     //     isPrePaid: totals.required > totals.availible,
     //     amount: totals.purchased,
     // };
+
+    if (totals.availible < totals.required) {
+        let updatedCredit = {
+            ...payload.reason,
+            sessionType: {
+                ...payload.reason.sessionType,
+                credits: totals.required - totals.availible,
+            },
+        };
+
+        payload.reason = updatedCredit;
+    }
 
     try {
         yield put(hideApiLoader());
@@ -273,24 +279,23 @@ function* setAppointment({ payload }) {
 
             yield getAppointments();
             yield sendAppointmentNotification(uid, time);
-            if (phoneNumber.length && enableText) {
+            if (phoneNumber && phoneNumber.length && enableText) {
                 const message = `Your Kiira Health appointment has been confirmed, please return to the app 5 minutes before your appointment on: \n\n ${moment(
                     time,
                 ).format('llll')}`;
                 yield sendSms(message, phoneNumber);
             }
 
-            if(payload.intakeData != null){
+            if (!payload.intakeData) {
                 navigation.navigate('Intake', {
                     appointmentDetails: payload,
                 });
-            }
-            else{
+            } else {
                 navigation.navigate('Success', {
                     time: moment(time).format('llll'),
                 });
             }
-            
+
             yield put(hideApiLoader());
         }
     } catch (error) {
@@ -308,5 +313,5 @@ export default function* appointmentsSaga() {
     yield takeEvery(getAppointmentsList, getAppointments);
     yield takeEvery(cancelAppointment, cancelTheAppointment);
     yield takeEvery(rateVisit, setExpertRating);
-    yield takeEvery(bookAppointment, setAppointment); 
+    yield takeEvery(bookAppointment, setAppointment);
 }

@@ -114,7 +114,7 @@ export default {
             ],
             insurance:[
                 {
-                   value:'Aetan Health'
+                   value:'Aetna Health'
                 },
                 {
                     value:'Blue Cross/Blue Shield'
@@ -427,6 +427,7 @@ export default {
 
         screenNames: {
             Activate: 'Activate',
+            KiiraWelcome: 'KiiraWelcome',
             AddChild: 'AddChild',
             AdditionalInformation: 'AdditionalInformation',
             AddCreditOrDebitCard: 'AddCreditOrDebitCard',
@@ -461,6 +462,8 @@ export default {
             Login: 'Login',
             Loss: 'Loss',
             MedicalHistory: 'MedicalHistory',
+            MedicalConditions: 'MedicalConditions',
+            Diagnosis: 'Diagnosis',
             Medications: 'Medications',
             NeedsPresciption: 'NeedsPresciption',
             NewUser: 'NewUser',
@@ -511,6 +514,7 @@ export default {
             checkBoxSelectedIcon: require('../../../assets/check.png'),
             checkGreenIcon: require('../../../assets/check_green.png'),
             checkGreyIcon: require('../../../assets/check_grey.png'),
+            checkGreenBoxIcon: require('../../../assets/check_green_box.png'),
             confirm: require('../../../assets/lock.png'),
             clipboard: require('../../../assets/clipboard.png'),
             creditCard: require('../../../assets/credit_card.png'),
@@ -753,6 +757,7 @@ export const icons = {
     chat: require('../../../assets/chat.png'),
     chatIcon: require('../../../assets/chat_icon_blue.png'),
     checkBoxIcon: require('../../../assets/uncheck.png'),
+    checkGreenBoxIcon: require('../../../assets/check_green_box.png'),
     checkBoxSelectedIcon: require('../../../assets/check.png'),
     checkGreenIcon: require('../../../assets/check_green.png'),
     checkGreyIcon: require('../../../assets/check_grey.png'),
@@ -818,6 +823,7 @@ export const stack = {
 
 export const screenNames = {
     Activate: 'Activate',
+    KiiraWelcome: 'KiiraWelcome',
     AddChild: 'AddChild',
     AddCreditOrDebitCard: 'AddCreditOrDebitCard',
     AddProfileData: 'AddProfileData',
@@ -854,6 +860,8 @@ export const screenNames = {
     Login: 'Login',
     Loss: 'Loss',
     MedicalHistory: 'MedicalHistory',
+    MedicalConditions: 'MedicalConditions',
+    Diagnosis: 'Diagnosis',
     Medications: 'Medications',
     Messages: 'Messages',
     NeedsPresciption: 'NeedsPresciption',
@@ -2255,10 +2263,10 @@ export const queryTypes = {
         "Infertility",
         "Lupus",
         "Ovarian Cancer",
-        "Ovarian cysts",
-        "Polycystic Ovarian Syndrome/PCOS",
+        "Ovarian Cysts",
+        "Polycystic Ovarian Syndrome/ PCOS",
         "Pre-Diabetes",
-        "Syphylis",        
+        "Syphylis",    
         "Thyroid Disorder",
         "Uterine Cancer",
         "Other",     
@@ -2268,16 +2276,16 @@ export const queryTypes = {
         "Breast Biopsy or Removal of Breast Tumor",
         "Colonoscopy",
         "Endoscopy",
-        "Joint(knee/hip/shoulder)Surgery",
+        "Joint (knee/hip/shoulder)",
         "Oral/Dental surgery",
-        "Removal of Adenoids(Adenoidectomy)",
-        "Removal of Appendix(Appendectomy)",
+        "Removal of Adenoids (Adenoidectomy)",
+        "Removal of Appendix (Appendectomy)",
         "Removal of Fallopian Tube(s)",
         "Removal of Fibroids",
-        "Removal of Gallbladder(Cholecystectomy)",
+        "Removal of Gallbladder (Cholecystectomy)",
         "Removal of Ovarian Cyst(s)",
         "Removal of Ovaries",
-        "Removal of Tonsils(Tonsillectomy)",
+        "Removal of Tonsils (Tonsillectomy)",
         "Thyroid Surgery",
         "Other", 
     ],
@@ -2292,7 +2300,7 @@ export const queryTypes = {
         "Pneumonia", 
         "Rubella",        
         "Tetanus",
-        "Whoopong cough/Pertusussis", 
+        "Whooping cough/ Pertussis", 
         "Other", 
     ], 
 }; 
@@ -2383,7 +2391,7 @@ export const healthIntakeQuerying = [
         type: controlType.CheckType
     },
     {
-        name: "Please list any allergies to medications.",
+        name: "Please list any medication allergies or other allergies we should be aware of.",
         hint: "Ex: Penecillin",
         kind: null,
         type: controlType.TextType

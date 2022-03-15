@@ -10,7 +10,7 @@ import Activate from '../screens/auth/activate';
 import AccountExpert from '../screens/provider/account';
 import AccountSupport from '../screens/support/account';
 import AddChild from '../screens/patient/dashboard/healthHistory/pregnancy/addChild';
-import Allergies from '../screens/patient/dashboard/healthHistory/allergies';
+import Allergies from '../screens/patient/account/Allergies';
 import AllergiesHistory from '../screens/provider/appointments/patientProfile/allergies';
 import Appointments from '../screens/patient/dashboard/appointments';
 import AskExpert from '../screens/provider/ask';
@@ -95,6 +95,9 @@ import VisitOverView from '../screens/patient/dashboard/appointments/visitSummar
 
 import { colors, icons } from '../utils/constants';
 import { default as globalStyles } from '~/components/styles';
+import KiiraWelcome from '~/screens/auth/KiiraWelcome';
+import MedicalConditions from '~/screens/patient/account/MedicalConditions';
+import Diagnosis from '~/screens/patient/account/MedicalConditions/Diagnosis';
 
 let tabIconSize = 25;
 
@@ -116,6 +119,7 @@ const notSelected = [tiny, gray_dark, regular, space_sm];
 const AuthStack = createStackNavigator(
     {
         Activate: { screen: Activate },
+        KiiraWelcome: {screen: KiiraWelcome},
         ChatBot: { screen: ChatBot },
         ForgotPassword: { screen: ForgotPassword },
         Landing: { screen: Landing },
@@ -525,6 +529,7 @@ const AppStackExpert = createStackNavigator(
         Recap: { screen: Recap },
         SocialHistory: { screen: SocialHistory },
         SettingsExpert: { screen: SettingsExpert },
+        Settings:{screen: Settings},
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
         BillingInsurance : {screen: BillingInsurance},
@@ -577,6 +582,8 @@ const MainAppStack = createStackNavigator(
         Loss: { screen: Loss },
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
+        MedicalConditions: {screen: MedicalConditions},
+        Diagnosis: {screen: Diagnosis},
         Messages: { screen: Messages },
         Payment: { screen: Payment },
         PregnancyAndChildren: { screen: Pregnancy },

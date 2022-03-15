@@ -118,6 +118,11 @@ class ChatExpert extends React.PureComponent {
         };
         setId(ids);
         loadUserMessages(payloadData);
+ 
+        const { createdMessage } = navigation.state.params;
+        if(createdMessage){
+            this.handleButtonPress();
+        }
     }
 
     componentWillUnmount() {

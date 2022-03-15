@@ -44,12 +44,11 @@ const Appointments = ({ navigation }) => {
                     parseInt(moment(b.time).format('x'))
                 );
             });
-
-            setPast(past);
-            setFuture(future);
         }
+        setPast(past);
+        setFuture(future);
     }, [history]);
-
+    
     const handleTabSelect = () => {
         setPastSelected(!pastSelected);
     };

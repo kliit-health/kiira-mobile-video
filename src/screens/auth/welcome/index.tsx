@@ -8,6 +8,7 @@ import {
     PermissionsAndroid,
     Alert,
 } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 import Constant, { colors, icons } from '~/utils/constants';
 import styles from './styles';
 import CustomButton from '~/components/customButton';
@@ -15,7 +16,7 @@ import { CustomText, Icon } from '~/components';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import CustomSelectModal from '~/components/customselectModal';
 import ImagePicker from 'react-native-image-picker';
-import { Avatar } from 'react-native-elements';
+import { handleNavigation } from '~/utils/functions';
 
 const Welcome = ({ navigation }) => {
 
@@ -37,7 +38,6 @@ const Welcome = ({ navigation }) => {
     });
     const [filePath, setFilePath] = useState('');
     const [file, setFile] = useState({});
-
     const RenderStateModalView = () => {
         return (
             <CustomSelectModal
@@ -159,7 +159,7 @@ const Welcome = ({ navigation }) => {
                         >
                             {userProfileData.selectedPronoun.value
                                 ? userProfileData.selectedPronoun.value
-                                : 'Preferred Pronoun'}
+                                : 'Preferred Pronouns'}
                         </CustomText>
                         <Image
                             resizeMode="contain"
@@ -247,26 +247,15 @@ const Welcome = ({ navigation }) => {
                             requestCameraPermission();
                         }}
                     >
-                        <Avatar
-                            renderPlaceholderContent={
-                                <Image
+                         <Image
                                     style={{
-                                        width: 120,
-                                        height: 120,
+                                        width: 90,
+                                        height: 90,
+                                        borderRadius:1000  
                                     }}
                                     resizeMode="stretch"
-                                    source={staticImages.profilePlaceholderImg}
+                                    source={userProfileData.imageSrc ? {uri: userProfileData.imageSrc} : staticImages.profilePlaceholderImg}
                                 />
-                            }
-                            size={90}
-                            rounded
-                            source={{
-                                uri: userProfileData.imageSrc
-                                    ? userProfileData.imageSrc
-                                    : '',
-                            }}
-                            activeOpacity={0.7}
-                        />
 
                         <TouchableOpacity style={styles.AddEditImage}>
                             <Image
@@ -333,8 +322,7 @@ const Welcome = ({ navigation }) => {
                             })
                         }
                     />
-                    <TextInput
-                        testID="birthday"
+                     <TextInputMask
                         style={
                             !userProfileData.birthday
                                 ? styles.otherTextInput
@@ -343,12 +331,13 @@ const Welcome = ({ navigation }) => {
                         placeholderTextColor={colors.greyDark}
                         placeholder="Birthday MM/DD/YYYY"
                         value={userProfileData.birthday}
-                        onChangeText={e =>
+                        onChangeText={(formatted, extracted) => {
                             setUserProfileData({
                                 ...userProfileData,
-                                birthday: e,
-                            })
-                        }
+                                birthday: formatted,
+                            });
+                        }}
+                        mask={'[00]{/}[00]{/}[0000]'}
                     />
                 </View>
                 {showStateModal && <RenderStateModalView />}
@@ -359,7 +348,6 @@ const Welcome = ({ navigation }) => {
                 <CustomButton
                     disabled={
                         !userProfileData.firstName ||
-                        !userProfileData.nickName ||
                         !userProfileData.lastName ||
                         !userProfileData.birthday ||
                         !userProfileData.selectedState.value ||
@@ -368,7 +356,6 @@ const Welcome = ({ navigation }) => {
                     }
                     buttonStyle={
                         !userProfileData.firstName ||
-                        !userProfileData.nickName ||
                         !userProfileData.lastName ||
                         !userProfileData.birthday ||
                         !userProfileData.selectedState.value ||
@@ -378,7 +365,7 @@ const Welcome = ({ navigation }) => {
                             : styles.buttonContainer
                     }
                     textStyle={styles.buttonText}
-                    onPress={() => navigation.navigate(Constant.App.screenNames.AdditionalInformation)}
+                    onPress={() => handleNavigation('AdditionalInformation',{userProfileData,filePath})}
                     text="Continue"
                 />
             </View>

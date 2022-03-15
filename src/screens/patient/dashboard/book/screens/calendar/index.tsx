@@ -23,6 +23,7 @@ import { bookVisitText } from '~/utils/constants';
 import moment from 'moment';
 
 import { default as globalStyles } from '~/components/styles';
+import { View } from 'react-native-animatable';
 
 const { width } = metrices;
 
@@ -155,6 +156,7 @@ const Calendar = () => {
             <Kiira.Text options={[pad]}>
                 { bookVisitText.message }
             </Kiira.Text>
+            <View style={{alignItems:'center',justifyContent:'center'}}>
             <FlatList
                 numColumns={3}
                 initialNumToRender={appointments.appointments.current.length}
@@ -166,7 +168,7 @@ const Calendar = () => {
                 )}
                 renderItem={({ item, index }) => {
                     let current = generateDateInfo(item.time);
-                    return (
+                    return (    
                         <Kiira.Button
                             test={'time ' + index}
                             onPress={() => setTime(current)}
@@ -186,9 +188,11 @@ const Calendar = () => {
                             }}
                             title={`${current.hour.time} ${current.hour.am_pm}`}
                         />
+                   
                     );
                 }}
             />
+            </View>
             <Kiira.Button
                 test="Confirm Date and Time"
                 onPress={handleConfirm}

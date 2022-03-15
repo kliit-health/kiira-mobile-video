@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
 import { handleBack } from '~/utils/functions/handleNavigation';
-import { payIntent } from '~/utils/firebase';
+import { getOrganizationInfo, payIntent } from '~/utils/firebase';
 import moment from 'moment';
 import { default as globalStyles, card, card_title } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
@@ -18,7 +18,7 @@ import {
     presentApplePay,
     confirmApplePayPayment,
 } from '@stripe/stripe-react-native';
-import { Alert } from 'react-native';
+import { ScrollView } from 'react-native';
 
 const {
     pad_b,
@@ -46,6 +46,7 @@ const Payment = () => {
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
     const [balance, setBalance] = useState(null);
+    const [organizationInfo, setOrganizationInfo] = useState(null);
 
     const {
         firstName,
@@ -58,7 +59,8 @@ const Payment = () => {
         insurance,
     } = user.profileInfo;
 
-    const { email, uid, organizationId, plan, visits, prepaid } = user;
+    const { email, uid, organizationId, plan, visits, prepaid, intakeData } =
+        user;
     const { visit } = appointments;
     const { expert, reason } = visit;
 
@@ -90,13 +92,13 @@ const Payment = () => {
             phoneNumber: expert.profileInfo.phoneNumber,
         },
         visits,
-        prepaid, 
-        intakeData: null,
+        prepaid,
+        intakeData,
     };
 
     const bookVisit = () => {
         
-        appointmentDetails.intakeData = '';
+        //appointmentDetails.intakeData = ''; ???
         dispatch(bookAppointment(appointmentDetails));
     };
 
@@ -125,7 +127,6 @@ const Payment = () => {
         };
 
         const clientSecret = await fetchPaymentIntentClientSecret();
-
         const { paymentIntent, error } = await confirmPayment(clientSecret, {
             type: 'Card',
             billingDetails,
@@ -169,6 +170,15 @@ const Payment = () => {
         setBalance(calculateTotal());
     }, []);
 
+    useEffect(() => {
+        async function fetchMyAPI() {
+            let response = await getOrganizationInfo(user);
+            setOrganizationInfo(response);
+        }
+
+        fetchMyAPI();
+    }, []);
+
     const VisitRecap = () => {
         return (
             <Kiira.Column options={[card]}>
@@ -200,9 +210,9 @@ const Payment = () => {
             </Kiira.Column>
         );
     };
-
     return (
         <Kiira.Screen test="Appointment Payment">
+             <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
             <Kiira.Header onBack={handleBack} title="Book Visit" />
             <VisitRecap />
             <Kiira.Column options={[card]}>
@@ -223,9 +233,15 @@ const Payment = () => {
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Kiira.Text options={[pad_h, large]}>
-                        {` -$${appointments.visit.details.price} ($${
-                            (visits + prepaid) * 60
-                        } credit available)`}
+                        {organizationInfo && organizationInfo.unlimited
+                            ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
+                            : visits + prepaid >= 0
+                            ? `-$${appointments.visit.details.price} ($${
+                                  (visits + prepaid) * 60
+                              } credit available)`
+                            : `-$${appointments.visit.details.price} ($${
+                                  Math.max(visits + prepaid, 0) * 60
+                              } credit available)`}
                     </Kiira.Text>
                 </Kiira.Row>
 
@@ -289,6 +305,7 @@ const Payment = () => {
                 multiline
                 placeholder="You can say something like 'I need new birth control'"
             />
+            </ScrollView>
             {balance === 0 && (
                 <Kiira.Button
                     test="Confirm Appointment"

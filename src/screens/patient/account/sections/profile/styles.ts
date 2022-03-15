@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { colors, text } from '~/utils/constants';
-import metrics, { smallScreen } from '~/utils/metrices'; 
+import metrics from '~/utils/metrices';
 
 let parentPaddingValue = metrics.width * 0.01;
-let parentPadding = parentPaddingValue * 2;
 
 export default StyleSheet.create({
     container: {
@@ -11,10 +10,11 @@ export default StyleSheet.create({
         paddingHorizontal: '10%',
         paddingVertical: 20,
     },
-    headerStyle:{
+    headerStyle: {
         borderBottomColor: colors.greyAccent,
-        borderBottomWidth: 1,  
+        borderBottomWidth: 1,
     },
+    
     root: {
         backgroundColor: colors.white,
         borderRadius: 12,
@@ -26,9 +26,27 @@ export default StyleSheet.create({
         padding: 5,
         marginBottom: 20,
         borderWidth: 1,
-        borderColor: colors.greyAccent, 
+        borderColor: colors.greyAccent,
+    },
+    imageView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '3%',
+    },
+    image:{
+        width: 100,
+        height: 100,
+        borderRadius:1000  
+    },
+    AddEditImage: {
+        position: 'absolute',
+        left: '2%',
+        bottom: '2%'
     },
 
+  
+   
     detailsContainer: {
         padding: 5,
         alignItems: 'center',
@@ -40,8 +58,8 @@ export default StyleSheet.create({
     },
 
     icon: {
-        marginRight: 5, 
-        alignSelf:'center'
+        marginRight: 5,
+        alignSelf: 'center',
     },
 
     itemContainer: {
@@ -50,23 +68,23 @@ export default StyleSheet.create({
         width: '45%',
         justifyContent: 'space-between',
         marginVertical: parentPaddingValue * 2,
-        padding: 5, 
+        padding: 5,
     },
 
     itemTitle: {
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular,
-        color: colors.black, 
+        color: colors.black,
         marginLeft: parentPaddingValue,
-        width: metrics.width * 0.4
+        width: metrics.width * 0.4,
     },
 
     itemEmptyTitle: {
         fontFamily: text.fontFamily.poppinsLight,
         fontSize: text.size.regular,
-        color: colors.greyDark, 
+        color: colors.greyDark,
         marginLeft: parentPaddingValue,
-        width: metrics.width * 0.4
+        width: metrics.width * 0.4,
     },
 
     itemValue: {
