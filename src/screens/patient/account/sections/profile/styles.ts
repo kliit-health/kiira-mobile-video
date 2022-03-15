@@ -14,7 +14,7 @@ export default StyleSheet.create({
         borderBottomColor: colors.greyAccent,
         borderBottomWidth: 1,
     },
-    
+
     root: {
         backgroundColor: colors.white,
         borderRadius: 12,
@@ -34,19 +34,23 @@ export default StyleSheet.create({
         alignItems: 'center',
         marginTop: '3%',
     },
-    image:{
-        width: 100,
-        height: 100,
-        borderRadius:1000  
+    image: {
+        width: 90,
+        height: 90,
     },
+    imageStyle: {
+        borderRadius: 90,
+        width: 90,
+        height: 90,
+        overflow: 'hidden',
+    },
+
     AddEditImage: {
         position: 'absolute',
         left: '2%',
-        bottom: '2%'
+        bottom: '2%',
     },
 
-  
-   
     detailsContainer: {
         padding: 5,
         alignItems: 'center',
