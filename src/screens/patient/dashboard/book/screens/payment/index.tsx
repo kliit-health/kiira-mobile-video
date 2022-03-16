@@ -283,6 +283,7 @@ const Payment = () => {
 
                             <Kiira.Button
                                 onPress={handlePayPress}
+                                disabled={!cardDetails?.complete}
                                 style={{
                                     container: [pad_h],
                                     title: [xLarge],

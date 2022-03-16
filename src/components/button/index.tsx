@@ -20,7 +20,7 @@ export type ButtonProps = TouchableOpacityProps & {
     };
 };
 
-const Button = ({ test, title, style, id,disabled, onPress, ...rest }: ButtonProps) => {
+const Button = ({ test, title, style, id, disabled, onPress, ...rest }: ButtonProps) => {
     const handlePress = () => {
         onPress(id);
     };
@@ -28,7 +28,7 @@ const Button = ({ test, title, style, id,disabled, onPress, ...rest }: ButtonPro
     return (
         <TouchableOpacity
             testID={test}
-            style={[defaultStyles.container, style.container]}
+            style={[defaultStyles.container, style.container, disabled && defaultStyles.disabled]}
             onPress={handlePress}
             disabled={disabled}
             {...rest}
