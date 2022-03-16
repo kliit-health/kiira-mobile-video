@@ -229,7 +229,6 @@ function* setAppointment({ payload }) {
         prepaid: prepaid,
         purchased: credits - visits,
         availible: visits + prepaid,
-        //isPrepaid: credits > visits + prepaid,
         redeemPrepaid:
             prepaid > 0 && credits - visits > 0 ? credits - visits : 0,
         redeemMonthly:
@@ -239,11 +238,6 @@ function* setAppointment({ payload }) {
                 ? 0
                 : credits,
     };
-
-    // payload.prepaidInfo = {
-    //     isPrePaid: totals.required > totals.availible,
-    //     amount: totals.purchased,
-    // };
 
     if (totals.availible < totals.required) {
         let updatedCredit = {
