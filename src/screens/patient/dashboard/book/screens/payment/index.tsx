@@ -134,6 +134,7 @@ const Payment = () => {
 
         if (error) {
             console.log('Payment confirmation error', error);
+            dispatch(hideApiLoader());
         } else if (paymentIntent) {
             bookVisit();
         }

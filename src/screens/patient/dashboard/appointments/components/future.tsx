@@ -62,11 +62,13 @@ const Future = ({ test, visit, date, navigation }) => {
     const {
         uid,
         calendarID,
-        appointmentType = null,
+        appointmentType = visit.appointmentType ? visit.appointmentType : null,
         reason,
         id,
         expert,
         prepaid,
+        prepaidInfo = null,
+        visits = visit.visits ? visit.visits : null,
     } = visit;
 
     const credits =
@@ -85,6 +87,8 @@ const Future = ({ test, visit, date, navigation }) => {
         expert,
         prepaid,
         credits,
+        prepaidInfo,
+        visits,
     };
 
     let today = moment().local();
