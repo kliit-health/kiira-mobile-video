@@ -67,7 +67,7 @@ const Future = ({ test, visit, date, navigation }) => {
         id,
         expert,
         prepaid,
-        prepaidInfo = null,
+        prepaidInfo = visit.prepaidInfo ? visit.prepaidInfo : null,
         visits = visit.visits ? visit.visits : null,
     } = visit;
 

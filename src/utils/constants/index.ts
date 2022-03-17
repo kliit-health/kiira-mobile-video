@@ -2069,7 +2069,7 @@ export const urls = {
     },
     staging: {
         appointmentGetByDay:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net//appointmentGetByDayAuth',
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
         appointmentGetByMonth:
             'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
         appointmentCheckTime:

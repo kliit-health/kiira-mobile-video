@@ -14,7 +14,7 @@ const MedicalHistory = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ExpertHeader title="Patient Profile " />
+            <ExpertHeader title="Patient Profile" />
             <PatientCard visit={visit} patientInfo={patientInfo} />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.infoContainer}>
