@@ -74,7 +74,7 @@ const Calendar = () => {
                 ...current,
                 calendarID,
                 addMonth,
-                appointmentTypeID: visit.details.appointmentTypeID,
+                appointmentType: visit.details.appointmentTypeID,
             }),
         );
 
@@ -84,7 +84,7 @@ const Calendar = () => {
             getAppointmentsForToday({
                 ...current,
                 calendarID,
-                appointmentTypeID: visit.details.appointmentTypeID,
+                appointmentType: visit.details.appointmentType,
             }),
         );
     }, []);
@@ -96,7 +96,7 @@ const Calendar = () => {
             getAppointmentsForToday({
                 ...date,
                 calendarID,
-                appointmentTypeID: visit.details.appointmentTypeID,
+                appointmentType: visit.details.appointmentType,
             }),
         );
     };

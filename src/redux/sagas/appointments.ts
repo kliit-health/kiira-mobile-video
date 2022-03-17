@@ -101,7 +101,7 @@ function* getAllAppointmentDates({ payload }) {
 function* updateAppointment({ payload }) {
     const {
         data,
-        data: { time, reason },
+        data: { time, reason, appointmentType },
     } = payload;
     const { assessment, profileInfo, uid, enableText } = yield select(
         state => state.user.data,
@@ -115,7 +115,6 @@ function* updateAppointment({ payload }) {
         let appointment = yield changeAppointmentAsync(data);
 
         yield put(hideApiLoader());
-
         if (appointment && !appointment.availible) {
             yield put(
                 showOrHideModal(
@@ -123,25 +122,14 @@ function* updateAppointment({ payload }) {
                 ),
             );
             navigation.navigate('Appointments');
-        }
-
-        if (
-            assessment &&
-            reason &&
-            reason.sessionType &&
-            reason.sessionType.title === 'Health Check'
-        ) {
-            yield put(updateUser({ assessment: { ...assessment, time } }));
+        }       
+        if (assessment && appointmentType && appointmentType.title === 'Health Check') {            yield put(updateUser({ assessment: { ...assessment, time } }));
         }
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
         );
         yield put(getAppointmentsList({ uid: data.uid }));
-        if (
-            profileInfo.phoneNumber &&
-            profileInfo.phoneNumber.length &&
-            enableText
-        ) {
+        if (profileInfo.phoneNumber && profileInfo.phoneNumber.length && enableText) {
             yield sendSms(message, profileInfo.phoneNumber);
         }
 
@@ -168,21 +156,27 @@ function* getAppointments() {
 
 function* cancelTheAppointment({ payload: { data } }) {
     const user = yield select(state => state.user.data);
-    const { credits, expert, prepaidInfo } = data;
+    const { credits, expert, prepaidInfo, visits = data.visits ? data.visits : 0 } = data;
 
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
-
+    const isPrepaid = prepaidInfo && prepaidInfo.isPrePaid ? prepaidInfo.isPrePaid : false;
+    const amount = prepaidInfo && prepaidInfo.amount ? prepaidInfo.amount : 0;
+ 
     const totals = {
         required: credits,
         monthly: user.visits,
         prepaid: user.prepaid,
-        purchased: prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0,
+        purchased: amount,
         availible: 0,
-        isPrepaid: prepaidInfo.isPrePaid,
+        isPrepaid: isPrepaid,
         redeemPrepaid: 0,
-        redeemMonthly: prepaidInfo.isPrePaid ? 0 : (credits - (prepaidInfo.amount >= 0 ? prepaidInfo.amount : 0)),
-    };
+        redeemMonthly: isPrepaid ? 
+                    (visits > 0 ? visits : 0) 
+                    : 
+                    (credits - amount),
+    }; 
+
     try {
         yield put(showApiLoader());
         const result = yield cancelAppointmentAsync(data);
@@ -226,10 +220,11 @@ function* setAppointment({ payload }) {
     const { phoneNumber, enableText } = yield select(
         state => state.user.data.profileInfo,
     );
-    const { time, reason, expert, visits, prepaid } = payload;
+    const { time, reason, expert, visits, prepaid, appointmentType } = payload;
+
     const {
-        sessionType: { credits },
-    } = reason;
+        credits,
+    } = appointmentType;
     const { uid } = expert;
     const details = {
         time,
@@ -243,7 +238,6 @@ function* setAppointment({ payload }) {
         prepaid: prepaid,
         purchased: credits - visits,
         availible: visits + prepaid,
-        isPrepaid: credits > visits + prepaid,
         redeemPrepaid:
             prepaid > 0 && credits - visits > 0 ? credits - visits : 0,
         redeemMonthly:
@@ -273,8 +267,7 @@ function* setAppointment({ payload }) {
 
     try {
         yield put(hideApiLoader());
-        yield put(showApiLoader());
-
+        yield put(showApiLoader()); 
         let appointment = yield makeAppointment(payload);
 
         if (appointment && !appointment.availible) {
