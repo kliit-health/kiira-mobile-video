@@ -120,10 +120,9 @@ const SelectProvider = () => {
 
     const ExpertDetails = ({ expert }) => {
         const {
+            expertName,
             profileInfo: { profileImageUrl, profession },
         } = expert;
-
-        const expertName = expert?.expertName ?  expert?.expertName : expert?.clinicInfo?.expertName
 
         return (
             <TouchableOpacity onPress={() => handleSelection(expert)}>
@@ -236,7 +235,7 @@ const SelectProvider = () => {
             />
             <Kiira.Column options={[white_bg, justify_fs, sm_pad_v]}>
                 <Kiira.Text options={[pad_h, xLarge, center]}>
-                    {expert.expertName ? expert.expertName : expert?.clinicInfo?.expertName}
+                    {expert.expertName}
                 </Kiira.Text>
                 <Kiira.Text options={[pad_h, medium, light, center, sm_pad_v]}>
                     {expert.profileInfo.profession.fullName}

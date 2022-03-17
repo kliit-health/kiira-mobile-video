@@ -84,9 +84,7 @@ const ExpertAppointments = ({ navigation }) => {
             });
 
             filtered = filtered.filter(visit => {
-                if(visit){
-                    return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
-                }
+                return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
             });
             setVisits([...filtered]);
             setSearch([...filtered]);

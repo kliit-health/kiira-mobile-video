@@ -55,7 +55,7 @@ function* cancelAppointment(data) {
                 ),
             );
         } else {
-            yield updateCredits(credits, data, true);
+            yield updateCredits(credits, data);
         }
 
         yield put({ type: FETCH_PAITENT_APPOINTMENTS, data: allApponitments });

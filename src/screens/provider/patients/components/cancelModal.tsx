@@ -13,8 +13,7 @@ const CancelModal = ({ visit, setVisible, visible }) => {
         id: visit.id,
         expert: visit.expert,
         prepaid: visit.prepaid,
-        credits: visit.appointmentType.credits ? visit.appointmentType.credits : 0,
-        visits: visit.visits ? visit.visits : 0
+        credits: visit.appointmentType.credits,
     };
 
     return (

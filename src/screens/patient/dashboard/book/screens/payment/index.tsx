@@ -42,7 +42,7 @@ const Payment = () => {
     const { confirmPayment, loading } = useConfirmPayment();
     const user = useSelector((state: RootState) => state.user.data);
     const appointments = useSelector((state: RootState) => state.appointments);
-     
+
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
     const [balance, setBalance] = useState(null);
@@ -62,7 +62,7 @@ const Payment = () => {
     const { email, uid, organizationId, plan, visits, prepaid, intakeData } =
         user;
     const { visit } = appointments;
-    const { expert, reason } = visit;
+    const { expert } = visit;
 
     const appointmentDetails = {
         firstName,
@@ -70,8 +70,11 @@ const Payment = () => {
         email,
         calendarID: visit.expert.calendarID,
         time: visit.time.date,
-        reason: reason,
-        appointmentType: visit.details,
+        reason: {
+            reason: visit.reason,
+            sessionType: visit.details,
+        },
+        appointmentTypeID: visit.details.appointmentType,
         uid,
         insurance,
         plan,
@@ -97,8 +100,6 @@ const Payment = () => {
     };
 
     const bookVisit = () => {
-        
-        //appointmentDetails.intakeData = ''; ???
         dispatch(bookAppointment(appointmentDetails));
     };
 
@@ -134,7 +135,6 @@ const Payment = () => {
 
         if (error) {
             console.log('Payment confirmation error', error);
-            dispatch(hideApiLoader());
         } else if (paymentIntent) {
             bookVisit();
         }

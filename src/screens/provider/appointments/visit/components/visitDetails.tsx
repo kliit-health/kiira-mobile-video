@@ -11,13 +11,12 @@ import CancelModal from './cancelModal';
 const VisitDetails = ({ navigation, visit }) => {
     const dispatch = useDispatch();
     const {
-        appointmentType: { duration },
-      } = visit;
+        reason: {
+            sessionType: { duration },
+        },
+    } = visit;
     let today = moment().startOf('day');
-    let appointment =
-    typeof visit.time === 'number'
-      ? moment.unix(visit.time).format('MM/DD/YYYY')
-      : moment(visit.time).format('YYYY-MM-DD');
+    let appointment = moment(visit.time).format('YYYY-MM-DD');
     let daysUntilVisit = Math.abs(
         moment.duration(today.diff(appointment)).asDays(),
     );

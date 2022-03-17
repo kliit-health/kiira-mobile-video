@@ -138,7 +138,7 @@ function* setQuestion({ data, dispatch }) {
                 };
                 yield delay(delayTime);
                 yield loadMessagesOfUser(payloadData);
-                if (expertInfo.profileInfo.phoneNumber && expertInfo.profileInfo.phoneNumber.length) {
+                if (expertInfo.profileInfo.phoneNumber) {
                     yield sendSms(message, expertInfo.profileInfo.phoneNumber);
                 }
 

@@ -186,10 +186,10 @@ export async function getAppointmentsAsync(uid) {
 }
 
 export async function getAppointmentsByDayAsync(data) {
-    const { calendarID, date, appointmentType } = data;
+    const { calendarID, date, appointmentTypeID } = data;
 
     let user = auth().currentUser;
-    let jwtToken = await user.getIdToken(); 
+    let jwtToken = await user.getIdToken();
 
     var obj = {
         method: 'POST',
@@ -201,14 +201,14 @@ export async function getAppointmentsByDayAsync(data) {
             data: {
                 calendarID,
                 date,
-                appointmentTypeID: appointmentType,
+                appointmentTypeID,
             },
         }),
     };
- 
+
     try {
         const times = {};
-        await fetch(urls.staging.appointmentGetByDay, obj)
+        await fetch(urls.dev.appointmentGetByDay, obj)
             .then(res => res.json())
             .then(data => (times.current = data));
         return times;
@@ -222,7 +222,7 @@ export async function getAppointmentDatesAsync(data) {
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
 
-        const { calendarID, monthNumber, addMonth, year, appointmentType } =
+        const { calendarID, monthNumber, addMonth, year, appointmentTypeID } =
             data;
         const currentMonth = `${year}-${monthNumber}`;
 
@@ -234,7 +234,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID: appointmentType,
+                    appointmentTypeID,
                     calendarID: calendarID,
                     month: currentMonth,
                 },
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
         };
 
         let response = [];
-        await fetch(urls.staging.appointmentGetByMonth, obj)
+        await fetch(urls.dev.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -256,19 +256,18 @@ export async function getAppointmentDatesAsync(data) {
             }),
             body: JSON.stringify({
                 data: {
-                    appointmentTypeID: appointmentType,
+                    appointmentTypeID,
                     calendarID: calendarID,
                     month: addMonth,
                 },
             }),
         };
 
-        await fetch(urls.staging.appointmentGetByMonth, obj)
+        await fetch(urls.dev.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
             });
-        
         return response;
     } catch (error) {
         return error;
@@ -287,7 +286,7 @@ export async function makeAppointment(data) {
             prescription,
             uid,
             expert,
-            appointmentType,
+            appointmentTypeID,
         } = data;
 
         let noPrescription = 'I do not need a prescription,';
@@ -300,7 +299,6 @@ export async function makeAppointment(data) {
 
         let user = auth().currentUser;
         let jwtToken = await user.getIdToken();
-        const { appointmentTypeID } = appointmentType;
 
         var obj = {
             method: 'POST',
@@ -318,13 +316,13 @@ export async function makeAppointment(data) {
                     reason,
                     prescription,
                     notes,
-                    appointmentTypeID: appointmentTypeID,
+                    appointmentTypeID,
                 },
             }),
         };
 
         let response;
-        let checkTime = await fetch(urls.staging.appointmentCheckTime, obj)
+        let checkTime = await fetch(urls.dev.appointmentCheckTime, obj)
             .then(res => res.json())
             .then(data => data)
             .catch(error => {
@@ -332,7 +330,7 @@ export async function makeAppointment(data) {
             });
 
         if (checkTime.valid) {
-            await fetch(urls.staging.appointmentMake, obj)
+            await fetch(urls.dev.appointmentMake, obj)
                 .then(res => res.json())
                 .then(res => {
                     response = {
@@ -398,24 +396,24 @@ export async function makeAppointment(data) {
 
 export async function cancelAppointmentData(data, message) {
     try {  
-        const { id, uid, expert, credits, prepaid } = data; 
+        const { id, uid, expert, credits } = data; 
+  
         const userDoc = firestore()
                     .collection('users')
                     .doc(uid);
         const resData = await userDoc.get();
         let userData = resData.data(); 
-        let amount = (data.prepaidInfo && data.prepaidInfo.amount) ? data.prepaidInfo.amount : 0;
-        let isPrePaid = (data.prepaidInfo && data.prepaidInfo.isPrePaid) ? data.prepaidInfo.isPrePaid : false;
         let visits = (userData.visits && userData.visits != "NaN") ? userData.visits : 0;  
+ 
         const totals = {
             required: credits,
             monthly: visits,
             prepaid: userData.prepaid,
-            purchased: amount,
+            purchased: data.prepaidInfo.amount,
             availible: 0,
-            isPrepaid: isPrePaid,
+            isPrepaid: data.prepaidInfo.isPrePaid,
             redeemPrepaid: 0,
-            redeemMonthly: credits - amount,
+            redeemMonthly: credits - data.prepaidInfo.amount,
         };
  
         const document = firestore()
@@ -437,7 +435,7 @@ export async function cancelAppointmentData(data, message) {
                 .doc(uid)
                 .update({
                     visits: totals.monthly + totals.redeemMonthly,
-                    prepaid: totals.prepaid + totals.redeemPrepaid,
+                    prepaid: totals.prepaid + totals.purchased,
                 }); 
 
         const expertDocument = firestore()
@@ -483,7 +481,7 @@ export async function cancelAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.staging.appointmentCancel, obj)
+        return await fetch(urls.dev.appointmentCancel, obj)
             .then(res => {
                 let response = res.json();
                 return response;
@@ -550,7 +548,7 @@ export async function changeAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.staging.appointmentChange, obj)
+        return await fetch(urls.dev.appointmentChange, obj)
             .then(res => res.json())
             .then(async res => {
                 if (res.body.error) {
@@ -1488,6 +1486,7 @@ export async function updateCredits(
         required,
         monthly,
         prepaid,
+        isPrepaid,
         purchased,
         redeemMonthly,
         redeemPrepaid,

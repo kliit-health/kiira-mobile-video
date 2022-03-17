@@ -19,16 +19,13 @@ const Appointments = ({ navigation }) => {
         let future = [];
         if (history.length) {
             history.forEach(visit => {
-                if(visit){
-                    let appointment = moment(visit.time);
-                    let now = moment(new Date());
-                    if (appointment.diff(now, 'hours') >= -1) {
-                        future.push(visit);
-                    } else if (appointment.diff(now, 'hours') <= -1) {
-                        past.push(visit);
-                    }
+                let appointment = moment(visit.time);
+                let now = moment(new Date());
+                if (appointment.diff(now, 'hours') >= -1) {
+                    future.push(visit);
+                } else if (appointment.diff(now, 'hours') <= -1) {
+                    past.push(visit);
                 }
-                
             });
 
             past = past.sort((a, b) => {

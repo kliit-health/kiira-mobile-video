@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>317518456959-sv5mt17tits7ubhpampdebpg0slet7nn.apps.googleusercontent.com</string>
+	<string>900829613230-uovjbpgbp1dt9hr6mdhte4bgjob0emqa.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.317518456959-sv5mt17tits7ubhpampdebpg0slet7nn</string>
+	<string>com.googleusercontent.apps.900829613230-uovjbpgbp1dt9hr6mdhte4bgjob0emqa</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD-6jv3lk0pt-hKJU3x9E_XT7K0lmd_sAw</string>
+	<string>AIzaSyBLNp1K2lMX5Kmp6CywgaDpooKbUQV8oes</string>
 	<key>GCM_SENDER_ID</key>
-	<string>317518456959</string>
+	<string>900829613230</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.kilt</string>
 	<key>PROJECT_ID</key>
-	<string>kiira-health-dev</string>
+	<string>kliit-health-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kiira-health-dev.appspot.com</string>
+	<string>kliit-health-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:317518456959:ios:682eca85e10525d3b7774a</string>
+	<string>1:900829613230:ios:2a9bd2c494a6efe4ed313f</string>
 	<key>DATABASE_URL</key>
-	<string>https://kiira-health-dev.firebaseio.com</string>
+	<string>https://kliit-health-dev.firebaseio.com</string>
 </dict>
 </plist>

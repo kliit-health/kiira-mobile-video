@@ -36,13 +36,8 @@ const { width } = metrices;
     } = globalStyles;
 
 const RescheduleVisit = props => {
+    const {  visit } = props.navigation.state.params;
     const appointmentData = useSelector((state:any) => state.appointments);
-    const { visit } = props.navigation.state.params;
-
-    const {
-        appointmentType: { appointmentType },
-    } = visit;
-
     const today = moment(new Date()).format('YYYY-MM-DD');
     const current = generateDateInfo(today);
     const [day, setDay] = useState(moment(today).format('ll'));
@@ -51,7 +46,7 @@ const RescheduleVisit = props => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const { calendarID, uid } = props.navigation.state.params;
+        const { calendarID, uid } = visit;
         const obj = { 
             expertsParams: {
                 tableName: 'users',
@@ -67,7 +62,7 @@ const RescheduleVisit = props => {
                 ...current,
                 calendarID,
                 addMonth,
-                appointmentType,
+                appointmentTypeID: visit.appointmentTypeID,
             }),
         );
 
@@ -77,19 +72,19 @@ const RescheduleVisit = props => {
             getAppointmentsForToday({
                 ...current,
                 calendarID,
-                appointmentType,
+                appointmentTypeID: visit.appointmentTypeID,
             }),
         );
     }, []);
 
     const handlePress = date => {
-        const { calendarID, uid } = props.navigation.state.params;
+        const { calendarID } = visit;
         setDay(moment(date.date).format('ll'));
         dispatch(
             getAppointmentsForToday({
                 ...date,
                 calendarID,
-                appointmentType,
+                appointmentTypeID: visit.appointmentTypeID,
             }),
         );
     };
