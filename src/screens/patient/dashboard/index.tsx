@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/redux/reducers';
-import { ScrollView, Linking, Platform } from 'react-native';
+import { ScrollView, Linking, Platform, Alert } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
 import { getAppointmentsList } from '~/redux/reducers/appointments';
@@ -15,7 +15,6 @@ import styles from '~/components/styles';
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
-  
     const firstName = user.profileInfo.firstName;
     const subscription = useSelector(
         (state: RootState) => state.subscription.data,
