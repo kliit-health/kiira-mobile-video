@@ -27,7 +27,7 @@ import { View } from 'react-native-animatable';
 
 const { width } = metrices;
 
-const Calendar = () => {
+const Calendar = ({ navigation }) => {
     const appointments = useSelector((state: RootState) => state.appointments);
 
     const {
@@ -68,7 +68,6 @@ const Calendar = () => {
 
         let addMonth = moment(`${current.year}-${current.monthNumber}`);
         addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
-
         dispatch(
             getAppointmentDates({
                 ...current,
@@ -87,6 +86,7 @@ const Calendar = () => {
                 appointmentType: visit.details.appointmentType,
             }),
         );
+ 
     }, []);
 
     const handlePress = date => {

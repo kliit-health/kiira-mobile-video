@@ -32,10 +32,21 @@ const CareSquad = ({ navigation }) => {
             const {
                 profileInfo: { state },
             } = user;
-            const stateAvailableExperts = experts.filter(({ profileInfo }) => {
+            var stateAvailableExperts = experts.filter(({ profileInfo }) => {
                 const supportedStates = profileInfo.license.states;
                 return supportedStates.some(({ code }) => code === state.code);
             });
+
+            if(!user.test){
+                stateAvailableExperts = stateAvailableExperts.filter(
+                ({
+                    profileInfo: {
+                        test: value,
+                    }
+                }) => { 
+                    return !value
+                });
+            }
 
             setAvailableExperts(stateAvailableExperts);
         }

@@ -10,11 +10,24 @@ import { default as globalStyles } from '~/components/styles';
 const { white_bg } = globalStyles;
 
 const ClosedQuestions = ({ data, readResolveData }) => {
-    const experts = useSelector(state => state.experts.data);
+    const experts = useSelector((state:any) => state.experts.data);
+    const user = useSelector((state:any) => state.user.data);
     const handleNavigation = item => {
-        const expertDetails = experts.find(
+        var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
+
+        if(!user.test){
+            expertDetails = expertDetails.filter(
+            ({
+                profileInfo: {
+                    test: value,
+                }
+            }) => { 
+                return !value
+            });
+        }
+        
         navigation.navigate(screenNames.Messages, {
             expertDetails,
             questionData: item,

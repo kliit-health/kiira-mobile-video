@@ -225,7 +225,7 @@ export async function getAppointmentDatesAsync(data) {
         const { calendarID, monthNumber, addMonth, year, appointmentType } =
             data;
         const currentMonth = `${year}-${monthNumber}`;
-
+        
         var obj = {
             method: 'POST',
             headers: new Headers({
