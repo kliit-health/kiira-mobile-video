@@ -35,7 +35,7 @@ const Question = ({
                 >
                     {userUnreadCount > 0 && <Dot />}
                     <Image
-                        resizeMode="contain"
+                        resizeMode="cover"
                         style={styles.image}
                         source={{
                             uri: expertInfo.profileInfo.profileImageUrl

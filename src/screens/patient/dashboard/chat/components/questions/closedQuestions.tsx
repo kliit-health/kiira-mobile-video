@@ -16,17 +16,6 @@ const ClosedQuestions = ({ data, readResolveData }) => {
         var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
-
-        if(!user.test){
-            expertDetails = expertDetails.filter(
-            ({
-                profileInfo: {
-                    test: value,
-                }
-            }) => { 
-                return !value
-            });
-        }
         
         navigation.navigate(screenNames.Messages, {
             expertDetails,
@@ -34,6 +23,7 @@ const ClosedQuestions = ({ data, readResolveData }) => {
             readResolveData: readResolveData,
         });
     };
+    
     return (
         <Column options={[white_bg]}>
             <FlatList

@@ -18,6 +18,9 @@ const OpenQuestions = ({ data, readResolveData }) => {
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
+        if(item.modifiedDate == ""){
+            dt = new Date();
+        }
         let today = new Date();
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
@@ -32,17 +35,6 @@ const OpenQuestions = ({ data, readResolveData }) => {
         var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
-
-        if(!user.test){
-            expertDetails = expertDetails.filter(
-            ({
-                profileInfo: {
-                    test: value,
-                }
-            }) => { 
-                return !value
-            });
-        }
 
         navigation.navigate(screenNames.Messages, {
             expertDetails: expertDetails,
@@ -70,7 +62,6 @@ const OpenQuestions = ({ data, readResolveData }) => {
                 data={data}
                 renderItem={({ item }) => {
                     const time = convertModifiedTime(item);
-                    console.log('THE ITEM', item);
                     return (
                         <SwipeItem
                             disableSwipeIfNoButton
@@ -99,7 +90,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
                             <Question
                                 key={item.questionId}
                                 {...item}
-                                 time={time}
+                                time={time}
                                 onPress={() => handleNavigation(item)}
                             />
                            

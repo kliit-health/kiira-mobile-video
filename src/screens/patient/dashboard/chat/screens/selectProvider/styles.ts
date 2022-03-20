@@ -96,7 +96,9 @@ const styles = StyleSheet.create({
     expertsContainer: {
         width: metrics.width,
     },
-
+    conterStyle :{
+        paddingBottom: 140
+    },
     filterIconStyle: {
         width: 35,
         height: 35,

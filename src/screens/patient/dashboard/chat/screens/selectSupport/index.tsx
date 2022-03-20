@@ -15,9 +15,12 @@ const SelectSupport = ({ navigation }) => {
     }, []);
 
     const getStaff = async () => {
-        const condition = [{ key: 'role', operator: '==', value: 'Support' }];
-        const staff = await firebaseFetch('users', condition);
-        setStaff(staff);
+        const condition = [{ key: 'role', operator: '==', value: 'Expert' }];
+        var staffs = await firebaseFetch('users', condition);
+        staffs = staffs.filter(staff => {
+            return staff.displayName == "Kiira"
+        })
+        setStaff(staffs);
     };
 
     return (

@@ -37,7 +37,7 @@ const CareSquad = ({ navigation }) => {
                 return supportedStates.some(({ code }) => code === state.code);
             });
 
-            if(!user.test){
+            if(!user.profileInfo.test){
                 stateAvailableExperts = stateAvailableExperts.filter(
                 ({
                     profileInfo: {
