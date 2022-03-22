@@ -406,6 +406,7 @@ export async function cancelAppointmentData(data, message) {
         let userData = resData.data(); 
         let amount = (data.prepaidInfo && data.prepaidInfo.amount) ? data.prepaidInfo.amount : 0;
         let isPrePaid = (data.prepaidInfo && data.prepaidInfo.isPrePaid) ? data.prepaidInfo.isPrePaid : false;
+
         const totals = {
             required: credits,
             monthly: (userData.visits && userData.visits != "NaN") ? userData.visits : 0,
@@ -439,7 +440,7 @@ export async function cancelAppointmentData(data, message) {
                 .doc(uid)
                 .update({
                     visits: totals.monthly + totals.redeemMonthly,
-                    prepaid: totals.prepaid + totals.purchased,
+                    prepaid: totals.prepaid + totals.redeemPrepaid,
                 }); 
 
         const expertDocument = firestore()
