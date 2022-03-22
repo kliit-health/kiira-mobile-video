@@ -33,7 +33,7 @@ const PatientDetails = ({ navigation, visit, patientInfo}) => {
                         </View>
                         <View style={styles.expertProfession}>
                             <Text style={styles.expertProfessionTextStyle}>
-                                {visit.reason ? visit.reason.reason : ""}
+                                {visit.reason ? visit.reason : ""}
                             </Text>
                         </View>
                         <View style={{ marginTop: 5 }}>

@@ -13,10 +13,14 @@ const { white_bg } = globalStyles;
 
 const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
-    const experts = useSelector(state => state.experts.data);
+    const experts = useSelector((state:any) => state.experts.data);
+    const user = useSelector((state:any) => state.user.data);
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
+        if(item.modifiedDate == ""){
+            dt = new Date();
+        }
         let today = new Date();
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
@@ -28,7 +32,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
     };
 
     const handleNavigation = item => {
-        const expertDetails = experts.find(
+        var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
 
@@ -58,7 +62,6 @@ const OpenQuestions = ({ data, readResolveData }) => {
                 data={data}
                 renderItem={({ item }) => {
                     const time = convertModifiedTime(item);
-                    console.log('THE ITEM', item);
                     return (
                         <SwipeItem
                             disableSwipeIfNoButton
@@ -87,7 +90,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
                             <Question
                                 key={item.questionId}
                                 {...item}
-                                 time={time}
+                                time={time}
                                 onPress={() => handleNavigation(item)}
                             />
                            

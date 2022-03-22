@@ -27,7 +27,7 @@ const VisitInfo = ({ visit, lockTime }) => {
             <View style={styles.heading}>
                 <Text style={styles.title}>Chief Complaint</Text>
             </View>
-            <Text style={styles.info}>{visit.reason ? visit.reason.reason: ""}</Text>
+            <Text style={styles.info}>{visit.reason ? visit.reason: ""}</Text>
         </Fragment>
     );
 };

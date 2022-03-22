@@ -80,7 +80,7 @@ const SelectProvider = () => {
                 ({ videoEnabled }) => videoEnabled,
             );
 
-            const filteredExperts = videoEnabledExperts.filter(
+            var filteredExperts = videoEnabledExperts.filter(
                 ({
                     profileInfo: {
                         profession: { specialities },
@@ -91,7 +91,18 @@ const SelectProvider = () => {
                     });
                 },
             );
-
+            
+            if(!userProfile.test){
+                filteredExperts = filteredExperts.filter(
+                ({
+                    profileInfo: {
+                        test: value,
+                    }
+                }) => { 
+                    return !value
+                });
+            }
+ 
             setAvailableExperts(filteredExperts);
         }
     }, [experts]);

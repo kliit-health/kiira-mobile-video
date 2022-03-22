@@ -111,6 +111,8 @@ const Avatar = ({
                 skipBackup: true,
                 path: 'images',
             },
+            maxWidth: 400,
+            maxHeight: 400,
         };
  
         ImagePicker.showImagePicker(options, response => {

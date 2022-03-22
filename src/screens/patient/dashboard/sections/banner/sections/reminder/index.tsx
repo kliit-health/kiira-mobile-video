@@ -20,7 +20,6 @@ const Reminder = ({ navigation }) => {
     const visitData = visits.filter(item =>
         moment(today).isSameOrBefore(moment(item.time).format('YYYY-MM-DD')),
     );
-
     const sortedDataByDate = _.sortBy(visitData, 'time');
 
     const handleView = () => {

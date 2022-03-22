@@ -236,7 +236,7 @@ function* setAppointment({ payload }) {
         required: credits,
         monthly: visits,
         prepaid: prepaid,
-        purchased: credits - visits,
+        purchased: credits - visits > 0 ? credits - visits : 0,
         availible: visits + prepaid,
         redeemPrepaid:
             prepaid > 0 && credits - visits > 0 ? credits - visits : 0,

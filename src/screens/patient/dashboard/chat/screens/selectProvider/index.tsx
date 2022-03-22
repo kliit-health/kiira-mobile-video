@@ -8,12 +8,14 @@ import Experts from './experts';
 import Favorites from './favorites';
 import FilterModal from './filterModal';
 import { h3 } from '~/components/styles';
-import { colors } from '~/utils/constants';
+import { colors, healthcare } from '~/utils/constants';
+import { navItems } from '../../model';
 
 const SelectChatProvider = ({ navigation }) => {
-    const { expertData } = useSelector(state => state.chooseExpert);
+    const { expertData } = useSelector((state:any) => state.chooseExpert);
+    const user = useSelector((state:any) => state.user.data);
     const favorites = useSelector((state: any) => state.favoriteExperts.data);
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state:any) => state.language);
     const [experts, setExperts] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
     const serviceType = navigation.state.params.type;
@@ -24,10 +26,38 @@ const SelectChatProvider = ({ navigation }) => {
 
     const setInitialExperts = () => {
         let filtered = expertData.filter(expert => {
-            if (expert.chatTypes) {
-                return expert.chatTypes.includes(serviceType);
+            if(expert.profileInfo.profession.fullName == "Kiira"){
+                return;
             }
+            if(expert.profileInfo.profession.specialities){
+                if(serviceType == navItems[0].type){
+                    return expert.profileInfo.profession.specialities.filter(spec =>{
+                       return healthcare.primaryCare.includes(spec);
+                    }).length > 0;
+                }
+                else if(serviceType == navItems[1].type){
+                    return expert.profileInfo.profession.specialities.filter(spec =>{
+                        return healthcare.womensHealth.includes(spec);
+                    }).length > 0;
+                }
+                else if(serviceType == navItems[2].type){
+                    return expert.profileInfo.profession.specialities.filter(spec =>{
+                        return healthcare.mentalHealth.includes(spec);
+                    }).length > 0;
+                }
+            }
+            
         });
+        if(!user.profileInfo.test){
+            filtered = filtered.filter(
+            ({
+                profileInfo: {
+                    test: value,
+                }
+            }) => { 
+                return !value
+            });
+        }
         setExperts(filtered);
     };
 
