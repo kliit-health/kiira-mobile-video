@@ -229,7 +229,7 @@ const Future = ({ test, visit, date, navigation }) => {
                     <FastImage
                         onLoadEnd={handleEndLoad}
                         style={styles.expertImage}
-                        resizeMode={'contain'}
+                        resizeMode={'cover'}
                         source={
                             loading
                                 ? staticImages.profilePlaceholderImg

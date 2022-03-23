@@ -11,7 +11,6 @@ const { white_bg } = globalStyles;
 
 const ClosedQuestions = ({ data, readResolveData }) => {
     const experts = useSelector((state:any) => state.experts.data);
-    const user = useSelector((state:any) => state.user.data);
     const handleNavigation = item => {
         var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,

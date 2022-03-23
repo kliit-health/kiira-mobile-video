@@ -440,7 +440,7 @@ export async function cancelAppointmentData(data, message) {
                 .doc(uid)
                 .update({
                     visits: totals.monthly + totals.redeemMonthly,
-                    prepaid: totals.prepaid + totals.redeemPrepaid,
+                    prepaid: totals.prepaid + totals.purchased,
                 }); 
 
         const expertDocument = firestore()

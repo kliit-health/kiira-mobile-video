@@ -14,7 +14,6 @@ const { white_bg } = globalStyles;
 const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
     const experts = useSelector((state:any) => state.experts.data);
-    const user = useSelector((state:any) => state.user.data);
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
@@ -56,6 +55,24 @@ const OpenQuestions = ({ data, readResolveData }) => {
         dispatch(resolveQuestion(payloadData));
     };
 
+    const resolveButton = (item) => {
+        return(<SwipeButtonsContainer
+            style={styles.rightButton}
+        >
+            <TouchableOpacity
+                onPress={() => resolve(item)}
+            >
+                <Icon
+                    options={[styles.resolve]}
+                    source={icons.resolve}
+                />
+                <Text options={[styles.label]}>
+                    Resolve
+                </Text>
+            </TouchableOpacity>
+        </SwipeButtonsContainer>)
+    }
+
     return (
         <Column options={[white_bg]}>
             <FlatList
@@ -69,23 +86,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
                             swipeContainerStyle={
                                 styles.swipeContentContainerStyle
                             }
-                            rightButtons={
-                                <SwipeButtonsContainer
-                                    style={styles.rightButton}
-                                >
-                                    <TouchableOpacity
-                                        onPress={() => resolve(item)}
-                                    >
-                                        <Icon
-                                            options={[styles.resolve]}
-                                            source={icons.resolve}
-                                        />
-                                        <Text options={[styles.label]}>
-                                            Resolve
-                                        </Text>
-                                    </TouchableOpacity>
-                                </SwipeButtonsContainer>
-                            }
+                            rightButtons={resolveButton(item)}
                         >
                             <Question
                                 key={item.questionId}
