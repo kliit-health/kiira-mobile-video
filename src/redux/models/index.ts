@@ -43,6 +43,7 @@ export default {
                 code: '',
                 value: '',
             },
+            test: false,
             zipcode: '',
         },
         subscription: {
@@ -107,6 +108,7 @@ export default {
                 code: '',
                 value: '',
             },
+            test: false,
         },
         rating: '',
         referalCode: '',

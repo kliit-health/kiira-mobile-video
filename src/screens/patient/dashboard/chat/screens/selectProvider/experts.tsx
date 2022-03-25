@@ -59,11 +59,13 @@ const Experts = ({ experts, navigation }) => {
     return (
         <View style={styles.expertsContainer}>
             <FlatList
+                contentContainerStyle={styles.conterStyle}
                 showsHorizontalScrollIndicator={false}
                 keyboardDismissMode={Platform.OS === 'ios' ? 'none' : 'on-drag'}
                 keyboardShouldPersistTaps={
                     Platform.OS === 'ios' ? 'never' : 'always'
                 }
+                 
                 data={experts}
                 renderItem={({ item }) => {
                     const {
@@ -78,7 +80,7 @@ const Experts = ({ experts, navigation }) => {
                         <View style={styles.expertInfoContainer}>
                             <View style={styles.imageView}>
                                 <Image
-                                    resizeMode="contain"
+                                    resizeMode="cover"
                                     style={styles.expertProfile}
                                     source={{
                                         uri: profileImageUrl

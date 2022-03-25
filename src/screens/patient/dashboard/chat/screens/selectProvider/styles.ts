@@ -83,8 +83,11 @@ const styles = StyleSheet.create({
 
     expertProfile: {
         height: 70,
-        width: 70,
-        paddingRight: 10,
+        width: 70, 
+        paddingRight: 10, 
+        borderRadius:100,
+        borderColor:colors.purple,
+        overflow: 'hidden',
     },
     imageView: {
         borderWidth: 2,
@@ -96,7 +99,9 @@ const styles = StyleSheet.create({
     expertsContainer: {
         width: metrics.width,
     },
-
+    conterStyle :{
+        paddingBottom: 140
+    },
     filterIconStyle: {
         width: 35,
         height: 35,

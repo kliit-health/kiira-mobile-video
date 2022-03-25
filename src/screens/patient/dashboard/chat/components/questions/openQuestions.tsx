@@ -13,10 +13,13 @@ const { white_bg } = globalStyles;
 
 const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
-    const experts = useSelector(state => state.experts.data);
+    const experts = useSelector((state:any) => state.experts.data);
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
+        if(item.modifiedDate == ""){
+            dt = new Date();
+        }
         let today = new Date();
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
@@ -28,7 +31,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
     };
 
     const handleNavigation = item => {
-        const expertDetails = experts.find(
+        var expertDetails = experts.find(
             expert => expert.uid === item.expertInfo.uid,
         );
 
@@ -52,13 +55,30 @@ const OpenQuestions = ({ data, readResolveData }) => {
         dispatch(resolveQuestion(payloadData));
     };
 
+    const resolveButton = (item) => {
+        return(<SwipeButtonsContainer
+            style={styles.rightButton}
+        >
+            <TouchableOpacity
+                onPress={() => resolve(item)}
+            >
+                <Icon
+                    options={[styles.resolve]}
+                    source={icons.resolve}
+                />
+                <Text options={[styles.label]}>
+                    Resolve
+                </Text>
+            </TouchableOpacity>
+        </SwipeButtonsContainer>)
+    }
+
     return (
         <Column options={[white_bg]}>
             <FlatList
                 data={data}
                 renderItem={({ item }) => {
                     const time = convertModifiedTime(item);
-                    console.log('THE ITEM', item);
                     return (
                         <SwipeItem
                             disableSwipeIfNoButton
@@ -66,28 +86,12 @@ const OpenQuestions = ({ data, readResolveData }) => {
                             swipeContainerStyle={
                                 styles.swipeContentContainerStyle
                             }
-                            rightButtons={
-                                <SwipeButtonsContainer
-                                    style={styles.rightButton}
-                                >
-                                    <TouchableOpacity
-                                        onPress={() => resolve(item)}
-                                    >
-                                        <Icon
-                                            options={[styles.resolve]}
-                                            source={icons.resolve}
-                                        />
-                                        <Text options={[styles.label]}>
-                                            Resolve
-                                        </Text>
-                                    </TouchableOpacity>
-                                </SwipeButtonsContainer>
-                            }
+                            rightButtons={resolveButton(item)}
                         >
                             <Question
                                 key={item.questionId}
                                 {...item}
-                                 time={time}
+                                time={time}
                                 onPress={() => handleNavigation(item)}
                             />
                            

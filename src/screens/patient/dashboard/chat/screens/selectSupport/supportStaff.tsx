@@ -32,7 +32,7 @@ const SupportStaff = ({ staff, navigation }) => {
                         <View style={styles.expertInfoContainer}>
                             <View style={styles.supportImageView}>
                                 <Image
-                                    resizeMode="contain"
+                                    resizeMode="cover"
                                     style={styles.expertProfile}
                                     source={{
                                         uri: profileImageUrl

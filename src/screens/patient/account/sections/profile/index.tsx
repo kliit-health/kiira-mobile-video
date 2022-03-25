@@ -58,6 +58,8 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                 skipBackup: true,
                 path: 'images',
             },
+            maxWidth: 300,
+            maxHeight: 300,
         };
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
@@ -120,19 +122,20 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
 
     const renderImageView = () => {
         return (
-            <TouchableOpacity
+            <View
                 style={styles.imageView}
-                onPress={() => {
-                    requestCameraPermission();
-                }}
             >
                 <Image
                             style={styles.image}
-                            resizeMode="stretch"
+                            resizeMode="cover"
                             source={imageUri ? {uri: imageUri} : staticImages.profilePlaceholderImg}
                         />
 
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        requestCameraPermission();
+                    }}
+                >
                     <Image
                         style={styles.AddEditImage}
                         source={
@@ -142,7 +145,7 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                         }
                     />
                 </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
         );
     };
 
@@ -159,7 +162,6 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
             <View style={styles.detailsContainer}>
                 <Text
                     style={styles.title}
-                    onPress={() => {}}
                 >{`${firstName} ${lastName}`}</Text>
             </View>
 

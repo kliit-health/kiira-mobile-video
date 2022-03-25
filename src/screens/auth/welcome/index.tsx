@@ -178,6 +178,8 @@ const Welcome = ({ navigation }) => {
                 skipBackup: true,
                 path: 'images',
             },
+            maxWidth: 400,
+            maxHeight: 400,
         };
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {

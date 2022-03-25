@@ -62,12 +62,13 @@ const Future = ({ test, visit, date, navigation }) => {
     const {
         uid,
         calendarID,
-        appointmentType = null,
+        appointmentType = visit.appointmentType ? visit.appointmentType : null,
         reason,
         id,
         expert,
         prepaid,
-        prepaidInfo,
+        prepaidInfo = visit.prepaidInfo ? visit.prepaidInfo : null,
+        visits = visit.visits ? visit.visits : null,
     } = visit;
 
     const credits =
@@ -87,6 +88,7 @@ const Future = ({ test, visit, date, navigation }) => {
         prepaid,
         credits,
         prepaidInfo,
+        visits,
     };
 
     let today = moment().local();
@@ -227,7 +229,7 @@ const Future = ({ test, visit, date, navigation }) => {
                     <FastImage
                         onLoadEnd={handleEndLoad}
                         style={styles.expertImage}
-                        resizeMode={'contain'}
+                        resizeMode={'cover'}
                         source={
                             loading
                                 ? staticImages.profilePlaceholderImg

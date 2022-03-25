@@ -92,9 +92,13 @@ const ItemFuture = props => {
         expert,
         onPress,
         index,
-        appointmentType: { duration },
+        appointmentType = null,
     } = props;
     const { firstName, lastName } = expert;
+    const duration =
+    typeof appointmentType !== 'string' && appointmentType
+      ? appointmentType.duration
+      : reason.sessionType.duration;
 
     const handlePress = () => {
         if (onPress) {

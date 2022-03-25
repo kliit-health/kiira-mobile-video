@@ -19,13 +19,16 @@ const Appointments = ({ navigation }) => {
         let future = [];
         if (history.length) {
             history.forEach(visit => {
-                let appointment = moment(visit.time);
-                let now = moment(new Date());
-                if (appointment.diff(now, 'hours') >= -1) {
-                    future.push(visit);
-                } else if (appointment.diff(now, 'hours') <= -1) {
-                    past.push(visit);
+                if(visit){
+                    let appointment = moment(visit.time);
+                    let now = moment(new Date());
+                    if (appointment.diff(now, 'hours') >= -1) {
+                        future.push(visit);
+                    } else if (appointment.diff(now, 'hours') <= -1) {
+                        past.push(visit);
+                    }
                 }
+                
             });
 
             past = past.sort((a, b) => {
@@ -41,10 +44,9 @@ const Appointments = ({ navigation }) => {
                     parseInt(moment(b.time).format('x'))
                 );
             });
-
-            setPast(past);
-            setFuture(future);
         }
+        setPast(past);
+        setFuture(future);
     }, [history]);
     
     const handleTabSelect = () => {

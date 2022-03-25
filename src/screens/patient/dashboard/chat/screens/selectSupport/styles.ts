@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
 
     supportImageView:{
         borderWidth:3,
-        borderRadius:1000,
-        borderColor:colors.purple
+        borderRadius:100,
+        borderColor:colors.purple,
+        overflow: 'hidden',
     },
 
     expertInfoProfession: {
@@ -71,7 +72,6 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         paddingRight: 10,
-       
     },
 
     expertsContainer: {
