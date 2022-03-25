@@ -5,7 +5,12 @@ import CustomButton from '~/components/customButton';
 import styles from '../styles';
 import { withNavigation } from 'react-navigation';
 
-const VisitDetails = ({ navigation, visit }) => {
+const VisitDetails = ({ navigation }) => {
+    const { visit } = navigation.state.params;
+    const { appointmentType, reason } = visit;
+    const duration = appointmentType
+    ? appointmentType.duration
+    : reason.sessionType.duration;
     let today = moment().startOf('day');
     let appointment =
         typeof visit.time === 'number'
@@ -14,9 +19,6 @@ const VisitDetails = ({ navigation, visit }) => {
     let daysUntilVisit = Math.abs(
         moment.duration(today.diff(appointment)).asDays(),
     );
-    const {
-        appointmentType: { duration },
-    } = visit;
 
     // To test video after booking
     // let daysUntilVisit = 0;

@@ -112,7 +112,7 @@ const VisitSummary = ({ navigation }) => {
                 <View style={styles.card}>
                     <Text style={styles.sectionTitle}>{chiefComplaint}</Text>
                     <Text style={styles.detailsDescription}>
-                        {visit.reason ? visit.reason.reason: ""}
+                        {visit.reason ? visit.reason: ""}
                     </Text>
                 </View>
                 <View style={styles.card}>

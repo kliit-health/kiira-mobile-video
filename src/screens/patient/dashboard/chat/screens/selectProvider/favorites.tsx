@@ -77,8 +77,8 @@ const Favorites = ({ experts, navigation }) => {
                     return (
                         <View style={styles.expertInfoContainer}>
                            <Image
-                                resizeMode="contain"
-                                style={styles.expertProfile}
+                                resizeMode="cover"
+                                style={[styles.expertProfile, {borderWidth:2}]}
                                 source={{
                                     uri: profileImageUrl ? profileImageUrl : '',
                                 }}

@@ -11,7 +11,7 @@ const VisitCard = ({ visit, date }) => {
         firstName,
         lastName,
         reason,
-        appointmentType: { duration },
+        appointmentType,
     }: Visit = visit;
     const {
         dow,
@@ -19,6 +19,10 @@ const VisitCard = ({ visit, date }) => {
         day,
         hour: { time, am_pm },
     }: Date = date;
+
+    const duration = appointmentType
+    ? appointmentType.duration
+    : reason.sessionType.duration;
 
     return (
         <View style={{ alignSelf: 'center' }}>

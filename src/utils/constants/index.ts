@@ -419,7 +419,7 @@ export default {
 
         privacyPolicyurl: 'https://www.kiira.io/privacy-policy',
         questionCreditValue: 10,
-        rateUsUrl: 'https://kliit-health-app.firebaseapp.com/devicedetection',
+        rateUsUrl: 'https://kiira-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
         becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',       
@@ -2067,6 +2067,20 @@ export const urls = {
         appointmentChange:
             'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
     },
+    staging: {
+        appointmentGetByDay:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
+        appointmentGetByMonth:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
+        appointmentCheckTime:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
+        appointmentMake:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentMakeAuth',
+        appointmentCancel:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCancelAuth',
+        appointmentChange:
+            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentChangeAuth',
+    },
 };
 
 export const assessmentText = {
@@ -2291,6 +2305,54 @@ export const queryTypes = {
     ], 
 }; 
 
+export const healthcare = {
+    primaryCare: [
+        "Asthma",
+        "Cold and Flu",
+        "Headaches",
+        "Sexually Transmitted Infections",
+        "Acne",
+        "UTI",
+        "Sore Throat",
+        "Rashes",
+        "Depression / Anxiety",
+        "Nutrition",
+        "Covid 19",
+        "General Health",
+    ],
+    womensHealth: [
+        "Sexually Transmitted Infections",
+        "Heavy or Painful Periods",
+        "Breast Concerns",
+        "Birth Control",
+        "Pregnancy",
+        "Abortion",
+        "UTI",
+        "Vaginal Infections",
+        "Pelvic Pain",
+        "Fibroids",
+        "Ovarian Cysts",
+        "PMS",
+        "Sex Therapy",
+        "Nutrition",
+        "Painful Sex"
+    ],
+    mentalHealth: [
+        "Depression",
+        "Anxiety",
+        "Eating Disorder",
+        "Insomnia / Trouble Sleeping",
+        "ADHD",
+        "Stress / Difficulty Coping",
+        "Counseling",
+        "Time Management",
+        "Family Stress",
+        "Alcohol and Substance Use",
+        "OCD",
+        "PTSD"
+    ]
+
+}
 export const healthIntakeQuerying = [
     {
         name: "How would you rate your overall health?",
