@@ -21,10 +21,11 @@ const OpenQuestions = ({ data, readResolveData }) => {
             dt = new Date();
         }
         let today = new Date();
+       
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1)
        return dt.toLocaleDateString() === today.toLocaleDateString()
-            ? moment(dt).format('hh:mm a')
+            ? moment(dt).format('h:mm a')
             : dt.toLocaleDateString() === yesterday.toLocaleDateString()
             ? days.yesterday
             : moment(dt).format('MM/D/YY h:mm a');     
