@@ -10,9 +10,9 @@ import { default as globalStyles } from '~/components/styles';
 
 const { pad_h, blue_bg, space_between } = globalStyles;
 
-export const None = () => {
+export const None = ({pastSelected}) => {
     const lang = useSelector((state: RootState) => state.language);
-
+ 
     return (
         <Column options={[blue_bg, pad_h, space_between]}>
             <Image
@@ -20,7 +20,7 @@ export const None = () => {
                 resizeMode="contain"
                 source={images.penguin}
             />
-            <Text style={styles.title}>{lang.appointments.noVisits}</Text>
+            <Text style={styles.title}>{pastSelected ? lang.appointments.noPastVisits : lang.appointments.noVisits}</Text>
             <TextButton
                 styles={Platform.OS == 'android' ? { root: { marginTop: 'auto',marginBottom:'3%' } }: { root: { marginTop: 'auto'} }}
                 onPress={() => handleNavigation(screenNames.Book)}

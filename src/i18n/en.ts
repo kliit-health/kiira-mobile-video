@@ -520,6 +520,7 @@ export default {
         scheduleAppointment: 'Schedule Appointment',
         notify: "We'll notifiy you about upcoming appointments, new messages, and more",
         noVisits: 'You have no scheduled appointments',
+        noPastVisits: 'You have no past visits',
         endVisit: 'Are you sure you want to end your visit?',
     },
     expertChats: {

@@ -49,7 +49,7 @@ export const Show = ({ pastSelected, past, future }) => {
                 <Visits data={data} />
             </Conditional>
             <Conditional if={!data.length}>
-                <None />
+                <None pastSelected={pastSelected}/>
             </Conditional>
         </>
     );
