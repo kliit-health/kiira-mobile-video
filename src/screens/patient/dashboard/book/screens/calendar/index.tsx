@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList, Alert } from 'react-native';
+import { ActivityIndicator, FlatList, Alert, StyleSheet } from 'react-native';
 import * as Kiira from '~/components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '~/redux/reducers';
@@ -10,13 +10,14 @@ import {
     getAppointmentsForToday,
     setAppointmentDayAndTime,
 } from '~/redux/reducers/appointments';
+import NativeModal from 'react-native-modal';
 
 import {
     handleBack,
     handleNavigation,
 } from '~/utils/functions/handleNavigation';
 import { generateDateInfo } from '~/utils/helper';
-import { colors } from '~/utils/constants';
+import { colors, screenNames, text } from '~/utils/constants';
 import metrices from '~/utils/metrices';
 import { bookVisitText } from '~/utils/constants';
 
@@ -24,12 +25,13 @@ import moment from 'moment';
 
 import { default as globalStyles } from '~/components/styles';
 import { View } from 'react-native-animatable';
+import { CustomButton, CustomText } from '~/components';
 
 const { width } = metrices;
 
 const Calendar = ({ navigation }) => {
     const appointments = useSelector((state: RootState) => state.appointments);
-
+    const [showModal, setShowModal] = useState(false);
     const {
         pad,
         medium,
@@ -56,7 +58,36 @@ const Calendar = ({ navigation }) => {
     const [time, setTime] = useState(null);
 
     const dispatch = useDispatch();
+    const RenderModalView = () => {
+        return (
+            <NativeModal
+                backdropColor={'rgba(0, 0, 0, 0.7)'}
+                backdropOpacity={0.5}
+                onBackdropPress={() => setShowModal(false)}
+                isVisible={showModal}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <CustomText style={styles.modalText}>
+                            {
+                                'This Clinician has no availability'
+                            }
+                        </CustomText>
 
+                        <CustomButton
+                            buttonStyle={styles.button}
+                            textStyle={styles.textStyle}
+                            text={'OK'}
+                            onPress={() => {
+                                setShowModal(false);
+                                navigation.navigate(screenNames.SelectProvider);
+                            }}
+                        />
+                    </View>
+                </View>
+            </NativeModal>
+        );
+    };
     useEffect(() => {
         const { calendarID, uid } = visit.expert;
         const obj = {
@@ -109,17 +140,22 @@ const Calendar = ({ navigation }) => {
         dispatch(setAppointmentDayAndTime({ day, time }));
         handleNavigation('Payment');
     };
-
+    useEffect(() => {
+        console.log("Appointment", appointments);
+    //    appointments.dates.length === undefined && setShowModal(true)
+    }, [appointments])
+    
     return (
         <Kiira.Screen>
             <Kiira.Header onBack={handleBack} title="Book Visit" />
             <Kiira.Text options={[pad, medium, light, pad_t]}>{day}</Kiira.Text>
+            {/* {showModal ?  <RenderModalView /> : null} */}
             <Kiira.Row options={[sm_pad_h, { height: 90 }]}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     keyExtractor={({ date }) => date}
-                    data={appointments.dates}
+                    data={!!appointments.dates.length ? appointments.dates : []}
                     ListEmptyComponent={() => (
                         <ActivityIndicator
                             style={{ marginLeft: width / 2 - 30 }}
@@ -162,7 +198,7 @@ const Calendar = ({ navigation }) => {
                 initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointments.appointments.current}
+                data={appointments.appointments.current.length }
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
@@ -205,3 +241,50 @@ const Calendar = ({ navigation }) => {
 };
 
 export default Calendar;
+
+const styles = StyleSheet.create({
+    modalView: {
+        margin: '5%',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: '2%',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        width: '80%',
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+    button: {
+        borderRadius: 20,
+        margin: '6%',
+        padding: 10,
+        elevation: 2,
+        backgroundColor: colors.primaryBlue,
+        width: '80%',
+    },
+
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    modalText: {
+        fontFamily: text.fontFamily.poppinsRegular,
+        fontSize: text.size.regular,
+        color: colors.black,
+        textAlign: 'left',
+        margin: '6%',
+        lineHeight: 30,
+    },
+})
