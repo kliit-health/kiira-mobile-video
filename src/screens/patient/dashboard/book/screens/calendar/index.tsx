@@ -143,7 +143,7 @@ const Calendar = ({ navigation }) => {
     useEffect(() => {
         const appInterval = setTimeout(() => {
             //When the appointment is settled, wait for 5 seconds and if dates is undefined show modal
-            if (!appointments?.dates?.length || !appointments?.appointments?.current?.length ) {
+            if (!appointments?.dates?.length ) {
                 setShowModal(true);
             }
         }, 5000)
