@@ -141,21 +141,29 @@ const Calendar = ({ navigation }) => {
         handleNavigation('Payment');
     };
     useEffect(() => {
-        console.log("Appointment", appointments);
-    //    appointments.dates.length === undefined && setShowModal(true)
-    }, [appointments])
-    
+        const appInterval = setTimeout(() => {
+            //When the appointment is settled, wait for 5 seconds and if dates is undefined show modal
+            if (!appointments?.dates?.length) {
+                setShowModal(true);
+            }
+        }, 5000)
+        return () => {
+            //This clears out timeout when the appointments changes
+            clearTimeout(appInterval)
+        }
+    }, [appointments]);
+
     return (
         <Kiira.Screen>
             <Kiira.Header onBack={handleBack} title="Book Visit" />
             <Kiira.Text options={[pad, medium, light, pad_t]}>{day}</Kiira.Text>
-            {/* {showModal ?  <RenderModalView /> : null} */}
+            {showModal && <RenderModalView />}
             <Kiira.Row options={[sm_pad_h, { height: 90 }]}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     keyExtractor={({ date }) => date}
-                    data={!!appointments.dates.length ? appointments.dates : []}
+                    data={!!appointments?.dates.length ? appointments.dates : []}
                     ListEmptyComponent={() => (
                         <ActivityIndicator
                             style={{ marginLeft: width / 2 - 30 }}
@@ -198,7 +206,7 @@ const Calendar = ({ navigation }) => {
                 initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointments.appointments.current.length }
+                data={appointments.appointments.current }
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
