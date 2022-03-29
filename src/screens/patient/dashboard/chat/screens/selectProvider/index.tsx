@@ -29,7 +29,7 @@ const SelectChatProvider = ({ navigation }) => {
             if(expert.profileInfo.profession.fullName == "Kiira"){
                 return;
             }
-            if(expert.profileInfo.profession.specialities){
+            if(expert.profileInfo.profession.specialities && expert.chatEnabled){
                 if(serviceType == navItems[0].type){
                     return expert.profileInfo.profession.specialities.filter(spec =>{
                        return healthcare.primaryCare.includes(spec);
@@ -63,9 +63,9 @@ const SelectChatProvider = ({ navigation }) => {
 
     const filterExperts = (gender, languages) => {
          setInitialExperts();
-        let experts = expertData.filter(expert =>{
+        let experts = expertData.filter(expert => {
             if (expert.chatTypes) {
-                return expert.chatTypes.includes(serviceType)
+                return expert.chatTypes.includes(serviceType);
             }
         });
 
