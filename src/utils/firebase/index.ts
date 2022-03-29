@@ -1459,8 +1459,6 @@ export async function payIntent({ visit }) {
 
         return response.data;
     } catch (err) {
-        console.log('visit = ', visit)
-        console.log('err payIntent = ', err.message)
         let status = err.status ? err.status : 'internal';
         return { ok: false, status };
     }
