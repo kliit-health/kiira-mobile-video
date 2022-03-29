@@ -58,6 +58,13 @@ const Future = ({ test, visit, date, navigation }) => {
     const user = useSelector((state: RootState) => state.user);
     const callConfig = useSelector((state: RootState) => state.twillio);
     const { staticImages } = constants.App;
+    const initialState = {
+        isAudioEnabled: true,
+        status: 'disconnected',
+        userName: '',
+        roomName: '',
+        token: '',
+    };
 
     const {
         uid,
@@ -70,7 +77,7 @@ const Future = ({ test, visit, date, navigation }) => {
         prepaidInfo = visit.prepaidInfo ? visit.prepaidInfo : null,
         visits = visit.visits ? visit.visits : null,
     } = visit;
-
+console.log(appointmentType)
     const credits =
         typeof appointmentType !== 'string' && appointmentType
             ? appointmentType.credits
@@ -211,7 +218,12 @@ const Future = ({ test, visit, date, navigation }) => {
             dispatch(getCallToken({ navigation, uid }));
         });
     };
-
+// useEffect(()=>{
+// setTimeout(()=>{
+//     dispatch(setCallConfig(initialState));
+//      navigation.navigate('VisitEnd');
+// },10000)
+// },[])
     const VisitTime = () => {
         return (
             <View style={styles.appointment}>
