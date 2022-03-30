@@ -59,7 +59,21 @@ function* getAppointmentsToday({ payload }) {
     const lang = yield select(state => state.language);
     try {
         yield put(showApiLoader());
+        
         const response = yield getAppointmentsByDayAsync(payload);
+        if(!response || !response.current || response.current.length == 0 || response.current.error){
+            yield put(hideApiLoader());
+            yield put(
+                showOrHideModal(
+                    "  This provider is busy now.\n Please select other provider.",
+                ),
+            );
+            if(navigation){
+                navigation.goBack();
+            }
+            
+        }
+        
         yield put(setTimes(response));
         yield put(hideApiLoader());
         return;
@@ -89,7 +103,13 @@ function* getAllAppointmentDates({ payload }) {
     try {
         yield put(showApiLoader());
         const response = yield getAppointmentDatesAsync(payload);
-        yield put(setAppointmentDates(response));
+        if(response && typeof(response) === 'string'){
+            yield put(setAppointmentDates([]));
+        }
+        else{
+            yield put(setAppointmentDates(response));
+        }
+        
         yield put(hideApiLoader());
         return;
     } catch (error) {

@@ -119,7 +119,7 @@ const Calendar = ({ navigation }) => {
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     keyExtractor={({ date }) => date}
-                    data={appointments.dates}
+                    data={appointments.dates.length ? appointments.dates : []}
                     ListEmptyComponent={() => (
                         <ActivityIndicator
                             style={{ marginLeft: width / 2 - 30 }}
@@ -162,7 +162,7 @@ const Calendar = ({ navigation }) => {
                 initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointments.appointments.current}
+                data={appointments.appointments.current.error ? [] : appointments.appointments.current}
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}
