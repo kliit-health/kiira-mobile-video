@@ -52,10 +52,13 @@ const VideoCallScreen = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
-        setTimeout(() => {
-            twilioVideo.current.disconnect();
-            dispatch(setCallConfig(initialState));
-        }, visit.appointmentType.duration * 60000);
+        if(!visit || !visit.appointmentType || !visit.appointmentType.duration) return
+        const videoVisitTimeout = setTimeout(() => {
+            _onEndButtonPress();
+        }, 10000);
+        return () => {
+            clearTimeout(videoVisitTimeout)
+        }
     }, [visit.appointmentType.duration]);
 
     const _onEndButtonPress = () => {
