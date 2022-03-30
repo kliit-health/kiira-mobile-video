@@ -9,8 +9,8 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
      
     const pattern = new RegExp(/^[0-9\-\b]+$/);
     const [lEmergencyContactInfo, setEmergencyContactInfo] = useState(emergencyContactInfo); 
+    const [firstName, setFirstName] = useState((emergencyContactInfo && emergencyContactInfo.firstName) ? emergencyContactInfo.firstName : '');
     const [lastName, setLastName] = useState((emergencyContactInfo && emergencyContactInfo.lastName) ? emergencyContactInfo.lastName : '');
-    const [firstName, setFirstName] = useState((emergencyContactInfo && emergencyContactInfo.firstName) ? emergencyContactInfo.firstName + '&' + lastName : '');    
     const [phoneNumber, setPhoneNumber] = useState((emergencyContactInfo && emergencyContactInfo.phoneNumber) ? emergencyContactInfo.phoneNumber : '');
     const [secondNumber, setSecondNumber] = useState((emergencyContactInfo && emergencyContactInfo.secondNumber) ? emergencyContactInfo.secondNumber : '');
     const [relationship, setRelationship] = useState((emergencyContactInfo && emergencyContactInfo.relationship) ? emergencyContactInfo.relationship : '');    
@@ -20,9 +20,8 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
 
     }, []);  
 
-    const canConfirm = (first, last, phone1, phone2, relation)=>{ 
-        if(phone1.length == 12 && phone2.length == 12 && first && 
-            (first.indexOf('&') <= first.length - 2) && first.indexOf('&') > 0 && relation){
+    const canConfirm = (first, last, phone)=>{ 
+        if(first && last && phone.length === 12){
             setDisabled(false); 
             return false;
         }
@@ -116,13 +115,36 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
                             autoCapitalize="words"
                             onChangeText={value =>{
                                 setFirstName(value); 
-                                canConfirm(value, lastName, phoneNumber, secondNumber, relationship);
+                                canConfirm(value, lastName, phoneNumber);
                             }
                             }
-                            placeholder={lang.emergencyContact.firstLastName}
+                            placeholder={lang.emergencyContact.firstName}
                             value={firstName}
                             style={
                                 (firstName)
+                                ? styles.inputEditTypeStyle
+                                : [
+                                    styles.inputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]
+                            }
+                            placeholderTextColor={
+                                "#868992"
+                            }
+                        />
+                    </View>
+                    <View style={styles.inputTextContainerStyle}>
+                        <CustomInputText
+                            autoCapitalize="words"
+                            onChangeText={value =>{
+                                setLastName(value); 
+                                canConfirm(firstName, value, phoneNumber);
+                            }
+                            }
+                            placeholder={lang.emergencyContact.lastName}
+                            value={lastName}
+                            style={
+                                (lastName)
                                 ? styles.inputEditTypeStyle
                                 : [
                                     styles.inputEmptyTypeStyle,
@@ -202,7 +224,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
                 </View>
                 <Button 
                     onPress={() => {   
-                        var emergency = {firstName: firstName.substr(0, firstName.indexOf('&')), lastName: firstName.substr(firstName.indexOf('&') + 1), 
+                        var emergency = {firstName: firstName, lastName: lastName, 
                             phoneNumber: phoneNumber, secondNumber: secondNumber, relationship: relationship};
                         setEmergencyContactInfo(emergency);
                         toggleModal(false, emergency);

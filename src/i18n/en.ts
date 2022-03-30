@@ -459,7 +459,8 @@ export default {
     },
     emergencyContact: {
         title: 'Emergency Contact', 
-        firstLastName: 'First & Last Name*',
+        firstName: 'First Name*',
+        lastName: 'Last Name*',
         phoneNumber: 'Phone Number*',
         secondaryPhoneNumber: 'Secondary Phone Number',
         relationshipToYou: 'Relationship to You'
