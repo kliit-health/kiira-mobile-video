@@ -36,8 +36,9 @@ const VideoCallScreen = ({ navigation }) => {
     const twilioVideo = useRef(null);
     const dispatch = useDispatch();
     const callConfig = useSelector(state => state.twillio);
+    const { visit } = useSelector((state: RootState) => state.appointments);
     const [videoTracks, setVideoTracks] = useState(new Map());
-
+    
     useEffect(() => {
         twilioVideo.current.connect({
             roomName: callConfig.roomName,
@@ -50,10 +51,17 @@ const VideoCallScreen = ({ navigation }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        setTimeout(() => {
+            twilioVideo.current.disconnect();
+            dispatch(setCallConfig(initialState));
+        }, visit.appointmentType.duration * 60000);
+    }, [visit.appointmentType.duration]);
+
     const _onEndButtonPress = () => {
         twilioVideo.current.disconnect();
         dispatch(setCallConfig(initialState));
-        // navigation.navigate('VisitEnd');
+        //  navigation.navigate('VisitEnd');
     };
 
     const _onPauseButtonPress = () => {
