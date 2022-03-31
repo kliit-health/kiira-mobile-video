@@ -41,7 +41,7 @@ export default StyleSheet.create({
     },
     AddEditImage: {
         position: 'absolute',
-        left: '2%',
+        right: '2%',
         bottom: '2%'
     },
 

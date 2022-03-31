@@ -71,7 +71,7 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
                     response.uri.lastIndexOf('/') + 1,
                     response.uri.length,
                 );
-                const ext = response.uri.split('.').pop();
+                const ext = response.type && response.type.split('/').pop();
                 const filename =
                     Platform.OS === 'ios'
                         ? `${Math.floor(Date.now())}${name}`
@@ -122,20 +122,22 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
 
     const renderImageView = () => {
         return (
-            <View
-                style={styles.imageView}
-            >
-                <Image
-                            style={styles.image}
-                            resizeMode="cover"
-                            source={imageUri ? {uri: imageUri} : staticImages.profilePlaceholderImg}
-                        />
-
+            <View style={styles.imageView}>
                 <TouchableOpacity
                     onPress={() => {
                         requestCameraPermission();
                     }}
                 >
+                    <Image
+                        style={styles.image}
+                        resizeMode="cover"
+                        source={
+                            imageUri
+                                ? { uri: imageUri }
+                                : staticImages.profilePlaceholderImg
+                        }
+                    />
+
                     <Image
                         style={styles.AddEditImage}
                         source={
@@ -160,9 +162,7 @@ export default ({ profileInfo, navigation, setShowModal, intakeData }) => {
             </View>
             {renderImageView()}
             <View style={styles.detailsContainer}>
-                <Text
-                    style={styles.title}
-                >{`${firstName} ${lastName}`}</Text>
+                <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
             </View>
 
             <View style={styles.root}>

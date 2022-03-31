@@ -16,12 +16,11 @@ function* updateExpertData({ data }) {
 
         if (imageParams) { 
             const responseImage = yield uploadImage(imageParams); 
-
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata; 
                 var refStorage = name;
                 if(Platform.OS === 'android'){
-                  refStorage = 'Kiira/' + name;;
+                  refStorage = 'Kiira/' + name;
                 }
                 const url = yield storage().ref(refStorage).getDownloadURL(); 
 

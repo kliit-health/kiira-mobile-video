@@ -16,6 +16,7 @@ import { getUser, updateUser as _updateUser } from '~/redux/actions';
 import storage from '@react-native-firebase/storage';
 import { changePassword, reAunthenticate } from '~/utils/firebase';
 import { default as navigation } from '~/navigation/navigationService';
+import { Platform } from 'react-native';
 
 function* signout() {
     const lang = yield select(state => state.language);
@@ -52,7 +53,11 @@ function* updateUser({ payload }) {
 
             if (responseImage.success) {
                 const { name } = responseImage.data.metadata;
-                const url = yield storage().ref(name).getDownloadURL();
+                let refStorage = name;
+                if(Platform.OS === 'android'){
+                    refStorage = 'Kiira/' + name;
+                  }
+                const url = yield storage().ref(refStorage).getDownloadURL();
                 const userUpdate = {
                     ...user,
                     role: userParams?.role ? userParams?.role : user?.role,
