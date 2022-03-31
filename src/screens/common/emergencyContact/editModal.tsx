@@ -16,9 +16,11 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
     const [relationship, setRelationship] = useState((emergencyContactInfo && emergencyContactInfo.relationship) ? emergencyContactInfo.relationship : '');    
     const [disabled, setDisabled] = useState(false)
 
-    useEffect(() => { 
-
-    }, []);  
+    useEffect(() => {
+        if (firstName === 0 || lastName === 0 || phoneNumber.length !== 12) {
+            setDisabled(true);
+        }
+    }, []);
 
     const canConfirm = (first, last, phone)=>{ 
         if(first && last && phone.length === 12){
