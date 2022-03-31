@@ -74,7 +74,7 @@ class Kiira extends PureComponent {
             <Provider store={store}>
                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                     <StripeProvider
-                        publishableKey={test}
+                        publishableKey={prod}
                         merchantIdentifier="merchant.com.kliit"
                     >
                         <App />

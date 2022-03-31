@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView, ActivityIndicator, Dimensions } from 'react-native';
 import * as Kiira from '~/components';
 import Agreements from '~/components/agreements';
 import { RootState } from '~/redux/reducers';
@@ -29,10 +29,11 @@ const {
 
 const Book = ({ navigation }) => {
     const dispatch = useDispatch();
+    const dimen = Dimensions.get('window');
     const { visit } = useSelector((state: RootState) => state.appointments);
     const [activeTab, setActiveTab] = useState('primaryCare');
     const [data, setData] = useState(null);
-    const [cardHeight, setCardHeight] = useState(330);
+    const [cardHeight, setCardHeight] = useState(dimen.height > 800 ? 330 : 230);
     const [shrinkCard, setShrinkCard] = useState(true);
     const [selection, setSelection] = useState(null);
     const [catagories, setCatagories] = useState(null);
@@ -129,7 +130,7 @@ const Book = ({ navigation }) => {
                 ]}
             >
                 <Kiira.Tabs list={tabs} active setActive={handleTabSelect} />
-                <Kiira.Column options={[zero_flex, height_250, pad_v]}>
+                <Kiira.Column options={[zero_flex, dimen.height > 800 ? height_250 : {height: 150}, pad_v]}>
                     <Kiira.RadioGroup onSelect={handleSelection} data={data} />
                 </Kiira.Column>
             </Kiira.Column>
