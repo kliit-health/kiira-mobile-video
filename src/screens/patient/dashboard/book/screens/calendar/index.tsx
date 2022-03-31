@@ -89,6 +89,13 @@ const Calendar = ({ navigation }) => {
  
     }, []);
 
+    useEffect(() => {
+        if(appointments.dates.length){
+            handlePress(appointments.dates[0])
+        }
+        
+    }, [appointments.dates]);
+
     const handlePress = date => {
         const { calendarID } = visit.expert;
         setDay(moment(date.date).format('ll'));

@@ -60,20 +60,7 @@ function* getAppointmentsToday({ payload }) {
     try {
         yield put(showApiLoader());
         
-        const response = yield getAppointmentsByDayAsync(payload);
-        if(!response || !response.current || response.current.length == 0 || response.current.error){
-            yield put(hideApiLoader());
-            yield put(
-                showOrHideModal(
-                    "  This provider is busy now.\n Please select other provider.",
-                ),
-            );
-            if(navigation){
-                navigation.goBack();
-            }
-            
-        }
-        
+        const response = yield getAppointmentsByDayAsync(payload);        
         yield put(setTimes(response));
         yield put(hideApiLoader());
         return;
@@ -103,8 +90,18 @@ function* getAllAppointmentDates({ payload }) {
     try {
         yield put(showApiLoader());
         const response = yield getAppointmentDatesAsync(payload);
-        if(response && typeof(response) === 'string'){
+        if(!response || response.length == 0 || response.toString().includes("TypeError")) {
+            yield put(hideApiLoader());
             yield put(setAppointmentDates([]));
+            yield put(
+                showOrHideModal(
+                    "  This provider is busy now.\n Please select other provider.",
+                ),
+            );
+            if(navigation){
+                navigation.goBack();
+            }
+            
         }
         else{
             yield put(setAppointmentDates(response));
@@ -143,7 +140,8 @@ function* updateAppointment({ payload }) {
             );
             navigation.navigate('Appointments');
         }       
-        if (assessment && appointmentType && appointmentType.title === 'Health Check') {            yield put(updateUser({ assessment: { ...assessment, time } }));
+        if (assessment && appointmentType && appointmentType.title === 'Health Check') {   
+            yield put(updateUser({ assessment: { ...assessment, time } }));
         }
         yield showOrHideModal(
             'Your appointment has been sucessfully rescheduled.',
