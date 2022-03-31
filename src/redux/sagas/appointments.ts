@@ -61,7 +61,6 @@ function* getAppointmentsToday({ payload }) {
         yield put(showApiLoader());
         
         const response = yield getAppointmentsByDayAsync(payload);
-        
         yield put(setTimes(response));
         yield put(hideApiLoader());
         return;
