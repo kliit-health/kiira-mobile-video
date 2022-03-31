@@ -106,6 +106,7 @@ const Calendar = ({ navigation }) => {
                 appointmentType: visit.details.appointmentType,
             }),
         );
+        setTime(null);
     };
 
     const handleConfirm = () => {
