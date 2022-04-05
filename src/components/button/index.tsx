@@ -1,34 +1,52 @@
 import React from 'react';
-import { TouchableOpacity, Text, ViewStyle } from 'react-native';
-import styles from './styles';
+import {
+    TouchableOpacity,
+    Text,
+    TextStyle,
+    ViewStyle,
+    TouchableOpacityProps,
+} from 'react-native';
+import defaultStyles from './styles';
 
-type ButtonProps = {
-    text: string | number;
+export type ButtonProps = TouchableOpacityProps & {
+    test: string;
+    title: string | number;
+    id?: string;
     disabled?: boolean;
-    onPress?: () => void;
-    textStyle?: ViewStyle;
-    containerStyle?: ViewStyle;
-    opacity?: number;
+    onPress?: (id: string) => void;
+    style?: {
+        container?: ViewStyle[];
+        title?: TextStyle[];
+    };
 };
 
-const Button = ({
-    text,
-    onPress = () => null,
-    containerStyle = {},
-    textStyle = {},
-    disabled = false,
-    opacity = 0.8,
-}: ButtonProps) => {
+const Button = ({ test, title, style, id,disabled, onPress, ...rest }: ButtonProps) => {
+    const handlePress = () => {
+        onPress(id);
+    };
+
     return (
         <TouchableOpacity
-            activeOpacity={opacity}
-            style={{ ...styles.button, ...containerStyle }}
-            onPress={onPress}
+            testID={test}
+            style={[defaultStyles.container, style.container]}
+            onPress={handlePress}
             disabled={disabled}
+            {...rest}
         >
-            <Text style={{ ...styles.text, ...textStyle }}>{text}</Text>
+            <Text style={[defaultStyles.title, style.title]}>{title}</Text>
         </TouchableOpacity>
     );
 };
+
+Button.defaultProps = {
+    activeOpacity: 0.8,
+    disabled: false,
+    title: '',
+    id: '',
+    style: {
+        container: {},
+        title: {},
+    },
+} as Partial<ButtonProps>;
 
 export default Button;

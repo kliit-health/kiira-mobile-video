@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScrollView } from 'react-native';
+import { RootState } from '~/redux/reducers';
+import { ScrollView, Linking, Platform, Alert } from 'react-native';
 import { useDidMount } from '~/utils/hooks';
 import * as actions from '~/redux/actions';
-import { Container } from '~/components';
-import { Items, Intro, HealthAssesment } from './sections';
-import styles from './styles';
+import { getAppointmentsList } from '~/redux/reducers/appointments';
+import { Screen, NavItem } from '~/components';
+import { Welcome, Banner } from './sections';
+import model from './model';
 import i18n from '~/i18n';
 import DeviceInfo from 'react-native-device-info';
+import styles from '~/components/styles';
 
 const Dashboard = ({ navigation }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data); 
-    const subscription = useSelector(state => state.subscription.data);
-    const licenses = useSelector(state => state.licenses.data.current);
-    const lang = useSelector(state => state.language);
+    const user = useSelector((state: RootState) => state.user.data);
+    const firstName = user.profileInfo.firstName;
+    const subscription = useSelector(
+        (state: RootState) => state.subscription.data,
+    );
+    const licenses = useSelector(
+        (state: RootState) => state.licenses.data.current,
+    );
+    const lang = useSelector((state: RootState) => state.language);
 
     const [videoEnabled, setVideoEnabled] = useState(false);
     const [chatEnabled, setChatEnabled] = useState(false);
@@ -27,6 +35,7 @@ const Dashboard = ({ navigation }) => {
             appVersion: DeviceInfo.getVersion(),
         };
         dispatch(actions.updateUser({ device }));
+        dispatch(getAppointmentsList(user.uid));
     }, []);
 
     useDidMount(() => {
@@ -45,8 +54,6 @@ const Dashboard = ({ navigation }) => {
     useEffect(() => {
         if (user.uid) {
             dispatch(actions.getHealthHistory({ uid: user.uid }));
-            dispatch(actions.getResolvedQuestion({ uid: user.uid }));
-            dispatch(actions.getUnresolvedQuestions({ uid: user.uid }));
             dispatch(actions.getFavoriteExperts({ uid: user.uid }));
         }
     }, [user]);
@@ -64,8 +71,15 @@ const Dashboard = ({ navigation }) => {
     }, [subscription]);
 
     useEffect(() => {
-        const includesState = licenses.includes(user.profileInfo.state.code);
-        setVideoEnabled(includesState);
+        const includesState = licenses.includes(user.profileInfo.state.code); 
+        if(!includesState){ 
+            if(user.profileInfo.state.code === null || user.profileInfo.state.code === ''){
+                setVideoEnabled(true);  
+                return;
+            }
+        }
+        
+        setVideoEnabled(includesState); 
     });
 
     useEffect(() => {
@@ -81,41 +95,46 @@ const Dashboard = ({ navigation }) => {
     }, [user]);
 
     const handleNavigation = (destination, features) => {
-        if (features === 'video' && !videoEnabled) {
-            dispatch(
-                actions.showMessage({
-                    message: lang.dashboard.serviceUnavailable,
-                }),
-            );
-            return;
-        }
+        if (features === 'urgent') {
+            const isAndroid = Platform.OS != 'ios';
+            Linking.openURL(isAndroid ? 'tel:${911}' : 'telprompt:${911}');
+        } else {
+            if (features === 'video' && !videoEnabled) {
+                dispatch(
+                    actions.showMessage({
+                        message: lang.dashboard.serviceUnavailable,
+                    }),
+                );
+                return;
+            }
 
-        if (features === 'chat' && !chatEnabled) {
-            dispatch(
-                actions.showMessage({
-                    message: lang.dashboard.chatNotAvailable,
-                }),
-            );
-            return;
-        }
+            if (features === 'chat' && !chatEnabled) {
+                dispatch(
+                    actions.showMessage({
+                        message: lang.dashboard.chatNotAvailable,
+                    }),
+                );
+                return;
+            }
 
-        navigation.navigate(destination);
+            navigation.navigate(destination);
+        }
     };
-
     return (
-        <Container
-            styles={styles.container}
-            barStyle={'dark-content'}
-            unformatted
-        >
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <Intro
-                    {...user} 
-                />
-                <Items onPress={handleNavigation} />
-                <HealthAssesment />
+        <Screen options={[styles.white_bg]} test="DashBoard">
+            <ScrollView showsVerticalScrollIndicator={false}> 
+                <Welcome displayName={firstName} />
+                <Banner />
+                {model.map(item => (
+                    <NavItem
+                        test={item.title}
+                        key={item.title}
+                        {...item}
+                        onPress={handleNavigation}
+                    />
+                ))} 
             </ScrollView>
-        </Container>
+        </Screen>
     );
 };
 

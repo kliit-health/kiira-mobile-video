@@ -1,660 +1,253 @@
 import React, { PureComponent } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  Platform,
-  ScrollView,
-  PermissionsAndroid,
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
+import { View, TouchableOpacity, Image, ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
-import styles from './style';
+import styles from './styles';
 import CustomText from '~/components/customText';
-import Constant from '~/utils/constants';
-import { Avatar } from 'react-native-elements';
+import Constant, { colors } from '~/utils/constants';
 import CustomInputText from '~/components/customInputText';
-import CustomSelectModal from '~/components/customselectModal';
-import DatePicker from '~/components/datePicker';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import ImagePicker from 'react-native-image-picker';
-import { updateUserDataToFirebase } from './action';
+import { signOut, updateAccount } from '~/redux/reducers/account';
 import { showOrHideModal } from '~/components/customModal/action';
+import { Header, ListItem } from '~/components';
+import { list, listItems } from './model';
+import VersionCheck from 'react-native-version-check';
 
 class Setting extends PureComponent {
-  public setState: any;
-  public userData: any;
-  public lang: any;
-  public navigation: any;
-  public showHideErrorModal: any;
-  public updateUserData: any;
-  public firstName: string;
-  public lastName: string;
-  public dob: any;
-  public email: string;
-  public pronounsArr: any;
-  public profileImageUrl: any;
-  public file: any;
-  public filepath: any;
-  public selectedState: any;
-  public selectedSexuality: any;
-  public insurance: any;
-  public insurancePlan: any;
-  public zipcode: any;
-  public enrollment: any;
-  public income: any;
-  public homeSecure: any;
-  public foodSecure: any;
-  public ethnicity: any;
-  public phoneNumber: string;
-  public gender: any;
-  public staticImages: any;
-  public imageSrc: any;
-  public showSelectStateModal: any;
-  public showSelectSexualityModal: any;
-  public enableText: string;
+    public props: any;
+    public state: any;
+    public user: any;
+    public setState: any;
+    public userData: any;
+    public lang: any;
+    public navigation: any;
+    public showHideErrorModal: any;
+    public updateUserData: any;
+    public handleSignout: any;
+    public email: any;
+    public phoneNumber: any;
+    public staticImages: any;
 
-  constructor(props) {
-    super(props);
-    const { userData, lang } = this.props;
-    this.state = {
-      firstName: userData.profileInfo.firstName,
-      lastName: userData.profileInfo.lastName,
-      imageSrc: userData.profileInfo.profileImageUrl,
-      email: userData.profileInfo.email,
-      profileImageUrl: '',
-      filepath: '',
-      file: '',
-      showIosDateModal: false,
-      showSelectStateModal: false,
-      showSelectSexualityModal: false,
-      dob: userData.profileInfo.dob,
-      gender: userData.profileInfo.gender,
-      selectedState: userData.profileInfo.state,
-      selectedSexuality: userData.profileInfo.sexuality,
-      states: Constant.App.Modal.states,
-      sexuality: Constant.App.Modal.sexuality,
-      insurance: userData.profileInfo.insurance,
-      insurancePlan: userData.profileInfo.insurancePlan,
-      zipcode: userData.profileInfo.zipcode,
-      enrollment: userData.profileInfo.enrollment,
-      income: userData.profileInfo.income,
-      homeSecure: userData.profileInfo.homeSecure,
-      foodSecure: userData.profileInfo.foodSecure,
-      ethnicity: userData.profileInfo.ethnicity,
-      lang: 'en',
-      phoneNumber: userData.profileInfo.phoneNumber,
-      enableText: userData.profileInfo.enableText ?? true,
-      pronounsArr: [
-        {
-          title: lang.addProfileData.sheHer,
-          selected:
-            userData.profileInfo.pronouns &&
-            userData.profileInfo.pronouns === lang.addProfileData.sheHer
-              ? true
-              : false,
-        },
-        {
-          title: lang.addProfileData.heHim,
-          selected:
-            userData.profileInfo.pronouns &&
-            userData.profileInfo.pronouns === lang.addProfileData.heHim
-              ? true
-              : false,
-        },
-        {
-          title: lang.addProfileData.theyThem,
-          selected:
-            userData.profileInfo.pronouns &&
-            userData.profileInfo.pronouns === lang.addProfileData.theyThem
-              ? true
-              : false,
-        },
-      ],
-    };
-  }
-
-  isPronounSelected(pronounsArr) {
-    let isSelected = false;
-    pronounsArr.forEach(element => {
-      if (element.selected) {
-        isSelected = true;
-      }
-    });
-    return isSelected;
-  }
-
-  getSelectedPronoun(pronounsArr) {
-    let selectedValue = '';
-    pronounsArr.forEach(element => {
-      if (element.selected) {
-        selectedValue = element.title;
-      }
-    });
-    return selectedValue;
-  }
-
-  renderHeaderView() {
-    const { navigation, showHideErrorModal, updateUserData, userData, lang } =
-      this.props;
-    const {
-      firstName,
-      lastName,
-      dob,
-      email,
-      pronounsArr,
-      profileImageUrl,
-      file,
-      filepath,
-      selectedState,
-      selectedSexuality,
-      insurance,
-      insurancePlan,
-      zipcode,
-      enrollment,
-      income,
-      homeSecure,
-      foodSecure,
-      ethnicity,
-      phoneNumber,
-      gender,
-      enableText,
-    } = this.state;
-    return (
-      <View style={styles.headerStyle}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <CustomText style={styles.cancelTextStyle}>
-            {lang.setting.cancel}
-          </CustomText>
-        </TouchableOpacity>
-        <CustomText style={styles.titleTextStyle}>
-          {lang.setting.title}
-        </CustomText>
-        <TouchableOpacity
-          onPress={() => {
-            if (!firstName.trim()) {
-              showHideErrorModal(lang.addProfileData.emptyFirstNameMsg);
-            } else if (!lastName.trim()) {
-              showHideErrorModal(lang.addProfileData.emptyLastNameMsg);
-            } else if (!selectedState) {
-              showHideErrorModal(lang.addProfileData.emptyStateSelectionMsg);
-            } else if (
-              pronounsArr.length > 0 &&
-              !this.isPronounSelected(pronounsArr)
-            ) {
-              showHideErrorModal(lang.addProfileData.emptyPronounsMsg);
-            } else {
-              let filename = null;
-              const payloadData = {
-                userParams: {
-                  firstName: firstName.trim(),
-                  lastName: lastName.trim(),
-                  dob: dob ? dob : '',
-                  email: email,
-                  pronouns: this.getSelectedPronoun(pronounsArr),
-                  state: selectedState,
-                  sexuality: selectedSexuality,
-                  insurance,
-                  insurancePlan,
-                  zipcode,
-                  enrollment,
-                  income,
-                  homeSecure,
-                  foodSecure,
-                  ethnicity,
-                  phoneNumber,
-                  profileImageUrl,
-                  lang: 'en',
-                  gender,
-                  enableText,
-                },
-                navigation, 
-              };
-              if (profileImageUrl) {
-                let name = profileImageUrl.substring(
-                  profileImageUrl.lastIndexOf('/') + 1,
-                  profileImageUrl.length,
-                );
-                const ext = profileImageUrl.split('/').pop(); // Extract image extension
-                filename =
-                  Platform.OS === 'ios'
-                    ? `${Math.floor(Date.now())}${name}`
-                    : `${Math.floor(Date.now())}${name}`; 
-              } else if (userData.profileInfo.profileImageUrl) {
-                payloadData.userParams.profileImageUrl =
-                  userData.profileInfo.profileImageUrl;
-              } 
-              if (filename) { 
-                payloadData.imageParams = {
-                  file: Platform.OS == 'ios' ? profileImageUrl : filepath,
-                  filename,
-                };
-              } 
-              updateUserData(payloadData);
-            }
-          }}
-        >
-          <CustomText style={styles.doneTextStyle}>
-            {lang.setting.done}
-          </CustomText>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  requestCameraPermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          const grantedAgain = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          );
-          if (grantedAgain === PermissionsAndroid.RESULTS.GRANTED) {
-            this.pickImage();
-          } else {
-            this.pickImage();
-          }
-        } else {
-          this.pickImage();
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      this.pickImage();
+    constructor(props) {
+        super(props);
+        const { userData, lang } = this.props;
+        this.state = {
+            email: userData.profileInfo.email,
+            phoneNumberLength: false,
+            lang: 'en',
+            phoneNumber: userData.profileInfo.phoneNumber,
+        };
     }
-  };
 
-  pickImage = () => { 
-    const options = {
-      title: 'Select Avatar',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-      maxWidth:300,
-      maxHeight:300,
+    renderButtonView() {
+        const { navigation, lang } = this.props;
+        return (
+            <TouchableOpacity
+                style={styles.btnContainerStyle}
+                onPress={() => {
+                    navigation.navigate(
+                        Constant.App.screenNames.ChangePassword,
+                    );
+                }}
+            >
+                <CustomText style={styles.btnTextStyle}>
+                    {lang.setting.changePassword}
+                </CustomText>
+            </TouchableOpacity>
+        );
+    }
+    formatPhoneNumber = value => {
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+        if (phoneNumberLength < 4) return phoneNumber;
+
+        if (phoneNumberLength < 7) {
+            return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+        }
+        if (phoneNumberLength === 10) {
+            this.setState({ phoneNumberLength: true });
+        } else if (phoneNumberLength < 10) {
+            this.setState({ phoneNumberLength: false });
+        }
+        return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+            3,
+            6,
+        )}-${phoneNumber.slice(6, 10)}`;
     };
 
-    ImagePicker.showImagePicker(options, response => { 
-      if (response.error) {
-        console.log('RESPONSE ERROR', response);
-        alert('And error occured: ' + JSON.stringify(response));
-      } else if (!response.didCancel) { 
-        const source = { uri: response.uri }; 
-        this.setState({
-          imageSrc: response.uri,
-          profileImageUrl: response.uri,
-          filepath: response.path,
-          file: response,
-        });
-      }
-    });
-  };
+    render() {
+        const { navigation, handleSignout, userData, updateUserData } =
+            this.props;
 
-  renderProfileImageView() {
-    const { staticImages } = Constant.App;
-    const { imageSrc } = this.state;
-    const {lang} = this.props; 
-    return (
-      <View style={styles.profileImgViewStyle}>
-        <Avatar
-          containerStyle={{ alignSelf: 'center' }}
-          renderPlaceholderContent={
-            <Image
-              style={{
-                width: 120,
-                height: 120,
-              }}
-              resizeMode="stretch"
-              source={staticImages.profilePlaceholderImg}
-            />
-          }
-          size={120}
-          rounded
-          source={{ uri: imageSrc ? imageSrc : '' }}
-          activeOpacity={0.7}
-        />
-        {Platform.OS === 'ios' && (
-          <TouchableOpacity
-            onPress={() => {
-              this.requestCameraPermission();
-            }}
-          >
-            <CustomText style={styles.changeProfileTextStyle}>
-              {lang.setting.changePhoto}
-            </CustomText>
-          </TouchableOpacity>
-        )}
-        {Platform.OS === 'android' && (
-          <TouchableOpacity
-            onPress={() => {
-              this.requestCameraPermission();
-            }}
-          >
-            <CustomText style={styles.changeProfileTextStyle}>
-              {lang.setting.changePhoto}
-            </CustomText>
-          </TouchableOpacity>
-        )}
-      </View>
-    );
-  }
+        const { phoneNumber, email, phoneNumberLength } = this.state;
+        const { staticImages } = Constant.App;
+        return (
+            <View style={styles.container}>
+                <ScrollView
+                    style={{ backgroundColor: colors.babyBlue }}
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={false}
+                >
+                    <View style={styles.headerStyle}>
+                        <Header
+                            onBack={() => navigation.goBack()}
+                            title={'Settings'}
+                        />
+                    </View>
+                    <View style={styles.inputTextParentContainerStyle}>
+                        <View style={[styles.inputTextEmailContainerStyle]}>
+                            <CustomText style={styles.textStyle}>
+                                Email:{' '}
+                            </CustomText>
+                            <CustomInputText
+                                editable={userData.email ? false : true}
+                                autoCapitalize="words"
+                                onChangeText={value =>
+                                    this.setState({ email: value })
+                                }
+                                placeholder={'Enter your email'}
+                                value={userData.email ? userData.email : email}
+                                style={[
+                                    styles.emailInputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]}
+                                placeholderTextColor={'#868992'}
+                            />
+                        </View>
+                        <View style={styles.inputTextPhoneContainerStyle}>
+                            <CustomText style={styles.textStyle}>
+                                Phone:{' '}
+                            </CustomText>
 
-  renderInputTextView() {
-    const {
-      firstName,
-      lastName,
-      dob,
-      showSelectStateModal,
-      showSelectSexualityModal,
-      selectedState,
-      selectedSexuality,
-      insurance,
-      insurancePlan,
-      phoneNumber,
-      enableText,
-    } = this.state;
-    const { lang } = this.props;
-    const { staticImages } = Constant.App;
-    return (
-      <View style={styles.inputTextParentContainerStyle}>
-        <View style={styles.inputTextContainerStyle}>
-          <View style={styles.inputTextFirstNameContainerStyle}>
-            <CustomInputText
-              autoCapitalize="words"
-              onChangeText={value => this.setState({ firstName: value })}
-              placeholder={lang.addProfileData.firstName}
-              value={firstName}
-              style={
-                firstName
-                  ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }]
-              }
-              placeholderTextColor={Constant.App.colors.blackColor}
-            />
-          </View>
-          <View style={styles.inputTextFirstNameContainerStyle}>
-            <CustomInputText
-              autoCapitalize="words"
-              onChangeText={value => this.setState({ lastName: value })}
-              placeholder={lang.addProfileData.lastName}
-              value={lastName}
-              style={
-                lastName
-                  ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }]
-              }
-              placeholderTextColor={Constant.App.colors.blackColor}
-            />
-          </View>
-        </View>
+                            <CustomInputText
+                                keyboardType="phone-pad"
+                                textContentType="telephoneNumber"
+                                onChangeText={value => {
+                                    const formattedPhoneNumber =
+                                        this.formatPhoneNumber(value);
+                                    this.setState({
+                                        phoneNumber: formattedPhoneNumber,
+                                    });
+                                }}
+                                placeholder={'Enter your number'}
+                                value={phoneNumber}
+                                style={[
+                                    styles.phoneInputEmptyTypeStyle,
+                                    { fontWeight: '300' },
+                                ]}
+                                placeholderTextColor={'#868992'}
+                            />
 
-        <View style={styles.inputTextContainerStyle}>
-          <View style={styles.inputTextFirstNameContainerStyle}>
-            <CustomInputText
-              autoCapitalize="words"
-              onChangeText={value => this.setState({ insurance: value })}
-              placeholder={lang.addProfileData.insurance}
-              value={insurance}
-              style={
-                insurance
-                  ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }]
-              }
-              placeholderTextColor={Constant.App.colors.blackColor}
-            />
-          </View>
-          <View style={styles.inputTextFirstNameContainerStyle}>
-            <CustomInputText
-              autoCapitalize="words"
-              onChangeText={value => this.setState({ insurancePlan: value })}
-              placeholder={lang.addProfileData.plan}
-              value={insurancePlan}
-              style={
-                insurancePlan
-                  ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }]
-              }
-              placeholderTextColor={Constant.App.colors.blackColor}
-            />
-          </View>
-        </View>
-
-        <View style={styles.inputTextContainerStyle}>
-          <View style={styles.inputTextFirstNameContainerStyle}>
-            <CustomInputText
-              autoCapitalize="words"
-              onChangeText={value => this.setState({ phoneNumber: value })}
-              placeholder="Phone Number"
-              value={phoneNumber}
-              style={
-                phoneNumber
-                  ? styles.inputTypeStyle
-                  : [styles.inputTypeStyle, { fontWeight: '100' }]
-              }
-              placeholderTextColor={Constant.App.colors.blackColor}
-            />
-          </View>
-          <View style={{ marginLeft: 20 }}>
-            <CustomText style={styles.textTitleTextStyle}>
-              Receive text messages
-            </CustomText>
-
-            <TouchableOpacity
-              key="Enable Text"
-              onPress={() => {
-                this.setState({
-                  enableText: !enableText,
-                });
-              }}
-            >
-              <View style={styles.textContainerStyle}>
-                <Image
-                  resizeMode="contain"
-                  source={
-                    enableText
-                      ? staticImages.checkBoxSelectedIcon
-                      : staticImages.checkBoxIcon
-                  }
-                  style={styles.pronounsChecboxIconStyle}
-                />
-                <CustomText style={styles.textTextStyle}>Enabled</CustomText>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.birthDayContainerStyle}>
-          <DatePicker
-            selectedDate={dob}
-            placeHolder={lang.addProfileData.yourBirthDay}
-            textStyle={styles.birthDayTextStyle}
-            onSelection={date => {
-              this.setState({
-                dob: date,
-              });
-            }}
-          />
-        </View>
-
-        <View style={styles.stateDropDownContainerStyle}>
-          <TouchableOpacity
-            style={{ flexDirection: 'row' }}
-            onPress={() => {
-              this.setState({
-                showSelectStateModal: !showSelectStateModal,
-              });
-            }}
-          >
-            <CustomText style={styles.stateDropDownTextStyle}>
-              {selectedState
-                ? selectedState.value
-                : lang.addProfileData.stateText}
-            </CustomText>
-            <Image
-              resizeMode="contain"
-              source={staticImages.downArrow}
-              style={styles.dropDownIconStyle}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.stateDropDownContainerStyle}>
-          <TouchableOpacity
-            style={{ flexDirection: 'row' }}
-            onPress={() => {
-              this.setState({
-                showSelectSexualityModal: !showSelectSexualityModal,
-              });
-            }}
-          >
-            <CustomText style={styles.stateDropDownTextStyle}>
-              {selectedSexuality
-                ? selectedSexuality.value
-                : lang.addProfileData.sexuality}
-            </CustomText>
-            <Image
-              resizeMode="contain"
-              source={staticImages.downArrow}
-              style={styles.dropDownIconStyle}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  renderPronounsView() {
-    const { staticImages } = Constant.App;
-    const { pronounsArr } = this.state;
-    const { lang } = this.props;
-    return (
-      <View style={styles.pronounsParentContainerStyle}>
-        <CustomText style={styles.pronounsTitleTextStyle}>
-          {lang.addProfileData.pronounsTitle}
-        </CustomText>
-        {pronounsArr.map((item, key) => (
-          <TouchableOpacity
-            key={key}
-            onPress={() => {
-              pronounsArr.forEach((element, index) => {
-                if (element.selected) {
-                  pronounsArr[index].selected = false;
-                }
-              });
-              pronounsArr[key].selected = true;
-              this.setState({
-                pronounsArr: Object.assign([], [], pronounsArr),
-              });
-            }}
-          >
-            <View style={styles.pronounsContainerStyle}>
-              <Image
-                resizeMode="contain"
-                source={
-                  item.selected
-                    ? staticImages.checkBoxSelectedIcon
-                    : staticImages.checkBoxIcon
-                }
-                style={styles.pronounsChecboxIconStyle}
-              />
-              <CustomText style={styles.pronounsTextStyle}>
-                {item.title}
-              </CustomText>
+                            {phoneNumberLength ? (
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        const payload = {
+                                            userParams: {
+                                                ...userData.profileInfo,
+                                                phoneNumber,
+                                                imageParams: null,
+                                                navigation,
+                                            },
+                                        };
+                                        updateUserData(payload);
+                                        this.setState({phoneNumberLength:false})
+                                    }}
+                                >
+                                    <View style={styles.textContainerStyle}>
+                                        <Image
+                                            resizeMode="contain"
+                                            source={
+                                                staticImages.checkGreenIcon
+                                            }
+                                            style={styles.phoneChecboxIconStyle}
+                                        />
+                                    </View>
+                                </TouchableOpacity>
+                            ) : null}
+                        </View>
+                    </View>
+                    <View style={styles.listItemView}>
+                        {listItems.map(({ title, destination, content }) => (
+                            <ListItem
+                                key={title}
+                                id={destination}
+                                onPress={() => navigation.navigate(destination)}
+                                displayChevron={true}
+                                displayBorder={true}
+                            >
+                                <View style={styles.listContainer}>
+                                    <View style={styles.titleContainer}>
+                                        {content == `HIPAA` && (
+                                            <Text style={styles.content}>
+                                                {content}
+                                            </Text>
+                                        )}
+                                        {content == `Terms and Conditions` && (
+                                            <Text style={styles.content}>
+                                                {content}
+                                            </Text>
+                                        )}
+                                        {content == `Privacy Policy` && (
+                                            <Text style={styles.content}>
+                                                {content}
+                                            </Text>
+                                        )}
+                                    </View>
+                                </View>
+                            </ListItem>
+                        ))}
+                    </View>
+                    <View style={{ marginTop: '6%' }}>
+                        {list.map(({ title }) => (
+                            <TouchableOpacity
+                                style={[
+                                    styles.versionListContainer,
+                                    styles.borderStyle,
+                                ]}
+                                onPress={() => console.log('')}
+                            >
+                                <View>
+                                    <View
+                                        style={{
+                                            flexDirection: 'row',
+                                            justifyContent: 'space-between',
+                                        }}
+                                    >
+                                        {title == `App Version` && (
+                                            <>
+                                                <Text style={styles.content}>
+                                                    {title}
+                                                </Text>
+                                                <Text style={styles.version}>
+                                                {`v ${VersionCheck.getCurrentVersion()}`}
+                                                </Text>
+                                            </>
+                                        )}
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                    {this.renderButtonView()}
+                    <TouchableOpacity
+                        onPress={() => handleSignout({ navigation })}
+                        style={styles.logoutView}
+                    >
+                        <Text style={styles.logoutTextStyle}>Log Out</Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
-  }
-
-  renderButtonView() {
-    const { navigation, lang } = this.props;
-    return (
-      <TouchableOpacity
-        style={styles.btnContainerStyle}
-        onPress={() => {
-          navigation.navigate(Constant.App.screenNames.ChangePassword);
-        }}
-      >
-        <CustomText style={styles.btnTextStyle}>
-          {lang.setting.changePassword}
-        </CustomText>
-      </TouchableOpacity>
-    );
-  }
-
-  render() {
-    const { showSelectStateModal, showSelectSexualityModal } = this.state;
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="dark-content" translucent={true} />
-        {this.renderHeaderView()}
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
-          {this.renderProfileImageView()}
-          {this.renderInputTextView()}
-          {this.renderPronounsView()}
-          {this.renderButtonView()}
-          {showSelectStateModal ? (
-            <CustomSelectModal
-              data={this.state.states}
-              onSelection={item => {
-                this.setState({
-                  selectedState: item,
-                  showSelectStateModal: false,
-                });
-              }}
-              onClose={() => {
-                this.setState({
-                  showSelectStateModal: false,
-                });
-              }}
-            />
-          ) : null}
-          {showSelectSexualityModal ? (
-            <CustomSelectModal
-              data={this.state.sexuality}
-              onSelection={item => {
-                this.setState({
-                  selectedSexuality: item,
-                  showSelectSexualityModal: false,
-                });
-              }}
-              onClose={() => {
-                this.setState({
-                  showSelectSexualityModal: false,
-                });
-              }}
-            />
-          ) : null}
-        </ScrollView>
-        {Platform.OS === 'ios' && <KeyboardSpacer />}
-      </SafeAreaView>
-    );
-  }
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-  userData: state.user.data,
-  lang: state.language,
+    userData: state.user.data,
+    lang: state.language,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUserData: value => dispatch(updateUserDataToFirebase(value)),
-  showHideErrorModal: value => dispatch(showOrHideModal(value)),
+    handleSignout: ({ value }) => dispatch(signOut({ value })),
+    updateUserData: value => dispatch(updateAccount(value)),
+    showHideErrorModal: value => dispatch(showOrHideModal(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Setting);

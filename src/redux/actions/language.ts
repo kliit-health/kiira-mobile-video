@@ -1,6 +1,6 @@
-import {SET_LANGUAGE} from '../types';
+import { SET_LANGUAGE } from '../types';
 
-export const setUserLanguage = (data) => ({
-  type: SET_LANGUAGE,
-  data,
+export const setUserLanguage = data => ({
+    type: SET_LANGUAGE,
+    data,
 });

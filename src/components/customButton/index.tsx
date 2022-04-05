@@ -1,12 +1,32 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import { TouchableOpacity } from "react-native";
-import CustomText from "../customText";
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import CustomText from '../customText';
 
-const CustomButton = ({ onPress, text, buttonStyle, disabled, textStyle }) => (
-  <TouchableOpacity disabled={disabled} onPress={onPress} style={buttonStyle}>
-    <CustomText style={textStyle}>{text}</CustomText>
-  </TouchableOpacity>
+type ButtonProps = {
+    onPress: any;
+    text: string;
+    buttonStyle: object;
+    disabled?: boolean;
+    textStyle: object;
+    test?: string;
+};
+
+const CustomButton = ({
+    onPress,
+    text,
+    buttonStyle,
+    disabled,
+    textStyle,
+    test,
+}: ButtonProps) => (
+    <TouchableOpacity
+        testID={test}
+        disabled={disabled}
+        onPress={onPress}
+        style={buttonStyle}
+    >
+        <CustomText style={textStyle}>{text}</CustomText>
+    </TouchableOpacity>
 );
 
 export default CustomButton;

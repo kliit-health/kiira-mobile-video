@@ -1,103 +1,195 @@
-import React, {useEffect, useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, ScrollView} from 'react-native';
-import {Header} from '~/components';
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, FlatList } from 'react-native';
+import * as Kiira from '~/components';
+import { useSelector, useDispatch } from 'react-redux';
 import {
-  getExpertsData,
-  setCalendarID,
-  getAppointmentsByDay,
-  getAppointmentDates,
-  getAppointmentsForToday,
-} from './action';
-import {generateDateInfo} from '~/utils/helper';
-import styles from './style';
-import Constant from '~/utils/constants';
+    getAppointmentDates,
+    getExpertsData,
+    setCalendarID,
+    getAppointmentsForToday,
+    updateVisit,
+} from '~/redux/reducers/appointments';
+import { handleBack } from '~/utils/functions/handleNavigation';
+import { generateDateInfo } from '~/utils/helper'; 
+import { colors } from '~/utils/constants';
+import metrices from '~/utils/metrices';  
 import moment from 'moment';
-import {
-  ExpertInfo,
-  Bio,
-  Specialties,
-  Languages,
-  ClinicInfo,
-  Hours,
-  SheduleModal,
-} from './components';
+import { default as globalStyles } from '~/components/styles';
 
-const RescheduleVisit = (props) => {
-  const {navigation, visit} = props.navigation.state.params;
-  const {calendarID, expert, uid, id, appointmentType: {appointmentType}} = visit;
+const { width } = metrices;
+    const {
+        pad,
+        medium,
+        light,
+        pad_t,
+        white_bg,
+        blue,
+        radius_sm,
+        sm_pad_h,
+        sm_pad_v,
+        pad_h,
+        grey_br,
+        blue_br,
+        blue_br_sm,
+        pad_top_none,
+        black,
+    } = globalStyles;
 
-  const expertData = useSelector((state) => state.expertProfile.expertData);
+const RescheduleVisit = props => {
+    const appointmentData = useSelector((state:any) => state.appointments);
+    const { visit } = props.navigation.state.params;
 
-  const appointmentData = useSelector((state) => state.expertSchedule);
-  const today = moment(new Date()).format('YYYY-MM-DD');
-  const current = generateDateInfo(today);
-  const [day, setDay] = useState(null);
-  const [time, setTime] = useState(null);
-  const [showShedule, setShowShedule] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(today);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const dispatch = useDispatch();
+    const {
+        appointmentType: { appointmentType },
+    } = visit;
 
-  useEffect(() => {
-    const obj = {
-      expertsParams: {
-        tableName: Constant.App.firebaseTableNames.users,
-        uid: expert.uid,
-      },
+    const today = moment(new Date()).format('YYYY-MM-DD');
+    const current = generateDateInfo(today);
+    const [day, setDay] = useState(moment(today).format('ll'));
+    const [time, setTime] = useState(null);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const { calendarID, uid } = props.navigation.state.params;
+        const obj = { 
+            expertsParams: {
+                tableName: 'users',
+                uid,
+            },
+        };
+
+        const curMonth = moment(`${current.year}-${current.monthNumber}`);
+        var addMonth = moment(curMonth).add(1, 'M').format('YYYY-MM'); 
+
+        dispatch(
+            getAppointmentDates({
+                ...current,
+                calendarID,
+                addMonth,
+                appointmentType,
+            }),
+        );
+
+        dispatch(getExpertsData(obj));
+        dispatch(setCalendarID(calendarID));
+        dispatch(
+            getAppointmentsForToday({
+                ...current,
+                calendarID,
+                appointmentType,
+            }),
+        );
+    }, []);
+
+    const handlePress = date => {
+        const { calendarID, uid } = props.navigation.state.params;
+        setDay(moment(date.date).format('ll'));
+        dispatch(
+            getAppointmentsForToday({
+                ...date,
+                calendarID,
+                appointmentType,
+            }),
+        );
     };
-    let addMonth = moment(`${current.year}-${current.monthNumber}`);
-        addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
 
-    dispatch(getExpertsData(obj));
-    dispatch(setCalendarID(calendarID));
-    dispatch(getAppointmentsForToday({...current, calendarID, appointmentType}));
-    dispatch(getAppointmentsByDay({...current, calendarID, appointmentType}));
-    dispatch(getAppointmentDates({...current, calendarID, addMonth, appointmentType}));
-  }, []);
+    const handleConfirm = () => {
+        dispatch(
+            updateVisit({
+                data: { ...visit, time: time.date },
+            }),
+        );
+    };
+    return (
+        <Kiira.Screen>
+            <Kiira.Header onBack={handleBack} title="Reschedule Visit" />
+            <Kiira.Text options={[pad, medium, light, pad_t]}>{day}</Kiira.Text>
+            <Kiira.Row options={[sm_pad_h, { height: 90 }]}>
+                <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    keyExtractor={({ date }) => date}
+                    data={appointmentData.dates}
+                    ListEmptyComponent={() => (
+                        <ActivityIndicator
+                            style={{ marginLeft: width / 2 - 30 }}
+                            size="large"
+                            color={colors.blue}
+                        />
+                    )}
+                    renderItem={({ item, index }) => {
+                        let date = generateDateInfo(item.date);
 
-  const childProps = {
-    appointmentType,
-    appointmentData,
-    calendarID,
-    day,
-    expert,
-    expertData,
-    generateDateInfo,
-    id,
-    navigation,
-    selectedDate,
-    selectedTime,
-    setDay,
-    setShowShedule,
-    setSelectedDate,
-    setSelectedTime,
-    setTime,
-    showShedule,
-    time,
-    today,
-    uid,
-    visit,
-  };
-  return (
-    <View style={styles.parentContainerStyle}>
-      <Header title="Reschedule Visit" onBack={() => navigation.goBack()} />
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}>
-        {expertData && (
-          <View>
-            <ExpertInfo {...childProps} />
-            <Bio expertData={expertData} />
-            <Specialties expertData={expertData} />
-            <Languages expertData={expertData} />
-            <ClinicInfo expertData={expertData} />
-            <Hours expertData={expertData} />
-          </View>
-        )}
-      </ScrollView>
-      <SheduleModal {...childProps} />
-    </View>
-  );
+                        return (
+                            <Kiira.Button
+                                test={'date ' + index}
+                                onPress={() => handlePress(date)}
+                                style={{
+                                    container: [
+                                        radius_sm,
+                                        white_bg,
+                                        sm_pad_h,
+                                        pad_top_none,
+                                        { width: 65 },
+                                        moment(date.date).format('ll') === day
+                                            ? blue_br
+                                            : grey_br,
+                                    ],
+                                    title: [black],
+                                }}
+                                title={`${date.dow} \n\n ${date.day}`}
+                            />
+                        );
+                    }}
+                />
+            </Kiira.Row>
+            <Kiira.Text options={[pad]}>
+                Please select an appointment time
+            </Kiira.Text>
+            <FlatList
+                numColumns={3}
+                initialNumToRender={appointmentData.appointments.current.length}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={({ time }) => time}
+                data={appointmentData.appointments.current}
+                ListEmptyComponent={() => (
+                    <ActivityIndicator size="large" color={colors.blue} />
+                )}
+                renderItem={({ item, index }) => {
+                    let current = generateDateInfo(item.time);
+                    return (
+                        <Kiira.Button
+                            test={'time ' + index}
+                            onPress={() => setTime(current)}
+                            style={{
+                                container: [
+                                    radius_sm,
+                                    white_bg,
+                                    sm_pad_h,
+                                    pad_top_none,
+                                    { width: 100 },
+                                    { margin: 20 },
+                                    time && current.date === time.date
+                                        ? blue_br_sm
+                                        : grey_br,
+                                ],
+                                title: [blue],
+                            }}
+                            title={`${current.hour.time} ${current.hour.am_pm}`}
+                        />
+                    );
+                }}
+            />
+            <Kiira.Button
+                test="Confirm Date and Time"
+                disabled={!time}
+                onPress={handleConfirm}
+                title="Confirm"
+                style={{ container: [sm_pad_v, pad_h,{backgroundColor: !day || !time ? colors.disableButtonColor:colors.primaryBlue}], title: [] }}
+            />
+        </Kiira.Screen>
+    );
 };
+
 export default RescheduleVisit;

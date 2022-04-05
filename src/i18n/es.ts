@@ -1,531 +1,606 @@
 export default {
-  account: {
-    logout: 'Spanish Logout',
-    settings: 'Spanish My Profile',
-    termsAndConditions: 'Spanish Terms & Conditions',
-    privacyPolicies: 'Spanish Privacy Policies',
-    help: 'Spanish Help',
-    rate: 'Spanish Rate us',
-    refer: 'Spanish Refer a Friend, Get 10 Credits',
-    appointments: 'Spanish Appointments',
-    healthHistory: 'Spanish Health History',
-    availablity: 'Spanish Update Availablity',
-    born: 'Spanish Born',
-    pronouns: 'Spanish Pronouns',
-    sexuality: 'Spanish Sexuality',
-    cancelPlan: 'Spanish Cancel Plan',
-    changePlan: 'Spanish Change Plan',
-    cancelConfirm: 'Spanish Are you sure you want to cancel your membership?',
-    planCanceled: 'Spanish Plan has been canceled. Service will end on ',
-    canceling: 'Spanish ...canceling',
-    emailUs:
-      'Spanish Please email us at kiira@support.io to get more information.',
-  },
-  requestVisit: {
-    title: 'Spanish Request a Visit',
-    goHome: 'Spanish Go Home',
-  },
-  addCreditCardData: {
-    cardNumber: 'Spanish Card number',
-    securityCode: 'Spanish Security Code',
-    expireDate: 'Spanish mm/yy',
-    firstName: 'Spanish First Name',
-    lastName: 'Spanish Last Name',
-    saveCard: 'Spanish Save Card',
-  },
+    account: {
+        logout: 'Spanish Logout',
+        settings: 'Spanish My Profile',
+        billingAndInsurance: 'Spanish Billing & Insurance',
+        addInsurance: 'Spanish Add Insurance',
+        pharmacy: 'Spanish Pharmacy',
+        pleaseSelect: 'Spanish Please Select',
+        emergencyContact: 'Spanish Emergency Contact',
+        myHealth: 'Spanish My Health', 
+        pleaseAddAContact: 'Spanish Please Add a Contact',
+        termsAndConditions: 'Spanish Terms & Conditions',
+        privacyPolicies: 'Spanish Privacy Policies',
+        help: 'Spanish Help',
+        rate: 'Spanish Rate us',
+        refer: 'Spanish Refer a Friend, Get 10 Credits',
+        appointments: 'Spanish Appointments',
+        healthHistory: 'Spanish Health History',
+        availablity: 'Spanish Update Availablity',
+        born: 'Spanish Born',
+        pronouns: 'Spanish Pronouns',
+        sexuality: 'Spanish Sexuality',
+        cancelPlan: 'Spanish Cancel Plan',
+        changePlan: 'Spanish Change Plan',
+        cancelConfirm:
+            'Spanish Are you sure you want to cancel your membership?',
+        planCanceled: 'Spanish Plan has been canceled. Service will end on ',
+        canceling: 'Spanish ...canceling',
+        emailUs:
+            'Spanish Please email us at kiira@support.io to get more information.',
+    },
+    requestVisit: {
+        title: 'Spanish Request a Visit',
+        goHome: 'Spanish Go Home',
+    },
+    addCreditCardData: {
+        cardNumber: 'Spanish Card number',
+        securityCode: 'Spanish Security Code',
+        expireDate: 'Spanish mm/yy',
+        firstName: 'Spanish First Name',
+        lastName: 'Spanish Last Name',
+        saveCard: 'Spanish Save Card',
+    },
 
-  addCreditOrDebitCard: {
-    title: 'Spanish Add Credit/Debit Card',
-    footer: 'Spanish Your information is encrypted and processed by Stripe.',
-  },
+    addCreditOrDebitCard: {
+        title: 'Spanish Add Credit/Debit Card',
+        footer: 'Spanish Your information is encrypted and processed by Stripe.',
+    },
 
-  personalInformation: {
-    title: 'Spanish Personal Information',
-    save: 'Spanish Save',
-  },
+    personalInformation: {
+        title: 'Spanish Personal Information',
+        save: 'Spanish Save',
+    },
 
-  consent: {
-    title: 'Spanish Consent Agreements',
-    acceptanceDate: 'Spanish Acceptance Date',
-  },
+    expertChatsHeaders:{
+        providers: 'All Providers',
+        yourSquad: 'Your Squad'
+     },
 
-  agreementDetails: {
-    title: 'Spanish Agreement Details',
-  },
+     profileHeader:{
+        profile:'Profile'
+    },
 
-  medications: {
-    title: 'Spanish Medications',
-    save: 'Spanish Save',
-  },
+    consent: {
+        title: 'Spanish Consent Agreements',
+        acceptanceDate: 'Spanish Acceptance Date',
+    },
 
-  pregnancy: {
-    title: 'Spanish Pregnancy and Children',
-  },
+    agreementDetails: {
+        title: 'Spanish Agreement Details',
+    },
 
-  pregnancyHistory: {
-    title: 'Spanish Pregnancy History',
-    save: 'Spanish Save',
-  },
+    medications: {
+        title: 'Spanish Medications',
+        save: 'Spanish Save',
+    },
 
-  pregnancyCurrent: {
-    title: 'Spanish Current Pregnancy',
-    addPregnancy: 'Spanish Add Pregnancy',
-  },
+    labResults: {
+        title: 'Spanish Lab Results', 
+    },
+    vaccines: {
+        title: 'Spanish Vaccines',
+    },
+    healthHistory: {
+        title: 'Spanish Health History',
+    },
+    pastVisits: {
+        title: 'Spanish Past Visits',
+    },
 
-  medicalHistory: {
-    title: 'Spanish Medical History',
-    save: 'Spanish Save',
-  },
+    pregnancy: {
+        title: 'Spanish Pregnancy and Children',
+    },
 
-  allergies: {
-    title: 'Spanish Allergies',
-    previous: 'Spanish Previous',
-    next: 'Spanish Next',
-    finish: 'Spanish Finish',
-  },
+    pregnancyHistory: {
+        title: 'Spanish Pregnancy History',
+        save: 'Spanish Save',
+    },
 
-  insurance: {
-    title: 'Spanish Insurance',
-    save: 'Spanish Save',
-  },
+    pregnancyCurrent: {
+        title: 'Spanish Current Pregnancy',
+        addPregnancy: 'Spanish Add Pregnancy',
+    },
 
-  previousAppointmentsNotes: {
-    title: 'Spanish Previous Appointments Notes',
-  },
+    medicalHistory: {
+        title: 'Spanish Medical History',
+        save: 'Spanish Save',
+    },
 
-  dueDate: {
-    title: 'Spanish Due Date',
-  },
-  needsPrescription: {
-    question: 'Spanish Do you need a prescription?',
-    yes: 'Spanish Yes',
-    no: 'Spanish No',
-    notSure: `Spanish I'm not sure`,
-  },
+    allergies: {
+        title: ' Spanish Allergies',
+        header: 'Spanish All Allergies',
+        noAllergies: 'Spanish You have no allergies on record with Kiira',
+        previous: 'Spanish Previous',
+        next: 'Spanish Next',
+        finish: 'Spanish Finish',
+    },
+    medicalConditions:{
+       title: 'Spanish History',
+       header: 'Spanish Conditions and Diagnoses',
+       noMedicalConditions: 'Spanish You have no conditions or procedures on record with Kiira'
+    },
+    insurance: {
+        title: 'Spanish Insurance',
+        save: 'Spanish Save',
+    },
 
-  loss: {
-    title: 'Spanish I Have Experienced a Loss',
-    confirm: 'Spanish Confirm',
-    weAreSorry: "Spanish We're sorry to hear this.",
-    youAreNotAlone: 'Spanish Many folks experience this. You are not alone.',
-    expertsNetwork:
-      'Spanish Kiira network of expertsis available to support you throught this difficult time.',
-  },
+    previousAppointmentsNotes: {
+        title: 'Spanish Previous Appointments Notes',
+    },
 
-  birth: {
-    title: 'Spanish I Have Given Birth',
-    confirm: 'Spanish Confirm',
-    congratulations: 'Spanish Congratulations!',
-    help:
-      'Spanish Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
-  },
+    dueDate: {
+        title: 'Spanish Due Date',
+    },
+    needsPrescription: {
+        question: 'Spanish Do you need a prescription?',
+        yes: 'Spanish Yes',
+        no: 'Spanish No',
+        notSure: `Spanish I'm not sure`,
+    },
 
-  children: {
-    title: 'Spanish Children',
-    addChild: 'Spanish Add Child',
-  },
-  addChild: {
-    title: 'Spanish Birth Date',
-    save: 'Spanish Save',
-    sex: 'Spanish Sex',
-    delete: 'Spanish Delete',
-    name: 'Spanish Name',
-  },
+    loss: {
+        title: 'Spanish I Have Experienced a Loss',
+        confirm: 'Spanish Confirm',
+        weAreSorry: "Spanish We're sorry to hear this.",
+        youAreNotAlone:
+            'Spanish Many folks experience this. You are not alone.',
+        expertsNetwork:
+            'Spanish Kiira network of expertsis available to support you throught this difficult time.',
+    },
 
-  careSquad: {
-    title: 'Spanish Care Squad',
-    search: 'Spanish Search Care Squad',
-  },
+    birth: {
+        title: 'Spanish I Have Given Birth',
+        confirm: 'Spanish Confirm',
+        congratulations: 'Spanish Congratulations!',
+        help: 'Spanish Our experts are here to help with your new parenting needs, including lactation consultation and mental health support.',
+    },
 
-  addProfileData: {
-    title: 'Spanish Tell us more about you in your profile.',
-    stateText: 'Spanish State of Residence',
-    sexuality: 'Spanish Sexual Identity',
-    save: 'Spanish Save',
-    firstName: 'Spanish First Name',
-    lastName: 'Spanish Last Name',
-    yourBirthDay: 'Spanish Your Birthday',
-    sheHer: 'Spanish She/Her',
-    heHim: 'Spanish He/Him',
-    theyThem: 'Spanish They/Them',
-    pronounsTitle: 'Spanish Your preferred pronouns:',
-    partnersTitle: 'Spanish Your partners (check all that apply)',
-    emptyProfileImageMsg: 'Spanish Profile image is a required field',
-    emptyFirstNameMsg: 'Spanish First name is a required field',
-    emptyLastNameMsg: 'Spanish Last name is a required field',
-    emptyDobMsg: 'Spanish Your birthday is a required field',
-    emptyStateSelectionMsg: 'Spanish State of residence is a required field',
-    emptyPronounsMsg: 'Spanish Your pronouns is a required field',
-    insurance: 'Spanish Insurance',
-    plan: 'Spanish Plan',
-  },
+    children: {
+        title: 'Spanish Children',
+        addChild: 'Spanish Add Child',
+    },
+    addChild: {
+        title: 'Spanish Birth Date',
+        save: 'Spanish Save',
+        sex: 'Spanish Sex',
+        delete: 'Spanish Delete',
+        name: 'Spanish Name',
+    },
 
-  askUser: {
-    headingText1: 'Spanish Hi',
-    headingText2: 'Spanish What do you want to ask an expert?',
-    headingTextAfterAskQuestion: 'Spanish you’re asking: ',
-    textAfterEmptyCredit:
-      'Spanish To ask a question to one of our experts, add Kiira credits to your account in the account tab.',
-    placehorderText:
-      'Spanish Ask your question to choose from our network of experts!',
-    btnText: 'Spanish Ask An Expert',
-    myPreviousQuestions: 'Spanish My previous questions',
-    myRecentExperts: 'Spanish Our experts',
-    answerBy: 'Spanish Answered by',
-    credits: 'Spanish Credits',
-    homeCreditsText: 'Spanish credits (per question)',
-    questionsText: 'Spanish question(s) left this month',
-    videoChatText: 'Spanish video session(s) left this month',
-    asking: 'Spanish Asking',
-    buyMoreCredits: 'Spanish Buy More Credits',
-  },
+    careSquad: {
+        title: 'Spanish Care Squad',
+        search: 'Spanish Search Care Squad',
+    },
 
-  askExpert: {
-    recent: 'Spanish Recent',
-    resolved: 'Spanish Resolved',
-    title: 'Spanish Kiira Chat',
-  },
+    addProfileData: {
+        title: 'Spanish Tell us more about you in your profile.',
+        stateText: 'Spanish State of Residence',
+        sexuality: 'Spanish Sexual Identity',
+        save: 'Spanish Save',
+        firstName: 'Spanish First Name',
+        lastName: 'Spanish Last Name',
+        yourBirthDay: 'Spanish Your Birthday',
+        sheHer: 'Spanish She/Her',
+        heHim: 'Spanish He/Him',
+        theyThem: 'Spanish They/Them',
+        pronounsTitle: 'Spanish Your preferred pronouns:',
+        partnersTitle: 'Spanish Your partners (check all that apply)',
+        emptyProfileImageMsg: 'Spanish Profile image is a required field',
+        emptyFirstNameMsg: 'Spanish First name is a required field',
+        emptyLastNameMsg: 'Spanish Last name is a required field',
+        emptyDobMsg: 'Spanish Your birthday is a required field',
+        emptyStateSelectionMsg:
+            'Spanish State of residence is a required field',
+        emptyPronounsMsg: 'Spanish Your pronouns is a required field',
+        insurance: 'Spanish Insurance',
+        plan: 'Spanish Plan',
+    },
 
-  apiLoader: {
-    loadingText: 'Spanish Loading..',
-  },
+    askUser: {
+        headingText1: 'Spanish Hi',
+        headingText2: 'Spanish What do you want to ask an expert?',
+        headingTextAfterAskQuestion: 'Spanish you’re asking: ',
+        textAfterEmptyCredit:
+            'Spanish To ask a question to one of our experts, add Kiira credits to your account in the account tab.',
+        placehorderText:
+            'Spanish Ask your question to choose from our network of experts!',
+        btnText: 'Spanish Ask An Expert',
+        myPreviousQuestions: 'Spanish My previous questions',
+        myRecentExperts: 'Spanish Our experts',
+        answerBy: 'Spanish Answered by',
+        credits: 'Spanish Credits',
+        homeCreditsText: 'Spanish credits (per question)',
+        questionsText: 'Spanish question(s) left this month',
+        videoChatText: 'Spanish video session(s) left this month',
+        asking: 'Spanish Asking',
+        buyMoreCredits: 'Spanish Buy More Credits',
+    },
 
-  buyingCredits: {
-    title: 'Spanish Purchase a single consultation',
-    kiira: 'Spanish Kiira',
-    amountTitle: 'Spanish Amount',
-    paymentTitle: 'Spanish Payment',
-    addPaymentMethod: 'Spanish Add Payment Method',
-    totalTitle: 'Spanish Total',
-    buyCredits: 'Spanish Pay',
-    applePayTitle: 'Spanish Apple Pay',
-    payPalTitle: 'Spanish PayPal',
-    googlePayTitle: 'Spanish G Pay',
-    selectPaymentMethod: 'Spanish Please select a payment method first',
-  },
+    askExpert: {
+        recent: 'Spanish Recent',
+        resolved: 'Spanish Resolved',
+        title: 'Spanish Kiira Chat',
+    },
 
-  chat: {
-    action: 'Spanish Actions',
-    resolveQuestion: 'Spanish Resolve Question',
-    cancel: 'Spanish Cancel',
-    titleRateExpert: 'Spanish Your question has been resolved!',
-    subTitleRateExpert: 'Spanish Rate your conversation with ',
-    rate: 'Spanish Rate',
-    enterMessage: 'Spanish Enter your Message',
-    resolved:
-      'Spanish This conversation has been resolved. To start a new question, return to the ask tab.',
-  },
+    apiLoader: {
+        loadingText: 'Spanish Loading..',
+    },
 
-  changePassword: {
-    title: 'Spanish Change Password',
-    cancel: 'Spanish Cancel',
-    currentPassword: 'Spanish Current Password',
-    newPassword: 'Spanish New Password',
-    updatePassword: 'Spanish Update Password',
-    EmptyCurrentPasswordMsg: 'Spanish Current Password is a required field.',
-    EmptyNewPasswordMsg: 'Spanish New Password is a required field.',
-    passwordLimitErrorMsg:
-      'Spanish New Password should be at least 7 characters',
-    passwordSpecialCharErrorMsg:
-      'Spanish New Password should have at least 1 special character',
-    passwordUpdateSuccessfullyMsg:
-      'Spanish Password has been updated successfully',
-  },
+    buyingCredits: {
+        title: 'Spanish Purchase a single consultation',
+        kiira: 'Spanish Kiira',
+        amountTitle: 'Spanish Amount',
+        paymentTitle: 'Spanish Payment',
+        addPaymentMethod: 'Spanish Add Payment Method',
+        totalTitle: 'Spanish Total',
+        buyCredits: 'Spanish Pay',
+        applePayTitle: 'Spanish Apple Pay',
+        payPalTitle: 'Spanish PayPal',
+        googlePayTitle: 'Spanish G Pay',
+        selectPaymentMethod: 'Spanish Please select a payment method first',
+    },
 
-  chooseExpert: {
-    questionTitle: 'Spanish Choose an expert to answer…',
-    edit: 'Spanish Edit',
-    cancel: 'Spanish Cancel',
-    save: 'Spanish Save',
-    filterTitle: 'Spanish Discovery Settings',
-    done: 'Spanish Done',
-    languageFilterTitle: 'Spanish Show me experts who speak…',
-    professionFilterTitle: 'Spanish Show me:',
-    genderFilterTitle: 'Spanish Show me experts who are…',
-  },
+    chat: {
+        action: 'Spanish Actions',
+        resolveQuestion: 'Spanish Resolve Question',
+        cancel: 'Spanish Cancel',
+        titleRateExpert: 'Spanish Your question has been resolved!',
+        subTitleRateExpert: 'Spanish Rate your conversation with ',
+        rate: 'Spanish Rate',
+        enterMessage: 'Spanish Enter your Message',
+        resolved:
+            'Spanish This conversation has been resolved. To start a new question, return to the ask tab.',
+    },
 
-  errorMessage: {
-    serverError: 'Spanish Something went wrong please try after some time',
-    noDataAvailable: 'Spanish No data available',
-    userNotExist: 'Spanish User does not exist',
-    invalidSecretKey: 'Spanish Invalid secret key.',
-    invalidreferalCode: 'Spanish Invalid referral code.',
-  },
+    changePassword: {
+        title: 'Spanish Change Password',
+        cancel: 'Spanish Cancel',
+        currentPassword: 'Spanish Current Password',
+        newPassword: 'Spanish New Password',
+        updatePassword: 'Spanish Update Password',
+        emptyCurrent: 'Spanish Current Password is a required field.',
+        emptyNew: 'Spanish New Password is a required field.',
+        limitError: 'Spanish New Password should be at least 7 characters',
+        specialCharError:
+            'Spanish New Password should have at least 1 special character',
+        success: 'Spanish Password has been updated successfully',
+    },
 
-  expertProfile: {
-    title: 'Spanish Expert Profile',
-    btnText: 'Spanish Ask This Expert',
-    bio: 'Spanish Bio',
-    specialties: 'Spanish Specialties',
-    languages: 'Spanish Languages',
-    clinicInfo: 'Spanish Clinic Info',
-    hours: 'Spanish Hours',
-    closed: 'Spanish Closed',
-    prescriber: 'Spanish Prescriber',
-  },
+    chooseExpert: {
+        questionTitle: 'Spanish Choose an expert to answer…',
+        edit: 'Spanish Edit',
+        cancel: 'Spanish Cancel',
+        save: 'Spanish Save',
+        filterTitle: 'Spanish Discovery Settings',
+        done: 'Spanish Done',
+        languageFilterTitle: 'Spanish Show me experts who speak:',
+        professionFilterTitle: 'Spanish Show me:',
+        genderFilterTitle: 'Spanish Show me experts who are:',
+    },
 
-  forgotPassword: {
-    Submit: 'Spanish Submit',
-    Email: 'Spanish Your email',
-    Title: 'Spanish Forgot Password',
-    Subtitle:
-      'Spanish Please enter your registered email to reset your password',
-    resetEmailSentMessage:
-      'Spanish A password reset message sent to your email address. Please click the link in that message to reset your password.',
-  },
+    errorMessage: {
+        serverError: 'Spanish Something went wrong please try after some time',
+        noDataAvailable: 'Spanish No data available',
+        userNotExist: 'Spanish User does not exist',
+        invalidSecretKey: 'Spanish Invalid secret key.',
+        invalidreferalCode: 'Spanish Invalid referral code.',
+    },
 
-  lifestyle: {
-    title: 'Spanish Lifestyle',
-    finish: 'Spanish Finish',
-    next: 'Spanish Next',
-    previous: 'Spanish Previous',
-  },
+    expertProfile: {
+        title: 'Spanish Expert Profile',
+        btnText: 'Spanish Ask This Expert',
+        bio: 'Spanish Bio',
+        specialties: 'Spanish Specialties',
+        languages: 'Spanish Languages',
+        clinicInfo: 'Spanish Clinic Info',
+        hours: 'Spanish Hours',
+        closed: 'Spanish Closed',
+        prescriber: 'Spanish Prescriber',
+    },
 
-  getTreatment: {
-    title: 'Spanish Get Treatment',
-    seeHistory: 'Spanish See History',
-    bookVisit: 'Spanish Book a Visit',
-    about: 'Spanish About',
-    languages: 'Spanish Languages',
-    specialties: 'Spanish Specialities',
-  },
+    forgotPassword: {
+        Submit: 'Spanish Submit',
+        Email: 'Spanish Your email',
+        Title: 'Spanish Forgot Password',
+        Subtitle:
+            'Spanish Please enter your registered email to reset your password',
+        resetEmailSentMessage:
+            'Spanish A password reset message sent to your email address. Please click the link in that message to reset your password.',
+    },
 
-  treatmentHistory: {
-    chatHistory: 'Spanish Chat History',
-    videoHistory: 'Spanish Video History',
-  },
+    lifestyle: {
+        title: 'Spanish Lifestyle',
+        finish: 'Spanish Finish',
+        next: 'Spanish Next',
+        previous: 'Spanish Previous',
+    },
 
-  chatHistory: {
-    empty: 'Spanish You have no chat history linked to this provider.',
-    resolved: 'Spanish Resolved',
-    unresolved: 'Spanish Unresolved',
-  },
+    getTreatment: {
+        title: 'Spanish Get Treatment',
+        seeHistory: 'Spanish See History',
+        bookVisit: 'Spanish Book a Visit',
+        about: 'Spanish About',
+        languages: 'Spanish Languages',
+        specialties: 'Spanish Specialities',
+    },
 
-  videoHistory: {
-    empty: 'Spanish You have no video history linked to this provider.',
-    subject: 'Spanish Subject: ',
-    visitId: 'Spanish Visit ID: ',
-    viewDetails: 'Spanish View Details',
-    videoWith: 'Spanish Video visit with',
-    afterVisit:
-      'Spanish After visit summary has not been provided by your expert. Check again later.',
-  },
+    treatmentHistory: {
+        chatHistory: 'Spanish Chat History',
+        videoHistory: 'Spanish Video History',
+    },
 
-  basicInfo: {
-    title: 'Spanish Basic Information',
-    save: 'Spanish Save',
-  },
+    chatHistory: {
+        empty: 'Spanish You have no chat history linked to this provider.',
+        resolved: 'Spanish Resolved',
+        unresolved: 'Spanish Unresolved',
+    },
 
-  healthHistory: {
-    title: 'Spanish My Health History',
-    basicInfo: 'Spanish Basic Information',
-    pregnancy: 'Spanish Pregnancy and Children',
-    lifestyle: 'Spanish Lifestyle',
-    allergies: 'Spanish Allergies',
-    medications: 'Spanish Medications',
-    medicalHistory: 'Spanish Medical History',
-    insurance: 'Spanish Insurance',
-    notes: 'Spanish Previous Appointment Notes',
-  },
+    videoHistory: {
+        empty: 'Spanish You have no video history linked to this provider.',
+        subject: 'Spanish Subject: ',
+        visitId: 'Spanish Visit ID: ',
+        viewDetails: 'Spanish View Details',
+        videoWith: 'Spanish Video visit with',
+        afterVisit:
+            'Spanish After visit summary has not been provided by your expert. Check again later.',
+    },
 
-  login: {
-    ForgotPassword: 'Spanish Forgot your password?',
-    Login: 'Spanish Log In',
-    User: 'Spanish User',
-    Expert: 'Spanish Expert',
-    or: 'Spanish or',
-    Email: 'Spanish Your email',
-    Password: 'Spanish Password',
-    EmptyEmailMsg: 'Spanish Email is a required field.',
-    InvalidEmailMsg:
-      'Spanish Enter a valid email address. For example abc@domain.com.',
-    EmptyPasswordMsg: 'Spanish Password is a required field.',
-    Verify: 'Spanish Get Activation Link',
-  },
+    basicInfo: {
+        title: 'Spanish Basic Information',
+        save: 'Spanish Save',
+    },
 
-  paymentMethods: {
-    title: 'Spanish Payment Methods',
-    myPayment: 'Spanish My Payment Methods',
-    addPayment: 'Spanish Add New Payment Method',
-    addCard: 'Spanish Add Credit/Debit Card',
-    addPaypal: 'Spanish Add PayPal',
-  },
+    healthHistory: {
+        title: 'Spanish My Health History',
+        basicInfo: 'Spanish Basic Information',
+        pregnancy: 'Spanish Pregnancy and Children',
+        lifestyle: 'Spanish Lifestyle',
+        allergies: 'Spanish Allergies',
+        medications: 'Spanish Medications',
+        medicalHistory: 'Spanish Medical History',
+        insurance: 'Spanish Insurance',
+        notes: 'Spanish Previous Appointment Notes',
+    },
 
-  referFriend: {
-    title: 'Spanish Refer a Friend',
-    subTitleText: 'Spanish Invite friends, get 10 credits',
-    subTitleText2:
-      'Spanish Get 10 credits for each friend who signs up with your referral code',
-    yourreferalCode: 'Spanish Your Referral Code',
-    btnText: 'Spanish Copy My Referral Code',
-    moreWays: 'Spanish More ways to share',
-    smsFb: 'Spanish SMS, Facebook, Twitter & More',
-  },
+    login: {
+        ForgotPassword: 'Spanish Forgot your password?',
+        Login: 'Spanish Log In',
+        User: 'Spanish User',
+        Expert: 'Spanish Expert',
+        or: 'Spanish or',
+        Email: 'Spanish Your email',
+        EnterEmail: 'Spanish Enter email address here',
+        Password: 'Spanish Password',
+        EmptyEmailMsg: 'Spanish Email is a required field.',
+        InvalidEmailMsg:
+            'Spanish Enter a valid email address. For example abc@domain.com.',
+        EmptyPasswordMsg: 'Spanish Password is a required field.',
+        Verify: 'Spanish Activate Account',
+        Member: 'Spanish Become a member',
+        Activation:
+            'Spanish You should receive an email shortly.\n\nIf you do not receive an email, please contact support@kiira.io',
+        MemberHelp: 'Spanish Awesome!! If you are a member, you will receive an email to set your password shortly. If you’re not,  you need to select a plan to get started.',
+        NoBiometrics: 'Spanish Please login with email and password to enable.',
+        Welcome: 'Spanish Welcome back to Kiira!',
+        Back: 'Spanish Back',
+        HelloNewMember: 'Spanish Hello New Member!',
+        ActivateBelow: 'Spanish To get started please activate your account below.',
+        UseSameEmail: 'Spanish Please use the same email address you used when you became a member.',
+        OrganizationPlan: 'Spanish If you are part of an organization sponsored plan i.e school or employer plan please use the email associated with your organization. example. _____.edu',
 
-  setting: {
-    title: 'Spanish Settings',
-    cancel: 'Spanish Cancel',
-    done: 'Spanish Done',
-    changePhoto: 'Spanish Change Profile Photo',
-    changePassword: 'Spanish Change Password',
-  },
+    },
+    welcomeKiira:{
+        welcomeKiira: ' Spanish Welcome to Kiira',
+        oneStopTitle: 'Spanish Your one stop shop for care. On the Kiira app you can:',
+        getVirtualAppointmentsInfo: 'Spanish Get virtual appointments, prescriptions, health resources, and answers to health questions via chat within 24 hours.',
+        accessPersonalizedTeamInfo: 'Spanish Access a personalized team of health providers for women\'s health, mental health, and primary care on-demand.',
+        takeKiiraEveryWhereInfo: 'Spanish Take Kiira with you everywhere you go and get answers specific to every stage of your life.',
+        becomeMember: 'Spanish Become a member',
+        back: 'Spanish Back'
+    },
 
-  signUp: {
-    titleText1: 'Spanish Hello!',
-    titleText2: 'Spanish Sign up to get started.',
-    signup: 'Spanish Sign Up',
-    termsConditionsText1: 'Spanish By signing up, you agree to the Kiira ',
-    termsConditionsText2: 'Spanish Terms and Conditions',
-    termsConditionsText3: 'Spanish  and ',
-    termsConditionsText4: 'Spanish Privacy Policy',
-    description:
-      'Spanish IF YOU HAVE A MEDICAL EMERGENCY, IMMEDIATELY CALL YOUR DOCTOR OR DIAL 911.THIS SERVICE PROVIDES GENERAL HEALTH AND WELLNESS INFORMATION AND A MEANS TO INTERACT WITH PRACTITIONERS.IT DOES NOT REPLACE YOUR RELATIONSHIP WITH ANY PRACTITIONER OR SERVICE, AND KIIRA, ITSELF, DOES NOT PROVIDE MEDICAL OR HEALTH ADVICE, CARE, DIAGNOSIS, OR TREATMENT.NONE OF THE CONTENT SHOULD BE CONSIDERED MEDICAL ADVICE OR AN ENDORSEMENT, REPRESENTATION OR WARRANTY THAT ANY PARTICULAR MEDICATION OR TREATMENT IS SAFE, APPROPRIATE, OR EFFECTIVE FOR YOU.',
-    passwordCharLimitValidMsg: 'Spanish At least 7 characters',
-    passwordSpecialCharValidMsg: 'Spanish At least 1 special character',
-    EmptyEmailMsg: 'Spanish Email is a required field.',
-    InvalidEmailMsg:
-      'Spanish Enter a valid email address. For example abc@domain.com.',
-    EmptyPasswordMsg: 'Spanish Password is a required field.',
-    passwordLimitErrorMsg: 'Spanish Password should be at least 7 characters.',
-    passwordSpecialCharErrorMsg:
-      'Spanish Password should have at least 1 special character.',
-    secretreferalCodeErrorMsg:
-      'Spanish Please enter Referral code or Secret key.',
-    referalCode: 'Spanish Referral code',
-    sceretKey: 'Spanish Secret Key',
-    or: 'Spanish OR',
-  },
+    paymentMethods: {
+        title: 'Spanish Payment Methods',
+        myPayment: 'Spanish My Payment Methods',
+        addPayment: 'Spanish Add New Payment Method',
+        addCard: 'Spanish Add Credit/Debit Card',
+        addPaypal: 'Spanish Add PayPal',
+    },
 
-  successMessages: {
-    visitAddedSuccessfully: 'Spanish Your payment was successful',
-    cardAddedSuccessfully: 'Spanish Your card has been added successfully',
-  },
+    referFriend: {
+        title: 'Spanish Refer a Friend',
+        subTitleText: 'Spanish Invite friends, get 10 credits',
+        subTitleText2:
+            'Spanish Get 10 credits for each friend who signs up with your referral code',
+        yourreferalCode: 'Spanish Your Referral Code',
+        btnText: 'Spanish Copy My Referral Code',
+        moreWays: 'Spanish More ways to share',
+        smsFb: 'Spanish SMS, Facebook, Twitter & More',
+    },
 
-  sos: {
-    title: 'Spanish SOS',
-    yes: 'Spanish Yes',
-    no: 'Spanish No',
-    emergency: 'Spanish Are you experiencing an emergency?',
-  },
+    setting: {
+        title: 'Spanish Settings',
+        cancel: 'Spanish Cancel',
+        done: 'Spanish Done',
+        changePhoto: 'Spanish Change Profile Photo',
+        changePassword: 'Spanish Change Password',
+    },
 
-  tabs: {
-    account: 'Spanish Account',
-    ask: 'Spanish Ask',
-    learn: 'Spanish Learn',
-  },
+    signUp: {
+        titleText1: 'Spanish Hello!',
+        titleText2: 'Spanish Sign up to get started.',
+        signup: 'Spanish Sign Up',
+        termsConditionsText1: 'Spanish By signing up, you agree to the Kiira ',
+        termsConditionsText2: 'Spanish Terms and Conditions',
+        termsConditionsText3: 'Spanish  and ',
+        termsConditionsText4: 'Spanish Privacy Policy',
+        description:
+            'Spanish IF YOU HAVE A MEDICAL EMERGENCY, IMMEDIATELY CALL YOUR DOCTOR OR DIAL 911.THIS SERVICE PROVIDES GENERAL HEALTH AND WELLNESS INFORMATION AND A MEANS TO INTERACT WITH PRACTITIONERS.IT DOES NOT REPLACE YOUR RELATIONSHIP WITH ANY PRACTITIONER OR SERVICE, AND KIIRA, ITSELF, DOES NOT PROVIDE MEDICAL OR HEALTH ADVICE, CARE, DIAGNOSIS, OR TREATMENT.NONE OF THE CONTENT SHOULD BE CONSIDERED MEDICAL ADVICE OR AN ENDORSEMENT, REPRESENTATION OR WARRANTY THAT ANY PARTICULAR MEDICATION OR TREATMENT IS SAFE, APPROPRIATE, OR EFFECTIVE FOR YOU.',
+        passwordCharLimitValidMsg: 'Spanish At least 7 characters',
+        passwordSpecialCharValidMsg: 'Spanish At least 1 special character',
+        EmptyEmailMsg: 'Spanish Email is a required field.',
+        InvalidEmailMsg:
+            'Spanish Enter a valid email address. For example abc@domain.com.',
+        EmptyPasswordMsg: 'Spanish Password is a required field.',
+        passwordLimitErrorMsg:
+            'Spanish Password should be at least 7 characters.',
+        passwordSpecialCharErrorMsg:
+            'Spanish Password should have at least 1 special character.',
+        secretreferalCodeErrorMsg:
+            'Spanish Please enter Referral code or Secret key.',
+        referalCode: 'Spanish Referral code',
+        sceretKey: 'Spanish Secret Key',
+        or: 'Spanish OR',
+    },
 
-  tutorial: {
-    signUp: 'Spanish Sign up',
-    login: 'Spanish Log In',
-    verify: 'Spanish Activate Account',
-  },
-  agreements: {
-    getStarted: 'Spanish Get Started',
-    agree: 'Spanish Agree',
-    finish: 'Spanish Finish',
-  },
-  termsAndConditions: {
-    title: 'Spanish Terms and Conditions',
-  },
-  privacyPolicy: {
-    title: 'Spanish Privacy Policy',
-  },
-  help: {
-    title: 'Spanish Help',
-    ask: 'Spanish Ask',
-    question: 'Spanish Have a question? Ask the Kiira support team!',
-  },
-  learn: {
-    title: 'Spanish Kick it with Kiira',
-    learnMore:
-      'Spanish Want to know more about Kiira and Women Health? Read our articles!',
-    seeArticles: 'Spanish See Articles',
-    explore: 'Spanish Explore tips and content on Kick it with Kiira.',
-    sexualHealth: 'Spanish Sexual Health',
-    mentalHealth: 'Spanish Mental Health',
-    obstetrics: 'Spanish Obstetrics',
-    gynecology: 'Spanish Gynecology',
-    breastHealth: 'Spanish Breast Health',
-    wellness: 'Spanish Wellness',
-    newsAndNoteworthy: 'Spanish News and Noteworthy',
-    prevention: 'Spanish Prevention',
-  },
-  expertAppointments: {
-    title: 'Spanish Appointments',
-    future: 'Spanish Future Appointments',
-    noVisitsToday:
-      'Spanish You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
-    patientName: 'Spanish Patient Name',
-    subject: 'Spanish CC',
-    lockError:
-      'Spanish There was an error saving the record please retry shortly',
-  },
-  expertAccount: {
-    logout: 'Spanish Logout',
-    settings: 'Spanish My Profile',
-    termsAndConditions: 'Terms & Conditions',
-    privacyPolicies: 'Spanish Privacy Policies',
-    updateAvailability: 'Spanish Update Availability',
-    rate: 'Spanish Rate us',
-    refer: 'Spanish Refer a Friend, Get 10 Credits',
-    appointments: 'Spanish Appointments',
-    healthHistory: 'Spanish Health History',
-    availablity: 'Spanish Update Availablity',
-    born: 'Spanish Born',
-    pronouns: 'Spanish Pronouns',
-    location: 'Spanish Location',
-  },
-  appointments: {
-    scheduleAppointment: 'Schedule Appointment',
-    notify: `Spanish We'll notifiy you about upcoming appointments, new messages, and more`,
-    noVisits: `Spanish You have no upcoming visits`,
-  },
-  expertChats: {
-    title: 'Spanish Chats',
-    resolved: 'Spanish Resolved',
-    active: 'Spanish Active',
-    chats: 'Spanish Chats',
-    patientName: 'Spanish Patient Name',
-    noQuestions:
-      'Spanish You have not been asked any questions. Check back later.',
-    subject: 'Spanish Subject',
-    lastMessage: 'Spanish Last Message',
-    searchName: 'Spanish Search Name',
-  },
-  visitSummary: {
-    title: 'Spanish Visit Summary',
-    visitInformation: 'Spanish Visit Information',
-    chiefComplaint: 'Spanish Chief Complaint',
-    assessmentPlan: 'Spanish Assessment / Plan',
-    afterVisitSummary: 'Spanish After Visit Summary',
-    patientName: 'Spanish Patient Name',
-    dateAndTime: 'Spanish Date and Time',
-    provider: 'Spanish Provider',
-    locked: 'Spanish Record Locked',
-    none: 'Spanish None',
-    reason: 'Spanish Reason',
-  },
-  changePlan: {
-    title: 'Spanish Change Plan',
-    confirm: 'Spanish Confirm',
-    cancel: 'Spanish Cancel',
-  },
-  dashboard: {
-    title: 'Spanish Dashboard',
-    getTreatment: 'Spanish Get Treatment',
-    mySquad: 'Spanish My Squad',
-    chatExpert: 'Spanish Chat with an Expert',
-    myHistory: 'Spanish My History',
-    reminders: 'Spanish Reminders',
-    sos: 'Spanish SOS',
-    helloName: 'Spanish Hello, ',
-    notFeelingSick: `Spanish I'm not feeling sick`,
-    nowMention: 'Spanish Now that you mention it',
-    kiira: 'Spanish Kiira',
-    bot: `Spanish Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?`,
-    great: `Spanish That's great! If that changes let us know.`,
-    serviceUnavailable:
-      'Spanish This Service is currently unavailable in your state',
-    chatNotAvailable: 'Spanish Chat unavailable with current plan',
-  },
+    successMessages: {
+        visitAddedSuccessfully: 'Spanish Your payment was successful',
+        cardAddedSuccessfully: 'Spanish Your card has been added successfully',
+    },
+
+    tabs: {
+        account: 'Spanish Account',
+        ask: 'Spanish Ask',
+        learn: 'Spanish Learn',
+    },
+
+    tutorial: {
+        signUp: 'Spanish Sign up',
+        login: 'Spanish Log In',
+        verify: 'Spanish Activate Account',
+    },
+    agreements: {
+        getStarted: 'Spanish Get Started',
+        agree: 'Spanish Agree',
+        finish: 'Spanish Finish',
+    },
+    billingAndInsurance: {
+        title: 'Spanish Billing & Insurance',
+        insuranceCompany: 'Spanish Insurance Company',
+        memberIdHint: 'Spanish Member ID',
+        insurance: 'Spanish Insurance:',
+        memberId: 'Spanish Member ID:',
+        pastBills: 'Spanish Past Bills',
+        noBills: 'Spanish You don\'t currently have any bills.'
+    },
+    pharmacy: {
+        title: 'Spanish Pharmacy',  
+        nameOfPharmacy: 'Spanish Name of Pharmacy',
+        phoneNumber: 'Spanish Phone Number',
+        address: 'Spanish Address',
+        bartells: 'Spanish Bartells' 
+    },
+    emergencyContact: {
+        title: 'Spanish Emergency Contact', 
+        firstLastName: 'Spanish First & Last Name*',
+        phoneNumber: 'Spanish Phone Number*',
+        secondaryPhoneNumber: 'Spanish Secondary Phone Number',
+        relationshipToYou: 'Spanish Relationship to You'
+    },
+    termsAndConditions: {
+        title: 'Spanish Terms and Conditions',
+    },
+    privacyPolicy: {
+        title: 'Spanish Privacy Policy',
+    },
+    help: {
+        title: 'Spanish Help',
+        ask: 'Spanish Ask',
+        question: 'Spanish Have a question? Ask the Kiira support team!',
+    },
+    learn: {
+        title: 'Spanish Kick it with Kiira',
+        learnMore:
+            'Spanish Want to know more about Kiira and Women Health? Read our articles!',
+        seeArticles: 'Spanish See Articles',
+        explore: 'Spanish Explore tips and content on Kick it with Kiira.',
+        sexualHealth: 'Spanish Sexual Health',
+        mentalHealth: 'Spanish Mental Health',
+        obstetrics: 'Spanish Obstetrics',
+        gynecology: 'Spanish Gynecology',
+        breastHealth: 'Spanish Breast Health',
+        wellness: 'Spanish Wellness',
+        newsAndNoteworthy: 'Spanish News and Noteworthy',
+        prevention: 'Spanish Prevention',
+    },
+    expertAppointments: {
+        title: 'Spanish Appointments',
+        future: 'Spanish Future Appointments',
+        noVisitsToday:
+            'Spanish You do not have any scheduled visits on the selected date. Upcoming visits will be listed here.',
+        patientName: 'Spanish Patient Name',
+        subject: 'Spanish CC',
+        lockError:
+            'Spanish There was an error saving the record please retry shortly',
+    },
+    expertAccount: {
+        logout: 'Spanish Logout',
+        settings: 'Spanish My Profile',
+        billingAndInsurance: 'Spanish Billing & Insurance',
+        termsAndConditions: 'Terms & Conditions',
+        privacyPolicies: 'Spanish Privacy Policies',
+        updateAvailability: 'Spanish Update Availability',
+        rate: 'Spanish Rate us',
+        refer: 'Spanish Refer a Friend, Get 10 Credits',
+        appointments: 'Spanish Appointments',
+        healthHistory: 'Spanish Health History',
+        availablity: 'Spanish Update Availablity',
+        born: 'Spanish Born',
+        pronouns: 'Spanish Pronouns',
+        location: 'Spanish Location',
+    },
+    appointments: {
+        scheduleAppointment: 'Schedule Appointment',
+        notify: `Spanish We'll notifiy you about upcoming appointments, new messages, and more`,
+        noVisits: `Spanish You have no upcoming visits`,
+    },
+    expertChats: {
+        title: 'Spanish Chats',
+        resolved: 'Spanish Resolved',
+        active: 'Spanish Active',
+        chats: 'Spanish Chats',
+        patientName: 'Spanish Patient Name',
+        noQuestions:
+            'Spanish You have no open chats.',
+        subject: 'Spanish Subject',
+        lastMessage: 'Spanish Last Message',
+        searchName: 'Spanish Search',
+    },
+    visitSummary: {
+        title: 'Spanish Visit Summary',
+        visitInformation: 'Spanish Visit Information',
+        chiefComplaint: 'Spanish Chief Complaint',
+        assessmentPlan: 'Spanish Assessment / Plan',
+        afterVisitSummary: 'Spanish After Visit Summary',
+        patientName: 'Spanish Patient Name',
+        dateAndTime: 'Spanish Date and Time',
+        provider: 'Spanish Provider',
+        locked: 'Spanish Record Locked',
+        none: 'Spanish None',
+        reason: 'Spanish Reason',
+    },
+    changePlan: {
+        title: 'Spanish Change Plan',
+        confirm: 'Spanish Confirm',
+        cancel: 'Spanish Cancel',
+    },
+    dashboard: {
+        title: 'Spanish Dashboard',
+        getTreatment: 'Spanish Get Treatment',
+        mySquad: 'Spanish My Squad',
+        chatExpert: 'Spanish Chat with an Expert',
+        myHistory: 'Spanish My History',
+        reminders: 'Spanish Reminders',
+        sos: 'Spanish SOS',
+        hiName: 'Spanish Hi, ',
+        notFeelingSick: `Spanish I'm not feeling sick`,
+        nowMention: 'Spanish Now that you mention it',
+        kiira: 'Spanish Kiira',
+        bot: `Spanish Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?`,
+        great: `Spanish That's great! If that changes let us know.`,
+        serviceUnavailable:
+            'Spanish This Service is currently unavailable in your state',
+        chatNotAvailable: 'Spanish Chat unavailable with current plan',
+    },
 };

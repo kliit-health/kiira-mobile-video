@@ -1,1 +1,1 @@
-export {default as topics} from './chat/topics';
+export { default as topics } from './chat/topics';

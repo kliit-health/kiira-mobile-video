@@ -1,45 +1,38 @@
 import { combineReducers } from 'redux';
-import account from '../../screens/patient/account/reducer';
+import account from './account';
+import activate from './activate';
 import agreements from './agreements';
-import addProfile from '../../screens/patient/account/settings/addProfileData/reducer';
 import addNewProfile from '../../screens/auth/chatBot/reducer';
-import appointments from '../../screens/patient/dashboard/appointments/reducer';
+import appointments from './appointments';
 import assessment from '../reducers/assessment';
-import ask from '../../screens/patient/dashboard/ask/reducer';
+import ask from './ask';
 import askExpert from '../../screens/provider/ask/reducer';
-import bookVisit from '../../screens/patient/dashboard/getTreatment/bookVisit/reducer';
-import changePassword from '../../screens/patient/account/settings/changePassword/reducer';
-import chat from '../../screens/patient/dashboard/ask/chat/reducer';
+import chat from './chat';
 import chatExpert from '../../screens/provider/ask/chat/reducer';
-import chooseExpert from '../../screens/patient/dashboard/ask/chooseExpert/reducer';
+import chooseExpert from './chooseExpert';
 import clientMedicalHistory from './medicalHistory';
 import expertAppointments from '../../screens/provider/appointments/reducer';
 import expertPatients from '../../screens/provider/patients/reducer';
 import expertProfile from '../../screens/common/expertProfile/reducer';
-import expertSchedule from '../../screens/patient/dashboard/getTreatment/expertSchedule/reducer';
 import experts from './experts';
 import favoriteExperts from './favoriteExperts';
-import forgotPassword from '../../screens/auth/forgotPassword/reducer';
+import forgotPassword from './forgotPassword';
 import healthHistory from './healthHistory';
 import language from './language';
 import licenses from './licenses';
 import loader from '../../components/customLoader/reducer';
-import login from '../../screens/auth/login/reducer';
+import login from './login';
 import medicalHistory from '../../screens/provider/appointments/patientProfile/reducer';
 import messaging from './messaging';
 import modal from '../../components/customModal/reducer';
-import payment from '../../screens/patient/dashboard/getTreatment/payment/reducer';
 import plan from './plan';
 import plans from './plans';
 import privacyPolicy from './privacyPolicy';
 import questions from './questions';
-import reschedule from '../../screens/patient/dashboard/appointments/rescheduleVisit/reducer';
-import settings from '../../screens/patient/account/settings/reducer';
 import settingsExpert from '../../screens/provider/account/settings/reducer';
 import subscription from './subscription';
 import termsAndConditions from './termsAndConditions';
 import toast from '../../components/customToast/reducer';
-import verify from '../../screens/auth/verify/reducer';
 import navigator from './navigator';
 import treatmentHistory from '../../screens/patient/dashboard/careSquad/treatmentHistory/reducer';
 import twillio from './twillio';
@@ -48,53 +41,46 @@ import updateExpert from '../../screens/provider/account/updateAvailablity/reduc
 import visit from '../../screens/patient/dashboard/appointments/visit/reducer';
 
 export const rootReducer = combineReducers({
-  account,
-  addProfile,
-  addNewProfile,
-  agreements,
-  appointments,
-  ask,
-  askExpert,
-  assessment,
-  bookVisit,
-  changePassword,
-  chat,
-  chatExpert,
-  chooseExpert,
-  clientMedicalHistory,
-  expertAppointments,
-  expertPatients,
-  expertProfile,
-  expertSchedule,
-  experts,
-  favoriteExperts,
-  forgotPassword,
-  healthHistory,
-  language,
-  licenses,
-  loader,
-  login,
-  medicalHistory,
-  messaging,
-  modal,
-  navigator,
-  payment,
-  plan,
-  plans,
-  privacyPolicy,
-  questions,
-  reschedule,
-  settings,
-  settingsExpert,
-  subscription,
-  termsAndConditions,
-  treatmentHistory,
-  twillio,
-  toast,
-  updateExpert,
-  user,
-  verify,
-  visit,
+    account,
+    activate,
+    addNewProfile,
+    agreements,
+    appointments,
+    ask,
+    askExpert,
+    assessment,
+    chat,
+    chatExpert,
+    chooseExpert,
+    clientMedicalHistory,
+    expertAppointments,
+    expertPatients,
+    expertProfile,
+    experts,
+    favoriteExperts,
+    forgotPassword,
+    healthHistory,
+    language,
+    licenses,
+    loader,
+    login,
+    medicalHistory,
+    messaging,
+    modal,
+    navigator,
+    plan,
+    plans,
+    privacyPolicy,
+    questions,
+    settingsExpert,
+    subscription,
+    termsAndConditions,
+    treatmentHistory,
+    twillio,
+    toast,
+    updateExpert,
+    user,
+    visit,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

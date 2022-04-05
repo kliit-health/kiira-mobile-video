@@ -1,14 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import {
-    StatusBar,
-    View,
-    ImageBackground,
-    ScrollView,
-    Dimensions,
-    Platform,
-    Linking,
-} from 'react-native';
+import { View, Platform, Linking, StatusBar } from 'react-native';
 import {
     requestMultiple,
     checkMultiple,
@@ -16,45 +7,13 @@ import {
     RESULTS,
 } from 'react-native-permissions';
 import SplashScreen from 'react-native-smart-splash-screen';
-import styles from './style';
-import Constant from '~/utils/constants';
-import CustomButton from '~/components/customButton';
-import Carousel from '~/components/carousel';
 import VersionCheck from 'react-native-version-check';
+import { Carousel, PageIndicator } from '~/components';
+import { Page } from './sections';
+import styles, { indicatorStyles } from './styles';
+import { pages } from './model';
 
-const largeDisplay = Dimensions.get('window').height > 800;
-
-let banner = [
-    {
-        id: 1,
-        image: largeDisplay
-            ? Constant.App.staticImages.tutorialImageOneLarge
-            : Constant.App.staticImages.tutorialImageOne,
-    },
-    {
-        id: 2,
-        image: largeDisplay
-            ? Constant.App.staticImages.tutorialImageTwoLarge
-            : Constant.App.staticImages.tutorialImageTwo,
-    },
-    {
-        id: 3,
-        image: largeDisplay
-            ? Constant.App.staticImages.tutorialImageThreeLarge
-            : Constant.App.staticImages.tutorialImageThree,
-    },
-    {
-        id: 4,
-        image: largeDisplay
-            ? Constant.App.staticImages.tutorialImageFourLarge
-            : Constant.App.staticImages.tutorialImageFour,
-    },
-];
-
-const Landing = props => {
-    const { navigation } = props;
-    const lang = useSelector(state => state.language);
-
+const Landing = () => {
     useEffect(() => {
         if (Platform.OS === 'android') {
             checkMultiple([
@@ -62,10 +21,10 @@ const Landing = props => {
                 PERMISSIONS.ANDROID.RECORD_AUDIO,
                 PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
             ])
-                .then(statuses => {
-                    for (var key in statuses) {
-                        if (statuses.hasOwnProperty(key)) {
-                            switch (statuses[key]) {
+                .then(status => {
+                    for (var key in status) {
+                        if (status.hasOwnProperty(key)) {
+                            switch (status[key]) {
                                 case RESULTS.UNAVAILABLE:
                                     break;
                                 case RESULTS.DENIED:
@@ -74,7 +33,7 @@ const Landing = props => {
                                         PERMISSIONS.ANDROID.RECORD_AUDIO,
                                         PERMISSIONS.ANDROID
                                             .WRITE_EXTERNAL_STORAGE,
-                                    ]).then(result => {});
+                                    ]);
                                     break;
                                 case RESULTS.GRANTED:
                                     break;
@@ -88,6 +47,7 @@ const Landing = props => {
                     console.log('The permission error', error);
                 });
         }
+
         SplashScreen.close({
             animationType: SplashScreen.animationType.scale,
             duration: 3000,
@@ -98,71 +58,23 @@ const Landing = props => {
     useEffect(() => {
         VersionCheck.needUpdate().then(async res => {
             if (res.isNeeded) {
-                Linking.openURL(res.storeUrl); // open store if update is needed.
+                Linking.openURL(res.storeUrl);
             }
         });
     }, []);
 
-    const renderSliderView = () => {
-        return (
-            <View style={styles.sliderViewStyle}>
-                <StatusBar hidden />
-                <Carousel
-                    autoplay
-                    autoplayTimeout={5000}
-                    loop
-                    index={0}
-                    pageSize={Dimensions.get('window').width}
-                    activePageIndicatorStyle={{
-                        backgroundColor: Constant.App.colors.blueColor,
-                    }}
-                >
-                    {banner.map((item, key) => (
-                        <View key={key}>
-                            <ImageBackground
-                                style={styles.bannerImageStyle}
-                                resizeMethod={'auto'}
-                                source={item.image}
-                            />
-                        </View>
-                    ))}
-                </Carousel>
-            </View>
-        );
-    };
-
-    const renderButtonView = () => {
-        return (
-            <View style={styles.buttonContainerStyle}>
-                <CustomButton
-                    text={lang.tutorial.verify}
-                    textStyle={styles.verifyButtonTextStyle}
-                    buttonStyle={styles.verifyButtonStyle}
-                    onPress={() =>
-                        navigation.navigate(Constant.App.screenNames.Verify)
-                    }
-                />
-                <CustomButton
-                    text={lang.tutorial.login}
-                    textStyle={styles.loginButtonTextStyle}
-                    buttonStyle={styles.loginButtonStyle}
-                    onPress={() => {
-                        navigation.navigate(Constant.App.screenNames.Login);
-                    }}
-                />
-            </View>
-        );
-    };
-
     return (
-        <View style={styles.containerStyle}>
-            <ScrollView
-                keyboardShouldPersistTaps="handled"
-                showsVerticalScrollIndicator={false}
+        <View testID="Landing" style={[styles.root]}>
+            <StatusBar hidden />
+            <Carousel
+                pageIndicator={props => (
+                    <PageIndicator styles={indicatorStyles} {...props} />
+                )}
             >
-                {renderSliderView()}
-                {renderButtonView()}
-            </ScrollView>
+                {pages.map(props => (
+                    <Page key={props.title} {...props} />
+                ))}
+            </Carousel>
         </View>
     );
 };

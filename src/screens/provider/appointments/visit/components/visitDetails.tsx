@@ -8,63 +8,76 @@ import styles from '../styles';
 import { withNavigation } from 'react-navigation';
 import CancelModal from './cancelModal';
 
-const VisitDetails = ({ navigation }) => {
-  const { visit } = navigation.state.params;
-  const { appointmentType, reason } = visit;
+const VisitDetails = ({ navigation, visit }) => {
+    const dispatch = useDispatch();
+    const {
+        appointmentType: { duration },
+      } = visit;
+    let today = moment().startOf('day');
+    let appointment =
+    typeof visit.time === 'number'
+      ? moment.unix(visit.time).format('MM/DD/YYYY')
+      : moment(visit.time).format('YYYY-MM-DD');
+    let daysUntilVisit = Math.abs(
+        moment.duration(today.diff(appointment)).asDays(),
+    );
 
-  const duration = appointmentType
-    ? appointmentType.duration
-    : reason.sessionType.duration;
+    let [visible, setVisible] = useState(false);
 
-  const dispatch = useDispatch();
-  let today = moment().startOf('day');
-  let appointment = moment(visit.time).format('YYYY-MM-DD');
-  let daysUntilVisit = Math.abs(
-    moment.duration(today.diff(appointment)).asDays(),
-  );
+    useEffect(() => {
+        dispatch(setVisit(visit));
+    });
 
-  let [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    dispatch(setVisit(visit));
-  });
-
-  return (
-    <View style={{ alignSelf: 'center' }}>
-      <View style={styles.visitDetailsParentContainer}>
-        <Text style={styles.visitDetailsTitle}>Your Next Appointment</Text>
-        <CancelModal visit={visit} visible={visible} setVisible={setVisible} />
-        <View style={{ flexDirection: 'row', margin: 26 }}>
-          <Image
-            style={styles.locationImage}
-            source={require('../../../../../../assets/blue_location.jpg')}
-            activeOpacity={0.7}
-          />
-          <View style={styles.informationContainer}>
-            <Text style={styles.informationTitle}>Location: Virtual Visit</Text>
-            <Text style={styles.informationTitle}>
-              {`Duration: ${duration} Minutes`}
-            </Text>
-            <Text style={styles.informationText}>{`Your next appointment is ${
-              daysUntilVisit > 0 ? `in ${daysUntilVisit} days.` : 'today.'
-            }`}</Text>
-          </View>
+    return (
+        <View style={{ alignSelf: 'center' }}>
+            <View style={styles.visitDetailsParentContainer}>
+                <Text style={styles.visitDetailsTitle}>
+                    Your Next Appointment
+                </Text>
+                <CancelModal
+                    visit={visit}
+                    visible={visible}
+                    setVisible={setVisible}
+                />
+                <View style={{ flexDirection: 'row', margin: 26 }}>
+                    <Image
+                        style={styles.locationImage}
+                        source={require('../../../../../../assets/blue_location.jpg')}
+                        activeOpacity={0.7}
+                    />
+                    <View style={styles.informationContainer}>
+                        <Text style={styles.informationTitle}>
+                            Location: Virtual Visit
+                        </Text>
+                        <Text style={styles.informationTitle}>
+                            {`Duration: ${duration} Minutes`}
+                        </Text>
+                        <Text
+                            style={styles.informationText}
+                        >{`Your next appointment is ${
+                            daysUntilVisit > 0
+                                ? `in ${daysUntilVisit} days.`
+                                : 'today.'
+                        }`}</Text>
+                    </View>
+                </View>
+                <CustomButton
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.buttonText}
+                    onPress={() =>
+                        navigation.navigate('ExpertTwillioLogin', { visit })
+                    }
+                    text="Start Visit"
+                />
+                <CustomButton
+                    buttonStyle={styles.buttonStyle}
+                    textStyle={styles.buttonText}
+                    onPress={() => setVisible(!visible)}
+                    text="Cancel Visit"
+                />
+            </View>
         </View>
-        <CustomButton
-          buttonStyle={styles.buttonStyle}
-          textStyle={styles.buttonText}
-          onPress={() => navigation.navigate('ExpertTwillioLogin', { visit })}
-          text="Start Visit"
-        />
-        <CustomButton
-          buttonStyle={styles.buttonStyle}
-          textStyle={styles.buttonText}
-          onPress={() => setVisible(!visible)}
-          text="Cancel Visit"
-        />
-      </View>
-    </View>
-  );
+    );
 };
 
 export default withNavigation(VisitDetails);
