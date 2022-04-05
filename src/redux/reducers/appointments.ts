@@ -23,7 +23,7 @@ const initialState = {
 export type IAppointments = {
     prepaid: boolean;
     expertData: null | object;
-    reason: null | object;
+    reason: null | string;
     prescription: boolean;
     calendarID: null | string;
     appointmentTypeID: number;
