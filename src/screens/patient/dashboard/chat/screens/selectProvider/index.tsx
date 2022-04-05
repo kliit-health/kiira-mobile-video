@@ -12,10 +12,10 @@ import { colors, healthcare } from '~/utils/constants';
 import { navItems } from '../../model';
 
 const SelectChatProvider = ({ navigation }) => {
-    const { expertData } = useSelector((state:any) => state.chooseExpert);
-    const user = useSelector((state:any) => state.user.data);
+    const { expertData } = useSelector((state: any) => state.chooseExpert);
+    const user = useSelector((state: any) => state.user.data);
     const favorites = useSelector((state: any) => state.favoriteExperts.data);
-    const lang = useSelector((state:any) => state.language);
+    const lang = useSelector((state: any) => state.language);
     const [experts, setExperts] = useState([]);
     const [showFilter, setShowFilter] = useState(false);
     const serviceType = navigation.state.params.type;
@@ -26,43 +26,50 @@ const SelectChatProvider = ({ navigation }) => {
 
     const setInitialExperts = () => {
         let filtered = expertData.filter(expert => {
-            if(expert.profileInfo.profession.fullName == "Kiira"){
+            if (expert.profileInfo.profession.fullName == 'Kiira') {
                 return;
             }
-            if(expert.profileInfo.profession.specialities && expert.chatEnabled){
-                if(serviceType == navItems[0].type){
-                    return expert.profileInfo.profession.specialities.filter(spec =>{
-                       return healthcare.primaryCare.includes(spec);
-                    }).length > 0;
-                }
-                else if(serviceType == navItems[1].type){
-                    return expert.profileInfo.profession.specialities.filter(spec =>{
-                        return healthcare.womensHealth.includes(spec);
-                    }).length > 0;
-                }
-                else if(serviceType == navItems[2].type){
-                    return expert.profileInfo.profession.specialities.filter(spec =>{
-                        return healthcare.mentalHealth.includes(spec);
-                    }).length > 0;
+            if (
+                expert.profileInfo.profession.specialities &&
+                expert.chatEnabled
+            ) {
+                if (serviceType == navItems[0].type) {
+                    return (
+                        expert.profileInfo.profession.specialities.filter(
+                            spec => {
+                                return healthcare.primaryCare.includes(spec);
+                            },
+                        ).length > 0
+                    );
+                } else if (serviceType == navItems[1].type) {
+                    return (
+                        expert.profileInfo.profession.specialities.filter(
+                            spec => {
+                                return healthcare.womensHealth.includes(spec);
+                            },
+                        ).length > 0
+                    );
+                } else if (serviceType == navItems[2].type) {
+                    return (
+                        expert.profileInfo.profession.specialities.filter(
+                            spec => {
+                                return healthcare.mentalHealth.includes(spec);
+                            },
+                        ).length > 0
+                    );
                 }
             }
-            
         });
-        if(!user.profileInfo.test){
-            filtered = filtered.filter(
-            ({
-                profileInfo: {
-                    test: value,
-                }
-            }) => { 
-                return !value
+        if (!user.profileInfo.test) {
+            filtered = filtered.filter(({ profileInfo: { test: value } }) => {
+                return !value;
             });
         }
         setExperts(filtered);
     };
 
     const filterExperts = (gender, languages) => {
-         setInitialExperts();
+        setInitialExperts();
         let experts = expertData.filter(expert => {
             if (expert.chatTypes) {
                 return expert.chatTypes.includes(serviceType);
@@ -88,6 +95,7 @@ const SelectChatProvider = ({ navigation }) => {
 
         setExperts(filtered);
     };
+
     const getFavoriteExperts = (favorites, experts) => {
         if (favorites.length > 0 && experts.length > 0) {
             const fav = experts.filter(experts =>
@@ -112,12 +120,12 @@ const SelectChatProvider = ({ navigation }) => {
                 <Header
                     title="Providers"
                     onBack={() => navigation.goBack()}
-                    onFilterPress={() => setShowFilter(true)}
+                    // onFilterPress={() => setShowFilter(true)}
                 />
                 {getFavoriteExperts(favorites, experts).length > 0 ? (
-                    <Text
-                        options={[h3, { color: colors.greyDark }]}
-                    >{lang. expertChatsHeaders.yourSquad}</Text>
+                    <Text options={[h3, { color: colors.greyDark }]}>
+                        {lang.expertChatsHeaders.yourSquad}
+                    </Text>
                 ) : null}
                 {expertData ? (
                     <Favorites
@@ -125,9 +133,9 @@ const SelectChatProvider = ({ navigation }) => {
                     />
                 ) : null}
                 {getNonFavoriteExperts(favorites, experts).length > 0 ? (
-                    <Text
-                        options={[h3, { color: colors.greyDark }]}
-                    >{lang. expertChatsHeaders.providers}</Text>
+                    <Text options={[h3, { color: colors.greyDark }]}>
+                        {lang.expertChatsHeaders.providers}
+                    </Text>
                 ) : null}
                 {expertData ? (
                     <Experts
