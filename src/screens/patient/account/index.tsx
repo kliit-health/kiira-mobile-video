@@ -14,7 +14,7 @@ import VersionCheck from 'react-native-version-check';
 const Account = ({ navigation }) => {
     const dispatch = useDispatch();
     const subscription = useSelector((state: RootState) => state.subscription);
-    const user = useSelector((state: RootState) => state.user.data);
+    const user:any = useSelector((state: RootState) => state.user.data);
     const lang = useSelector((state: RootState) => state.language);
     const [showModal, setShowModal] = useState(false);
     const handleSignOut = () => {
@@ -54,7 +54,8 @@ const Account = ({ navigation }) => {
         <Screen test="Profile Screen">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Profile
-                    {...user}
+                    profileInfo = {user.profileInfo}
+                    intakeData = {user.intakeData}
                     navigation={navigation}
                     setShowModal={setShowModal}
                 />

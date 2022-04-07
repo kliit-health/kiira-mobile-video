@@ -19,6 +19,14 @@ import PatientDetails from '../screens/provider/appointments/visit/components/pa
 import AppointmentVisit from '../screens/provider/appointments/visit';  
 import ASK from '../screens/provider/ask';  
 import ChatExpert from '../screens/provider/ask/chat';  
+import Appointments from '../screens/provider/appointments'; 
+import PatientProfile from '../screens/provider/appointments/patientProfile';
+import ExpertVisit from '../screens/provider/appointments/visit';
+import VisitDetails from '../screens/provider/appointments/visit/components/visitDetails';
+import ExpertTwillioLogin from '../screens/provider/appointments/twillio/Login';
+import ExpertTwillioCalling from '../screens/provider/appointments/twillio/Callling';
+import Visits from '../screens/provider/appointments/components/visit'; 
+import VisitSummary from '../screens/patient/dashboard/careSquad/visitSummary';
 
 
 test('renders correctly', () => {
@@ -27,6 +35,8 @@ test('renders correctly', () => {
 
     const headerTree = renderer.create(<Header/>);
     expect(headerTree).toBeDefined();
+
+    
 });  
  
  
@@ -185,4 +195,62 @@ describe('Testing Active Chat for 178', () => {
         expect(ChatExpertTree).toBeDefined();
     });
  
-});
+}); 
+
+describe('Testing for reason type in appointment #195', () => {  
+    const appointmentTree = renderer.create(<Appointments navigation/>);
+    test('appointment', () => {
+        expect(appointmentTree).toBeDefined();
+    }); 
+
+    const patientProfileTree = renderer.create(<PatientProfile/>);
+    test('patientProfile', () => {
+        expect(patientProfileTree).toBeDefined();
+    }); 
+
+    const expertVisitTree = renderer.create(<ExpertVisit/>);
+    test('expertVisit', () => {
+        expect(expertVisitTree).toBeDefined();
+    }); 
+
+    const visitDetailsTree = renderer.create(<VisitDetails visit />);
+    test('visitDetails', () => {
+        expect(visitDetailsTree).toBeDefined();
+    }); 
+    
+    const expertTwillioLoginTree = renderer.create(<ExpertTwillioLogin navigation/>);
+    test('expertTwillioLogin', () => {
+        expect(expertTwillioLoginTree).toBeDefined();
+    }); 
+
+    const expertTwillioCallingTree = renderer.create(<ExpertTwillioCalling navigation/>);
+    test('expertTwillioCalling', () => {
+        expect(expertTwillioCallingTree).toBeDefined();
+    }); 
+ 
+    const visitsTree = renderer.create(<Visits props/>);
+    test('visits', () => {
+        expect(visitsTree).toBeDefined();
+    }); 
+
+    const { reason } = require('../screens/provider/appointments/components/visit'); 
+    test('reason_visit', () => { 
+        expect(reason).toBeInstanceOf(String)
+    });
+
+    const { reason: reason_past } = require('../screens/patient/dashboard/appointments/components/past'); 
+    test('reason_past', () => { 
+        expect(reason_past).toBeInstanceOf(String)
+    });
+
+    const { reason: reason_payment } = require('../screens/patient/dashboard/book/screens/payment'); 
+    test('reason_payment', () => { 
+        expect(reason_payment).toBeInstanceOf(String)
+    });
+
+    const visitsSummaryTree = renderer.create(<VisitSummary navigation/>);
+    test('visitsSummary', () => {
+        expect(visitsSummaryTree).toBeDefined(); 
+    });
+    
+}); 

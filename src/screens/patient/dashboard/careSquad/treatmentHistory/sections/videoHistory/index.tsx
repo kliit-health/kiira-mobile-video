@@ -122,7 +122,7 @@ const ItemFuture = props => {
                         {videoHistory.subject}
                     </Text>
                     <Text style={itemFutureStyles.subtitle}>
-                        {reason.title}
+                        {reason}
                     </Text>
                 </View>
             </View>

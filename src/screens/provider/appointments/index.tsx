@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, View, FlatList, Text, StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomText from '~/components/customText';
@@ -17,11 +17,11 @@ import styles, { modifiers } from './styles';
 
 const ExpertAppointments = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector(state => state.language);
-    const uid = useSelector(state => state.user.data.uid);
-    const visitData = useSelector(state => state.expertAppointments.history);
-    const screens = useSelector(state => state.navigator);
-
+    const lang = useSelector((state: any) => state.language);
+    const uid = useSelector((state: any) => state.user.data.uid);
+    const visitData = useSelector((state: any) => state.expertAppointments.history);
+    const screens = useSelector((state: any) => state.navigator);
+    const flatListRef = useRef<FlatList>(null);
     const [visits, setVisits] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     const [dates, setDates] = useState([]);
@@ -76,14 +76,14 @@ const ExpertAppointments = ({ navigation }) => {
     useEffect(() => {
         let record = _.flatten(visitData);
         if (record.length > 0 && selectedDate) {
-            let filtered = record.sort((a, b) => {
+            let filtered = record.sort((a: any, b: any) => {
                 return (
                     parseInt(moment(a.time).format('x')) -
                     parseInt(moment(b.time).format('x'))
                 );
             });
 
-            filtered = filtered.filter(visit => {
+            filtered = filtered.filter((visit: any) => {
                 if(visit){
                     return moment(visit.time).format('YYYY-MM-DD') === selectedDate;
                 }
@@ -133,6 +133,7 @@ const ExpertAppointments = ({ navigation }) => {
             />
             <View style={styles.container}>
                 <FlatList
+                    ref={flatListRef}
                     showsHorizontalScrollIndicator={false}
                     initialScrollIndex={12}
                     getItemLayout={(data, index) => ({
@@ -140,7 +141,12 @@ const ExpertAppointments = ({ navigation }) => {
                         offset: 40 * index,
                         index,
                     })} 
-                    onScrollToIndexFailed={0} 
+                    onScrollToIndexFailed={({index, averageItemLength}) => {
+                        flatListRef.current.scrollToIndex({
+                            index: index * averageItemLength,
+                            animated: true,
+                        })
+                    }} 
                     data={dates} 
                     horizontal={true} 
                     decelerationRate={'fast'}

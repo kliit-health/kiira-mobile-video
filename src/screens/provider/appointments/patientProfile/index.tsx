@@ -6,6 +6,7 @@ import {
     ScrollView,
     Modal,
     Pressable,
+    Alert,
 } from 'react-native';
 import Image from 'react-native-fast-image';
 import ExpertHeader from '~/components/expertHeader';
@@ -21,11 +22,11 @@ const PatientProfile = ({ navigation }) => {
     const { visit, patient } = navigation.state.params;
     const [modalVisible, setModalVisible] = useState(false);
     const dispatch = useDispatch();
-    const patientInfo = useSelector(state => state.user.data);
-    const appointment = useSelector(state => state.medicalHistory.appointment);
+    const patientInfo = useSelector((state:any) => state.user.data);
+    const appointment = useSelector((state:any) => state.medicalHistory.appointment);
 
     useEffect(() => {
-        dispatch(getUser(patient.uid));
+        dispatch(getUser());
     }, []);
 
     useEffect(() => {
@@ -62,10 +63,8 @@ const PatientProfile = ({ navigation }) => {
                             }}
                         >
                             <Image
-                                containerStyle={{ alignSelf: 'center' }}
                                 style={styles.icon}
                                 source={require('../../../../../assets/HPI.png')}
-                                activeOpacity={0.7}
                             />
                             <Text style={styles.info}>
                                 Personal Information
@@ -83,20 +82,16 @@ const PatientProfile = ({ navigation }) => {
                             }}
                         >
                             <Image
-                                containerStyle={{ alignSelf: 'center' }}
                                 style={styles.icon}
                                 source={require('../../../../../assets/firstaid.png')}
-                                activeOpacity={0.7}
                             />
                             <Text style={styles.info}>Medical History</Text>
                             <View style={styles.check}>
                                 {appointment && appointment.visit.locked && (
                                     <Image
                                         resizeMode="contain"
-                                        containerStyle={{ alignSelf: 'center' }}
                                         style={styles.icon}
                                         source={require('../../../../../assets/lock.png')}
-                                        activeOpacity={0.7}
                                     />
                                 )}
                             </View>
@@ -112,10 +107,8 @@ const PatientProfile = ({ navigation }) => {
                             }}
                         >
                             <Image
-                                containerStyle={{ alignSelf: 'center' }}
                                 style={styles.icon}
                                 source={require('../../../../../assets/notes.png')}
-                                activeOpacity={0.7}
                             />
                             <Text style={styles.info}>Previous Visits</Text>
                         </View>
@@ -130,10 +123,8 @@ const PatientProfile = ({ navigation }) => {
                             }}
                         >
                             <Image
-                                containerStyle={{ alignSelf: 'center' }}
                                 style={styles.icon}
                                 source={require('../../../../../assets/agreement.png')}
-                                activeOpacity={0.7}
                             />
                             <Text style={styles.info}>Consent Agreements</Text>
                         </View>
@@ -149,10 +140,8 @@ const PatientProfile = ({ navigation }) => {
                         >
                             <Image
                                 resizeMode="contain"
-                                containerStyle={{ alignSelf: 'center' }}
                                 style={styles.icon}
                                 source={require('../../../../../assets/phone.png')}
-                                activeOpacity={0.7}
                             />
                             <Text style={styles.info}>Video Visit</Text>
                         </View>

@@ -10,7 +10,7 @@ import styles from './styles';
 
 const Visit = props => {
     const { firstName, lastName, reason, time, onPress, visit } = props;
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const dispatch = useDispatch();
     const [patientInfo, setPatientInfo] = useState(null);
 
@@ -71,7 +71,7 @@ const Visit = props => {
                         {lang.expertAppointments.subject}
                     </Text>
                     <Text numberOfLines={1} style={styles.subtitle}>
-                        {reason.title}
+                        {reason}
                     </Text>
                 </View>
             </View>
