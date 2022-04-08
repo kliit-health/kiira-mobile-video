@@ -38,7 +38,7 @@ const ExpertProfile = props => {
 
     useEffect(() => {
         return () => {
-            dispatch(clearExpertProfileState());
+            dispatch(clearExpertProfileState(null));
         };
     }, []);
 

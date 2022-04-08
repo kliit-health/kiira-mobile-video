@@ -8,7 +8,7 @@ import styles, { modifiers } from './styles';
 
 const ProfileCard = ({ profileInfo }) => {
     const { firstName, lastName, profileImageUrl } = profileInfo;
-    const language = useSelector(state => state.language, shallowEqual);
+    const language = useSelector((state: any) => state.language, shallowEqual);
 
     return (
         <View style={styles.root}>

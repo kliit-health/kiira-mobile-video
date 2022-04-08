@@ -9,8 +9,6 @@ import { resolveQuestion } from '~/redux/actions/chat';
 import { default as globalStyles } from '~/components/styles';
 import moment from 'moment';
 
-const { white_bg } = globalStyles;
-
 const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
     const experts = useSelector((state:any) => state.experts.data);
@@ -74,7 +72,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
     }
 
     return (
-        <Column options={[white_bg]}>
+        <Column options={[globalStyles.white_bg]}>
             <FlatList
                 data={data}
                 renderItem={({ item }) => {

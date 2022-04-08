@@ -2,6 +2,7 @@ import { StyleSheet, Platform } from 'react-native';
 import { text, colors, dimensions } from '~/utils/constants';
 import metrics, { smallScreen } from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
+import { IOS } from 'react-native-permissions/lib/typescript/constants';
 
 let parentPaddingValue = metrics.width * 0.08;
 let parentPadding = parentPaddingValue * 2;
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center', 
-        marginTop: getStatusBarHeight(null), 
+        marginTop: Platform.OS === 'ios' ? 20 : 0, 
         backgroundColor: colors.white,
         borderRadius: 35,
         overflow: 'hidden',

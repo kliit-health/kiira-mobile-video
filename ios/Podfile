@@ -12,7 +12,7 @@ target 'kiira' do
   pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts.podspec"
   pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications.podspec"
-
+  pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
   # Twilio
   pod 'react-native-twilio-video-webrtc', path: '../node_modules/react-native-twilio-video-webrtc'
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'

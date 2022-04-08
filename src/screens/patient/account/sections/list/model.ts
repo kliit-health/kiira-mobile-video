@@ -1,5 +1,5 @@
 import { screenNames } from '~/utils/constants';
-import { icons } from '../../../../../utils/constants'; 
+import { icons } from '~/utils/constants'; 
  
 export default [
     {
@@ -24,12 +24,12 @@ export default [
         title: `account.myHealth`,     
         pane: true
     },
-    // {
-    //     title: `labResults.title`,
-    //     destination: screenNames.termsAndConditions,
-    //     icon: icons.labResults,
-    //     noBorder: true
-    // },
+    {
+        title: `labResults.title`,
+        destination: screenNames.termsAndConditions,
+        icon: icons.labResults,
+        noBorder: true
+    },
     // {
     //     title: `medications.title`,
     //     destination: screenNames.termsAndConditions,

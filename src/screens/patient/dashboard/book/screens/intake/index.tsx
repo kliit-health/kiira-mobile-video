@@ -183,8 +183,8 @@ const Intake = ({ navigation }) => {
                         onPress={onIntakeFinish}
                         title="Go to Home"
                         style={{
-                            container: styles.healthIntake,
-                            title: styles.healthIntakeTitle,
+                            container: [styles.healthIntake],
+                            title: [styles.healthIntakeTitle],
                         }}
                     />
                 </Column>

@@ -8,7 +8,7 @@ import moment from 'moment';
 import styles from '../styles';
 
 const ExpertInfo = ({ visit }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <View style={{ marginTop: 10 }}>

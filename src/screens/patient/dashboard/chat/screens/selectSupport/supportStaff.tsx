@@ -12,8 +12,6 @@ import { colors, screenNames, icons } from '~/utils/constants';
 import { default as globalStyles } from '~/components/styles';
 import styles from './styles';
 
-const { xLarge } = globalStyles;
-
 const SupportStaff = ({ staff, navigation }) => {
     return (
         <View style={styles.expertsContainer}>
@@ -55,7 +53,7 @@ const SupportStaff = ({ staff, navigation }) => {
                             />
 
                             <View style={styles.expertInfo}>
-                                <Text options={[xLarge]}>
+                                <Text options={[globalStyles.xLarge]}>
                                     {`${firstName} ${lastName}`}
                                 </Text>
                             </View>

@@ -6,7 +6,7 @@ import model from './model';
 import styles from './styles';
 
 const Pregnancy = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <Container unformatted>

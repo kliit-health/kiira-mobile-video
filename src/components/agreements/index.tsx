@@ -25,11 +25,11 @@ const Agreements = ({ navigation }) => {
 
     const [visible, setVisible] = useState(false);
 
-    const user = useSelector(state => state.user.data);
-    const currentRoute = useSelector(state => state.navigator.currentRoute);
-    const loading = useSelector(state => state.agreements.loading);
-    const error = useSelector(state => state.agreements.error);
-    const contract = useSelector(state => state.agreements.data.contract);
+    const user = useSelector((state: any) => state.user.data);
+    const currentRoute = useSelector((state: any) => state.navigator.currentRoute);
+    const loading = useSelector((state: any) => state.agreements.loading);
+    const error = useSelector((state: any) => state.agreements.error);
+    const contract = useSelector((state: any) => state.agreements.data.contract);
 
     useEffect(() => {
         if (currentRoute === screenNames.Book) {

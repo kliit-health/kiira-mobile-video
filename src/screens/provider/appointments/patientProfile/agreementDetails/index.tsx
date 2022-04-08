@@ -10,7 +10,7 @@ const AgreementDetails = ({ navigation }) => {
     const id = navigation.state.params.id;
 
     const [details, setDetails] = useState(undefined);
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     useEffect(() => {
         (async () => {

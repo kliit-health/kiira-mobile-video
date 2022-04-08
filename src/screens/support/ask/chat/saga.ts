@@ -43,7 +43,7 @@ function* sendMessageToUser({ data }) {
         const { messageParams, imageParams, id, lastMessage, questionId } =
             data;
         if (imageParams) {
-            yield put(showApiLoader(lang.apiLoader.loadingText));
+            yield put(showApiLoader());
             const responseImage = yield uploadImage(imageParams);
             if (responseImage.success) {
                 const { downloadURL } = responseImage.data;
@@ -137,7 +137,7 @@ function* sendMessageToUser({ data }) {
 function* loadMessagesOfExpert({ data, dispatch }) {
     const lang = yield select(state => state.language);
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         let isFirstTime = true;
         loadMessagesObserver = yield loadMessages(
             data,

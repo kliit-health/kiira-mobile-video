@@ -15,9 +15,9 @@ const formatDate = date => {
 };
 
 const Children = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const answers = useSelector(
-        state => state.healthHistory.data.children.answers,
+        (state: any) => state.healthHistory.data.children.answers,
     );
 
     const handleAddChild = () => {

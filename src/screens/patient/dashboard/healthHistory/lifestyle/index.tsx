@@ -10,17 +10,17 @@ import styles from './styles';
 
 const Lifestyle = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
     const answers = useSelector(
-        state => state.healthHistory.data.lifestyle.answers,
+        (state: any) => state.healthHistory.data.lifestyle.answers,
     );
     const [questions, setQuestions] = useState(initialQuestions);
     const [finish, setFinish] = useState(false);
     const [disabled, setDisabled] = useState(true);
 
     const [lifestyle, setLifestyle] = useState({
-        sexuallyActive: '',
+        sexuallyActive: false,
         partnersGender: [],
         malePartners: '',
         femalePartners: '',

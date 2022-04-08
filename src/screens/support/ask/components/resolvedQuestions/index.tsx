@@ -32,7 +32,7 @@ const ResolvedQuestions = ({ data, navigation, visible }) => {
 const ListItem = props => {
     const { userInfo, lastMessage, modifiedDate, onPress } = props;
     const { firstName, lastName } = userInfo.profileInfo;
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const handlePress = () => {
         if (onPress) {
             onPress(props);
@@ -69,7 +69,7 @@ const ListItem = props => {
 };
 
 const Fallback = () => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     return (
         <View style={styles.fallBack.container}>
             <Text style={styles.fallBack.text}>

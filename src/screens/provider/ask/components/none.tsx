@@ -5,17 +5,15 @@ import {Image} from 'react-native';
 import styles from '../styles';
 import { images } from '~/utils/constants';
 
-const { white_bg, center, justify_c,  } = globalStyles;
-
  const None = () => {
     return (
-        <Screen options={[white_bg, justify_c]} >
+        <Screen options={[globalStyles.white_bg, globalStyles.justify_c]} >
             <Image
                 style={styles.image}
                 resizeMode="contain"
                 source={images.penguin}
             />
-            <Text options={[h2, center]}>
+            <Text options={[h2, globalStyles.center]}>
                 {'You have no open chats'}
             </Text>
         </Screen>

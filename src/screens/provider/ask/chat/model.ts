@@ -1,5 +1,6 @@
 export type Tab = {
     title: string;
+    label: string,
 };
 
 
@@ -29,8 +30,10 @@ export default [
 export const chatTabs: Tab[] = [
     {
         title: 'OPEN CHATS',
+        label: '',
     },
     {
         title: 'RESOLVED',
+        label: '',
     },
 ];

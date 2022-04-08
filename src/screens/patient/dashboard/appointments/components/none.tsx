@@ -8,13 +8,11 @@ import { images, screenNames } from '~/utils/constants';
 import styles from '../style';
 import { default as globalStyles } from '~/components/styles';
 
-const { pad_h, blue_bg, space_between } = globalStyles;
-
 export const None = () => {
     const lang = useSelector((state: RootState) => state.language);
 
     return (
-        <Column options={[blue_bg, pad_h, space_between]}>
+        <Column options={[globalStyles.blue_bg, globalStyles.pad_h, globalStyles.space_between]}>
             <Image
                 style={styles.image}
                 resizeMode="contain"

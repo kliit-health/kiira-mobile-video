@@ -8,11 +8,11 @@ import { displayConsole } from '~/utils/helper';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function* changeUserPassword({ data }) {
-    const lang = yield select(state => state.language);
+    const lang: any = yield select((state: any) => state.language);
     try {
         const { params, navigation } = data;
         displayConsole('data', data);
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const responseReAunthenticate = yield reAunthenticate(
             params.currentPassword,
         );

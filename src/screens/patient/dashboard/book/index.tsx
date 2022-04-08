@@ -12,21 +12,6 @@ import { default as globalStyles, h3 } from '~/components/styles';
 import Expandable from '~/components/expandable';
 import { getAllDocumentsFromCollection } from '~/utils/firebase';
 
-const {
-    grey_br_t_md,
-    grey_dark_br_t_md,
-    hide_overflow,
-    height_250,
-    no_pad_h,
-    no_pad_v,
-    pad_b,
-    pad_h,
-    pad_v,
-    sm_pad_t,
-    width_10,
-    zero_flex,
-} = globalStyles;
-
 const Book = ({ navigation }) => {
     const dispatch = useDispatch();
     const dimen = Dimensions.get('window');
@@ -124,22 +109,22 @@ const Book = ({ navigation }) => {
             <Kiira.Column
                 options={[
                     card,
-                    hide_overflow,
-                    zero_flex,
+                    globalStyles.hide_overflow,
+                    globalStyles.zero_flex,
                     { height: cardHeight },
                 ]}
             >
                 <Kiira.Tabs list={tabs} active setActive={handleTabSelect} />
-                <Kiira.Column options={[zero_flex, dimen.height > 800 ? height_250 : {height: 150}, pad_v]}>
+                <Kiira.Column options={[globalStyles.zero_flex, dimen.height > 800 ? globalStyles.height_250 : {height: 150}, globalStyles.pad_v]}>
                     <Kiira.RadioGroup onSelect={handleSelection} data={data} />
                 </Kiira.Column>
             </Kiira.Column>
-            <Kiira.Column options={[card, hide_overflow, no_pad_v, no_pad_h]}>
+            <Kiira.Column options={[card, globalStyles.hide_overflow, globalStyles.no_pad_v, globalStyles.no_pad_h]}>
                 <ScrollView>
                     <Kiira.Line
-                        options={[pad_v, width_10, grey_dark_br_t_md]}
+                        options={[globalStyles.pad_v, globalStyles.width_10, globalStyles.grey_dark_br_t_md]}
                     />
-                    <Kiira.Column options={[pad_h]}>
+                    <Kiira.Column options={[globalStyles.pad_h]}>
                         <Kiira.Conditional if={loading && selection}>
                             <ActivityIndicator size="large" />
                         </Kiira.Conditional>
@@ -153,7 +138,7 @@ const Book = ({ navigation }) => {
                     </Kiira.Column>
                     <Expandable onPress={handleLinePress} list={sections} />
                     <Kiira.Column
-                        options={[pad_h, pad_b, grey_br_t_md, zero_flex]}
+                        options={[globalStyles.pad_h, globalStyles.pad_b, globalStyles.grey_br_t_md, globalStyles.zero_flex]}
                     >
                         <Kiira.Conditional if={selection}>
                             <Kiira.Button
@@ -162,7 +147,7 @@ const Book = ({ navigation }) => {
                                     navigation.navigate('SelectProvider')
                                 }
                                 style={{
-                                    container: [sm_pad_t],
+                                    container: [globalStyles.sm_pad_t],
                                 }}
                                 title="See Providers"
                             />

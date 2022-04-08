@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Image, Pressable, Text } from 'react-native';
+import { Modal, View, Image, Pressable, Text, Alert } from 'react-native';
 import { cancelAppointment } from '../action';
 import { useDispatch } from 'react-redux';
 
@@ -32,7 +32,6 @@ const CancelModal = ({ visit, setVisible, visible }) => {
                         resizeMode="contain"
                         style={styles.modalImage}
                         source={require('../../../../../assets/logo.png')}
-                        activeOpacity={0.7}
                     />
                     <Text style={styles.modalText}>
                         Are you sure you want to cancel this appointment?

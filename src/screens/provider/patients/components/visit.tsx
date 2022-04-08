@@ -22,7 +22,7 @@ const VisitCard = ({ visit, date }) => {
 
     const duration = appointmentType
     ? appointmentType.duration
-    : reason.sessionType.duration;
+    : "";
 
     return (
         <View style={{ alignSelf: 'center' }}>

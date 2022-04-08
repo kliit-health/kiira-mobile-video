@@ -143,8 +143,8 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
                         toggleModal(false, lPharmacy, lPhoneNumber, lAddress);
                     }} 
                     disabled={disabled}
-                    style={!disabled ? {container:
-                        styles.searchButton} : {container:
+                    style={!disabled ? {container: [
+                        styles.searchButton]} : {container: 
                             [styles.searchButtonDisabled]}}
                     title={`Confirm`}
                 />

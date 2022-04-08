@@ -13,7 +13,7 @@ function* uploadUserData({ data, dispatch }) {
     try {
         const { userParams, navigation, imageParams } = data;
 
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         if (imageParams) {
             const responseImage = yield uploadImage(imageParams);
 

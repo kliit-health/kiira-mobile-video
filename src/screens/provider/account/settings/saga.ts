@@ -12,7 +12,7 @@ function* updateExpertData({ data }) {
     const user = yield select(state => state.user.data);
     try {
         const { userParams, imageParams, navigation } = data;
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
 
         if (imageParams) { 
             const responseImage = yield uploadImage(imageParams); 
@@ -59,7 +59,7 @@ function* updateExpertData({ data }) {
                 );
             }
         } else {
-            yield put(showApiLoader(lang.apiLoader.loadingText)); 
+            yield put(showApiLoader()); 
             const userInfo = {
                 ...user,
                 clinicInfo: {

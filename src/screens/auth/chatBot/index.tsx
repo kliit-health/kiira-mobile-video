@@ -7,7 +7,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { updateUserDataToFirebase } from './action';
 import Constant from '~/utils/constants';
-import { showOrHideModal } from '~/components/customModal/action';
+import { showOrHideModal, showHideErrorModal } from '~/components/customModal/action';
 import { getOrganizationInfo } from '~/utils/firebase';
 
 class ChatBotScreen extends Component {
@@ -60,8 +60,7 @@ class ChatBotScreen extends Component {
     };
 
     handleSubmit = userInfo => {
-        const { navigation, updateUserData, userData } = this.props;
-
+        const { navigation, updateUserData, userData, lang } = this.props;
         const {
             first_name,
             last_name,
@@ -97,7 +96,6 @@ class ChatBotScreen extends Component {
                     displayName: userData.displayName,
                     email: userData.email,
                     fcmToken: userData.fcmToken,
-                    invitationDate: userData.invitationDate,
                     invitationDate: userData.invitationDate,
                     invitationId: userData.invitationId,
                     organizationId: userData.organizationId,
@@ -357,7 +355,7 @@ class ChatBotScreen extends Component {
                 },
                 {
                     id: 'review',
-                    component: <Review custom={false} />,
+                    component: <Review custom={false}/>,
                     trigger: 'update',
                 },
                 {

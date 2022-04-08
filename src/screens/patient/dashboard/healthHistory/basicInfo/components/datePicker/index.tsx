@@ -25,7 +25,15 @@ const DatePicker = ({ value, title, onSave, placeholder }) => {
                 placeholder={placeholder}
                 chevron
                 value={value ? moment(value).format('MM/DD/YYYY') : undefined}
-                onPress={handlePress}
+                onPress={handlePress} 
+                styles={undefined} 
+                children={undefined} 
+                onChange={undefined} 
+                multiline={false} 
+                id={undefined} 
+                outlined={false} 
+                label={undefined} 
+                defaultValue={undefined}           
             />
             <ModalDatePicker
                 onBackdropPress={handleBackPress}

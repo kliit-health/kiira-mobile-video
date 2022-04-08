@@ -25,6 +25,14 @@ const Picker = ({ value, data, title, onSave, placeholder }) => {
                 chevron
                 value={value}
                 onPress={handlePress}
+                children={null}
+                multiline={false}
+                id={undefined}
+                outlined={false}
+                label={undefined} 
+                styles={undefined} 
+                onChange={undefined} 
+                defaultValue={undefined}            
             />
             <ModalPicker
                 onBackdropPress={handleBackPress}

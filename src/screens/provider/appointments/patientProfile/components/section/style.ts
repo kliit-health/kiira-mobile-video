@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         width: 20,
         height: 20,
+        alignSelf: 'center'
     },
 
     check: {

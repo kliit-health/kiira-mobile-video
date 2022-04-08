@@ -14,6 +14,7 @@ export const initialQuestions = [
         options: [],
         type: polar,
         extra: undefined,
+        link: '',
     },
     {
         dataKey: 'partnersGender',
@@ -21,6 +22,7 @@ export const initialQuestions = [
         options: ['Men', 'Women', 'Other'],
         type: objective,
         extra: undefined,
+        link: '',
     },
 ];
 
@@ -29,7 +31,7 @@ export const extraQuestions = [
         dataKey: 'malePartners',
         question:
             'In the past 12 months, how many sexual partners have you had who were men?',
-        options: numbers,
+        options: [],
         type: picker,
         extra: 'Number of Partners(Men)',
         link: 'Men',
@@ -38,7 +40,7 @@ export const extraQuestions = [
         dataKey: 'femalePartners',
         question:
             'In the past 12 months, how many sexual partners have you had who were women?',
-        options: numbers,
+        options: [],
         type: picker,
         extra: 'Number of Partners(Women)',
         link: 'Women',
@@ -47,7 +49,7 @@ export const extraQuestions = [
         dataKey: 'otherPartners',
         question:
             'In the past 12 months, how many sexual partners have you had who do not identify as men or women?',
-        options: numbers,
+        options: [],
         type: picker,
         extra: 'Number of Partners(Other)',
         link: 'Other',

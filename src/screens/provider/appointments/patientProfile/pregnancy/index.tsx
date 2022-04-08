@@ -22,7 +22,7 @@ const PregnancyHistory = ({ navigation }) => {
         cesarean,
         livingChildren,
         pregnancyIssues,
-    } = useSelector(state => state.medicalHistory.pregnancy);
+    } = useSelector((state: any) => state.medicalHistory.pregnancy);
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
     const [visible, setVisible] = useState(false);
@@ -113,6 +113,7 @@ const PregnancyHistory = ({ navigation }) => {
                                     onPress={() =>
                                         toggleSelection(questions[progress].key)
                                     }
+                                    styles={{}}
                                 />
                                 <PolarButton
                                     variant="no"
@@ -123,6 +124,7 @@ const PregnancyHistory = ({ navigation }) => {
                                     onPress={() =>
                                         toggleSelection(questions[progress].key)
                                     }
+                                    styles={{}}
                                 />
                             </View>
                             {questions[progress].textPrompt ? (
@@ -169,7 +171,15 @@ const PregnancyHistory = ({ navigation }) => {
                                 onPress={toggleModal}
                                 placeholder={questions[progress].textPrompt}
                                 value={answers[questions[progress].key].number}
-                                chevron
+                                chevron 
+                                styles={undefined} 
+                                children={undefined} 
+                                onChange={undefined} 
+                                multiline={false} 
+                                id={undefined} 
+                                outlined={false} 
+                                label={undefined} 
+                                defaultValue={undefined}                            
                             />
                             <ModalPicker
                                 onSave={selection =>

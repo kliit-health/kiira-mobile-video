@@ -6,7 +6,7 @@ import { route, colors, text } from '~/utils/constants';
 const { fontFamily, size } = text;
 
 export type QuestionProps = {
-    expertInfo: object;
+    expertInfo: any;
     questionId: string;
     time: number;
     destination: route;

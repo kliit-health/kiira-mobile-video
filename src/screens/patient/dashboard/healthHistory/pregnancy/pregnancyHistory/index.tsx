@@ -17,10 +17,10 @@ const PregnancyHistory = ({ navigation }) => {
         miscarriages: null,
     });
 
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
     const answers = useSelector(
-        state => state.healthHistory.data.pregnancyHistory.answers,
+        (state: any) => state.healthHistory.data.pregnancyHistory.answers,
     );
 
     useEffect(() => {

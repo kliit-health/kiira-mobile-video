@@ -42,16 +42,16 @@ const Success = ({ navigation }) => {
                     onPress={() => navigation.navigate(screenNames.Home)}
                     title="Go Home"
                     style={{
-                        container: styles.homeButton,
-                        title: styles.homeButtonTitle,
+                        container: [styles.homeButton],
+                        title: [styles.homeButtonTitle],
                     }}
                 />
                 <Button 
                     onPress={() => navigation.navigate(screenNames.Home)}
                     title="Complete Health Intake"
                     style={{
-                        container: styles.healthIntake,
-                        title: styles.healthIntakeTitle,
+                        container: [styles.healthIntake],
+                        title: [styles.healthIntakeTitle],
                     }}
                 />
             </Column>

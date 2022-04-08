@@ -305,6 +305,7 @@ const Payment = () => {
                 options={[radius_md, grey_br, { width: '90%' }]}
                 multiline
                 placeholder="You can say something like 'I need new birth control'"
+                editable={true}
             />
             </ScrollView>
             {balance === 0 && (

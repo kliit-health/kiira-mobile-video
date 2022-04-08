@@ -111,10 +111,8 @@ const TransparentStyle = StyleSheet.create({
     },
 });
 
-const { blue, tiny, regular, space_sm, gray_dark } = globalStyles;
-
-const selected = [blue, tiny, regular, space_sm];
-const notSelected = [tiny, gray_dark, regular, space_sm];
+const selected = [globalStyles.blue, globalStyles.tiny, globalStyles.regular, globalStyles.space_sm];
+const notSelected = [globalStyles.tiny, globalStyles.gray_dark, globalStyles.regular, globalStyles.space_sm];
 
 const AuthStack = createStackNavigator(
     {

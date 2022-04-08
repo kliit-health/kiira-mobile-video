@@ -12,7 +12,7 @@ function* changeUserPassword({ data }) {
     try {
         const { params, navigation } = data;
         displayConsole('data', data);
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const responseReAunthenticate = yield reAunthenticate(
             params.currentPassword,
         );

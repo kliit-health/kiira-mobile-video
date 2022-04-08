@@ -74,11 +74,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
-
-    container: {
-        flex: 1,
-        paddingTop: 20,
-    },
     textlayout: {
         alignSelf: 'center',
         backgroundColor: 'white',

@@ -3,16 +3,25 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 import PropTypes from 'prop-types';
 
-const Review = props => {
+interface header{
+    steps: any;
+    custom: any;
+}
+
+const Review = (props: header) => {
     const [currentState, setState] = useState({
-        first_name: '',
-        last_name: '',
-        pronouns: '',
-        gender: '',
-        dob: '',
-        zipcode: '',
-        income: '',
-        enrollment: '',
+        first_name: null,
+        last_name: null,
+        pronouns: null,
+        gender: null,
+        dob: null,
+        zipcode: null,
+        income: null,
+        enrollment: null,
+        insurance: null,
+        plan: null,
+        housingSecure: null,
+        foodSecure: null,
     });
 
     const { steps, custom } = props;
@@ -35,14 +44,15 @@ const Review = props => {
             foodSecure,
             ethnicity,
         } = steps;
+
         setState({
             first_name,
             last_name,
             pronouns,
             dob,
-            state: state.value,
+            //state,
             gender,
-            sexuality: sexuality.value,
+            //sexuality,
             insurance,
             plan,
             zipcode: zipcode ? zipcode : '',
@@ -50,7 +60,7 @@ const Review = props => {
             enrollment: enrollment ? enrollment : '',
             housingSecure,
             foodSecure,
-            ethnicity: ethnicity && ethnicity.value ? ethnicity.value : '',
+            //ethnicity: ethnicity && ethnicity.value ? ethnicity.value : '',
         });
     }, []);
 

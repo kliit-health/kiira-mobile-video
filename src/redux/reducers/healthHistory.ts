@@ -82,7 +82,7 @@ const initialState = {
         },
     },
     loading: false,
-    error: '',
+    error: null,
 };
 
 export default createReducer(initialState, {

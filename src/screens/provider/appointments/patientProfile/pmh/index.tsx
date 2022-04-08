@@ -114,6 +114,7 @@ const PersonalMedicalHistory = ({ navigation }) => {
                                 onPress={() =>
                                     toggleSelection(questions[progress].key)
                                 }
+                                styles={{}}
                             />
                             <PolarButton
                                 variant="no"
@@ -123,6 +124,7 @@ const PersonalMedicalHistory = ({ navigation }) => {
                                 onPress={() =>
                                     toggleSelection(questions[progress].key)
                                 }
+                                styles={{}}
                             />
                         </View>
                         <TextInput

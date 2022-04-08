@@ -24,7 +24,7 @@ import {
     images,
 } from '../../../utils/constants';
 import styles from '../styles';
-
+import { getStatusBarHeight } from '~/components/iPhoneXHelper';
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();
     const { login } = useSelector((state: RootState) => state.language);

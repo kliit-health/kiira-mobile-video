@@ -323,7 +323,7 @@ export default createReducer(initialState, {
         error: null,
         loading: true,
     }),
-    [GET_PATIENT_DETAILS_REJECTED]: (_, { data: details }) => ({
+    [GET_PATIENT_DETAILS_REJECTED]: (state, { data: details }) => ({
         ...state,
         error: 'Failed to get data.',
         details,
@@ -339,7 +339,7 @@ export default createReducer(initialState, {
         state.error = null;
         state.loading = true;
     },
-    [UPDATE_PATIENT_DETAILS_REJECTED]: (_, { data: details }) => ({
+    [UPDATE_PATIENT_DETAILS_REJECTED]: (state, { data: details }) => ({
         ...state,
         error: 'Failed to update details.',
         details,

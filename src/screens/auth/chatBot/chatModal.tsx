@@ -18,9 +18,7 @@ const ChatModal = props => {
                 });
             }}
             onClose={() => {
-                this.setState({
-                    showSelectStateModal: false,
-                });
+                setShowModal(false)
             }}
         />
     ) : null;

@@ -16,7 +16,7 @@ enum Action {
 }
 
 const Banner = () => {
-    const assessment = useSelector(state => state.user.data.assessment);
+    const assessment = useSelector((state: any) => state.user.data.assessment);
     const appointments = useSelector((state:RootState) =>state.appointments)
     const [action, setAction] = useState<Action | undefined>(Action.Schedule);
     const getUpcomingAppointments = visits => {

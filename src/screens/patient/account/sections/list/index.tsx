@@ -7,8 +7,8 @@ import { ListItem } from '~/components';
 import styles from './styles';
 
 export default ({ onItemPress }) => {
-    const language = useSelector(state => state.language, shallowEqual);
-    const user = useSelector(state => state.user.data); 
+    const language = useSelector((state: any) => state.language, shallowEqual);
+    const user = useSelector((state: any) => state.user.data); 
     return (
         <View>
             {model.map(({ title, destination, content, icon, pane, noBorder}) => (
@@ -17,8 +17,8 @@ export default ({ onItemPress }) => {
                     id={destination}
                     onPress={onItemPress}
                     displayChevron={!pane}
-                    displayBorder={!noBorder} 
-                >
+                    displayBorder={!noBorder}    
+                > 
                     <View style={styles.listContainer}>
                         {icon && (
                             <Image

@@ -35,7 +35,7 @@ const initialState = {
 const VideoCallScreen = ({ navigation }) => {
     const twilioVideo = useRef(null);
     const dispatch = useDispatch();
-    const callConfig = useSelector(state => state.twillio);
+    const callConfig = useSelector((state: any) => state.twillio);
     const [videoTracks, setVideoTracks] = useState(new Map());
 
     useEffect(() => {

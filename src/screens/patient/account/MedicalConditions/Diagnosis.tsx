@@ -6,7 +6,7 @@ import Constant from '../../../../utils/constants';
 import { Header } from '~/components';
 
 const Diagnosis = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const title = navigation.state.params;
 
     const handleBackPress = () => {

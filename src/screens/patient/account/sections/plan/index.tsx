@@ -7,8 +7,8 @@ import { cancelSubscription } from '~/redux/actions';
 import styles from './styles';
 
 export default ({ subscription, user }) => {
-    const plan = useSelector(state => state.plan.data);
-    const lang = useSelector(state => state.language);
+    const plan = useSelector((state: any) => state.plan.data);
+    const lang = useSelector((state: any) => state.language);
     const dispatch = useDispatch();
 
     const [visible, setVisible] = useState(false);
@@ -65,6 +65,7 @@ export default ({ subscription, user }) => {
                 visible={visible}
                 onConfirm={handleConfirm}
                 onCancel={handleCancel}
+                onClose={{}}
             />
         </View>
     );

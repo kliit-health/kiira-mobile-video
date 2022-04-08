@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { Container, Header } from '~/components';
 import { View } from 'react-native-animatable';
 import { colors, text } from '~/utils/constants';
-import Constant from '../../../../utils/constants';
+import Constant from '~/utils/constants';
 
 const Allergies = ({ navigation }) => {
-    const user = useSelector(state => state.user.data);
-    const lang = useSelector(state => state.language);
+    const user = useSelector((state: any) => state.user.data);
+    const lang = useSelector((state: any) => state.language);
 
     const handleBackPress = () => {
         navigation.goBack();

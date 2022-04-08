@@ -47,7 +47,7 @@ const ChatHistoryItem = ({
     isResolved,
     onPress,
 }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     return (
         <ListItem styles={itemModifiers.list} onPress={onPress}>
             <View style={itemStyles.messagesContainer}>
@@ -79,7 +79,7 @@ const ChatHistoryItem = ({
 };
 
 const Fallback = () => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     return (
         <View style={fallbackStyles.container}>
             <Text style={fallbackStyles.description}>

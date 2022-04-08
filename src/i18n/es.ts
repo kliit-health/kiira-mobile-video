@@ -81,9 +81,6 @@ export default {
     vaccines: {
         title: 'Spanish Vaccines',
     },
-    healthHistory: {
-        title: 'Spanish Health History',
-    },
     pastVisits: {
         title: 'Spanish Past Visits',
     },
@@ -352,7 +349,7 @@ export default {
     },
 
     healthHistory: {
-        title: 'Spanish My Health History',
+        title: 'Spanish Health History',
         basicInfo: 'Spanish Basic Information',
         pregnancy: 'Spanish Pregnancy and Children',
         lifestyle: 'Spanish Lifestyle',

@@ -5,14 +5,14 @@ import { generateDateInfo } from '~/utils/helper';
 const today = moment(new Date()).format('YYYY-MM-DD');
 const current = generateDateInfo(today);
 
-let addMonth = moment(`${current.year}-${current.monthNumber}`);
+let addMonth = moment(`${current.year}-${current.monthNumber}`).format('YYYY-MM');
 addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
 
 interface AssessmentState {
     loading: boolean;
     details: object;
     current: object;
-    addMonth: object;
+    addMonth: string;
     selectedDate: string;
     appointment: object;
     appointments: any;
@@ -83,6 +83,6 @@ export const {
     setAppointmentTimes,
 } = assessmentSlice.actions;
 
-export const selectAssessment = (state: AssessmentState) => state.assessment;
+export const selectAssessment = (state: AssessmentState) => state.appointment;
 
 export default assessmentSlice.reducer;

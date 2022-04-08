@@ -88,9 +88,7 @@ const EditModal = ({ show, lang, company, memberId, billDate, toggleModal}) => {
                     onPress={() => { 
                         toggleModal(false, insurance, member);
                     }} 
-                    
-                    style={{container:
-                        styles.searchButton}}
+                    style={{container: [styles.searchButton]}}
                     title={`Confirm`}
                 />
             </Screen>

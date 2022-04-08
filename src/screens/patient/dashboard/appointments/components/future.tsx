@@ -32,24 +32,7 @@ import {
     PERMISSIONS,
     RESULTS,
 } from 'react-native-permissions';
-
-const {
-    xLarge,
-    xxLarge,
-    white,
-    pad_h,
-    pad_v_md,
-    sm_pad_v,
-    blue,
-    large,
-    light,
-    pad_r,
-    white_bg,
-    radius_md,
-    hide_overflow,
-    grey_br,
-    text_align_c,
-} = globalStyles;
+ 
 
 const Future = ({ test, visit, date, navigation }) => {
     const dispatch = useDispatch();
@@ -215,7 +198,7 @@ const Future = ({ test, visit, date, navigation }) => {
     const VisitTime = () => {
         return (
             <View style={styles.appointment}>
-                <Text options={[xxLarge, white, pad_h, text_align_c]}>
+                <Text options={[globalStyles.xxLarge, globalStyles.white, globalStyles.pad_h, globalStyles.text_align_c]}>
                     {moment(date.date).format('ddd MMM Do h:mm a')}
                 </Text>
             </View>
@@ -242,7 +225,7 @@ const Future = ({ test, visit, date, navigation }) => {
                 </View>
                 <View style={{ width: '100%', marginTop: 15 }}>
                     <View style={styles.expertName}>
-                        <Text options={[xLarge]}>
+                        <Text options={[globalStyles.xLarge]}>
                             {`${visit.expert.firstName} ${visit.expert.lastName}`}
                         </Text>
                     </View>
@@ -286,14 +269,14 @@ const Future = ({ test, visit, date, navigation }) => {
     const VisitDetails = () => {
         return (
             <>
-                <Row options={[pad_h]}>
+                <Row options={[globalStyles.pad_h]}>
                     <CameraBlack />
-                    <Text options={[pad_h, large]}>
+                    <Text options={[globalStyles.pad_h, globalStyles.large]}>
                         <Bold>{`${duration} min. Virtual Visit`}</Bold>
                     </Text>
                 </Row>
 
-                <Text options={[pad_h, sm_pad_v, large, light]}>
+                <Text options={[globalStyles.pad_h, globalStyles.sm_pad_v, globalStyles.large, globalStyles.light]}>
                     {`Your visit should be starting\n${
                         daysUntilVisit > 0
                             ? `in ${Math.round(daysUntilVisit)} days.`
@@ -305,7 +288,7 @@ const Future = ({ test, visit, date, navigation }) => {
     };
 
     const Disclaimer = () => (
-        <Row options={[pad_h]}>
+        <Row options={[globalStyles.pad_h]}>
             <CheckBox
                 styles={{
                     root: {
@@ -316,7 +299,7 @@ const Future = ({ test, visit, date, navigation }) => {
                 onPress={() => setChecked(!checked)}
                 checked={checked}
             />
-            <Text options={[blue, large, light, pad_r]}>
+            <Text options={[globalStyles.blue, globalStyles.large, globalStyles.light, globalStyles.pad_r]}>
                 {`I certify that I am currently in the state of ${user.data.profileInfo.state.value} and that this consultation will be conducted while within state boundaries.`}
             </Text>
         </Row>
@@ -325,19 +308,19 @@ const Future = ({ test, visit, date, navigation }) => {
     return (
         <Column
             options={[
-                white_bg,
-                pad_h,
-                pad_v_md,
-                radius_md,
-                hide_overflow,
-                grey_br,
+                globalStyles.white_bg,
+                globalStyles.pad_h,
+                globalStyles.pad_v_md,
+                globalStyles.radius_md,
+                globalStyles.hide_overflow,
+                globalStyles.grey_br,
             ]}
         >
             <VisitTime />
             <ExpertDetails />
             <ModifyVisit />
             <VisitDetails />
-            <Column options={[pad_h]}>
+            <Column options={[globalStyles.pad_h]}>
                 <Line />
             </Column>
             <Disclaimer />

@@ -16,24 +16,7 @@ import metrices from '~/utils/metrices';
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
-const { width } = metrices;
-    const {
-        pad,
-        medium,
-        light,
-        pad_t,
-        white_bg,
-        blue,
-        radius_sm,
-        sm_pad_h,
-        sm_pad_v,
-        pad_h,
-        grey_br,
-        blue_br,
-        blue_br_sm,
-        pad_top_none,
-        black,
-    } = globalStyles;
+const { width } = metrices; 
 
 const RescheduleVisit = props => {
     const appointmentData = useSelector((state:any) => state.appointments);
@@ -104,8 +87,8 @@ const RescheduleVisit = props => {
     return (
         <Kiira.Screen>
             <Kiira.Header onBack={handleBack} title="Reschedule Visit" />
-            <Kiira.Text options={[pad, medium, light, pad_t]}>{day}</Kiira.Text>
-            <Kiira.Row options={[sm_pad_h, { height: 90 }]}>
+            <Kiira.Text options={[globalStyles.pad, globalStyles.medium, globalStyles.light, globalStyles.pad_t]}>{day}</Kiira.Text>
+            <Kiira.Row options={[globalStyles.sm_pad_h, { height: 90 }]}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     horizontal
@@ -127,16 +110,16 @@ const RescheduleVisit = props => {
                                 onPress={() => handlePress(date)}
                                 style={{
                                     container: [
-                                        radius_sm,
-                                        white_bg,
-                                        sm_pad_h,
-                                        pad_top_none,
+                                        globalStyles.radius_sm,
+                                        globalStyles.white_bg,
+                                        globalStyles.sm_pad_h,
+                                        globalStyles.pad_top_none,
                                         { width: 65 },
                                         moment(date.date).format('ll') === day
-                                            ? blue_br
-                                            : grey_br,
+                                            ? globalStyles.blue_br
+                                            : globalStyles.grey_br,
                                     ],
-                                    title: [black],
+                                    title: [globalStyles.black],
                                 }}
                                 title={`${date.dow} \n\n ${date.day}`}
                             />
@@ -144,7 +127,7 @@ const RescheduleVisit = props => {
                     }}
                 />
             </Kiira.Row>
-            <Kiira.Text options={[pad]}>
+            <Kiira.Text options={[globalStyles.pad]}>
                 Please select an appointment time
             </Kiira.Text>
             <FlatList
@@ -164,17 +147,17 @@ const RescheduleVisit = props => {
                             onPress={() => setTime(current)}
                             style={{
                                 container: [
-                                    radius_sm,
-                                    white_bg,
-                                    sm_pad_h,
-                                    pad_top_none,
+                                    globalStyles.radius_sm,
+                                    globalStyles.white_bg,
+                                    globalStyles.sm_pad_h,
+                                    globalStyles.pad_top_none,
                                     { width: 100 },
                                     { margin: 20 },
                                     time && current.date === time.date
-                                        ? blue_br_sm
-                                        : grey_br,
+                                        ? globalStyles.blue_br_sm
+                                        : globalStyles.grey_br,
                                 ],
-                                title: [blue],
+                                title: [globalStyles.blue],
                             }}
                             title={`${current.hour.time} ${current.hour.am_pm}`}
                         />
@@ -186,7 +169,7 @@ const RescheduleVisit = props => {
                 disabled={!time}
                 onPress={handleConfirm}
                 title="Confirm"
-                style={{ container: [sm_pad_v, pad_h,{backgroundColor: !day || !time ? colors.disableButtonColor:colors.primaryBlue}], title: [] }}
+                style={{ container: [globalStyles.sm_pad_v, globalStyles.pad_h,{backgroundColor: !day || !time ? colors.disableButtonColor:colors.primaryBlue}], title: [] }}
             />
         </Kiira.Screen>
     );

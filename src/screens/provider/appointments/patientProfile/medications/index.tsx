@@ -9,7 +9,7 @@ import { updateMedicalHistoryExpert } from '../actions';
 import styles from './style';
 
 const Medications = ({ navigation }) => {
-    const medications = useSelector(state => state.medicalHistory.medications);
+    const medications = useSelector((state: any) => state.medicalHistory.medications);
     const [yes, setYes] = useState(medications.history);
     const [no, setNo] = useState(!medications.history);
     const [notes, setNotes] = useState(medications.notes);
@@ -47,11 +47,13 @@ const Medications = ({ navigation }) => {
                         variant="yes"
                         selected={yes}
                         onPress={() => toggleSelection('yes')}
+                        styles={{}}
                     />
                     <PolarButton
                         variant="no"
                         selected={no}
                         onPress={() => toggleSelection('no')}
+                        styles={{}}
                     />
                 </View>
                 <TextInput

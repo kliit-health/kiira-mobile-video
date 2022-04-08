@@ -150,7 +150,7 @@ const ItemFuture = props => {
 };
 
 const ItemPast = props => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const { reason, time, id, onPress } = props;
 
     const handlePress = () => {
@@ -193,7 +193,7 @@ const SectionSeparator = ({ title }) => (
 );
 
 const Fallback = () => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <View style={fallbackStyles.container}>
@@ -205,7 +205,7 @@ const Fallback = () => {
 };
 
 const ModalMessage = ({ onClose, ...rest }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <Modal

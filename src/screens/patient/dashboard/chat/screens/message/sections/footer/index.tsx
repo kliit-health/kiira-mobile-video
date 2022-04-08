@@ -23,7 +23,7 @@ const Footer = ({
     onSendPress,
     resolved,
 }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     const insets = useSafeAreaInsets();
     const headerHeight = 50;
@@ -76,13 +76,12 @@ const Footer = ({
                             )}
                             <View style={styles.messageContainer}>
                                 <TextInput
-                                    maxHeight={200}
                                     multiline={true}
                                     autoCapitalize="sentences"
                                     onChangeText={onChangeText}
                                     placeholder={lang.chat.enterMessage}
                                     value={message}
-                                    style={styles.messageInput}
+                                    style={[styles.messageInput, {maxHeight: 200}]}
                                     placeholderTextColor={colors.gray}
                                 />
                                 <TouchableOpacity

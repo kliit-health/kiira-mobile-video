@@ -26,4 +26,8 @@ export default StyleSheet.create({
         fontSize: text.size.regular,
         marginBottom: 5,
     },
+    itemContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });

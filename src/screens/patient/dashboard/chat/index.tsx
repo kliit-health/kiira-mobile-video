@@ -18,17 +18,6 @@ import {
 
 import { default as globalStyles } from '~/components/styles';
 
-const {
-    blue_bg,
-    gray_dark,
-    pad_b,
-    sm_pad_v,
-    pad_h,
-    medium,
-    white_bg,
-    xxLarge,
-} = globalStyles;
-
 const Chat = () => {
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.data);
@@ -68,13 +57,13 @@ const Chat = () => {
     return (
         <Screen test="Chat Screen">
             <Header title="Chats" onBack={handleBack} />
-            <Text options={[xxLarge, pad_h, sm_pad_v]}>
+            <Text options={[globalStyles.xxLarge, globalStyles.pad_h, globalStyles.sm_pad_v]}>
                 Please select a category
             </Text>
-            <Text options={[gray_dark, medium, pad_h, pad_b]}>
+            <Text options={[globalStyles.gray_dark, globalStyles.medium, globalStyles.pad_h, globalStyles.pad_b]}>
                 Responses are typically recieved within 24 hours
             </Text>
-            <Column options={[white_bg]}>
+            <Column options={[globalStyles.white_bg]}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={navItems}
@@ -91,9 +80,9 @@ const Chat = () => {
                     )}
                 />
             </Column>
-            <Column options={[white_bg]}>
+            <Column options={[globalStyles.white_bg]}>
                 <Tabs
-                    options={[blue_bg]}
+                    options={[globalStyles.blue_bg]}
                     list={chatTabs}
                     active={pastQuestions}
                     setActive={handleTabSelect}

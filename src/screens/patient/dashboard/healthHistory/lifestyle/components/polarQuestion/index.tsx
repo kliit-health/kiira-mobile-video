@@ -5,7 +5,7 @@ import styles from './styles';
 
 export const PolarQuestion = ({ value, onPress }) => (
     <View style={styles.container}>
-        <PolarButton variant="yes" selected={value} onPress={onPress} />
-        <PolarButton variant="no" selected={value == false} onPress={onPress} />
+        <PolarButton variant="yes" selected={value} onPress={onPress} styles={{}}/>
+        <PolarButton variant="no" selected={value == false} onPress={onPress} styles={{}}/>
     </View>
 );

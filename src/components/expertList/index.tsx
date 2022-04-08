@@ -15,7 +15,7 @@ import Constant from '../../utils/constants';
 const ExpertList = ({ navigation, experts }) => {
     const { staticImages } = Constant.App;
 
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <FlatList

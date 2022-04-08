@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     parentContainerStyle: {
         flex: 1,
         alignItems: 'center',
-        marginTop: getStatusBarHeight(null),
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
         backgroundColor: Constant.App.colors.offWhiteColor,
         flexDirection: 'column',
     },

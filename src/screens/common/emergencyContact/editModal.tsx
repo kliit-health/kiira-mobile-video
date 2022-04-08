@@ -209,7 +209,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal}) => {
                     }} 
                     disabled={disabled}
                     style={!disabled ? {container:
-                        styles.searchButton} : {container:
+                        [styles.searchButton]} : {container:
                             [styles.searchButtonDisabled]}}
                     title={`Confirm`}
                 />
