@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00887B22516249A1A2D400ED /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7E7192B46B4E30B2CD6D7D /* placeholder.png */; };
 		033FFC390F504F6B9C0C8A2C /* Poppins-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C451EA56B9049A9A5C74AFC /* Poppins-MediumItalic.otf */; };
 		05E954896E98416A98A9B99E /* Poppins-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38F02A2BFF17476BB86D52DA /* Poppins-Light.otf */; };
 		06086FF4230C00A200994F22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06086FF2230C00A200994F22 /* GoogleService-Info.plist */; };
@@ -94,6 +95,7 @@
 		9679DCB6ED4547058CB4245B /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		981EAD4905224AA0ACE5283C /* Poppins-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.otf"; path = "../assets/fonts/Poppins-BlackItalic.otf"; sourceTree = "<group>"; };
 		9BBEB175C2FB40A28E7FA6A4 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		9F7E7192B46B4E30B2CD6D7D /* placeholder.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = placeholder.png; path = ../assets/fonts/placeholder.png; sourceTree = "<group>"; };
 		9F90CFD1202144479FCEC162 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		A2534040CD244D07A42BB570 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		A3DA468C6B2245E0ADAA06AE /* Avenir-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Avenir-Light.ttf"; path = "../assets/fonts/Avenir-Light.ttf"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				E8974EA67EBF4D7DAAB0FB21 /* Avenir-Book.ttf */,
 				62209AD6390942BDA677C668 /* ProximaNova-SemiBold.otf */,
 				A3DA468C6B2245E0ADAA06AE /* Avenir-Light.ttf */,
+				9F7E7192B46B4E30B2CD6D7D /* placeholder.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -343,7 +346,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = P8NZSAW4X8;
+						DevelopmentTeam = S7Z7782V72;
 						LastSwiftMigration = 1250;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -423,6 +426,7 @@
 				973D81CE28AD47B69D2C4588 /* Avenir-Book.ttf in Resources */,
 				3F6AC3C1CA4941AABE36D414 /* ProximaNova-SemiBold.otf in Resources */,
 				0E17AB25703F4ED6B5313410 /* Avenir-Light.ttf in Resources */,
+				00887B22516249A1A2D400ED /* placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,7 +606,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 38;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = P8NZSAW4X8;
+				DEVELOPMENT_TEAM = S7Z7782V72;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -662,7 +666,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 38;
-				DEVELOPMENT_TEAM = P8NZSAW4X8;
+				DEVELOPMENT_TEAM = S7Z7782V72;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -743,7 +747,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -799,7 +803,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

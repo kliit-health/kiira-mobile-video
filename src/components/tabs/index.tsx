@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, FlatList, StyleSheet, ViewStyle } from 'react-native';
 import { colors } from '~/utils/constants';
-import { Tab as TabType } from '~/screens/patient/dashboard/book/model';
+import { Tab as TabType } from '../../screens/patient/dashboard/book/model';
 import Tab from '../tab';
 
 import { default as globalStyles } from '../styles';

@@ -51,7 +51,7 @@ const SurgicalHistory = ({ navigation }) => {
                         variant="no"
                         selected={no}
                         onPress={() => toggleSelection('no')}
-                        
+                        styles={{}}
                     />
                 </View>
                 <TextInput

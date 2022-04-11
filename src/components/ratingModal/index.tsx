@@ -49,9 +49,9 @@ const RatingModal = ({
     return (
         <Modal
             isVisible={isVisible}
-            onRequestClose={onRequestClose}
+            onDismiss={onRequestClose}
             useNativeDriver={true}
-            transparent={true}
+            backdropOpacity={0.1}
             animationIn="fadeIn"
             animationOut="fadeOut"
         >
@@ -66,10 +66,8 @@ const RatingModal = ({
                 <Text style={styles.description}>{description}</Text>
                 <Rating
                     size={starSize}
-                    readonly={false}
-                    startingValue={startingValue}
                     showRating={false}
-                    starStyle={styles.ratingStar}
+                    starStyle={customStyles.ratingStar}
                     defaultRating={defaultRating}
                     onFinishRating={handleRatingChange}
                 />

@@ -93,7 +93,7 @@ const FilterModal = ({ show, lang, toggleModal, filterExperts, count }) => {
             animationType="slide"
             onRequestClose={() => {}}
             transparent
-            isVisible={show}
+            visible={show}
         >
             <Screen options={[styles.container]}>
                 <Header

@@ -6,7 +6,7 @@ import * as Animatable from 'react-native-animatable';
 
 const CustomLoader = ({ showLoader, textMsg }) => {
     return (
-        <Modal onRequestClose={() => {}} transparent isVisible={showLoader}>
+        <Modal onRequestClose={() => {}} transparent visible={showLoader}>
             <View style={style.parentContainerStyle}>
                 <View style={style.innerContainerStyle}>
                     <Animatable.View

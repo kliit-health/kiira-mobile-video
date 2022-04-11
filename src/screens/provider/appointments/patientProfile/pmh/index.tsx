@@ -12,7 +12,7 @@ import styles from './style';
 
 const PersonalMedicalHistory = ({ navigation }) => {
     const { cancer, rareDisease, disease } = useSelector(
-        state => state.medicalHistory.pmh,
+        (state: any) => state.medicalHistory.pmh,
     );
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();

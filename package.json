@@ -14,7 +14,7 @@
         "ios-sim": "react-native run-ios --simulator",
         "clean": "npx react-native-clean-project",
         "show-ios": "xcrun simctl list devices",
-        "test": "jest --coverage"
+        "test": "jest -u --coverage"
     },
     "dependencies": {
         "@notifee/react-native": "^3.0.3",
@@ -171,8 +171,9 @@
             "^.+\\.tsx?$": "ts-jest"
         },
         "transformIgnorePatterns": [
-            "/node_modules/(?!@react-native|react-native|react-navigation|react-native-gesture-handler|NativeEventEmitter)"
+            "/node_modules/(?!@react-native|react-native|react-navigation|react-navigation-tabs|react-native-gesture-handler|NativeEventEmitter|react-navigation-stack|react-native-twilio-video-webrtc)"
         ],
+        "setupFilesAfterEnv": ["./src/__tests__/jestInit.js"],
         "verbose": true,
         "bail": 1,
         "testRegex": "(/src/.*\\.(test|spec))\\.(jsx?|tsx?)$",
@@ -206,8 +207,7 @@
             "~/models": "<rootDir>/src/models",
             "~/i18n": "<rootDir>/src/i18n",
             "~/redux/reducers/forgotPassword": "<rootDir>/src/redux/reducers/forgotPassword",
-            "~/redux/reducers/login": "<rootDir>/src/redux/reducers/login",
-            "@stripe/stripe-react-native": "<rootDir>/node_moudles/@stripe/stripe-react-native/lib/typescript/src/components"
+            "~/redux/reducers/login": "<rootDir>/src/redux/reducers/login"
         }
     },
     "preset": "react-native",

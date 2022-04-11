@@ -20,22 +20,6 @@ import {
 } from '@stripe/stripe-react-native';
 import { ScrollView } from 'react-native';
 
-const {
-    pad_b,
-    pad_h,
-    pad_v,
-    text_align_c,
-    radius_md,
-    large,
-    xLarge,
-    xxLarge,
-    grey_br,
-    sm_pad_v,
-    space_around,
-    gray_dark,
-    image_md,
-} = globalStyles;
-
 const Payment = () => {
     const dispatch = useDispatch();
     const { isApplePaySupported } = useApplePay();
@@ -188,19 +172,19 @@ const Payment = () => {
                         'ddd MMM Do h:mm a',
                     )}
                 </Kiira.Text>
-                <Kiira.Row options={[pad_h, pad_v]}>
+                <Kiira.Row options={[globalStyles.pad_h, globalStyles.pad_v]}>
                     <FastImage
-                        style={[image_md]}
+                        style={[globalStyles.image_md]}
                         source={{
                             uri: appointments.visit.expert.profileInfo
                                 .profileImageUrl,
                         }}
                     />
-                    <Kiira.Column options={[pad_h, space_around]}>
-                        <Kiira.Text options={[xxLarge]}>
+                    <Kiira.Column options={[globalStyles.pad_h, globalStyles.space_around]}>
+                        <Kiira.Text options={[globalStyles.xxLarge]}>
                             {appointments.visit.expert.expertName}
                         </Kiira.Text>
-                        <Kiira.Text options={[gray_dark]}>
+                        <Kiira.Text options={[globalStyles.gray_dark]}>
                             {
                                 appointments.visit.expert.profileInfo.profession
                                     .shortName
@@ -217,23 +201,23 @@ const Payment = () => {
             <Kiira.Header onBack={handleBack} title="Book Visit" />
             <VisitRecap />
             <Kiira.Column options={[card]}>
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
+                <Kiira.Row options={[globalStyles.pad_h, globalStyles.sm_pad_v]}>
                     <CameraBlack />
-                    <Kiira.Text options={[pad_h, large]}>
+                    <Kiira.Text options={[globalStyles.pad_h, globalStyles.large]}>
                         {`${appointments.visit.details.duration} min Video Visit`}
                     </Kiira.Text>
                 </Kiira.Row>
                 <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
+                <Kiira.Row options={[globalStyles.pad_h, globalStyles.sm_pad_v]}>
                     <Cart />
-                    <Kiira.Text options={[pad_h, large]}>
+                    <Kiira.Text options={[globalStyles.pad_h, globalStyles.large]}>
                         {`$${appointments.visit.details.price}`}
                     </Kiira.Text>
                 </Kiira.Row>
                 <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
+                <Kiira.Row options={[globalStyles.pad_h, globalStyles.sm_pad_v]}>
                     <Dollar />
-                    <Kiira.Text options={[pad_h, large]}>
+                    <Kiira.Text options={[globalStyles.pad_h, globalStyles.large]}>
                         {organizationInfo && organizationInfo.unlimited
                             ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
                             : visits + prepaid >= 0
@@ -267,10 +251,10 @@ const Payment = () => {
                             options={[
                                 { justifyContent: 'space-between' },
                                 { alignItems: 'center' },
-                                pad_b,
+                                globalStyles.pad_b,
                             ]}
                         >
-                            <Kiira.Text options={[pad_h, xxLarge]}>
+                            <Kiira.Text options={[globalStyles.pad_h, globalStyles.xxLarge]}>
                                 Total: ${balance}
                             </Kiira.Text>
                             {isApplePaySupported && (
@@ -286,8 +270,8 @@ const Payment = () => {
                             <Kiira.Button
                                 onPress={handlePayPress}
                                 style={{
-                                    container: [pad_h],
-                                    title: [xLarge],
+                                    container: [globalStyles.pad_h],
+                                    title: [globalStyles.xLarge],
                                 }}
                                 title="Pay"
                             />
@@ -296,13 +280,13 @@ const Payment = () => {
                 </Kiira.Conditional>
             </Kiira.Column>
 
-            <Kiira.Text options={[text_align_c]}>
+            <Kiira.Text options={[globalStyles.text_align_c]}>
                 Anything you would like to add?
             </Kiira.Text>
             <Kiira.Input
                 value={message}
                 onChangeText={setMessage}
-                options={[radius_md, grey_br, { width: '90%' }]}
+                options={[globalStyles.radius_md, globalStyles.grey_br, { width: '90%' }]}
                 multiline
                 placeholder="You can say something like 'I need new birth control'"
                 editable={true}
@@ -312,7 +296,7 @@ const Payment = () => {
                 <Kiira.Button
                     test="Confirm Appointment"
                     onPress={bookVisit}
-                    style={{ container: [pad_h], title: [large] }}
+                    style={{ container: [globalStyles.pad_h], title: [globalStyles.large] }}
                     title="Confirm"
                 />
             )}

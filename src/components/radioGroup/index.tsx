@@ -99,7 +99,7 @@ const RadioGroup = ({
                     key={item + index}
                     label={typeof item === 'object' ? item.label : item}
                     selected={compare(item, selected)}
-                    onPress={() => handlePress(item, index)}
+                    onPress={() => handlePress(item)}
                     boxed={horizontal ? false : boxed}
                     styles={styles.button}
                 />

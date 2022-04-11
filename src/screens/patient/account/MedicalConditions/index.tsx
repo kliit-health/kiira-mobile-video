@@ -43,7 +43,6 @@ const MedicalConditions = ({ navigation }) => {
                 </View>
                 {user.intakeData[12].name.map(title => (
                     <ListItem
-                        borderBottom
                         key={title}
                         displayChevron={true}
                         displayBorder={true}

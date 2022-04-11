@@ -9,7 +9,7 @@ import {
     Alert,
 } from 'react-native';
 import Image from 'react-native-fast-image';
-import ExpertHeader from '~/components/expertHeader';
+import {ExpertHeader} from '~/components';
 import PatientCard from './components/patientCard';
 import { screenNames } from '~/utils/constants';
 import { useDispatch, useSelector } from 'react-redux';

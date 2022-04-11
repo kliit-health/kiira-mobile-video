@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
 
     expertProfessionTextStyle: {
-        fontSize: Constant.App.textSize.xxlarge,
+        fontSize: Constant.App.textSize.xxLarge,
         color: Constant.App.colors.blueGrey,
         marginRight: 10,
     },

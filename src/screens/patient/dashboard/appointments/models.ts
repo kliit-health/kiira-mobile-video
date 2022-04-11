@@ -1,4 +1,4 @@
-import { Tab as TabType } from '~/screens/patient/dashboard/book/model';
+import { Tab as TabType } from '../../../../screens/patient/dashboard/book/model';
   
 export const tabs: TabType[] = [
     {

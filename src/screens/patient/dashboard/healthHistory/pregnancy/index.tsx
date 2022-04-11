@@ -22,7 +22,7 @@ const Pregnancy = ({ navigation }) => {
                     <ListItem
                         displayChevron
                         key={title}
-                        title={title}
+                        id={title}
                         onPress={() => navigation.navigate(destination)}
                     >
                         <Text style={styles.title}>{title}</Text>

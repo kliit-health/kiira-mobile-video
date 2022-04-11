@@ -19,7 +19,7 @@ import {
 const VideoHistory = ({ navigation, expertDetails }) => {
     const [visible, setVisible] = useState(false);
     const { visits } = useSelector(
-        state => state.treatmentHistory.videoHistory,
+        (state: any) => state.treatmentHistory.videoHistory,
         shallowEqual,
     );
 
@@ -209,10 +209,13 @@ const ModalMessage = ({ onClose, ...rest }) => {
 
     return (
         <Modal
+            onBackdropPress={rest.onBackdropPress} 
             animationIn="fadeInUp"
             animationOut="fadeOutDown"
             styles={messageModifiers}
             {...rest}
+            visible={rest.visible}
+            testID={rest.testID}
         >
             <View style={messageStyles.card}>
                 <Text style={messageStyles.messageText}>

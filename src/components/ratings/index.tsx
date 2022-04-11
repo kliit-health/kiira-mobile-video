@@ -46,7 +46,7 @@ const Ratings = ({
                             <View key={key} style={styles.starContainer}>
                                 <Star
                                     width={size.width}
-                                    heigth={size.heigth}
+                                    height={size.height}
                                     color={color}
                                 />
                             </View>
@@ -57,7 +57,7 @@ const Ratings = ({
                 <View style={styles.root}>
                     <Star
                         width={size.width}
-                        heigth={size.heigth}
+                        height={size.height}
                         color={colors.yellow}
                     />
                     <Text style={styles.text}>{value}</Text>
@@ -75,7 +75,7 @@ Ratings.propTypes = {
     multistar: bool,
     numberOfStars: number,
     size: shape({
-        heigth: number,
+        height: number,
         width: number,
     }),
 };
@@ -85,7 +85,7 @@ Ratings.defaultProps = {
     value: 5,
     multistar: false,
     numberOfStars: 5,
-    size: { heigth: 18, width: 18 },
+    size: { height: 18, width: 18 },
 };
 
 export default Ratings;

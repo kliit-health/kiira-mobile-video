@@ -14,4 +14,7 @@ export default StyleSheet.create({
     picker: {
         margin: 20,
     },
+    button: {
+        
+    }
 });

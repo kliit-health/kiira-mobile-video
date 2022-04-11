@@ -312,7 +312,6 @@ export default StyleSheet.create({
     searchBar: {
         alignSelf: 'center',
         width: metrics.width * 0.75,
-        backgroundColor: Constant.App.colors.greyBgAsk,
         margin: 5,
         backgroundColor: 'transparent',
         borderWidth: 0, //no effect
@@ -330,7 +329,6 @@ export default StyleSheet.create({
     // },
 
     visitContainerStyle: {
-        padding: parentPaddingValue,
         flexDirection: 'row',
         backgroundColor: Constant.App.colors.whiteColor,
         alignSelf: 'center',
@@ -349,7 +347,6 @@ export default StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.whiteColor,
         alignSelf: 'center',
-        backgroundColor: 'white',
         width: metrics.width * 0.9,
         overflow: 'visible',
         marginVertical: 40,

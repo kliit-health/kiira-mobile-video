@@ -464,7 +464,7 @@ class ChatExpert extends React.PureComponent {
                 animationType="fade"
                 onRequestClose={() => {}}
                 transparent
-                isVisible={showActionModal}
+                visible={showActionModal}
             >
                 <View style={styles.actionModalParentContainerStyle}>
                     <View style={styles.actionModalInnerContainerStyle}>

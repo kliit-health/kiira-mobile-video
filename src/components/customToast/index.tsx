@@ -17,7 +17,7 @@ const CustomToast = ({ showToast, textMsg, dispatch, delay }) => {
             animationType="fade"
             onRequestClose={() => {}}
             transparent
-            isVisible={showToast}
+            visible={showToast}
         >
             <View style={style.parentContainerStyle}>
                 <View style={style.innerContainerStyle}>

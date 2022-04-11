@@ -14,8 +14,7 @@ import {
     Image,
 } from 'react-native';
 
-import Container from '~/components/container';
-import Header from '~/components/header';
+import { Header, Container } from '~/components';
 import { ActivityIndicator } from 'react-native-paper';
 import { sendNotification } from '~/utils/firebase';
 

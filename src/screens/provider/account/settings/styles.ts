@@ -210,6 +210,14 @@ const styles = StyleSheet.create({
         fontSize: Constant.App.textSize.Large,
         fontFamily: Constant.App.fontFamily.headerBold,
     },
+
+    inputTextBioContainer:{
+
+    },
+
+    inputTypeBio:{
+        
+    }
 });
 
 export default styles;

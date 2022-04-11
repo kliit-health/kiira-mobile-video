@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import Constant from '~/utils/constants';
 import metrics from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';

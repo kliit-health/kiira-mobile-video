@@ -59,7 +59,7 @@ const EditModal = ({ show, lang, pharmacy, phoneNumber, address, toggleModal}) =
             animationType="slide"
             onRequestClose={() => {}}
             transparent
-            isVisible={show}
+            visible={show}
         >
             <Screen>
                 <View style={styles.headerStyle}>

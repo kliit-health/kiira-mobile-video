@@ -49,7 +49,6 @@ const ExpertList = ({ navigation, experts }) => {
                                 source={{
                                     uri: item.profileInfo.profileImageUrl,
                                 }}
-                                activeOpacity={0.7}
                             />
                             {item.isOnline ? (
                                 <View style={styles.expertIsOnline} />

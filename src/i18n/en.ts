@@ -1,5 +1,3 @@
-import BillingAndInsurance from "~/screens/common/billingAndInsurance";
-
 export default {
     account: {
         logout: 'Logout',

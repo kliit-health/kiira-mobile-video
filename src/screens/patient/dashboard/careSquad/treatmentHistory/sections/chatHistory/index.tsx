@@ -8,7 +8,7 @@ import { styles, itemStyles, fallbackStyles, itemModifiers } from './styles';
 
 const ChatHistory = ({ navigation, expertDetails }) => {
     const { questions } = useSelector(
-        state => state.treatmentHistory.chatHistory,
+        (state: any)  => state.treatmentHistory.chatHistory,
         shallowEqual,
     );
 

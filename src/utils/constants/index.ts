@@ -841,6 +841,7 @@ export const screenNames = {
     ChangePassword: 'ChangePassword',
     ChangePasswordExpert: 'ChangePasswordExpert',
     ChatExpert: 'ChatExpert',
+    Chat: 'Chat',
     Children: 'Children',
     ChooseExpert: 'ChooseExpert',
     Dashboard: 'DashBoard',

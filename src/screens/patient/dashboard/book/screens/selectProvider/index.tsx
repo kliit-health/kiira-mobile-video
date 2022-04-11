@@ -28,32 +28,6 @@ import metrices from '~/utils/metrices';
 
 const { textSize } = Constant.App;
 
-const {
-    medium,
-    xLarge,
-    text_align_c,
-    image_md,
-    image_lg,
-    white_bg,
-    sm_pad_v,
-    sm_pad_h,
-    grey_br_b_md,
-    white_br,
-    pad_h,
-    pad_vertical,
-    light,
-    justify_fs,
-    center,
-    blue_bg,
-    pad,
-    pad_sm,
-    radius_sm,
-    hide_overflow,
-    no_pad_v,
-    pad_v,
-} = select_provider;
-const { height_50, width_50, align_items_c, justify_c } = globalStyles;
-
 const SelectProvider = () => {
     const dispatch = useDispatch();
     const [availableExperts, setAvailableExperts] = useState([]);
@@ -137,20 +111,20 @@ const SelectProvider = () => {
 
         return (
             <TouchableOpacity onPress={() => handleSelection(expert)}>
-                <Kiira.Row options={[white_bg, sm_pad_v, pad_vertical]}>
+                <Kiira.Row options={[select_provider.white_bg, select_provider.sm_pad_v, select_provider.pad_vertical]}>
                     <FastImage
                         testID={expertName}
-                        style={[pad_h, image_md]}
+                        style={[select_provider.pad_h, select_provider.image_md]}
                         source={{
                             uri: profileImageUrl,
                             priority: FastImage.priority.normal,
                         }}
                     />
                     <Kiira.Column>
-                        <Kiira.Text options={[pad_h, xLarge]}>
+                        <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>
                             {expertName}
                         </Kiira.Text>
-                        <Kiira.Text options={[pad_h, medium, light]}>
+                        <Kiira.Text options={[select_provider.pad_h, select_provider.medium, select_provider.light]}>
                             {profession.fullName}
                         </Kiira.Text>
                     </Kiira.Column>
@@ -194,22 +168,22 @@ const SelectProvider = () => {
         </Modal>
     );
     const ErrorState = () => (
-        <Kiira.Screen test="Book Screen" options={[white_bg]}>
+        <Kiira.Screen test="Book Screen" options={[select_provider.white_bg]}>
             <Kiira.Header title="Select Provider" onBack={handleBack} />
-            <Kiira.Column options={[align_items_c, justify_c, blue_bg]}>
+            <Kiira.Column options={[globalStyles.align_items_c, globalStyles.justify_c, select_provider.blue_bg]}>
                 <Image
                     style={styles.logo}
                     resizeMode="contain"
                     source={images.penguin_g}
                 />
             </Kiira.Column>
-            <Kiira.Column options={[white_bg, { flex: 2 }]}>
+            <Kiira.Column options={[select_provider.white_bg, { flex: 2 }]}>
                 <Kiira.Text options={[h1, { marginTop: '10%' }]}>
                     Uh oh! It looks like there aren't any providers available.
                 </Kiira.Text>
 
                 <Kiira.Text
-                    options={[h3, sm_pad_v, { flex: 3.7, marginBottom: '10%' }]}
+                    options={[h3, select_provider.sm_pad_v, { flex: 3.7, marginBottom: '10%' }]}
                 >
                     Due to licensing, video visits are currently limited to
                     covered locations.Please let us know if you would like an
@@ -221,7 +195,7 @@ const SelectProvider = () => {
                 <Kiira.Button
                     onPress={toggleUpdateModal}
                     title="Request Update"
-                    style={{ container: [sm_pad_v, pad_h], title: [] }}
+                    style={{ container: [select_provider.sm_pad_v, select_provider.pad_h], title: [] }}
                 />
             </Kiira.Column>
         </Kiira.Screen>
@@ -238,22 +212,22 @@ const SelectProvider = () => {
             onBackdropPress={toggleModal}
         >
             <FastImage
-                style={[pad_h, image_lg, white_br, center, { marginTop: -50 }]}
+                style={[select_provider.pad_h, select_provider.image_lg, select_provider.white_br, select_provider.center, { marginTop: -50 }]}
                 source={{
                     uri: expert.profileInfo.profileImageUrl,
                     priority: FastImage.priority.normal,
                 }}
             />
-            <Kiira.Column options={[white_bg, justify_fs, sm_pad_v]}>
-                <Kiira.Text options={[pad_h, xLarge, center]}>
+            <Kiira.Column options={[select_provider.white_bg, select_provider.justify_fs, select_provider.sm_pad_v]}>
+                <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge, select_provider.center]}>
                     {expert.expertName}
                 </Kiira.Text>
-                <Kiira.Text options={[pad_h, medium, light, center, sm_pad_v]}>
+                <Kiira.Text options={[select_provider.pad_h, select_provider.medium, select_provider.light, select_provider.center, select_provider.sm_pad_v]}>
                     {expert.profileInfo.profession.fullName}
                 </Kiira.Text>
-                <Kiira.Line options={[grey_br_b_md]} />
-                <Kiira.Text options={[pad_h, xLarge]}>Specialities</Kiira.Text>
-                <Kiira.Row options={[no_pad_v, { height: 60 }]}>
+                <Kiira.Line options={[select_provider.grey_br_b_md]} />
+                <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Specialities</Kiira.Text>
+                <Kiira.Row options={[select_provider.no_pad_v, { height: 60 }]}>
                     <FlatList
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={item => item}
@@ -263,13 +237,13 @@ const SelectProvider = () => {
                             return (
                                 <Kiira.Text
                                     options={[
-                                        sm_pad_h,
-                                        sm_pad_v,
-                                        blue_bg,
+                                        select_provider.sm_pad_h,
+                                        select_provider.sm_pad_v,
+                                        select_provider.blue_bg,
                                         { height: 40 },
-                                        pad_sm,
-                                        radius_sm,
-                                        hide_overflow,
+                                        select_provider.pad_sm,
+                                        select_provider.radius_sm,
+                                        select_provider.hide_overflow,
                                     ]}
                                 >
                                     {item}
@@ -279,12 +253,12 @@ const SelectProvider = () => {
                     />
                 </Kiira.Row>
                 <ScrollView>
-                    <Kiira.Text options={[pad_h, xLarge]}>Bio</Kiira.Text>
-                    <Kiira.Text options={[pad]}>
+                    <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Bio</Kiira.Text>
+                    <Kiira.Text options={[select_provider.pad]}>
                         {expert.profileInfo.bio}
                     </Kiira.Text>
-                    <Kiira.Text options={[pad_h, xLarge]}>Languages</Kiira.Text>
-                    <Kiira.Row options={[pad]}>
+                    <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Languages</Kiira.Text>
+                    <Kiira.Row options={[select_provider.pad]}>
                         {expert.profileInfo.languages.map(lang => (
                             <Kiira.Text
                                 key={lang.value}
@@ -295,7 +269,7 @@ const SelectProvider = () => {
                 <Kiira.Button
                     testID="See Availability"
                     onPress={handlePress}
-                    style={{ container: [pad_h, pad_v] }}
+                    style={{ container: [select_provider.pad_h,select_provider. pad_v] }}
                     title="See Availability"
                 />
             </Kiira.Column>
@@ -304,7 +278,7 @@ const SelectProvider = () => {
     return availableExperts.length !== 0 ? (
         <Kiira.Screen test="Book Screen">
             <Kiira.Header title="Select Provider" onBack={handleBack} />
-            <Kiira.Heading options={[text_align_c]}>
+            <Kiira.Heading options={[select_provider.text_align_c]}>
                 Please choose a provider
             </Kiira.Heading>
             <FlatList

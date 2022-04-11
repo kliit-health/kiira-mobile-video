@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ScrollView, View, FlatList, Text, StatusBar } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import CustomText from '~/components/customText';
-import { Header, Container, SearchBar } from '~/components';
-import CustomButton from '~/components/customButton';
+import { Header, Container, SearchBar, CustomText, CustomButton } from '~/components';
 import Constant from '~/utils/constants';
 import ErrorBoundary from 'react-native-error-boundary';
 import { getAppointmentsList } from './action';

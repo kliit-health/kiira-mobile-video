@@ -148,22 +148,22 @@ const PregnancyHistory = ({ navigation }) => {
                             />
                         </View>
                     ),
-                    [types.objective]:
-                        questions[progress].options &&
-                        questions[progress].options.map(option => {
-                            return (
-                                <CheckBox
-                                    key={option.title}
-                                    onPress={() => setAnswer(option)}
-                                    title={option.title}
-                                    checkedIcon="check"
-                                    uncheckedIcon="square-o"
-                                    checked={
-                                        answers[option.section][option.key]
-                                    }
-                                />
-                            );
-                        }),
+                    // [types.objective]:
+                    //     questions[progress].options &&
+                    //     questions[progress].options.map(option => {
+                    //         return (
+                    //             <CheckBox
+                    //                 key={option.title}
+                    //                 onPress={() => setAnswer(option)}
+                    //                 title={option.title}
+                    //                 checkedIcon="check"
+                    //                 uncheckedIcon="square-o"
+                    //                 checked={
+                    //                     answers[option.section][option.key]
+                    //                 }
+                    //             />
+                    //         );
+                    //     }),
                     [types.picker]: (
                         <View style={{ width: 300, alignSelf: 'center' }}>
                             <CustomTextInput
