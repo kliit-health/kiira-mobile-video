@@ -43,7 +43,6 @@ const VisitDetails = ({ navigation, visit }) => {
                     <Image
                         style={styles.locationImage}
                         source={require('../../../../../../assets/blue_location.jpg')}
-                        activeOpacity={0.7}
                     />
                     <View style={styles.informationContainer}>
                         <Text style={styles.informationTitle}>

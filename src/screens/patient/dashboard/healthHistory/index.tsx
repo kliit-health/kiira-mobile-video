@@ -7,8 +7,8 @@ import model from './model';
 import styles from './styles';
 
 const HealthHistory = ({ navigation }) => {
-    const language = useSelector(state => state.language, shallowEqual);
-    const healthHistory = useSelector(state => state.healthHistory.data);
+    const language = useSelector((state: any) => state.language, shallowEqual);
+    const healthHistory = useSelector((state: any) => state.healthHistory.data);
 
     return (
         <Container unformatted>

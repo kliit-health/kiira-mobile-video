@@ -4,28 +4,6 @@ import FastImage from 'react-native-fast-image';
 import * as Kiira from '~/components';
 import { select_provider } from '~/components/styles';
 
-const {
-    medium,
-    xLarge,
-    image_lg,
-    white_bg,
-    sm_pad_v,
-    sm_pad_h,
-    grey_br_b_md,
-    white_br,
-    pad_h,
-    light,
-    justify_fs,
-    center,
-    blue_bg,
-    pad,
-    pad_sm,
-    radius_sm,
-    hide_overflow,
-    no_pad_v,
-    pad_v,
-} = select_provider;
-
 const ProfileModal = ({ expert, showProfile, toggleProfile }) => (
     <Kiira.Modal
         styles={{
@@ -38,22 +16,22 @@ const ProfileModal = ({ expert, showProfile, toggleProfile }) => (
         onBackdropPress={toggleProfile}
     >
         <FastImage
-            style={[pad_h, image_lg, white_br, center, { marginTop: -50 }]}
+            style={[select_provider.pad_h, select_provider.image_lg, select_provider.white_br, select_provider.center, { marginTop: -50 }]}
             source={{
                 uri: expert.profileInfo.profileImageUrl,
                 priority: FastImage.priority.normal,
             }}
         />
-        <Kiira.Column options={[white_bg, justify_fs, sm_pad_v]}>
-            <Kiira.Text options={[pad_h, xLarge, center]}>
+        <Kiira.Column options={[select_provider.white_bg, select_provider.justify_fs, select_provider.sm_pad_v]}>
+            <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge, select_provider.center]}>
                 {expert.expertName}
             </Kiira.Text>
-            <Kiira.Text options={[pad_h, medium, light, center, sm_pad_v]}>
+            <Kiira.Text options={[select_provider.pad_h, select_provider.medium, select_provider.light, select_provider.center, select_provider.sm_pad_v]}>
                 {expert.profileInfo.profession.fullName}
             </Kiira.Text>
-            <Kiira.Line options={[grey_br_b_md]} />
-            <Kiira.Text options={[pad_h, xLarge]}>Specialities</Kiira.Text>
-            <Kiira.Row options={[no_pad_v, { height: 60 }]}>
+            <Kiira.Line options={[select_provider.grey_br_b_md]} />
+            <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Specialities</Kiira.Text>
+            <Kiira.Row options={[select_provider.no_pad_v, { height: 60 }]}>
                 <FlatList
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={item => item}
@@ -63,13 +41,13 @@ const ProfileModal = ({ expert, showProfile, toggleProfile }) => (
                         return (
                             <Kiira.Text
                                 options={[
-                                    sm_pad_h,
-                                    sm_pad_v,
-                                    blue_bg,
+                                    select_provider.sm_pad_h,
+                                    select_provider.sm_pad_v,
+                                    select_provider.blue_bg,
                                     { height: 40 },
-                                    pad_sm,
-                                    radius_sm,
-                                    hide_overflow,
+                                    select_provider.pad_sm,
+                                    select_provider.radius_sm,
+                                    select_provider.hide_overflow,
                                 ]}
                             >
                                 {item}
@@ -79,12 +57,12 @@ const ProfileModal = ({ expert, showProfile, toggleProfile }) => (
                 />
             </Kiira.Row>
             <ScrollView>
-                <Kiira.Text options={[pad_h, xLarge]}>Bio</Kiira.Text>
-                <Kiira.Text options={[pad]}>
+                <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Bio</Kiira.Text>
+                <Kiira.Text options={[select_provider.pad]}>
                     {expert.profileInfo.bio}
                 </Kiira.Text>
-                <Kiira.Text options={[pad_h, xLarge]}>Languages</Kiira.Text>
-                <Kiira.Row options={[pad]}>
+                <Kiira.Text options={[select_provider.pad_h, select_provider.xLarge]}>Languages</Kiira.Text>
+                <Kiira.Row options={[select_provider.pad]}>
                     {expert.profileInfo.languages.map(lang => (
                         <Kiira.Text
                             key={lang.value}
@@ -95,7 +73,7 @@ const ProfileModal = ({ expert, showProfile, toggleProfile }) => (
             <Kiira.Button
                 testID="Close Profile"
                 onPress={() => toggleProfile(false)}
-                style={{ container: [pad_h, pad_v] }}
+                style={{ container: [select_provider.pad_h, select_provider.pad_v] }}
                 title="Close Profile"
             />
         </Kiira.Column>

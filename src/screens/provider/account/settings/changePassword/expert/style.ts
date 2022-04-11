@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import Constant from '~/utils/constants';
 import metrics from '~/utils/metrices';
 import { getStatusBarHeight } from '~/components/iPhoneXHelper';
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.whiteColor,
-        marginTop: getStatusBarHeight(null),
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
     },
 
     headerStyle: {

@@ -22,35 +22,35 @@ import { updateExpertDataToFirebase } from './actions';
 import { showOrHideModal } from '~/components/customModal/action';
 
 interface props{
-    setState: any;
-    userData: any;
-    lang: any;
-    navigation: any;
-    showHideErrorModal: any;
-    updateUserData: any;
-    bio: any;
-    city: any;
-    clinicInfo: any;
-    credits: any;
-    dob: any;
-    email: any;
-    file: any;
-    filepath: any;
-    firstName: any;
-    gender: any;
-    profileImageUrl: any;
-    languages: any;
-    lastName: any;
-    license: any;
-    location: any;
-    profession: any;
-    profileInfo: any;
-    pronounsArr: any;
-    selectedState: any;
-    staticImages: any;
-    imageSrc: any;
-    showSelectStateModal: any;
-    state:any;
+    setState?: any;
+    userData?: any;
+    lang?: any;
+    navigation?: any;
+    showHideErrorModal?: any;
+    updateUserData?: any;
+    bio?: any;
+    city?: any;
+    clinicInfo?: any;
+    credits?: any;
+    dob?: any;
+    email?: any;
+    file?: any;
+    filepath?: any;
+    firstName?: any;
+    gender?: any;
+    profileImageUrl?: any;
+    languages?: any;
+    lastName?: any;
+    license?: any;
+    location?: any;
+    profession?: any;
+    profileInfo?: any;
+    pronounsArr?: any;
+    selectedState?: any;
+    staticImages?: any;
+    imageSrc?: any;
+    showSelectStateModal?: any;
+    state?:any;
 }
 
 interface myState{
@@ -72,6 +72,7 @@ interface myState{
     profession: any;
     profileInfo: any;
     pronounsArr: any;
+    profileImageUrl: any;
     selectedState: any;
     imageSrc: any;
     showIosDateModal: boolean;
@@ -125,6 +126,7 @@ class SettingsExpert extends PureComponent<props, myState> {
             firstName: userData.profileInfo.firstName,
             gender: userData.profileInfo.gender,
             imageSrc: userData.profileInfo.profileImageUrl,
+            profileImageUrl: userData.profileInfo.profileImageUrl,
             imageUri: '',
             languages: userData.profileInfo.languages,
             lastName: userData.profileInfo.lastName,
@@ -209,6 +211,7 @@ class SettingsExpert extends PureComponent<props, myState> {
             firstName,
             gender,
             imageUri,
+            profileImageUrl,
             languages,
             lastName,
             license,
@@ -271,6 +274,7 @@ class SettingsExpert extends PureComponent<props, myState> {
                                     location,
                                     clinicInfo,
                                     profileInfo,
+                                    profileImageUrl,
                                     city,
                                     languages,
                                     imageUri,

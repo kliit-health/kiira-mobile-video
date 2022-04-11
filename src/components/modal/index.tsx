@@ -17,7 +17,6 @@ const Modal = ({
     return (
         <NativeModal
             onBackdropPress={onBackdropPress}
-            transparent
             isVisible={visible}
             style={styles.root}
             hideModalContentWhileAnimating

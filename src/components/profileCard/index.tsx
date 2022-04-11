@@ -51,6 +51,7 @@ const ProfileCard = ({
         tagsText: [defaultStyles.tagsText, customStyles.tagsText],
         actionBox: [defaultStyles.actionBox, customStyles.actionBox],
         labelsBox: [defaultStyles.labelsBox, customStyles.labelsBox],
+        extra: []
     };
 
     return (

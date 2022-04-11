@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        marginTop: getStatusBarHeight(null),
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
     },
 
     expertDetailsCard: {

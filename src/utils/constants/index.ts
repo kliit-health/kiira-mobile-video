@@ -1,4 +1,4 @@
-import VersionCheck from 'react-native-version-check';
+import RNVersionCheck from 'react-native';
 
 export default {
     App: {
@@ -841,6 +841,7 @@ export const screenNames = {
     ChangePassword: 'ChangePassword',
     ChangePasswordExpert: 'ChangePasswordExpert',
     ChatExpert: 'ChatExpert',
+    Chat: 'Chat',
     Children: 'Children',
     ChooseExpert: 'ChooseExpert',
     Dashboard: 'DashBoard',
@@ -2112,7 +2113,7 @@ export const tables = {
 };
 
 export const app = {
-    version: `v ${VersionCheck.getCurrentVersion()}`,
+    version: `v ${RNVersionCheck.NativeModules.RNVersionCheck}`,
     name: 'Kiira',
 };
 

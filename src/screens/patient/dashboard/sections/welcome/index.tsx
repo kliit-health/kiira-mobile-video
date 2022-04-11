@@ -8,7 +8,7 @@ export type WelcomeProps = {
 };
 
 const Welcome = ({ displayName }: WelcomeProps): JSX.Element => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     return (
         <View style={styles.container}>
             <Text

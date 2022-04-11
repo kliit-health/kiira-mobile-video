@@ -21,15 +21,15 @@ const AskSupport = ({ navigation }) => {
     const [searching, setSearching] = useState(false);
     const [value, setValue] = useState('');
 
-    const lang = useSelector(state => state.language);
-    const expertDetails = useSelector(state => state.user.data);
-    const activeQuestions = useSelector(state => state.askExpert.active);
-    const resolvedQuestions = useSelector(state => state.askExpert.resolved);
+    const lang = useSelector((state: any) => state.language);
+    const expertDetails = useSelector((state: any) => state.user.data);
+    const activeQuestions = useSelector((state: any) => state.askExpert.active);
+    const resolvedQuestions = useSelector((state: any) => state.askExpert.resolved);
     const activeSearchResult = useSelector(
-        state => state.askExpert.activeSearch,
+        (state: any) => state.askExpert.activeSearch,
     );
     const resolvedSearchResult = useSelector(
-        state => state.askExpert.resolvedSearch,
+        (state: any) => state.askExpert.resolvedSearch,
     );
 
     useEffect(() => {

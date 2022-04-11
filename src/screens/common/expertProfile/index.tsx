@@ -43,7 +43,7 @@ const ExpertProfile = props => {
 
     useEffect(() => {
         return () => {
-            dispatch(clearExpertProfileState());
+            dispatch(clearExpertProfileState(null));
         };
     }, []);
 
@@ -151,7 +151,7 @@ const ExpertProfile = props => {
                 <Rating
                     imageSize={20}
                     readonly
-                    startingValue={parseFloat(expertDetails.rating / 2)}
+                    startingValue={parseFloat(expertDetails.rating) / 2}
                 />
                 {isFrom && isFrom === Constant.App.screenNames.ChooseExpert && (
                     <CustomButton

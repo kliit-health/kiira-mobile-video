@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         borderColor: colors.greyAccent,
         borderWidth: 2,
+        color: colors.primaryBlue,
     },
 
     visitReturnText: {

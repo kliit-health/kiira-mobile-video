@@ -9,11 +9,10 @@ const ExpertHeader = ({ navigation, title }) => {
         <View>
             <View style={styles.header}>
                 <View style={{ position: 'absolute', top: 40, left: 15 }}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7}>
                         <Image
                             style={styles.image}
                             source={require('../../../assets/goBack.png')}
-                            activeOpacity={0.7}
                         />
                     </TouchableOpacity>
                 </View>

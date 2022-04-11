@@ -11,7 +11,7 @@ import { changePassword } from './action';
 import { showOrHideModal } from '~/components/customModal/action';
 
 const ChangePassword = props => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const dispatch = useDispatch();
 
     const [currentPassword, setCurrentPassword] = useState('');

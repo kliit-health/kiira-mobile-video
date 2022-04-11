@@ -12,7 +12,7 @@ import styles from './style';
 
 const FamilyHistory = ({ navigation }) => {
     const { cancer, rareDisease, illnesses } = useSelector(
-        state => state.medicalHistory.family,
+        (state: any) => state.medicalHistory.family,
     );
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();
@@ -107,12 +107,9 @@ const FamilyHistory = ({ navigation }) => {
                         <View style={styles.buttonContainer}>
                             <PolarButton
                                 variant="yes"
-                                selected={
-                                    answers[questions[progress].key].history
-                                }
-                                onPress={() =>
-                                    toggleSelection(questions[progress].key)
-                                }
+                                selected={answers[questions[progress].key].history}
+                                onPress={() => toggleSelection(questions[progress].key)} 
+                                styles={{}}                           
                             />
                             <PolarButton
                                 variant="no"
@@ -122,6 +119,7 @@ const FamilyHistory = ({ navigation }) => {
                                 onPress={() =>
                                     toggleSelection(questions[progress].key)
                                 }
+                                styles={{}}  
                             />
                         </View>
                         <TextInput

@@ -7,8 +7,6 @@ import { screenNames } from '~/utils/constants';
 import moment from 'moment';
 import { default as globalStyles } from '~/components/styles';
 
-const { white_bg } = globalStyles;
-
 const ClosedQuestions = ({ data, readResolveData }) => {
     const experts = useSelector((state:any) => state.experts.data);
     const handleNavigation = item => {
@@ -24,7 +22,7 @@ const ClosedQuestions = ({ data, readResolveData }) => {
     };
     
     return (
-        <Column options={[white_bg]}>
+        <Column options={[globalStyles.white_bg]}>
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={data}

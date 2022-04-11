@@ -8,7 +8,7 @@ import { h2 } from '~/components/styles';
 import { firebaseFetch } from '~/utils/firebase';
 
 const SelectSupport = ({ navigation }) => {
-    const [staff, setStaff] = useState([]);
+    const [staff, setStaff] = useState(null);
 
     useEffect(() => {
         getStaff();
@@ -16,7 +16,7 @@ const SelectSupport = ({ navigation }) => {
 
     const getStaff = async () => {
         const condition = [{ key: 'role', operator: '==', value: 'Expert' }];
-        var staffs = await firebaseFetch('users', condition);
+        var staffs:any = await firebaseFetch('users', condition);
         staffs = staffs.filter(staff => {
             return staff.displayName == "Kiira"
         })

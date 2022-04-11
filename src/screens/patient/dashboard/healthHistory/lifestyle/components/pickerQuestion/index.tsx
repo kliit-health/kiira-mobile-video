@@ -24,7 +24,16 @@ export const PickerQuestion = ({ data, value, onSave, placeholder, title }) => {
                 onPress={handleOnLabelPress}
                 placeholder={placeholder}
                 value={value}
-                chevron
+                chevron 
+                styles={undefined} 
+                children={undefined} 
+                onChange={undefined} 
+                multiline={false} 
+                id={undefined} 
+                outlined={false} 
+                label={undefined} 
+                defaultValue={undefined} 
+                editable={false}            
             />
             <ModalPicker
                 onSave={handleOnSave}

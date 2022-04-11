@@ -69,15 +69,11 @@ const MessageListItem = ({
                                     style={{
                                         height: metrices.width - 100,
                                         width: metrices.width - 100,
-                                        resizeMode: 'cover',
                                     }}
                                     source={{
                                         uri: item.image,
                                     }}
-                                    defaultSource={
-                                        Constant.App.staticImages
-                                            .profilePlaceholderImg
-                                    }
+                                    resizeMode={'cover'}
                                 />
                             ) : null}
                         </View>
@@ -169,15 +165,11 @@ const MessageListItem = ({
                                     style={{
                                         height: metrices.width - 100,
                                         width: metrices.width - 100,
-                                        resizeMode: 'cover',
                                     }}
                                     source={{
                                         uri: item.image,
                                     }}
-                                    defaultSource={
-                                        Constant.App.staticImages
-                                            .profilePlaceholderImg
-                                    }
+                                    resizeMode={'cover'}
                                 />
                             ) : null}
                         </View>

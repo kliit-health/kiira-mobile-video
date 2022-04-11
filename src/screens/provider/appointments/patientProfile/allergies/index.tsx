@@ -9,7 +9,7 @@ import { updateMedicalHistoryExpert } from '../actions';
 import styles from './style';
 
 const Allergies = ({ navigation }) => {
-    const allergies = useSelector(state => state.medicalHistory.allergies);
+    const allergies = useSelector((state: any) => state.medicalHistory.allergies);
     const [yes, setYes] = useState(allergies.allergic);
     const [no, setNo] = useState(!allergies.alleric);
     const [notes, setNotes] = useState(allergies.notes);
@@ -46,12 +46,14 @@ const Allergies = ({ navigation }) => {
                     <PolarButton
                         variant="yes"
                         selected={yes}
-                        onPress={() => toggleSelection('yes')}
+                        onPress={() => toggleSelection('yes')} 
+                        styles={{}}                    
                     />
                     <PolarButton
                         variant="no"
                         selected={no}
                         onPress={() => toggleSelection('no')}
+                        styles={{}}   
                     />
                 </View>
                 <TextInput

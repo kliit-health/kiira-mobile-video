@@ -15,7 +15,7 @@ import Constant from '../../utils/constants';
 const ExpertList = ({ navigation, experts }) => {
     const { staticImages } = Constant.App;
 
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <FlatList
@@ -49,7 +49,6 @@ const ExpertList = ({ navigation, experts }) => {
                                 source={{
                                     uri: item.profileInfo.profileImageUrl,
                                 }}
-                                activeOpacity={0.7}
                             />
                             {item.isOnline ? (
                                 <View style={styles.expertIsOnline} />

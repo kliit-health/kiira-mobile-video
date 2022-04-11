@@ -8,8 +8,8 @@ import Constant from '../../../../utils/constants';
 import { handleNavigation } from '~/utils/functions';
 
 const MedicalConditions = ({ navigation }) => {
-    const user = useSelector(state => state.user.data);
-    const lang = useSelector(state => state.language);
+    const user = useSelector((state: any) => state.user.data);
+    const lang = useSelector((state: any) => state.language);
 
     const handleBackPress = () => {
         navigation.goBack();
@@ -43,7 +43,6 @@ const MedicalConditions = ({ navigation }) => {
                 </View>
                 {user.intakeData[12].name.map(title => (
                     <ListItem
-                        borderBottom
                         key={title}
                         displayChevron={true}
                         displayBorder={true}

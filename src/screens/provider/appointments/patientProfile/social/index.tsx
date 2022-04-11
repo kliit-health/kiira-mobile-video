@@ -23,7 +23,7 @@ const SocialHistory = ({ navigation }) => {
         education,
         exercise,
         diet,
-    } = useSelector(state => state.medicalHistory.social);
+    } = useSelector((state: any) => state.medicalHistory.social);
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();
 
@@ -141,6 +141,7 @@ const SocialHistory = ({ navigation }) => {
                                 onPress={() =>
                                     toggleSelection(questions[progress].key)
                                 }
+                                styles={{}}
                             />
                             <PolarButton
                                 variant="no"
@@ -150,6 +151,7 @@ const SocialHistory = ({ navigation }) => {
                                 onPress={() =>
                                     toggleSelection(questions[progress].key)
                                 }
+                                styles={{}}
                             />
                         </View>
                         <TextInput

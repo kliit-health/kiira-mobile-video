@@ -8,10 +8,10 @@ import styles from './styles';
 
 const Medications = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
     const answers = useSelector(
-        state => state.healthHistory.data.medications.answers,
+        (state: any) => state.healthHistory.data.medications.answers,
     );
 
     const [medications, setMedications] = useState({
@@ -58,7 +58,15 @@ const Medications = ({ navigation }) => {
                     onChange={value => handleChange(dataKey, value)}
                     multiline
                     blurOnSubmit
-                    onSubmitEditing={() => Keyboard.dismiss()}
+                    onSubmitEditing={() => Keyboard.dismiss()} 
+                    chevron={false} 
+                    children={undefined} 
+                    onPress={undefined} 
+                    value={undefined} 
+                    id={undefined} 
+                    outlined={false} 
+                    label={undefined} 
+                    editable={false}                
                 />
             ))}
             <TextButton styles={styles.button} onPress={handleSave}>

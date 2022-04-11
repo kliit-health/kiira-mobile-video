@@ -1,0 +1,709 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing for reason type in appointment #195 appointment 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#0253E2",
+        "height": 0,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0253E2",
+        "borderBottomColor": "#F9F9F9",
+        "borderBottomWidth": 0,
+        "flexDirection": "row",
+        "height": 50,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFFFFF",
+          "fontFamily": "Poppins-Regular",
+          "fontSize": 20,
+          "fontWeight": "400",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "textAlign": "center",
+        }
+      }
+    >
+      Test Appointment
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#FFFFFF",
+          "borderBottomColor": "#F6F7FA",
+          "borderBottomWidth": 0.3,
+          "borderTopColor": "#F6F7FA",
+          "borderTopWidth": 0.3,
+          "flexDirection": "row",
+        },
+        Object {
+          "marginTop": 20,
+        },
+      ]
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Search"
+      placeholderTextColor="#8e8e93"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "flex": 1,
+            "fontFamily": "Poppins-Regular",
+            "fontSize": 16,
+            "paddingHorizontal": 15,
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "margin": 10,
+            "marginRight": 15,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Search
+        color="#8e8e93"
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "padding": 0,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#F9F9F9",
+          "flex": 1,
+          "flexDirection": "column",
+          "width": 750,
+        }
+      }
+    >
+      <RCTScrollView
+        data={
+          Array [
+            "2022-04-01",
+            "2022-04-02",
+            "2022-04-03",
+            "2022-04-04",
+            "2022-04-05",
+            "2022-04-06",
+            "2022-04-07",
+            "2022-04-08",
+            "2022-04-09",
+            "2022-04-10",
+            "2022-04-11",
+            "2022-04-12",
+            "2022-04-13",
+            "2022-04-14",
+            "2022-04-15",
+            "2022-04-16",
+            "2022-04-17",
+            "2022-04-18",
+            "2022-04-19",
+            "2022-04-20",
+            "2022-04-21",
+            "2022-04-22",
+            "2022-04-23",
+            "2022-04-24",
+            "2022-04-25",
+            "2022-04-26",
+            "2022-04-27",
+            "2022-04-28",
+            "2022-04-29",
+            "2022-04-30",
+            "2022-05-01",
+            "2022-05-02",
+            "2022-05-03",
+            "2022-05-04",
+            "2022-05-05",
+            "2022-05-06",
+            "2022-05-07",
+            "2022-05-08",
+            "2022-05-09",
+            "2022-05-10",
+          ]
+        }
+        decelerationRate="fast"
+        extraData="2022-04-11"
+        getItem={[Function]}
+        getItemCount={[Function]}
+        getItemLayout={[Function]}
+        horizontal={true}
+        initialScrollIndex={12}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        onScrollToIndexFailed={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        showsHorizontalScrollIndicator={false}
+        stickyHeaderIndices={Array []}
+        viewabilityConfigCallbackPairs={Array []}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                null,
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "height": 100,
+                  "margin": 15,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "black",
+                    },
+                    Object {
+                      "flexWrap": "wrap",
+                    },
+                  ]
+                }
+              >
+                Apr
+              </Text>
+              <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                nativeID="animatedComponent"
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#008AFC",
+                    "borderRadius": 50,
+                    "borderWidth": 1,
+                    "elevation": 3,
+                    "marginVertical": 19.71,
+                    "opacity": 1,
+                    "padding": 8,
+                  }
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "black",
+                        "elevation": 3,
+                        "textAlign": "center",
+                        "width": 18,
+                      },
+                      Object {
+                        "flexWrap": "wrap",
+                      },
+                    ]
+                  }
+                >
+                  1
+                </Text>
+              </View>
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "black",
+                    },
+                    Object {
+                      "flexWrap": "wrap",
+                    },
+                  ]
+                }
+              >
+                Fri
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "width": 1560,
+              }
+            }
+          />
+        </View>
+      </RCTScrollView>
+      <Text
+        style={
+          Object {
+            "color": "#000B1E",
+            "fontFamily": "Poppins-Regular",
+            "fontSize": 38,
+            "height": 657,
+            "margin": 20,
+            "textAlign": "center",
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "height": 0,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Testing for reason type in appointment #195 expertTwillioLogin 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "height": 0,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderBottomColor": "#F9F9F9",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "height": 50,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#000B1E",
+          "fontFamily": "Poppins-Regular",
+          "fontSize": 20,
+          "fontWeight": "400",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "textAlign": "center",
+        }
+      }
+    >
+      Kiira Video Chat
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "padding": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "lightgrey",
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#fff",
+            "borderTopLeftRadius": 20,
+            "borderTopRightRadius": 20,
+            "flex": 1,
+            "marginTop": 10,
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={
+            Object {
+              "testUri": "../../../assets/logo-sm.png",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "alignSelf": "center",
+                "height": 150,
+                "width": "90%",
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderColor": "#008AFC",
+              "borderRadius": 25,
+              "borderWidth": 1,
+              "elevation": 2,
+              "height": 200,
+              "shadowColor": "rgba(0,0,0, .4)",
+              "shadowOffset": Object {
+                "height": 13,
+                "width": 1,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 10,
+              "width": 637.5,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontFamily": "Poppins-Bold",
+                "fontSize": 16,
+                "margin": 30,
+                "textAlign": "center",
+              }
+            }
+          >
+            When you press Start your session will begin.
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "justifyContent": "center",
+              "margin": 20,
+              "marginLeft": 50,
+              "marginRight": 50,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#008AFC",
+                "borderRadius": 20,
+                "marginTop": 10,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#fff",
+                  "textAlign": "center",
+                }
+              }
+            >
+               START 
+            </Text>
+          </View>
+        </View>
+        <View
+          accessibilityRole="progressbar"
+          accessibilityState={
+            Object {
+              "busy": false,
+            }
+          }
+          accessible={true}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              Object {
+                "marginTop": 40,
+              },
+            ]
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "height": 30,
+                "opacity": 0,
+                "width": 30,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              nativeID="animatedComponent"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                nativeID="animatedComponent"
+                style={
+                  Object {
+                    "height": 30,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 30,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 15,
+                      "overflow": "hidden",
+                      "width": 30,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    nativeID="animatedComponent"
+                    style={
+                      Object {
+                        "height": 30,
+                        "transform": Array [
+                          Object {
+                            "translateY": 0,
+                          },
+                          Object {
+                            "rotate": "-165deg",
+                          },
+                        ],
+                        "width": 30,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        Object {
+                          "height": 15,
+                          "overflow": "hidden",
+                          "width": 30,
+                        }
+                      }
+                    >
+                      <View
+                        collapsable={false}
+                        nativeID="animatedComponent"
+                        style={
+                          Object {
+                            "borderColor": "#3f51b5",
+                            "borderRadius": 15,
+                            "borderWidth": 3,
+                            "height": 30,
+                            "width": 30,
+                          }
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              collapsable={false}
+              nativeID="animatedComponent"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
+              <View
+                collapsable={false}
+                nativeID="animatedComponent"
+                style={
+                  Object {
+                    "height": 30,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 30,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 15,
+                      "overflow": "hidden",
+                      "top": 15,
+                      "width": 30,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    nativeID="animatedComponent"
+                    style={
+                      Object {
+                        "height": 30,
+                        "transform": Array [
+                          Object {
+                            "translateY": -15,
+                          },
+                          Object {
+                            "rotate": "345deg",
+                          },
+                        ],
+                        "width": 30,
+                      }
+                    }
+                  >
+                    <View
+                      collapsable={false}
+                      style={
+                        Object {
+                          "height": 15,
+                          "overflow": "hidden",
+                          "width": 30,
+                        }
+                      }
+                    >
+                      <View
+                        collapsable={false}
+                        nativeID="animatedComponent"
+                        style={
+                          Object {
+                            "borderColor": "#3f51b5",
+                            "borderRadius": 15,
+                            "borderWidth": 3,
+                            "height": 30,
+                            "width": 30,
+                          }
+                        }
+                      />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "height": 0,
+      }
+    }
+  />
+</View>
+`;

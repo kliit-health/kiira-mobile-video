@@ -19,7 +19,7 @@ import {
 const VideoHistory = ({ navigation, expertDetails }) => {
     const [visible, setVisible] = useState(false);
     const { visits } = useSelector(
-        state => state.treatmentHistory.videoHistory,
+        (state: any) => state.treatmentHistory.videoHistory,
         shallowEqual,
     );
 
@@ -122,7 +122,7 @@ const ItemFuture = props => {
                         {videoHistory.subject}
                     </Text>
                     <Text style={itemFutureStyles.subtitle}>
-                        {reason.title}
+                        {reason}
                     </Text>
                 </View>
             </View>
@@ -150,7 +150,7 @@ const ItemFuture = props => {
 };
 
 const ItemPast = props => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const { reason, time, id, onPress } = props;
 
     const handlePress = () => {
@@ -193,7 +193,7 @@ const SectionSeparator = ({ title }) => (
 );
 
 const Fallback = () => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <View style={fallbackStyles.container}>
@@ -205,14 +205,17 @@ const Fallback = () => {
 };
 
 const ModalMessage = ({ onClose, ...rest }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <Modal
+            onBackdropPress={rest.onBackdropPress} 
             animationIn="fadeInUp"
             animationOut="fadeOutDown"
             styles={messageModifiers}
             {...rest}
+            visible={rest.visible}
+            testID={rest.testID}
         >
             <View style={messageStyles.card}>
                 <Text style={messageStyles.messageText}>

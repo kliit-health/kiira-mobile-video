@@ -105,7 +105,7 @@ function* updatePatientDetails({ data }) {
 function* lockVisit(data) {
     const lang = yield select(state => state.language);
     try {
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const update = yield call(saveAndLock, data);
         yield call(sendVisitRecap, data);
         yield put(clearMedicalHistory());

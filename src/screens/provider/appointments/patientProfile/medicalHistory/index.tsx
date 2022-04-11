@@ -10,7 +10,7 @@ import styles from './style';
 
 const MedicalHistory = ({ navigation }) => {
     const { visit, patientInfo } = navigation.state.params;
-    const medicalHistory = useSelector(state => state.medicalHistory);
+    const medicalHistory = useSelector((state: any) => state.medicalHistory);
 
     return (
         <View style={styles.container}>
@@ -28,11 +28,11 @@ const MedicalHistory = ({ navigation }) => {
                                 title={item.title}
                                 image={item.image}
                                 screen={item.screen}
-                                complete={
-                                    item.complete
-                                        ? medicalHistory[item.complete].complete
-                                        : false
-                                }
+                                complete={item.complete
+                                    ? medicalHistory[item.complete].complete
+                                    : false} 
+                                data={null} 
+                                lock={false}                           
                             />
                         )}
                     />

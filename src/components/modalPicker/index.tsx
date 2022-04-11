@@ -5,6 +5,7 @@ import TextButton from '../textButton';
 import Modal from '../modal';
 import { WheelPicker } from 'react-native-wheel-picker-android';
 import defaultStyles from './styles';
+import { text } from '~/utils/constants';
 
 const ModalPicker = ({
     styles: customStyles,
@@ -34,7 +35,7 @@ const ModalPicker = ({
     };
 
     return (
-        <Modal onBackdropPress={onBackdropPress} visible={visible}>
+        <Modal onBackdropPress={onBackdropPress} visible={visible} styles={{}}>
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.picker}>
@@ -44,6 +45,8 @@ const ModalPicker = ({
                                 data={data}
                                 selectedItem={selectedItem}
                                 onItemSelected={handleOnItemSelect}
+                                itemTextFontFamily={text.fontFamily.poppinsRegular}
+                                selectedItemTextFontFamily={text.fontFamily.poppinsBold}
                             />
                         ),
                         [data],

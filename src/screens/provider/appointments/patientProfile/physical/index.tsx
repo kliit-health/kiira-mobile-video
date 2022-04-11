@@ -8,7 +8,7 @@ import { updateMedicalHistoryExpert } from '../actions';
 import styles from './style';
 
 const PhysicalExam = ({ navigation }) => {
-    const { physical } = useSelector(state => state.medicalHistory);
+    const { physical } = useSelector((state: any) => state.medicalHistory);
     const [notes, setNotes] = useState(physical.notes);
     const dispatch = useDispatch();
 

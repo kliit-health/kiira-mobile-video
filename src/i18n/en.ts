@@ -1,5 +1,3 @@
-import BillingAndInsurance from "~/screens/common/billingAndInsurance";
-
 export default {
     account: {
         logout: 'Logout',
@@ -73,9 +71,6 @@ export default {
     },
     vaccines: {
         title: 'Vaccines',
-    },
-    healthHistory: {
-        title: 'Health History',
     },
     pastVisits: {
         title: 'Past Visits',
@@ -329,7 +324,7 @@ export default {
         save: 'Save',
     },
     healthHistory: {
-        title: 'My Health History',
+        title: 'Health History',
         basicInfo: 'Basic Information',
         pregnancy: 'Pregnancy and Children',
         lifestyle: 'Lifestyle',

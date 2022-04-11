@@ -14,8 +14,7 @@ import {
     Image,
 } from 'react-native';
 
-import Container from '~/components/container';
-import Header from '~/components/header';
+import { Header, Container } from '~/components';
 import { ActivityIndicator } from 'react-native-paper';
 import { sendNotification } from '~/utils/firebase';
 
@@ -31,8 +30,8 @@ import styles from './styles';
 
 const ExpertTwillioLogin = ({ navigation }) => {
     const dispatch = useDispatch();
-    const callConfig = useSelector(state => state.twillio);
-    const { visit } = useSelector(state => state.visit);
+    const callConfig = useSelector((state: any) => state.twillio);
+    const { visit } = useSelector((state: any) => state.visit);
     const [loaderVisible, setLoaderVisible] = useState(false);
     const { expert, uid } = visit;
     const euid = expert.uid;
@@ -109,12 +108,7 @@ const ExpertTwillioLogin = ({ navigation }) => {
                 }
             }
         });
-    };
-
-    useEffect(() => {
-        checkPermissions();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }; 
 
     const sessionStart = () => {
         const title = 'Kiira Health Visit';

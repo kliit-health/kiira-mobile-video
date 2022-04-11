@@ -7,7 +7,7 @@ import styles, { buttonStyles } from './styles';
 import { screenNames } from '~/utils/constants';
 
 const Book = ({ navigation }) => {
-    const lang = useSelector(state => state.language.book, shallowEqual);
+    const lang = useSelector((state: any) => state.language.book, shallowEqual);
 
     const handleSchedule = () => {
         navigation.navigate(screenNames.Book);
@@ -18,19 +18,19 @@ const Book = ({ navigation }) => {
             <Text style={styles.description}>{lang.bookVisit}</Text>
             <View style={styles.actions}>
                 <Button
-                    style={buttonStyles}
+                    style={{container: [buttonStyles.container], title: [buttonStyles.title]}}
                     onPress={handleSchedule}
                     title={lang.mentalHealth}
                     id="mentalHealth"
                 />
                 <Button
-                    style={buttonStyles}
+                    style={{container: [buttonStyles.container], title: [buttonStyles.title]}}
                     onPress={handleSchedule}
                     title={lang.primaryCare}
                     id="primaryCare"
                 />
                 <Button
-                    style={buttonStyles}
+                    style={{container: [buttonStyles.container], title: [buttonStyles.title]}}
                     onPress={handleSchedule}
                     title={lang.womensHealth}
                     id="womensHealth"

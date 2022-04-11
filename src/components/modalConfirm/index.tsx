@@ -13,12 +13,12 @@ const ModalConfirm = ({
     ...rest
 }) => (
     <Modal
+        onBackdropPress={null} 
         visible={visible}
         animationIn="fadeInUp"
         animationOut="fadeOutDown"
         styles={styles.modal}
-        {...rest}
-    >
+        {...rest}    >
         <View style={styles.message.card}>
             <Text style={styles.message.text}>{message}</Text>
             <View style={styles.message.buttonsContainer}>

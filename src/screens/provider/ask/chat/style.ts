@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     },
 
     headerStyle: {
-        paddingTop: getStatusBarHeight(null) + parentPaddingValue * 0.5,
+        paddingTop: (Platform.OS === 'ios' ? 20 : 0) + parentPaddingValue * 0.5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

@@ -14,9 +14,6 @@ import styles from './styles';
 
 const { staticImages } = Constant.App;
 
-const { black, pad_h, xxLarge, large, pad_v, center, grey_br, radius_md } =
-    globalStyles;
-
 const VideoRating = () => {
     const dispatch = useDispatch();
 
@@ -34,7 +31,7 @@ const VideoRating = () => {
         <ScrollView>
             <StatusBar barStyle="light-content" translucent />
             <View style={styles.heading}>
-                <Text options={[black, pad_h, xxLarge]}>
+                <Text options={[globalStyles.black, globalStyles.pad_h, globalStyles.xxLarge]}>
                     We hope you had a great visit! Please rate your visit
                 </Text>
             </View>
@@ -42,13 +39,11 @@ const VideoRating = () => {
                 <View style={styles.expertImageContainer}>
                     <FastImage
                         style={styles.expertImage}
-                        defaultSource={staticImages.profilePlaceholderImg}
-                        source={{ uri: visit.expert.imageUrl }}
-                        activeOpacity={0.7}
+                        source={{ uri: visit.expert.imageUrl ? visit.expert.imageUrl : staticImages.profilePlaceholderImg }}
                     />
                 </View>
                 <Text
-                    options={[black, large, pad_v, center]}
+                    options={[globalStyles.black, globalStyles.large, globalStyles.pad_v, globalStyles.center]}
                 >{`${visit.expert.firstName} ${visit.expert.lastName}`}</Text>
                 <Rating
                     type="custom"
@@ -67,7 +62,7 @@ const VideoRating = () => {
                     value={review}
                     onChangeText={setReview}
                     placeholder="Tell us about your experience"
-                    options={[grey_br, radius_md, pad_v]}
+                    options={[globalStyles.grey_br, globalStyles.radius_md, globalStyles.pad_v]}
                 />
                 <Conditional if={review.length || hasRated}>
                     <CustomButton

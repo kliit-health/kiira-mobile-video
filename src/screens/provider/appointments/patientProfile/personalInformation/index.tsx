@@ -25,7 +25,7 @@ const PersonalInformation = ({ navigation }) => {
     });
 
     const [picker, setPicker] = useState(false);
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     const handleDatePress = () => {
         setPicker(true);
@@ -76,7 +76,14 @@ const PersonalInformation = ({ navigation }) => {
                             chevron={date}
                             onPress={date ? handleDatePress : null}
                             defaultValue={value}
-                            onChange={value => handleUpdate(dataKey, value)}
+                            onChange={value => handleUpdate(dataKey, value)} 
+                            styles={undefined} 
+                            placeholder={undefined} 
+                            children={undefined} 
+                            multiline={false} 
+                            value={undefined} 
+                            id={undefined} 
+                            editable={false}                        
                         />
                     );
                 })}

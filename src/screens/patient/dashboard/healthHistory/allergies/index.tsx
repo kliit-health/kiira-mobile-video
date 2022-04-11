@@ -10,10 +10,10 @@ import styles from './styles';
 
 const Allergies = ({ navigation }) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.data);
-    const lang = useSelector(state => state.language);
+    const user = useSelector((state: any) => state.user.data);
+    const lang = useSelector((state: any) => state.language);
     const answers = useSelector(
-        state => state.healthHistory.data.allergies.answers,
+        (state: any) => state.healthHistory.data.allergies.answers,
     );
     const [questions, setQuestions] = useState(initialQuestions);
     const [finish, setFinish] = useState(false);

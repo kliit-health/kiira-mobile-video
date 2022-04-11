@@ -11,6 +11,14 @@ export default StyleSheet.create({
         fontFamily: text.fontFamily.poppinsRegular,
         fontSize: text.size.regular, 
     },
+    barLineStyle:{
+        width: 1,
+        height: 40,
+        backgroundColor: '#DDE0E7', 
+        alignItems: 'center', 
+        marginHorizontal: 22,
+        marginTop: -29,  
+    }
 });
 
 export const modifiers = {

@@ -7,6 +7,7 @@ import {
     Share,
     Platform,
     Clipboard,
+    Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './style';
@@ -54,7 +55,7 @@ class ReferFriend extends PureComponent {
                 // dismissed
             }
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     };
     renderHeaderView() {
@@ -98,7 +99,7 @@ class ReferFriend extends PureComponent {
     writeToClipboard = async () => {
         const { userData } = this.props;
         await Clipboard.setString(userData.referralCode);
-        alert('Code copied to clipboard');
+        Alert.alert('Code copied to clipboard');
     };
 
     renderYourReferralTitleView() {

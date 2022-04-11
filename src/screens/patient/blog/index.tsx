@@ -5,7 +5,7 @@ import { Container, Header } from '~/components';
 import { modifiers } from './styles';
 
 const Learn = () => {
-    const language = useSelector(state => state.language, shallowEqual);
+    const language = useSelector((state: any) => state.language, shallowEqual);
     const webViewRef = useRef(null);
 
     const handleBackPress = () => {

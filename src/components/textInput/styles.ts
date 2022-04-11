@@ -34,6 +34,9 @@ export default StyleSheet.create({
 
 export const modifiers = {
     outlined: {
+        root: {
+
+        },
         touchable: {
             borderWidth: 1,
             borderBottomWidth: 1,

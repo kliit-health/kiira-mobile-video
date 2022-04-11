@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: Constant.App.colors.offWhiteColor,
-        marginTop: getStatusBarHeight(null),
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
     },
 
     doneTextStyle: {
@@ -210,6 +210,14 @@ const styles = StyleSheet.create({
         fontSize: Constant.App.textSize.Large,
         fontFamily: Constant.App.fontFamily.headerBold,
     },
+
+    inputTextBioContainer:{
+
+    },
+
+    inputTypeBio:{
+        
+    }
 });
 
 export default styles;

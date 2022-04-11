@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bool, func } from 'prop-types';
 import { Modal, Header, TextButton } from '~/components';
 import { useDidMount } from '~/utils/hooks';
@@ -19,7 +19,7 @@ const ChangePlan = ({
     subscription,
 }) => {
     const [selectedPlan, setSelectedPlan] = useState({ id: '' });
-
+    const language = useSelector((state: any) => state.language);
     useDidMount(() => {
         getPlans();
     });
@@ -41,7 +41,7 @@ const ChangePlan = ({
     };
 
     return (
-        <Modal visible={visible} styles={modifiers.modal}>
+        <Modal visible={visible} styles={modifiers.modal} onBackdropPress={null}>
             <Header
                 styles={modifiers.header}
                 onClose={handleClose}

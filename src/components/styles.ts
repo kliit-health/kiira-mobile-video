@@ -6,8 +6,7 @@ const { size, fontFamily } = text;
 const { height, width } = metrices;
 
 const styles = StyleSheet.create({
-    //FONT SIZE
-
+    //FONT SIZE,
     large: {
         fontSize: size.large,
     },

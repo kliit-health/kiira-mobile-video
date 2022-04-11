@@ -207,7 +207,7 @@ export async function getAppointmentsByDayAsync(data) {
     };
  
     try {
-        const times = {};
+        const times:any = {};
         await fetch(urls.prod.appointmentGetByDay, obj)
             .then(res => res.json())
             .then(data => (times.current = data));
@@ -620,7 +620,7 @@ export function getUserData(obj, success, error) {
 
 export async function getLicensesAsync() {
     try {
-        let licensesRef = await firestore.doc('licenses/states').get();
+        let licensesRef = await firestore().doc('licenses/states').get();
         return licensesRef.data();
     } catch (error) {
         displayConsole('Crash error', error);
@@ -783,11 +783,11 @@ export function getFilterDataWithCondition(obj) {
     try {
         var db = firestore();
         let collection = db.collection(obj.tableName);
-        collection = collection.where(obj.roleKey, '==', obj.roleValue);
+        var collectionQuery = collection.where(obj.roleKey, '==', obj.roleValue);
         if (obj.genderKey && obj.genderValue) {
-            collection = collection.where(obj.genderKey, '==', obj.genderValue);
+            collectionQuery = collection.where(obj.genderKey, '==', obj.genderValue);
         }
-        return collection
+        return collectionQuery
             .get()
             .then(querySnapshot => {
                 const arr = [];
@@ -914,13 +914,18 @@ export function changePassword(newPassword) {
         var user = auth().currentUser;
         return user
             .updatePassword(newPassword)
-            .then(function () {
-                return reAunthenticate(newPassword);
+            .then(function (success) {
+                reAunthenticate(newPassword);
+                const data = {
+                    success: true,
+                };
+                return data;
             })
             .catch(function (error) {
                 const { message, code } = error;
                 displayConsole('error message', message);
                 displayConsole('error code', code);
+                return false;
             });
     } catch (error) {
         displayConsole('Crash error', error);
@@ -1117,7 +1122,7 @@ export function updateReadMessageStatus(obj) {
         questionDocRef
             .then(querySnapshotQuestionDoc => {
                 querySnapshotQuestionDoc.docs.forEach(element => {
-                    batch.update(element._ref, {
+                    batch.update(element.ref, {
                         isRead: true,
                     });
                 });
@@ -1281,11 +1286,11 @@ export function getExpertsData(obj, success, error) {
     try {
         var db = firestore();
         let collection = db.collection(obj.tableName);
-        collection = collection.where(obj.roleKey, '==', obj.roleValue);
+        var collectionQuery = collection.where(obj.roleKey, '==', obj.roleValue);
         if (obj.genderKey && obj.genderValue) {
-            collection = collection.where(obj.genderKey, '==', obj.genderValue);
+            collectionQuery = collection.where(obj.genderKey, '==', obj.genderValue);
         }
-        return collection.onSnapshot(success, error);
+        return collectionQuery.onSnapshot(success, error);
     } catch (error) {
         return false;
     }
@@ -1295,11 +1300,11 @@ export function getFiltersDataWithCondition(obj) {
     try {
         var db = firestore();
         let collection = db.collection(obj.tableName);
-        collection = collection.where(obj.roleKey, '==', obj.roleValue);
+        var collectionQuery = collection.where(obj.roleKey, '==', obj.roleValue);
         if (obj.genderKey && obj.genderValue) {
-            collection = collection.where(obj.genderKey, '==', obj.genderValue);
+            collectionQuery = collection.where(obj.genderKey, '==', obj.genderValue);
         }
-        return collection
+        return collectionQuery
             .get()
             .then(querySnapshot => {
                 const arr = [];
@@ -1482,7 +1487,7 @@ export async function payAmountWithToken(tokenID, amount) {
 
 export async function updateCredits(
     data: object,
-    credits: object,
+    credits: any,
     addition: boolean,
 ) {
     const user = auth().currentUser;
@@ -1540,7 +1545,7 @@ export const firebaseFetch = (collectionName, conditions = [], limit = 10000) =>
                 let query = firestore().collection(collectionName);
                 for (let condition of conditions) {
                     const { key, operator, value } = condition;
-                    query = query.where(key, operator, value);
+                    var queryQan = query.where(key, operator, value);
                 }
                 const response = await query.limit(limit).get();
                 const data = response.docs.map(item => ({
@@ -1649,10 +1654,9 @@ export const firebaseRealTimeFetch = (
     onError,
 ) => {
     let query = firestore().collection(collectionName);
-
     for (let condition of conditions) {
         const { key, operator, value } = condition;
-        query = query.where(key, operator, value);
+        var queryWan = query.where(key, operator, value);
     }
 
     query.onSnapshot(

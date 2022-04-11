@@ -17,8 +17,6 @@ import { updateFavoriteExperts } from '~/redux/actions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { RootState } from '~/redux/reducers';
 
-const { xLarge, medium, gray_dark, blue } = globalStyles;
-
 const Experts = ({ experts, navigation }) => {
     const user = useSelector((state: any) => state.user.data);
     const favorites = useSelector((state: any) => state.favoriteExperts.data);
@@ -103,16 +101,16 @@ const Experts = ({ experts, navigation }) => {
                             />
 
                             <View style={styles.expertInfo}>
-                                <Text options={[xLarge]}>
+                                <Text options={[globalStyles.xLarge]}>
                                     {`${firstName} ${lastName}`}
                                 </Text>
-                                <Text options={[medium, gray_dark]}>
+                                <Text options={[globalStyles.medium, globalStyles.gray_dark]}>
                                     {profession.fullName}
                                 </Text>
                                 <TouchableOpacity
                                     onPress={() => showProfileModal(item)}
                                 >
-                                    <Text options={[medium, blue]}>
+                                    <Text options={[globalStyles.medium, globalStyles.blue]}>
                                         {lang.profileHeader.profile}
                                     </Text>
                                 </TouchableOpacity>

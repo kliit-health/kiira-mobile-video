@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Modal, Text, Pressable } from 'react-native';
+import { View, Modal, Text, Pressable, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomButton from '~/components/customButton';
 import Recap from '../recap';
@@ -11,7 +11,7 @@ const Confirm = ({ navigation }) => {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const { visit } = navigation.state.params;
-    const medicalHistory = useSelector(state => state.medicalHistory);
+    const medicalHistory = useSelector((state: any) => state.medicalHistory);
 
     const fakeNavigation = {
         state: {

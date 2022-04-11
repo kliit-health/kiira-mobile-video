@@ -31,7 +31,7 @@ const ResolvedQuestions = ({ data, navigation, visible }) => {
 const ListItem = props => {
     const { userInfo, lastMessage, modifiedDate, onPress } = props;
     const { firstName, lastName } = userInfo.profileInfo;
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const handlePress = () => {
         if (onPress) {
             onPress(props);
@@ -44,7 +44,7 @@ const ListItem = props => {
         yesterday.setDate(yesterday.getDate() - 1);
         var hours = dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours();
         var AmOrPm = hours >= 12 ? 'pm' : 'am';
-        hours = hours % 12 || 12;
+        hours = Number(hours) % 12 || 12;
         var minutes =
             dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes();
         var finalTime = hours + ':' + minutes + ' ' + AmOrPm;

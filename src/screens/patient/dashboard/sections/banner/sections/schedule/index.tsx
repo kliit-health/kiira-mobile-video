@@ -9,7 +9,7 @@ import styles, { buttonStyles } from './styles';
 
 const Schedule = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector(state => state.language.schedule, shallowEqual);
+    const lang = useSelector((state: any) => state.language.schedule, shallowEqual);
 
     const handleSchedule = () => {
         dispatch(
@@ -33,7 +33,7 @@ const Schedule = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.description}>{lang.schedule}</Text>
             <Button
-                style={buttonStyles}
+                style={{container: [buttonStyles.container]}}
                 onPress={handleSchedule}
                 title={lang.letsDoIt}
             />

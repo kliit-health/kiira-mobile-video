@@ -6,6 +6,7 @@ import {
     Platform,
     TouchableOpacity,
     Text,
+    Alert,
 } from 'react-native';
 import defaultStyles from './styles';
 

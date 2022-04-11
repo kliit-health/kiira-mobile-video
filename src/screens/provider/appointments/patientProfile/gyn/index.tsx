@@ -35,7 +35,7 @@ const GynHistory = ({ navigation }) => {
         sexualPartners,
         currentlyActive,
         numberOfPartners,
-    } = useSelector(state => state.medicalHistory.gyn);
+    } = useSelector((state: any) => state.medicalHistory.gyn);
     const dispatch = useDispatch();
     const [progress, setProgress] = useState(0);
     const finished = progress === questions.length - 1;
@@ -211,6 +211,7 @@ const GynHistory = ({ navigation }) => {
                                     onPress={() =>
                                         toggleSelection(questions[progress].key)
                                     }
+                                    styles={{}}
                                 />
                                 <PolarButton
                                     variant="no"
@@ -221,6 +222,7 @@ const GynHistory = ({ navigation }) => {
                                     onPress={() =>
                                         toggleSelection(questions[progress].key)
                                     }
+                                    styles={{}}
                                 />
                             </View>
                             {questions[progress].textPrompt ? (
@@ -286,14 +288,17 @@ const GynHistory = ({ navigation }) => {
                                                 <Text>{option.title}</Text>
                                                 <CustomTextInput
                                                     editable={false}
-                                                    onPress={() =>
-                                                        toggleModal(option)
-                                                    }
+                                                    onPress={() => toggleModal(option)}
                                                     placeholder={option.title}
-                                                    value={answers.numberOfPartners[
-                                                        option.key
-                                                    ].number.toString()}
-                                                    chevron
+                                                    value={answers.numberOfPartners[option.key].number.toString()}
+                                                    chevron styles={undefined} 
+                                                    children={undefined} 
+                                                    onChange={undefined} 
+                                                    multiline={false} 
+                                                    id={undefined} 
+                                                    outlined={false} 
+                                                    label={undefined} 
+                                                    defaultValue={undefined}                                                
                                                 />
                                                 <ModalPicker
                                                     onSave={selection =>

@@ -66,7 +66,7 @@ const Calendar = ({ navigation }) => {
             },
         };
 
-        let addMonth = moment(`${current.year}-${current.monthNumber}`);
+        let addMonth = moment(`${current.year}-${current.monthNumber}`).format('YYYY-MM');
         addMonth = moment(addMonth).add(1, 'M').format('YYYY-MM');
         dispatch(
             getAppointmentDates({
@@ -170,7 +170,7 @@ const Calendar = ({ navigation }) => {
                 initialNumToRender={appointments.appointments.current.length}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({ time }) => time}
-                data={appointments.appointments.current.error ? [] : appointments.appointments.current}
+                data={appointments.appointments.current.length ? appointments.appointments.current : []}
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" color={colors.blue} />
                 )}

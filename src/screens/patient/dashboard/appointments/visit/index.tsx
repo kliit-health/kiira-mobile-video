@@ -49,7 +49,7 @@ const Visit = props => {
                             onBack={() => navigation.goBack()}
                         />
                         <ExpertInfo visit={visit} />
-                        <VisitDetails visit={visit} />
+                        <VisitDetails/>
                     </ErrorBoundary>
                 </View>
             </ScrollView>

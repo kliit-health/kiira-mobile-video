@@ -67,3 +67,5 @@ buck-out/
 # Detox
 .detoxrc.json
 *.pbxproj
+coverage/
+coverage/clover.xml

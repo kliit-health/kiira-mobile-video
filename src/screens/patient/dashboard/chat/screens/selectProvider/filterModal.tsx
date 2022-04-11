@@ -14,7 +14,7 @@ const FilterModal = ({ show, lang, toggleModal, filterExperts, count }) => {
         radioUnCheckBlueIcon,
     } = staticImages;
 
-    const chooseExpert = useSelector(state => state.chooseExpert);
+    const chooseExpert = useSelector((state: any) => state.chooseExpert);
     const { languagesData } = chooseExpert;
     const [languagePreference, setLanguagePreference] = useState(
         Object.assign(
@@ -93,7 +93,7 @@ const FilterModal = ({ show, lang, toggleModal, filterExperts, count }) => {
             animationType="slide"
             onRequestClose={() => {}}
             transparent
-            isVisible={show}
+            visible={show}
         >
             <Screen options={[styles.container]}>
                 <Header
@@ -162,8 +162,8 @@ const FilterModal = ({ show, lang, toggleModal, filterExperts, count }) => {
                     style={{
                         container:
                             count > 0
-                                ? styles.searchButton
-                                : styles.searchButtonDisabled,
+                                ? [styles.searchButton]
+                                : [styles.searchButtonDisabled]
                     }}
                     title={`Show ${count} Expert(s)`}
                 />

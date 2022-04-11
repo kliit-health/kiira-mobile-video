@@ -7,7 +7,6 @@ import {
     updatePassword,
     updateActiveAt,
     updateIntakeData,
-    updateUserRole,
 } from '../reducers/account';
 import { logout, updateStatus } from '~/utils/firebase';
 import { clearAskState } from '~/redux/actions/ask';

@@ -7,7 +7,7 @@ import defaultStyles from './styles';
 import { colors } from '../../utils/constants';
 
 const CheckBox = ({ styles: customStyles, checked, onPress, label }) => {
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState(false);
 
     useEffect(() => {
         setSelected(checked);

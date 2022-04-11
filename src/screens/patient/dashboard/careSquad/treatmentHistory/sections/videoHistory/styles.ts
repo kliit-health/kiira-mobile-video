@@ -13,7 +13,6 @@ export const itemFutureStyles = StyleSheet.create({
         marginBottom: 10,
         marginHorizontal: 10,
         backgroundColor: colors.white,
-        padding: 20,
         borderRadius: 10,
         shadowColor: colors.black,
         shadowOffset: { width: 1, height: 1 },

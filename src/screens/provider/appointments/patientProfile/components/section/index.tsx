@@ -26,19 +26,15 @@ const Section = ({
             <View style={styles.container}>
                 <Image
                     resizeMode={'contain'}
-                    containerStyle={{ alignSelf: 'center' }}
                     style={styles.icon}
                     source={staticImages[image]}
-                    activeOpacity={0.7}
                 />
                 <Text style={styles.info}>{title}</Text>
                 <View style={styles.check}>
                     {complete && (
                         <Image
-                            containerStyle={{ alignSelf: 'center' }}
                             style={styles.icon}
                             source={require('../../../../../../../assets/check.png')}
-                            activeOpacity={0.7}
                         />
                     )}
                 </View>

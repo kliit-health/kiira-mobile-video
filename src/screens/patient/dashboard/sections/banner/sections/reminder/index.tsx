@@ -10,8 +10,8 @@ import { RootState } from '~/redux/reducers';
 import _ from 'lodash';
 
 const Reminder = ({ navigation }) => {
-    const lang = useSelector(state => state.language.reminder, shallowEqual);
-    const assessment = useSelector(state => state.user.data.assessment);
+    const lang = useSelector((state: any) => state.language.reminder, shallowEqual);
+    const assessment = useSelector((state: any) => state.user.data.assessment);
 
     const today = moment().format('YYYY-MM-DD');
     const visits = useSelector(
@@ -36,7 +36,7 @@ const Reminder = ({ navigation }) => {
                     </Text>
                 )}
                 <Button
-                    style={buttonStyles}
+                    style={{container: [buttonStyles.container]}}
                     onPress={handleView}
                     title={lang.view}
                 />

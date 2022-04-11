@@ -18,10 +18,10 @@ const BasicInfo = ({ navigation }) => {
         weight: '',
     });
 
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
     const answers = useSelector(
-        state => state.healthHistory.data.basicInfo.answers,
+        (state: any) => state.healthHistory.data.basicInfo.answers,
     );
 
     useEffect(() => {
@@ -63,6 +63,15 @@ const BasicInfo = ({ navigation }) => {
                             defaultValue={data[dataKey]}
                             placeholder={title}
                             onChange={value => handleChange(dataKey, value)}
+                            chevron={false} 
+                            children={null} 
+                            onPress={undefined} 
+                            multiline={false} 
+                            value={undefined} 
+                            id={dataKey} 
+                            outlined={false} 
+                            label={undefined} 
+                            editable={false}                        
                         />
                     ),
                     [types.picker]: (

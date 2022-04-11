@@ -21,10 +21,10 @@ const AddChild = ({ navigation }) => {
         sex: '',
     });
 
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
     const answers = useSelector(
-        state => state.healthHistory.data.children.answers,
+        (state: any) => state.healthHistory.data.children.answers,
     );
 
     useDidMount(() => {
@@ -83,11 +83,22 @@ const AddChild = ({ navigation }) => {
             {model.map(({ type, dataKey, title, placeholder, options }) =>
                 switchCase({
                     [types.textInput]: (
+                        
                         <TextInput
                             key={title}
                             value={data[dataKey]}
                             placeholder={title}
                             onChange={value => handleChange(dataKey, value)}
+                            styles={{}}  
+                            chevron={false} 
+                            children={null} 
+                            onPress={{}} 
+                            multiline={false} 
+                            id={title} 
+                            outlined={false}
+                            label={null} 
+                            defaultValue={null} 
+                            editable={false}                       
                         />
                     ),
                     [types.picker]: (
@@ -119,7 +130,7 @@ const AddChild = ({ navigation }) => {
                 )}
                 <TextButton
                     disabled={Object.entries(data).some(
-                        ([_, value]) => value == false,
+                        ([_, value]) => value === null,
                     )}
                     styles={{ root: styles.button }}
                     onPress={handleSave}

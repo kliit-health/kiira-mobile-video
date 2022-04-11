@@ -1,20 +1,23 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TextInput, View } from 'react-native';
 import PolarButton from '~/components/polarButton';
 import styles from './style';
+ 
 
 const PolarQuestion = ({ progress }) => (
     <View>
         <View style={styles.buttonContainer}>
             <PolarButton
                 variant="yes"
-                selected={yes}
+                selected={progress.yes}
                 onPress={() => toggleSelection('yes')}
+                styles={{}}  
             />
             <PolarButton
                 variant="no"
-                selected={no}
+                selected={progress.no}
                 onPress={() => toggleSelection('no')}
+                styles={{}}  
             />
         </View>
         {progress.textPrompt ? (

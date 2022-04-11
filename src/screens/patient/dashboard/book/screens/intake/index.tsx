@@ -15,9 +15,6 @@ import Logo from '~/svgs/gpenguin.svg';
 import LinearGradient from 'react-native-linear-gradient'
 
 const { size, fontFamily } = text;
-
-const { height_50, width_50, align_items_c, justify_c, sm_pad_v, white_bg } =
-    globalStyles;
  
  
 const Intake = ({ navigation }) => {   
@@ -103,10 +100,10 @@ const Intake = ({ navigation }) => {
                 </View> 
             }
             {type === controlType.CompleteType && 
-                <Column options={[align_items_c, justify_c]}>
+                <Column options={[globalStyles.align_items_c, globalStyles.justify_c]}>
                     <Logo />
                     <Text options={[h1, styles.allSetStyle]}>You're all set!</Text>
-                    <Text options={[h3, sm_pad_v, styles.centerStyle]}>
+                    <Text options={[h3, globalStyles.sm_pad_v, styles.centerStyle]}>
                         Thanks for completing your intake form. 
                     </Text>
                 </Column>
@@ -126,7 +123,7 @@ const Intake = ({ navigation }) => {
             }
              
             {(type === controlType.RadioType || type === controlType.CheckType) && 
-                <Column options={[white_bg, styles.optionStyle]}>
+                <Column options={[globalStyles.white_bg, styles.optionStyle]}>
                     <Kiira.RadioGroupQuery 
                         onSelect={handleSelection} 
                         data={data} type={type} 
@@ -183,8 +180,8 @@ const Intake = ({ navigation }) => {
                         onPress={onIntakeFinish}
                         title="Go to Home"
                         style={{
-                            container: styles.healthIntake,
-                            title: styles.healthIntakeTitle,
+                            container: [styles.healthIntake],
+                            title: [styles.healthIntakeTitle],
                         }}
                     />
                 </Column>

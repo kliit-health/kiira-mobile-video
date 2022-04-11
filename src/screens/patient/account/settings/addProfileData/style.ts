@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     parentContainerStyle: {
         flex: 1,
-        marginTop: getStatusBarHeight(null),
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
     },
 
     profileImgViewStyle: {

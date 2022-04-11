@@ -9,7 +9,7 @@ function* getExperts({ data }) {
     const lang = yield select(state => state.language);
     try {
         const { expertsParams } = data;
-        yield put(showApiLoader(lang.apiLoader.loadingText));
+        yield put(showApiLoader());
         const response = yield getDataFromTable(expertsParams);
         yield put(hideApiLoader());
         if (response) {

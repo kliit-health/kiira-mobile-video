@@ -23,7 +23,7 @@ const initialState = {
 export type IAppointments = {
     prepaid: boolean;
     expertData: null | object;
-    reason: null | object;
+    reason: null | string;
     prescription: boolean;
     calendarID: null | string;
     appointmentTypeID: number;
@@ -44,31 +44,31 @@ export const appointmentsSlice = createSlice({
     name: 'appointments',
     initialState,
     reducers: {
-        getExpertsData: (state, action: PayloadAction<object>) => {
+        getExpertsData: (state, action: PayloadAction<any>) => {
             return state;
         },
-        getExpertsDataSuccess: (state, action: PayloadAction<object>) => {
+        getExpertsDataSuccess: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 expertData: action.payload,
             };
         },
-        clearExpertProfileState: (state, action: PayloadAction<object>) => {
+        clearExpertProfileState: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 expertData: null,
             };
         },
-        getAppointmentsForToday: (state, action: PayloadAction<object>) => {
+        getAppointmentsForToday: (state, action: PayloadAction<any>) => {
             return state;
         },
-        getAppointmentsByDay: (state, action: PayloadAction<object>) => {
+        getAppointmentsByDay: (state, action: PayloadAction<any>) => {
             return state;
         },
-        getAppointmentDates: (state, action: PayloadAction<object>) => {
+        getAppointmentDates: (state, action: PayloadAction<any>) => {
             return state;
         },
-        setAppointmentDates: (state, action: PayloadAction<object>) => {
+        setAppointmentDates: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 dates: action.payload,
@@ -80,49 +80,49 @@ export const appointmentsSlice = createSlice({
                 prescription: action.payload,
             };
         },
-        reasonForVisit: (state, action: PayloadAction<object>) => {
+        reasonForVisit: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 reason: action.payload,
             };
         },
-        setAppointmentDay: (state, action: PayloadAction<object>) => {
+        setAppointmentDay: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 date: action.payload,
             };
         },
-        setAppointmentTime: (state, action: PayloadAction<object>) => {
+        setAppointmentTime: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 time: action.payload,
             };
         },
-        setCalendarID: (state, action: PayloadAction<object>) => {
+        setCalendarID: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 calendarID: action.payload,
             };
         },
-        setTimes: (state, action: PayloadAction<object>) => {
+        setTimes: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 appointments: { ...state.appointments, ...action.payload },
             };
         },
-        updateVisit: (state, action: PayloadAction<object, string>) => {
+        updateVisit: (state, action: PayloadAction<any, string>) => {
             return state;
         },
-        getAppointmentsList: (state, action: PayloadAction<object>) => {
+        getAppointmentsList: (state, action: PayloadAction<any>) => {
             return state;
         },
-        cancelAppointment: (state, action: PayloadAction<object>) => {
+        cancelAppointment: (state, action: PayloadAction<any>) => {
             return state;
         },
-        rateVisit: (state, action: PayloadAction<object>) => {
+        rateVisit: (state, action: PayloadAction<any>) => {
             return state;
         },
-        fetchAppointments: (state, action: PayloadAction<object>) => {
+        fetchAppointments: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 history: [...action.payload.history],
@@ -134,28 +134,28 @@ export const appointmentsSlice = createSlice({
                 prepaid: true,
             };
         },
-        bookAppointment: (state, action: PayloadAction<object>) => {
+        bookAppointment: (state, action: PayloadAction<any>) => {
             return state;
         },
-        setVisit: (state, action: PayloadAction<object>) => {
+        setVisit: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 visit: action.payload,
             };
         },
-        setAppointmentDetails: (state, action: PayloadAction<object>) => {
+        setAppointmentDetails: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 visit: { ...state.visit, ...action.payload },
             };
         },
-        setAppointmentExpert: (state, action: PayloadAction<object>) => {
+        setAppointmentExpert: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 visit: { ...state.visit, expert: { ...action.payload } },
             };
         },
-        setAppointmentDayAndTime: (state, action: PayloadAction<object>) => {
+        setAppointmentDayAndTime: (state, action: PayloadAction<any>) => {
             return {
                 ...state,
                 visit: {

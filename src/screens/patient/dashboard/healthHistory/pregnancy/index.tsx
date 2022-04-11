@@ -6,7 +6,7 @@ import model from './model';
 import styles from './styles';
 
 const Pregnancy = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <Container unformatted>
@@ -22,7 +22,7 @@ const Pregnancy = ({ navigation }) => {
                     <ListItem
                         displayChevron
                         key={title}
-                        title={title}
+                        id={title}
                         onPress={() => navigation.navigate(destination)}
                     >
                         <Text style={styles.title}>{title}</Text>

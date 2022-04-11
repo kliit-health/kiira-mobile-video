@@ -21,7 +21,6 @@ import { ActiveQuestions, ResolvedQuestions } from './components';
 import styles, { modifiers } from './styles';
 import { chatTabs } from './chat/model';
 import { default as globalStyles } from '~/components/styles';
-const { blue_bg } = globalStyles;
 
 const AskExpert = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -103,7 +102,7 @@ const AskExpert = ({ navigation }) => {
                 placeholder={lang.expertChats.searchName}
             />
             <Tabs
-                options={[blue_bg]}
+                options={[globalStyles.blue_bg]}
                 list={chatTabs}
                 active={active}
                 setActive={toggleActive}

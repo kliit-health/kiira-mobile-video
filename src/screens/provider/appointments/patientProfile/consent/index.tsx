@@ -7,9 +7,9 @@ import moment from 'moment';
 import styles from './styles';
 
 const ConsentAgreements = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const consentAgreements = useSelector(
-        state => state.medicalHistory.data.consentAgreements,
+        (state: any) => state.medicalHistory.data.consentAgreements,
     );
 
     const handlePress = ({ id }) => {

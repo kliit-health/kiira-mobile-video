@@ -8,7 +8,7 @@ import moment from 'moment';
 import styles from '../styles';
 
 const ExpertInfo = ({ visit }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
 
     return (
         <View style={{ marginTop: 10 }}>
@@ -16,9 +16,7 @@ const ExpertInfo = ({ visit }) => {
                 <View style={styles.expertImageContainer}>
                     <FastImage
                         style={styles.expertImage}
-                        defaultSource={require('../../../../../../../assets/profile_img_placeholder.png')}
-                        source={{ uri: visit.expert.imageUrl }}
-                        activeOpacity={0.7}
+                        source={visit.expert.imageUrl ? { uri: visit.expert.imageUrl } : require('../../../../../../../assets/profile_img_placeholder.png')}
                     />
                     <View>
                         <View style={styles.myRecentExpertContainerStyle}>
@@ -49,8 +47,8 @@ const ExpertInfo = ({ visit }) => {
                                     imageSize={20}
                                     readonly
                                     startingValue={parseFloat(
-                                        visit.expert.rating / 2,
-                                    )}
+                                        visit.expert.rating
+                                    ) / 2}
                                 />
                             </View>
                         </View>

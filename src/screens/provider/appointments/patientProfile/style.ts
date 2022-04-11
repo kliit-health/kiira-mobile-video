@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         width: 20,
         height: 20,
+        alignSelf: 'center',
     },
 
     info: {
@@ -136,6 +137,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         padding: 10,
+    },
+    cancelButton: {
+        backgroundColor: 'white',
+        borderColor: '#2196F3',
+        borderWidth: 2,
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        width: 100,
+        marginBottom: 10,
     },
 });
 

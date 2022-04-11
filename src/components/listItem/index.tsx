@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, object, func, bool, number } from 'prop-types';
+import { shape, object, func, bool, number, node, string } from 'prop-types';
 import { TouchableOpacity, Image } from 'react-native';
 import { icons } from '../../utils/constants';
 import defaultStyles from './styles';
@@ -57,6 +57,8 @@ ListItem.propTypes = {
     displayChevron: bool,
     displayBorder: bool,
     activeOpacity: number,
+    children: node,
+    id: string,
 };
 
 ListItem.defaultProps = {

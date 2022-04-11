@@ -38,7 +38,7 @@ const ModalDatePicker = ({
     };
 
     return (
-        <Modal onBackdropPress={onBackdropPress} visible={visible}>
+        <Modal onBackdropPress={onBackdropPress} visible={visible} styles={{}} >
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
                 {useMemo(

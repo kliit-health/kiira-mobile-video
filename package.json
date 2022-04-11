@@ -14,7 +14,7 @@
         "ios-sim": "react-native run-ios --simulator",
         "clean": "npx react-native-clean-project",
         "show-ios": "xcrun simctl list devices",
-        "test": "jest --coverage"
+        "test": "jest -u --coverage"
     },
     "dependencies": {
         "@notifee/react-native": "^3.0.3",
@@ -159,6 +159,10 @@
         "react-native-safe-area-view": "^2.0.0"
     },
     "jest": {
+        "roots": [
+            "<rootDir>",
+            "src/components"
+        ],
         "preset": "react-native",
         "setupFiles": [
             "./src/__tests__/setup/setup.ts"
@@ -167,8 +171,9 @@
             "^.+\\.tsx?$": "ts-jest"
         },
         "transformIgnorePatterns": [
-            "/node_modules/(?!@react-native|react-native|react-navigation|react-native-gesture-handler|NativeEventEmitter)"
+            "/node_modules/(?!@react-native|react-native|react-navigation|react-navigation-tabs|react-native-gesture-handler|NativeEventEmitter|react-navigation-stack|react-native-twilio-video-webrtc)"
         ],
+        "setupFilesAfterEnv": ["./src/__tests__/jestInit.js"],
         "verbose": true,
         "bail": 1,
         "testRegex": "(/src/.*\\.(test|spec))\\.(jsx?|tsx?)$",
@@ -183,7 +188,27 @@
         "moduleDirectories": [
             "node_modules",
             "src"
-        ]
+        ],
+        "moduleNameMapper": {
+            "~/components": "<rootDir>/src/components",
+            "~/redux/types": "<rootDir>/src/redux/types",
+            "~/redux/reducers/account": "<rootDir>/src/redux/reducers",
+            "~/utils/constants": "<rootDir>/src/utils/constants",
+            "~/utils/metrices": "<rootDir>/src/utils/metrices",
+            "~/utils/functions": "<rootDir>/src/utils/functions",
+            "~/utils/helper": "<rootDir>/src/utils/helper",
+            "~/redux/actions": "<rootDir>/src/redux/actions",
+            "~/redux/reducers/activate": "<rootDir>/src/redux/reducers/activate",
+            "~/utils/hooks": "<rootDir>/src/utils/hooks",
+            "~/redux/reducers/appointments": "<rootDir>/src/redux/reducers/appointments",
+            "~/svgs": "<rootDir>/src/svgs",
+            "~/navigation": "<rootDir>/src/navigation",
+            "~/utils/firebase": "<rootDir>/src/utils/firebase",
+            "~/models": "<rootDir>/src/models",
+            "~/i18n": "<rootDir>/src/i18n",
+            "~/redux/reducers/forgotPassword": "<rootDir>/src/redux/reducers/forgotPassword",
+            "~/redux/reducers/login": "<rootDir>/src/redux/reducers/login"
+        }
     },
     "preset": "react-native",
     "setupFiles": [

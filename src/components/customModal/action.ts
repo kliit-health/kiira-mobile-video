@@ -9,6 +9,11 @@ export const showOrHideModal = errorMessage => ({
     errorMessage,
 });
 
+export const showHideErrorModal = errorMessage => ({
+    type: SHOW_OR_HIDE_ERROR_MODAL,
+    errorMessage,
+});
+
 export const showMemberModal = errorMessage => ({
     type: SHOW_OR_HIDE_MEMEBER_MODAL,
     errorMessage,

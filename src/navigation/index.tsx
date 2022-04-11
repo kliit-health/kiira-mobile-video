@@ -65,9 +65,9 @@ import VideoRating from '../screens/patient/dashboard/appointments/twillio/ratin
 import Recap from '../screens/provider/appointments/patientProfile/recap';
 import ReferFriend from '../screens/patient/account/settings/referFriend';
 import RescheduleVisit from '../screens/patient/dashboard/appointments/rescheduleVisit';
-import SelectChatProvider from '~/screens/patient/dashboard/chat/screens/selectProvider';
-import SelectProvider from '~/screens/patient/dashboard/book/screens/selectProvider';
-import SelectSupport from '~/screens/patient/dashboard/chat/screens/selectSupport';
+import SelectChatProvider from '../screens/patient/dashboard/chat/screens/selectProvider';
+import SelectProvider from '../screens/patient/dashboard/book/screens/selectProvider';
+import SelectSupport from '../screens/patient/dashboard/chat/screens/selectSupport';
 import Settings from '../screens/patient/account/settings';
 import SettingsExpert from '../screens/provider/account/settings';
 import SocialHistory from '../screens/provider/appointments/patientProfile/social';
@@ -78,7 +78,7 @@ import Summary from '../screens/provider/appointments/patientProfile/summary';
 import Landing from '../screens/auth/landing'; 
 import BillingInsurance from '../screens/common/billingAndInsurance'; 
 import Pharmacy from '../screens/common/pharmacy'; 
-import AdditionalInformation from '~/screens/auth/welcome/AdditionalInformation';
+import AdditionalInformation from '../screens/auth/welcome/AdditionalInformation';
 import EmergencyContact from '../screens/common/emergencyContact';  
 import TermsConditions from '../screens/common/termsAndConditions'; 
 import UpdateAvailablity from '../screens/provider/account/updateAvailablity';
@@ -92,12 +92,11 @@ import AgreementDetails from '../screens/provider/appointments/patientProfile/ag
 import VisitEnd from '../screens/patient/dashboard/appointments/twillio/visitEnd';
 import VisitSummary from '../screens/patient/dashboard/careSquad/treatmentHistory/visitSummary';
 import VisitOverView from '../screens/patient/dashboard/appointments/visitSummary';
-
 import { colors, icons } from '../utils/constants';
-import { default as globalStyles } from '~/components/styles';
-import KiiraWelcome from '~/screens/auth/KiiraWelcome';
-import MedicalConditions from '~/screens/patient/account/MedicalConditions';
-import Diagnosis from '~/screens/patient/account/MedicalConditions/Diagnosis';
+import { default as globalStyles } from '../components/styles';
+import KiiraWelcome from '../screens/auth/KiiraWelcome';
+import MedicalConditions from '../screens/patient/account/MedicalConditions';
+import Diagnosis from '../screens/patient/account/MedicalConditions/Diagnosis';
 
 let tabIconSize = 25;
 
@@ -111,16 +110,14 @@ const TransparentStyle = StyleSheet.create({
     },
 });
 
-const { blue, tiny, regular, space_sm, gray_dark } = globalStyles;
-
-const selected = [blue, tiny, regular, space_sm];
-const notSelected = [tiny, gray_dark, regular, space_sm];
+const selected = [globalStyles.blue, globalStyles.tiny, globalStyles.regular, globalStyles.space_sm];
+const notSelected = [globalStyles.tiny, globalStyles.gray_dark, globalStyles.regular, globalStyles.space_sm];
 
 const AuthStack = createStackNavigator(
     {
         Activate: { screen: Activate },
         KiiraWelcome: {screen: KiiraWelcome},
-        ChatBot: { screen: ChatBot },
+        ChatBot: { screen:() => <ChatBot/>},
         ForgotPassword: { screen: ForgotPassword },
         Landing: { screen: Landing },
         Login: { screen: Login },
@@ -326,7 +323,7 @@ const BottomTabExpert = createBottomTabNavigator(
             },
         },
         ExpertAppointments: {
-            screen: ExpertAppointments,
+            screen: () => <ExpertAppointments navigation/>,
             navigationOptions: {
                 tabBarIcon: ({ tintColor, focused }) => (
                     <View
@@ -508,10 +505,10 @@ const AppStackExpert = createStackNavigator(
         BottomTabExpert: { screen: BottomTabExpert },
         Consent: { screen: Consent },
         ChangePasswordExpert: { screen: ChangePasswordExpert },
-        ChatExpert: { screen: ChatExpert },
-        ExpertTwillioLogin: { screen: ExpertTwillioLogin },
+        ChatExpert: { screen:() => <ChatExpert /> },
+        ExpertTwillioLogin: { screen:() => <ExpertTwillioLogin navigation/> },
         ExpertTwillioCalling: { screen: ExpertTwillioCalling },
-        ExpertVisit: { screen: ExpertVisit },
+        ExpertVisit: { screen: () => <ExpertVisit/> },
         FamilyHistory: { screen: FamilyHistory },
         GynHistory: { screen: GynHistory },
         Help: { screen: Help },
@@ -519,7 +516,7 @@ const AppStackExpert = createStackNavigator(
         MedicationsHistory: { screen: MedicationsHistory },
         MedicalHistoryExpert: { screen: MedicalHistoryExpert },
         Confirm: { screen: Confirm },
-        PatientProfile: { screen: PatientProfile },
+        PatientProfile: { screen: () => <PatientProfile/> },
         PersonalMedicalHistory: { screen: PersonalMedicalHistory },
         PhysicalExam: { screen: PhysicalExam },
         Plan: { screen: Plan },
@@ -528,18 +525,18 @@ const AppStackExpert = createStackNavigator(
         PrivacyPolicy: { screen: PrivacyPolicy },
         Recap: { screen: Recap },
         SocialHistory: { screen: SocialHistory },
-        SettingsExpert: { screen: SettingsExpert },
-        Settings:{screen: Settings},
+        SettingsExpert: { screen: () => <SettingsExpert/> },
+        Settings: { screen:() => <Settings /> },
         Summary: { screen: Summary },
         SurgicalHistory: { screen: SurgicalHistory },
         BillingInsurance : {screen: BillingInsurance},
         Pharmacy : {screen: Pharmacy},
         EmergencyContact : {screen: EmergencyContact},
         TermsConditions: { screen: TermsConditions },
-        UpdateAvailablity: { screen: UpdateAvailablity },
+        UpdateAvailablity: { screen:() => <UpdateAvailablity /> },
         PersonalInformation: { screen: PersonalInformation },
         AgreementDetails: { screen: AgreementDetails },
-        VisitExpert: { screen: VisitExpert },
+        VisitExpert: { screen:() => <VisitExpert /> },
     },
     {
         headerMode: 'none',
@@ -582,20 +579,20 @@ const MainAppStack = createStackNavigator(
         Loss: { screen: Loss },
         Medications: { screen: Medications },
         MedicalHistory: { screen: MedicalHistory },
-        MedicalConditions: {screen: MedicalConditions},
-        Diagnosis: {screen: Diagnosis},
-        Messages: { screen: Messages },
+        MedicalConditions: { screen: MedicalConditions },
+        Diagnosis: { screen: Diagnosis },
+        Messages: { screen: () => <Messages/> },
         Payment: { screen: Payment },
         PregnancyAndChildren: { screen: Pregnancy },
         PregnancyCurrent: { screen: CurrentPregnancy },
         PregnancyHistory: { screen: PregnancyHistory },
         PrivacyPolicy: { screen: PrivacyPolicy },
-        ReferFriend: { screen: ReferFriend },
+        ReferFriend: { screen: () => <ReferFriend/> },
         RescheduleVisit: { screen: RescheduleVisit },
         SelectChatProvider: { screen: SelectChatProvider },
         SelectProvider: { screen: SelectProvider },
         SelectSupport: { screen: SelectSupport },
-        Settings: { screen: Settings },
+        Settings: { screen: () => <Settings/> },
         Success: { screen: Success },
         Intake: { screen: Intake },  
         Landing: { screen: Landing }, 

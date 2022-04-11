@@ -14,8 +14,8 @@ const initialState = {
 
 const Loss = ({ navigation }) => {
     const dispatch = useDispatch();
-    const lang = useSelector(state => state.language);
-    const user = useSelector(state => state.user.data);
+    const lang = useSelector((state: any) => state.language);
+    const user = useSelector((state: any) => state.user.data);
 
     const handleBackPress = () => {
         navigation.goBack();

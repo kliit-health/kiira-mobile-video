@@ -11,9 +11,9 @@ import styles from './styles';
 const formatDate = date => moment(date).format('ll');
 
 const PregnancyCurrent = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+    const lang = useSelector((state: any) => state.language);
     const answers = useSelector(
-        state => state.healthHistory.data.pregnancyCurrent.answers,
+        (state: any) => state.healthHistory.data.pregnancyCurrent.answers,
     );
 
     const handleAddPregnancy = () => {
@@ -38,7 +38,7 @@ const PregnancyCurrent = ({ navigation }) => {
                     {model.map(({ title, destination }) => (
                         <View key={title}>
                             <ListItem
-                                title={title}
+                                id={title}
                                 onPress={() => navigation.navigate(destination)}
                             >
                                 <Text style={styles.title}>{title}</Text>

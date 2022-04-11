@@ -26,8 +26,8 @@ const initialState = {
 const VisitSummary = ({ navigation }) => {
     const { id } = navigation.state.params;
     const [summary, setSummary] = useState(initialState);
-    const data = useSelector(state => state.clientMedicalHistory.data);
-    const lang = useSelector(state => state.language);
+    const data = useSelector((state: any) => state.clientMedicalHistory.data);
+    const lang = useSelector((state: any) => state.language);
 
     useEffect(() => {
         const { appointment, summary, plan } = data.find(

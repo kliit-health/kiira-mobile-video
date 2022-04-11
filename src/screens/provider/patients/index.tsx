@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, View, FlatList } from 'react-native';
+import { StatusBar, View, FlatList, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles, { modifiers } from './style';
 import { getPatientsList } from './action';
@@ -14,9 +14,9 @@ const Patients = props => {
     const { navigation } = props;
     const dispatch = useDispatch();
 
-    const lang = useSelector(state => state.language);
-    const userData = useSelector(state => state.user.data);
-    const visitData = useSelector(state => state.expertPatients.history);
+    const lang = useSelector((state: any) => state.language);
+    const userData = useSelector((state: any) => state.user.data);
+    const visitData = useSelector((state: any) => state.expertPatients.history);
     const [visits, setVisits] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchVisits, setSearchVisits] = useState([]);
@@ -29,11 +29,11 @@ const Patients = props => {
         let record = _.flatten(visitData);
 
         if (record.length > 1) {
-            let filtered = record.filter(visit =>
+            let filtered = record.filter((visit: any) =>
                 moment(visit.time).isSameOrAfter(new Date()),
             );
 
-            filtered = filtered.sort((a, b) => {
+            filtered = filtered.sort((a: any, b: any) => {
                 return (
                     parseInt(moment(a.time).format('x')) -
                     parseInt(moment(b.time).format('x'))
@@ -72,7 +72,8 @@ const Patients = props => {
             <SearchBar
                 onChange={handleSearch}
                 value={searchTerm}
-                placeholder={'Search by Name or Date'}
+                placeholder={'Search by Name or Date'} 
+                styles={null}          
             />
             <View style={styles.container}>
                 {visits.length > 0 && (
@@ -87,13 +88,12 @@ const Patients = props => {
                         data={searchVisits}
                         decelerationRate={'fast'}
                         renderItem={({ item, index }) => {
-                            const date: IDate = generateDateInfo(item.time);
-                            const visit: Visit = item;
+                            const date: any = generateDateInfo(item.time);
+                            const visit: any = item;
                             return (
                                 <VisitCard
                                     visit={visit}
                                     date={date}
-                                    navigation={navigation}
                                 />
                             );
                         }}

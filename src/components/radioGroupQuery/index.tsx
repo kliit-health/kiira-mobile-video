@@ -122,13 +122,11 @@ const RadioGroupQuery = ({
                 {color: colors.black}, 
             ]),  
         },
+        
         barLineStyle:{
-            width: 1,
-            height: 40,
-            backgroundColor: '#DDE0E7', 
-            alignItems: 'center', 
-            marginHorizontal: 22,
-            marginTop: -29,  
+            root: mergeStyles([
+                defaultStyles.barLineStyle
+            ]),            
         }
     };
 
@@ -164,7 +162,7 @@ const RadioGroupQuery = ({
                         boxed={horizontal ? false : boxed}
                         styles={styles.button}
                     />
-                    {index < data.length - 1 &&  <View style={styles.barLineStyle} />} 
+                    {index < data.length - 1 &&  <View style={defaultStyles.barLineStyle} />} 
                 </Column>  
                 :
                 <Column>

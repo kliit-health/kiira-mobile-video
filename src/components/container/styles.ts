@@ -9,6 +9,9 @@ export default StyleSheet.create({
     safeAreaTop: {
         backgroundColor: colors.white,
     },
+    safeAreaBottom: {
+        backgroundColor: colors.white,
+    },
     container: {
         padding: 15,
         flex: 1,
