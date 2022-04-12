@@ -6,7 +6,8 @@ import { RootState } from '~/redux/reducers';
 import { handleBack } from '~/utils/functions/handleNavigation';
 import { getOrganizationInfo, payIntent } from '~/utils/firebase';
 import moment from 'moment';
-import { default as globalStyles, card, card_title } from '~/components/styles';
+
+import { card, card_title } from '~/components/styles';
 import { CameraBlack, Dollar, Cart } from '~/svgs';
 import { bookAppointment } from '~/redux/reducers/appointments';
 import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
@@ -19,6 +20,7 @@ import {
     confirmApplePayPayment,
 } from '@stripe/stripe-react-native';
 import { ScrollView } from 'react-native';
+const globalStyles = require('~/components/styles');
 
 const Payment = () => {
     const dispatch = useDispatch();

@@ -193,7 +193,6 @@
         ],
         "moduleNameMapper": {
             "~/components": "<rootDir>/src/components",
-            "~/components/styles": "<rootDir>/src/components/styles.ts",
             "~/redux/types": "<rootDir>/src/redux/types",
             "~/redux/reducers/account": "<rootDir>/src/redux/reducers",
             "~/utils/constants": "<rootDir>/src/utils/constants",
