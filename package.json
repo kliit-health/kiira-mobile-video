@@ -173,7 +173,9 @@
         "transformIgnorePatterns": [
             "/node_modules/(?!@react-native|react-native|react-navigation|react-navigation-tabs|react-native-gesture-handler|NativeEventEmitter|react-navigation-stack|react-native-twilio-video-webrtc)"
         ],
-        "setupFilesAfterEnv": ["./src/__tests__/jestInit.js"],
+        "setupFilesAfterEnv": [
+            "./src/__tests__/jestInit.js"
+        ],
         "verbose": true,
         "bail": 1,
         "testRegex": "(/src/.*\\.(test|spec))\\.(jsx?|tsx?)$",
@@ -191,6 +193,7 @@
         ],
         "moduleNameMapper": {
             "~/components": "<rootDir>/src/components",
+            "~/components/styles": "<rootDir>/src/components/styles.ts",
             "~/redux/types": "<rootDir>/src/redux/types",
             "~/redux/reducers/account": "<rootDir>/src/redux/reducers",
             "~/utils/constants": "<rootDir>/src/utils/constants",
