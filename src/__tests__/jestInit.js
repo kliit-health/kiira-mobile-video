@@ -34,6 +34,9 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 jest.mock('../svgs/search.svg', () => 'Search');
+jest.mock('../svgs/camera_black.svg', () => 'CameraBlack');
+jest.mock('../svgs/dollar.svg', () => 'Dollar');
+jest.mock('../svgs/cart.svg', () => 'Cart');
 
 jest.mock('react-redux', () => 'useDispatch');
 
@@ -91,6 +94,10 @@ jest.mock('react-redux', () => {
                 time: {
                     date: 'date',
                 },
+                details:{
+                    duration: 'duration',
+                    price: 'price'
+                }
             },
         }),
     };
@@ -215,4 +222,4 @@ jest.mock('react-native-twilio-video-webrtc', () => {
 jest.mock('react-native-keep-awake', () => 'KeepAwake');
 jest.mock('react-native-reanimated', () =>
     require('react-native-reanimated/mock'),
-);
+); 

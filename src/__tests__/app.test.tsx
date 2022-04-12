@@ -2,7 +2,7 @@
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');
 import 'react-native';
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import React, { useRef } from 'react'; 
 import Appointments from '../screens/provider/appointments';  
 import ExpertTwillioLogin from '../screens/provider/appointments/twillio/Login';
@@ -23,10 +23,11 @@ describe('Testing for reason type in appointment #195', () => {
         expect(expertTwillioLoginTree.toJSON()).toMatchSnapshot();
     }); 
    
-    const payment = renderer.create(<Payment />);
+    const paymentTree = renderer.create(<Payment />);
     test('payment', () => {
-        expect(payment).toBeDefined();
-        expect(payment.toJSON()).toMatchSnapshot();
+        expect(paymentTree).toBeDefined();
+        expect(paymentTree.toJSON()).toMatchSnapshot();
     });
+    
 });  
  
