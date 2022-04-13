@@ -951,7 +951,7 @@ Array [
                 ]
               }
             >
-              $undefined
+              $price
             </Text>
           </View>
           <View
@@ -998,7 +998,7 @@ Array [
                 ]
               }
             >
-              -$undefined ($NaN credit available)
+              -$price ($NaN credit available)
             </Text>
           </View>
         </View>

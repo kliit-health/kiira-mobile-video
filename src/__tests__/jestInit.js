@@ -94,9 +94,10 @@ jest.mock('react-redux', () => {
                 time: {
                     date: 'date',
                 },
-                details: {
+                details:{
                     duration: 'duration',
-                },
+                    price: 'price'
+                }
             },
         }),
     };
@@ -221,4 +222,4 @@ jest.mock('react-native-twilio-video-webrtc', () => {
 jest.mock('react-native-keep-awake', () => 'KeepAwake');
 jest.mock('react-native-reanimated', () =>
     require('react-native-reanimated/mock'),
-);
+); 
