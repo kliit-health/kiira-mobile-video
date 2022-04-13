@@ -34,6 +34,9 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 jest.mock('../svgs/search.svg', () => 'Search');
+jest.mock('../svgs/cart.svg', () => 'Cart');
+jest.mock('../svgs/dollar.svg', () => 'Dollar');
+jest.mock('../svgs/camera_black.svg', () => 'CameraBlack');
 
 jest.mock('react-redux', () => 'useDispatch');
 
@@ -90,6 +93,9 @@ jest.mock('react-redux', () => {
                 uid: 'uid',
                 time: {
                     date: 'date',
+                },
+                details: {
+                    duration: 'duration',
                 },
             },
         }),
