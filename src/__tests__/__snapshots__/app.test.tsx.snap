@@ -120,8 +120,6 @@ exports[`Testing for reason type in appointment #195 appointment 1`] = `
       <RCTScrollView
         data={
           Array [
-            "2022-04-01",
-            "2022-04-02",
             "2022-04-03",
             "2022-04-04",
             "2022-04-05",
@@ -160,10 +158,12 @@ exports[`Testing for reason type in appointment #195 appointment 1`] = `
             "2022-05-08",
             "2022-05-09",
             "2022-05-10",
+            "2022-05-11",
+            "2022-05-12",
           ]
         }
         decelerationRate="fast"
-        extraData="2022-04-11"
+        extraData="2022-04-13"
         getItem={[Function]}
         getItemCount={[Function]}
         getItemLayout={[Function]}
@@ -223,9 +223,7 @@ exports[`Testing for reason type in appointment #195 appointment 1`] = `
               </Text>
               <View
                 accessible={true}
-                collapsable={false}
                 focusable={true}
-                nativeID="animatedComponent"
                 onClick={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
@@ -263,7 +261,7 @@ exports[`Testing for reason type in appointment #195 appointment 1`] = `
                     ]
                   }
                 >
-                  1
+                  3
                 </Text>
               </View>
               <Text
@@ -279,7 +277,7 @@ exports[`Testing for reason type in appointment #195 appointment 1`] = `
                   ]
                 }
               >
-                Fri
+                Sun
               </Text>
             </View>
           </View>
@@ -706,4 +704,348 @@ exports[`Testing for reason type in appointment #195 expertTwillioLogin 1`] = `
     }
   />
 </View>
+`;
+
+exports[`Testing for reason type in appointment #195 payment 1`] = `
+Array [
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "flex": 0,
+      }
+    }
+  />,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#ECFCFF",
+        "flex": 1,
+      }
+    }
+    testID="Appointment Payment"
+  >
+    <RCTScrollView
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#FFFFFF",
+              "borderBottomColor": "#F9F9F9",
+              "borderBottomWidth": 1,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "space-between",
+              "paddingHorizontal": 10,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#000B1E",
+                "fontFamily": "Poppins-Regular",
+                "fontSize": 20,
+                "fontWeight": "400",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "textAlign": "center",
+              }
+            }
+          >
+            Book Visit
+          </Text>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000B1E",
+                  "fontFamily": "Poppins-Regular",
+                  "fontSize": 16,
+                },
+                undefined,
+              ]
+            }
+          >
+            Invalid date
+          </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  Array [
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              <FastImageView
+                resizeMode="cover"
+                source={
+                  Object {
+                    "uri": undefined,
+                  }
+                }
+                style={
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "center",
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "#000B1E",
+                      "fontFamily": "Poppins-Regular",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "color": "#000B1E",
+                      "fontFamily": "Poppins-Regular",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            <CameraBlack />
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#000B1E",
+                    "fontFamily": "Poppins-Regular",
+                    "fontSize": 16,
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              duration min Video Visit
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "borderColor": "#DDE0E7",
+                  "borderTopWidth": 1,
+                  "marginBottom": 20,
+                  "width": "100%",
+                },
+                Object {
+                  "marginBottom": 0,
+                },
+                Object {
+                  "width": "90%",
+                },
+              ]
+            }
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            <Cart />
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#000B1E",
+                    "fontFamily": "Poppins-Regular",
+                    "fontSize": 16,
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              $undefined
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "borderColor": "#DDE0E7",
+                  "borderTopWidth": 1,
+                  "marginBottom": 20,
+                  "width": "100%",
+                },
+                Object {
+                  "marginBottom": 0,
+                },
+                Object {
+                  "width": "90%",
+                },
+              ]
+            }
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            <Dollar />
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#000B1E",
+                    "fontFamily": "Poppins-Regular",
+                    "fontSize": 16,
+                  },
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              -$undefined ($NaN credit available)
+            </Text>
+          </View>
+        </View>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000B1E",
+                "fontFamily": "Poppins-Regular",
+                "fontSize": 16,
+              },
+              undefined,
+            ]
+          }
+        >
+          Anything you would like to add?
+        </Text>
+        <TextInput
+          editable={true}
+          multiline={true}
+          onChangeText={[Function]}
+          placeholder="You can say something like 'I need new birth control'"
+          placeholderTextColor="#8e8e93"
+          style={
+            Array [
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "#FFFFFF",
+                "flexDirection": "row",
+                "fontSize": 16,
+                "height": 197.1,
+                "padding": 10,
+                "width": 750,
+              },
+              Array [
+                undefined,
+                undefined,
+                Object {
+                  "width": "90%",
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+      </View>
+    </RCTScrollView>
+  </RCTSafeAreaView>,
+]
 `;
