@@ -271,18 +271,6 @@ function* setAppointment({ payload }) {
         amount: totals.purchased,
     };
 
-    if (totals.availible < totals.required) {
-        let updatedCredit = {
-            ...payload.reason,
-            sessionType: {
-                ...payload.reason.sessionType,
-                credits: totals.required - totals.availible,
-            },
-        };
-
-        payload.reason = updatedCredit;
-    }
-
     try {
         yield put(hideApiLoader());
         yield put(showApiLoader()); 
