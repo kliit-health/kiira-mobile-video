@@ -112,7 +112,7 @@ const Payment = () => {
     };
 
     const fetchPaymentIntentClientSecret = async () => {
-        const response = await payIntent({ visit: appointments.visit.details });
+        const response = await payIntent({ balance });
 
         return response;
     };

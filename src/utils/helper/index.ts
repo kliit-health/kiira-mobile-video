@@ -74,3 +74,7 @@ export const convertCamelCase = str => {
     const converted = strArr.map(capitalizeFirstLetter);
     return converted.join(' ');
 };
+
+export const log = function log(obj) {
+  console.log(JSON.stringify(obj, null, 4));
+};

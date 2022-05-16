@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.twiliorn.library.TwilioPackage;
+import com.imagepicker.ImagePickerPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

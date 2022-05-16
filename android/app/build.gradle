@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
-
 import com.android.build.OutputFile
 
 /**
@@ -158,9 +157,9 @@ android {
         }
         release {
             storeFile rootProject.file("app/release.keystore")
-            storePassword System.getProperty("APPCENTER_KEYSTORE_PASSWORD")
-            keyAlias System.getProperty("APPCENTER_KEY_ALIAS")
-            keyPassword System.getProperty("APPCENTER_KEY_PASSWORD")
+            storePassword 'Admin123#'
+            keyAlias 'klit'
+            keyPassword 'Admin123#'
         }
     }
     buildTypes {
@@ -209,7 +208,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
-    
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -224,6 +222,7 @@ dependencies {
     compile project(':react-native-twilio-video-webrtc')
     compile project(':react-native-image-picker')
     implementation "com.google.android.gms:play-services-base:16.1.0"
+    implementation 'com.google.android.play:core:1.10.0'
     implementation project(path: ':react-native-background-timer')
     if (useIntlJsc) {
         implementation 'org.webkit:android-jsc-intl:+'
