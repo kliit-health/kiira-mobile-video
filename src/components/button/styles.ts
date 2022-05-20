@@ -15,4 +15,7 @@ export default StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
     },
+    disabled: {
+        backgroundColor: colors.disableButtonColor,
+    }
 });
