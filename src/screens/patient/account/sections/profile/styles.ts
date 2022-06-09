@@ -5,99 +5,97 @@ import metrics from '~/utils/metrices';
 let parentPaddingValue = metrics.width * 0.01;
 
 export default StyleSheet.create({
-    container: {
-        zIndex: 100,
-        paddingHorizontal: '10%',
-        paddingVertical: 20,
-    },
-    headerStyle: {
-        borderBottomColor: colors.greyAccent,
-        borderBottomWidth: 1,
-    },
-    
-    root: {
-        backgroundColor: colors.white,
-        borderRadius: 12,
-        width: '90%',
-        alignSelf: 'center',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
-        padding: 5,
-        marginBottom: 20,
-        borderWidth: 1,
-        borderColor: colors.greyAccent,
-    },
-    imageView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '3%',
-    },
-    image:{
-        width: 100,
-        height: 100,
-        borderRadius:1000  
-    },
-    AddEditImage: {
-        position: 'absolute',
-        left: '2%',
-        bottom: '2%'
-    },
+  container: {
+    zIndex: 100,
+    paddingHorizontal: '10%',
+    paddingVertical: 20,
+  },
+  headerStyle: {
+    borderBottomColor: colors.greyAccent,
+    borderBottomWidth: 1,
+  },
 
-  
-   
-    detailsContainer: {
-        padding: 5,
-        alignItems: 'center',
-    },
+  root: {
+    backgroundColor: colors.white,
+    borderRadius: 12,
+    width: '90%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    padding: 5,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: colors.greyAccent,
+  },
+  imageView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '3%',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 1000,
+  },
+  AddEditImage: {
+    position: 'absolute',
+    left: '2%',
+    bottom: '2%',
+  },
 
-    title: {
-        fontFamily: text.fontFamily.poppinsRegular,
-        fontSize: text.size.xLarge,
-    },
+  detailsContainer: {
+    padding: 5,
+    alignItems: 'center',
+  },
 
-    icon: {
-        marginRight: 5,
-        alignSelf: 'center',
-    },
+  title: {
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.xLarge,
+  },
 
-    itemContainer: {
-        flexDirection: 'row',
-        paddingLeft: parentPaddingValue * 2,
-        width: '45%',
-        justifyContent: 'space-between',
-        marginVertical: parentPaddingValue * 2,
-        padding: 5,
-    },
+  icon: {
+    marginRight: 5,
+    alignSelf: 'center',
+  },
 
-    itemTitle: {
-        fontFamily: text.fontFamily.poppinsRegular,
-        fontSize: text.size.regular,
-        color: colors.black,
-        marginLeft: parentPaddingValue,
-        width: metrics.width * 0.4,
-    },
+  itemContainer: {
+    flexDirection: 'row',
+    paddingLeft: parentPaddingValue * 2,
+    width: '45%',
+    justifyContent: 'space-between',
+    marginVertical: parentPaddingValue * 2,
+    padding: 5,
+  },
 
-    itemEmptyTitle: {
-        fontFamily: text.fontFamily.poppinsLight,
-        fontSize: text.size.regular,
-        color: colors.greyDark,
-        marginLeft: parentPaddingValue,
-        width: metrics.width * 0.4,
-    },
+  itemTitle: {
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.regular,
+    color: colors.black,
+    marginLeft: parentPaddingValue,
+    width: metrics.width * 0.4,
+  },
 
-    itemValue: {
-        fontFamily: text.fontFamily.poppinsRegular,
-        fontSize: text.size.regular,
-    },
+  itemEmptyTitle: {
+    fontFamily: text.fontFamily.poppinsLight,
+    fontSize: text.size.regular,
+    color: colors.greyDark,
+    marginLeft: parentPaddingValue,
+    width: metrics.width * 0.4,
+  },
+
+  itemValue: {
+    fontFamily: text.fontFamily.poppinsRegular,
+    fontSize: text.size.regular,
+  },
 });
 
 export const modifiers = {
-    avatar: {
-        root: {
-            marginTop: 10,
-            alignSelf: 'center',
-        },
+  avatar: {
+    root: {
+      marginTop: 10,
+      alignSelf: 'center',
     },
+  },
 };

@@ -11,50 +11,48 @@ import Constant, { tables } from '~/utils/constants';
 import styles from './styles';
 
 const Visit = props => {
-    const dispatch = useDispatch();
-    const { navigation } = props;
+  const dispatch = useDispatch();
+  const { navigation } = props;
 
-    const { uid, visit } = props.navigation.state.params;
+  const { uid, visit } = props.navigation.state.params;
 
-    const params = {
-        expertsParams: {
-            tableName: tables.users,
-            uid,
-        },
-    };
+  const params = {
+    expertsParams: {
+      tableName: tables.users,
+      uid,
+    },
+  };
 
-    useEffect(() => {
-        dispatch(getExpertsData(params));
-    }, []);
+  useEffect(() => {
+    dispatch(getExpertsData(params));
+  }, []);
 
-    useEffect(() => {
-        dispatch(setVisit(visit));
-    });
+  useEffect(() => {
+    dispatch(setVisit(visit));
+  });
 
-    const FallBack = () => <View></View>;
+  const FallBack = () => <View></View>;
 
-    return (
-        <SafeAreaView style={styles.parentContainerStyle}>
-            <ScrollView
-                keyboardShouldPersistTaps="handled"
-                showsVerticalScrollIndicator={false}
-            >
-                <View>
-                    <ErrorBoundary
-                        FallbackComponent={FallBack}
-                        onError={() => navigation.goBack()}
-                    >
-                        <Header
-                            title="Appointment Details"
-                            onBack={() => navigation.goBack()}
-                        />
-                        <ExpertInfo visit={visit} />
-                        <VisitDetails visit={visit} />
-                    </ErrorBoundary>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={styles.parentContainerStyle}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
+        <View>
+          <ErrorBoundary
+            FallbackComponent={FallBack}
+            onError={() => navigation.goBack()}>
+            <Header
+              title="Appointment Details"
+              onBack={() => navigation.goBack()}
+            />
+            <ExpertInfo visit={visit} />
+            <VisitDetails visit={visit} />
+          </ErrorBoundary>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 export default withNavigation(Visit);

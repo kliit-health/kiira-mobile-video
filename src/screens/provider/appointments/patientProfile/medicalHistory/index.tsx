@@ -9,37 +9,35 @@ import sections from './model';
 import styles from './style';
 
 const MedicalHistory = ({ navigation }) => {
-    const { visit, patientInfo } = navigation.state.params;
-    const medicalHistory = useSelector(state => state.medicalHistory);
+  const { visit, patientInfo } = navigation.state.params;
+  const medicalHistory = useSelector(state => state.medicalHistory);
 
-    return (
-        <View style={styles.container}>
-            <ExpertHeader title="Patient Profile" />
-            <PatientCard visit={visit} patientInfo={patientInfo} />
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.infoContainer}>
-                    <FlatList
-                        data={sections}
-                        keyExtractor={section => section.title}
-                        renderItem={({ item }) => (
-                            <Section
-                                visit={visit}
-                                navigation={navigation}
-                                title={item.title}
-                                image={item.image}
-                                screen={item.screen}
-                                complete={
-                                    item.complete
-                                        ? medicalHistory[item.complete].complete
-                                        : false
-                                }
-                            />
-                        )}
-                    />
-                </View>
-            </ScrollView>
+  return (
+    <View style={styles.container}>
+      <ExpertHeader title="Patient Profile" />
+      <PatientCard visit={visit} patientInfo={patientInfo} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.infoContainer}>
+          <FlatList
+            data={sections}
+            keyExtractor={section => section.title}
+            renderItem={({ item }) => (
+              <Section
+                visit={visit}
+                navigation={navigation}
+                title={item.title}
+                image={item.image}
+                screen={item.screen}
+                complete={
+                  item.complete ? medicalHistory[item.complete].complete : false
+                }
+              />
+            )}
+          />
         </View>
-    );
+      </ScrollView>
+    </View>
+  );
 };
 
 export default withNavigation(MedicalHistory);

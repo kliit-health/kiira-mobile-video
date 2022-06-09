@@ -7,37 +7,35 @@ import model from './model';
 import styles, { modifiers } from './styles';
 
 const ProfileCard = ({ profileInfo }) => {
-    const { firstName, lastName, profileImageUrl } = profileInfo;
-    const language = useSelector(state => state.language, shallowEqual);
+  const { firstName, lastName, profileImageUrl } = profileInfo;
+  const language = useSelector(state => state.language, shallowEqual);
 
-    return (
-        <View style={styles.root}>
-            <Avatar
-                source={profileImageUrl ? profileImageUrl : ''}
-                size="large"
-                styles={modifiers.avatar}
-            />
-            <View style={styles.detailsContainer}>
-                <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
+  return (
+    <View style={styles.root}>
+      <Avatar
+        source={profileImageUrl ? profileImageUrl : ''}
+        size="large"
+        styles={modifiers.avatar}
+      />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>{`${firstName} ${lastName}`}</Text>
+      </View>
+      <View style={styles.groupContainer}>
+        {model.map(({ dataKey, title, secondaryKey }) => {
+          return (
+            <View key={dataKey} style={styles.itemContainer}>
+              <Text style={styles.itemTitle}>{get(language, title)}</Text>
+              <Text style={styles.itemValue}>
+                {secondaryKey
+                  ? profileInfo[dataKey][secondaryKey]
+                  : profileInfo[dataKey]}
+              </Text>
             </View>
-            <View style={styles.groupContainer}>
-                {model.map(({ dataKey, title, secondaryKey }) => {
-                    return (
-                        <View key={dataKey} style={styles.itemContainer}>
-                            <Text style={styles.itemTitle}>
-                                {get(language, title)}
-                            </Text>
-                            <Text style={styles.itemValue}>
-                                {secondaryKey
-                                    ? profileInfo[dataKey][secondaryKey]
-                                    : profileInfo[dataKey]}
-                            </Text>
-                        </View>
-                    );
-                })}
-            </View>
-        </View>
-    );
+          );
+        })}
+      </View>
+    </View>
+  );
 };
 
 export default ProfileCard;

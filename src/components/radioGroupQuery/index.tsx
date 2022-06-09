@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
-    shape,
-    object,
-    bool,
-    string,
-    number,
-    func,
-    arrayOf,
-    oneOfType,
-    any,
+  shape,
+  object,
+  bool,
+  string,
+  number,
+  func,
+  arrayOf,
+  oneOfType,
+  any,
 } from 'prop-types';
 import { FlatList, View } from 'react-native';
 import RadioButton from '../radioButton';
@@ -16,7 +16,7 @@ import { isEqual } from 'lodash';
 import { mergeStyles } from '../../utils/functions';
 import defaultStyles, { modifiers } from './styles';
 import { text, colors, controlType } from '../../utils/constants';
-import { Column, CheckBox } from '~/components';  
+import { Column, CheckBox } from '~/components';
 
 /**
  * @desc - Radio Group Component
@@ -33,194 +33,189 @@ import { Column, CheckBox } from '~/components';
  */
 
 const RadioGroupQuery = ({
-    styles: customStyles,
-    data,
-    type,
-    initialValue, 
-    initialIndex,
-    onChange,
-    boxed,
-    horizontal,
-    scrollPaddingBottom = 0,
-    onSelect = null, 
+  styles: customStyles,
+  data,
+  type,
+  initialValue,
+  initialIndex,
+  onChange,
+  boxed,
+  horizontal,
+  scrollPaddingBottom = 0,
+  onSelect = null,
 }) => {
-    const [selected, setSelected] = useState(undefined);
-    const [index, setIndex] = useState(undefined); 
-    const [selectedArray, setSelectedArray] = useState([]);
+  const [selected, setSelected] = useState(undefined);
+  const [index, setIndex] = useState(undefined);
+  const [selectedArray, setSelectedArray] = useState([]);
 
+  useEffect(() => {
+    if (initialValue) {
+      setSelected(initialValue);
+    }
+    setSelectedArray([]);
+  }, [initialValue]);
 
-    useEffect(() => {
-        if (initialValue) {
-            setSelected(initialValue);
-        }
-        setSelectedArray([]);
-    }, [initialValue]);  
-    
+  useEffect(() => {
+    if (initialIndex) {
+      setSelected(data[initialIndex]);
+    }
+  }, [initialIndex]);
 
-    useEffect(() => {
-        if (initialIndex) {
-            setSelected(data[initialIndex]);
-        }
-    }, [initialIndex]);
+  useEffect(() => {
+    onChange(selected, index);
+  }, [selected, index]);
 
-    useEffect(() => {
-        onChange(selected, index);
-    }, [selected, index]);
+  const handlePress = (item, index) => {
+    setSelected(item);
+    setIndex(index);
 
-    const handlePress = (item, index) => {
-        setSelected(item);
-        setIndex(index);
+    if (onSelect) {
+      onSelect(item);
+    }
+  };
 
-        if (onSelect) {
-            onSelect(item);
-        }
-    };
+  const handleChkPress = (item, index) => {
+    const arrSelect = [];
+    var existItem = false;
+    for (let ni = 0; ni < selectedArray.length; ni++) {
+      if (!compare(selectedArray[ni], item)) {
+        arrSelect.push(selectedArray[ni]);
+      } else {
+        existItem = true;
+      }
+    }
 
-    const handleChkPress = (item, index) => { 
-        const arrSelect = []; 
-        var existItem = false;
-        for(let ni = 0; ni < selectedArray.length; ni++){
-            if(!compare(selectedArray[ni], item)){
-                arrSelect.push(selectedArray[ni]);
-            }
-            else{
-                existItem = true;
-            }
-        }
+    if (!existItem) {
+      arrSelect.push(item);
+    }
 
-        if(!existItem){
-            arrSelect.push(item);
-        }
-        
-        setSelectedArray(arrSelect);   
-        onSelect(arrSelect);
-    };
+    setSelectedArray(arrSelect);
+    onSelect(arrSelect);
+  };
 
-    const styles = {
-        root: mergeStyles([
-            defaultStyles.root,
-            [modifiers.horizontal.root, horizontal],
-            customStyles.root, 
-        ]),
-        button: {
-            root: mergeStyles([
-                defaultStyles.button,
-                [modifiers.boxed.button, boxed],
-                [modifiers.horizontal.button, horizontal],  
-            ]),
-            label: mergeStyles([
-                {color: colors.black}, 
-            ]),  
-        },
-        chkButton: {
-            root: mergeStyles([
-                defaultStyles.chkButton,
-                [modifiers.boxed.chkButton, boxed],
-                [modifiers.horizontal.button, horizontal],  
-            ]),
-            label: mergeStyles([
-                {color: colors.black}, 
-            ]),  
-        },
-        barLineStyle:{
-            width: 1,
-            height: 40,
-            backgroundColor: '#DDE0E7', 
-            alignItems: 'center', 
-            marginHorizontal: 22,
-            marginTop: -29,  
-        }
-    };
+  const styles = {
+    root: mergeStyles([
+      defaultStyles.root,
+      [modifiers.horizontal.root, horizontal],
+      customStyles.root,
+    ]),
+    button: {
+      root: mergeStyles([
+        defaultStyles.button,
+        [modifiers.boxed.button, boxed],
+        [modifiers.horizontal.button, horizontal],
+      ]),
+      label: mergeStyles([{ color: colors.black }]),
+    },
+    chkButton: {
+      root: mergeStyles([
+        defaultStyles.chkButton,
+        [modifiers.boxed.chkButton, boxed],
+        [modifiers.horizontal.button, horizontal],
+      ]),
+      label: mergeStyles([{ color: colors.black }]),
+    },
+    barLineStyle: {
+      width: 1,
+      height: 40,
+      backgroundColor: '#DDE0E7',
+      alignItems: 'center',
+      marginHorizontal: 22,
+      marginTop: -29,
+    },
+  };
 
-    const compare = (first, second) => {
-        return typeof first === 'object'
-            ? isEqual(first, second)
-            : first === second;
-    };
- 
-    const compareChk = (first, arrayGroup) => { 
-        return arrayGroup.includes(first);
-        // for(var ni = 0; ni < arrayGroup.length; ni++){
-        //     if(first === arrayGroup[ni]){
-        //         return true;
-        //     }
-        // }
-        // return false;
-    };
+  const compare = (first, second) => {
+    return typeof first === 'object'
+      ? isEqual(first, second)
+      : first === second;
+  };
 
-    return (
-        <FlatList
-            showsVerticalScrollIndicator={false}
-            data={data}
-            contentContainerStyle={{paddingBottom:scrollPaddingBottom}}
-            keyExtractor={(item, index) => 'group' + index}
-            renderItem={({ item, index }) => ( 
-                (type == controlType.RadioType) ? <Column>  
-                    <RadioButton
-                        key={item + index}
-                        label={typeof item === 'object' ? item.label : item}
-                        selected={compare(item, selected)}
-                        onPress={() => handlePress(item, index)}
-                        boxed={horizontal ? false : boxed}
-                        styles={styles.button}
-                    />
-                    {index < data.length - 1 &&  <View style={styles.barLineStyle} />} 
-                </Column>  
-                :
-                <Column>
-                    <CheckBox
-                        key={item + index}
-                        label={typeof item === 'object' ? item.label : item} 
-                        onPress={() => handleChkPress(item, index)} 
-                        checked={compareChk(item, selectedArray)}
-                        styles={styles.chkButton}  
-                    /> 
-                </Column>
-            )}
-        />
-    );
+  const compareChk = (first, arrayGroup) => {
+    return arrayGroup.includes(first);
+    // for(var ni = 0; ni < arrayGroup.length; ni++){
+    //     if(first === arrayGroup[ni]){
+    //         return true;
+    //     }
+    // }
+    // return false;
+  };
+
+  return (
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={data}
+      contentContainerStyle={{ paddingBottom: scrollPaddingBottom }}
+      keyExtractor={(item, index) => 'group' + index}
+      renderItem={({ item, index }) =>
+        type == controlType.RadioType ? (
+          <Column>
+            <RadioButton
+              key={item + index}
+              label={typeof item === 'object' ? item.label : item}
+              selected={compare(item, selected)}
+              onPress={() => handlePress(item, index)}
+              boxed={horizontal ? false : boxed}
+              styles={styles.button}
+            />
+            {index < data.length - 1 && <View style={styles.barLineStyle} />}
+          </Column>
+        ) : (
+          <Column>
+            <CheckBox
+              key={item + index}
+              label={typeof item === 'object' ? item.label : item}
+              onPress={() => handleChkPress(item, index)}
+              checked={compareChk(item, selectedArray)}
+              styles={styles.chkButton}
+            />
+          </Column>
+        )
+      }
+    />
+  );
 };
 
 RadioGroupQuery.propTypes = {
-    styles: shape({
-        root: object,
-        radio: shape({
-            root: object,
-            ring: object,
-            circle: object,
-            label: object,
-        }),
+  styles: shape({
+    root: object,
+    radio: shape({
+      root: object,
+      ring: object,
+      circle: object,
+      label: object,
     }),
-    initialIndex: number,
-    initialValue: oneOfType([
-        string,
-        shape({
-            label: string,
-            value: any,
-        }),
-    ]), 
-    data: arrayOf(
-        oneOfType([
-            string,
-            shape({
-                label: string,
-                value: any,
-            }),
-        ]),
-    ),
-    onChange: func,
-    boxed: bool,
-    horizontal: bool, 
+  }),
+  initialIndex: number,
+  initialValue: oneOfType([
+    string,
+    shape({
+      label: string,
+      value: any,
+    }),
+  ]),
+  data: arrayOf(
+    oneOfType([
+      string,
+      shape({
+        label: string,
+        value: any,
+      }),
+    ]),
+  ),
+  onChange: func,
+  boxed: bool,
+  horizontal: bool,
 };
 
 RadioGroupQuery.defaultProps = {
-    styles: {},
-    initialIndex: undefined,
-    initialValue: undefined, 
-    data: [],
-    onChange: () => {},
-    boxed: true,
-    horizontal: false,
+  styles: {},
+  initialIndex: undefined,
+  initialValue: undefined,
+  data: [],
+  onChange: () => {},
+  boxed: true,
+  horizontal: false,
 };
 
 export default RadioGroupQuery;

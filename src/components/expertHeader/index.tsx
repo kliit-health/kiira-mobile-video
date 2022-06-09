@@ -5,26 +5,26 @@ import styles from './style';
 import { withNavigation } from 'react-navigation';
 
 const ExpertHeader = ({ navigation, title }) => {
-    return (
-        <View>
-            <View style={styles.header}>
-                <View style={{ position: 'absolute', top: 40, left: 15 }}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image
-                            style={styles.image}
-                            source={require('../../../assets/goBack.png')}
-                            activeOpacity={0.7}
-                        />
-                    </TouchableOpacity>
-                </View>
-                <Text style={styles.headerText}>{title}</Text>
-            </View>
+  return (
+    <View>
+      <View style={styles.header}>
+        <View style={{ position: 'absolute', top: 40, left: 15 }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              style={styles.image}
+              source={require('../../../assets/goBack.png')}
+              activeOpacity={0.7}
+            />
+          </TouchableOpacity>
         </View>
-    );
+        <Text style={styles.headerText}>{title}</Text>
+      </View>
+    </View>
+  );
 };
 
 ExpertHeader.propTypes = {
-    title: string,
+  title: string,
 };
 
 export default withNavigation(ExpertHeader);

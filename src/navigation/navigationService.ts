@@ -1,50 +1,48 @@
 import { NavigationActions, StackActions } from 'react-navigation';
 
 class NavigationService {
-    public _navigator: any;
+  public _navigator: any;
 
-    constructor() {
-        this._navigator = null;
-    }
+  constructor() {
+    this._navigator = null;
+  }
 
-    set navigator(navigator) {
-        this._navigator = navigator;
-    }
+  set navigator(navigator) {
+    this._navigator = navigator;
+  }
 
-    get navigator() {
-        return this._navigator;
-    }
+  get navigator() {
+    return this._navigator;
+  }
 
-    navigate(routeName: string, params?: object, action?: any) {
-        this.navigator.dispatch(
-            NavigationActions.navigate({ routeName, params, action }),
-        );
-    }
+  navigate(routeName: string, params?: object, action?: any) {
+    this.navigator.dispatch(
+      NavigationActions.navigate({ routeName, params, action }),
+    );
+  }
 
-    goBack() {
-        this.navigator.dispatch(NavigationActions.back());
-    }
+  goBack() {
+    this.navigator.dispatch(NavigationActions.back());
+  }
 
-    push(routeName, params, action) {
-        this.navigator.dispatch(
-            StackActions.push({ routeName, params, action }),
-        );
-    }
+  push(routeName, params, action) {
+    this.navigator.dispatch(StackActions.push({ routeName, params, action }));
+  }
 
-    pop(numberOfScreens) {
-        this.navigator.dispatch(StackActions.pop({ n: numberOfScreens }));
-    }
+  pop(numberOfScreens) {
+    this.navigator.dispatch(StackActions.pop({ n: numberOfScreens }));
+  }
 
-    reset(routeName, index, params, navigatorKey) {
-        const mainAction = NavigationActions.navigate({ routeName, params });
-        this.navigator.dispatch(
-            StackActions.reset({
-                index,
-                actions: [mainAction],
-                key: navigatorKey,
-            }),
-        );
-    }
+  reset(routeName, index, params, navigatorKey) {
+    const mainAction = NavigationActions.navigate({ routeName, params });
+    this.navigator.dispatch(
+      StackActions.reset({
+        index,
+        actions: [mainAction],
+        key: navigatorKey,
+      }),
+    );
+  }
 }
 
 export default new NavigationService();

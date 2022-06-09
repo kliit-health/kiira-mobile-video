@@ -5,26 +5,26 @@ import { default as MessageListItem } from '../messageListItem';
 import styles from './styles';
 
 const MessageView = ({ messages, expertProfile, ...rest }) => {
-    const handleKeyExtractor = () => generateIdentifier();
+  const handleKeyExtractor = () => generateIdentifier();
 
-    return (
-        <FlatList
-            data={messages}
-            style={styles.flatlist}
-            keyExtractor={handleKeyExtractor}
-            showsVerticalScrollIndicator={false}
-            renderItem={props => (
-                <MessageListItem
-                    {...props}
-                    expertProfile={expertProfile}
-                    lastIndex={messages.length}
-                />
-            )}
-            inverted={true}
-            contentContainerStyle={styles.contentContainer}
-            {...rest}
+  return (
+    <FlatList
+      data={messages}
+      style={styles.flatlist}
+      keyExtractor={handleKeyExtractor}
+      showsVerticalScrollIndicator={false}
+      renderItem={props => (
+        <MessageListItem
+          {...props}
+          expertProfile={expertProfile}
+          lastIndex={messages.length}
         />
-    );
+      )}
+      inverted={true}
+      contentContainerStyle={styles.contentContainer}
+      {...rest}
+    />
+  );
 };
 
 export default MessageView;

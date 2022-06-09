@@ -4,17 +4,17 @@ import Constant from '~/utils/constants';
 import style from './style';
 
 const Header = () => {
-    const { staticImages } = Constant.App;
+  const { staticImages } = Constant.App;
 
-    return (
-        <SafeAreaView>
-            <Image
-                resizeMode="contain"
-                source={staticImages.logoHorizontal}
-                style={style.logoStyle}
-            />
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView>
+      <Image
+        resizeMode="contain"
+        source={staticImages.logoHorizontal}
+        style={style.logoStyle}
+      />
+    </SafeAreaView>
+  );
 };
 
 export default Header;

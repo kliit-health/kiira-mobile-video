@@ -8,36 +8,34 @@ import { signOut } from '~/redux/reducers/account';
 import styles, { modifiers } from './styles';
 
 const AccountSupport = ({ navigation }) => {
-    const language = useSelector(
-        (state: RootState) => state.language,
-        shallowEqual,
-    );
-    const dispatch = useDispatch();
+  const language = useSelector(
+    (state: RootState) => state.language,
+    shallowEqual,
+  );
+  const dispatch = useDispatch();
 
-    const handleSignOut = () => {
-        dispatch(signOut({ navigation }));
-    };
+  const handleSignOut = () => {
+    dispatch(signOut({ navigation }));
+  };
 
-    return (
-        <Container themed unformatted>
-            <StatusBar barStyle="light-content" translucent={true} />
+  return (
+    <Container themed unformatted>
+      <StatusBar barStyle="light-content" translucent={true} />
 
-            <View style={styles.logoutContainer}>
-                <Text
-                    style={{
-                        alignSelf: 'center',
-                    }}
-                >{`v ${VersionCheck.getCurrentVersion()}`}</Text>
-                <TextButton
-                    onPress={handleSignOut}
-                    // styles={modifiers.button}
-                    link
-                >
-                    {language.expertAccount.logout}
-                </TextButton>
-            </View>
-        </Container>
-    );
+      <View style={styles.logoutContainer}>
+        <Text
+          style={{
+            alignSelf: 'center',
+          }}>{`v ${VersionCheck.getCurrentVersion()}`}</Text>
+        <TextButton
+          onPress={handleSignOut}
+          // styles={modifiers.button}
+          link>
+          {language.expertAccount.logout}
+        </TextButton>
+      </View>
+    </Container>
+  );
 };
 
 export default AccountSupport;

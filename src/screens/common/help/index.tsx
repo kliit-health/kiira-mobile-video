@@ -10,35 +10,35 @@ import { icons } from '~/utils/constants';
 import styles, { modifiers } from './styles';
 
 const Help = ({ navigation }) => {
-    const lang = useSelector((state: RootState) => state.language);
+  const lang = useSelector((state: RootState) => state.language);
 
-    const handleBack = () => {
-        navigation.goBack();
-    };
+  const handleBack = () => {
+    navigation.goBack();
+  };
 
-    const handleAsk = () => {
-        Linking.openURL('mailto:hello@kiira.io?subject=Kiira Support');
-        setTimeout(() => {
-            navigation.navigate(screenNames.Help);
-        }, 200);
-    };
+  const handleAsk = () => {
+    Linking.openURL('mailto:hello@kiira.io?subject=Kiira Support');
+    setTimeout(() => {
+      navigation.navigate(screenNames.Help);
+    }, 200);
+  };
 
-    return (
-        <Container>
-            <Header title={lang.help.title} onBack={handleBack} />
-            <View>
-                <Image
-                    source={icons.logoHorizontal}
-                    style={styles.logo}
-                    resizeMode="contain"
-                />
-            </View>
-            <Text style={styles.question}>{lang.help.question}</Text>
-            <TextButton styles={modifiers.button} onPress={handleAsk}>
-                {lang.help.ask}
-            </TextButton>
-        </Container>
-    );
+  return (
+    <Container>
+      <Header title={lang.help.title} onBack={handleBack} />
+      <View>
+        <Image
+          source={icons.logoHorizontal}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      </View>
+      <Text style={styles.question}>{lang.help.question}</Text>
+      <TextButton styles={modifiers.button} onPress={handleAsk}>
+        {lang.help.ask}
+      </TextButton>
+    </Container>
+  );
 };
 
 export default Help;

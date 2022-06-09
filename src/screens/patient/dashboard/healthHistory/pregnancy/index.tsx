@@ -6,31 +6,26 @@ import model from './model';
 import styles from './styles';
 
 const Pregnancy = ({ navigation }) => {
-    const lang = useSelector(state => state.language);
+  const lang = useSelector(state => state.language);
 
-    return (
-        <Container unformatted>
-            <Header
-                title={lang.pregnancy.title}
-                onBack={() => navigation.goBack()}
-            />
-            <ScrollView
-                keyboardShouldPersistTaps="handled"
-                showsVerticalScrollIndicator={false}
-            >
-                {model.map(({ title, destination }) => (
-                    <ListItem
-                        displayChevron
-                        key={title}
-                        title={title}
-                        onPress={() => navigation.navigate(destination)}
-                    >
-                        <Text style={styles.title}>{title}</Text>
-                    </ListItem>
-                ))}
-            </ScrollView>
-        </Container>
-    );
+  return (
+    <Container unformatted>
+      <Header title={lang.pregnancy.title} onBack={() => navigation.goBack()} />
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
+        {model.map(({ title, destination }) => (
+          <ListItem
+            displayChevron
+            key={title}
+            title={title}
+            onPress={() => navigation.navigate(destination)}>
+            <Text style={styles.title}>{title}</Text>
+          </ListItem>
+        ))}
+      </ScrollView>
+    </Container>
+  );
 };
 
 export default Pregnancy;

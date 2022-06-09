@@ -10,55 +10,47 @@ import { signOut } from '~/redux/reducers/account';
 import styles, { modifiers } from './styles';
 
 const ExpertAccount = ({ navigation }) => {
-    const language = useSelector(state => state.language, shallowEqual);
-    const details = useSelector(state => state.user.data);
-    const dispatch = useDispatch();
+  const language = useSelector(state => state.language, shallowEqual);
+  const details = useSelector(state => state.user.data);
+  const dispatch = useDispatch();
 
-    const handleNavigation = destination => {
-        navigation.navigate(destination);
-    };
+  const handleNavigation = destination => {
+    navigation.navigate(destination);
+  };
 
-    const handleSignOut = () => {
-        dispatch(signOut({ navigation }));
-    };
+  const handleSignOut = () => {
+    dispatch(signOut({ navigation }));
+  };
 
-    return (
-        <Container themed unformatted>
-            <StatusBar barStyle="light-content" translucent={true} />
-            <ScrollView>
-                <View style={styles.profileContainter}>
-                    <View style={styles.profileBackground} />
-                    <ProfileCard {...details} />
-                </View>
-                <View>
-                    {model.map(({ title, destination }) => (
-                        <ListItem
-                            key={title}
-                            id={destination}
-                            onPress={handleNavigation}
-                            displayChevron
-                        >
-                            <Text style={styles.itemTitle}>
-                                {get(language, title)}
-                            </Text>
-                        </ListItem>
-                    ))}
-                </View>
-                <Text
-                    style={{
-                        alignSelf: 'center',
-                    }}
-                >{`v ${VersionCheck.getCurrentVersion()}`}</Text>
-                <TextButton
-                    onPress={handleSignOut}
-                    styles={modifiers.button}
-                    link
-                >
-                    {language.expertAccount.logout}
-                </TextButton>
-            </ScrollView>
-        </Container>
-    );
+  return (
+    <Container themed unformatted>
+      <StatusBar barStyle="light-content" translucent={true} />
+      <ScrollView>
+        <View style={styles.profileContainter}>
+          <View style={styles.profileBackground} />
+          <ProfileCard {...details} />
+        </View>
+        <View>
+          {model.map(({ title, destination }) => (
+            <ListItem
+              key={title}
+              id={destination}
+              onPress={handleNavigation}
+              displayChevron>
+              <Text style={styles.itemTitle}>{get(language, title)}</Text>
+            </ListItem>
+          ))}
+        </View>
+        <Text
+          style={{
+            alignSelf: 'center',
+          }}>{`v ${VersionCheck.getCurrentVersion()}`}</Text>
+        <TextButton onPress={handleSignOut} styles={modifiers.button} link>
+          {language.expertAccount.logout}
+        </TextButton>
+      </ScrollView>
+    </Container>
+  );
 };
 
 export default ExpertAccount;

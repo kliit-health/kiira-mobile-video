@@ -7,25 +7,24 @@ import { hideMessage } from '~/redux/actions';
 import styles from './styles';
 
 export default ({ children }) => {
-    const dispatch = useDispatch();
-    const message = useSelector((state: RootState) => state.messaging.message);
-    const visible = useSelector((state: RootState) => state.messaging.visible);
+  const dispatch = useDispatch();
+  const message = useSelector((state: RootState) => state.messaging.message);
+  const visible = useSelector((state: RootState) => state.messaging.visible);
 
-    const handleBackdropPress = () => {
-        dispatch(hideMessage());
-    };
+  const handleBackdropPress = () => {
+    dispatch(hideMessage());
+  };
 
-    return (
-        <Modal
-            animationIn="fadeInUp"
-            animationOut="fadeOutDown"
-            onBackdropPress={handleBackdropPress}
-            styles={styles.modal}
-            visible={visible}
-        >
-            <View style={styles.card.container}>
-                <Text style={styles.card.text}>{message}</Text>
-            </View>
-        </Modal>
-    );
+  return (
+    <Modal
+      animationIn="fadeInUp"
+      animationOut="fadeOutDown"
+      onBackdropPress={handleBackdropPress}
+      styles={styles.modal}
+      visible={visible}>
+      <View style={styles.card.container}>
+        <Text style={styles.card.text}>{message}</Text>
+      </View>
+    </Modal>
+  );
 };

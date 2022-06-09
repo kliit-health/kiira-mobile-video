@@ -2,26 +2,26 @@ import { StyleSheet } from 'react-native';
 import { colors } from '~/utils/constants';
 
 export default StyleSheet.create({
-    buttonsContainer: {
-        flexDirection: 'row',
-        paddingHorizontal: 5,
-        paddingVertical: 10,
-        backgroundColor: colors.white,
-    },
+  buttonsContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    backgroundColor: colors.white,
+  },
 });
 
 export const modifiers = {
-    container: {
-        root: {},
+  container: {
+    root: {},
+  },
+  searchBar: {
+    root: {
+      marginTop: 10,
     },
-    searchBar: {
-        root: {
-            marginTop: 10,
-        },
+  },
+  button: {
+    root: {
+      marginHorizontal: 5,
     },
-    button: {
-        root: {
-            marginHorizontal: 5,
-        },
-    },
+  },
 };

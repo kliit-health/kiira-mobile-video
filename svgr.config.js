@@ -1,5 +1,5 @@
 module.exports = {
-	replaceAttrValues: {
-		"#000": "{props.color}",
-	},
+  replaceAttrValues: {
+    '#000': '{props.color}',
+  },
 };

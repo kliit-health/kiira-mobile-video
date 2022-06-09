@@ -7,37 +7,37 @@ import styles, { buttonStyles } from './styles';
 import { screenNames } from '~/utils/constants';
 
 const Book = ({ navigation }) => {
-    const lang = useSelector(state => state.language.book, shallowEqual);
+  const lang = useSelector(state => state.language.book, shallowEqual);
 
-    const handleSchedule = () => {
-        navigation.navigate(screenNames.Book);
-    };
+  const handleSchedule = () => {
+    navigation.navigate(screenNames.Book);
+  };
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.description}>{lang.bookVisit}</Text>
-            <View style={styles.actions}>
-                <Button
-                    style={buttonStyles}
-                    onPress={handleSchedule}
-                    title={lang.mentalHealth}
-                    id="mentalHealth"
-                />
-                <Button
-                    style={buttonStyles}
-                    onPress={handleSchedule}
-                    title={lang.primaryCare}
-                    id="primaryCare"
-                />
-                <Button
-                    style={buttonStyles}
-                    onPress={handleSchedule}
-                    title={lang.womensHealth}
-                    id="womensHealth"
-                />
-            </View>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.description}>{lang.bookVisit}</Text>
+      <View style={styles.actions}>
+        <Button
+          style={buttonStyles}
+          onPress={handleSchedule}
+          title={lang.mentalHealth}
+          id="mentalHealth"
+        />
+        <Button
+          style={buttonStyles}
+          onPress={handleSchedule}
+          title={lang.primaryCare}
+          id="primaryCare"
+        />
+        <Button
+          style={buttonStyles}
+          onPress={handleSchedule}
+          title={lang.womensHealth}
+          id="womensHealth"
+        />
+      </View>
+    </View>
+  );
 };
 
 export default withNavigation(Book);

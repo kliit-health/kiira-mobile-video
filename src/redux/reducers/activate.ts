@@ -4,13 +4,13 @@ import { RootState } from '.';
 const initialState = {};
 
 export const activateSlice = createSlice({
-    name: 'activate',
-    initialState,
-    reducers: {
-        sendVerification: (state, action: PayloadAction<object>) => {
-            return state;
-        },
+  name: 'activate',
+  initialState,
+  reducers: {
+    sendVerification: (state, action: PayloadAction<object>) => {
+      return state;
     },
+  },
 });
 
 export const { sendVerification } = activateSlice.actions;

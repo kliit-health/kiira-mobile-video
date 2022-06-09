@@ -11,22 +11,25 @@ import { default as globalStyles } from '~/components/styles';
 const { pad_h, blue_bg, space_between } = globalStyles;
 
 export const None = () => {
-    const lang = useSelector((state: RootState) => state.language);
+  const lang = useSelector((state: RootState) => state.language);
 
-    return (
-        <Column options={[blue_bg, pad_h, space_between]}>
-            <Image
-                style={styles.image}
-                resizeMode="contain"
-                source={images.penguin}
-            />
-            <Text style={styles.title}>{lang.appointments.noVisits}</Text>
-            <TextButton
-                styles={Platform.OS == 'android' ? { root: { marginTop: 'auto',marginBottom:'3%' } }: { root: { marginTop: 'auto'} }}
-                onPress={() => handleNavigation(screenNames.Book)}
-            >
-                {lang.appointments.scheduleAppointment}
-            </TextButton>
-        </Column>
-    );
+  return (
+    <Column options={[blue_bg, pad_h, space_between]}>
+      <Image
+        style={styles.image}
+        resizeMode="contain"
+        source={images.penguin}
+      />
+      <Text style={styles.title}>{lang.appointments.noVisits}</Text>
+      <TextButton
+        styles={
+          Platform.OS == 'android'
+            ? { root: { marginTop: 'auto', marginBottom: '3%' } }
+            : { root: { marginTop: 'auto' } }
+        }
+        onPress={() => handleNavigation(screenNames.Book)}>
+        {lang.appointments.scheduleAppointment}
+      </TextButton>
+    </Column>
+  );
 };

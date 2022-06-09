@@ -8,31 +8,31 @@ import { h2 } from '~/components/styles';
 import { firebaseFetch } from '~/utils/firebase';
 
 const SelectSupport = ({ navigation }) => {
-    const [staff, setStaff] = useState([]);
+  const [staff, setStaff] = useState([]);
 
-    useEffect(() => {
-        getStaff();
-    }, []);
+  useEffect(() => {
+    getStaff();
+  }, []);
 
-    const getStaff = async () => {
-        const condition = [{ key: 'role', operator: '==', value: 'Expert' }];
-        var staffs = await firebaseFetch('users', condition);
-        staffs = staffs.filter(staff => {
-            return staff.displayName == "Kiira"
-        })
-        setStaff(staffs);
-    };
+  const getStaff = async () => {
+    const condition = [{ key: 'role', operator: '==', value: 'Expert' }];
+    var staffs = await firebaseFetch('users', condition);
+    staffs = staffs.filter(staff => {
+      return staff.displayName == 'Kiira';
+    });
+    setStaff(staffs);
+  };
 
-    return (
-        <Screen test="Select Chat Support">
-            <View>
-                <Header title="Support" onBack={() => navigation.goBack()} />
-                <Text options={[h2]}>{`Availible Staff`}</Text>
-                {staff && <SupportStaff staff={staff} />}
-            </View>
-            {Platform.OS === 'ios' && <KeyboardSpacer />}
-        </Screen>
-    );
+  return (
+    <Screen test="Select Chat Support">
+      <View>
+        <Header title="Support" onBack={() => navigation.goBack()} />
+        <Text options={[h2]}>{`Availible Staff`}</Text>
+        {staff && <SupportStaff staff={staff} />}
+      </View>
+      {Platform.OS === 'ios' && <KeyboardSpacer />}
+    </Screen>
+  );
 };
 
 export default withNavigation(SelectSupport);

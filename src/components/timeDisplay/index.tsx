@@ -5,35 +5,32 @@ import Clock from '../../svgs/clock.svg';
 import defaultStyles from './styles';
 
 const TimeDisplay = ({ styles: customStyles, time }) => {
-    const styles = {
-        root: [defaultStyles.root, customStyles.root],
-        text: [defaultStyles.text, customStyles.text],
-        iconContainer: [
-            defaultStyles.iconContainer,
-            customStyles.iconContainer,
-        ],
-    };
+  const styles = {
+    root: [defaultStyles.root, customStyles.root],
+    text: [defaultStyles.text, customStyles.text],
+    iconContainer: [defaultStyles.iconContainer, customStyles.iconContainer],
+  };
 
-    return (
-        <View style={styles.root}>
-            <View style={styles.iconContainer}>
-                <Clock />
-            </View>
-            <Text style={styles.text}>{time}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.root}>
+      <View style={styles.iconContainer}>
+        <Clock />
+      </View>
+      <Text style={styles.text}>{time}</Text>
+    </View>
+  );
 };
 
 TimeDisplay.propTypes = {
-    styles: shape({
-        root: object,
-    }),
-    time: string,
+  styles: shape({
+    root: object,
+  }),
+  time: string,
 };
 
 TimeDisplay.defaultProps = {
-    styles: {},
-    time: undefined,
+  styles: {},
+  time: undefined,
 };
 
 TimeDisplay.displayName = 'TimeDisplay';
