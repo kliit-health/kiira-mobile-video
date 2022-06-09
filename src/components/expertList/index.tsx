@@ -84,7 +84,7 @@ const ExpertList = ({ navigation, experts }) => {
                     {lang.expertProfile.prescriber}
                   </CustomText>
                 </View>
-                <View style={styles.firstAvaliableContainer}></View>
+                <View style={styles.firstAvaliableContainer} />
               </View>
             </View>
           </TouchableOpacity>

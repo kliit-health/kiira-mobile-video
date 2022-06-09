@@ -43,7 +43,7 @@ const Book = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       const topics = await getAllDocumentsFromCollection(
-        `appointmentCategories`,
+        'appointmentCategories',
       );
 
       if (Array.isArray(topics)) {
@@ -60,7 +60,7 @@ const Book = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      const types = await getAllDocumentsFromCollection(`appointmentTypes`);
+      const types = await getAllDocumentsFromCollection('appointmentTypes');
 
       if (Array.isArray(types)) {
         const result = types.reduce((acc, item) => {
@@ -75,7 +75,7 @@ const Book = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      const types = await getAllDocumentsFromCollection(`appointmentTypes`);
+      const types = await getAllDocumentsFromCollection('appointmentTypes');
 
       if (Array.isArray(types)) {
         const result = types.reduce((acc, item) => {

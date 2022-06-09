@@ -27,7 +27,7 @@ const SelectSupport = ({ navigation }) => {
     <Screen test="Select Chat Support">
       <View>
         <Header title="Support" onBack={() => navigation.goBack()} />
-        <Text options={[h2]}>{`Availible Staff`}</Text>
+        <Text options={[h2]}>{'Availible Staff'}</Text>
         {staff && <SupportStaff staff={staff} />}
       </View>
       {Platform.OS === 'ios' && <KeyboardSpacer />}

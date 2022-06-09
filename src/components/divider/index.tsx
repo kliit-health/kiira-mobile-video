@@ -8,7 +8,7 @@ const Divider = ({ styles: customStyles }) => {
     root: [defaultStyles.root, customStyles.root],
   };
 
-  return <View style={styles.root}></View>;
+  return <View style={styles.root} />;
 };
 
 Divider.propTypes = {

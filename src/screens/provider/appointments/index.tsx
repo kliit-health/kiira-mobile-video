@@ -113,13 +113,15 @@ const ExpertAppointments = ({ navigation }) => {
 
     if (term) {
       filtered = filtered.filter(({ firstName, lastName }) => {
-        if (firstName.includes(term) || lastName.includes(term)) return true;
+        if (firstName.includes(term) || lastName.includes(term)) {
+          return true;
+        }
       });
     }
     setSearch([...filtered]);
   };
 
-  const FallBack = () => <View></View>;
+  const FallBack = () => <View />;
   console.log('SEARCH: ', search);
   return (
     <Container unformatted styles={modifiers.container} themed>

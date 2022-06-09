@@ -1,14 +1,14 @@
 export default [
   {
-    title: `expertAccount.born`,
+    title: 'expertAccount.born',
     dataKey: 'dob',
   },
   {
-    title: `expertAccount.pronouns`,
+    title: 'expertAccount.pronouns',
     dataKey: 'pronouns',
   },
   {
-    title: `expertAccount.location`,
+    title: 'expertAccount.location',
     dataKey: 'state',
     secondaryKey: 'code',
   },

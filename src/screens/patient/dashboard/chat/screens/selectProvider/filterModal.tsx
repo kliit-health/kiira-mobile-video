@@ -79,7 +79,9 @@ const FilterModal = ({ show, lang, toggleModal, filterExperts, count }) => {
       : true;
     setLanguagePreference(Object.assign([], [], languagePreference));
     languagePreference.forEach(item => {
-      if (item.selected) languages.push(item.value);
+      if (item.selected) {
+        languages.push(item.value);
+      }
     });
     filterExperts('', languages);
   };

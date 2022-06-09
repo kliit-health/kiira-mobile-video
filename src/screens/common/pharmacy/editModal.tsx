@@ -141,7 +141,7 @@ const EditModal = ({
               ? { container: styles.searchButton }
               : { container: [styles.searchButtonDisabled] }
           }
-          title={`Confirm`}
+          title={'Confirm'}
         />
       </Screen>
     </Modal>

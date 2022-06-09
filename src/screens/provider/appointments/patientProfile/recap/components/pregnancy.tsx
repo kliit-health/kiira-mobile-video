@@ -41,7 +41,7 @@ const Pregnancy = ({ pregnancy }) => {
           uncheckedIcon="square-o"
           checked={pregnancy.pregnancyIssues.history}
         />
-        <Text>{`Pregnancy issues`}</Text>
+        <Text>{'Pregnancy issues'}</Text>
       </View>
       {pregnancy.pregnancyIssues.history && (
         <Text style={styles.info}>{pregnancy.pregnancyIssues.notes}</Text>

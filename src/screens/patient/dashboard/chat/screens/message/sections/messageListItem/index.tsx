@@ -171,7 +171,7 @@ const MessageListItem = ({
         </View>
       );
     } else {
-      return <View></View>;
+      return <View />;
     }
   };
 

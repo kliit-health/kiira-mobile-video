@@ -25,7 +25,7 @@ const Social = ({ social }) => {
         );
       })}
 
-      <Text style={styles.subheading}>{`\n Marital Status`}</Text>
+      <Text style={styles.subheading}>{'\n Marital Status'}</Text>
       {Object.keys(social.status).map(key => {
         return (
           <CheckItem

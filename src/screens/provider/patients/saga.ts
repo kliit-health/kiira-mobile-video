@@ -16,7 +16,9 @@ import { showOrHideModal } from '~/components/customModal/action';
 function getUserAppointments(data) {
   let users = Object.values(data);
   let allApponitments = users.reduce((acc, item) => {
-    if (Object.values(item).length) return [...acc, ...Object.values(item)];
+    if (Object.values(item).length) {
+      return [...acc, ...Object.values(item)];
+    }
   }, []);
 
   return allApponitments;

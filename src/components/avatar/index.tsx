@@ -41,7 +41,9 @@ const Avatar = ({
   }, []);
 
   useEffect(() => {
-    if (!source) return;
+    if (!source) {
+      return;
+    }
     setImageSrc(source);
   }, [source]);
 

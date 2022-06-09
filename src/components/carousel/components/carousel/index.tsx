@@ -135,13 +135,17 @@ const Carousel = (props: CarouselProps) => {
       newIndex = Math.round(currentIndex);
     }
 
-    if (currentIndex === newIndex) return;
+    if (currentIndex === newIndex) {
+      return;
+    }
 
     goToPage(newIndex);
   };
 
   const goToNextPage = () => {
-    if (!loop && currentIndex === childrenCount - 1) return;
+    if (!loop && currentIndex === childrenCount - 1) {
+      return;
+    }
     goToPage(Math.floor(currentIndex) + 1);
   };
 
@@ -211,8 +215,12 @@ const Carousel = (props: CarouselProps) => {
   };
 
   const loopJump = () => {
-    if (!loop) return;
-    if (childrenCount <= 1) return;
+    if (!loop) {
+      return;
+    }
+    if (childrenCount <= 1) {
+      return;
+    }
 
     if (currentIndex === 0) {
       goToPage(childrenCount - 2, false);

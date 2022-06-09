@@ -7,7 +7,7 @@ import { generateDateInfo } from '~/utils/helper';
 import ErrorBoundary from 'react-native-error-boundary';
 
 export const Show = ({ pastSelected, past, future }) => {
-  const FallBack = () => <View></View>;
+  const FallBack = () => <View />;
   const data = pastSelected ? past : future;
 
   const Visits = ({ data }) => {

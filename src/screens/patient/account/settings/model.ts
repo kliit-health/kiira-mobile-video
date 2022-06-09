@@ -2,24 +2,24 @@ import { screenNames } from '~/utils/constants';
 
 export const listItems = [
   {
-    title: `HIPAA`,
+    title: 'HIPAA',
     destination: screenNames.termsAndConditions,
-    content: `HIPAA`,
+    content: 'HIPAA',
   },
   {
-    title: `Terms and conditions`,
+    title: 'Terms and conditions',
     destination: screenNames.termsAndConditions,
 
-    content: `Terms and Conditions`,
+    content: 'Terms and Conditions',
   },
   {
-    title: `Privacy Policy`,
+    title: 'Privacy Policy',
     destination: screenNames.privacyPolicies,
-    content: `Privacy Policy`,
+    content: 'Privacy Policy',
   },
 ];
 export const list = [
   {
-    title: `App Version`,
+    title: 'App Version',
   },
 ];

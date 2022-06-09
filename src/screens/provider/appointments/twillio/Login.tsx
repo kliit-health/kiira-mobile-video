@@ -138,7 +138,7 @@ const ExpertTwillioLogin = ({ navigation }) => {
           />
           <View style={styles.textlayout}>
             <Text style={styles.subtitle}>
-              {`When you press Start your session will begin.`}
+              {'When you press Start your session will begin.'}
             </Text>
           </View>
           <View style={styles.buttonStyle}>

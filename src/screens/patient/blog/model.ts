@@ -2,42 +2,42 @@ const baseUrl = 'https://www.kiira.io/category';
 
 const list = [
   {
-    title: `learn.sexualHealth`,
+    title: 'learn.sexualHealth',
     url: `${baseUrl}/sexual-health`,
     image: require('../../../../assets/sexual-health.jpg'),
   },
   {
-    title: `learn.mentalHealth`,
+    title: 'learn.mentalHealth',
     url: `${baseUrl}/mental-health`,
     image: require('../../../../assets/mental-health.jpg'),
   },
   {
-    title: `learn.obstetrics`,
+    title: 'learn.obstetrics',
     url: `${baseUrl}/obstetrics`,
     image: require('../../../../assets/obstetrics.jpg'),
   },
   {
-    title: `learn.gynecology`,
+    title: 'learn.gynecology',
     url: `${baseUrl}/gynecology`,
     image: require('../../../../assets/gynecology.jpeg'),
   },
   {
-    title: `learn.breastHealth`,
+    title: 'learn.breastHealth',
     url: `${baseUrl}/breast-health`,
     image: require('../../../../assets/breast-health.jpeg'),
   },
   {
-    title: `learn.wellness`,
+    title: 'learn.wellness',
     url: `${baseUrl}/wellness`,
     image: require('../../../../assets/wellness.jpg'),
   },
   {
-    title: `learn.newsAndNoteworthy`,
+    title: 'learn.newsAndNoteworthy',
     url: `${baseUrl}/news-and-noteworthy`,
     image: require('../../../../assets/news-and-noteworthy.jpg'),
   },
   {
-    title: `learn.prevention`,
+    title: 'learn.prevention',
     url: `${baseUrl}/prevention`,
     image: require('../../../../assets/prevention.jpg'),
   },

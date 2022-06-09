@@ -236,7 +236,7 @@ const EditModal = ({ show, lang, emergencyContactInfo, toggleModal }) => {
               ? { container: styles.searchButton }
               : { container: [styles.searchButtonDisabled] }
           }
-          title={`Confirm`}
+          title={'Confirm'}
         />
       </Screen>
     </Modal>

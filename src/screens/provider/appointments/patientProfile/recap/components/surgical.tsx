@@ -18,7 +18,7 @@ const Surgical = ({ surgical }) => {
           uncheckedIcon="square-o"
           checked={surgical.surgeries}
         />
-        <Text>{`Had surgery`}</Text>
+        <Text>{'Had surgery'}</Text>
       </View>
       {surgical.surgeries && (
         <Text style={styles.notes}>{`Notes: ${surgical.notes}`}</Text>

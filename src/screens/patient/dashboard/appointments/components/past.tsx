@@ -74,7 +74,7 @@ export const Past = ({ visit, date }) => {
         </Column>
         <Conditional if={!locked}>
           <Text options={[pad_h, pad_b, large, gray_dark]}>
-            {`Waiting for visit summary`}
+            {'Waiting for visit summary'}
           </Text>
         </Conditional>
         <Conditional if={locked}>
@@ -87,7 +87,7 @@ export const Past = ({ visit, date }) => {
                 size={25}
               />
               <Text options={[sm_pad_h, pad_b, xLarge, blue]}>
-                {`View Visit Summary`}
+                {'View Visit Summary'}
               </Text>
             </Row>
           </TouchableOpacity>

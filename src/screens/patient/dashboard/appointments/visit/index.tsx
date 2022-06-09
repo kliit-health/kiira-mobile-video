@@ -31,7 +31,7 @@ const Visit = props => {
     dispatch(setVisit(visit));
   });
 
-  const FallBack = () => <View></View>;
+  const FallBack = () => <View />;
 
   return (
     <SafeAreaView style={styles.parentContainerStyle}>

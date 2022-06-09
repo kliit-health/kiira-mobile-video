@@ -136,7 +136,7 @@ export default {
     question: 'Spanish Do you need a prescription?',
     yes: 'Spanish Yes',
     no: 'Spanish No',
-    notSure: `Spanish I'm not sure`,
+    notSure: "Spanish I'm not sure",
   },
 
   loss: {
@@ -555,8 +555,9 @@ export default {
   },
   appointments: {
     scheduleAppointment: 'Schedule Appointment',
-    notify: `Spanish We'll notifiy you about upcoming appointments, new messages, and more`,
-    noVisits: `Spanish You have no upcoming visits`,
+    notify:
+      "Spanish We'll notifiy you about upcoming appointments, new messages, and more",
+    noVisits: 'Spanish You have no upcoming visits',
   },
   expertChats: {
     title: 'Spanish Chats',
@@ -596,11 +597,11 @@ export default {
     reminders: 'Spanish Reminders',
     sos: 'Spanish SOS',
     hiName: 'Spanish Hi, ',
-    notFeelingSick: `Spanish I'm not feeling sick`,
+    notFeelingSick: "Spanish I'm not feeling sick",
     nowMention: 'Spanish Now that you mention it',
     kiira: 'Spanish Kiira',
-    bot: `Spanish Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?`,
-    great: `Spanish That's great! If that changes let us know.`,
+    bot: 'Spanish Doctors and therapists (your Squad) are important folks, in sickness and in health! Are you feeling sick right now?',
+    great: "Spanish That's great! If that changes let us know.",
     serviceUnavailable:
       'Spanish This Service is currently unavailable in your state',
     chatNotAvailable: 'Spanish Chat unavailable with current plan',

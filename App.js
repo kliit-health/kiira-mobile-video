@@ -124,7 +124,9 @@ const App = () => {
   };
 
   const getCurrentRouteName = navigationState => {
-    if (!navigationState) return null;
+    if (!navigationState) {
+      return null;
+    }
 
     const route = navigationState.routes[navigationState.index];
     if (route.routes) {

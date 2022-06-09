@@ -2,19 +2,19 @@ import { screenNames } from '~/utils/constants';
 
 export default [
   {
-    title: `expertAccount.settings`,
+    title: 'expertAccount.settings',
     destination: screenNames.expertSettings,
   },
   {
-    title: `expertAccount.updateAvailability`,
+    title: 'expertAccount.updateAvailability',
     destination: screenNames.updateAvailability,
   },
   {
-    title: `expertAccount.termsAndConditions`,
+    title: 'expertAccount.termsAndConditions',
     destination: screenNames.termsAndConditions,
   },
   {
-    title: `expertAccount.privacyPolicies`,
+    title: 'expertAccount.privacyPolicies',
     destination: screenNames.privacyPolicies,
   },
 ];

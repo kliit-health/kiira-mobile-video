@@ -140,7 +140,9 @@ const Payment = () => {
   };
 
   const handleApplePay = async () => {
-    if (!isApplePaySupported) return;
+    if (!isApplePaySupported) {
+      return;
+    }
 
     const { error } = await presentApplePay({
       cartItems: [{ label: 'Kiira Balance', amount: `${balance}.00` }],

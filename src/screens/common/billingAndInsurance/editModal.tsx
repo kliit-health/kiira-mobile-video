@@ -83,7 +83,7 @@ const EditModal = ({
             toggleModal(false, insurance, member);
           }}
           style={{ container: styles.searchButton }}
-          title={`Confirm`}
+          title={'Confirm'}
         />
       </Screen>
     </Modal>

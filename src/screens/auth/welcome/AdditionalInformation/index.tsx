@@ -86,7 +86,9 @@ const AdditionalInformation = ({ navigation }) => {
   const formatPhoneNumber = value => {
     const phoneNumber = value.replace(/[^\d]/g, '');
     const phoneNumberLength = phoneNumber.length;
-    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 4) {
+      return phoneNumber;
+    }
 
     if (phoneNumberLength < 7) {
       return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;

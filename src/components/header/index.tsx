@@ -73,7 +73,7 @@ const Header = (props: header) => {
     if (timeString) {
       return `Active ${moment.unix(timeString).fromNow(true)} ago`;
     }
-    return `Active a few days ago`;
+    return 'Active a few days ago';
   };
 
   return (

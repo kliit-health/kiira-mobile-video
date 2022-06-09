@@ -54,7 +54,9 @@ class Setting extends PureComponent {
   formatPhoneNumber = value => {
     const phoneNumber = value.replace(/[^\d]/g, '');
     const phoneNumberLength = phoneNumber.length;
-    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 4) {
+      return phoneNumber;
+    }
 
     if (phoneNumberLength < 7) {
       return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
@@ -150,13 +152,13 @@ class Setting extends PureComponent {
                 displayBorder={true}>
                 <View style={styles.listContainer}>
                   <View style={styles.titleContainer}>
-                    {content == `HIPAA` && (
+                    {content == 'HIPAA' && (
                       <Text style={styles.content}>{content}</Text>
                     )}
-                    {content == `Terms and Conditions` && (
+                    {content == 'Terms and Conditions' && (
                       <Text style={styles.content}>{content}</Text>
                     )}
-                    {content == `Privacy Policy` && (
+                    {content == 'Privacy Policy' && (
                       <Text style={styles.content}>{content}</Text>
                     )}
                   </View>
@@ -175,7 +177,7 @@ class Setting extends PureComponent {
                       flexDirection: 'row',
                       justifyContent: 'space-between',
                     }}>
-                    {title == `App Version` && (
+                    {title == 'App Version' && (
                       <>
                         <Text style={styles.content}>{title}</Text>
                         <Text style={styles.version}>

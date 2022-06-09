@@ -3,25 +3,25 @@ import { icons } from '../../../../../utils/constants';
 
 export default [
   {
-    title: `account.billingAndInsurance`,
+    title: 'account.billingAndInsurance',
     destination: screenNames.billingAndInsurance,
     icon: icons.billing,
-    content: `Add Insurance`,
+    content: 'Add Insurance',
   },
   {
-    title: `account.pharmacy`,
+    title: 'account.pharmacy',
     destination: screenNames.pharmacy,
     icon: icons.pharmacy,
-    content: `Please Select`,
+    content: 'Please Select',
   },
   {
-    title: `account.emergencyContact`,
+    title: 'account.emergencyContact',
     destination: screenNames.emergencyContact,
     icon: icons.emergencyContact,
-    content: `Please Add a Contact`,
+    content: 'Please Add a Contact',
   },
   {
-    title: `account.myHealth`,
+    title: 'account.myHealth',
     pane: true,
   },
   // {
@@ -42,12 +42,12 @@ export default [
   // },
 
   {
-    title: `allergies.title`,
+    title: 'allergies.title',
     destination: screenNames.Allergies,
     icon: icons.allergies,
   },
   {
-    title: `healthHistory.title`,
+    title: 'healthHistory.title',
     destination: screenNames.MedicalConditions,
     icon: icons.healthHistory,
   },

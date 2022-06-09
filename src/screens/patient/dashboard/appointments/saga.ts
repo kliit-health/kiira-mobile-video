@@ -23,8 +23,9 @@ function* getAppointments({ data }) {
     yield put(showApiLoader());
     const appointments = yield getAppointmentsAsync(data.uid);
 
-    if (appointments)
+    if (appointments) {
       yield put({ type: FETCH_APPOINTMENTS, data: appointments });
+    }
 
     yield put(hideApiLoader());
   } catch (error) {

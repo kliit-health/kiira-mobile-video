@@ -26,21 +26,21 @@ export default ({ onItemPress }) => {
               <Text style={pane ? styles.paneTitle : styles.title}>
                 {get(language, title)}
               </Text>
-              {content == `Add Insurance` && (
+              {content == 'Add Insurance' && (
                 <Text style={styles.content}>
                   {user.profileInfo && user.profileInfo.insurance
                     ? user.profileInfo.insurance
                     : content}
                 </Text>
               )}
-              {content == `Please Select` && (
+              {content == 'Please Select' && (
                 <Text style={styles.content}>
                   {user.profileInfo && user.profileInfo.pharmacy
                     ? user.profileInfo.pharmacy
                     : content}
                 </Text>
               )}
-              {content == `Please Add a Contact` && (
+              {content == 'Please Add a Contact' && (
                 <Text style={styles.content}>
                   {user.profileInfo &&
                   user.profileInfo.emergencyContactInfo &&
