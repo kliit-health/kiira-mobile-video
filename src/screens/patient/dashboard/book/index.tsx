@@ -206,7 +206,6 @@ const Book = ({ navigation }) => {
                             )}
                         </Kiira.Conditional>
                     </Kiira.Column>
-                    <Expandable onPress={handleLinePress} list={sections} />
                     <View
                         style={{
                             borderBottomColor: colors.greyAccent,
@@ -230,6 +229,7 @@ const Book = ({ navigation }) => {
                             {'Schedule an In-Person Appointment '}
                         </Text>
                     </TouchableOpacity>
+                    <Expandable onPress={handleLinePress} list={sections} />
                     <Kiira.Column
                         options={[pad_h, pad_b, grey_br_t_md, zero_flex]}
                     >
