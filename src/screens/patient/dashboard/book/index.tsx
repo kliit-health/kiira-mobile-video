@@ -132,8 +132,8 @@ const Book = ({ navigation }) => {
         );
         setLoading(false);
     };
-    return modalVisible ? (
-        <SafeAreaView>
+    return (
+        <Kiira.Screen test="Book Screen">
             <Modal
                 style={{
                     flex: 1,
@@ -141,7 +141,7 @@ const Book = ({ navigation }) => {
                     alignItems: 'center',
                 }}
                 animationType="slide"
-                transparent={true}
+                transparent={false}
                 visible={modalVisible}
                 onRequestClose={() => {
                     setModalVisible(!modalVisible);
@@ -165,9 +165,6 @@ const Book = ({ navigation }) => {
                     }}
                 />
             </Modal>
-        </SafeAreaView>
-    ) : (
-        <Kiira.Screen test="Book Screen">
             <Agreements navigation={navigation} />
             <Kiira.Header title="Book Visit" onBack={handleBack} />
             <Kiira.Heading>
