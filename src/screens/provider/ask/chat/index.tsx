@@ -273,9 +273,6 @@ class ChatExpert extends React.PureComponent<Props, myState> {
         return (
             <View style={styles.headerStyle}>
                 <TouchableOpacity
-                    style={{
-                        alignSelf: 'center',
-                    }}
                     onPress={() => {
                         navigation.goBack();
                     }}
@@ -289,7 +286,7 @@ class ChatExpert extends React.PureComponent<Props, myState> {
                         source={staticImages.backIcon}
                     />
                 </TouchableOpacity>
-                <View style={styles.profileHeaderStyle}> 
+                <View style={!questionData.isResolved ? styles.profileHeaderStyle: styles.profileHeaderStyleWithNoIcon}> 
                     <FastImage 
                         resizeMode='center'
                         style={[styles.image, {opacity: 0.7}]}
@@ -302,7 +299,7 @@ class ChatExpert extends React.PureComponent<Props, myState> {
                         {`${questionData.userInfo.profileInfo.firstName} ${questionData.userInfo.profileInfo.lastName}`}
                     </CustomText>
                 </View>
-                <TouchableOpacity
+                {!questionData.isResolved && <TouchableOpacity
                     style={{
                         alignSelf: 'center',
                         opacity:
@@ -322,7 +319,8 @@ class ChatExpert extends React.PureComponent<Props, myState> {
                         resizeMode="contain"
                         source={staticImages.menuDotIcon}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> }
+                
             </View>
         );
     }
@@ -530,13 +528,12 @@ class ChatExpert extends React.PureComponent<Props, myState> {
         const { navigation } = this.props;
         const { questionData } = navigation.state.params;
         const { showActionModal } = this.state;
+
         return (
             <View style={styles.parentContainer}>
                 {this.renderHeaderView()}
                 {this.renderMessageView()}
-                {questionData && questionData.isResolved
-                    ? this.renderResolvedFooterView()
-                    : this.renderFooterView()}
+                { this.renderFooterView()}
                 {showActionModal ? this.renderActionModal() : null}
                 {Platform.OS === 'ios' ? <KeyboardSpacer /> : null}
             </View>
