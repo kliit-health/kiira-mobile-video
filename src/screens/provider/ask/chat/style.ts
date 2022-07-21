@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         borderRadius: 50,
+        alignSelf: 'center'
     },
 
     imageParentContainerStyle: {
@@ -178,7 +179,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        
     },
+    profileHeaderStyleWithNoIcon: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex:1
+    },
+
 
     resolvedParentContainer: {
         flexDirection: 'column',
@@ -277,6 +286,8 @@ const styles = StyleSheet.create({
         color: Constant.App.colors.blackColor,
         fontSize: Constant.App.textSize.Large,
         fontFamily: Constant.App.fontFamily.headerBold,
+        alignSelf:'center',
+
     },
 });
 export default styles;

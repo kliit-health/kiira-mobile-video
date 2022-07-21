@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator, Dimensions } from 'react-native';
+import {
+    ScrollView,
+    ActivityIndicator,
+    Dimensions,
+    View,
+    TouchableOpacity,
+    SafeAreaView,
+    Modal,
+    Image,
+} from 'react-native';
 import * as Kiira from '~/components';
 import Agreements from '~/components/agreements';
 import { RootState } from '~/redux/reducers';
@@ -11,6 +20,10 @@ import { card } from '~/components/styles';
 import { default as globalStyles, h3 } from '~/components/styles';
 import Expandable from '~/components/expandable';
 import { getAllDocumentsFromCollection } from '~/utils/firebase';
+import { Text } from '~/components';
+import { WebView } from 'react-native-webview';
+import { colors } from '~/utils/constants';
+import Constant from '~/utils/constants';
 
 const {
     grey_br_t_md,
@@ -25,6 +38,8 @@ const {
     sm_pad_t,
     width_10,
     zero_flex,
+    sm_pad_v,
+    align_items_fs,
 } = globalStyles;
 
 const Book = ({ navigation }) => {
@@ -33,12 +48,16 @@ const Book = ({ navigation }) => {
     const { visit } = useSelector((state: RootState) => state.appointments);
     const [activeTab, setActiveTab] = useState('primaryCare');
     const [data, setData] = useState(null);
-    const [cardHeight, setCardHeight] = useState(dimen.height > 800 ? 330 : 230);
+    const [cardHeight, setCardHeight] = useState(
+        dimen.height > 800 ? 330 : 230,
+    );
     const [shrinkCard, setShrinkCard] = useState(true);
     const [selection, setSelection] = useState(null);
     const [catagories, setCatagories] = useState(null);
     const [appointmentTypes, setAppointmentTypes] = useState(null);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
+    const { staticImages } = Constant.App;
 
     useEffect(() => {
         (async () => {
@@ -113,9 +132,39 @@ const Book = ({ navigation }) => {
         );
         setLoading(false);
     };
-
     return (
         <Kiira.Screen test="Book Screen">
+            <Modal
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+                animationType="slide"
+                transparent={false}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View>
+                    <TouchableOpacity
+                        style={{ height: 50, marginTop: 50, left: 20 }}
+                        onPress={() => setModalVisible(!modalVisible)}
+                    >
+                        <Image
+                            resizeMode="contain"
+                            source={staticImages.backIcon}
+                            style={{ width: 30, height: 30 }}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <WebView
+                    source={{
+                        uri: 'https://www.kiirahealth.com/schedule-an-in-person-appointment',
+                    }}
+                />
+            </Modal>
             <Agreements navigation={navigation} />
             <Kiira.Header title="Book Visit" onBack={handleBack} />
             <Kiira.Heading>
@@ -130,7 +179,13 @@ const Book = ({ navigation }) => {
                 ]}
             >
                 <Kiira.Tabs list={tabs} active setActive={handleTabSelect} />
-                <Kiira.Column options={[zero_flex, dimen.height > 800 ? height_250 : {height: 150}, pad_v]}>
+                <Kiira.Column
+                    options={[
+                        zero_flex,
+                        dimen.height > 800 ? height_250 : { height: 150 },
+                        pad_v,
+                    ]}
+                >
                     <Kiira.RadioGroup onSelect={handleSelection} data={data} />
                 </Kiira.Column>
             </Kiira.Column>
@@ -151,6 +206,29 @@ const Book = ({ navigation }) => {
                             )}
                         </Kiira.Conditional>
                     </Kiira.Column>
+                    <View
+                        style={{
+                            borderBottomColor: colors.greyAccent,
+                            borderBottomWidth: 2,
+                            width: '90%',
+                            marginHorizontal: 20,
+                            alignItems: 'center',
+                        }}
+                    />
+                    <TouchableOpacity
+                        onPress={() => setModalVisible(!modalVisible)}
+                    >
+                        <Text
+                            options={[
+                                sm_pad_v,
+                                pad_h,
+                                align_items_fs,
+                                { left: 22 },
+                            ]}
+                        >
+                            {'Schedule an In-Person Appointment '}
+                        </Text>
+                    </TouchableOpacity>
                     <Expandable onPress={handleLinePress} list={sections} />
                     <Kiira.Column
                         options={[pad_h, pad_b, grey_br_t_md, zero_flex]}

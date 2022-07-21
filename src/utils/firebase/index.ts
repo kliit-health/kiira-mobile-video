@@ -1451,10 +1451,10 @@ export async function payAmount(cardID, amount) {
     }
 }
 
-export async function payIntent({ visit }) {
+export async function payIntent({ balance }) {
     try {
         const response = await functions().httpsCallable('paymentIntent')({
-            visit,
+            balance,
         });
 
         return response.data;

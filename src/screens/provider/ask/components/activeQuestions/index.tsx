@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlatList } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
-import {  Icon } from '~/components';
+import { Icon } from '~/components';
 import { icons, screenNames } from '~/utils/constants';
 import styles from './styles';
 import None from '../none';
 import { SwipeButtonsContainer, SwipeItem } from 'react-native-swipe-item';
 import { resolveQuestion } from '~/redux/actions/chat';
 import moment from 'moment';
-
 const ActiveQuestions = ({ data, navigation, visible }) => {
     const handleItemPress = questionData => {
         navigation.navigate(screenNames.expertChat, { questionData });
     };
     const dispatch = useDispatch();
-    const resolve = item => {
+    const itemsRef = useRef([]);
+    const resolve = (item, index) => {
         const question = Object.assign({}, item);
         question.isResolved = true;
         question.resolvedDate = moment().unix();
@@ -25,16 +25,23 @@ const ActiveQuestions = ({ data, navigation, visible }) => {
             navigation,
         };
         dispatch(resolveQuestion(payloadData));
+        itemsRef.current[index].close();
     };
+    useEffect(() => {
+        if (!data.length) return;
+        itemsRef.current = itemsRef.current.slice(0, data.length);
+    }, [data, itemsRef]);
+    
     return visible ? (
         <FlatList
             data={data}
             showsVerticalScrollIndicator={false}
             keyExtractor={item => item.uid}
             ListEmptyComponent={() => <Fallback />}
-            renderItem={({ item }) => {
+            renderItem={({ item, index }) => {
                 return (
                     <SwipeItem
+                        ref={el => (itemsRef.current[index] = el)}
                         disableSwipeIfNoButton
                         style={styles.item.button}
                         swipeContainerStyle={
@@ -44,7 +51,9 @@ const ActiveQuestions = ({ data, navigation, visible }) => {
                             <SwipeButtonsContainer
                                 style={styles.item.rightButton}
                             >
-                                <TouchableOpacity onPress={() => resolve(item)}>
+                                <TouchableOpacity
+                                    onPress={() => resolve(item, index)}
+                                >
                                     <Icon
                                         options={[styles.item.resolve]}
                                         source={icons.resolve}
@@ -65,7 +74,6 @@ const ActiveQuestions = ({ data, navigation, visible }) => {
         <View />
     );
 };
-
 const ListItem = props => {
     const { userInfo, lastMessage, modifiedDate, onPress } = props;
     const { firstName, lastName } = userInfo.profileInfo;
@@ -75,7 +83,6 @@ const ListItem = props => {
             onPress(props);
         }
     };
-
     const convertModifiedTime = date => {
         var dt = new Date(date * 1000);
         const today = new Date();
@@ -93,9 +100,7 @@ const ListItem = props => {
             ? 'Yesterday'
             : dt.toLocaleDateString();
     };
-
     const time = convertModifiedTime(modifiedDate);
-
     return (
         <TouchableOpacity
             activeOpacity={0.9}
@@ -118,7 +123,6 @@ const ListItem = props => {
         </TouchableOpacity>
     );
 };
-
 const Fallback = () => {
     return (
         <View style={styles.fallBack.container}>
@@ -126,5 +130,4 @@ const Fallback = () => {
         </View>
     );
 };
-
 export default ActiveQuestions;

@@ -112,7 +112,7 @@ const Payment = () => {
     };
 
     const fetchPaymentIntentClientSecret = async () => {
-        const response = await payIntent({ visit: appointments.visit.details });
+        const response = await payIntent({ balance });
 
         return response;
     };
@@ -285,6 +285,10 @@ const Payment = () => {
 
                             <Kiira.Button
                                 onPress={handlePayPress}
+                                disabled={
+                                    !cardDetails?.complete ||
+                                    cardDetails?.postalCode.length !== 5
+                                }
                                 style={{
                                     container: [pad_h],
                                     title: [xLarge],

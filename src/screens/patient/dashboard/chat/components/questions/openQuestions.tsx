@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef,useEffect} from 'react';
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Column, Line, Question, Text, Icon } from '~/components';
@@ -14,6 +14,7 @@ const { white_bg } = globalStyles;
 const OpenQuestions = ({ data, readResolveData }) => {
     const dispatch = useDispatch();
     const experts = useSelector((state:any) => state.experts.data);
+    const itemsRef = useRef([]);
 
     const convertModifiedTime = item => {
         var dt = new Date(item.modifiedDate * 1000);
@@ -42,7 +43,7 @@ const OpenQuestions = ({ data, readResolveData }) => {
         });
     };
 
-    const resolve = item => {
+    const resolve = (item, index) => {
         const question = Object.assign({}, item);
         question.isResolved = true;
         question.resolvedDate = moment().unix();
@@ -53,14 +54,15 @@ const OpenQuestions = ({ data, readResolveData }) => {
             navigation,
         };
         dispatch(resolveQuestion(payloadData));
+        itemsRef.current[index].close();
     };
 
-    const resolveButton = (item) => {
+    const resolveButton = (item,index) => {
         return(<SwipeButtonsContainer
             style={styles.rightButton}
         >
             <TouchableOpacity
-                onPress={() => resolve(item)}
+                onPress={() => resolve(item,index)}
             >
                 <Icon
                     options={[styles.resolve]}
@@ -72,21 +74,28 @@ const OpenQuestions = ({ data, readResolveData }) => {
             </TouchableOpacity>
         </SwipeButtonsContainer>)
     }
+    useEffect(() => {
+        if (!data.length) return;
+        itemsRef.current = itemsRef.current.slice(0, data.length);
+    }, [data, itemsRef]);
 
     return (
         <Column options={[white_bg]}>
             <FlatList
                 data={data}
-                renderItem={({ item }) => {
+                renderItem={({ item,index }) => {
                     const time = convertModifiedTime(item);
                     return (
                         <SwipeItem
+                       ref={el => (itemsRef.current[index] = el)}
                             disableSwipeIfNoButton
                             style={styles.button}
                             swipeContainerStyle={
                                 styles.swipeContentContainerStyle
                             }
-                            rightButtons={resolveButton(item)}
+                            rightButtons={resolveButton(item,index)}
+                        
+                            
                         >
                             <Question
                                 key={item.questionId}
