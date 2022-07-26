@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { View, Modal, TouchableOpacity, Image } from 'react-native';
+import { View, Modal, TouchableOpacity, Image, Linking } from 'react-native';
 import CustomText from '../customText';
 import style from './style';
 import CustomButton from '../customButton';
 import { BlurView } from "@react-native-community/blur"; 
 import Constant from '~/utils/constants';
+import { Text } from 'react-native-animatable';
+
 
 const { staticImages } = Constant.App;
 
-const CustomModal = ({ showLoader, errorMsg, memberMsg, onPressErrorButtonOk, onEmailSupport, onBecomeMember}) => (
+const CustomModal = ({ showLoader, errorMsg, memberMsg,supportLink, onPressErrorButtonOk, onEmailSupport, onBecomeMember}) => (
     <Modal
         animationType="fade"
         onRequestClose={() => {}}
@@ -23,8 +25,8 @@ const CustomModal = ({ showLoader, errorMsg, memberMsg, onPressErrorButtonOk, on
           blurAmount={5} 
         />}
          <View style={memberMsg ? [style.parentContainerStyle, {backgroundColor: 'rgba(0, 11, 30, 0.65)'}] : style.parentContainerStyle}>
-            <View style={memberMsg ? [style.innerContainerStyle, {borderRadius: 16}]: style.innerContainerStyle}>
-                <CustomText style={memberMsg ? style.textMemberStyle : style.textStyle}>{errorMsg}</CustomText>
+            <View style={memberMsg ? [style.innerContainerStyle, {borderRadius: 16}]: style.innerContainerStyle}> 
+                <CustomText style={memberMsg ? style.textMemberStyle : style.textStyle}>{errorMsg} {supportLink ? <Text style={style.linkStyle} onPress={()=> Linking.openURL('mailto:hello@kiira.io')}>hello@kiira.io</Text>: null} </CustomText>
                 {memberMsg &&
                 <CustomButton 
                     textStyle={style.supportStyle}

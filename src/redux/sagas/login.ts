@@ -11,6 +11,7 @@ import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
 import { default as navigation } from '~/navigation/navigationService';
+import { Linking } from 'react-native';
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -20,7 +21,6 @@ function* loginFirebase({ payload }) {
     try {
         let token: string;
         const { email, password } = payload;
-
         yield put(showApiLoader());
         const response = yield loginInWithFirebase(payload);
         const { uid } = response;
@@ -89,11 +89,13 @@ function* loginFirebase({ payload }) {
                 });
         } else {
             const message = response.message.split("]").pop().trim()
+            const disabledMessage = `There was an issue logging you in. For login issues, please contact Support$`
             yield put(
                 showOrHideModal(
-                    response.message
-                        ? message
-                        : lang.errorMessage.serverError,
+                    response.message === "The user account has been disabled by an administrator"
+                        ? disabledMessage
+                        : response.message ? message : lang.errorMessage.serverError, 
+                        response.message === "The user account has been disabled by an administrator" ? true : false
                 ),
             );
             yield put(hideApiLoader());
