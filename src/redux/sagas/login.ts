@@ -87,15 +87,16 @@ function* loginFirebase({ payload }) {
                         }
                     }
                 });
-        } else {
+        } else {     
             const message = response.message.split("]").pop().trim()
-            const disabledMessage = `There was an issue logging you in. For login issues, please contact Support$`
+            const disableErrorMessage = "The user account has been disabled by an administrator."
+            const disabledMessage = `There was an issue logging you in. For login issues, please contact Support`
             yield put(
                 showOrHideModal(
-                    response.message === "The user account has been disabled by an administrator"
-                        ? disabledMessage
+                    message === disableErrorMessage
+                        ? disabledMessage 
                         : response.message ? message : lang.errorMessage.serverError, 
-                        response.message === "The user account has been disabled by an administrator" ? true : false
+                        message === disableErrorMessage ? true : false
                 ),
             );
             yield put(hideApiLoader());
@@ -103,7 +104,7 @@ function* loginFirebase({ payload }) {
         }
     } catch (error) {
         yield put(hideApiLoader());
-        yield put(showOrHideModal(lang.errorMessage.serverError));
+        yield put(showOrHideModal(lang.errorMessage.serverError,false));
     }
 }
 

@@ -24,7 +24,7 @@ const App = () => {
     let navigationRef = useRef();
     const spinner = useSelector(state => state.loader);
     const toast = useSelector(state => state.toast);
-    const { showModalError, errorMessage, memberMessage } = useSelector(state => state.modal);
+    const { showModalError, errorMessage, memberMessage,supportLink } = useSelector(state => state.modal);
 
     FastImage.preload([
         {
@@ -156,6 +156,7 @@ const App = () => {
                     showLoader={showModalError}
                     errorMsg={errorMessage}
                     memberMsg={memberMessage}
+                    supportLink={supportLink}
                 />
             </Conditional>
             <Conditional if={spinner.showLoader}>

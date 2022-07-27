@@ -26,6 +26,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.healthcare-fitness</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -42,17 +44,13 @@
 		</dict>
 	</dict>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Kiira would like access to your contacts for scheduling</string>
+	<string>Kiira would like access to your calendar for secure and simplified scheduling</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Kiira would like to use your camera.</string>
+	<string>Kiira would like to use your camera to capture videos and images to share via our secure messaging platform.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Kiira would like access to your contacts for scheduling</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Enabling Face ID allows you quick and secure access to your account.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Kiira would like to access your location when in use</string>
+	<string>Kiira would like access to your contacts for secure and simplified messaging</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Kiira would like to use your microphone.</string>
+	<string>Kiira would like to use your microphone to capture audio for calls</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Kiira would like access to your photo gallery to upload the profile picture.</string>
 	<key>UIAppFonts</key>
