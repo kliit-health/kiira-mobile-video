@@ -64,13 +64,6 @@ export default StyleSheet.create({
         fontSize: Constant.App.textSize.Large,
     },
 
-    linkStyle: {
-        width: metrices.width - 80,
-        color: 'blue',
-        marginLeft:20,
-        fontSize: Constant.App.textSize.Large,
-    },
-
     textMemberStyle: {
         marginTop:10,
         marginBottom:20,

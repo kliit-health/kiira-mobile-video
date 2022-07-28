@@ -11,7 +11,7 @@ import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
 import { default as navigation } from '~/navigation/navigationService';
-import { Linking } from 'react-native';
+
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -101,7 +101,7 @@ function* loginFirebase({ payload }) {
         }
     } catch (error) {
         yield put(hideApiLoader());
-        yield put(showOrHideModal(lang.errorMessage.serverError,false));
+        yield put(showOrHideModal(lang.errorMessage.serverError));
     }
 }
 

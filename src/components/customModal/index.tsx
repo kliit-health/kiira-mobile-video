@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { View, Modal, TouchableOpacity, Image, Linking } from 'react-native';
+import { View, Modal, TouchableOpacity, Image } from 'react-native';
 import CustomText from '../customText';
 import style from './style';
 import CustomButton from '../customButton';
 import { BlurView } from "@react-native-community/blur"; 
 import Constant from '~/utils/constants';
-import { Text } from 'react-native-animatable';
 
 
 const { staticImages } = Constant.App;
