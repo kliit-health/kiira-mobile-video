@@ -6,6 +6,7 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 import App from './App';
 import { name as appName } from './app.json';
 import configStore from './src/redux/store';
+import Config from 'react-native-config'
 import {
     SafeAreaProvider,
     initialWindowMetrics,
@@ -64,8 +65,7 @@ import messaging from '@react-native-firebase/messaging';
     }
 })();
 
-const test = 'pk_test_lNJDgwEtGeMEcjcOBWzmVttH00Ig4ewVWF';
-const prod = 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K';
+
 
 const store = configStore();
 class Kiira extends PureComponent {
@@ -74,7 +74,7 @@ class Kiira extends PureComponent {
             <Provider store={store}>
                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                     <StripeProvider
-                        publishableKey={prod}
+                        publishableKey={Config.prod}
                         merchantIdentifier="merchant.com.kliit"
                     >
                         <App />
