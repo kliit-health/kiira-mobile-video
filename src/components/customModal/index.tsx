@@ -11,7 +11,7 @@ import { Text } from 'react-native-animatable';
 
 const { staticImages } = Constant.App;
 
-const CustomModal = ({ showLoader, errorMsg, memberMsg,supportLink, onPressErrorButtonOk, onEmailSupport, onBecomeMember}) => (
+const CustomModal = ({ showLoader, errorMsg, memberMsg, onPressErrorButtonOk, onEmailSupport, onBecomeMember}) => (
     <Modal
         animationType="fade"
         onRequestClose={() => {}}
@@ -26,7 +26,7 @@ const CustomModal = ({ showLoader, errorMsg, memberMsg,supportLink, onPressError
         />}
          <View style={memberMsg ? [style.parentContainerStyle, {backgroundColor: 'rgba(0, 11, 30, 0.65)'}] : style.parentContainerStyle}>
             <View style={memberMsg ? [style.innerContainerStyle, {borderRadius: 16}]: style.innerContainerStyle}> 
-                <CustomText style={memberMsg ? style.textMemberStyle : style.textStyle}>{errorMsg} {supportLink ? <Text style={style.linkStyle} onPress={()=> Linking.openURL('mailto:hello@kiira.io')}>hello@kiira.io</Text>: null} </CustomText>
+                <CustomText style={memberMsg ? style.textMemberStyle : style.textStyle}>{errorMsg}</CustomText>
                 {memberMsg &&
                 <CustomButton 
                     textStyle={style.supportStyle}

@@ -8,7 +8,6 @@ const initialState = {
     showModal: false,
     showModalError: false,
     errorMessage: '',
-    supportLink:false,
     data: {
         title: '',
         subtitle: '',
@@ -29,7 +28,6 @@ const modalReducer = (state = initialState, action) => {
                 ...state,
                 showModalError: !state.showModalError,
                 errorMessage: action.errorMessage,
-                supportLink: action.supportLink
             };
         case SHOW_OR_HIDE_MEMEBER_MODAL:
             return {

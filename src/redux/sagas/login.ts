@@ -89,14 +89,11 @@ function* loginFirebase({ payload }) {
                 });
         } else {     
             const message = response.message.split("]").pop().trim()
-            const disableErrorMessage = "The user account has been disabled by an administrator."
-            const disabledMessage = `There was an issue logging you in. For login issues, please contact Support`
             yield put(
                 showOrHideModal(
-                    message === disableErrorMessage
-                        ? disabledMessage 
-                        : response.message ? message : lang.errorMessage.serverError, 
-                        message === disableErrorMessage ? true : false
+                    response.message
+                        ? message
+                        : lang.errorMessage.serverError,
                 ),
             );
             yield put(hideApiLoader());

@@ -4,10 +4,9 @@ import {
     SHOW_OR_HIDE_DEDUCT_CONFIRMATION_MODAL,
 } from '../../redux/types';
 
-export const showOrHideModal = (errorMessage,supportLink=false) => ({
+export const showOrHideModal = (errorMessage) => ({
     type: SHOW_OR_HIDE_ERROR_MODAL,
     errorMessage,
-    supportLink
 });
 
 export const showMemberModal = errorMessage => ({
