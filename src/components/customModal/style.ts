@@ -75,6 +75,13 @@ export default StyleSheet.create({
         fontFamily: fontFamily.poppinsRegular,
     },
 
+    linkStyle: {
+        width: metrices.width - 80,
+        color: 'blue',
+        marginLeft:20,
+        fontSize: Constant.App.textSize.Large,
+    },
+
     supportStyle: {
         width: metrices.width - 80,
         color: '#0253E2',
