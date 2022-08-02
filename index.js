@@ -64,8 +64,7 @@ import messaging from '@react-native-firebase/messaging';
     }
 })();
 
-const test = 'pk_test_lNJDgwEtGeMEcjcOBWzmVttH00Ig4ewVWF';
-const prod = 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K';
+
 
 const store = configStore();
 class Kiira extends PureComponent {
