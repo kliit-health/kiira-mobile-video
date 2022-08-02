@@ -10,6 +10,7 @@ import {
     SafeAreaProvider,
     initialWindowMetrics,
 } from 'react-native-safe-area-context';
+import Config from 'react-native-config';
 
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
@@ -73,7 +74,7 @@ class Kiira extends PureComponent {
             <Provider store={store}>
                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                     <StripeProvider
-                        publishableKey={prod}
+                        publishableKey={Config.prod}
                         merchantIdentifier="merchant.com.kliit"
                     >
                         <App />
