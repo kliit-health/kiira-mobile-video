@@ -66,7 +66,6 @@ import messaging from '@react-native-firebase/messaging';
 })();
 
 
-
 const store = configStore();
 class Kiira extends PureComponent {
     render() {
