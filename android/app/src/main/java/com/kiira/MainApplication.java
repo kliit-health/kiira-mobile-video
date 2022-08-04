@@ -7,6 +7,7 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.microsoft.codepush.react.CodePush;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -43,7 +44,10 @@ public class MainApplication extends Application implements ReactApplication {
       return packages;
     }
 
-
+    @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
+        }
 
     @Override
     protected String getJSMainModuleName() {
