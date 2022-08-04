@@ -5,9 +5,15 @@ on:
 
 jobs:
   unit_tests:
-    runs-on: [ubuntu-latest]
+    runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+      - uses: c-hive/gha-yarn-cache@v1
 
+      - name: Install node modules
+        run: |
+          yarn install
+          
       - name: Assemble Release APK
         run: cd android && ./gradlew app:assembleRelease
