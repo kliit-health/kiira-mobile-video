@@ -8,7 +8,7 @@
         "start": "react-native start",
         "lint": "eslint .",
         "prettier": "prettier \"./**/*.js\" --write",
-        "postinstall": "patch-package && npx jetify && cd ios && pod install && npx react-native-fix-image",
+        "postinstall": "patch-package && npx jetify && npx react-native-fix-image",
         "ios-device": "react-native run-ios --device",
         "ios-udid": "react-native run-ios --udid",
         "ios-sim": "react-native run-ios --simulator",
