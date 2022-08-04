@@ -9,8 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: CD
-        run: cd android
-
-      - name: Unit tests
-        run: ./gradlew app:assembleRelease
+      - name: Assemble Release APK
+        run: cd android && ./gradlew app:assembleRelease
