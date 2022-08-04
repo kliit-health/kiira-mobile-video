@@ -1,0 +1,16 @@
+name: Build Android
+
+on:
+  push:
+
+jobs:
+  unit_tests:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: CD
+        run: cd android
+
+      - name: Unit tests
+        run: ./gradlew app:assembleRelease
