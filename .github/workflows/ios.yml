@@ -1,10 +1,10 @@
 name: Build iOS
 
 on:
-  push:
+  pull_request:
 
 jobs:
-  unit_tests:
+  compile:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
