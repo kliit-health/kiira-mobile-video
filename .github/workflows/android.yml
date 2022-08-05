@@ -5,7 +5,7 @@ on:
 
 jobs:
   unit_tests:
-    runs-on: [ ubuntu-latest ]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@master
@@ -13,7 +13,7 @@ jobs:
 
       - name: Install node modules
         run: |
-          yarn install
+          yarn install --frozen-lockfile
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
