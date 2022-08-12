@@ -1,8 +1,9 @@
 import { initStripe } from '@stripe/stripe-react-native';
 import { Platform } from 'react-native';
+import Config from 'react-native-config';
 
 initStripe({
-    publishableKey: 'pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K',
+    publishableKey: Config.prod,
     merchantIdentifier: 'merchant.com.kliit',
 });
 

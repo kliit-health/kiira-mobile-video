@@ -10,7 +10,7 @@ import {
     SafeAreaProvider,
     initialWindowMetrics,
 } from 'react-native-safe-area-context';
-import Config from 'react-native-config'
+import Config from 'react-native-config';
 
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
