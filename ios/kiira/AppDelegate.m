@@ -2,7 +2,6 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
-#import <CodePush/CodePush.h>
 
 #if RCT_DEV
 #import <React/RCTDevLoadingView.h>
@@ -57,7 +56,7 @@
   #if RCT_DEV
    [bridge moduleForClass:[RCTDevLoadingView class]];
   #endif
-  
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"kiira"
                                             initialProperties:nil];
@@ -76,15 +75,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-}
-
-- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
-{
-#if DEBUG
-  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-#else
-  return [CodePush bundleURL];
-#endif
 }
 
 @end
