@@ -25,6 +25,8 @@ target 'kiira' do
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
   pod 'react-native-config', :path => '../node_modules/react-native-config'
 
+pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
 #   target 'kiiramobileTests' do
 #     inherit! :complete
 #     # Pods for testing
