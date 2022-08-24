@@ -87,7 +87,7 @@ const SelectProvider = () => {
                     },
                 }) => { 
                     return specialities.some(specialty => {
-                        return specialty.includes(visit.reason);
+                        return visit.reason === specialty
                     });
                 },
             );
