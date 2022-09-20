@@ -65,9 +65,6 @@ const Payment = () => {
     const { expert, reason } = visit;
 
     const appointmentDetails = {
-        firstName,
-        lastName,
-        email,
         calendarID: visit.expert.calendarID,
         time: visit.time.date,
         reason: reason,
@@ -168,6 +165,7 @@ const Payment = () => {
     };
 
     useEffect(() => {
+        console.log("Appp----",appointmentDetails)
         setBalance(calculateTotal());
     }, []);
 
