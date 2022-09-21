@@ -239,7 +239,8 @@ function* setAppointment({ payload }) {
         state => state.user.data.profileInfo,
     );
     const { time, reason, expert, visits, prepaid, appointmentType } = payload;
-
+    const mentalHealthCredits = payload.credits
+ 
     const {
         credits,
     } = appointmentType;
@@ -285,7 +286,7 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            yield updateCredits({ data: payload }, totals, false);
+            yield updateCredits({ data: payload }, totals, false,mentalHealthCredits.mentalHealth > 0);
             if (credits === 0) {
                 yield put(updateUser({ assessment: details }));
             }

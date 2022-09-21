@@ -10,6 +10,9 @@ export default {
         isActive: false,
         isOnline: false,
         prepaid: 0,
+        credits:{
+            mentalHealth:0
+        },
         organizationId: '',
         profileInfo: {
             dob: '',
