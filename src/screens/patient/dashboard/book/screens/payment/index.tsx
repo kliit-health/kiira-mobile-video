@@ -165,7 +165,6 @@ const Payment = () => {
     };
 
     useEffect(() => {
-        console.log("Appp----",appointmentDetails)
         setBalance(calculateTotal());
     }, []);
 

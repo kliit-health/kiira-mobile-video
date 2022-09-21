@@ -2081,7 +2081,9 @@ export const urls = {
         appointmentChange:
             'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentChangeAuth',
         makeAppointment:
-             'https://us-central1-kiira-health-dev.cloudfunctions.net/bookAppointment'
+             'https://us-central1-kiira-health-dev.cloudfunctions.net/bookAppointment',
+        cancelAppointment:
+             'https://us-central1-kiira-health-dev.cloudfunctions.net/cancelAppointment'
     },
 };
 
