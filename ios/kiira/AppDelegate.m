@@ -2,6 +2,7 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
+#import <CodePush/CodePush.h>
 
 #if RCT_DEV
 #import <React/RCTDevLoadingView.h>
@@ -81,7 +82,8 @@
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-
+#else
+  return [CodePush bundleURL];
 #endif
 }
 
