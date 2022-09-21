@@ -239,7 +239,7 @@ function* setAppointment({ payload }) {
         state => state.user.data.profileInfo,
     );
     const { time, reason, expert, visits, prepaid, appointmentType } = payload;
-
+  
     const {
         credits,
     } = appointmentType;
