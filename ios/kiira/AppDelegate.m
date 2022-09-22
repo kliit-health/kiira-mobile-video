@@ -57,7 +57,7 @@
   #if RCT_DEV
    [bridge moduleForClass:[RCTDevLoadingView class]];
   #endif
-  
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"kiira"
                                             initialProperties:nil];
@@ -76,14 +76,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-}
-
-- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
-{
-#if DEBUG
-  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-
-#endif
 }
 
 @end
