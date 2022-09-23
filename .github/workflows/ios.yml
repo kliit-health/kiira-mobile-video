@@ -43,3 +43,4 @@ jobs:
           project-path: ios/kiira.xcodeproj
           workspace-path: ios/kiira.xcworkspace
           scheme: kiira
+          team-id: ${{ secrets.APPLE_TEAM_ID }}
