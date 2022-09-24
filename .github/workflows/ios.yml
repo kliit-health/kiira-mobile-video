@@ -38,4 +38,4 @@ jobs:
         run: cd ios && pod install --repo-update && cd ..
 
       - name: Build
-        run: cd ios && xcodebuild
+        run: yarn ios
