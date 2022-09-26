@@ -42,7 +42,8 @@ const Payment = () => {
     const { confirmPayment, loading } = useConfirmPayment();
     const user = useSelector((state: RootState) => state.user.data);
     const appointments = useSelector((state: RootState) => state.appointments);
-     
+    const { credits } = user;
+
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
     const [balance, setBalance] = useState(null);
@@ -89,22 +90,26 @@ const Payment = () => {
             phoneNumber: expert.profileInfo.phoneNumber,
         },
         visits,
+        credits,
         prepaid,
         intakeData,
     };
 
     const bookVisit = () => {
-        
         //appointmentDetails.intakeData = ''; ???
         dispatch(bookAppointment(appointmentDetails));
     };
 
     const calculateTotal = () => {
-        const total = visits + prepaid;
-        if (appointments.visit.details.price <= total * 60) {
+        const total =
+            visit.details.appointmentType === '22763871' &&
+            credits.mentalHealth !== 0
+                ? credits.mentalHealth
+                : visits;
+        if (visit.details.price < total * 60) {
             return 0;
         } else {
-            return appointments.visit.details.price - total * 60;
+            return visit.details.price - total * 60;
         }
     };
 
@@ -208,105 +213,116 @@ const Payment = () => {
             </Kiira.Column>
         );
     };
+
     return (
         <Kiira.Screen test="Appointment Payment">
-             <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-            <Kiira.Header onBack={handleBack} title="Book Visit" />
-            <VisitRecap />
-            <Kiira.Column options={[card]}>
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
-                    <CameraBlack />
-                    <Kiira.Text options={[pad_h, large]}>
-                        {`${appointments.visit.details.duration} min Video Visit`}
-                    </Kiira.Text>
-                </Kiira.Row>
-                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
-                    <Cart />
-                    <Kiira.Text options={[pad_h, large]}>
-                        {`$${appointments.visit.details.price}`}
-                    </Kiira.Text>
-                </Kiira.Row>
-                <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
-                <Kiira.Row options={[pad_h, sm_pad_v]}>
-                    <Dollar />
-                    <Kiira.Text options={[pad_h, large]}>
-                        {organizationInfo && organizationInfo.unlimited
-                            ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
-                            : visits + prepaid >= 0
-                            ? `-$${appointments.visit.details.price} ($${
-                                  (visits + prepaid) * 60
-                              } credit available)`
-                            : `-$${appointments.visit.details.price} ($${
-                                  Math.max(visits + prepaid, 0) * 60
-                              } credit available)`}
-                    </Kiira.Text>
-                </Kiira.Row>
+            <ScrollView
+                keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
+            >
+                <Kiira.Header onBack={handleBack} title="Book Visit" />
+                <VisitRecap />
+                <Kiira.Column options={[card]}>
+                    <Kiira.Row options={[pad_h, sm_pad_v]}>
+                        <CameraBlack />
+                        <Kiira.Text options={[pad_h, large]}>
+                            {`${appointments.visit.details.duration} min Video Visit`}
+                        </Kiira.Text>
+                    </Kiira.Row>
+                    <Kiira.Line
+                        options={[{ marginBottom: 0 }, { width: '90%' }]}
+                    />
+                    <Kiira.Row options={[pad_h, sm_pad_v]}>
+                        <Cart />
+                        <Kiira.Text options={[pad_h, large]}>
+                            {`$${appointments.visit.details.price}`}
+                        </Kiira.Text>
+                    </Kiira.Row>
+                    <Kiira.Line
+                        options={[{ marginBottom: 0 }, { width: '90%' }]}
+                    />
+                    <Kiira.Row options={[pad_h, sm_pad_v]}>
+                        <Dollar />
+                        <Kiira.Text options={[pad_h, large]}>
+                            {organizationInfo && organizationInfo.unlimited
+                                ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
+                                : visits >= 0 &&
+                                  visit.details.appointmentType ===
+                                      '22763871' &&
+                                  credits.mentalHealth > 0
+                                ? `-$${appointments.visit.details.price} ($${
+                                      (visits + credits.mentalHealth) * 60
+                                  } credit available)`
+                                : `-$${appointments.visit.details.price} ($${
+                                      Math.max(visits, 0) * 60
+                                  } credit available)`}
+                        </Kiira.Text>
+                    </Kiira.Row>
 
-                <Kiira.Conditional if={balance > 0}>
-                    <>
-                        <CardField
-                            testID="Credit Card"
-                            postalCodeEnabled={true}
-                            placeholder={{
-                                number: 'CC #',
-                            }}
-                            style={{
-                                height: 50,
-                                marginHorizontal: 10,
-                            }}
-                            onCardChange={cardDetails => {
-                                setCardDetails(cardDetails);
-                            }}
-                        />
-                        <Kiira.Line options={[{ width: '90%' }]} />
-                        <Kiira.Row
-                            options={[
-                                { justifyContent: 'space-between' },
-                                { alignItems: 'center' },
-                                pad_b,
-                            ]}
-                        >
-                            <Kiira.Text options={[pad_h, xxLarge]}>
-                                Total: ${balance}
-                            </Kiira.Text>
-                            {isApplePaySupported && (
-                                <ApplePayButton
-                                    onPress={handleApplePay}
-                                    type="plain"
-                                    buttonStyle="black"
-                                    borderRadius={4}
-                                    style={[{ width: 80 }, { height: 40 }]}
-                                />
-                            )}
-
-                            <Kiira.Button
-                                onPress={handlePayPress}
-                                disabled={
-                                    !cardDetails?.complete ||
-                                    cardDetails?.postalCode.length !== 5
-                                }
-                                style={{
-                                    container: [pad_h],
-                                    title: [xLarge],
+                    <Kiira.Conditional if={balance > 0}>
+                        <>
+                            <CardField
+                                testID="Credit Card"
+                                postalCodeEnabled={true}
+                                placeholder={{
+                                    number: 'CC #',
                                 }}
-                                title="Pay"
+                                style={{
+                                    height: 50,
+                                    marginHorizontal: 10,
+                                }}
+                                onCardChange={cardDetails => {
+                                    setCardDetails(cardDetails);
+                                }}
                             />
-                        </Kiira.Row>
-                    </>
-                </Kiira.Conditional>
-            </Kiira.Column>
+                            <Kiira.Line options={[{ width: '90%' }]} />
+                            <Kiira.Row
+                                options={[
+                                    { justifyContent: 'space-between' },
+                                    { alignItems: 'center' },
+                                    pad_b,
+                                ]}
+                            >
+                                <Kiira.Text options={[pad_h, xxLarge]}>
+                                    Total: ${balance}
+                                </Kiira.Text>
+                                {isApplePaySupported && (
+                                    <ApplePayButton
+                                        onPress={handleApplePay}
+                                        type="plain"
+                                        buttonStyle="black"
+                                        borderRadius={4}
+                                        style={[{ width: 80 }, { height: 40 }]}
+                                    />
+                                )}
 
-            <Kiira.Text options={[text_align_c]}>
-                Anything you would like to add?
-            </Kiira.Text>
-            <Kiira.Input
-                value={message}
-                onChangeText={setMessage}
-                options={[radius_md, grey_br, { width: '90%' }]}
-                multiline
-                placeholder="You can say something like 'I need new birth control'"
-            />
+                                <Kiira.Button
+                                    onPress={handlePayPress}
+                                    disabled={
+                                        !cardDetails?.complete ||
+                                        cardDetails?.postalCode.length !== 5
+                                    }
+                                    style={{
+                                        container: [pad_h],
+                                        title: [xLarge],
+                                    }}
+                                    title="Pay"
+                                />
+                            </Kiira.Row>
+                        </>
+                    </Kiira.Conditional>
+                </Kiira.Column>
+
+                <Kiira.Text options={[text_align_c]}>
+                    Anything you would like to add?
+                </Kiira.Text>
+                <Kiira.Input
+                    value={message}
+                    onChangeText={setMessage}
+                    options={[radius_md, grey_br, { width: '90%' }]}
+                    multiline
+                    placeholder="You can say something like 'I need new birth control'"
+                />
             </ScrollView>
             {balance === 0 && (
                 <Kiira.Button

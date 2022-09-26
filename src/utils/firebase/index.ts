@@ -6,6 +6,7 @@ import { displayConsole } from '../helper';
 import moment from 'moment';
 import { collections, urls, firebaseCollections } from '../constants';
 import { Login } from '~/typescript/types';
+import { MentalHealth } from '~/svgs';
 
 var voucher_codes = require('voucher-code-generator');
 
@@ -342,7 +343,11 @@ export async function cancelAppointmentData(data, message) {
             availible: 0,
             isPrepaid: isPrePaid,
             redeemPrepaid: 0,
-            redeemMonthly: credits + userData.visits,
+            redeemMonthly: isPrePaid
+                ? visits > 0
+                    ? visits
+                    : 0
+                : credits - amount,
         };
 
         const document = firestore().collection('appointments').doc(uid);
@@ -1368,6 +1373,7 @@ export async function updateCredits(
     data: object,
     credits: object,
     addition: boolean,
+    isMentalHealth: boolean = false,
 ) {
     const user = auth().currentUser;
 
@@ -1382,15 +1388,24 @@ export async function updateCredits(
                 });
             return { ok: true };
         } else {
-            await firestore()
-                .collection('users')
-                .doc(user.uid)
-                .update({
-                    visits:
-                        monthly - redeemMonthly < 0
-                            ? 0
-                            : monthly - redeemMonthly,
-                });
+            if (isMentalHealth) {
+                await firestore()
+                    .collection('users')
+                    .doc(user.uid)
+                    .update({
+                        credits: { mentalHealth: 0 },
+                    });
+            } else {
+                await firestore()
+                    .collection('users')
+                    .doc(user.uid)
+                    .update({
+                        visits:
+                            monthly - redeemMonthly < 0
+                                ? 0
+                                : monthly - redeemMonthly,
+                    });
+            }
             return { ok: true };
         }
     } catch (err) {
