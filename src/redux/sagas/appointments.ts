@@ -238,6 +238,7 @@ function* setAppointment({ payload }) {
     const { phoneNumber, enableText } = yield select(
         state => state.user.data.profileInfo,
     );
+    //payload some form of user? These variables are from a user?
     const { time, reason, expert, visits, prepaid, appointmentType } = payload;
     const mentalHealthCredits = payload.credits
  

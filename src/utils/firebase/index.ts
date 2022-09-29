@@ -1,4 +1,4 @@
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 import storage from '@react-native-firebase/storage';
@@ -323,9 +323,9 @@ export async function cancelAppointmentData(data, message) {
         const userDoc = firestore().collection('users').doc(uid);
         const resData = await userDoc.get();
         let userData = resData.data();
-        let amount =
-            data.prepaidInfo && data.prepaidInfo.amount
-                ? data.prepaidInfo.amount
+        let prepPaidAmount =
+            data.prepaidInfo && data.prepaidInfo.prepPaidAmount
+                ? data.prepaidInfo.prepPaidAmount
                 : 0;
         let isPrePaid =
             data.prepaidInfo && data.prepaidInfo.isPrePaid
@@ -339,7 +339,7 @@ export async function cancelAppointmentData(data, message) {
                     ? userData.visits
                     : 0,
             prepaid: userData.prepaid,
-            purchased: amount,
+            purchased: prepPaidAmount,
             availible: 0,
             isPrepaid: isPrePaid,
             redeemPrepaid: 0,
@@ -347,7 +347,7 @@ export async function cancelAppointmentData(data, message) {
                 ? visits > 0
                     ? visits
                     : 0
-                : credits - amount,
+                : credits - prepPaidAmount,
         };
 
         const document = firestore().collection('appointments').doc(uid);
@@ -356,12 +356,13 @@ export async function cancelAppointmentData(data, message) {
         appointments.history = appointments.history.filter(
             item => item.id !== id,
         );
+//----------------- 
 
         await document.set(
             { history: [...(appointments.history || [])] },
             { merge: true },
         );
-
+           //Insert reference to firebase function here
         await firestore()
             .collection('users')
             .doc(uid)
@@ -1323,14 +1324,14 @@ export async function getPaymentMethods() {
     }
 }
 
-export async function payAmount(cardID, amount) {
+export async function payprepPaidAmount(cardID, prepPaidAmount) {
     try {
-        const amountInCents = Number(amount) * 100;
+        const prepPaidAmountInCents = Number(prepPaidAmount) * 100;
         const response = await functions().httpsCallable(
-            'apiPaymentsPayAmount',
+            'apiPaymentsPayprepPaidAmount',
         )({
             card_id: cardID,
-            amount: amountInCents,
+            prepPaidAmount: prepPaidAmountInCents,
         });
 
         return { ok: response.data };
@@ -1353,14 +1354,14 @@ export async function payIntent({ balance }) {
     }
 }
 
-export async function payAmountWithToken(tokenID, amount) {
+export async function payprepPaidAmountWithToken(tokenID, prepPaidAmount) {
     try {
-        const amountInCents = Number(amount) * 100;
+        const prepPaidAmountInCents = Number(prepPaidAmount) * 100;
         const response = await functions().httpsCallable(
-            'apiPaymentsPayAmountApplePay',
+            'apiPaymentsPayprepPaidAmountApplePay',
         )({
             token_id: tokenID,
-            amount: amountInCents,
+            prepPaidAmount: prepPaidAmountInCents,
         });
         return { ok: response };
     } catch (err) {
@@ -1369,23 +1370,71 @@ export async function payAmountWithToken(tokenID, amount) {
     }
 }
 
-export async function updateCredits(
+export async function updateVisits(
+    //contains all relevant data to extract
     data: object,
-    credits: object,
+    //Are we adding/subtracting
     addition: boolean,
     isMentalHealth: boolean = false,
 ) {
+    //Insert referencef to firebase function here
     const user = auth().currentUser;
+     
+ //cancel appointment math
+    const visitUpdateValues = {
+        required: creditsCost,
+        monthly: user.visits,
+        userPrepaidAmount: user.prepaid, 
+        purchased: prepPaidAmount, //resolve
+        availible: 0,
+        isPrepaid: isPrepaid, //resolve if the appointment prepaid field is true
+        redeemPrepaid: 0,
+        redeemMonthly: isPrepaid ? 
+                    (visitsCost > 0 ? visitsCost : 0) 
+                    : 
+                    (creditsCost - prepPaidAmount),
+    }; 
+    
 
-    const { required, monthly, redeemMonthly } = credits;
+/* set appointment math
+    const totals = {
+        required: cost,
+        monthly: visits,
+        prepaid: prepaid,
+        purchased: cost - visits > 0 ? cost - visits : 0,
+        availible: visits + prepaid,
+        redeemPrepaid:
+            prepaid > 0 && cost - visits > 0 ? cost - visits : 0,
+        redeemMonthly:
+            visits > 0 && cost - prepaid > 0 && visits < cost
+                ? cost - prepaid
+                : visits === 0
+                ? 0
+                : cost,
+    };
+*/
+
+    const { required, monthly, redeemMonthly } = visitUpdateValues;
     try {
+        //Insert reference to firebase calculate visits/credits here
         if (addition) {
-            await firestore()
-                .collection('users')
-                .doc(user.uid)
-                .update({
-                    visits: monthly + redeemMonthly,
-                });
+
+            const add = firebase.functions().httpsCallable('creditsProcessing');
+            await add({
+                userId:user.uid,
+                
+                transactionInfo:{
+                    type:aType,
+                    id:aId,
+                    op:op
+                    //visits: monthly + redeemMonthly,
+                }
+                
+
+            });
+
+
+
             return { ok: true };
         } else {
             if (isMentalHealth) {
