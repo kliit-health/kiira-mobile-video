@@ -306,75 +306,12 @@ export async function makeAppointment(data) {
     }
 }
 
-export async function cancelAppointmentData(data, message) {
+export async function smsNotifyPatientOnCancel(data, message) {
     try {
-        const {
-            id,
-            uid,
-            expert,
-            credits,
-            visits = data.visits ? data.visits : 0,
-        } = data;
+        const {uid} = data;
         const userDoc = firestore().collection('users').doc(uid);
         const resData = await userDoc.get();
         let userData = resData.data();
-        let amount =
-            data.prepaidInfo && data.prepaidInfo.amount
-                ? data.prepaidInfo.amount
-                : 0;
-        let isPrePaid =
-            data.prepaidInfo && data.prepaidInfo.isPrePaid
-                ? data.prepaidInfo.isPrePaid
-                : false;
-
-        const totals = {
-            required: credits,
-            monthly:
-                userData.visits && userData.visits != 'NaN'
-                    ? userData.visits
-                    : 0,
-            prepaid: userData.prepaid,
-            purchased: amount,
-            availible: 0,
-            isPrepaid: isPrePaid,
-            redeemPrepaid: 0,
-            redeemMonthly: credits + userData.visits,
-        };
-
-        const document = firestore().collection('appointments').doc(uid);
-        const response = await document.get();
-        let appointments = response.data();
-        appointments.history = appointments.history.filter(
-            item => item.id !== id,
-        );
-
-        await document.set(
-            { history: [...(appointments.history || [])] },
-            { merge: true },
-        );
-
-        await firestore()
-            .collection('users')
-            .doc(uid)
-            .update({
-                visits: totals.monthly + totals.redeemMonthly,
-                prepaid: totals.prepaid + totals.purchased,
-            });
-
-        const expertDocument = firestore()
-            .collection('appointments')
-            .doc(expert.uid);
-        const expertResponse = await expertDocument.get();
-        let expertAppointments = expertResponse.data();
-        let filtered = expertAppointments.history[uid].filter(item => {
-            return item.id !== id ? item : false;
-        });
-
-        await expertDocument.set(
-            { history: { [uid]: [...(filtered || [])] } },
-            { merge: true },
-        );
-
         if (
             userData.profileInfo.phoneNumber &&
             userData.profileInfo.phoneNumber.length
@@ -382,13 +319,13 @@ export async function cancelAppointmentData(data, message) {
             await sendSms(message, userData.profileInfo.phoneNumber);
         }
     } catch (error) {
-        console.log('Cancel Error', error);
+        console.log('sendSMS failed', error);
         return error;
     }
 }
 
-export async function cancelAppointmentAsync(data) {
-    const { id, uid, expert } = data;
+export async function cancelAppointmentAsync(patientId, data) {
+    const { id, expert } = data;
     let user = auth().currentUser;
     let jwtToken = await user.getIdToken();
 
@@ -400,6 +337,7 @@ export async function cancelAppointmentAsync(data) {
                 Authorization: 'Bearer ' + jwtToken,
             }),
             body: JSON.stringify({
+                patientId,
                 appointmentId: id,
                 expertId: expert.uid,
             }),

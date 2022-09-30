@@ -173,7 +173,7 @@ function* getAppointments() {
 
 function* cancelTheAppointment({ payload: { data } }) {
     const user = yield select(state => state.user.data);
-    const { credits, expert, prepaidInfo, visits = data.visits ? data.visits : 0 } = data;
+    const { uid, credits, expert, prepaidInfo, visits = data.visits ? data.visits : 0 } = data;
 
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
@@ -196,7 +196,7 @@ function* cancelTheAppointment({ payload: { data } }) {
 
     try {
         yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(data);
+        const result = yield cancelAppointmentAsync(uid, data);
         if (result) {
             yield put(
                 showOrHideModal(

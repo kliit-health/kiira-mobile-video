@@ -41,7 +41,7 @@ function* cancelAppointment(data) {
 
   try {
     yield put(showApiLoader());
-    const result = yield cancelAppointmentAsync(data);
+    const result = yield cancelAppointmentAsync(uid, data);
     const appointments = yield getAppointmentsAsync(uid);
     if (result) {
       yield put(
