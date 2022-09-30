@@ -276,11 +276,9 @@ export async function getAppointmentDatesAsync(data) {
 }
 export async function makeAppointment(data) {
     const {
-        calendarID,
         time,
         reason,
         prescription,
-        uid,
         expert,
         appointmentType,
     } = data;
@@ -294,13 +292,11 @@ export async function makeAppointment(data) {
                 Authorization: 'Bearer ' + jwtToken,
             }),
             body: JSON.stringify({
-                uid,
-                expert,
-                calendarID,
+                expertId: expert.uid,
                 time,
                 reason,
                 prescription,
-                appointmentType: appointmentType,
+                appointmentTypeId: appointmentType.id,
             }),
         };
         await fetch(urls.staging.makeAppointment, obj);
@@ -404,9 +400,8 @@ export async function cancelAppointmentAsync(data) {
                 Authorization: 'Bearer ' + jwtToken,
             }),
             body: JSON.stringify({
-                id: id,
-                uid,
-                expert,
+                appointmentId: id,
+                expertId: expert.uid,
             }),
         };
         await fetch(urls.staging.cancelAppointment, obj);
@@ -1361,41 +1356,6 @@ export async function payAmountWithToken(tokenID, amount) {
     } catch (err) {
         let status = err.status ? err.status : 'internal';
         return { ok: false, status };
-    }
-}
-
-export async function updateCredits(
-    data: object,
-    credits: object,
-    addition: boolean,
-) {
-    const user = auth().currentUser;
-
-    const { required, monthly, redeemMonthly } = credits;
-    try {
-        if (addition) {
-            await firestore()
-                .collection('users')
-                .doc(user.uid)
-                .update({
-                    visits: monthly + redeemMonthly,
-                });
-            return { ok: true };
-        } else {
-            await firestore()
-                .collection('users')
-                .doc(user.uid)
-                .update({
-                    visits:
-                        monthly - redeemMonthly < 0
-                            ? 0
-                            : monthly - redeemMonthly,
-                });
-            return { ok: true };
-        }
-    } catch (err) {
-        console.log('UPDATE CREDITS ERROR', err);
-        return { ok: false, status: 'internal' };
     }
 }
 

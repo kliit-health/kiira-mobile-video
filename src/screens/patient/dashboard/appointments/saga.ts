@@ -9,7 +9,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 import {
   getAppointmentsAsync,
   cancelAppointmentAsync,
-  updateCredits,
   setVideoVisitRating,
   sendSms,
   sendNotification,
@@ -53,8 +52,7 @@ function* cancelAppointment(data) {
     } else {
       if (credits === 0) {
         yield put(updateUser({ assessment: null }));
-      } 
-      yield updateCredits(credits, data, true);
+      }
       yield put(getUser());
       if (expert.profileInfo.phoneNumber && expert.profileInfo.phoneNumber.length) {
         yield sendSms(message, expert.profileInfo.phoneNumber);
