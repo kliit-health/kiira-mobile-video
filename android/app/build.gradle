@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 import com.android.build.OutputFile
 
 /**
@@ -218,7 +217,7 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
-    
+
     compile project(':react-native-smart-splashscreen')
     compile project(':react-native-twilio-video-webrtc')
     compile project(':react-native-image-picker')
