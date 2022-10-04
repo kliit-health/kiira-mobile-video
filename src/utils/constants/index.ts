@@ -2084,6 +2084,8 @@ export const urls = {
              'https://us-central1-kiira-health-dev.cloudfunctions.net/bookAppointment',
         cancelAppointment:
              'https://us-central1-kiira-health-dev.cloudfunctions.net/cancelAppointment',
+        checkAppointmentCost:
+             'https://us-central1-kiira-health-dev.cloudfunctions.net/checkAppointmentCost',
     },
 };
 

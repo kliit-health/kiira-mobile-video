@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import * as Kiira from '~/components';
-import FastImage from 'react-native-fast-image';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '~/redux/reducers';
-import { handleBack } from '~/utils/functions/handleNavigation';
-import { getOrganizationInfo, payIntent } from '~/utils/firebase';
-import moment from 'moment';
-import { default as globalStyles, card, card_title } from '~/components/styles';
-import { CameraBlack, Dollar, Cart } from '~/svgs';
-import { bookAppointment } from '~/redux/reducers/appointments';
-import { showApiLoader, hideApiLoader } from '~/components/customLoader/action';
 import {
-    ApplePayButton,
-    CardField,
-    useApplePay,
-    useConfirmPayment,
-    presentApplePay,
-    confirmApplePayPayment,
-} from '@stripe/stripe-react-native';
-import { ScrollView } from 'react-native';
+  ApplePayButton,
+  CardField,
+  confirmApplePayPayment,
+  presentApplePay,
+  useApplePay,
+  useConfirmPayment,
+} from '@stripe/stripe-react-native'
+import moment from 'moment'
+import React, {useEffect, useState} from 'react'
+import {ScrollView} from 'react-native'
+import FastImage from 'react-native-fast-image'
+import {useDispatch, useSelector} from 'react-redux'
+import * as Kiira from '~/components'
+import {hideApiLoader, showApiLoader} from '~/components/customLoader/action'
+import {card, card_title, default as globalStyles} from '~/components/styles'
+import {RootState} from '~/redux/reducers'
+import {bookAppointment} from '~/redux/reducers/appointments'
+import {CameraBlack, Cart, Dollar} from '~/svgs'
+import {fetchAppointmentCost, getOrganizationInfo, payIntent} from '~/utils/firebase'
+import {handleBack} from '~/utils/functions/handleNavigation'
 
 const {
-    pad_b,
-    pad_h,
-    pad_v,
-    text_align_c,
-    radius_md,
-    large,
-    xLarge,
-    xxLarge,
+  pad_b,
+  pad_h,
+  pad_v,
+  text_align_c,
+  radius_md,
+  large,
+  xLarge,
+  xxLarge,
     grey_br,
     sm_pad_v,
     space_around,
@@ -42,10 +42,10 @@ const Payment = () => {
     const { confirmPayment, loading } = useConfirmPayment();
     const user = useSelector((state: RootState) => state.user.data);
     const appointments = useSelector((state: RootState) => state.appointments);
-     
+
     const [message, setMessage] = useState('');
     const [cardDetails, setCardDetails] = useState(null);
-    const [balance, setBalance] = useState(null);
+    const [balance, setBalance] = useState<number>(0);
     const [organizationInfo, setOrganizationInfo] = useState(null);
 
     const {
@@ -94,18 +94,14 @@ const Payment = () => {
     };
 
     const bookVisit = () => {
-        
+
         //appointmentDetails.intakeData = ''; ???
         dispatch(bookAppointment(appointmentDetails));
     };
 
-    const calculateTotal = () => {
-        const total = visits + prepaid;
-        if (appointments.visit.details.price <= total * 60) {
-            return 0;
-        } else {
-            return appointments.visit.details.price - total * 60;
-        }
+    const calculateTotal = async (): Promise<number> => {
+      const result = await fetchAppointmentCost(appointments.visit.details.id)
+      return result.dollars
     };
 
     const fetchPaymentIntentClientSecret = async () => {
@@ -165,7 +161,11 @@ const Payment = () => {
     };
 
     useEffect(() => {
-        setBalance(calculateTotal());
+      async function x() {
+        setBalance(await calculateTotal())
+      }
+
+      x();
     }, []);
 
     useEffect(() => {
@@ -231,15 +231,7 @@ const Payment = () => {
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Kiira.Text options={[pad_h, large]}>
-                        {organizationInfo && organizationInfo.unlimited
-                            ? `-$${appointments.visit.details.price} credit (Credits Unlimited)`
-                            : visits + prepaid >= 0
-                            ? `-$${appointments.visit.details.price} ($${
-                                  (visits + prepaid) * 60
-                              } credit available)`
-                            : `-$${appointments.visit.details.price} ($${
-                                  Math.max(visits + prepaid, 0) * 60
-                              } credit available)`}
+                        {`$${balance}`}
                     </Kiira.Text>
                 </Kiira.Row>
 

@@ -1,29 +1,29 @@
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import functions from '@react-native-firebase/functions';
-import storage from '@react-native-firebase/storage';
-import { displayConsole } from '../helper';
-import moment from 'moment';
-import { collections, urls, firebaseCollections } from '../constants';
-import { Login } from '~/typescript/types';
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import functions from '@react-native-firebase/functions'
+import storage from '@react-native-firebase/storage'
+import moment from 'moment'
+import {Login} from '~/typescript/types'
+import {collections, firebaseCollections, urls} from '../constants'
+import {displayConsole} from '../helper'
 
-var voucher_codes = require('voucher-code-generator');
+var voucher_codes = require('voucher-code-generator')
 
 export function getPlans(plan) {
-    try {
-        let planRef = firestore().doc(`plans/${plan}`).get();
-        return planRef
-            .then(doc => {
-                return doc.data();
-            })
-            .catch(e => {
-                displayConsole('e', e);
-                return false;
-            });
-    } catch (error) {
-        displayConsole('Crash error', error);
-        return false;
-    }
+  try {
+    let planRef = firestore().doc(`plans/${plan}`).get()
+    return planRef
+      .then(doc => {
+        return doc.data()
+      })
+      .catch(e => {
+        displayConsole('e', e)
+        return false
+      })
+  } catch (error) {
+    displayConsole('Crash error', error)
+    return false
+  }
 }
 
 export function loginInWithFirebase(obj: Login) {
@@ -289,39 +289,57 @@ export async function makeAppointment(data) {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + jwtToken,
+              Authorization: 'Bearer ' + jwtToken,
             }),
-            body: JSON.stringify({
-                expertId: expert.uid,
-                time,
-                reason,
-                prescription,
-                appointmentTypeId: appointmentType.id,
-            }),
+          body: JSON.stringify({
+            expertId: expert.uid,
+            time,
+            reason,
+            prescription,
+            appointmentTypeId: appointmentType.id,
+          }),
         };
-        await fetch(urls.staging.makeAppointment, obj);
-        return;
+      await fetch(urls.staging.makeAppointment, obj)
+      return
     } catch (err) {
-        return err;
+      return err
     }
 }
 
-export async function smsNotifyPatientOnCancel(data, message) {
-    try {
-        const {uid} = data;
-        const userDoc = firestore().collection('users').doc(uid);
-        const resData = await userDoc.get();
-        let userData = resData.data();
-        if (
-            userData.profileInfo.phoneNumber &&
-            userData.profileInfo.phoneNumber.length
-        ) {
-            await sendSms(message, userData.profileInfo.phoneNumber);
-        }
-    } catch (error) {
-        console.log('sendSMS failed', error);
-        return error;
+export async function fetchAppointmentCost(appointmentTypeId: any): Promise<any> {
+  try {
+    const user = auth().currentUser
+    const jwtToken = await user.getIdToken()
+    const obj = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + jwtToken,
+      }),
+      body: JSON.stringify({appointmentTypeId}),
     }
+    return (await fetch(urls.staging.checkAppointmentCost, obj)).json()
+  } catch (err) {
+    return err
+  }
+}
+
+export async function smsNotifyPatientOnCancel(data, message) {
+  try {
+    const {uid} = data
+    const userDoc = firestore().collection('users').doc(uid)
+    const resData = await userDoc.get()
+    let userData = resData.data()
+    if (
+      userData.profileInfo.phoneNumber &&
+      userData.profileInfo.phoneNumber.length
+    ) {
+      await sendSms(message, userData.profileInfo.phoneNumber)
+    }
+  } catch (error) {
+    console.log('sendSMS failed', error)
+    return error
+  }
 }
 
 export async function cancelAppointmentAsync(patientId, data) {
