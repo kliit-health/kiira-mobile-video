@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1093636438068-hs8rpq4b0c9vegifob16sv0rqvm988d4.apps.googleusercontent.com</string>
+	<string>317518456959-sv5mt17tits7ubhpampdebpg0slet7nn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1093636438068-hs8rpq4b0c9vegifob16sv0rqvm988d4</string>
+	<string>com.googleusercontent.apps.317518456959-sv5mt17tits7ubhpampdebpg0slet7nn</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAHsqGwxuinrzvYcwKhRXUl3opwFKEfd0s</string>
+	<string>AIzaSyD-6jv3lk0pt-hKJU3x9E_XT7K0lmd_sAw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1093636438068</string>
+	<string>317518456959</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kiira</string>
+	<string>com.kliit</string>
 	<key>PROJECT_ID</key>
-	<string>kiira-health-app</string>
+	<string>kiira-health-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kiira-health-app.appspot.com</string>
+	<string>kiira-health-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1093636438068:ios:3cdbc93543ca9da4e5b261</string>
+	<string>1:317518456959:ios:682eca85e10525d3b7774a</string>
 	<key>DATABASE_URL</key>
-	<string>https://kiira-health-app.firebaseio.com</string>
+	<string>https://kiira-health-dev.firebaseio.com</string>
 </dict>
 </plist>

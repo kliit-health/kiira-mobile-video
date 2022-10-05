@@ -139,11 +139,11 @@ export function getPlanDetails(planDetails) {
 }
 
 export async function sendEmailVerification(email: string) {
-    try { 
+    try {
         const data = {data: email};
         await functions().httpsCallable('sendActivationLink')(data);
         return { ok: true, data: null };
-    } catch (err) { 
+    } catch (err) {
         let status = err.status ? err.status : 'internal';
         return { ok: false, status };
     }
@@ -189,7 +189,7 @@ export async function getAppointmentsByDayAsync(data) {
     const { calendarID, date, appointmentType } = data;
 
     let user = auth().currentUser;
-    let jwtToken = await user.getIdToken(); 
+    let jwtToken = await user.getIdToken();
 
     var obj = {
         method: 'POST',
@@ -205,10 +205,10 @@ export async function getAppointmentsByDayAsync(data) {
             },
         }),
     };
- 
+
     try {
         const times = {};
-        await fetch(urls.prod.appointmentGetByDay, obj)
+        await fetch(urls.staging.appointmentGetByDay, obj)
             .then(res => res.json())
             .then(data => (times.current = data));
         return times;
@@ -225,7 +225,7 @@ export async function getAppointmentDatesAsync(data) {
         const { calendarID, monthNumber, addMonth, year, appointmentType } =
             data;
         const currentMonth = `${year}-${monthNumber}`;
-        
+
         var obj = {
             method: 'POST',
             headers: new Headers({
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
         };
 
         let response = [];
-        await fetch(urls.prod.appointmentGetByMonth, obj)
+        await fetch(urls.staging.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -263,12 +263,12 @@ export async function getAppointmentDatesAsync(data) {
             }),
         };
 
-        await fetch(urls.prod.appointmentGetByMonth, obj)
+        await fetch(urls.staging.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
             });
-        
+
         return response;
     } catch (error) {
         return error;
@@ -324,7 +324,7 @@ export async function makeAppointment(data) {
         };
 
         let response;
-        let checkTime = await fetch(urls.prod.appointmentCheckTime, obj)
+        let checkTime = await fetch(urls.staging.appointmentCheckTime, obj)
             .then(res => res.json())
             .then(data => data)
             .catch(error => {
@@ -332,7 +332,7 @@ export async function makeAppointment(data) {
             });
 
         if (checkTime.valid) {
-            await fetch(urls.prod.appointmentMake, obj)
+            await fetch(urls.staging.appointmentMake, obj)
                 .then(res => res.json())
                 .then(res => {
                     response = {
@@ -397,13 +397,13 @@ export async function makeAppointment(data) {
 }
 
 export async function cancelAppointmentData(data, message) {
-    try {  
-        const { id, uid, expert, credits, visits = data.visits ? data.visits : 0 } = data; 
+    try {
+        const { id, uid, expert, credits, visits = data.visits ? data.visits : 0 } = data;
         const userDoc = firestore()
                     .collection('users')
                     .doc(uid);
         const resData = await userDoc.get();
-        let userData = resData.data(); 
+        let userData = resData.data();
         let amount = (data.prepaidInfo && data.prepaidInfo.amount) ? data.prepaidInfo.amount : 0;
         let isPrePaid = (data.prepaidInfo && data.prepaidInfo.isPrePaid) ? data.prepaidInfo.isPrePaid : false;
 
@@ -415,12 +415,12 @@ export async function cancelAppointmentData(data, message) {
             availible: 0,
             isPrepaid: isPrePaid,
             redeemPrepaid: 0,
-            redeemMonthly: isPrePaid ? 
-                (visits > 0 ? visits : 0) 
-                : 
+            redeemMonthly: isPrePaid ?
+                (visits > 0 ? visits : 0)
+                :
                 (credits - amount),
         };
- 
+
         const document = firestore()
                     .collection('appointments')
                     .doc(uid);
@@ -434,14 +434,14 @@ export async function cancelAppointmentData(data, message) {
             { history: [...(appointments.history || [])] },
             { merge: true },
         );
- 
+
         await firestore()
                 .collection('users')
                 .doc(uid)
                 .update({
                     visits: totals.monthly + totals.redeemMonthly,
                     prepaid: totals.prepaid + totals.purchased,
-                }); 
+                });
 
         const expertDocument = firestore()
             .collection('appointments')
@@ -456,7 +456,7 @@ export async function cancelAppointmentData(data, message) {
             { history: { [uid]: [...(filtered || [])] } },
             { merge: true },
         );
-        
+
         if (userData.profileInfo.phoneNumber && userData.profileInfo.phoneNumber.length) {
             await sendSms(message, userData.profileInfo.phoneNumber);
         }
@@ -486,7 +486,7 @@ export async function cancelAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.prod.appointmentCancel, obj)
+        return await fetch(urls.staging.appointmentCancel, obj)
             .then(res => {
                 let response = res.json();
                 return response;
@@ -553,7 +553,7 @@ export async function changeAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.prod.appointmentChange, obj)
+        return await fetch(urls.staging.appointmentChange, obj)
             .then(res => res.json())
             .then(async res => {
                 if (res.body.error) {
