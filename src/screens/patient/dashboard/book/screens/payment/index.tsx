@@ -224,14 +224,14 @@ const Payment = () => {
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Cart />
                     <Kiira.Text options={[pad_h, large]}>
-                        {`$${appointments.visit.details.price}`}
+                        {`$${appointments.visit.details.price} - Price of Visit`}
                     </Kiira.Text>
                 </Kiira.Row>
                 <Kiira.Line options={[{ marginBottom: 0 }, { width: '90%' }]} />
                 <Kiira.Row options={[pad_h, sm_pad_v]}>
                     <Dollar />
                     <Kiira.Text options={[pad_h, large]}>
-                        {`$${balance}`}
+                        {`$${balance} - What You Owe`}
                     </Kiira.Text>
                 </Kiira.Row>
 
