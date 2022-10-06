@@ -208,7 +208,7 @@ export async function getAppointmentsByDayAsync(data) {
 
     try {
         const times = {};
-        await fetch(urls.staging.appointmentGetByDay, obj)
+        await fetch(urls.appointmentGetByDay, obj)
             .then(res => res.json())
             .then(data => (times.current = data));
         return times;
@@ -242,7 +242,7 @@ export async function getAppointmentDatesAsync(data) {
         };
 
         let response = [];
-        await fetch(urls.staging.appointmentGetByMonth, obj)
+        await fetch(urls.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -263,7 +263,7 @@ export async function getAppointmentDatesAsync(data) {
             }),
         };
 
-        await fetch(urls.staging.appointmentGetByMonth, obj)
+        await fetch(urls.appointmentGetByMonth, obj)
             .then(res => res.json())
             .then(data => {
                 response = [...response, ...data];
@@ -299,7 +299,7 @@ export async function makeAppointment(data) {
             appointmentTypeId: appointmentType.id,
           }),
         };
-      await fetch(urls.staging.makeAppointment, obj)
+      await fetch(urls.makeAppointment, obj)
       return
     } catch (err) {
       return err
@@ -318,7 +318,7 @@ export async function fetchAppointmentCost(appointmentTypeId: any): Promise<any>
       }),
       body: JSON.stringify({appointmentTypeId}),
     }
-    return (await fetch(urls.staging.checkAppointmentCost, obj)).json()
+    return (await fetch(urls.checkAppointmentCost, obj)).json()
   } catch (err) {
     return err
   }
@@ -360,7 +360,7 @@ export async function cancelAppointmentAsync(patientId, data) {
                 expertId: expert.uid,
             }),
         };
-        await fetch(urls.staging.cancelAppointment, obj);
+        await fetch(urls.cancelAppointment, obj);
         return;
     } catch (error) {
         console.log('Cancel Error', error);
@@ -388,7 +388,7 @@ export async function changeAppointmentAsync(data) {
     };
 
     try {
-        return await fetch(urls.staging.appointmentChange, obj)
+        return await fetch(urls.appointmentChange, obj)
             .then(res => res.json())
             .then(async res => {
                 if (res.body.error) {

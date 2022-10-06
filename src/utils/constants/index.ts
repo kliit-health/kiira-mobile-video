@@ -2037,56 +2037,15 @@ export const collections = {
     careSquad: 'careSquad',
     appointments: 'appointments',
 };
-
+const prodBase = 'https://us-central1-kiira-health-app.cloudfunctions.net';
+const devBase = 'https://us-central1-kiira-health-dev.cloudfunctions.net';
 export const urls = {
-    prod: {
-        appointmentGetByDay:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
-        appointmentGetByMonth:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
-        appointmentCheckTime:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
-        appointmentMake:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
-        appointmentCancel:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType',
-    },
-    dev: {
-        appointmentGetByDay:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-        appointmentGetByMonth:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-        appointmentCheckTime:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-        appointmentMake:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
-        appointmentCancel:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
-    },
-    staging: {
-        appointmentGetByDay:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-        appointmentGetByMonth:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-        appointmentCheckTime:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-        appointmentMake:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentMakeAuth',
-        appointmentCancel:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentChangeAuth',
-        makeAppointment:
-             'https://us-central1-kiira-health-dev.cloudfunctions.net/bookAppointment',
-        cancelAppointment:
-             'https://us-central1-kiira-health-dev.cloudfunctions.net/cancelAppointment',
-        checkAppointmentCost:
-             'https://us-central1-kiira-health-dev.cloudfunctions.net/checkAppointmentCost',
-    },
+    appointmentGetByDay: `${devBase}/appointmentGetByDayWithType`,
+    appointmentGetByMonth: `${devBase}/appointmentGetByMonthWithType`,
+    appointmentChange: `${devBase}/appointmentChangeWithType`,
+    makeAppointment: `${devBase}/bookAppointment`,
+    cancelAppointment: `${devBase}/cancelAppointment`,
+    checkAppointmentCost: `${devBase}/checkAppointmentCost`,
 };
 
 export const assessmentText = {
