@@ -58,7 +58,6 @@ const Future = ({ test, visit, date, navigation }) => {
     const user = useSelector((state: RootState) => state.user);
     const callConfig = useSelector((state: RootState) => state.twillio);
     const { staticImages } = constants.App;
-
     const {
         uid,
         calendarID,
