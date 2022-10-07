@@ -2040,12 +2040,12 @@ export const collections = {
 const prodBase = 'https://us-central1-kiira-health-app.cloudfunctions.net';
 const devBase = 'https://us-central1-kiira-health-dev.cloudfunctions.net';
 export const urls = {
-    appointmentGetByDay: `${devBase}/appointmentGetByDayWithType`,
-    appointmentGetByMonth: `${devBase}/appointmentGetByMonthWithType`,
-    appointmentChange: `${devBase}/appointmentChangeWithType`,
-    makeAppointment: `${devBase}/bookAppointment`,
-    cancelAppointment: `${devBase}/cancelAppointment`,
-    checkAppointmentCost: `${devBase}/checkAppointmentCost`,
+    appointmentGetByDay: `${prodBase}/appointmentGetByDayWithType`,
+    appointmentGetByMonth: `${prodBase}/appointmentGetByMonthWithType`,
+    appointmentChange: `${prodBase}/appointmentChangeWithType`,
+    makeAppointment: `${prodBase}/bookAppointment`,
+    cancelAppointment: `${prodBase}/cancelAppointment`,
+    checkAppointmentCost: `${prodBase}/checkAppointmentCost`,
 };
 
 export const assessmentText = {

@@ -2,7 +2,7 @@ import { initStripe } from '@stripe/stripe-react-native';
 import { Platform } from 'react-native';
 
 initStripe({
-    publishableKey: "pk_test_lNJDgwEtGeMEcjcOBWzmVttH00Ig4ewVWF",
+    publishableKey: "pk_live_btVnfQvMZs05jE2zOqzFYPUT00X4YNC57K",
     merchantIdentifier: 'merchant.com.kliit',
 });
 
