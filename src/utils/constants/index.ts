@@ -407,12 +407,12 @@ export default {
             ],
             Pronouns:[
                 {
-                  value:'He/Him',code: 'He'  
+                  value:'He/Him',code: 'He'
                 },
                 {
-                    value:'She/Her',code: 'Her'  
+                    value:'She/Her',code: 'Her'
                   },{
-                    value:'They/Them',code: 'They'  
+                    value:'They/Them',code: 'They'
                   },
             ]
         },
@@ -422,8 +422,8 @@ export default {
         rateUsUrl: 'https://kiira-health-app.firebaseapp.com/devicedetection',
         referalCredits: 10,
         termsAndConditionsUrl: 'https://www.kiira.io/terms-of-use',
-        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',       
-        emailSupportUrl: 'mailto:hello@kiira.io?subject=Kiira Activate Account',  
+        becomeAMemeberUrl: 'https://www.kiira.io/become-a-member',
+        emailSupportUrl: 'mailto:hello@kiira.io?subject=Kiira Activate Account',
 
         screenNames: {
             Activate: 'Activate',
@@ -566,9 +566,9 @@ export default {
             tutorialImageThree: require('../../../assets/Onboarding-3-1.jpg'),
             tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
             unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
-            xCloseIcon: require('../../../assets/xclose.png'), 
-            xxIcon: require('../../../assets/xxIcon.png'),  
-            backgroundUrl: require('../../assets/back-drop.png'),  
+            xCloseIcon: require('../../../assets/xclose.png'),
+            xxIcon: require('../../../assets/xxIcon.png'),
+            backgroundUrl: require('../../assets/back-drop.png'),
         },
 
         Toast: {
@@ -664,7 +664,7 @@ export const images = {
     bandaid: require('../../../assets/bandaid.png'),
     bandaidGrey: require('../../../assets/bandaid_grey.png'),
     basket: require('../../../assets/basket.png'),
-    bell: require('../../../assets/bell.png'),    
+    bell: require('../../../assets/bell.png'),
     cameraGreyIcon: require('../../../assets/camera_grey.png'),
     cameraWhiteImg: require('../../../assets/camera_white.png'),
     cardIcon: require('../../../assets/card.png'),
@@ -725,8 +725,8 @@ export const images = {
     tutorialImageFour: require('../../../assets/Onboarding-4-1.jpg'),
     unreadMsgIcon: require('../../../assets/unread_msg_icon.png'),
     xCloseIcon: require('../../../assets/xclose.png'),
-    circleBackButton: require('../../../assets/circleBackButton.png'), 
-    circleNextButton: require('../../../assets/circleNextButton.png'), 
+    circleBackButton: require('../../../assets/circleBackButton.png'),
+    circleNextButton: require('../../../assets/circleNextButton.png'),
 };
 
 export const icons = {
@@ -767,7 +767,7 @@ export const icons = {
     downArrow: require('../../../assets/down_arrow.png'),
     filterIcon: require('../../../assets/filter_gray.png'),
     heart: require('../../../assets/heart_black.png'),
-    home: require('../../../assets/home.png'), 
+    home: require('../../../assets/home.png'),
     editBilling: require('../../../assets/editBilling.png'),
     settings: require('../../../assets/settings.png'),
     homeActive: require('../../../assets/home-active.png'),
@@ -776,7 +776,7 @@ export const icons = {
     greyDownArrow: require('../../../assets/grey_down_arrow.png'),
     kliitCredit: require('../../../assets/kliit_credits.png'),
     lockIcon: require('../../../assets/npLock.png'),
-    kiiraLogo: require('../../../assets/logo.png'), 
+    kiiraLogo: require('../../../assets/logo.png'),
     location: require('../../../assets/location_black.png'),
     loginLogoImage2: require('../../../assets/logo2.png'),
     logoHorizontal: require('../../../assets/logo-sm.png'),
@@ -2037,50 +2037,15 @@ export const collections = {
     careSquad: 'careSquad',
     appointments: 'appointments',
 };
-
+const prodBase = 'https://us-central1-kiira-health-app.cloudfunctions.net';
+const devBase = 'https://us-central1-kiira-health-dev.cloudfunctions.net';
 export const urls = {
-    prod: {
-        appointmentGetByDay:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByDayWithType',
-        appointmentGetByMonth:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentGetByMonthWithType',
-        appointmentCheckTime:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCheckTimeWithType',
-        appointmentMake:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentMakeWithType',
-        appointmentCancel:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kiira-health-app.cloudfunctions.net/appointmentChangeWithType',
-    },
-    dev: {
-        appointmentGetByDay:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-        appointmentGetByMonth:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-        appointmentCheckTime:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-        appointmentMake:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentMakeAuth',
-        appointmentCancel:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kliit-health-dev.cloudfunctions.net/appointmentChangeAuth',
-    },
-    staging: {
-        appointmentGetByDay:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByDayAuth',
-        appointmentGetByMonth:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentGetByMonthAuth',
-        appointmentCheckTime:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCheckTimeAuth',
-        appointmentMake:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentMakeAuth',
-        appointmentCancel:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentCancelAuth',
-        appointmentChange:
-            'https://us-central1-kiira-health-dev.cloudfunctions.net/appointmentChangeAuth',
-    },
+    appointmentGetByDay: `${prodBase}/appointmentGetByDayWithType`,
+    appointmentGetByMonth: `${prodBase}/appointmentGetByMonthWithType`,
+    appointmentChange: `${prodBase}/appointmentChangeWithType`,
+    makeAppointment: `${prodBase}/bookAppointment`,
+    cancelAppointment: `${prodBase}/cancelAppointment`,
+    checkAppointmentCost: `${prodBase}/checkAppointmentCost`,
 };
 
 export const assessmentText = {
@@ -2134,14 +2099,14 @@ export const firebaseConditionals = {
     expertGender: 'profileInfo.gender',
     expertProfession: 'profileInfo.profession.fullName',
 };
- 
+
 export const controlType = {
     RadioType: 0,
-    CheckType: 1, 
+    CheckType: 1,
     TextType: 2,
     CompleteType: 3,
 }
-    
+
 export const queryTypes = {
     queryTypeIncredible: [
         {
@@ -2168,8 +2133,8 @@ export const queryTypes = {
             name: "Very bad",
             label: "1 - Very bad",
             type: 0,
-        }, 
-    ], 
+        },
+    ],
     queryTypeEveryday: [
         {
             name: "Nearly every day",
@@ -2190,8 +2155,8 @@ export const queryTypes = {
             name: "Not at all",
             label: "0 - Not at all",
             type: 0,
-        }, 
-    ], 
+        },
+    ],
     queryTypeDaily: [
         {
             name: "Daily / Almost Daily",
@@ -2217,8 +2182,8 @@ export const queryTypes = {
             name: "Never",
             label: "0 - Never",
             type: 0,
-        }, 
-    ], 
+        },
+    ],
     queryTypeAgo: [
         {
             name: "More than 5 years ago",
@@ -2239,14 +2204,14 @@ export const queryTypes = {
             name: "Within the last year",
             label: "Within the last year",
             type: 0,
-        }, 
+        },
     ],
     queryCheckCond: [
         "None",
         "Abnormal Pap smear/HPV",
         "ADD/ADHD",
         "Anxiety",
-        "Arthritis",        
+        "Arthritis",
         "Asthma",
         "Breast Cancer",
         "Chlamydia",
@@ -2266,10 +2231,10 @@ export const queryTypes = {
         "Ovarian Cysts",
         "Polycystic Ovarian Syndrome/ PCOS",
         "Pre-Diabetes",
-        "Syphylis",    
+        "Syphylis",
         "Thyroid Disorder",
         "Uterine Cancer",
-        "Other",     
+        "Other",
     ],
     queryCheckProcedure: [
         "None",
@@ -2287,23 +2252,23 @@ export const queryTypes = {
         "Removal of Ovaries",
         "Removal of Tonsils (Tonsillectomy)",
         "Thyroid Surgery",
-        "Other", 
+        "Other",
     ],
     queryCheckVaccin: [
         "None",
-        "Chicken Pox/Varicella", 
-        "COVID-19", 
-        "Hepatitis B", 
-        "HPV",  
-        "Measles", 
-        "Mumps", 
-        "Pneumonia", 
-        "Rubella",        
+        "Chicken Pox/Varicella",
+        "COVID-19",
+        "Hepatitis B",
+        "HPV",
+        "Measles",
+        "Mumps",
+        "Pneumonia",
+        "Rubella",
         "Tetanus",
-        "Whooping cough/ Pertussis", 
-        "Other", 
-    ], 
-}; 
+        "Whooping cough/ Pertussis",
+        "Other",
+    ],
+};
 
 export const healthcare = {
     primaryCare: [
@@ -2389,7 +2354,7 @@ export const healthIntakeQuerying = [
         hint: "",
         kind: queryTypes.queryTypeDaily,
         type: controlType.RadioType
-    }, 
+    },
     {
         name: "In the past year how often have you used tobacco?",
         hint: "",
@@ -2461,11 +2426,11 @@ export const healthIntakeQuerying = [
         hint: "I am concerned about...",
         kind: null,
         type: controlType.TextType
-    }, 
+    },
     {
         name: "You’re all set!",
         hint: "Thanks for completing your intake form.",
         kind: null,
         type: controlType.CompleteType
-    }, 
+    },
 ];

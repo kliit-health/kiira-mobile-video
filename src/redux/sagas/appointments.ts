@@ -26,7 +26,6 @@ import {
     changeAppointmentAsync,
     getAppointmentsAsync,
     cancelAppointmentAsync,
-    updateCredits,
     setVideoVisitRating,
     getDataFromTable,
     makeAppointment,
@@ -59,7 +58,7 @@ function* getAppointmentsToday({ payload }) {
     const lang = yield select(state => state.language);
     try {
         yield put(showApiLoader());
-        
+
         const response = yield getAppointmentsByDayAsync(payload);
         yield put(setTimes(response));
         yield put(hideApiLoader());
@@ -101,12 +100,12 @@ function* getAllAppointmentDates({ payload }) {
             if(navigation){
                 navigation.goBack();
             }
-            
+
         }
         else{
             yield put(setAppointmentDates(response));
         }
-        
+
         yield put(hideApiLoader());
         return;
     } catch (error) {
@@ -139,8 +138,8 @@ function* updateAppointment({ payload }) {
                 ),
             );
             navigation.navigate('Appointments');
-        }       
-        if (assessment && appointmentType && appointmentType.title === 'Health Check') {   
+        }
+        if (assessment && appointmentType && appointmentType.title === 'Health Check') {
             yield put(updateUser({ assessment: { ...assessment, time } }));
         }
         yield showOrHideModal(
@@ -174,13 +173,13 @@ function* getAppointments() {
 
 function* cancelTheAppointment({ payload: { data } }) {
     const user = yield select(state => state.user.data);
-    const { credits, expert, prepaidInfo, visits = data.visits ? data.visits : 0 } = data;
+    const { uid, credits, expert, prepaidInfo, visits = data.visits ? data.visits : 0 } = data;
 
     const title = 'Cancellation';
     const message = 'An appointment has been canceled';
     const isPrepaid = prepaidInfo && prepaidInfo.isPrePaid ? prepaidInfo.isPrePaid : false;
     const amount = prepaidInfo && prepaidInfo.amount ? prepaidInfo.amount : 0;
- 
+
     const totals = {
         required: credits,
         monthly: user.visits,
@@ -189,15 +188,15 @@ function* cancelTheAppointment({ payload: { data } }) {
         availible: 0,
         isPrepaid: isPrepaid,
         redeemPrepaid: 0,
-        redeemMonthly: isPrepaid ? 
-                    (visits > 0 ? visits : 0) 
-                    : 
+        redeemMonthly: isPrepaid ?
+                    (visits > 0 ? visits : 0)
+                    :
                     (credits - amount),
-    }; 
+    };
 
     try {
         yield put(showApiLoader());
-        const result = yield cancelAppointmentAsync(data);
+        const result = yield cancelAppointmentAsync(uid, data);
         if (result) {
             yield put(
                 showOrHideModal(
@@ -209,7 +208,6 @@ function* cancelTheAppointment({ payload: { data } }) {
                 yield put(updateUser({ assessment: null }));
             }
 
-            yield updateCredits(data, totals, true);
             yield put(getUser());
             if (expert.phoneNumber) {
                 yield sendSms(message, expert.phoneNumber);
@@ -273,7 +271,7 @@ function* setAppointment({ payload }) {
 
     try {
         yield put(hideApiLoader());
-        yield put(showApiLoader()); 
+        yield put(showApiLoader());
         let appointment = yield makeAppointment(payload);
 
         if (appointment && !appointment.availible) {
@@ -285,7 +283,6 @@ function* setAppointment({ payload }) {
             );
             navigation.goBack();
         } else {
-            yield updateCredits({ data: payload }, totals, false);
             if (credits === 0) {
                 yield put(updateUser({ assessment: details }));
             }

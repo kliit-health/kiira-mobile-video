@@ -23,6 +23,7 @@ target 'kiira' do
     :hermes_enabled => false
   )
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
+
 #   target 'kiiramobileTests' do
 #     inherit! :complete
 #     # Pods for testing
@@ -49,7 +50,7 @@ target 'kiira' do
     react_native_post_install(installer)
 
     # Apple Silicon builds require a library path tweak for Swift library discovery or "symbol not found" for swift things
-    installer.aggregate_targets.each do |aggregate_target| 
+    installer.aggregate_targets.each do |aggregate_target|
       aggregate_target.user_project.native_targets.each do |target|
         target.build_configurations.each do |config|
           config.build_settings['LIBRARY_SEARCH_PATHS'] = ['$(SDKROOT)/usr/lib/swift', '$(inherited)']

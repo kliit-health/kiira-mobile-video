@@ -136,8 +136,8 @@ android {
         applicationId "com.kiira"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 72
-        versionName '2.2.4'
+        versionCode 73
+        versionName '2.2.5'
         multiDexEnabled true
     }
     splits {
@@ -217,7 +217,7 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
-    
+
     compile project(':react-native-smart-splashscreen')
     compile project(':react-native-twilio-video-webrtc')
     compile project(':react-native-image-picker')
