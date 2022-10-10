@@ -1,8 +1,5 @@
 name: Build iOS
 
-on:
-  pull_request:
-
 jobs:
   compile:
     runs-on: macos-latest
