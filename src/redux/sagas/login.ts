@@ -26,6 +26,7 @@ function* loginFirebase({ payload }) {
         const response = yield loginInWithFirebase(payload);
         const { uid } = response;
         if (uid) {
+            //Addinf the user data 
             yield put(getUser());
 
             Keychain.setGenericPassword(email, password, {
@@ -36,10 +37,11 @@ function* loginFirebase({ payload }) {
 
             const enabled = yield messaging().hasPermission();
 
-            yield delay(500);
+            
             yield put(showApiLoader());
-           // yield delay(500);
-            //
+            yield delay(2000);
+            //ToDo: Refactor the hardcoded timing in this script to properly await user data being called
+            //Then proceed to run the following behavior
             if (enabled) {
                 token = yield messaging().getToken();
                 yield put(updateUser({ uid, fcmToken: token ,email}));
@@ -56,15 +58,15 @@ function* loginFirebase({ payload }) {
             }
 
             yield put(getTermsAndConditions());
-            const userData = yield select(state => state.user.data);
-            console.log("Aquired user data. Hardcoded timing due to chance of bug!");
             
-            yield delay(1500);
+            const userData = yield select(state => state.user.data);
+            
             yield put(hideApiLoader());
             const { firstLogin, role } = userData;
+            //waiting for ipa loader to dissipate?
             yield delay(500);
             if(!userData.email){
-                console.error("A bug has occured where the user data is invalid! A valid user data was not retrived from firebase!",userData)
+                console.error("A bug has occured where the user data is invalid depsire credentils possibly being valid!",userData)
                 yield put(hideApiLoader());
                 yield put(showOrHideModal(lang.errorMessage.serverError));
             }
