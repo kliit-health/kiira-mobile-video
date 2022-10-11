@@ -39,7 +39,7 @@ function* loginFirebase({ payload }) {
 
             
             yield put(showApiLoader());
-            yield delay(200);
+            yield delay(300);
             //ToDo: Refactor the hardcoded timing to properly await user data being called
             //Then proceed to run the following behavior
             if (enabled) {
@@ -58,19 +58,14 @@ function* loginFirebase({ payload }) {
             }
 
             yield put(getTermsAndConditions());
-            const user = yield select(state => state.user);
 
             const userData = yield select(state => state.user.data);
             
             yield put(hideApiLoader());
-            const { firstLogin, role } = userData;
             //ToDO: insert a delay to wait for ipa loader to dissipate?
+            const { firstLogin, role } = userData;
+            
 
-            if(!userData.email){
-                console.error("A bug has occured where the user data is invalid depsire credentils possibly being valid!",userData)
-                //TODO: have a custom modal that keeps reappearing if the bug persists. This modal only appears after the first time.
-                yield put(showOrHideModal("Something went wrong. Please restart the app and try again"));
-            }
             yield auth()
                 .currentUser.getIdTokenResult()
                 .then(({ claims }) => {
