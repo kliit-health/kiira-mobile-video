@@ -37,6 +37,7 @@ const Dashboard = ({ navigation }) => {
         dispatch(actions.updateUser({ device }));
         dispatch(getAppointmentsList(user.uid));
         
+        //Error handeling for empty user
         if(!user.email){
             console.error("A bug has occured where the user data is invalid depsire credentils possibly being valid!",user)
                 //TODO: have a custom modal that keeps reappearing if the bug persists. This modal only appears after the first time.
