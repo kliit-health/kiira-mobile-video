@@ -39,9 +39,12 @@ const Dashboard = ({ navigation }) => {
         
         //Error handeling for empty user
         if(!user.email){
-            console.error("A bug has occured where the user data is invalid depsire credentils possibly being valid!",user)
-                //TODO: have a custom modal that keeps reappearing if the bug persists. This modal only appears after the first time.
-                dispatch(actions.showMessage("Something went wrong. Please try again later."));
+            console.error("User data is invalid depsire credentils possibly being valid!",user)
+                dispatch(
+                    actions.showMessage({
+                        message: "An error has occured. Please try again.",
+                    }),
+                );
                 navigation.navigate('Landing');
         }
         
