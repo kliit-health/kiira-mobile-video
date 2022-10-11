@@ -11,6 +11,7 @@ import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
 import { default as navigation } from '~/navigation/navigationService';
+import user from '../reducers/user';
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -25,6 +26,7 @@ function* loginFirebase({ payload }) {
         const response = yield loginInWithFirebase(payload);
         const { uid } = response;
         if (uid) {
+            //Addinf the user data 
             yield put(getUser());
 
             Keychain.setGenericPassword(email, password, {
@@ -35,10 +37,11 @@ function* loginFirebase({ payload }) {
 
             const enabled = yield messaging().hasPermission();
 
-            yield delay(500);
-            yield put(hideApiLoader());
-            yield delay(500);
-
+            
+            yield put(showApiLoader());
+            yield delay(300);
+            //ToDo: Refactor the hardcoded timing to properly await user data being called
+            //Then proceed to run the following behavior
             if (enabled) {
                 token = yield messaging().getToken();
                 yield put(updateUser({ uid, fcmToken: token ,email}));
@@ -55,10 +58,13 @@ function* loginFirebase({ payload }) {
             }
 
             yield put(getTermsAndConditions());
+
             const userData = yield select(state => state.user.data);
-            yield delay(500);
+            
+            yield put(hideApiLoader());
+            //ToDO: insert a delay to wait for ipa loader to dissipate?
             const { firstLogin, role } = userData;
-            yield delay(1000);
+            
 
             yield auth()
                 .currentUser.getIdTokenResult()
@@ -70,7 +76,7 @@ function* loginFirebase({ payload }) {
                     const isUser = role === 'User';
                     const isNewUser = firstLogin;
                     const isSupport = role === 'Support';
-
+                    //Loads login pages depending on the type of user
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
                             navigation.navigate(stack.AppStack);

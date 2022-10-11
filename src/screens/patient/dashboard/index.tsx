@@ -36,6 +36,18 @@ const Dashboard = ({ navigation }) => {
         };
         dispatch(actions.updateUser({ device }));
         dispatch(getAppointmentsList(user.uid));
+        
+        //Error handeling for empty user
+        if(!user.email){
+            console.error("User data is invalid depsire credentils possibly being valid!",user)
+                dispatch(
+                    actions.showMessage({
+                        message: "An error has occured. Please try again.",
+                    }),
+                );
+                navigation.navigate('Landing');
+        }
+        
     }, []);
 
     useDidMount(() => {
