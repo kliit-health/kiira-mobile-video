@@ -11,6 +11,7 @@ import { getTermsAndConditions } from '~/redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as Keychain from 'react-native-keychain';
 import { default as navigation } from '~/navigation/navigationService';
+import user from '../reducers/user';
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -36,9 +37,9 @@ function* loginFirebase({ payload }) {
             const enabled = yield messaging().hasPermission();
 
             yield delay(500);
-            yield put(hideApiLoader());
-            yield delay(500);
-
+            yield put(showApiLoader());
+           // yield delay(500);
+            //
             if (enabled) {
                 token = yield messaging().getToken();
                 yield put(updateUser({ uid, fcmToken: token ,email}));
@@ -56,10 +57,17 @@ function* loginFirebase({ payload }) {
 
             yield put(getTermsAndConditions());
             const userData = yield select(state => state.user.data);
-            yield delay(500);
+            console.log("Aquired user data. Hardcoded timing due to chance of bug!");
+            
+            yield delay(1500);
+            yield put(hideApiLoader());
             const { firstLogin, role } = userData;
-            yield delay(1000);
-
+            yield delay(500);
+            if(!userData.email){
+                console.error("A bug has occured where the user data is invalid! A valid user data was not retrived from firebase!",userData)
+                yield put(hideApiLoader());
+                yield put(showOrHideModal(lang.errorMessage.serverError));
+            }
             yield auth()
                 .currentUser.getIdTokenResult()
                 .then(({ claims }) => {
@@ -70,7 +78,7 @@ function* loginFirebase({ payload }) {
                     const isUser = role === 'User';
                     const isNewUser = firstLogin;
                     const isSupport = role === 'Support';
-
+                    //Loads login pages depending on the type of user
                     if (isStudent || isSubscriber || isUser) {
                         if (!isNewUser) {
                             navigation.navigate(stack.AppStack);
